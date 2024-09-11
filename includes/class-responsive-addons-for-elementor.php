@@ -23,8 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Responsive_Addons_For_Elementor {
 
-
-	const MINIMUM_ELEMENTOR_VERSION = '2.9.6';
+	const MINIMUM_ELEMENTOR_VERSION = '3.10.0';
 
 	/**
 	 * Represents the singleton instance.
