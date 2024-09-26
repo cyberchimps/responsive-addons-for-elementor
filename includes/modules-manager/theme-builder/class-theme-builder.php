@@ -54,6 +54,15 @@ class RAEL_Theme_Builder {
 
 		$is_elementor_callable = ( defined( 'ELEMENTOR_VERSION' ) && is_callable( 'Elementor\Plugin::instance' ) ) ? true : false;
 
+		$compatibility_themes = array( 'astra' );
+
+		// If no match is found, set up fallback support.
+		if ( ! in_array( $this->template, $compatibility_themes ) ) {
+			add_action( 'init', array( $this, 'setup_fallback_support' ) );
+		} else {
+			require RAEL_DIR . 'themes/compatibility/class-rael-compatibility-compat.php';
+		}
+
 		if ( $is_elementor_callable ) {
 			self::$elementor = Elementor\Plugin::instance();
 
@@ -79,6 +88,16 @@ class RAEL_Theme_Builder {
 
 			add_shortcode( 'rael_theme_template', array( $this, 'render_template' ) );
 		}
+
+	}
+
+	/**
+	 * Add support for theme if the current theme does add support for 'header-footer-elementor'
+	 *
+	 * @since  1.6.1
+	 */
+	public function setup_fallback_support() {
+		require_once RAEL_DIR . 'themes/default/class-rael-default-compat.php';
 
 	}
 
@@ -254,7 +273,7 @@ class RAEL_Theme_Builder {
 		}
 
 		echo '<header id="masthead" class="site-header" role="banner" >';
-		echo wp_kses_post( self::$elementor->frontend->get_builder_content_for_display( $header_id ) );
+		echo self::$elementor->frontend->get_builder_content_for_display( $header_id );//phpcs:ignore
 		echo '</header>';
 
 		return true;
@@ -276,7 +295,7 @@ class RAEL_Theme_Builder {
 		}
 
 		echo '<div id="footer" class="clearfix site-footer">';
-		echo wp_kses_post( self::$elementor->frontend->get_builder_content_for_display( $footer_id ) );
+		echo self::$elementor->frontend->get_builder_content_for_display( $footer_id );//phpcs:ignore
 		echo '</div>';
 
 		return true;
@@ -606,7 +625,7 @@ class RAEL_Theme_Builder {
 					// Get Meta Value.
 					$raeltermlayoutid = get_term_meta( $termobj->term_id, 'rael_selectcategory_layout', true ) ? get_term_meta( $termobj->term_id, 'rael_selectcategory_layout', true ) : '0';
 
-					if ( ! empty( $product_archive_custom_page_id ) && $raeltermlayoutid == '0' ) {
+					if ( ! empty( $product_archive_custom_page_id ) && '0' == $raeltermlayoutid ) {
 						$raeltermlayoutid = $product_archive_custom_page_id;
 					}
 				}
@@ -641,7 +660,7 @@ class RAEL_Theme_Builder {
 		$archive_template_id = $this->rael_product_archive_template();
 		$templatefile        = array();
 		$templatefile[]      = 'templates/woocommerce/archive-product.php';
-		if ( $archive_template_id != '0' ) {
+		if ( '0' != $archive_template_id ) {
 			$template = locate_template( $templatefile );
 			if ( ! $template || ( ! empty( $status_options['template_debug_mode'] ) && current_user_can( 'manage_options' ) ) ) {
 				$template = $this->dir . 'templates/woocommerce/archive-product.php';

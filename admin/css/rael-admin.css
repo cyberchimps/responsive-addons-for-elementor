@@ -22,9 +22,9 @@ body.responsive_page_rael_getting_started #wpfooter {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 30px 40px;
-	gap: 16px;
-	height: 125px;
+	padding: 33px 40px;
+	gap: 12px;
+	height: 159px;
 	background: #FFFFFF;
 	border-bottom: 1px solid #E5E7EB;
 }
@@ -35,7 +35,7 @@ body.responsive_page_rael_getting_started #wpfooter {
 	justify-content: center;
 	align-items: center;
 	padding: 0px;
-	gap: 20px;
+	gap: 26px;
 	flex: none;
 	order: 0;
 	flex-grow: 0;
@@ -45,21 +45,6 @@ body.responsive_page_rael_getting_started #wpfooter {
 	width: 30px;
 	height: 30px;
 	margin-right: -10px;
-}
-
-.responsive-addons-for-elementor-brand-name {
-	display: contents;
-	font-family: 'Montserrat', sans-serif;;
-	font-style: normal;
-	font-weight: 600;
-	font-size: 20px;
-	line-height: 24px;
-	letter-spacing: 0.01em;
-	text-transform: uppercase;
-	color: #1F2937;
-	flex: none;
-	order: 1;
-	flex-grow: 0;
 }
 
 .responsive-addons-for-elementor-version {
@@ -76,10 +61,14 @@ body.responsive_page_rael_getting_started #wpfooter {
 	flex: none;
 	order: 1;
 	flex-grow: 0;
-	font-weight: 400;
 	font-size: 12px;
 	line-height: 16px;
 	color: #4B5563;
+	font-family: Libre Franklin;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.54px;
+    text-align: left;
 }
 
 .responsive-addons-for-elementor-brand-desc {
@@ -459,11 +448,20 @@ input:checked + .rael-widgets-slider:before {
 	border-radius: 50%;
 }
 
+.rael-widget-category-card{
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-top: 20px;
+}
+
 .rael-widgets-card {
 	padding: 16px 18px;
 	background: #FFFFFF;
 	border: 1px solid #F3F4F6;
-	box-shadow: 0px 4px 15px -1px rgba(0, 0, 0, 0.08), 0px 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.rael-widgets-card:hover{
+	box-shadow: 0px 4px 20px -1px rgba(12, 41, 66, 0.13);
 }
 
 .rael-widgets-card-title {
@@ -494,6 +492,11 @@ input:checked + .rael-widgets-slider:before {
     display: flex;
 }
 
+.responsive-elementor-main-settings-div .responsive-elementor-settings-tab-selection{
+    width: 248px;
+}
+
+
 .responsive-addons-for-elementor-flex-display{
 	display: flex;
 	gap: 8px;
@@ -514,7 +517,7 @@ input:checked + .rael-widgets-slider:before {
 }
 
 .responsive-addons-for-elementor-setting-border-left{
-	border-left: 1px solid #DEDEDE;
+	border-left: 1px solid #EAEAEA;
 }
 
 .responsive-addons-for-elementor-inner-settings {
@@ -648,6 +651,36 @@ input:checked + .rael-widgets-slider:before {
     padding: 0 24px 0 20px !important;
 }
 
+.responsive-addons-for-elementor-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0px 0px;
+    gap: 10px;
+    height: 130px;
+}
+
+.responsive-addons-for-elementor-footer-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 24px;
+    height: 45px;
+}
+
+.responsive-addons-for-elementor-footer-text-line {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    color: #6B7280;
+}
+
+.responsive-addons-for-elementor-footer-brand-name {
+    font-weight: 500;
+    color: #374151;
+}
+
 @media (max-width: 768px) {
 	.responsive-addons-for-elementor-tabs-section {
 		padding: 20px 10px 0;
@@ -688,10 +721,6 @@ input:checked + .rael-widgets-slider:before {
 
 	.responsive-addons-for-elementor-brand .responsive-addons-for-elementor-logo {
 		margin: inherit;
-	}
-
-	.responsive-addons-for-elementor-brand-name {
-		font-size: 18px;
 	}
 
 	.responsive-addons-for-elementor-version {
@@ -760,10 +789,6 @@ input:checked + .rael-widgets-slider:before {
 		align-items: center;
 	}
 
-	.responsive-addons-for-elementor-brand-name {
-		font-size: 20px;
-	}
-
 	.responsive-addons-for-elementor-version {
 		font-size: 12px;
 	}
@@ -800,4 +825,21 @@ input:checked + .rael-widgets-slider:before {
 		height: 35px;
 	}
 
+}
+
+.responsive-addons-for-elementor-brand .responsive-addons-for-elementor-logo {
+	height: 62px;
+	width: 228px;
+}
+.rael-widget-header-container{
+	justify-content: space-between;
+}
+.rael-widget-search-box {
+	width: 100%;
+}
+.rael-widget-search-box input{
+	width: 100%;
+}
+#responsive-elementor-plugin-settings{
+	margin-bottom:0px;
 }

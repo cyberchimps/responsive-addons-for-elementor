@@ -514,6 +514,17 @@ class Login_Register {
 				}
 			}
 		}
+		$page_author_id = get_post_field( 'post_author', $page_id );
+
+		$user = get_user_by( 'ID', $page_author_id );
+		if ( $user ) {
+			$user_roles = $user->roles;
+		}
+
+		if ( ! in_array( 'administrator', $user_roles, true ) ) {
+			$settings['rael_register_user_role'] = get_option( 'default_role' );
+		}
+
 		return $settings;
 	}
 

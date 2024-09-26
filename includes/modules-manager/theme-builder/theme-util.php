@@ -8,6 +8,38 @@
 use Responsive_Addons_For_Elementor\ModulesManager\Theme_Builder\RAEL_Theme_Builder;
 
 /**
+ * Checks if Header is enabled from RAEL.
+ *
+ * @return bool True if header is enabled. False if header is not enabled
+ */
+function rael_header_enabled() {
+	$header_id = RAEL_Theme_Builder::get_settings( 'header', '' );
+	$status    = false;
+
+	if ( '' !== $header_id ) {
+		$status = true;
+	}
+
+	return apply_filters( 'rael_header_enabled', $status );
+}
+
+/**
+ * Checks if Footer is enabled from RAEL.
+ *
+ * @return bool True if Footer is enabled. False if Footer is not enabled.
+ */
+function rael_footer_enabled() {
+	$footer_id = RAEL_Theme_Builder::get_settings( 'footer', '' );
+	$status    = false;
+
+	if ( '' !== $footer_id ) {
+		$status = true;
+	}
+
+	return apply_filters( 'rael_footer_enabled', $status );
+}
+
+/**
  * Get RAEL Header ID
  *
  * @since  1.3.0
@@ -42,6 +74,22 @@ function get_rael_footer_id() {
 }
 
 /**
+ * Checks if Single template is enabled from RAEL.
+ *
+ * @return bool True if Single template  is enabled. False if Single template is not enabled
+ */
+function rael_single_page_enabled() {
+	$single_id = RAEL_Theme_Builder::get_settings( 'single-page', '' );
+	$status    = false;
+
+	if ( '' !== $single_id ) {
+		$status = true;
+	}
+
+	return apply_filters( 'rael_single_page_enabled', $status );
+}
+
+/**
  * Get RAEL Single Page ID
  *
  * @since  1.3.0
@@ -58,6 +106,21 @@ function get_rael_single_page_id() {
 	return apply_filters( 'get_rael_single_page_id', $single_page_id );
 }
 
+/**
+ * Checks if Single template is enabled from RAEL.
+ *
+ * @return bool True if Single template  is enabled. False if Single template is not enabled
+ */
+function rael_single_enabled() {
+	$single_id = RAEL_Theme_Builder::get_settings( 'single-post', '' );
+	$status    = false;
+
+	if ( '' !== $single_id ) {
+		$status = true;
+	}
+
+	return apply_filters( 'rael_single_enabled', $status );
+}
 /**
  * Get RAEL Single Post ID
  *
@@ -93,6 +156,21 @@ function get_rael_error_404_id() {
 }
 
 /**
+ * Checks if Archive template is enabled from RAEL.
+ *
+ * @return bool True if Archive template  is enabled. False if Archive template is not enabled
+ */
+function rael_archive_enabled() {
+	$archive_id = RAEL_Theme_Builder::get_settings( 'archive', '' );
+	$status     = false;
+
+	if ( '' !== $archive_id ) {
+		$status = true;
+	}
+
+	return apply_filters( 'rael_archive_enabled', $status );
+}
+/**
  * Get RAEL Archive ID
  *
  * @since  1.5.0
@@ -109,6 +187,16 @@ function get_rael_archive_id() {
 	return apply_filters( 'get_rael_archive_id', $error_404_id );
 }
 
+/**
+ * Retrieves the single product ID according to RAEL Theme Builder settings.
+ *
+ * This function checks if the current page is a product page and retrieves the single product ID
+ * based on RAEL Theme Builder settings.
+ *
+ * @global object $post The current post object.
+ *
+ * @return int|false Single product ID if available, otherwise false.
+ */
 function get_rael_single_product_id() {
 	$single_product_id = false;
 
@@ -139,36 +227,102 @@ function get_rael_product_archive_id() {
 	return apply_filters( 'get_rael_product_archive_id', $product_archive_id );
 
 }
-
 /**
- * Render RAEL Theme location.
- *
- * @since 1.7.0
- *
- * @param string $location RAEL Theme location.
- * @return boolean
+ * Display Header markup.
  */
-function rea_theme_template_render_at_location( $location ) {
-	$module  = RAEL_Theme_Builder::instance();
-	$content = false;
+function rael_render_header() {
 
-	switch ( $location ) {
-		case 'header':
-			$content = $module::get_header_content();
-			break;
-		case 'footer':
-			$content = $module::get_footer_content();
-			break;
-		case 'single':
-			$content = $module::get_single_content();
-			break;
-		case 'archive':
-			$content = $module::get_archive_content();
-			break;
-		// Locations other than Header, Footer, Single Post, Single Page or Archive will render Single template.
-		case 'default':
-			$content = $module::get_single_content();
+	if ( false == apply_filters( 'enable_rael_render_header', true ) ) {
+		return;
 	}
 
-	return $content;
+	?>
+		<header id="masthead" itemscope="itemscope" itemtype="https://schema.org/WPHeader">
+			<?php RAEL_Theme_Builder::get_header_content(); ?>
+		</header>
+
+	<?php
+
+}
+
+/**
+ * Display footer markup.
+ */
+function rael_render_footer() {
+
+	if ( false == apply_filters( 'enable_rael_render_footer', true ) ) {
+		return;
+	}
+
+	?>
+		<footer itemtype="https://schema.org/WPFooter" itemscope="itemscope" id="colophon" role="contentinfo">
+			<?php RAEL_Theme_Builder::get_footer_content(); ?>
+		</footer>
+	<?php
+
+}
+
+/**
+ * Display sigle page/post markup.
+ */
+function rael_render_single() {
+
+	if ( false == apply_filters( 'enable_rael_render_single', true ) ) {
+		return;
+	}
+	RAEL_Theme_Builder::get_single_content();
+}
+
+/**
+ * Display Archive post/product markup.
+ *
+ * @since  1.0.2
+ */
+function rael_render_archive() {
+
+	if ( false == apply_filters( 'enable_rael_render_archive', true ) ) {
+		return;
+	}
+	RAEL_Theme_Builder::get_archive_content();
+}
+
+if ( ! function_exists( 'is_plugin_active' ) ) {
+	require_once ABSPATH . 'wp-admin/includes/plugin.php';
+}
+
+if ( ! is_plugin_active( 'responsive-elementor-addons/responsive-elementor-addons.php' ) ) {
+	if ( ! function_exists( 'rea_theme_template_render_at_location' ) ) {
+		/**
+		 * Render RAEL Theme location.
+		 *
+		 * @since 1.7.0
+		 *
+		 * @param string $location RAEL Theme location.
+		 * @return boolean
+		 */
+		function rea_theme_template_render_at_location( $location ) {
+			$module  = RAEL_Theme_Builder::instance();
+			$content = false;
+
+			switch ( $location ) {
+				case 'header':
+					$content = $module::get_header_content();
+					break;
+				case 'footer':
+					$content = $module::get_footer_content();
+					break;
+				case 'single':
+					$content = $module::get_single_content();
+					break;
+				case 'archive':
+					$content = $module::get_archive_content();
+					break;
+				// Locations other than Header, Footer, Single Post, Single Page or Archive will render Single template.
+				case 'default':
+					$content = $module::get_single_content();
+			}
+
+			return $content;
+		}
+	}
 }

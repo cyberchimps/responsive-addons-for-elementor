@@ -2725,11 +2725,11 @@ class Responsive_Addons_For_Elementor_Post_Carousel extends Widget_Base {
 								include $template;
 							}
 						} else {
-							echo '<p class="no-posts-found">' . esc_html__( 'No posts found!', 'responsive-elementor-addons' ) . '</p>';
+							echo '<p class="no-posts-found">' . esc_html__( 'No posts found!', 'responsive-addons-for-elementor' ) . '</p>';
 						}
 						wp_reset_postdata();
 					} else {
-						echo '<p class="no-posts-found">' . esc_html__( 'No layout found!', 'responsive-elementor-addons' ) . '</p>';
+						echo '<p class="no-posts-found">' . esc_html__( 'No layout found!', 'responsive-addons-for-elementor' ) . '</p>';
 					}
 					?>
 				</div>

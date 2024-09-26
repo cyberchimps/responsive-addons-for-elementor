@@ -1,11 +1,11 @@
-=== Responsive Addons for Elementor - Best Free Elementor Widgets and Elementor Templates ===
+=== Responsive Addons for Elementor – Free Elementor Addons Plugin and Elementor Templates ===
 Contributors: cyberchimps
 Donate Link: https://cyberchimps.com
 Tags: elementor, elementor addons, elementor widget, woocommerce elementor, page builder plugin
 Requires at least: 5.0
-Tested up to: 6.4
+Tested up to: 6.6.1
 Requires PHP: 5.6
-Stable tag: 1.2.0
+Stable tag: 1.5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,165 +13,376 @@ Responsive Addons for Elementor is a plugin to add some exciting elementor widge
 
 == Description ==
 
-**Responsive Addons for Elementor**
-
-Supercharge your Elementor page building experience with Responsive Addons for Elementor – the ultimate toolkit for creating stunning websites effortlessly. Elevate your design capabilities and enhance the power of Elementor with our collection of versatile widgets and extensions.
+<a href="https://cyberchimps.com/responsive-addons-for-elementor/" target="_blank">Responsive Addons for Elementor</a> is a free Elementor addons plugin that offers 80+ powerful Elementor widgets, and powerful Elementor extensions to build any Elementor website with ease, all at no cost. The plugin is designed for you to fine-tune every part of your Elementor website and enhance your design further.
 
 <a href="https://cyberchimps.com/responsive-addons-for-elementor/home/#home-menu" target="_blank">Checkout the Responsive Addons for Elementor demos</a> 
 
-==Key Features:==
+https://www.youtube.com/watch?v=pR4ZjH-P9Qs
 
-🌐 **Fully Responsive Design**: Ensure your website looks flawless on all devices with our Responsive Addons for Elementor. Craft beautiful layouts that adapt seamlessly to desktops, tablets, and mobiles.
+## Key Features of Responsive Addons for Elementor Plugin:##
+<ol>
+<li>80+ Free Elementor Widgets</li>
+<li>150+ ready-to-import Elementor Templates</li>
+<li>250+ ready-to-use Elementor sections</li>
+<li>5+ Elementor extensions</li>
+<li>Theme builder</li>
+<li>WooCommerce Widgets</li>
+<li>Cross-Browser Compatible</li>
+<li>Expert Support</li>
+<li>Fully compatible with Elementor plugin</li>
+</ol>
 
-🎨 **Customization at Your Fingertips**: Unlock endless design possibilities with each Elementor widget. Tailor your website's appearance with a myriad of customization options, allowing you to bring your creative vision to life.
 
-💨 **Lightweight & Fast Loading**: Say goodbye to sluggish websites. Our plugin is optimized for lightning-fast loading, ensuring a smooth user experience without unnecessary resource consumption.
+##Highlights of Responsive Addons for Elementor Plugin:##
 
-🚀 **Elements Control Option**: Fine-tune your page's performance by enabling or disabling individual Elementor addons. Keep your site lightweight and nimble by deactivating unnecessary widgets.
+Here are some of the key highlights of Responsive Addons for Elementor plugin that sets it apart from many premium Elementor Addons:
 
-🎉 **Free Templates & Sections**: Access a treasure trove of pre-made templates and sections through Responsive Addons for Elementor. Effortlessly create standout websites with our professionally designed templates that seamlessly integrate with Elementor.
+### 🌐 Fully Responsive Design:###
+With our Responsive Addons for Elementor plugin, we make sure your website looks perfect on all devices. You can create beautiful layouts that seamlessly adapt to desktops, tablets, and mobile phones.
 
-🌟 **Expert Support**: Join a community backed by an extraordinary support team. Seek assistance through our [support forum](https://wordpress.org/support/plugin/responsive-addons-for-elementor/), or contact form, ensuring you get the help you need when you need it.
 
-⚙️ **Plugin Requirements**: Responsive Addons for Elementor requires the Elementor website builder for optimal functionality.
+###🎨 Customization at Your Fingertips:###
+Each Elementor widget unlocks endless design possibilities. Customize your website’s appearance with numerous options, allowing you to bring your creative vision to life.
 
-🚀 **Continuous Updates**: Stay ahead with regular updates and new additions to our collection of Elementor addons, providing you with fresh tools to enhance your website.
 
-🌐 **Trusted Development**: Developed by the [Cyberchimps](https://cyberchimps.com/) team, Responsive Addons for Elementor is committed to delivering top-notch WordPress products. Join the ranks of satisfied users and elevate your website-building journey.
+###💨 Lightweight & Fast Loading:###
+Load only required resources. For instance, if you wish to use a limited number of widgets on your Elementor pages, you can turn off the remaining widgets to make sure your website loads only the required Javacript, CSS and HTML.
 
-==Support & Documentation==
+###🚀 Elements Control Option:###
+Fine-tune your page’s performance by toggling individual Elementor widgets on or off. Deactivate unnecessary widgets to keep your site lightweight and fast.
+
+###🎉 Free Templates & Sections:###
+Unlock a growing library of pre-made templates and sections with Responsive Addons for Elementor. Create standout websites effortlessly using our professionally designed, seamlessly integrated templates.
+
+###🌟 Expert Support:###
+Join our community and get exceptional support through our forum or contact form whenever you need it.
+
+###⚙️ Plugin Requirements:###
+Responsive Addons for Elementor require the Elementor plugin for its functionality.
+
+###🚀 Continuous Updates:###
+Stay ahead with regular updates and new additions to our collection of Elementor widgets, giving you fresh tools to enhance your website.
+
+
+###🌐 Trusted Development:###
+Created by the [Cyberchimps](https://cyberchimps.com/responsive-addons-for-elementor/) team, Responsive Addons for Elementor is committed to delivering top-notch WordPress products. Join the ranks of satisfied users and elevate your website-building journey.
+
+##Import Designer-made Elementor Templates and Ready-to-use Elementor Websites##
+
+<img src = "/assets/images/description.png">
+
+Import professionally designed websites with Responsive Addons for Elementor plugin in minutes. This helps you cut down your website design time by 90% without compromising on performance.
+
+Responsive Addons for Elementor plugin integrates seamlessly with the [Responsive Plus - Starter templates](https://wordpress.org/plugins/responsive-add-ons/) plugin to offer you a library of fully functional, professionally built websites that you can import and launch your website with just a few clicks!
+
+[Check Ready Websites and Starter Templates](https://cyberchimps.com/wordpress-themes/?page-builder=elementor)
+
+##80+ FREE ELEMENTOR WIDGETS AND COUNTING##
+
+Using 80+ widgets from the  Responsive Addons for Elementor plugin, you can design your Elementor website without limits.
+
+Let’s get started with the widget list.
+
+
+###Content Widgets:###
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/advanced-tabs/">Advanced Tabs</a> - Advanced Tabs widget helps you aesthetically display information under different tabs.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/audio-player/" >Audio Player</a> – With Audio widget, users can add an audio box to the page.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/author-box-widget/" >Author Box</a> – The Author Box is a single post widget that dynamically displays the respective post author.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/back-to-top/" >Back to Top</a> – The Back to Top Widget allows visitors to navigate to the top of the page quickly.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/banner-widget/" >Banner</a> – Responsive Addons for Elementor’s Banner widget enables you to create eye-catching interactive banners.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/breadcrumb-widget/" >Breadcrumbs</a> – The widget displays a secondary navigation panel that reveals a user's location within a website.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/business-hour-widget/" >Business Hours</a> – Business Hours allows you to display your business hours in a beautiful tabular way.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/button-widget/" >Button</a> – The button widget helps you add beautiful buttons on Elementor pages.
+
+1. <a href = "https://cyberchimps.com/blocks/call-to-action/" >Call to Action</a> — The Call to Action Widget is a tool for creating beautiful boxes that combine an image, some text, and a button.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/contact-form-7-styler/" >Contact Form Styler</a> — The Contact Form 7 widget lets you style the free Contact Form 7 forms, improving communication and customer satisfaction.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/content-switcher/" >Content Switcher</a> – The widget lets users switch between different types of content using a toggle button.
+
+1. <a href = "https://cyberchimps.com/elementor-widgets/content-ticker/" >Content Ticker</a> — Content Ticker helps you design a beautiful ticker and display ‘Dynamic’ or ‘Custom’ content as your headlines.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/countdown-widget/" >Countdown</a> – The countdown widget lets you attractively add countdowns to your page.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/data-table-widget/" >Data Table</a> – The data Table widget displays data in a tabular format within a website.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/divider/" >Divider</a> – The widget allows you to use various fancy dividers supporting text, icons, and images.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/dual-color-header/" >Dual Color Header</a> — The Dual Color Header Widget allows you to create an eye-catching header with dual colors, creating an interactive look for your audience.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/faq/" >FAQ</a> — The FAQ widget allows you to create and display FAQs in accordion or with a grid layout.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/fancy-text/" >Fancy Text</a> – Create eye-catching marketing messages with fancy, animated texts and headings.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/features-list-widget/" >Feature List</a> – Feature List widget allows you to design and showcase your product’s key features in a more visually attractive and intuitive way.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/feature-image-widget/" >Featured Image</a> – The featured Image widget lets you add the featured image of that particular page or post to the content.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/flip-box-widget/" >Flip Box</a> – The Flip Box Widget helps you create animated boxes that flip to the other side once the visitor hovers over them.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/google-maps-widget/" >Google Map</a> – Google Map is a widget that is used to embed Google Maps to display required information.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/gravity-form-styler/" >Gravity Form Styler</a> – Gravity Forms Styler allows you to style your gravity form to make it more attractive to the end-user.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/icon-box/" >Icon Box</a> – Using the Icon Box widget, you can add or remove the icon/image with the CTA button.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/image-gallery-widget/" >Image Gallery</a> – The Image Gallery widget allows you to create an attractive image gallery widget.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/image-hotspot-widget/" >Image Hotspot</a> – Hotspot widget allows you to quickly create a product showcase and highlight some of its key features.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/logo-carousel-widget/" >Logo Carousel</a> – Logo Carousel widget allows you to create a carousel of logos/images with different transition effects.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/login-registration-form/" >Login / Register form</a> – The login / Register widget allows you to create a simple login/registration form for your website.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/lottie/" >Lottie</a> – Lottie is a widget that allows you to add Lottie animations.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/mailchimp-styler/" >MailChimp Styler</a> – Mailchimp Styler allows you to style your Mailchimp form with different customization options.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/menu-cart/" >Menu Cart</a> – The Menu Cart widget allows you to display the cart icon on the website.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/multi-button-widget/" >Multi Button</a> – Multi Button’s widget helps create two buttons side by side that result in two different actions.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/media-carousel-widget/" >Media Carousel</a> – Media Carousel allows you to create carousels and sliders that beautifully showcase your images and videos.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/modal-popup/" >Modal Popup</a> — The Modal Popup widget allows you to create unique lightweight Popups displayed with the click of a button.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/nav-menu-widget/" >Nav Menu</a> –  The Nav Menu widget lets you create navigation menus easily, with custom styling options and layouts.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/off-canvas/" >Off-Canvas </a> — Off-Canvas menu is an easy-to-use tool for creating a hidden sidebar or menu that a button or icon can trigger.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/one-page-navigation-widget/" >One Page Nav igation</a> – One Page Navigation gives you the flexibility to navigate through your one-page website easily.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/portfolio-widget/" >Portfolio</a> – The po rtfolio Widget allows you to display your posts, pages, and custom post types in an attractive, filterable grid.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/post-widget/" >Posts</a> –  Posts widget lets you quickly display posts on any website page.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/post-carousel/" >Post Carousel</a> – The Post Carousel widget allows you to display your blog posts with images, post titles, excerpts, and read-only buttons that slide smoothly.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/pricing-table/" >Pricing Table</a> – The pricing Table widget displays pricing information for different products or services in a visually appealing and organized manner.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/price-box-widget/" >Price Box</a> –  The price box widget allows the attractive addition of products and service packages.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/price-list/" >Price List</a> – The price List widget lets you create fully styled catalogs and menus that include pricing.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/progress-bar/" >Progress Bar</a> — The progress bar allows you to showcase the progress of specific fields and show information based on the company's statistical fields.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/reviews/" >Reviews</a> – The Reviews Elementor widget displays a sliding carousel of user reviews.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/search-form-styler/" >Search Form Styler</a> – Search Form allows you to create a perfect search bar and add it anywhere on your website.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/site-logo-widget/" >Site Logo</a> — Site Logo is a dynamic widget that enables you to display your logo anywhere you choose to use it.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/slider/" >Slider</a> – Slider widget lets you quickly create a simple slider that works perfectly for your website.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/docs/sticky-video/" >Sticky Video</a> – Sticky Video is a widget that allows you to add a video and make its position sticky when scrolling the page.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/table-of-contents-widget/" >Table of Contents</a> — The widget organizes your page according to the H1 to H6 hierarchy levels.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/team-member-widget/" >Team Member</a> — A Team Member widget lets you add an image, name, designation, description, and social links to your team members.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/testimonial-slider-widget/" >Testimonial Slider</a> – The widget lets you display a slider of customer testimonials in various designs.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/timeline/" >Timeline</a> — The timeline widget allows you to show the timeline for anything, such as orders, course maps, etc.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/twitter-feeds-widget/" >Twitter Feed</a> – Twitter Feed is a widget that embeds all the tweets of a Twitter account.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/video/" >Video</a> – The video widget allows you to customize the video play button.
+
+###WooCommerce Widgets:###
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/woo-checkout/" >WC Checkout</a> — The Woo Checkout widget helps you design a beautiful checkout page for your eCommerce store with just a few clicks.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/product-widget/" >WC Products</a> – The Products widget lets you quickly display WooCommerce products on any website.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/wpforms-styler-widget/" >WP Form Styler</a> – The WP Forms Styler widget makes your WP Forms look stylish.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/breadcrumb-widget/" >WC Breadcrumbs</a> — WooCommerce Breadcrumb allows you to display and customize WooCommerce Breadcrumbs and products on any website page.
+
+###Theme Builder Widgets:###
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/archive-posts/" >Archive Posts</a> – With the Archive Posts widget, you can dynamically display posts based on the date or specific category the user visits.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/archive-description/" >Archive Description</a> - Archive Product Description fetches the product archive page description.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/archive-product/" >Archive Products</a> – Archive Products is used to get the list of products on the WooCommerce product archive page.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/archive-title/" >Archive Title</a> – The Archive Title widget shows a dynamic title based on the archive period viewed by the user.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/post-comment-widget/" >Post Comments</a> — The post Comments widget is a Single Post Template widget that displays the total number of comments on a post and offers a form to submit a comment.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/post-content/" >Post Content</a> — The Post Content widget displays the content of the page/post it is set upon.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/post-excerpt-widget/" >Post Excerpt</a> – Post Excerpt widgets display the text input in the excerpt when creating the post.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/post-info/" >Post Info</a> — The post Info widget fetches the meta details of the page/post to be displayed on the screen.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/post-navigation-widget/" >Post Navigation</a> — Post Navigation is a single post template widget that dynamically displays links to the previous and next posts.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/docs/post-title/" >Post Title</a> — The post Title widget allows you to display the page's title or post it is set upon.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/product-additional-information-widget/" >Product Additional Information</a> – Product Additional Information lets you display product-related information.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/product-carousel/" >Product Carousel</a> — The product Carousel widget allows you to showcase your products in a carousel with many customizable features.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/product-category-grid/" >Product Category Grid</a> — This useful widget allows the user to display the Product Categories in a grid view.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/product-content-widget/" >Product Content</a> — Product Content is used to get the product content from WooCommerce products. 
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/product-data-tabs/" >Product Data Tabs</a> – Product Data Tabs gives you the data information for WooCommerce products. 
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/product-image-widget/" >Product Images</a> – The product images widget lets you dynamically add the WooCommerce product image on archive pages.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/product-meta-widget/" >Product Meta</a> – Product Meta helps you insert product meta without writing code.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/product-price-widget/" >Product Price</a> – Customize the product price for WooCommerce products on archive pages.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/product-rating-widget/" >Product Ratings</a> — The Product rating widget lets you add a WooCommerce product rating by fetching it dynamically on archive pages.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/related-products-widget/" >Related Product</a> — Product Related lets you add the related products easily. 
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/product-short-description-widget/" >Product Short Description</a> – With the Short Description widget, you can add the product short description for WooCommerce products.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/product-stock/" >Product Stock</a> – Product stock widgets fetch the stock quantity on archive pages.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/product-title-widget/" >Product Title</a> – The product title widget lets you dynamically add the WooCommerce product titles on archive pages.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/product-upsells/" >Product Upsells</a> – Upsells lets you add product upsells easily on dynamic product pages.
+
+###Extension Modules###
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/cross-site-copy-paste/" >Cross site Copy Paste</a> — Cross-site copy-paste lets you easily replicate Elementor sections from one website to another with the ease of copy-paste functionality. It copies all the texts, columns, widgets, typography, design, and everything else. If you’re still not using the fantastic widgets from the Responsive Elementor Addons plugin, you can sign up for the Responsive Pro version.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/particles-background/" >Particles Background</a> – A particle background is an animated effect with moving particles, like snow or lights. It enhances the visual appeal of a website and gives it a more modern look.
+
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/sticky-section-widget/" >Sticky section</a> – The Elementor sticky sections improve navigation, increase conversions, enhance the design, and enhance accessibility by keeping important elements visible and accessible at all times. You can enhance your website by adding a sticky section today.
+
+
+
+
+
+###Theme Builder for Elementor###
+
+<a href = "https://cyberchimps.com/responsive-addons-for-elementor/theme-builder/" >Theme Builder</a> — Responsive Addons for Elementor’s Theme Builder is a user-friendly tool that empowers you to create and design templates for different sections of your website. Its drag-and-drop interface makes website customization a breeze. The tool also offers a feature that allows you to design and customize various sections of your website as templates, such as the header, footer, WooCommerce products, and more.
+
+
+##Responsive Addons for Elementor Reviews and Testimonials##
+
+Are You A Happy User Of Responsive Addons For Elementor?
+
+Testimonials from real customers:
+
+**Free and easy to use.**
+
+* Responsive Addons for Elementor is a versatile plugin that enhances Elementor with a rich collection of widgets, and templates. It’s user-friendly, highly customizable, and ensures responsive designs across all devices. This plugin is a must-have for anyone looking to extend Elementor’s capabilities effortlessly. Highly recommended!
+
+Give your valuable review on [WordPress](https://wordpress.org/plugins/responsive-addons-for-elementor/#reviews). 
+
+
+##Support & Documentation##
 
 Have any questions? Visit support on Responsive Addons for Elementor Plugin Forum.
-Learn more about using Responsive Addons for Elementor plugin with our [detailed documentation](https://cyberchimps.com/responsive-addons-for-elementor/docs/). Get easy access to [Video Tutorials](https://www.youtube.com/playlist?list=PLXTwxw3ZJwPTSRVyRNmdX9O1M-ateeHOW).
 
-==50+ FREE ELEMENTOR ADDON WIDGETS AND COUNTING==
+* For documentation and tutorials, check out [Documentation](https://cyberchimps.com/responsive-addons-for-elementor/docs/).
+* Join our [Facebook Group](https://www.facebook.com/groups/responsive.theme) for the latest updates.
+* You can also visit our support on the  [Plugin’s Forum](https://wordpress.org/support/plugin/responsive-addons-for-elementor/) to solve your queries.
+* For more information about features, FAQs, and documentation, visit our [Responsive Addons for Elementor](https://cyberchimps.com/responsive-addons-for-elementor/)website.
+* Check out our [YouTube channel](https://www.youtube.com/playlist?list=PLXTwxw3ZJwPTSRVyRNmdX9O1M-ateeHOW) for tutorials.
 
-[Advanced Tabs](https://cyberchimps.com/responsive-addons-for-elementor/docs/rea-advanced-tabs/) - Advanced Tabs widget helps you display information in an aesthetic way under different tabs.
+Download Responsive Addons for Elementor for free and transform your Elementor experience today!
 
-[Audio](https://cyberchimps.com/responsive-addons-for-elementor/docs/audio-player/) - With Audio widget, users can add an audio box to the page.
-
-[Back To Top](https://cyberchimps.com/responsive-addons-for-elementor/docs/back-to-top/) - Back to Top Widget allows your visitors to quickly navigate to the top of the page.
-
-[Banner](https://cyberchimps.com/responsive-addons-for-elementor/docs/banner/) - Banner widget enables you to create eye-catching interactive banners.
-
-[Breadcrumbs](https://cyberchimps.com/responsive-addons-for-elementor/docs/breadcrumbs/) - Breadcrumbs widget displays a secondary navigation panel that reveals a users location within a website.
-
-[Business Hour](https://cyberchimps.com/responsive-addons-for-elementor/docs/business-hour/) - Business Hours allows you to display your business hours in a beautiful tabular way.
-
-[Button](https://cyberchimps.com/responsive-addons-for-elementor/docs/button/) - Button widget helps you add beautiful buttons on Elementor pages.
-
-[Call To Action](https://cyberchimps.com/responsive-addons-for-elementor/docs/call-to-action/) - Call to Action Widget is a tool for creating beautiful boxes that combine an image, some text, and a button.
-
-[Contact Form Styler](https://cyberchimps.com/responsive-addons-for-elementor/docs/contact-form-7-styler/) - Contact Form 7 widget lets style the free Contact form 7 forms, improving communication and customer satisfaction.
-
-[Content Switcher](https://cyberchimps.com/responsive-addons-for-elementor/docs/content-switcher/) - Content Switcher widget lets users switch between different types of content using toggle button.
-
-[Content Ticker](https://cyberchimps.com/responsive-addons-for-elementor/docs/content-ticker/) -  Content Ticker helps you to design a beautiful ticker and display ‘Dynamic’ or ‘Custom’ contents as your headlines.
-
-[Countdown](https://cyberchimps.com/responsive-addons-for-elementor/docs/countdown/) -  Countdown widget enables you to add countdowns to your page in an attractive way.
-
-[Data Table](https://cyberchimps.com/responsive-addons-for-elementor/docs/data-table/) - Data Table widget displays data in a tabular format within a website.
-
-[Divider](https://cyberchimps.com/responsive-addons-for-elementor/docs/divider/) - Divider widget allows you to use various fancy dividers that supports text, icon, and images.
-
-[Dual Color Header](https://cyberchimps.com/responsive-addons-for-elementor/docs/dual-color-header/) - Dual Color Header Widget allows you to create an eye-catching header with dual colors to create an interactive look for your audience.
-
-[FAQ](https://cyberchimps.com/responsive-addons-for-elementor/docs/faq/) - FAQ Widget allows you to create FAQs and display it as an Accordion or with a Grid Layout.
-
-[Feature List](https://cyberchimps.com/responsive-addons-for-elementor/docs/feature-list/) - Feature List widget allows you to design and showcase your product’s key features in a more visually attractive and intuitive way.
-
-[Flip Box](https://cyberchimps.com/responsive-addons-for-elementor/docs/flipbox/) - Flip Box Widget helps you create animated boxes that flip to the other side, once the visitor hovers over them.
-
-[Fancy Text](https://cyberchimps.com/responsive-addons-for-elementor/docs/fancy-text/) - Create eye-catching marketing messages with fancy, animated texts and headings.
-
-[Google Map](https://cyberchimps.com/responsive-addons-for-elementor/docs/google-map/) - Google Map is a widget used to embed Google Maps to display required information.
-
-[Icon Box](https://cyberchimps.com/responsive-addons-for-elementor/docs/icon-box/) - Using Icon Box widget, you can add or remove the icon/image with CTA button.
-
-[Image Gallery](https://cyberchimps.com/responsive-addons-for-elementor/docs/image-gallery/) - Image Gallery widget allows you to create attractive image gallery widget.
-
-[Image Hotspot](https://cyberchimps.com/responsive-addons-for-elementor/docs/image-hotspot/) - Hotspot widget allows you to quickly create a product showcase and highlight some of its key features.
-
-[Logo Carousel](https://cyberchimps.com/responsive-addons-for-elementor/docs/logo-carousel/) - Logo Carousel widget allows you to create a carousel of logos/images with different transition effects.
-
-[Login Register](https://cyberchimps.com/responsive-addons-for-elementor/docs/login-register/) - Login / Register widget allows you to create a simple login/registration form for your website.
-
-[Lottie](https://cyberchimps.com/responsive-addons-for-elementor/docs/lottie/) - Lottie is a widget that allows you to add Lottie animations.
-
-[MailChimp Styler](https://cyberchimps.com/responsive-addons-for-elementor/docs/mailchimp-styler/) - Mailchimp Styler allows you to style your Mailchimp form with different options for customization.
-
-[Multi Button](https://cyberchimps.com/responsive-addons-for-elementor/docs/multibutton/) - Multi Button’s widget is helpful for creating two buttons side by side that result in two different actions.
-
-[Media Carousel](https://cyberchimps.com/responsive-addons-for-elementor/docs/media-carousel/) - Media Carousel allows you to create carousels and sliders that beautifully showcase your images and videos.
-
-[Nav Menu](https://cyberchimps.com/responsive-addons-for-elementor/docs/nav-menu/) - Nav Menu widget lets you create navigation menus easily, with custom styling options and layouts.
-
-[Off canvas](https://cyberchimps.com/responsive-addons-for-elementor/docs/offcanvas/) - Off canvas menu is an easy to use tool that allows you to create a hidden sidebar or menu that can be triggered by a button or icon.
-
-[One Page Navigation](https://cyberchimps.com/responsive-addons-for-elementor/docs/one-page-navigation/) - One Page Navigation gives you the flexibility to easily navigate through your one-page website.
-
-[Posts](https://cyberchimps.com/responsive-addons-for-elementor/docs/posts/) - Posts widget allows you to quickly display posts on any page of your website.
-
-[Post Carousel](https://cyberchimps.com/responsive-addons-for-elementor/docs/post-carousel/) - Post Carousel widget allows you to display your blog posts with Images, Post Titles, Excerpts, and Read More Buttons that slide smoothly.
-
-[Pricing Table](https://cyberchimps.com/responsive-addons-for-elementor/docs/pricing-table/) - Pricing Table widget displays pricing information for different products or services in a visually appealing and organized manner.
-
-[Price Box](https://cyberchimps.com/responsive-addons-for-elementor/docs/price-box/) - Price Box widget gives the option to add products and services packages in an attractive way.
-
-[Price List](https://cyberchimps.com/responsive-addons-for-elementor/docs/price-list/) - Price List widget lets you create fully styled catalogs and menus that include pricing.
-
-[Product Carousel](https://cyberchimps.com/responsive-addons-for-elementor/docs/product-carousel/) - Product Carousel widget allows you to showcase your products in a carousel with many customizing features.
-
-[Product Category Grid](https://cyberchimps.com/responsive-addons-for-elementor/docs/product-category-grid/) - Product Category Grid is a useful widget that allows the user to display the Product Categories in a grid view.
-
-[Progress Bar](https://cyberchimps.com/responsive-addons-for-elementor/docs/progress-bar/) - Progress bar allows you to showcase the progress of specific fields, and show information based on statistical fields of the company.
-
-[Reviews](https://cyberchimps.com/responsive-addons-for-elementor/docs/reviews/) - Reviews Elementor widget displays a sliding carousel of user reviews.
-
-[Search Form](https://cyberchimps.com/responsive-addons-for-elementor/docs/search-form/) - Search Form allows you to create a perfect search bar and add it anywhere on your website.
-
-[Slider](https://cyberchimps.com/responsive-addons-for-elementor/docs/slider/) - Slider widget allows you to quickly create a simple slider that works perfectly for your website.
-
-[Sticky Video](https://cyberchimps.com/responsive-addons-for-elementor/docs/sticky-video/) - Sticky Video is a widget that allows you to add a video and make its position sticky on scrolling the page.
-
-[Table of Contents](https://cyberchimps.com/responsive-addons-for-elementor/docs/table-of-contents/) - Table of Contents widget organizes your page according to your H1 to H6 levels of hierarchy.
-
-[Team Member](https://cyberchimps.com/responsive-addons-for-elementor/docs/team-member/) - A Team Member widget lets you add image, name, designation, description, and social links to your team members.
-
-[Testimonial Slider](https://cyberchimps.com/responsive-addons-for-elementor/docs/testimonial-slider/) - Testimonial Slider widget lets you display a slider of customer testimonials in a variety of designs.
-
-[Timeline](https://cyberchimps.com/responsive-addons-for-elementor/docs/timeline/) - Using the timeline widget, you can show the timeline for anything, such as orders, course maps, etc.
-
-[Twitter Feed](https://cyberchimps.com/responsive-addons-for-elementor/docs/twitter-feed/) - Twitter Feed is a special widget that embeds all the tweets of a Twitter account.
-
-[Video](https://cyberchimps.com/responsive-addons-for-elementor/docs/video/) - Video widget allows you to customize video play button.
-
-[WC Checkout](https://cyberchimps.com/responsive-addons-for-elementor/docs/woo-checkout/) - Woo Checkout widget helps to design a beautiful checkout page for your eCommerce store in just a few clicks.
-
-[WC Products](https://cyberchimps.com/responsive-addons-for-elementor/docs/products/) - Products widget allows you to quickly display WooCommerce products on any page of your website.
-
-[WP Form Styler](https://cyberchimps.com/responsive-addons-for-elementor/docs/wp-forms-styler/) - WP Forms Styler widget makes your WP Forms look stylish.
-
-[WC Breadcrumbs](https://cyberchimps.com/responsive-addons-for-elementor/docs/woocommerce-breadcrumbs/) - WooCommerce Breadcrumb allows you to display & customize WooCommerce Breadcrumbs along with products on any page of your website.
-
-
-##Download Responsive Addons for Elementor for free and transform your Elementor experience today!##
-
-==What’s Next?==
+##What’s Next?##
 
 If you like Responsive Addons for Elementor, consider checking out our other WordPress Products:
 
-**[Responsive Theme](https://wordpress.org/themes/responsive/)**: Responsive Theme is a free WordPress theme built by Cyberchimps that is a fast, lightweight, and fully customizable theme that loads completely under 100 KB. Having a blazing GTMetrix performance score of 100%, it helps loading your website superfast, ensuring customers get a better user experience. The theme powers more than 30,000 websites and more than 500 5-star ratings on WordPress.
+1. **[Responsive Theme](https://wordpress.org/themes/responsive/)**: Responsive Theme is a free WordPress theme built by Cyberchimps that is fast, lightweight, and fully customizable. It loads completely under 100 KB. With a blazing GTMetrix performance score of 100%, it helps your website load super fast, ensuring customers get a better user experience. The theme powers more than 30,000 websites and more than 500 5-star ratings on WordPress.
 
-**[Responsive Starter Templates](https://wordpress.org/plugins/responsive-add-ons/)**: Offers you a library of 250+ freemium starter templates for Elementor and block editor to launch your website quickly. Just select your favorite website template, click import and launch your website.
+1. **[Responsive Plus - Starter Templates](https://wordpress.org/plugins/responsive-add-ons/)**: This library of 250+ freemium starter templates for Elementor and block editor allows you to launch your website quickly. Select your favorite website template, click import, and launch your website.
 
-**[Responsive Blocks](https://wordpress.org/plugins/responsive-block-editor-addons/)**: Library of 50+ creative blocks, you can design beautiful pages without writing a single line of code, and the settings are easy to customize to create your unique look.
+1. **[Responsive Blocks](https://wordpress.org/plugins/responsive-block-editor-addons/)**: A library of 50+ creative blocks, you can design beautiful pages without writing a single line of code, and the settings are easy to customize to create your unique look.
 
-**[WPLegalPages](https://wordpress.org/plugins/wplegalpages/)**: It’s a popular plugin that helps you generate a professional Privacy Policy, terms of use, terms & conditions, eCommerce returns & refunds policy, affiliate disclaimers & more.
+1. **[WPLegalPages](https://wordpress.org/plugins/wplegalpages/)**  is a popular plugin that helps you generate a professional Privacy Policy, terms of use, terms and conditions, eCommerce returns and refunds policy, affiliate disclaimers, and more.
 
-**[WP Cookie Notice & Consent Banner for GDPR, CCPA & ePrivacy](https://wordpress.org/plugins/gdpr-cookie-consent/)**: WP Cookie Notice for GDPR, CCPA & ePrivacy Cons.
+1. **[WP Cookie Notice & Consent Banner for GDPR, CCPA & ePrivacy](https://wordpress.org/plugins/gdpr-cookie-consent/)**: WP Cookie Notice for GDPR, CCPA & ePrivacy Cons.
+
+####Development Version#### 
+The Development Version of the Responsive Addons for Elementor plugin is located at [https://github.com/cyberchimps/responsive-addons-for-elementor](https://github.com/cyberchimps/responsive-addons-for-elementor)
 
 == Changelog ==
+
+= 1.5.4 - 11th September 2024 =
+- Improvement: Added sticky section in flexbox containers.
+- Improvement: Added separate option to add image in advanced tabs widget.
+- Improvement: Added control to manage below heading spacing in dual color header widget.
+- Fix: Fixed Minor bugs.
+
+= 1.5.3 - 30th August 2024 =
+- Improvement: Added particles background in flexbox containers.
+- Fix: Fixed add display inclusion and exclusion conditions in theme builder.
+- Fix: Fixed SVG icon for button widget.
+- Fix: Fixed color and alignment styling in Product rating widget.
+- Fix: Fixed Minor bugs and PHP warnings.
+
+= 1.5.2 - 22nd August 2024 =
+- Fix: Fixed REA to RAE migration issue of Product Carousel widget.
+- Fix: Added missing image custom fields of Image Gallery widget.
+- Improvement: Added support for Youtube shared link in Video widget.
+
+= 1.5.1 - 8th August 2024 =
+- Fix: Fixed a PHP deprecated error in modal popup widget.
+- Improvement: Minor UI changes.
+
+= 1.5.0 - 1st July 2024 =
+- New: Migration from REA plugin to RAE plugin in order to match the Elementor's copyright guidelines.
+
+= 1.4.0 - 20th June 2024 =
+- Improvement: Added the compatibility of RAE theme builder with Astra theme, Kadence theme, OceanWP theme.
+
+= 1.3.1 - 16th May 2024 =
+-Fix: Resolved a conflict with BuddyBoss platform plugin.
+-Fix: Fixed a small issue in the RAE login/register widget.
+
+= 1.3.0 - 13th May 2024 =
+-New: Add to Cart
+-New: Gravity Form Styler
+-New: Menu Cart
+-New: Modal Popup
+-New: Portfolio
+-New: RAE Theme Builder
+
+Theme Builder Widgets:
+-New: RAE Archive Product Description
+-New: RAE Archive Products
+-New: RAE Archive Title
+-New: RAE Author Box
+-New: RAE Featured Image
+-New: RAE Menu Cart
+-New: RAE Post Comments
+-New: RAE Post Content
+-New: RAE Post Excerpt
+-New: RAE Post Info
+-New: RAE Post Navigation
+-New: RAE Post Title
+-New: RAE Product Additional Information
+-New: RAE Product Content
+-New: RAE Product Data Tabs
+-New: RAE Product Images
+-New: RAE Product Meta
+-New: RAE Product Price
+-New: RAE Product Rating
+-New: RAE Product Related
+-New: RAE Product Stock
+-New: RAE Product Title
+-New: RAE Short Description
+-New: RAE Site Logo
+-New: RAE Upsells
 
 = 1.2.0 - 23rd April 2024 =
 - Releasing 17 new widgets in the plugin.
@@ -190,16 +401,31 @@ If you like Responsive Addons for Elementor, consider checking out our other Wor
 == Frequently Asked Questions ==
 
 = 1. Is Responsive Addons for Elementor plugin free? =
-Yes, the Responsive Addons for Elementor is a free addon plugin for the Elementor plugin. It offers more than 50 widgets and powerful extension features in the free version. You can check all the widget demos on the official website.
+Yes, the Responsive Addons for Elementor plugin is free and can be found in the official WordPress plugins directory. Unlike other premium Elementor add-ons, you do not have to pay for subscription plans.
 
 = 2. Will Responsive Addons for Elementor plugin work with my theme? =
-Responsive Addons for Elementor is compatible and works with all the popular WordPress themes.
+It is compatible with any WordPress theme that supports Elementor. We suggest using the Responsive theme as it seamlessly integrates with any plugin or addon.
 
 = 3. Do I need to install any other plugins? =
-Responsive Addons for Elementor needs the free Elementor plugin to work. Apart from that, there is no other plugin required.
+Yes, it will be compatible with any WordPress theme that supports Elementor. We suggest using the Responsive theme, which integrates seamlessly with any plugin or addon.
 
-== Development Version ==
-The Development Version of the Responsive Addons for Elementor plugin is located at [https://github.com/cyberchimps/responsive-addons-for-elementor](https://github.com/cyberchimps/responsive-addons-for-elementor)
+= 4. Will this plugin slow down my website performance? =
+Responsive Addons For Elementor is lightweight. To improve your website performance, you can quickly turn specific elements or sections on or off from the plugin's options panel.
+
+= 5. How do we activate Responsive Addons for the Elementor plugin? =
+To install the Responsive Addons for the Elementor plugin manually from the WordPress admin dashboard:
+***
+* Download the latest Responsive Addons for the Elementor plugin.
+* Login to your WordPress Dashboard.
+* Go to Plugins > Add New.
+* Upload the downloaded plugin zip file.
+* Install and activate it.
+
+
+
+= 6. How do we add responsive widgets to our website? =
+Install and activate the Responsive Addons for Elementor plugin, search for the widget you want to add, drag and drop it on the page, and customize it.
+
 
 == Installation ==
 

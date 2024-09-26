@@ -27,7 +27,7 @@ window.XdUtils = window.XdUtils || (function () {
  */
 'use strict';
 /* global console, XdUtils */
-window.reaCrossSiteCopyLocalStorage = window.reaCrossSiteCopyLocalStorage || (function () {
+window.raelCrossSiteCopyLocalStorage = window.raelCrossSiteCopyLocalStorage || (function () {
 
     var MESSAGE_NAMESPACE = 'cross-domain-local-message';
     var options = {
@@ -96,7 +96,7 @@ window.reaCrossSiteCopyLocalStorage = window.reaCrossSiteCopyLocalStorage || (fu
 
     function isApiReady() {
         if (!wasInit) {
-            console.log('You must call reaCrossSiteCopyLocalStorage.init() before using it.');
+            console.log('You must call raelCrossSiteCopyLocalStorage.init() before using it.');
             return false;
         }
         if (!iframeReady) {
@@ -117,7 +117,7 @@ window.reaCrossSiteCopyLocalStorage = window.reaCrossSiteCopyLocalStorage || (fu
                 throw 'You must specify iframeUrl';
             }
             if (wasInit) {
-                console.log('reaCrossSiteCopyLocalStorage was already initialized!');
+                console.log('raelCrossSiteCopyLocalStorage was already initialized!');
                 return;
             }
             wasInit = true;

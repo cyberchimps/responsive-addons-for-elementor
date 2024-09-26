@@ -132,30 +132,30 @@ class RAEL_Conditions {
 		$post_types = apply_filters( 'rael_hf_display_condition_post_types', array_merge( $post_types, $custom_post_type ) );
 
 		$special_pages = array(
-			'special-404'    => __( '404 Page', 'responsive-elementor-addons' ),
-			'special-search' => __( 'Search Page', 'responsive-elementor-addons' ),
-			'special-blog'   => __( 'Blog / Posts Page', 'responsive-elementor-addons' ),
-			'special-front'  => __( 'Front Page', 'responsive-elementor-addons' ),
-			'special-date'   => __( 'Date Archive', 'responsive-elementor-addons' ),
-			'special-author' => __( 'Author Archive', 'responsive-elementor-addons' ),
+			'special-404'    => __( '404 Page', 'responsive-addons-for-elementor' ),
+			'special-search' => __( 'Search Page', 'responsive-addons-for-elementor' ),
+			'special-blog'   => __( 'Blog / Posts Page', 'responsive-addons-for-elementor' ),
+			'special-front'  => __( 'Front Page', 'responsive-addons-for-elementor' ),
+			'special-date'   => __( 'Date Archive', 'responsive-addons-for-elementor' ),
+			'special-author' => __( 'Author Archive', 'responsive-addons-for-elementor' ),
 		);
 
 		if ( class_exists( 'WooCommerce' ) ) {
-			$special_pages['special-woo-shop'] = __( 'WooCommerce Shop Page', 'responsive-elementor-addons' );
+			$special_pages['special-woo-shop'] = __( 'WooCommerce Shop Page', 'responsive-addons-for-elementor' );
 		}
 
 		$selection_options = array(
 			'basic'         => array(
-				'label' => __( 'Basic', 'responsive-elementor-addons' ),
+				'label' => __( 'Basic', 'responsive-addons-for-elementor' ),
 				'value' => array(
-					'basic-global'    => __( 'Entire Website', 'responsive-elementor-addons' ),
-					'basic-singulars' => __( 'All Singulars', 'responsive-elementor-addons' ),
-					'basic-archives'  => __( 'All Archives', 'responsive-elementor-addons' ),
+					'basic-global'    => __( 'Entire Website', 'responsive-addons-for-elementor' ),
+					'basic-singulars' => __( 'All Singulars', 'responsive-addons-for-elementor' ),
+					'basic-archives'  => __( 'All Archives', 'responsive-addons-for-elementor' ),
 				),
 			),
 
 			'special-pages' => array(
-				'label' => __( 'Special Pages', 'responsive-elementor-addons' ),
+				'label' => __( 'Special Pages', 'responsive-addons-for-elementor' ),
 				'value' => $special_pages,
 			),
 		);
@@ -196,9 +196,9 @@ class RAEL_Conditions {
 		}
 
 		$selection_options['specific-target'] = array(
-			'label' => __( 'Specific Target', 'responsive-elementor-addons' ),
+			'label' => __( 'Specific Target', 'responsive-addons-for-elementor' ),
 			'value' => array(
-				'specifics' => __( 'Specific Pages / Posts / Taxonomies, etc.', 'responsive-elementor-addons' ),
+				'specifics' => __( 'Specific Pages / Posts / Taxonomies, etc.', 'responsive-addons-for-elementor' ),
 			),
 		);
 
@@ -219,16 +219,16 @@ class RAEL_Conditions {
 	public static function get_user_selections() {
 		$selection_options = array(
 			'basic'    => array(
-				'label' => __( 'Basic', 'responsive-elementor-addons' ),
+				'label' => __( 'Basic', 'responsive-addons-for-elementor' ),
 				'value' => array(
-					'all'        => __( 'All', 'responsive-elementor-addons' ),
-					'logged-in'  => __( 'Logged In', 'responsive-elementor-addons' ),
-					'logged-out' => __( 'Logged Out', 'responsive-elementor-addons' ),
+					'all'        => __( 'All', 'responsive-addons-for-elementor' ),
+					'logged-in'  => __( 'Logged In', 'responsive-addons-for-elementor' ),
+					'logged-out' => __( 'Logged Out', 'responsive-addons-for-elementor' ),
 				),
 			),
 
 			'advanced' => array(
-				'label' => __( 'Advanced', 'responsive-elementor-addons' ),
+				'label' => __( 'Advanced', 'responsive-addons-for-elementor' ),
 				'value' => array(),
 			),
 		);
@@ -629,18 +629,18 @@ class RAEL_Conditions {
 
 		$localize_vars = array(
 			'rael_lang'     => $lang,
-			'please_enter'  => __( 'Please enter', 'responsive-elementor-addons' ),
-			'please_delete' => __( 'Please delete', 'responsive-elementor-addons' ),
-			'more_char'     => __( 'or more characters', 'responsive-elementor-addons' ),
-			'character'     => __( 'character', 'responsive-elementor-addons' ),
-			'loading'       => __( 'Loading more results…', 'responsive-elementor-addons' ),
-			'only_select'   => __( 'You can only select', 'responsive-elementor-addons' ),
-			'item'          => __( 'item', 'responsive-elementor-addons' ),
-			'char_s'        => __( 's', 'responsive-elementor-addons' ),
-			'no_result'     => __( 'No results found', 'responsive-elementor-addons' ),
-			'searching'     => __( 'Searching…', 'responsive-elementor-addons' ),
-			'not_loader'    => __( 'The results could not be loaded.', 'responsive-elementor-addons' ),
-			'search'        => __( 'Search pages / post / categories', 'responsive-elementor-addons' ),
+			'please_enter'  => __( 'Please enter', 'responsive-addons-for-elementor' ),
+			'please_delete' => __( 'Please delete', 'responsive-addons-for-elementor' ),
+			'more_char'     => __( 'or more characters', 'responsive-addons-for-elementor' ),
+			'character'     => __( 'character', 'responsive-addons-for-elementor' ),
+			'loading'       => __( 'Loading more results…', 'responsive-addons-for-elementor' ),
+			'only_select'   => __( 'You can only select', 'responsive-addons-for-elementor' ),
+			'item'          => __( 'item', 'responsive-addons-for-elementor' ),
+			'char_s'        => __( 's', 'responsive-addons-for-elementor' ),
+			'no_result'     => __( 'No results found', 'responsive-addons-for-elementor' ),
+			'searching'     => __( 'Searching…', 'responsive-addons-for-elementor' ),
+			'not_loader'    => __( 'The results could not be loaded.', 'responsive-addons-for-elementor' ),
+			'search'        => __( 'Search pages / post / categories', 'responsive-addons-for-elementor' ),
 			'ajax_nonce'    => wp_create_nonce( 'rael-hfe-get-posts-by-query' ),
 		);
 		wp_localize_script( 'rael-select2', 'rael_display_conditions', $localize_vars );
@@ -665,7 +665,7 @@ class RAEL_Conditions {
 		$type           = isset( $settings['type'] ) ? $settings['type'] : 'target_rule';
 		$class          = isset( $settings['class'] ) ? $settings['class'] : '';
 		$rule_type      = isset( $settings['rule_type'] ) ? $settings['rule_type'] : 'target_rule';
-		$add_rule_label = isset( $settings['add_rule_label'] ) ? $settings['add_rule_label'] : __( 'Add Display On Condition', 'responsive-elementor-addons' );
+		$add_rule_label = isset( $settings['add_rule_label'] ) ? $settings['add_rule_label'] : __( 'Add Display On Condition', 'responsive-addons-for-elementor' );
 		$saved_values   = $value;
 		$output         = '';
 
@@ -681,7 +681,7 @@ class RAEL_Conditions {
 		/* Condition Selection */
 		$output .= '<div class="rael-hf__display-condition-wrapper" >';
 		$output .= '<select name="' . esc_attr( $input_name ) . '[rule][{{data.id}}]" class="rael-hf__display-condition-input form-control rael-hf-input">';
-		$output .= '<option value="">' . __( 'Select', 'responsive-elementor-addons' ) . '</option>';
+		$output .= '<option value="">' . __( 'Select', 'responsive-addons-for-elementor' ) . '</option>';
 
 		foreach ( $selection_options as $group => $group_data ) {
 			$output .= '<optgroup label="' . $group_data['label'] . '">';
@@ -735,12 +735,12 @@ class RAEL_Conditions {
 		$post_option = array();
 
 		/* translators: %s post label */
-		$all_posts                          = sprintf( __( 'All %s', 'responsive-elementor-addons' ), $post_label );
+		$all_posts                          = sprintf( __( 'All %s', 'responsive-addons-for-elementor' ), $post_label );
 		$post_option[ $post_name . '|all' ] = $all_posts;
 
 		if ( 'pages' !== $post_key ) {
 			/* translators: %s post label */
-			$all_archive                                = sprintf( __( 'All %s Archive', 'responsive-elementor-addons' ), $post_label );
+			$all_archive                                = sprintf( __( 'All %s Archive', 'responsive-addons-for-elementor' ), $post_label );
 			$post_option[ $post_name . '|all|archive' ] = $all_archive;
 		}
 
@@ -749,7 +749,7 @@ class RAEL_Conditions {
 			$tax_name  = $taxonomy->name;
 
 			/* translators: %s taxonomy label */
-			$tax_archive = sprintf( __( 'All %s Archive', 'responsive-elementor-addons' ), $tax_label );
+			$tax_archive = sprintf( __( 'All %s Archive', 'responsive-addons-for-elementor' ), $tax_label );
 
 			$post_option[ $post_name . '|all|taxarchive|' . $tax_name ] = $tax_archive;
 		}
@@ -794,7 +794,7 @@ class RAEL_Conditions {
 			$output .= '<span class="rael-hf__display-condition-delete dashicons dashicons-dismiss"></span>';
 			$output .= '<div class="rael-hf__display-condition-wrapper" >';
 			$output .= '<select name="' . esc_attr( $input_name ) . '[rule][' . $index . ']" class="rael-hf__display-condition-input form-control rael-hf-input">';
-			$output .= '<option value="">' . __( 'Select', 'responsive-elementor-addons' ) . '</option>';
+			$output .= '<option value="">' . __( 'Select', 'responsive-addons-for-elementor' ) . '</option>';
 
 			foreach ( $selection_options as $group => $group_data ) {
 				$output .= '<optgroup label="' . $group_data['label'] . '">';
@@ -865,7 +865,7 @@ class RAEL_Conditions {
 		if ( 'display' === $type ) {
 			/* Add new rule */
 			$output .= '<div class="rael-hf__add-exclude-display-condition-wrapper">';
-			$output .= '<a href="#" class="button">' . __( 'Add Exclusion Condition', 'responsive-elementor-addons' ) . '</a>';
+			$output .= '<a href="#" class="button">' . __( 'Add Exclusion Condition', 'responsive-addons-for-elementor' ) . '</a>';
 			$output .= '</div>';
 		}
 
@@ -1054,7 +1054,7 @@ class RAEL_Conditions {
 		$type           = isset( $settings['type'] ) ? $settings['type'] : 'target_rule';
 		$class          = isset( $settings['class'] ) ? $settings['class'] : '';
 		$rule_type      = isset( $settings['rule_type'] ) ? $settings['rule_type'] : 'target_rule';
-		$add_rule_label = isset( $settings['add_rule_label'] ) ? $settings['add_rule_label'] : __( 'Add Rule', 'responsive-elementor-addons' );
+		$add_rule_label = isset( $settings['add_rule_label'] ) ? $settings['add_rule_label'] : __( 'Add Rule', 'responsive-addons-for-elementor' );
 		$saved_values   = $value;
 		$output         = '';
 
@@ -1070,7 +1070,7 @@ class RAEL_Conditions {
 				/* Condition Selection */
 				$output     .= '<div class="rael-hf__user-role-condition-wrapper" >';
 					$output .= '<select name="' . esc_attr( $input_name ) . '[{{data.id}}]" class="rael-hf__user-role-condition-input form-control rael-hf-input">';
-					$output .= '<option value="">' . __( 'Select', 'responsive-elementor-addons' ) . '</option>';
+					$output .= '<option value="">' . __( 'Select', 'responsive-addons-for-elementor' ) . '</option>';
 
 		foreach ( $selection_options as $group => $group_data ) {
 			$output .= '<optgroup label="' . $group_data['label'] . '">';
@@ -1100,7 +1100,7 @@ class RAEL_Conditions {
 				/* Condition Selection */
 				$output     .= '<div class="rael-hf__user-role-condition-wrapper" >';
 					$output .= '<select name="' . esc_attr( $input_name ) . '[' . $index . ']" class="rael-hf__user-role-condition-input form-control rael-hf-input">';
-					$output .= '<option value="">' . __( 'Select', 'responsive-elementor-addons' ) . '</option>';
+					$output .= '<option value="">' . __( 'Select', 'responsive-addons-for-elementor' ) . '</option>';
 
 			foreach ( $selection_options as $group => $group_data ) {
 				$output .= '<optgroup label="' . $group_data['label'] . '">';

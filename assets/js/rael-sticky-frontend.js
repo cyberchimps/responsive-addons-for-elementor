@@ -99,6 +99,7 @@
     init: function init() {
       elementor.hooks.addAction('frontend/element_ready/column', RaelSticky.elementorColumn);
       elementorFrontend.hooks.addAction('frontend/element_ready/section', RaelSticky.setStickySection);
+      elementorFrontend.hooks.addAction('frontend/element_ready/container', RaelSticky.setStickySection);
       $(RaelSticky.stickySection);
     },
     getStickySectionsDesktop: [],

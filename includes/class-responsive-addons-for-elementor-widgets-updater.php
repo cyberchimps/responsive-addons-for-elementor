@@ -309,6 +309,33 @@ class Responsive_Addons_For_Elementor_Widgets_Updater {
 				'docs'     => 'https://cyberchimps.com/responsive-addons-for-elementor/docs/woo-checkout',
 				'category' => 'woocommerce',
 			),
+			array(
+				'title'    => 'portfolio',
+				'docs'     => 'https://cyberchimps.com/responsive-addons-for-elementor/docs/portfolio',
+				'category' => 'content',
+			),
+			array(
+				'title'    => 'menu-cart',
+				'docs'     => 'https://cyberchimps.com/responsive-addons-for-elementor/docs/menu-cart',
+				'category' => 'woocommerce',
+			),
+			array(
+				'title'    => 'wc-add-to-cart',
+				'name'     => 'WC Add to Cart',
+				'docs'     => 'https://cyberchimps.com/esponsive-addons-for-elementor/docs/custom-add-to-cart',
+				'category' => 'woocommerce',
+			),
+			array(
+				'title'    => 'modal-popup',
+				'docs'     => 'https://cyberchimps.com/responsive-addons-for-elementor/docs/modal-popup',
+				'category' => 'marketing',
+			),
+			array(
+				'title'    => 'gf-styler',
+				'name'     => 'Gravity Forms Styler',
+				'docs'     => 'https://cyberchimps.com/responsive-addons-for-elementor/docs/gravity-forms-styler',
+				'category' => 'form',
+			),
 		);
 
 		return $widgets;
@@ -358,4 +385,18 @@ class Responsive_Addons_For_Elementor_Widgets_Updater {
 
 		add_option( 'rael_widgets', $widgets );
 	}
+
+	/**
+	 * Reset the RAEL widgets into the database.
+	 */
+	public function reset_widgets_data() {
+
+		$delete_widgets = delete_option( 'rael_widgets' );
+		if ( $delete_widgets ) {
+			$widgets = $this->initial_rael_widgets_data();
+			add_option( 'rael_widgets', $widgets );
+		}
+
+	}
+
 }

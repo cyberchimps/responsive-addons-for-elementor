@@ -107,7 +107,7 @@ class Responsive_Addons_For_Elementor_Theme_Product_Rating extends Woo_Widget_Ba
 				'label'     => esc_html__( 'Star Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'.woocommerce {{WRAPPER}} .star-rating' => 'color: {{VALUE}}',
+					'.woocommerce {{WRAPPER}} .star-rating span' => 'color: {{VALUE}}',
 				),
 			)
 		);

@@ -106,7 +106,7 @@
 
 	};
 
-	$(document).raeldy(function($) {
+	$(document).ready(function($) {
 
 		jQuery( '.rael-hf__display-condition' ).each( function() {
 			var $this 			= $( this ),

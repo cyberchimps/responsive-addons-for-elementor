@@ -321,12 +321,12 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 			array(
 				'label'   => __( 'Layout', 'responsive-addons-for-elementor' ),
 				'type'    => Controls_Manager::SELECT,
-				'default' => 'preset-1',
+				'default' => 'preset_1',
 				'options' => array(
-					'preset-1' => __( 'Preset 1', 'responsive-addons-for-elementor' ),
-					'preset-2' => __( 'Preset 2', 'responsive-addons-for-elementor' ),
-					'preset-3' => __( 'Preset 3', 'responsive-addons-for-elementor' ),
-					'preset-4' => __( 'Preset 4', 'responsive-addons-for-elementor' ),
+					'preset_1' => __( 'Preset 1', 'responsive-addons-for-elementor' ),
+					'preset_2' => __( 'Preset 2', 'responsive-addons-for-elementor' ),
+					'preset_3' => __( 'Preset 3', 'responsive-addons-for-elementor' ),
+					'preset_4' => __( 'Preset 4', 'responsive-addons-for-elementor' ),
 				),
 			)
 		);
@@ -911,10 +911,10 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 				'default' => 'sale_preset_5',
 				'options' => array(
 					'sale_preset_5' => esc_html__( 'Preset 1', 'responsive-addons-for-elementor' ),
-					'sale_preset-2' => esc_html__( 'Preset 2', 'responsive-addons-for-elementor' ),
-					'sale_preset-3' => esc_html__( 'Preset 3', 'responsive-addons-for-elementor' ),
-					'sale_preset-4' => esc_html__( 'Preset 4', 'responsive-addons-for-elementor' ),
-					'sale_preset-1' => esc_html__( 'Preset 5', 'responsive-addons-for-elementor' ),
+					'sale_preset_2' => esc_html__( 'Preset 2', 'responsive-addons-for-elementor' ),
+					'sale_preset_3' => esc_html__( 'Preset 3', 'responsive-addons-for-elementor' ),
+					'sale_preset_4' => esc_html__( 'Preset 4', 'responsive-addons-for-elementor' ),
+					'sale_preset_1' => esc_html__( 'Preset 5', 'responsive-addons-for-elementor' ),
 
 				),
 			)
@@ -936,7 +936,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 					),
 				),
 				'condition' => array(
-					'rael_pc_dynamic_template_layout!' => 'preset-2',
+					'rael_pc_dynamic_template_layout!' => 'preset_2',
 				),
 			)
 		);
@@ -998,7 +998,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 					'{{WRAPPER}} .rael-product-carousel .rael-pc__product-details-wrapper' => 'text-align: {{VALUE}};',
 				),
 				'condition' => array(
-					'rael_pc_dynamic_template_layout' => 'preset-3',
+					'rael_pc_dynamic_template_layout' => 'preset_3',
 				),
 			)
 		);
@@ -1012,7 +1012,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 					'{{WRAPPER}} .rael-product-carousel-container .rael-product-carousel' => 'background-color: {{VALUE}};',
 				),
 				'condition' => array(
-					'rael_pc_dynamic_template_layout!' => array( 'preset-2', 'preset-4' ),
+					'rael_pc_dynamic_template_layout!' => array( 'preset_2', 'preset_4' ),
 				),
 			)
 		);
@@ -1027,7 +1027,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 					'{{WRAPPER}} .rael-product-carousel-container .rael-product-carousel .rael-product-carousel__overlay' => 'background: {{VALUE}};',
 				),
 				'condition'   => array(
-					'rael_pc_dynamic_template_layout' => array( 'preset-2', 'preset-4' ),
+					'rael_pc_dynamic_template_layout' => array( 'preset_2', 'preset_4' ),
 				),
 			)
 		);
@@ -1323,7 +1323,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 				'selector'  => '{{WRAPPER}} .rael-product-carousel .rael-pc__product-excerpt',
 				'condition' => array(
 					'rael_pc_excerpt'                 => 'yes',
-					'rael_pc_dynamic_template_layout' => 'preset-1',
+					'rael_pc_dynamic_template_layout' => 'preset_1',
 				),
 			)
 		);
@@ -1336,7 +1336,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 				'selector'  => '{{WRAPPER}} .rael-product-carousel .rael-pc__excerpt',
 				'condition' => array(
 					'rael_pc_excerpt'                  => 'yes',
-					'rael_pc_dynamic_template_layout!' => 'preset-1',
+					'rael_pc_dynamic_template_layout!' => 'preset_1',
 				),
 			)
 		);
@@ -1369,7 +1369,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 				'default'   => '',
 				'selectors' => array(
 					'{{WRAPPER}} .rael-product-carousel .onsale, {{WRAPPER}} .rael-product-carousel .rael-pc__onsale' => 'background-color: {{VALUE}};',
-					'{{WRAPPER}} .rael-product-carousel .rael-pc__onsale:not(.rael-pc__out-of-stock).sale_preset-4:after'        => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
+					'{{WRAPPER}} .rael-product-carousel .rael-pc__onsale:not(.rael-pc__out-of-stock).sale_preset_4:after'        => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
 				),
 			)
 		);
@@ -1411,7 +1411,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 				'default'   => '#ff2a13',
 				'selectors' => array(
 					'{{WRAPPER}} .woocommerce ul.products li.product .outofstock-badge, {{WRAPPER}} .woocommerce ul.products li.product .rael-pc__onsale.rael-pc__out-of-stock' => 'background-color: {{VALUE}};',
-					'{{WRAPPER}} .woocommerce ul.products li.product .rael-pc__onsale.rael-pc__out-of-stock.sale_preset-4:after'                                                => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
+					'{{WRAPPER}} .woocommerce ul.products li.product .rael-pc__onsale.rael-pc__out-of-stock.sale_preset_4:after'                                                => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
 				),
 			)
 		);
@@ -1452,7 +1452,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 					'{{WRAPPER}} .rael-product-carousel .rael-pc__icons-wrapper li a' => 'width: {{SIZE}}px; height: {{SIZE}}px;',
 				),
 				'condition' => array(
-					'rael_pc_dynamic_template_layout!' => 'preset-3',
+					'rael_pc_dynamic_template_layout!' => 'preset_3',
 				),
 			)
 		);
@@ -1471,7 +1471,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 					'{{WRAPPER}} .rael-product-carousel .rael-pc__icons-wrapper' => 'height: {{SIZE}}px;',
 				),
 				'condition' => array(
-					'rael_pc_dynamic_template_layout' => 'preset-3',
+					'rael_pc_dynamic_template_layout' => 'preset_3',
 				),
 			)
 		);
@@ -1502,7 +1502,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 					'{{WRAPPER}} .rael-product-carousel .rael-pc__icons-wrapper li' => 'border-color: {{VALUE}};',
 				),
 				'condition' => array(
-					'rael_pc_dynamic_template_layout' => 'preset-3',
+					'rael_pc_dynamic_template_layout' => 'preset_3',
 				),
 			)
 		);
@@ -1545,7 +1545,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 				'name'      => 'rael_pc_product_button_border_normal',
 				'selector'  => '{{WRAPPER}} .rael-product-carousel .button.add_to_cart_button, {{WRAPPER}} .rael-product-carousel .rael-pc__icons-wrapper li a',
 				'condition' => array(
-					'rael_pc_dynamic_template_layout!' => 'preset-3',
+					'rael_pc_dynamic_template_layout!' => 'preset_3',
 				),
 			)
 		);
@@ -1569,7 +1569,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 					'{{WRAPPER}} .rael-product-carousel .rael-pc__icons-wrapper.details-block-style-2 li:last-child a'  => 'border-radius: 0 {{SIZE}}px {{SIZE}}px 0;',
 				),
 				'condition' => array(
-					'rael_pc_dynamic_template_layout!' => 'preset-3',
+					'rael_pc_dynamic_template_layout!' => 'preset_3',
 				),
 			)
 		);
@@ -1588,7 +1588,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 					'{{WRAPPER}} .rael-product-carousel .rael-pc__icons-wrapper' => 'margin-top: {{SIZE}}px;',
 				),
 				'condition' => array(
-					'rael_pc_dynamic_template_layout' => 'preset-4',
+					'rael_pc_dynamic_template_layout' => 'preset_4',
 				),
 			)
 		);
@@ -1844,7 +1844,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'.rael-pc__popup-details-render{{WRAPPER}} .rael-pc__onsale' => 'background-color: {{VALUE}}!important;',
-					'.rael-pc__popup-details-render{{WRAPPER}} .rael-pc__onsale:not(.rael-pc__out-of-stock).sale_preset-4:after'        => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
+					'.rael-pc__popup-details-render{{WRAPPER}} .rael-pc__onsale:not(.rael-pc__out-of-stock).sale_preset_4:after'        => 'border-left-color: {{VALUE}}; border-right-color: {{VALUE}};',
 				),
 			)
 		);
@@ -2993,6 +2993,15 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 	 * @return string The file path of the template.
 	 */
 	protected function get_template( $template_name ) {
+		if ( 'preset_1' === $template_name ) {
+			$template_name = 'preset-1';
+		} elseif ( 'preset_2' === $template_name ) {
+			$template_name = 'preset-2';
+		} elseif ( 'preset_3' === $template_name ) {
+			$template_name = 'preset-3';
+		} elseif ( 'preset_4' === $template_name ) {
+			$template_name = 'preset-4';
+		}
 		$file_name = RAEL_DIR . 'includes/widgets-manager/widgets/skins/product-carousel/' . $template_name . '.php';
 		return $file_name;
 	}

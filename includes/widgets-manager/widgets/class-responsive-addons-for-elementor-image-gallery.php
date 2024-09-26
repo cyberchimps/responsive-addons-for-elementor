@@ -2628,9 +2628,15 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 
 		$gallery = $images;
 
+		$image_custom_fields_migration_process = get_option( 'rea_to_rae_image_gallery_images_custom_fields_migration_process' );
 		foreach ( $images as $i => $data ) {
+			if ( ! $image_custom_fields_migration_process || 'complete' !== $image_custom_fields_migration_process ) {
+				$this->responsive_addons_for_elementor_fetch_image_custom_field( $data['id'] );
+			}
 			$gallery[ $i ]['custom_link'] = get_post_meta( $data['id'], 'rael-custom-link', true );
 		}
+
+		update_option( 'rea_to_rae_image_gallery_images_custom_fields_migration_process', 'complete' );
 
 		if ( 'carousel' === $settings['rael_gallery_style'] ) {
 			$wrap_class[] = $settings['rael_navigation'];
@@ -2681,5 +2687,44 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 	 */
 	public function get_custom_help_url() {
 		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/image-gallery';
+	}
+
+	/**
+	 * Get Images Custom Fields and make them compatible with REA.
+	 *
+	 * @since 1.5.2
+	 * @param integer $post_id Image ID.
+	 * @return void
+	 */
+	public function responsive_addons_for_elementor_fetch_image_custom_field( $post_id ) {
+		global $wpdb;
+
+		$results = $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT meta_id, meta_key, meta_value
+				FROM {$wpdb->postmeta}
+				WHERE post_id = %d
+				AND (meta_key LIKE %s OR meta_key LIKE %s)",
+				$post_id,
+				'rea_%',
+				'rea-%'
+			),
+			ARRAY_N
+		);
+
+		if ( empty( $results ) ) {
+			return;
+		}
+
+		foreach ( $results as $value ) {
+			$new_key = str_replace( array( 'rea_', 'rea-' ), array( 'rael_', 'rael-' ), $value[1] );
+			$wpdb->update(
+				$wpdb->postmeta,
+				array( 'meta_key' => $new_key ),
+				array( 'meta_id' => $value[0] ),
+				array( '%s' ),
+				array( '%d' )
+			);
+		}
 	}
 }

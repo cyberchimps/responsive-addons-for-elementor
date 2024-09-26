@@ -4,9 +4,8 @@
  * @package responsive-addons-for-elementor
  */
 
-var $ = jQuery.noConflict();
-$( document ).ready(
-	function () {
+jQuery( document ).ready(
+	function ($) {
 		let hash = window.location.hash;
 		if (hash === "") {
 			window.location.hash = "#widgets";

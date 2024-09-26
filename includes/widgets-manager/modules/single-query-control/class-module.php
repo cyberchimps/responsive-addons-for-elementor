@@ -567,7 +567,8 @@ class Module extends QueryControlModule {
 		$query_data = $this->autocomplete_query_data( $data );
 
 		if ( is_wp_error( $query_data ) ) {
-			throw new \Exception( $query_data->get_code() . ':' . $query_data->get_message() );
+			// Throw an exception with error code and message from $query_data.
+			throw new \Exception( esc_html( $query_data->get_code() ) . ':' . esc_html( $query_data->get_message() ) );
 		}
 
 		$results                     = array();

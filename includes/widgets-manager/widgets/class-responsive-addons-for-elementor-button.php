@@ -436,6 +436,7 @@ class Responsive_Addons_For_Elementor_Button extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .rael-icon'       => 'color: {{VALUE}};',
 					'{{WRAPPER}} .rael-button svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .rael-button svg path' => 'fill: {{VALUE}};',
 				),
 			)
 		);
@@ -457,6 +458,7 @@ class Responsive_Addons_For_Elementor_Button extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .rael-button:hover .rael-icon' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .rael-button:hover svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .rael-button:hover svg path' => 'fill: {{VALUE}};',
 				),
 			)
 		);
@@ -603,7 +605,47 @@ class Responsive_Addons_For_Elementor_Button extends Widget_Base {
 			'open_video_in_lightbox' => $settings['open_video_in_lightbox'],
 		);
 
-		echo wp_kses_post( $this->rael_widget_button_callback( $args ) );
+		echo wp_kses( $this->rael_widget_button_callback( $args ), $this->allowed_html_tags() );
+	}
+
+	/**
+	 * Return allowed tags for current widget
+	 *
+	 * @return array Array of allowed tags for current widget
+	 */
+	private function allowed_html_tags() {
+		$tags_allowed = wp_kses_allowed_html( 'post' );
+
+		$tags_allowed['svg'] = array(
+			'g'           => array(),
+			'width'       => array(),
+			'height'      => array(),
+			'fill'        => array(),
+			'version'     => array(),
+			'class'       => array(),
+			'xmlns'       => array(),
+			'viewBox'     => array(),
+			'viewbox'     => array(),
+			'xml:space'   => array(),
+			'xmlns:xlink' => array(),
+			'x'           => array(),
+			'y'           => array(),
+			'style'       => array(),
+			'path'    => array(
+				'id'    => array(),
+				'class' => array(),
+				'd'     => array(),
+				'fill'  => array(),
+			),
+		);
+		$tags_allowed['path'] = array(
+			'id'    => array(),
+			'class' => array(),
+			'd'     => array(),
+			'fill'  => array(),
+		);
+
+		return $tags_allowed;
 	}
 
 	/**

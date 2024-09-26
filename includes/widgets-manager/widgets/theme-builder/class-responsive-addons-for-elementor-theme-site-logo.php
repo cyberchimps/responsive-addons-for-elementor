@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * RAEL Theme Product Upsell widget class.
+ * RAEL Theme Site Logo widget class
  */
 class Responsive_Addons_For_Elementor_Theme_Site_Logo extends Widget_Image {
 
@@ -88,7 +88,7 @@ class Responsive_Addons_For_Elementor_Theme_Site_Logo extends Widget_Image {
 	}
 
 	/**
-	 * Register controls for archive title widget
+	 * Register controls for Site logo widget
 	 */
 	protected function register_controls() {
 		parent::register_controls();
@@ -395,7 +395,8 @@ class Responsive_Addons_For_Elementor_Theme_Site_Logo extends Widget_Image {
 	 * @return array The modified options array for the caption source control.
 	 */
 	private function get_caption_source_options() {
-		$caption_source_options = $this->get_controls( 'caption_source' )['options'];
+		$caption_source_controls = $this->get_controls( 'caption_source' );
+		$caption_source_options  = isset( $caption_source_controls['options'] ) ? $caption_source_controls['options'] : array();
 
 		unset( $caption_source_options['custom'] );
 

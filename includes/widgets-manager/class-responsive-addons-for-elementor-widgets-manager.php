@@ -167,6 +167,9 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 			'media-carousel',
 			'google-map',
 			'lottie',
+			'portfolio',
+			'modal-popup',
+			'gf-styler',
 		);
 
 		return $widget_list;
@@ -184,6 +187,8 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 			'product-category-grid',
 			'product-carousel',
 			'woo-checkout',
+			'menu-cart',
+			'wc-add-to-cart',
 		);
 
 		return $widget_list;
@@ -590,6 +595,25 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 							Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Woo_Checkout() );
 						}
 						break;
+					case 'portfolio':
+						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Portfolio() );
+						break;
+					case 'menu-cart':
+						if ( class_exists( 'WooCommerce' ) ) {
+							Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Menu_Cart() );
+						}
+						break;
+					case 'wc-add-to-cart':
+						if ( class_exists( 'WooCommerce' ) ) {
+							Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_WC_Add_To_Cart() );
+						}
+						break;
+					case 'modal-popup':
+						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Modal_Popup() );
+						break;
+					case 'gf-styler':
+						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Gf_Styler() );
+						break;
 				}
 			}
 		}
@@ -666,7 +690,7 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 				<span class="elementor-button-text"><?php echo wp_kses_post( $sub_total ); ?></span>
 				<span class="elementor-button-icon" <?php echo wp_kses_post( $counter_attr ); ?>>
 					<i class="eicon" aria-hidden="true"></i>
-					<span class="elementor-screen-only"><?php esc_html_e( 'Cart', 'responsive-elementor-addons' ); ?></span>
+					<span class="elementor-screen-only"><?php esc_html_e( 'Cart', 'responsive-addons-for-elementor' ); ?></span>
 				</span>
 			</a>
 		</div>
@@ -690,7 +714,7 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 				<div class="rael-menu-cart__container elementor-lightbox" aria-expanded="false">
 					<div class="rael-menu-cart__main" aria-expanded="false">
 						<div class="rael-menu-cart__close-button"></div>
-						<div class="widget_shopping_cart_content"></div>
+						<div class="widget_shopping_cart_content"><?php	wc_get_template( 'cart/mini-cart.php' ); ?></div>
 					</div>
 				</div>
 				<?php self::render_menu_cart_toggle_button(); ?>

@@ -310,6 +310,22 @@ class Responsive_Addons_For_Elementor_Dual_Color_Header extends Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'rael_dual_color_header_below_heading_spacing',
+			array(
+				'label'     => esc_html__( 'Below heading spacing', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => array(
+					'px' => array(
+						'max' => 500,
+					),
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .rael-dual-color-header .title' => 'margin-bottom: {{SIZE}}px;',
+				),
+			)
+		);
+
 		$this->add_responsive_control(
 			'rael_dual_color_header_container_padding',
 			array(

@@ -143,10 +143,6 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 				'label'            => esc_html__( 'Icon', 'responsive-addons-for-elementor' ),
 				'type'             => Controls_Manager::ICONS,
 				'fa4compatibility' => 'rael_testimonial_slider_before_content_icon',
-				'default'          => array(
-					'value'   => 'fas fa-home',
-					'library' => 'fa-solid',
-				),
 			)
 		);
 

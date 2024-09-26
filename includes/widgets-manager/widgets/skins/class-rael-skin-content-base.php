@@ -322,7 +322,7 @@ trait RAEL_Skin_Content_Base {
 				$preview_type = $document->get_settings( 'preview_type' );
 				$preview_id   = $document->get_settings( 'preview_id' );
 
-				if ( 0 == strpos( $preview_type, 'single' ) && ! empty( $preview_id ) ) {
+				if ( null !== $preview_type && 0 == strpos( $preview_type, 'single' ) && ! empty( $preview_id ) ) {
 					$post = get_post( $preview_id );
 
 					if ( ! $post ) {
@@ -371,7 +371,7 @@ trait RAEL_Skin_Content_Base {
 		if ( $with_wrapper ) {
 			echo '<div class="elementor-post__content">' . wp_kses_post( balanceTags( $content, true ) ) . '</div>';
 		} else {
-			echo wp_kses_post( $content );
+			echo ( $content ); //phpcs:ignore
 		}
 	}
 	/**

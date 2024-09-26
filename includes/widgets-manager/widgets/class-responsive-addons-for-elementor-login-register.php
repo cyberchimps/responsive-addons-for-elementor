@@ -193,7 +193,6 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 		$this->rael_register_recaptcha_style_controls();
 		$this->rael_login_link_style_controls();
 		$this->rael_register_link_style_controls();
-
 	}
 	/**
 	 * Get controls display condition
@@ -592,7 +591,6 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 		}
 
 		$this->end_controls_section();
-
 	}
 	/**
 	 * RAE form header controls.
@@ -777,7 +775,6 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
 	}
 	/**
 	 * REA login field controls.
@@ -971,7 +968,6 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
 	}
 
 	/**
@@ -1018,7 +1014,6 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
 	}
 		/**
 		 * RAE register fields controls.
@@ -1230,7 +1225,6 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
 	}
 	/**
 	 * RAE register options controls.
@@ -1307,7 +1301,6 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
 	}
 	/**
 	 * RAE user mail controls.
@@ -1410,7 +1403,6 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
 	}
 	/**
 	 * RAE admin mail controls.
@@ -1511,7 +1503,6 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
 	}
 	/**
 	 * RAE terms and conditions controls.
@@ -2076,7 +2067,6 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
 	}
 	/**
 	 * RAE header style controls.
@@ -3102,7 +3092,6 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
 	}
 	/**
 	 * RAE input login button style controls.
@@ -3691,6 +3680,49 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 
 		$this->end_controls_section();
 	}
+	
+	/**
+	 * Form Logo Position
+	 *
+	 * @var string
+	 */
+	protected $form_logo_pos;
+
+	/**
+	 * Page Id
+	 *
+	 * @var string
+	 */
+	protected $page_id;
+	
+	/**
+	 * Should print login form?
+	 *
+	 * @var bool
+	 */
+	protected $should_print_login_form;
+	
+	/**
+	 * Should print registration form?
+	 *
+	 * @var bool
+	 */
+	protected $should_print_registration_form;
+	
+	/**
+	 * Form Image URL
+	 *
+	 * @var string
+	 */
+	protected $form_image_url;
+	
+	/**
+	 * Logo URL
+	 *
+	 * @var string
+	 */
+	protected $logo_url;
+	
 	/**
 	 * Render
 	 *
@@ -4166,7 +4198,7 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 									value="<?php echo esc_attr( $register_button_text ); ?>"
 									disabled="disabled"/>
 							<?php if ( $show_login_link ) { ?>
-								<?php echo '<a class="rael-reg-login-link" id="rael-reg-login-link-' . esc_html( $login_link_type ) . '" href=' . esc_url( $login_url ) . esc_attr( $login_attributes ) . '>' . esc_html( $login_link_text ) . '</a>'; ?>
+								<?php echo '<a class="rael-reg-login-link" id="rael-reg-login-link-' . esc_html( $login_link_type ) . '" href="' . esc_url( $login_url ) . esc_attr( esc_html( $login_attributes ) ) . '">' . esc_html( $login_link_text ) . '</a>'; ?>
 							<?php } ?>
 						</div>
 					</form>
@@ -4189,12 +4221,67 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 				if ( $repeated || $username_input_missing || $email_input_missing || $password_missing ) {
 					return false;
 				}
-				echo wp_kses_post( $registration_form );
+				echo wp_kses( $registration_form, self::get_allowed_tags() );
 			} else {
-				echo wp_kses_post( $registration_form );
+				echo wp_kses( $registration_form, self::get_allowed_tags() );
 			}
 		}
 	}
+
+	public function get_allowed_tags() {
+		return array(
+			'div'    => array(
+				'class' => array(),
+				'id'    => array(),
+			),
+			'a'      => array(
+				'href'   => array(),
+				'class'  => array(),
+				'target' => array(),
+				'rel'    => array(),
+				'id'     => array(),
+			),
+			'form'   => array(
+				'id'     => array(),
+				'class'  => array(),
+				'method' => array(),
+			),
+			'input'  => array(
+				'name'          => array(),
+				'type'          => array(),
+				'placeholder'   => array(),
+				'class'         => array(),
+				'id'            => array(),
+				'required'      => array(),
+				'aria-required' => array(),
+				'pattern'       => array(),
+				'value'         => array(),
+				'disabled'      => array(),
+			),
+			'label'  => array(
+				'for'   => array(),
+				'class' => array(),
+			),
+			'p'      => array(
+				'class' => array(),
+				'id'    => array(),
+			),
+			'i'      => array(
+				'class' => array(),
+			),
+			'button' => array(
+				'type'       => array(),
+				'id'         => array(),
+				'class'      => array(),
+				'aria-label' => array(),
+			),
+			'span'   => array(
+				'class' => array(),
+				'id'    => array(),
+			),
+		);
+	}
+
 	/**
 	 * RAE print login validation errors.
 	 *
@@ -4452,7 +4539,7 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 			<span class="rael-register-label">
 				<?php
 				if ( 'custom_link' === $source || 'default' === $source ) {
-					echo esc_html( $tc_label ), esc_url( $tc_link );
+					echo esc_html( $tc_label ), wp_kses_post( $tc_link );
 				} else {
 					echo esc_html( $tc_label_data );
 				}

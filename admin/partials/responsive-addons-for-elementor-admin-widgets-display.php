@@ -32,7 +32,7 @@ foreach ( $widgets as $widget ) {
 ?>
 
 <div class="container">
-	<div class="row">
+	<div class="row" class = "rael-widget-header-container">
 		<div class="col-lg-9">
 			<div class="rael-widget-list">
 				<p>
@@ -40,9 +40,16 @@ foreach ( $widgets as $widget ) {
 					<span class="rael-widget-category mx-3"><?php esc_html_e( '|', 'responsive-addons-for-elementor' ); ?></span>
 					<span class="rael-widget-category rael-widget-tab pointer" id="content"><?php esc_html_e( 'Content', 'responsive-addons-for-elementor' ); ?></span>
 					<span class="rael-widget-category mx-3"><?php esc_html_e( '|', 'responsive-addons-for-elementor' ); ?></span>
+					<span class="rael-widget-category rael-widget-tab pointer" id="form"><?php esc_html_e( 'Form', 'responsive-addons-for-elementor' ); ?></span>
+					<span class="rael-widget-category mx-3"><?php esc_html_e( '|', 'responsive-addons-for-elementor' ); ?></span>					
 					<span class="rael-widget-category rael-widget-tab pointer" id="marketing"><?php esc_html_e( 'Marketing', 'responsive-addons-for-elementor' ); ?></span>
 					<span class="rael-widget-category mx-3"><?php esc_html_e( '|', 'responsive-addons-for-elementor' ); ?></span>
 					<span class="rael-widget-category rael-widget-tab pointer" id="creativity"><?php esc_html_e( 'Creativity', 'responsive-addons-for-elementor' ); ?></span>
+					<span class="rael-widget-category mx-3"><?php esc_html_e( '|', 'responsive-addons-for-elementor' ); ?></span>
+					<span class="rael-widget-category rael-widget-tab pointer" id="woocommerce"><?php esc_html_e( 'WooCommerce', 'responsive-addons-for-elementor' ); ?></span>
+					<span class="rael-widget-category mx-3"><?php esc_html_e( '|', 'responsive-addons-for-elementor' ); ?></span>
+					<span class="rael-widget-category rael-widget-tab pointer" id="seo"><?php esc_html_e( 'SEO', 'responsive-addons-for-elementor' ); ?></span>
+					
 				</p>
 			</div>
 		</div>

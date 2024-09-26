@@ -41,7 +41,7 @@ class Responsive_Addons_For_Elementor_Theme_Archive_Posts extends Widget_Base {
 	 *
 	 * @var boolean
 	 */
-	protected $has_template_content = false;
+	protected $_has_template_content = false;
 
 	/**
 	 * Get widget name.
@@ -85,7 +85,7 @@ class Responsive_Addons_For_Elementor_Theme_Archive_Posts extends Widget_Base {
 	 * @return string Help URL.
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/archive-posts';
+		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/archive-posts/';
 	}
 
 	/**
@@ -647,9 +647,9 @@ class Responsive_Addons_For_Elementor_Theme_Archive_Posts extends Widget_Base {
 		$url        = get_permalink();
 
 		if ( $i > 1 ) {
-			if ( '' === get_option( 'permalink_structure' ) || in_array( $post->post_status, array( 'draft', 'pending' ), true ) ) {
+			if ( '' == get_option( 'permalink_structure' ) || in_array( $post->post_status, array( 'draft', 'pending' ), true ) ) {
 				$url = add_query_arg( 'page', $i, $url );
-			} elseif ( get_option( 'show_on_front' ) === 'page' && (int) get_option( 'page_on_front' ) === $post->ID ) {
+			} elseif ( get_option( 'show_on_front' ) == 'page' && (int) get_option( 'page_on_front' ) == $post->ID ) {
 				$url = trailingslashit( $url ) . user_trailingslashit( "$wp_rewrite->pagination_base/" . $i, 'single_paged' );
 			} else {
 				$url = trailingslashit( $url ) . user_trailingslashit( $i, 'single_paged' );
@@ -657,7 +657,7 @@ class Responsive_Addons_For_Elementor_Theme_Archive_Posts extends Widget_Base {
 		}
 
 		if ( is_preview() ) {
-			if ( ( 'draft' !== $post->post_status ) && isset( $_GET['preview_id'], $_GET['preview_nonce'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( ( 'draft' != $post->post_status ) && isset( $_GET['preview_id'], $_GET['preview_nonce'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				$query_args['preview_id']    = wp_unslash( $_GET['preview_id'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$query_args['preview_nonce'] = wp_unslash( $_GET['preview_nonce'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			}

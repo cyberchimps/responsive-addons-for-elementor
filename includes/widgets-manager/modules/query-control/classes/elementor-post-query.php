@@ -17,9 +17,9 @@ class Elementor_Post_Query {
 	 * @param string      $group_query_name
 	 * @param array       $query_args
 	 */
-	public function __construct( $widget, $group_query_name, $query_args = [] ) {
-		$this->widget = $widget;
-		$this->prefix = $group_query_name . '_';
+	public function __construct( $widget, $group_query_name, $query_args = array() ) {
+		$this->widget     = $widget;
+		$this->prefix     = $group_query_name . '_';
 		$this->query_args = $query_args;
 
 		$settings = $this->widget->get_settings();
@@ -44,19 +44,19 @@ class Elementor_Post_Query {
 
 		$query_id = $this->get_widget_settings( 'query_id' );
 		if ( ! empty( $query_id ) ) {
-			add_action( 'pre_get_posts', [ $this, 'pre_get_posts_query_filter' ] );
+			add_action( 'pre_get_posts', array( $this, 'pre_get_posts_query_filter' ) );
 		}
 
 		if ( 0 < $offset_control ) {
-			add_action( 'pre_get_posts', [ $this, 'fix_query_offset' ], 1 );
-			add_filter( 'found_posts', [ $this, 'fix_query_found_posts' ], 1, 2 );
+			add_action( 'pre_get_posts', array( $this, 'fix_query_offset' ), 1 );
+			add_filter( 'found_posts', array( $this, 'fix_query_found_posts' ), 1, 2 );
 		}
 
 		$query = new \WP_Query( $this->query_args );
 
-		remove_action( 'pre_get_posts', [ $this, 'pre_get_posts_query_filter' ] );
-		remove_action( 'pre_get_posts', [ $this, 'fix_query_offset' ], 1 );
-		remove_filter( 'found_posts', [ $this, 'fix_query_found_posts' ], 1 );
+		remove_action( 'pre_get_posts', array( $this, 'pre_get_posts_query_filter' ) );
+		remove_action( 'pre_get_posts', array( $this, 'fix_query_offset' ), 1 );
+		remove_filter( 'found_posts', array( $this, 'fix_query_found_posts' ), 1 );
 
 		Module::add_to_avoid_list( wp_list_pluck( $query->posts, 'ID' ) );
 
@@ -64,14 +64,14 @@ class Elementor_Post_Query {
 	}
 
 	protected function get_query_defaults() {
-		$defaults = [
-			$this->prefix . 'post_type' => 'post',
-			$this->prefix . 'posts_ids' => [],
-			$this->prefix . 'orderby' => 'date',
-			$this->prefix . 'order' => 'desc',
-			$this->prefix . 'offset' => 0,
+		$defaults = array(
+			$this->prefix . 'post_type'      => 'post',
+			$this->prefix . 'posts_ids'      => array(),
+			$this->prefix . 'orderby'        => 'date',
+			$this->prefix . 'order'          => 'desc',
+			$this->prefix . 'offset'         => 0,
 			$this->prefix . 'posts_per_page' => 3,
-		];
+		);
 
 		return $defaults;
 	}
@@ -83,7 +83,7 @@ class Elementor_Post_Query {
 			$current_query_vars = $GLOBALS['wp_query']->query_vars;
 
 			$current_query_vars = apply_filters( 'elementor/query/get_query_args/current_query', $current_query_vars );
-			$this->query_args = $current_query_vars;
+			$this->query_args   = $current_query_vars;
 			return $current_query_vars;
 		}
 
@@ -117,7 +117,7 @@ class Elementor_Post_Query {
 
 		$post_type = $this->get_widget_settings( 'post_type' );
 		if ( 'by_id' === $post_type ) {
-			$post_types = $this->get_public_post_types();
+			$post_types                    = $this->get_public_post_types();
 			$this->query_args['post_type'] = array_keys( $post_types );
 		} else {
 			$this->query_args['post_type'] = $post_type;
@@ -132,7 +132,7 @@ class Elementor_Post_Query {
 
 			if ( empty( $this->query_args['post__in'] ) ) {
 				// If no selection - return an empty query.
-				$this->query_args['post__in'] = [ 0 ];
+				$this->query_args['post__in'] = array( 0 );
 			}
 		}
 	}
@@ -145,7 +145,7 @@ class Elementor_Post_Query {
 			return;
 		}
 
-		$post__not_in = [];
+		$post__not_in = array();
 
 		if ( $this->maybe_in_array( 'current_post', $exclude ) ) {
 			if ( is_singular() ) {
@@ -163,7 +163,7 @@ class Elementor_Post_Query {
 
 	protected function set_avoid_duplicates() {
 		if ( 'yes' === $this->get_widget_settings( 'avoid_duplicates' ) ) {
-			$post__not_in = isset( $this->query_args['post__not_in'] ) ? $this->query_args['post__not_in'] : [];
+			$post__not_in = isset( $this->query_args['post__not_in'] ) ? $this->query_args['post__not_in'] : array();
 			$post__not_in = array_merge( $post__not_in, Module::$displayed_ids );
 			$this->set_query_arg( 'post__not_in', $post__not_in );
 		}
@@ -189,19 +189,19 @@ class Elementor_Post_Query {
 	}
 
 	protected function build_terms_query( $tab_id, $control_id, $exclude = false ) {
-		$tab_id = $this->get_widget_settings( $tab_id );
+		$tab_id         = $this->get_widget_settings( $tab_id );
 		$settings_terms = $this->get_widget_settings( $control_id );
 		if ( empty( $tab_id ) || empty( $settings_terms ) || ! $this->maybe_in_array( 'terms', $tab_id ) ) {
 			return;
 		}
 
-		$terms = [];
+		$terms = array();
 
 		// Switch to term_id in order to get all term children (sub-categories).
 		foreach ( $settings_terms as $id ) {
 			$term_data = get_term_by( 'term_taxonomy_id', $id );
 			if ( false !== $term_data ) {
-				$taxonomy = $term_data->taxonomy;
+				$taxonomy             = $term_data->taxonomy;
 				$terms[ $taxonomy ][] = $id;
 			}
 		}
@@ -209,13 +209,13 @@ class Elementor_Post_Query {
 	}
 
 	protected function insert_tax_query( $terms, $exclude ) {
-		$tax_query = [];
+		$tax_query = array();
 		foreach ( $terms as $taxonomy => $ids ) {
-			$query = [
+			$query = array(
 				'taxonomy' => $taxonomy,
-				'field' => 'term_taxonomy_id',
-				'terms' => $ids,
-			];
+				'field'    => 'term_taxonomy_id',
+				'terms'    => $ids,
+			);
 
 			if ( $exclude ) {
 				$query['operator'] = 'NOT IN';
@@ -232,7 +232,7 @@ class Elementor_Post_Query {
 			$this->query_args['tax_query'] = $tax_query;
 		} else {
 			$this->query_args['tax_query']['relation'] = 'AND';
-			$this->query_args['tax_query'][] = $tax_query;
+			$this->query_args['tax_query'][]           = $tax_query;
 		}
 	}
 
@@ -264,7 +264,7 @@ class Elementor_Post_Query {
 
 		$select_date = $this->get_widget_settings( 'select_date' );
 		if ( ! empty( $select_date ) ) {
-			$date_query = [];
+			$date_query = array();
 			switch ( $select_date ) {
 				case 'today':
 					$date_query['after'] = '-1 day';
@@ -298,7 +298,7 @@ class Elementor_Post_Query {
 		}
 	}
 
-	/**\
+	/**
 	 *
 	 * @param string $control_name
 	 *
@@ -334,7 +334,7 @@ class Elementor_Post_Query {
 	 */
 	public function pre_get_posts_query_filter( $wp_query ) {
 		if ( $this->widget ) {
-			$query_id = $this->get_widget_settings( 'query_id' );
+			$query_id    = $this->get_widget_settings( 'query_id' );
 			$widget_name = $this->widget->get_name();
 			do_action( "elementor/query/{$query_id}", $wp_query, $this->widget );
 		}
@@ -376,10 +376,10 @@ class Elementor_Post_Query {
 	 * @return array
 	 */
 	public function get_public_post_types( $args = array() ) {
-		$post_type_args = [
+		$post_type_args = array(
 			// Default is the value $public.
 			'show_in_nav_menus' => true,
-		];
+		);
 
 		// Keep for backwards compatibility.
 		if ( ! empty( $args['post_type'] ) ) {
@@ -391,7 +391,7 @@ class Elementor_Post_Query {
 
 		$_post_types = get_post_types( $post_type_args, 'objects' );
 
-		$post_types = [];
+		$post_types = array();
 
 		foreach ( $_post_types as $post_type => $object ) {
 			$post_types[ $post_type ] = $object->label;
