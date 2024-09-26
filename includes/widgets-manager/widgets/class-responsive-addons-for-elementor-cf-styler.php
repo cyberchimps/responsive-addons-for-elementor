@@ -12,12 +12,12 @@ namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
-use Elementor\Core\Schemes\Color;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Typography;
 use Responsive_Addons_For_Elementor\Traits\Missing_Dependency;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -233,10 +233,9 @@ class Responsive_Addons_For_Elementor_Cf_Styler extends Widget_Base {
 			array(
 				'label'     => __( 'Label Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'default'   => '',
 				'selectors' => array(
 					'{{WRAPPER}} .rael-cf7-style .wpcf7 form.wpcf7-form:not(input)' => 'color: {{VALUE}};',
@@ -249,10 +248,9 @@ class Responsive_Addons_For_Elementor_Cf_Styler extends Widget_Base {
 			array(
 				'label'     => __( 'Input Text / Placeholder Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-cf7-style .wpcf7 input:not([type=submit]),{{WRAPPER}} .rael-cf7-style .wpcf7 input::placeholder, {{WRAPPER}} .rael-cf7-style .wpcf7 select, {{WRAPPER}} .rael-cf7-style .wpcf7 textarea, {{WRAPPER}} .rael-cf7-style .wpcf7 textarea::placeholder,{{WRAPPER}} .rael-cf7-style .rael-cf7-select-custom:after' => 'color: {{VALUE}};',
 					'{{WRAPPER}}.elementor-widget-rael-cf7-styler .wpcf7-checkbox input[type="checkbox"]:checked + span:before, {{WRAPPER}}.elementor-widget-rael-cf7-styler .wpcf7-acceptance input[type="checkbox"]:checked + span:before' => 'color: {{VALUE}};',
@@ -511,10 +509,9 @@ class Responsive_Addons_For_Elementor_Cf_Styler extends Widget_Base {
 			array(
 				'label'     => __( 'Selected Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'condition' => array(
 					'radio_check_override!' => '',
 				),
@@ -533,10 +530,9 @@ class Responsive_Addons_For_Elementor_Cf_Styler extends Widget_Base {
 			array(
 				'label'     => __( 'Label Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'condition' => array(
 					'radio_check_override!' => '',
 				),
@@ -705,10 +701,9 @@ class Responsive_Addons_For_Elementor_Cf_Styler extends Widget_Base {
 				'types'          => array( 'classic', 'gradient' ),
 				'fields_options' => array(
 					'color' => array(
-						'scheme' => array(
-							'type'  => Color::get_type(),
-							'value' => Color::COLOR_4,
-						),
+						'global'   => [
+							'default' => Global_Colors::COLOR_ACCENT,
+						],
 					),
 				),
 				'selector'       => '{{WRAPPER}} .rael-cf7-style input[type="submit"]',
@@ -899,7 +894,9 @@ class Responsive_Addons_For_Elementor_Cf_Styler extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'cf7_message_typo',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-cf7-style span.wpcf7-not-valid-tip',
 			)
 		);
@@ -1038,7 +1035,9 @@ class Responsive_Addons_For_Elementor_Cf_Styler extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'cf7_validation_typo',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-cf7-style .wpcf7 .wpcf7-validation-errors, {{WRAPPER}} .rael-cf7-style div.wpcf7-mail-sent-ng,{{WRAPPER}} .rael-cf7-style .wpcf7-mail-sent-ok,{{WRAPPER}} .rael-cf7-style .wpcf7-acceptance-missing,{{WRAPPER}} .rael-cf7-style .wpcf7 form .wpcf7-response-output',
 			)
 		);
@@ -1120,7 +1119,9 @@ class Responsive_Addons_For_Elementor_Cf_Styler extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'form_label_typography',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-cf7-style .wpcf7 form.wpcf7-form label',
 			)
 		);
@@ -1138,7 +1139,9 @@ class Responsive_Addons_For_Elementor_Cf_Styler extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'input_typography',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-cf7-style .wpcf7 input:not([type=submit]), {{WRAPPER}} .rael-cf7-style .wpcf7 input::placeholder, {{WRAPPER}} .wpcf7 select,{{WRAPPER}} .rael-cf7-style .wpcf7 textarea, {{WRAPPER}} .rael-cf7-style .wpcf7 textarea::placeholder, {{WRAPPER}} .rael-cf7-style input[type=range]::-webkit-slider-thumb,{{WRAPPER}} .rael-cf7-style .rael-cf7-select-custom',
 			)
 		);
@@ -1156,7 +1159,9 @@ class Responsive_Addons_For_Elementor_Cf_Styler extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'button_typography',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-cf7-style input[type=submit]',
 			)
 		);
@@ -1177,7 +1182,9 @@ class Responsive_Addons_For_Elementor_Cf_Styler extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'radio_check_typography',
-				'scheme'    => Typography::TYPOGRAPHY_4,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'condition' => array(
 					'radio_check_override!' => '',
 				),

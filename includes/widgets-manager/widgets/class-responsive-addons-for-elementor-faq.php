@@ -12,8 +12,8 @@ use Elementor\Repeater;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Box_Shadow;
-use Elementor\Core\Schemes\Typography;
-use Elementor\Core\Schemes\Color;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use Elementor\Icons_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -840,8 +840,9 @@ class Responsive_Addons_For_Elementor_FAQ extends Widget_Base {
 			array(
 				'name'     => 'title_typography',
 				'selector' => '{{WRAPPER}} .rael-faq-accordion .rael-accordion-title .rael-question-span, {{WRAPPER}} .rael-faq-accordion .rael-accordion-title .rael-accordion-icon',
-				'scheme'   => Typography::TYPOGRAPHY_1,
-
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 			)
 		);
 
@@ -889,10 +890,9 @@ class Responsive_Addons_For_Elementor_FAQ extends Widget_Base {
 						{{WRAPPER}}  .rael-accordion-icon-closed, {{WRAPPER}} span.rael-accordion-icon-opened' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .rael-accordion-icon-closed, {{WRAPPER}} span.rael-accordion-icon-opened' => 'fill: {{VALUE}};',
 				),
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 			)
 		);
 
@@ -905,10 +905,9 @@ class Responsive_Addons_For_Elementor_FAQ extends Widget_Base {
 					'{{WRAPPER}} .rael-faq-accordion .rael-accordion-title.rael-title-active .rael-question-span,
 						{{WRAPPER}} span.rael-accordion-icon-opened' => 'color: {{VALUE}};',
 				),
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 				'condition' => array(
 					'rael_faq_layout' => 'accordion',
 				),
@@ -959,10 +958,9 @@ class Responsive_Addons_For_Elementor_FAQ extends Widget_Base {
 					{{WRAPPER}}  .rael-accordion-icon-closed:hover' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .rael-accordion-icon-closed:hover' => 'fill: {{VALUE}};',
 				),
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 			)
 		);
 
@@ -975,10 +973,9 @@ class Responsive_Addons_For_Elementor_FAQ extends Widget_Base {
 					'{{WRAPPER}} .rael-faq-accordion .rael-accordion-title.rael-title-active:hover .rael-question-span,
 					{{WRAPPER}} span.rael-accordion-icon-opened:hover' => 'color: {{VALUE}};',
 				),
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 				'condition' => array(
 					'rael_faq_layout' => 'accordion',
 				),
@@ -1024,7 +1021,9 @@ class Responsive_Addons_For_Elementor_FAQ extends Widget_Base {
 			array(
 				'name'     => 'content_typography',
 				'selector' => '{{WRAPPER}} .rael-faq-accordion .rael-accordion-content',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 			)
 		);
 
@@ -1057,10 +1056,9 @@ class Responsive_Addons_For_Elementor_FAQ extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .rael-faq-accordion .rael-accordion-content' => 'color: {{VALUE}};',
 				),
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 			)
 		);
 
@@ -1092,10 +1090,9 @@ class Responsive_Addons_For_Elementor_FAQ extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .rael-faq-accordion .rael-accordion-content:hover' => 'color: {{VALUE}};',
 				),
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 			)
 		);
 
@@ -1160,10 +1157,9 @@ class Responsive_Addons_For_Elementor_FAQ extends Widget_Base {
 					'{{WRAPPER}}  .rael-accordion-icon-closed' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .rael-accordion-icon-closed' => 'fill: {{VALUE}};',
 				),
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 			)
 		);
 
@@ -1175,10 +1171,9 @@ class Responsive_Addons_For_Elementor_FAQ extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} span.rael-accordion-icon-opened'  => 'color: {{VALUE}};',
 				),
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 			)
 		);
 

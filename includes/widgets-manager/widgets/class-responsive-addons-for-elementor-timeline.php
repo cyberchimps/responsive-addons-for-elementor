@@ -12,7 +12,7 @@ use Elementor\Widget_Base;
 use Elementor\Utils;
 use Elementor\Repeater;
 use Elementor\Control_Media;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Icons_Manager;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
@@ -674,7 +674,9 @@ class Responsive_Addons_For_Elementor_Timeline extends Widget_Base {
 			array(
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
 				'name'     => 'rael_content_box',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-timeline__content',
 			)
 		);
@@ -1007,7 +1009,9 @@ class Responsive_Addons_For_Elementor_Timeline extends Widget_Base {
 			array(
 				'name'     => 'rael_title',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'scheme'   => Typography::TYPOGRAPHY_1,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'selector' => '{{WRAPPER}} .rael-timeline__title',
 			)
 		);
@@ -1088,7 +1092,9 @@ class Responsive_Addons_For_Elementor_Timeline extends Widget_Base {
 			array(
 				'name'      => 'rael_time',
 				'label'     => __( 'Time Typography', 'responsive-addons-for-elementor' ),
-				'scheme'    => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector'  => '{{WRAPPER}} .rael-timeline__date .time',
 				'condition' => array(
 					'rael_show_time' => 'yes',
@@ -1152,7 +1158,9 @@ class Responsive_Addons_For_Elementor_Timeline extends Widget_Base {
 			array(
 				'label'     => __( 'Date Typography', 'responsive-addons-for-elementor' ),
 				'name'      => 'rael_time_date',
-				'scheme'    => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector'  => '{{WRAPPER}} .rael-timeline__date .date',
 				'condition' => array(
 					'rael_show_date' => 'yes',
@@ -1212,7 +1220,9 @@ class Responsive_Addons_For_Elementor_Timeline extends Widget_Base {
 			array(
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
 				'name'     => 'rael_button',
-				'scheme'   => Typography::TYPOGRAPHY_4,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'selector' => '{{WRAPPER}} .rael-timeline__button',
 			)
 		);

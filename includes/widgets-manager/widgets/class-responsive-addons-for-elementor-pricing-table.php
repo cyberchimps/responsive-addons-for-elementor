@@ -10,7 +10,8 @@ namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
-use Elementor\Core\Schemes;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
@@ -420,10 +421,9 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 			array(
 				'label'     => __( 'Background Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Schemes\Color::get_type(),
-					'value' => Schemes\Color::COLOR_2,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_SECONDARY,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-price-table__header' => 'background-color: {{VALUE}}',
 				),
@@ -467,7 +467,9 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 			array(
 				'name'     => 'heading_typography',
 				'selector' => '{{WRAPPER}} .rael-price-table__heading',
-				'scheme'   => Schemes\Typography::TYPOGRAPHY_1,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 			)
 		);
 
@@ -496,7 +498,9 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 			array(
 				'name'     => 'sub_heading_typography',
 				'selector' => '{{WRAPPER}} .rael-price-table__subheading',
-				'scheme'   => Schemes\Typography::TYPOGRAPHY_2,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
+				],
 			)
 		);
 
@@ -551,7 +555,9 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 			array(
 				'name'     => 'price_typography',
 				'selector' => '{{WRAPPER}} .rael-price-table__price span:not(.rael-price-table__period), {{WRAPPER}} .rael-price-table__price > .rael-price-table__after-price > .rael-price-table__fractional-part',
-				'scheme'   => Schemes\Typography::TYPOGRAPHY_1,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 			)
 		);
 
@@ -715,10 +721,9 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Schemes\Color::get_type(),
-					'value' => Schemes\Color::COLOR_2,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_SECONDARY,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-price-table__original-price' => 'color: {{VALUE}}',
 				),
@@ -734,7 +739,9 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 			array(
 				'name'      => 'original_price_typography',
 				'selector'  => '{{WRAPPER}} .rael-price-table__original-price',
-				'scheme'    => Schemes\Typography::TYPOGRAPHY_1,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'condition' => array(
 					'sale'            => 'yes',
 					'original_price!' => '',
@@ -794,10 +801,9 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Schemes\Color::get_type(),
-					'value' => Schemes\Color::COLOR_2,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_SECONDARY,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-price-table__period' => 'color: {{VALUE}}',
 				),
@@ -812,7 +818,9 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 			array(
 				'name'      => 'period_typography',
 				'selector'  => '{{WRAPPER}} .rael-price-table__period',
-				'scheme'    => Schemes\Typography::TYPOGRAPHY_2,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
+				],
 				'condition' => array(
 					'period!' => '',
 				),
@@ -876,10 +884,9 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Schemes\Color::get_type(),
-					'value' => Schemes\Color::COLOR_3,
-				),
+				'global'   => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'separator' => 'before',
 				'selectors' => array(
 					'{{WRAPPER}} .rael-price-table__features-list' => 'color: {{VALUE}}',
@@ -892,7 +899,9 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 			array(
 				'name'     => 'features_list_typography',
 				'selector' => '{{WRAPPER}} .rael-price-table__features-list li',
-				'scheme'   => Schemes\Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 			)
 		);
 
@@ -975,10 +984,9 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ddd',
-				'scheme'    => array(
-					'type'  => Schemes\Color::get_type(),
-					'value' => Schemes\Color::COLOR_3,
-				),
+				'global'   => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'condition' => array(
 					'list_divider' => 'yes',
 				),
@@ -1143,7 +1151,9 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'button_typography',
-				'scheme'   => Schemes\Typography::TYPOGRAPHY_4,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'selector' => '{{WRAPPER}} .rael-price-table__button',
 			)
 		);
@@ -1153,10 +1163,9 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 			array(
 				'label'     => __( 'Background Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Schemes\Color::get_type(),
-					'value' => Schemes\Color::COLOR_4,
-				),
+				'global'   => [
+					'default' => Global_Colors::COLOR_ACCENT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-price-table__button' => 'background-color: {{VALUE}};',
 				),
@@ -1270,10 +1279,9 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Schemes\Color::get_type(),
-					'value' => Schemes\Color::COLOR_3,
-				),
+				'global'   => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-price-table__additional_info' => 'color: {{VALUE}}',
 				),
@@ -1288,7 +1296,9 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 			array(
 				'name'      => 'additional_info_typography',
 				'selector'  => '{{WRAPPER}} .rael-price-table__additional_info',
-				'scheme'    => Schemes\Typography::TYPOGRAPHY_3,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'condition' => array(
 					'footer_additional_info!' => '',
 				),
@@ -1336,10 +1346,9 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 			array(
 				'label'     => __( 'Background Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Schemes\Color::get_type(),
-					'value' => Schemes\Color::COLOR_4,
-				),
+				'global'   => [
+					'default' => Global_Colors::COLOR_ACCENT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-price-table__ribbon-inner' => 'background-color: {{VALUE}}',
 				),
@@ -1383,7 +1392,9 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 			array(
 				'name'     => 'ribbon_typography',
 				'selector' => '{{WRAPPER}} .rael-price-table__ribbon-inner',
-				'scheme'   => Schemes\Typography::TYPOGRAPHY_4,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 			)
 		);
 

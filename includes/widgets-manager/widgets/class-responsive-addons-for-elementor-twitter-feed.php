@@ -14,7 +14,7 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Color;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 
 /**
  * 'RAEL Twitter Feed' widget class
@@ -865,10 +865,9 @@ class Responsive_Addons_For_Elementor_Twitter_Feed extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-twitter-feed__twitter-icon' => 'color: {{VALUE}};',
 				),

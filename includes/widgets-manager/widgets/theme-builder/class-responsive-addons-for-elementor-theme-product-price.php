@@ -7,10 +7,10 @@
 
 namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets\ThemeBuilder;
 
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Responsive_Addons_For_Elementor\WidgetsManager\Widgets\ThemeBuilder\Woo_Widget_Base;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use Elementor\Controls_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) {

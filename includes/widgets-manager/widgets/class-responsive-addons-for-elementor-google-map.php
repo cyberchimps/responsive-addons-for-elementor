@@ -11,7 +11,7 @@ namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets;
 use Elementor\Widget_Base;
 use Elementor\Repeater;
 use Elementor\Controls_Manager;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Typography;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -607,7 +607,9 @@ class Responsive_Addons_For_Elementor_Google_Map extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'rael_info_window_title',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-google-map__info-window-title',
 			)
 		);

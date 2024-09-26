@@ -16,7 +16,7 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Responsive_Addons_For_Elementor\Traits\Missing_Dependency;
 
 use Responsive_Addons_For_Elementor\WidgetsManager\Widgets\Skins\Product_Category_Grid as Skins;
@@ -863,7 +863,9 @@ class Responsive_Addons_For_Elementor_Product_Category_Grid extends Widget_Base 
 			array(
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
 				'name'     => 'rael_load_more_button',
-				'scheme'   => Typography::TYPOGRAPHY_4,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'selector' => '{{WRAPPER}} .rael-product-category-grid__load-more-button',
 			)
 		);

@@ -9,9 +9,9 @@ namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Repeater;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Typography;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 
@@ -310,7 +310,9 @@ class Responsive_Addons_For_Elementor_Fancy_Text extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'typography',
-				'scheme'         => Typography::TYPOGRAPHY_1,
+				'global'         => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'fields_options' => array(
 					'typography'  => array( 'default' => 'yes' ),
 					'font_size'   => array( 'default' => array( 'size' => 22 ) ),
@@ -415,7 +417,9 @@ class Responsive_Addons_For_Elementor_Fancy_Text extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'rael_fancy_text_strings_typography',
-				'scheme'         => Typography::TYPOGRAPHY_1,
+				'global'         => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'fields_options' => array(
 					'typography'  => array( 'default' => 'yes' ),
 					'font_size'   => array( 'default' => array( 'size' => 22 ) ),
@@ -543,7 +547,9 @@ class Responsive_Addons_For_Elementor_Fancy_Text extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'ending_typography',
-				'scheme'         => Typography::TYPOGRAPHY_1,
+				'global'         => [
+					'default'     => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'fields_options' => array(
 					'typography'  => array( 'default' => 'yes' ),
 					'font_size'   => array( 'default' => array( 'size' => 22 ) ),

@@ -13,8 +13,8 @@ use Elementor\Controls_Manager;
 use Elementor\Utils;
 use Elementor\Control_Media;
 use Elementor\Icons_Manager;
-use Elementor\Core\Schemes\Color;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Css_Filter;
 use Elementor\Group_Control_Background;
@@ -614,10 +614,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 				'selector'       => '{{WRAPPER}} .elementor-button',
 				'fields_options' => array(
 					'color' => array(
-						'scheme' => array(
-							'type'  => Color::get_type(),
-							'value' => Color::COLOR_4,
-						),
+						'global'   => [
+							'default' => Global_Colors::COLOR_ACCENT,
+						],
 					),
 				),
 			)
@@ -744,10 +743,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 				'selector'       => '{{WRAPPER}} a.elementor-button:hover, {{WRAPPER}} .elementor-button:hover',
 				'fields_options' => array(
 					'color' => array(
-						'scheme' => array(
-							'type'  => Color::get_type(),
-							'value' => Color::COLOR_4,
-						),
+						'global'   => [
+							'default' => Global_Colors::COLOR_ACCENT,
+						],
 					),
 				),
 			)
@@ -849,10 +847,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_4,
-				),
+				'global'   => [
+					'default' => Global_Colors::COLOR_ACCENT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-infobox__separator' => 'border-top-color: {{VALUE}};',
 				),
@@ -1100,10 +1097,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			array(
 				'label'      => __( 'Icon Color', 'responsive-addons-for-elementor' ),
 				'type'       => Controls_Manager::COLOR,
-				'scheme'     => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'     => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 				'conditions' => array(
 					'relation' => 'and',
 					'terms'    => array(
@@ -1132,10 +1128,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Background Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_2,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_SECONDARY,
+				],
 				'default'   => '',
 				'condition' => array(
 					'rael_image_type' => array( 'icon', 'photo' ),
@@ -1173,10 +1168,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Border Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 				'condition' => array(
 					'rael_image_type'   => array( 'icon', 'photo' ),
 					'rael_icon_border!' => 'none',
@@ -1902,7 +1896,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'rael_title_typography',
-				'scheme'    => Typography::TYPOGRAPHY_1,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'selector'  => '{{WRAPPER}} .rael-infobox__title',
 				'condition' => array(
 					'rael_title!' => '',
@@ -1914,10 +1910,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 				'default'   => '',
 				'condition' => array(
 					'rael_title!' => '',
@@ -1970,7 +1965,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'rael_description_typography',
-				'scheme'    => Typography::TYPOGRAPHY_3,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector'  => '{{WRAPPER}} .rael-infobox__description',
 				'condition' => array(
 					'rael_description!' => '',
@@ -1982,10 +1979,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Description Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'   => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'default'   => '',
 				'condition' => array(
 					'rael_description!' => '',
@@ -2024,7 +2020,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'rael_cta_typography',
-				'scheme'    => Typography::TYPOGRAPHY_2,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
+				],
 				'selector'  => '{{WRAPPER}} .rael-infobox__cta-link, {{WRAPPER}} .elementor-button, {{WRAPPER}} a.elementor-button',
 				'condition' => array(
 					'rael_cta_type' => array( 'link', 'button' ),
@@ -2036,10 +2034,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Link Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_4,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_ACCENT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-infobox__cta-link' => 'color: {{VALUE}};',
 				),

@@ -10,7 +10,7 @@ namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets;
 
 use \Elementor\Controls_Manager;
 use \Elementor\Group_Control_Background;
-use \Elementor\Core\Schemes\Typography;
+use \Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
@@ -656,7 +656,9 @@ class Responsive_Addons_For_Elementor_One_Page_Navigation extends Widget_Base {
 			array(
 				'name'      => 'rael_tooltip_typography',
 				'label'     => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'scheme'    => Typography::TYPOGRAPHY_4,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'selector'  => '{{WRAPPER}} .rael-nav-dot-tooltip',
 				'condition' => array(
 					'rael_nav_tooltip' => 'yes',

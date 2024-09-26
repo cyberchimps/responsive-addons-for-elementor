@@ -10,11 +10,11 @@ namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Utils;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Icons_Manager;
@@ -731,7 +731,9 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 			array(
 				'name'     => 'front_title_typography',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'scheme'   => Schemes\Typography::TYPOGRAPHY_1,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'selector' => '{{WRAPPER}} .rael-flip-box-front .rael-flip-box-layer-title',
 			)
 		);
@@ -764,7 +766,9 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 			array(
 				'name'     => 'front_description_typography',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'scheme'   => Schemes\Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-flip-box-front .rael-flip-box-layer-desc',
 			)
 		);
@@ -904,7 +908,9 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 			array(
 				'name'      => 'back_title_typography',
 				'label'     => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'scheme'    => Schemes\Typography::TYPOGRAPHY_1,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'selector'  => '{{WRAPPER}} .rael-flip-box-back .rael-flip-box-layer-title',
 				'condition' => array( 'back_title_text!' => '' ),
 			)
@@ -953,7 +959,9 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 			array(
 				'name'     => 'description_typography_b',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'scheme'   => Schemes\Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-flip-box-back .rael-flip-box-layer-desc',
 			)
 		);
@@ -1048,7 +1056,9 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 			array(
 				'name'     => 'button_typography',
 				'label'    => esc_html__( 'Typography', 'responsive-addons-for-elementor' ),
-				'scheme'   => Schemes\Typography::TYPOGRAPHY_4,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'selector' => '{{WRAPPER}} .rael-flip-box-button',
 			)
 		);

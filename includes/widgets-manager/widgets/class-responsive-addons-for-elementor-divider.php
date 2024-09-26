@@ -11,7 +11,7 @@ namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Utils;
@@ -687,7 +687,9 @@ class Responsive_Addons_For_Elementor_Divider extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'rael_divider_text_typography',
-				'scheme'    => Typography::TYPOGRAPHY_4,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'selector'  => '{{WRAPPER}} .rael-divider__text',
 				'condition' => array(
 					'rael_divider_type' => 'text',

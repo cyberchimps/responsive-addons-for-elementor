@@ -13,7 +13,7 @@ use Elementor\Controls_Manager;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -777,7 +777,9 @@ class Responsive_Addons_For_Elementor_Progress_Bar extends Widget_Base {
 			array(
 				'name'     => 'progress_bar_title_typography',
 				'label'    => __( 'Title', 'responsive-addons-for-elementor' ),
-				'scheme'   => Typography::TYPOGRAPHY_1,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'selector' => '{{WRAPPER}} .rael-progressbar-title',
 			)
 		);
@@ -800,7 +802,9 @@ class Responsive_Addons_For_Elementor_Progress_Bar extends Widget_Base {
 			array(
 				'name'     => 'progress_bar_count_typography',
 				'label'    => __( 'Counter', 'responsive-addons-for-elementor' ),
-				'scheme'   => Typography::TYPOGRAPHY_1,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'selector' => '{{WRAPPER}} .rael-progressbar-count-wrap',
 			)
 		);
@@ -823,7 +827,9 @@ class Responsive_Addons_For_Elementor_Progress_Bar extends Widget_Base {
 			array(
 				'name'      => 'progress_bar_after_typography',
 				'label'     => __( 'Prefix/Postfix', 'responsive-addons-for-elementor' ),
-				'scheme'    => Typography::TYPOGRAPHY_1,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'selector'  => '{{WRAPPER}} .rael-progressbar-half-circle-after span',
 				'condition' => array(
 					'rael_progress_bar_layout' => 'half_circle',

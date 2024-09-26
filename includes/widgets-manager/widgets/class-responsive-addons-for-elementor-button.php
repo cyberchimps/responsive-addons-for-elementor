@@ -8,16 +8,14 @@
 
 namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets;
 
-use Elementor\Plugin;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Icons_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Typography;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Text_Shadow;
-use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -524,7 +522,9 @@ class Responsive_Addons_For_Elementor_Button extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'text_typography',
-				'scheme'   => Typography::TYPOGRAPHY_1,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'selector' => '{{WRAPPER}} .rael-text',
 			)
 		);
@@ -562,7 +562,9 @@ class Responsive_Addons_For_Elementor_Button extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'hover_text_typography',
-				'scheme'   => Typography::TYPOGRAPHY_1,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'selector' => '{{WRAPPER}} .rael-text',
 			)
 		);

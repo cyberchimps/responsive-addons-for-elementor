@@ -12,7 +12,7 @@ use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Control_Icon;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Border;
 
@@ -450,7 +450,9 @@ class Responsive_Addons_For_Elementor_Multi_Button extends Widget_Base {
 				'name'     => 'rael_button_typography',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
 				'selector' => '{{WRAPPER}} .rael-multi-button',
-				'scheme'   => Typography::TYPOGRAPHY_4,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 			)
 		);
 
@@ -560,7 +562,9 @@ class Responsive_Addons_For_Elementor_Multi_Button extends Widget_Base {
 			array(
 				'name'     => $id_prefix . '_typography',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'scheme'   => Typography::TYPOGRAPHY_4,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'selector' => '{{WRAPPER}} .rael-multi-button__' . $type . '-btn',
 			)
 		);
@@ -708,7 +712,9 @@ class Responsive_Addons_For_Elementor_Multi_Button extends Widget_Base {
 			array(
 				'name'     => 'rael_connector_typography',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-multi-button__connector',
 			)
 		);

@@ -15,8 +15,8 @@ use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Css_Filter;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Typography;
-use Elementor\Core\Schemes\Color;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Text_Shadow;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Box_Shadow;
@@ -805,10 +805,9 @@ class Responsive_Addons_For_Elementor_Banner extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-banner-image-banner-desc .rael_banner_title' => 'color: {{VALUE}};',
 				),
@@ -820,7 +819,9 @@ class Responsive_Addons_For_Elementor_Banner extends Widget_Base {
 			array(
 				'name'     => 'rael_banner_title_typography',
 				'selector' => '{{WRAPPER}} .rael-banner-image-banner-desc .rael_banner_title',
-				'scheme'   => Typography::TYPOGRAPHY_1,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 			)
 		);
 
@@ -876,10 +877,9 @@ class Responsive_Addons_For_Elementor_Banner extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-banner .rael_banner_content' => 'color: {{VALUE}};',
 				),
@@ -891,7 +891,9 @@ class Responsive_Addons_For_Elementor_Banner extends Widget_Base {
 			array(
 				'name'     => 'rael_banner_content_typhography',
 				'selector' => '{{WRAPPER}} .rael-banner .rael_banner_content',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 			)
 		);
 
@@ -935,10 +937,9 @@ class Responsive_Addons_For_Elementor_Banner extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-banner .rael-banner-link' => 'color: {{VALUE}};',
 				),
@@ -950,10 +951,9 @@ class Responsive_Addons_For_Elementor_Banner extends Widget_Base {
 			array(
 				'label'     => __( 'Hover Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-banner .rael-banner-link:hover' => 'color: {{VALUE}};',
 				),
@@ -964,7 +964,9 @@ class Responsive_Addons_For_Elementor_Banner extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'rael_banner_button_typhography',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-banner-link',
 			)
 		);

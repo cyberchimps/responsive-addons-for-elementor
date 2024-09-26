@@ -14,7 +14,7 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Responsive_Addons_For_Elementor\Helper\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -1709,7 +1709,9 @@ class Responsive_Addons_For_Elementor_Post_Carousel extends Widget_Base {
 			array(
 				'name'     => 'rael_post_title_typography',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'scheme'   => Typography::TYPOGRAPHY_1,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'selector' => '{{WRAPPER}} .rael-post-carousel__entry-title, {{WRAPPER}} .rael-post-carousel__entry-title > a',
 			)
 		);
@@ -1782,7 +1784,9 @@ class Responsive_Addons_For_Elementor_Post_Carousel extends Widget_Base {
 			array(
 				'name'     => 'rael_post_excerpt_typography',
 				'label'    => __( 'Excerpt Typography', 'responsive-addons-for-elementor' ),
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-post-carousel__excerpt p',
 			)
 		);
@@ -1835,7 +1839,9 @@ class Responsive_Addons_For_Elementor_Post_Carousel extends Widget_Base {
 			array(
 				'name'     => 'rael_post_terms_typography',
 				'label'    => __( 'Meta Typography', 'responsive-addons-for-elementor' ),
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-post-carousel__meta-categories li a, {{WRAPPER}} .rael-post-carousel__meta-categories li, {{WRAPPER}} .rael-post-carousel__meta-categories li a',
 			)
 		);
@@ -1899,7 +1905,9 @@ class Responsive_Addons_For_Elementor_Post_Carousel extends Widget_Base {
 			array(
 				'name'     => 'rael_post_meta_date_typography',
 				'label'    => __( 'Meta Date Typography', 'responsive-addons-for-elementor' ),
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-post-carousel__meta-posted-on',
 			)
 		);
@@ -2006,7 +2014,9 @@ class Responsive_Addons_For_Elementor_Post_Carousel extends Widget_Base {
 			array(
 				'name'     => 'rael_post_meta_header_typography',
 				'label'    => __( 'Meta Typography', 'responsive-addons-for-elementor' ),
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-post-carousel__entry-meta > span,{{WRAPPER}} .rael-post-carousel__entry-meta > .rael-post-carousel__posted-by,{{WRAPPER}} .rael-post-carousel__entry-meta > .rael-post-carousel__meta-posted-on',
 			)
 		);
