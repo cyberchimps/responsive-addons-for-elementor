@@ -144,6 +144,8 @@ class Group_Control_Query extends Group_Control_Base {
 			'options'      => array(),
 			'label_block'  => true,
 			'multiple'     => true,
+			'default'      => array(),
+			'filter_type'  => 'cpt_taxonomies',
 			'autocomplete' => array(
 				'object'  => 'cpt_tax',
 				'display' => 'detailed',
@@ -168,6 +170,9 @@ class Group_Control_Query extends Group_Control_Base {
 			'multiple'     => true,
 			'default'      => array(),
 			'options'      => array(),
+			'post_type'    => '',
+			'filter_type'  => 'author',
+			'include_type' => true,
 			'condition'    => array(
 				'include'    => 'authors',
 				'post_type!' => array(
