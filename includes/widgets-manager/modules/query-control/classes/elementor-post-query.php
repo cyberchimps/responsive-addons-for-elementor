@@ -61,10 +61,11 @@ class Elementor_Post_Query {
 		
 				// Prepare a placeholder for IN clause
 				$placeholders = implode(',', array_fill(0, count($term_ids), '%d'));
+				$meta_key = '_yoast_wpseo_primary_category';
 				
 				// SQL query to get post IDs with matching meta_value in wp_postmeta
 				$query = $wpdb->prepare(
-					"SELECT post_id FROM {$wpdb->postmeta} WHERE meta_value IN ($placeholders)",
+					"SELECT post_id FROM {$wpdb->postmeta} WHERE meta_value IN ($placeholders) and meta_key='$meta_key'",
 					...$term_ids
 				);
 		
