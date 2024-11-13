@@ -880,7 +880,10 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 	 */
 	protected function render() {
 		$settings            = $this->get_settings_for_display();
-		$icon_circle_size    = intval( $settings['rael_feature_list_icon_circle_size']['size'] );
+		$icon_circle_size = 70;
+		if ( isset( $settings['rael_feature_list_icon_circle_size']['size'] ) ) {
+			$icon_circle_size = intval( $settings['rael_feature_list_icon_circle_size']['size'] );
+		}
 		$feature_list_css_id = 'rael-feature-list-' . esc_attr( $this->get_id() );
 
 		$icon_tablet_pos = isset( $settings['rael_feature_list_icon_position_tablet'] ) ? $settings['rael_feature_list_icon_position_tablet'] : '';
@@ -953,7 +956,7 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 			foreach ( $settings['rael_feature_list'] as $index => $item ) :
 
 				$icon_color     = ( 'on' === $item['rael_icon_style'] && isset( $item['rael_feature_list_icon_individual_color'] ) ) ? esc_attr( $item['rael_feature_list_icon_individual_color'] ) : '';
-				$icon_bg        = ( ( 'on' === $item['rael_icon_style'] ) ? ' style="background-color:' . esc_attr( $item['rael_feature_list_icon_bg_color'] ) . '"' : '' );
+				$icon_bg        = ( ( 'on' === $item['rael_icon_style'] ) ? ' ' . esc_attr( $item['rael_feature_list_icon_bg_color'] ) : '' );
 				$icon_box_bg    = ( ( 'on' === $item['rael_icon_style'] ) ? ' style="background-color:' . esc_attr( $item['rael_feature_list_icon_box_bg_color'] ) . '"' : '' );
 				$feat_title_tag = Utils::validate_html_tag( $settings['rael_feature_title'] );
 
@@ -999,13 +1002,13 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 
 					<div class="rael-feature-list-icon-box">
 						<div class="rael-feature-list-icon-inner"<?php echo wp_kses_post( $icon_box_bg ); ?>>
-							<<?php echo wp_kses_post( $feature_icon_tag ) . ' ' . wp_kses_post( $this->get_render_attribute_string( 'rael_feature_list_icon' . $index ) ) . esc_attr( $this->get_render_attribute_string( 'rael_feature_list_link' . $index ) ) . esc_attr( $icon_bg ); ?>>
+							<<?php echo wp_kses_post( $feature_icon_tag ) . ' ' . wp_kses_post( $this->get_render_attribute_string( 'rael_feature_list_icon' . $index ) ) . esc_attr( $this->get_render_attribute_string( 'rael_feature_list_link' . $index ) ) . 'style="background-color:' . esc_attr( $icon_bg ) . '"' ?>>
 				<?php
 				if ( 'icon' === $item['rael_icon_type'] && $feature_has_icon ) {
 
 					if ( empty( $item['rael_feature_list_icon'] ) || isset( $item['__fa4_migrated']['rael_feature_list_icon_new'] ) ) {
 
-						if ( 'svg' === $item['rael_feature_list_icon_new']['library'] && $icon_color ) {
+						if ( $icon_color ) {
 							?>
 						<style>
 							<?php

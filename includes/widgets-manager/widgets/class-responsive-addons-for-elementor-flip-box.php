@@ -409,6 +409,10 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 					),
 				),
 				'size_units' => array( 'px', 'vh' ),
+				'default'    => array(
+					'unit' => 'px',
+					'size' => 280,
+				),
 				'selectors'  => array( '{{WRAPPER}} .rael-flip-box' => 'height: {{SIZE}}{{UNIT}};' ),
 			)
 		);
