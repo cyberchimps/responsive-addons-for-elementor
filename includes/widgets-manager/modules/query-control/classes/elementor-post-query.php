@@ -46,14 +46,10 @@ class Elementor_Post_Query {
     	$tax_query = $this->query_args['tax_query'] ?? [];
     	$term_ids = [];
 
-		error_log('Tax Query: '.print_r($tax_query, true));
-
     	foreach ($tax_query as $tax) {
     	    if (isset($tax['field']) && $tax['field'] === 'primary_category') {
-				error_log("Inside If Statement");
 				$is_termm_primary_category = true;
     	        $term_ids = $tax['terms'] ?? [];
-				error_log("Term Ids: ". print_r($term_ids, true));
             	break;
     	    }
     	}
@@ -71,12 +67,8 @@ class Elementor_Post_Query {
 					"SELECT post_id FROM {$wpdb->postmeta} WHERE meta_value IN ($placeholders)",
 					...$term_ids
 				);
-
-				error_log("Term Ids: ". print_r($query, true));
 		
 				$post_ids = $wpdb->get_col($query);
-
-				error_log("Term Ids: ". print_r($post_ids, true));
 		
 				// If post IDs are found, update `query_args` to use `post__in`
 				if ($post_ids) {
@@ -277,7 +269,6 @@ class Elementor_Post_Query {
 				$terms[ $taxonomy ][] = $id;
 			}
 		}
-		// error_log("Terms: ".print_r($terms, true));
 		$this->insert_tax_query_for_primary_category( $terms, $exclude );
 	}
 
