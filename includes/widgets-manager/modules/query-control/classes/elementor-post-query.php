@@ -39,28 +39,79 @@ class Elementor_Post_Query {
 	 */
 	public function get_query() {
 		$this->get_query_args();
+		// Determine if `term_taxonomy_id` is used as the field in `tax_query`
+		$is_termm_primary_category = false;
 
-		$offset_control = $this->get_widget_settings( 'offset' );
+    	// Check if `term_taxonomy_id` is the field in `tax_query`
+    	$tax_query = $this->query_args['tax_query'] ?? [];
+    	$term_ids = [];
 
-		$query_id = $this->get_widget_settings( 'query_id' );
-		if ( ! empty( $query_id ) ) {
-			add_action( 'pre_get_posts', array( $this, 'pre_get_posts_query_filter' ) );
+    	foreach ($tax_query as $tax) {
+    	    if (isset($tax['field']) && $tax['field'] === 'primary_category') {
+				$is_termm_primary_category = true;
+    	        $term_ids = $tax['terms'] ?? [];
+            	break;
+    	    }
+    	}
+
+		if($is_termm_primary_category) {
+			// If we have term IDs, retrieve post IDs from wp_postmeta
+			if (!empty($term_ids)) {
+				global $wpdb;
+		
+				// Prepare a placeholder for IN clause
+				$placeholders = implode(',', array_fill(0, count($term_ids), '%d'));
+				$meta_key = '_yoast_wpseo_primary_category';
+				
+				// SQL query to get post IDs with matching meta_value in wp_postmeta
+				$query = $wpdb->prepare(
+					"SELECT post_id FROM {$wpdb->postmeta} WHERE meta_value IN ($placeholders) and meta_key='$meta_key'",
+					...$term_ids
+				);
+		
+				$post_ids = $wpdb->get_col($query);
+		
+				// If post IDs are found, update `query_args` to use `post__in`
+				if ($post_ids) {
+					$this->query_args['post__in'] = $post_ids;
+				} else {
+					// No matching posts, return an empty query result
+					return new \WP_Query(['post__in' => [0]]);
+				}
+		
+				// Remove the taxonomy query, as we’re now filtering by post IDs
+				unset($this->query_args['tax_query']);
+			}
+		
+			// Proceed with the WP_Query
+			$query = new \WP_Query($this->query_args);
+		
+			Module::add_to_avoid_list(wp_list_pluck($query->posts, 'ID'));
+		
+			return $query;
+		} else {
+			$offset_control = $this->get_widget_settings( 'offset' );
+
+			$query_id = $this->get_widget_settings( 'query_id' );
+			if ( ! empty( $query_id ) ) {
+				add_action( 'pre_get_posts', array( $this, 'pre_get_posts_query_filter' ) );
+			}
+
+			if ( 0 < $offset_control ) {
+				add_action( 'pre_get_posts', array( $this, 'fix_query_offset' ), 1 );
+				add_filter( 'found_posts', array( $this, 'fix_query_found_posts' ), 1, 2 );
+			}
+
+			$query = new \WP_Query( $this->query_args );
+
+			remove_action( 'pre_get_posts', array( $this, 'pre_get_posts_query_filter' ) );
+			remove_action( 'pre_get_posts', array( $this, 'fix_query_offset' ), 1 );
+			remove_filter( 'found_posts', array( $this, 'fix_query_found_posts' ), 1 );
+
+			Module::add_to_avoid_list( wp_list_pluck( $query->posts, 'ID' ) );
+
+			return $query;
 		}
-
-		if ( 0 < $offset_control ) {
-			add_action( 'pre_get_posts', array( $this, 'fix_query_offset' ), 1 );
-			add_filter( 'found_posts', array( $this, 'fix_query_found_posts' ), 1, 2 );
-		}
-
-		$query = new \WP_Query( $this->query_args );
-
-		remove_action( 'pre_get_posts', array( $this, 'pre_get_posts_query_filter' ) );
-		remove_action( 'pre_get_posts', array( $this, 'fix_query_offset' ), 1 );
-		remove_filter( 'found_posts', array( $this, 'fix_query_found_posts' ), 1 );
-
-		Module::add_to_avoid_list( wp_list_pluck( $query->posts, 'ID' ) );
-
-		return $query;
 	}
 
 	protected function get_query_defaults() {
@@ -98,6 +149,7 @@ class Elementor_Post_Query {
 			$this->set_avoid_duplicates();
 			$this->set_terms_args();
 			$this->set_author_args();
+			$this->set_primary_category_args();
 			$this->set_date_args();
 		}
 
@@ -180,12 +232,45 @@ class Elementor_Post_Query {
 		$this->build_terms_query_exclude( 'exclude_term_ids' );
 	}
 
+	protected function set_primary_category_args() {
+
+		$post_type = $this->get_widget_settings( 'post_type' );
+		if ( 'by_id' === $post_type ) {
+			return;
+		}
+		$this->build_primary_category_query_include( 'include_primary_category' );
+	}
+
 	protected function build_terms_query_include( $control_id ) {
 		$this->build_terms_query( 'include', $control_id );
 	}
 
 	protected function build_terms_query_exclude( $control_id ) {
 		$this->build_terms_query( 'exclude', $control_id, true );
+	}
+
+	protected function build_primary_category_query_include( $control_id ) {
+		$this->build_primary_category_query( 'include', $control_id );
+	}
+
+	protected function build_primary_category_query( $tab_id, $control_id, $exclude = false ) {
+		$tab_id         = $this->get_widget_settings( $tab_id );
+		$settings_terms = $this->get_widget_settings( $control_id );
+		if ( empty( $tab_id ) || empty( $settings_terms ) || ! $this->maybe_in_array( 'primary_category', $tab_id ) ) {
+			return;
+		}
+
+		$terms = array();
+
+		// Switch to term_id in order to get all term children (sub-categories).
+		foreach ( $settings_terms as $id ) {
+			$term_data = get_term_by( 'term_taxonomy_id', $id );
+			if ( false !== $term_data ) {
+				$taxonomy             = $term_data->taxonomy;
+				$terms[ $taxonomy ][] = $id;
+			}
+		}
+		$this->insert_tax_query_for_primary_category( $terms, $exclude );
 	}
 
 	protected function build_terms_query( $tab_id, $control_id, $exclude = false ) {
@@ -214,6 +299,34 @@ class Elementor_Post_Query {
 			$query = array(
 				'taxonomy' => $taxonomy,
 				'field'    => 'term_taxonomy_id',
+				'terms'    => $ids,
+			);
+
+			if ( $exclude ) {
+				$query['operator'] = 'NOT IN';
+			}
+
+			$tax_query[] = $query;
+		}
+
+		if ( empty( $tax_query ) ) {
+			return;
+		}
+
+		if ( empty( $this->query_args['tax_query'] ) ) {
+			$this->query_args['tax_query'] = $tax_query;
+		} else {
+			$this->query_args['tax_query']['relation'] = 'AND';
+			$this->query_args['tax_query'][]           = $tax_query;
+		}
+	}
+
+	protected function insert_tax_query_for_primary_category( $terms, $exclude ) {
+		$tax_query = array();
+		foreach ( $terms as $taxonomy => $ids ) {
+			$query = array(
+				'taxonomy' => $taxonomy,
+				'field'    => 'primary_category',
 				'terms'    => $ids,
 			);
 

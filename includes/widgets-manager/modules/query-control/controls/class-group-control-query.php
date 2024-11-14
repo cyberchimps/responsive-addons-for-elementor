@@ -125,6 +125,7 @@ class Group_Control_Query extends Group_Control_Base {
 			'options'      => array(
 				'terms'   => __( 'Term', 'responsive-addons-for-elementor' ),
 				'authors' => __( 'Author', 'responsive-addons-for-elementor' ),
+				'primary_category' => __( 'Primary Category', 'responsive-addons-for-elementor' ),
 			),
 			'condition'    => array(
 				'post_type!' => array(
@@ -144,6 +145,8 @@ class Group_Control_Query extends Group_Control_Base {
 			'options'      => array(),
 			'label_block'  => true,
 			'multiple'     => true,
+			'default'      => array(),
+			'filter_type'  => 'cpt_taxonomies',
 			'autocomplete' => array(
 				'object'  => 'cpt_tax',
 				'display' => 'detailed',
@@ -168,6 +171,9 @@ class Group_Control_Query extends Group_Control_Base {
 			'multiple'     => true,
 			'default'      => array(),
 			'options'      => array(),
+			'post_type'    => '',
+			'filter_type'  => 'author',
+			'include_type' => true,
 			'condition'    => array(
 				'include'    => 'authors',
 				'post_type!' => array(
@@ -181,6 +187,33 @@ class Group_Control_Query extends Group_Control_Base {
 			'tabs_wrapper' => $tabs_wrapper,
 			'inner_tab'    => $include_wrapper,
 			'export'       => false,
+		);
+
+		$fields['include_primary_category'] = array(
+			'label'        => __( 'Primary Category', 'responsive-addons-for-elementor' ),
+			'label_block'  => true,
+			'type'         => 'rael-query',
+			'multiple'     => true,
+			'default'      => array(),
+			'options'      => array(),
+			'include_type' => true,
+			'post_type'    => '',
+			'filter_type'  => 'primary_category',
+			'autocomplete' => array(
+				'object'  => 'cpt_tax',
+				'display' => 'detailed',
+			),
+			'condition'    => array(
+				'include'    => 'primary_category',
+				'post_type!' => array(
+					'by_id',
+					'current_query',
+				),
+			),
+			
+			'tabs_wrapper' => $tabs_wrapper,
+			'inner_tab'    => $include_wrapper,
+			'export'	   => false,
 		);
 
 		$fields['query_exclude'] = array(
@@ -483,6 +516,7 @@ class Group_Control_Query extends Group_Control_Base {
 				'include_ids',
 				'include_term_ids',
 				'include_authors',
+				'include_primary_category'
 			)
 		);
 
