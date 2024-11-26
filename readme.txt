@@ -4,8 +4,6 @@ Donate Link: https://cyberchimps.com
 Tags: elementor, elementor addons, elementor widget, woocommerce elementor, page builder plugin
 Requires at least: 5.0
 Tested up to: 6.7
-Elementor tested up to: 3.25
-Elementor Pro tested up to: 3.25
 Requires PHP: 5.6
 Stable tag: 1.6.2
 License: GPLv2 or later
