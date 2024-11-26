@@ -2468,11 +2468,12 @@ class Responsive_Addons_For_Elementor_Modal_Popup extends Widget_Base {
 				$output_html = $wp_embed->autoembed( $dynamic_settings['rael_ct_video'] );
 				break;
 			case 'iframe':
+				$_rael_iframe_url = esc_url( $dynamic_settings['rael_iframe_url'] );
 				if ( 'yes' == $dynamic_settings['rael_async_iframe'] ) {
 
-					$output_html = '<div class="rael-modal-content-type-iframe" data-src="' . $dynamic_settings['rael_iframe_url'] . '" frameborder="0" allowfullscreen></div>';
+					$output_html = '<div class="rael-modal-content-type-iframe" data-src="' . $_rael_iframe_url . '" frameborder="0" allowfullscreen></div>';
 				} else {
-					$output_html = '<iframe src="' . $dynamic_settings['rael_iframe_url'] . '" class="rael-content-iframe" frameborder="0" width="100%" height="100%" allowfullscreen></iframe>';
+					$output_html = '<iframe src="' . $_rael_iframe_url . '" class="rael-content-iframe" frameborder="0" width="100%" height="100%" allowfullscreen></iframe>';
 				}
 				break;
 			case 'saved_rows':

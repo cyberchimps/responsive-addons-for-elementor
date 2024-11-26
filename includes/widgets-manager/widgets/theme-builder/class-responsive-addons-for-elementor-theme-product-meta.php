@@ -82,7 +82,7 @@ class Responsive_Addons_For_Elementor_Theme_Product_Meta extends Woo_Widget_Base
 	 * @return string Widget keywords.
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/';
+		return 'https://cyberchimps.com/docs/widgets/';
 	}
 
 	/**

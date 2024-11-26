@@ -15,8 +15,6 @@ use Elementor\Controls_Stack;
 use Responsive_Addons_For_Elementor\WidgetsManager\Modules\QueryControl\Controls\Group_Control_Query;
 use Responsive_Addons_For_Elementor\WidgetsManager\Modules\Woocommerce\Classes\Products_Renderer;
 use Responsive_Addons_For_Elementor\WidgetsManager\Modules\Woocommerce\Classes\Current_Query_Renderer;
-use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
-use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
@@ -155,7 +153,7 @@ class Responsive_Addons_For_Elementor_Woo_Products extends Widget_Base {
 	 * @return string The widget icon.
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/products';
+		return 'https://cyberchimps.com/docs/widgets/products';
 	}
 
 	/**

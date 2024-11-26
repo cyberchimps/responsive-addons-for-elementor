@@ -131,12 +131,16 @@ class RAEL_Theme_Builder {
 	public function enqueue_scripts() {
 		if ( class_exists( '\Elementor\Plugin' ) ) {
 			$elementor = \Elementor\Plugin::instance();
-			$elementor->frontend->enqueue_styles();
+			if ( method_exists( $elementor->frontend, 'enqueue_styles' ) ) {
+				$elementor->frontend->enqueue_styles();
+			}
 		}
 
 		if ( class_exists( '\ElementorPro\Plugin' ) ) {
 			$elementor_pro = \ElementorPro\Plugin::instance();
-			$elementor_pro->enqueue_styles();
+			if ( method_exists( $elementor_pro, 'enqueue_styles' ) ) {
+				$elementor_pro->enqueue_styles();
+			}
 		}
 
 		if ( get_rael_header_id() ) {

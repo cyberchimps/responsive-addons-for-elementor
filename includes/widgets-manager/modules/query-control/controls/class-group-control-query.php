@@ -137,6 +137,11 @@ class Group_Control_Query extends Group_Control_Base {
 			'inner_tab'    => $include_wrapper,
 		);
 
+		// Conditionally add 'primary_category' option.
+		if ( in_array( 'wordpress-seo-premium/wp-seo-premium.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+		    $fields['include']['options']['primary_category'] = __( 'Primary Category', 'responsive-addons-for-elementor' );
+		}
+
 		$fields['include_term_ids'] = array(
 			'label'        => __( 'Term', 'responsive-addons-for-elementor' ),
 			'type'         => 'rael-query',
@@ -144,6 +149,8 @@ class Group_Control_Query extends Group_Control_Base {
 			'options'      => array(),
 			'label_block'  => true,
 			'multiple'     => true,
+			'default'      => array(),
+			'filter_type'  => 'cpt_taxonomies',
 			'autocomplete' => array(
 				'object'  => 'cpt_tax',
 				'display' => 'detailed',
@@ -168,6 +175,9 @@ class Group_Control_Query extends Group_Control_Base {
 			'multiple'     => true,
 			'default'      => array(),
 			'options'      => array(),
+			'post_type'    => '',
+			'filter_type'  => 'author',
+			'include_type' => true,
 			'condition'    => array(
 				'include'    => 'authors',
 				'post_type!' => array(
@@ -182,6 +192,36 @@ class Group_Control_Query extends Group_Control_Base {
 			'inner_tab'    => $include_wrapper,
 			'export'       => false,
 		);
+
+		// Conditionally add 'primary_category' option.
+		if ( in_array( 'wordpress-seo-premium/wp-seo-premium.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+		    $fields['include_primary_category'] = array(
+				'label'        => __( 'Primary Category', 'responsive-addons-for-elementor' ),
+				'label_block'  => true,
+				'type'         => 'rael-query',
+				'multiple'     => true,
+				'default'      => array(),
+				'options'      => array(),
+				'include_type' => true,
+				'post_type'    => '',
+				'filter_type'  => 'primary_category',
+				'autocomplete' => array(
+					'object'  => 'cpt_tax',
+					'display' => 'detailed',
+				),
+				'condition'    => array(
+					'include'    => 'primary_category',
+					'post_type!' => array(
+						'by_id',
+						'current_query',
+					),
+				),
+
+				'tabs_wrapper' => $tabs_wrapper,
+				'inner_tab'    => $include_wrapper,
+				'export'	   => false,
+			);
+		}
 
 		$fields['query_exclude'] = array(
 			'type'         => Controls_Manager::TAB,
@@ -483,6 +523,7 @@ class Group_Control_Query extends Group_Control_Base {
 				'include_ids',
 				'include_term_ids',
 				'include_authors',
+				'include_primary_category'
 			)
 		);
 

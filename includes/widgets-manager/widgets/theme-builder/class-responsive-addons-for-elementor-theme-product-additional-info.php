@@ -62,7 +62,7 @@ class Responsive_Addons_For_Elementor_Theme_Product_Additional_Info extends Woo_
 	 * Get custom help url
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/';
+		return 'https://cyberchimps.com/docs/widgets/';
 	}
 
 	/**

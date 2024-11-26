@@ -419,201 +419,208 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 		}
 
 		$rael_widgets = get_option( 'rael_widgets' );
-
-		foreach ( $rael_widgets as $rael_widget ) {
-			if ( $rael_widget['status'] ) {
-				switch ( $rael_widget['title'] ) {
-					case 'audio':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Audio() );
-						break;
-					case 'back-to-top':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Back_To_Top() );
-						break;
-					case 'banner':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Banner() );
-						break;
-					case 'breadcrumbs':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Breadcrumbs() );
-						break;
-					case 'business-hour':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Business_Hour() );
-						break;
-					case 'button':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Button() );
-						break;
-					case 'call-to-action':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Call_To_Action() );
-						break;
-					case 'content-switcher':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Content_Switcher() );
-						break;
-					case 'countdown':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Countdown() );
-						break;
-					case 'divider':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Divider() );
-						break;
-					case 'dual-color-header':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Dual_Color_Header() );
-						break;
-					case 'fancy-text':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Fancy_Text() );
-						break;
-					case 'faq':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_FAQ() );
-						break;
-					case 'feature-list':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Feature_List() );
-						break;
-					case 'flip-box':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Flip_Box() );
-						break;
-					case 'icon-box':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Icon_Box() );
-						break;
-					case 'image-gallery':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Image_Gallery() );
-						break;
-					case 'image-hotspot':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Image_Hotspot() );
-						break;
-					case 'mc-styler':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_MC_Styler() );
-						break;
-					case 'progress-bar':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Progress_Bar() );
-						break;
-					case 'reviews':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Reviews() );
-						break;
-					case 'search-form':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Search_Form() );
-						break;
-					case 'slider':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Slider() );
-						break;
-					case 'timeline':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Timeline() );
-						break;
-					case 'sticky-video':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Sticky_Video() );
-						break;
-					case 'table-of-contents':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Table_Of_Contents() );
-						break;
-					case 'team-member':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Team_Member() );
-						break;
-					case 'testimonial-slider':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Testimonial_Slider() );
-						break;
-					case 'twitter-feed':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Twitter_Feed() );
-						break;
-					case 'video':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Video() );
-						break;
-					case 'one-page-navigation':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_One_Page_Navigation() );
-						break;
-					case 'logo-carousel':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Logo_Carousel() );
-						break;
-					case 'data-table':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Data_Table() );
-						break;
-					case 'advanced-tabs':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Advanced_Tabs() );
-						break;
-					case 'cf-styler':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Cf_Styler() );
-						break;
-					case 'wpf-styler':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_WPF_Styler() );
-						break;
-					case 'content-ticker':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Content_Ticker() );
-						break;
-					case 'pricing-table':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Pricing_Table() );
-						break;
-					case 'price-list':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Price_List() );
-						break;
-					case 'posts':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Posts() );
-						break;
-					case 'price-box':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Price_Box() );
-						break;
-					case 'post-carousel':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Post_Carousel() );
-						break;
-					case 'offcanvas':
-						Plugin::instance()->widgets_manager->register( new Widgets\RAEL_Offcanvas() );
-						break;
-					case 'nav-menu':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Nav_Menu() );
-						break;
-					case 'login-register':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Login_Register() );
-						break;
-					case 'media-carousel':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Media_Carousel() );
-						break;
-					case 'google-map':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Google_Map() );
-						break;
-					case 'lottie':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Lottie() );
-						break;
-					case 'multi-button':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Multi_Button() );
-						break;
-					case 'woo-products':
-						if ( class_exists( 'WooCommerce' ) ) {
-							Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Woo_Products() );
-						}
-						break;
-					case 'breadcrumb':
-						if ( class_exists( 'WooCommerce' ) ) {
-							Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Breadcrumb() );
-						}
-						break;
-					case 'product-category-grid':
-						if ( class_exists( 'WooCommerce' ) ) {
-							Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Product_Category_Grid() );
-						}
-						break;
-					case 'product-carousel':
-						if ( class_exists( 'WooCommerce' ) ) {
-							Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Product_Carousel() );
-						}
-						break;
-					case 'woo-checkout':
-						if ( class_exists( 'WooCommerce' ) ) {
-							Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Woo_Checkout() );
-						}
-						break;
-					case 'portfolio':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Portfolio() );
-						break;
-					case 'menu-cart':
-						if ( class_exists( 'WooCommerce' ) ) {
-							Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Menu_Cart() );
-						}
-						break;
-					case 'wc-add-to-cart':
-						if ( class_exists( 'WooCommerce' ) ) {
-							Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_WC_Add_To_Cart() );
-						}
-						break;
-					case 'modal-popup':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Modal_Popup() );
-						break;
-					case 'gf-styler':
-						Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Gf_Styler() );
-						break;
+		if ( ! $rael_widgets ) {
+			include_once RAEL_DIR . 'includes/class-responsive-addons-for-elementor-widgets-updater.php';
+			$rael_widgets_data = new \Responsive_Addons_For_Elementor_Widgets_Updater();
+			$rael_widgets_data->insert_widgets_data();
+			$rael_widgets = get_option( 'rael_widgets' );
+		}
+		if ( is_array( $rael_widgets ) ) {
+			foreach ( $rael_widgets as $rael_widget ) {
+				if ( $rael_widget['status'] ) {
+					switch ( $rael_widget['title'] ) {
+						case 'audio':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Audio() );
+							break;
+						case 'back-to-top':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Back_To_Top() );
+							break;
+						case 'banner':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Banner() );
+							break;
+						case 'breadcrumbs':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Breadcrumbs() );
+							break;
+						case 'business-hour':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Business_Hour() );
+							break;
+						case 'button':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Button() );
+							break;
+						case 'call-to-action':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Call_To_Action() );
+							break;
+						case 'content-switcher':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Content_Switcher() );
+							break;
+						case 'countdown':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Countdown() );
+							break;
+						case 'divider':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Divider() );
+							break;
+						case 'dual-color-header':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Dual_Color_Header() );
+							break;
+						case 'fancy-text':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Fancy_Text() );
+							break;
+						case 'faq':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_FAQ() );
+							break;
+						case 'feature-list':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Feature_List() );
+							break;
+						case 'flip-box':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Flip_Box() );
+							break;
+						case 'icon-box':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Icon_Box() );
+							break;
+						case 'image-gallery':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Image_Gallery() );
+							break;
+						case 'image-hotspot':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Image_Hotspot() );
+							break;
+						case 'mc-styler':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_MC_Styler() );
+							break;
+						case 'progress-bar':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Progress_Bar() );
+							break;
+						case 'reviews':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Reviews() );
+							break;
+						case 'search-form':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Search_Form() );
+							break;
+						case 'slider':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Slider() );
+							break;
+						case 'timeline':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Timeline() );
+							break;
+						case 'sticky-video':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Sticky_Video() );
+							break;
+						case 'table-of-contents':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Table_Of_Contents() );
+							break;
+						case 'team-member':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Team_Member() );
+							break;
+						case 'testimonial-slider':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Testimonial_Slider() );
+							break;
+						case 'twitter-feed':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Twitter_Feed() );
+							break;
+						case 'video':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Video() );
+							break;
+						case 'one-page-navigation':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_One_Page_Navigation() );
+							break;
+						case 'logo-carousel':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Logo_Carousel() );
+							break;
+						case 'data-table':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Data_Table() );
+							break;
+						case 'advanced-tabs':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Advanced_Tabs() );
+							break;
+						case 'cf-styler':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Cf_Styler() );
+							break;
+						case 'wpf-styler':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_WPF_Styler() );
+							break;
+						case 'content-ticker':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Content_Ticker() );
+							break;
+						case 'pricing-table':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Pricing_Table() );
+							break;
+						case 'price-list':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Price_List() );
+							break;
+						case 'posts':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Posts() );
+							break;
+						case 'price-box':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Price_Box() );
+							break;
+						case 'post-carousel':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Post_Carousel() );
+							break;
+						case 'offcanvas':
+							Plugin::instance()->widgets_manager->register( new Widgets\RAEL_Offcanvas() );
+							break;
+						case 'nav-menu':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Nav_Menu() );
+							break;
+						case 'login-register':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Login_Register() );
+							break;
+						case 'media-carousel':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Media_Carousel() );
+							break;
+						case 'google-map':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Google_Map() );
+							break;
+						case 'lottie':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Lottie() );
+							break;
+						case 'multi-button':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Multi_Button() );
+							break;
+						case 'woo-products':
+							if ( class_exists( 'WooCommerce' ) ) {
+								Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Woo_Products() );
+							}
+							break;
+						case 'breadcrumb':
+							if ( class_exists( 'WooCommerce' ) ) {
+								Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Breadcrumb() );
+							}
+							break;
+						case 'product-category-grid':
+							if ( class_exists( 'WooCommerce' ) ) {
+								Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Product_Category_Grid() );
+							}
+							break;
+						case 'product-carousel':
+							if ( class_exists( 'WooCommerce' ) ) {
+								Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Product_Carousel() );
+							}
+							break;
+						case 'woo-checkout':
+							if ( class_exists( 'WooCommerce' ) ) {
+								Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Woo_Checkout() );
+							}
+							break;
+						case 'portfolio':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Portfolio() );
+							break;
+						case 'menu-cart':
+							if ( class_exists( 'WooCommerce' ) ) {
+								Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Menu_Cart() );
+							}
+							break;
+						case 'wc-add-to-cart':
+							if ( class_exists( 'WooCommerce' ) ) {
+								Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_WC_Add_To_Cart() );
+							}
+							break;
+						case 'modal-popup':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Modal_Popup() );
+							break;
+						case 'gf-styler':
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Gf_Styler() );
+							break;
+					}
 				}
 			}
 		}

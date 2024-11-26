@@ -80,7 +80,7 @@ class Responsive_Addons_For_Elementor_Theme_Post_Content extends Widget_Base {
 	 * @return array Widget doc url.
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/post-content';
+		return 'https://cyberchimps.com/docs/widgets/post-content';
 	}
 
 	/**

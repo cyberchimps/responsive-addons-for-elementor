@@ -368,7 +368,7 @@ class RAEL_HF_Admin {
 	 * @return string Doc URL.
 	 */
 	public function get_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/theme-builder';
+		return 'https://cyberchimps.com/docs/widgets/theme-builder';
 	}
 
 	/**

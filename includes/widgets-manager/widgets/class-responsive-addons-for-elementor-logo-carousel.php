@@ -9,7 +9,7 @@
 namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets;
 
 use Elementor\Controls_Manager;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Widget_Base;
 use Elementor\Repeater;
 use Elementor\Group_Control_Background;
@@ -99,7 +99,7 @@ class Responsive_Addons_For_Elementor_Logo_Carousel extends Widget_Base {
 	 * @return string help URL
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/logo-carousel';
+		return 'https://cyberchimps.com/docs/widgets/logo-carousel';
 	}
 
 	/**
@@ -685,7 +685,9 @@ class Responsive_Addons_For_Elementor_Logo_Carousel extends Widget_Base {
 			array(
 				'name'     => 'rael_logo_title_typography',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'scheme'   => Typography::TYPOGRAPHY_4,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'selector' => '{{WRAPPER}} .rael-logo-carousel__item-title',
 			)
 		);

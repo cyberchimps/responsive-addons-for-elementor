@@ -769,6 +769,6 @@ class Responsive_Addons_For_Elementor_Table_Of_Contents extends Widget_Base {
 	 * @return string help URL
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/table-of-contents';
+		return 'https://cyberchimps.com/docs/widgets/table-of-contents';
 	}
 }

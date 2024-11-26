@@ -13,8 +13,8 @@ use Elementor\Controls_Manager;
 use Elementor\Repeater;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Color;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Control_Media;
 
@@ -374,7 +374,7 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 				array(
 					'type'            => Controls_Manager::RAW_HTML,
 					/* translators: %s: documentation */
-					'raw'             => sprintf( __( 'Note: Enter the category name that you wish to set as a default on page load. Read %1$s this article %2$s for more information.', 'responsive-addons-for-elementor' ), '<a href="https://cyberchimps.com/responsive-addons-for-elementor/docs/image-gallery/#how-to-display-specific-category-tab-as-a-default-on-page-load" target="_blank" rel="noopener">', '</a>' ),
+					'raw'             => sprintf( __( 'Note: Enter the category name that you wish to set as a default on page load. Read %1$s this article %2$s for more information.', 'responsive-addons-for-elementor' ), '<a href="https://cyberchimps.com/docs/widgets/image-gallery/#how-to-display-specific-category-tab-as-a-default-on-page-load" target="_blank" rel="noopener">', '</a>' ),
 					'content_classes' => 'rael-editor-doc',
 					'condition'       => array(
 						'rael_default_filter_switch'  => 'yes',
@@ -570,7 +570,7 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 				array(
 					'type'            => Controls_Manager::RAW_HTML,
 					/* translators: %s: documentation */
-					'raw'             => sprintf( __( 'Learn : %1$s How to assign custom link for images? %2$s', 'responsive-addons-for-elementor' ), '<a href="https://cyberchimps.com/responsive-addons-for-elementor/docs/image-gallery/#add-a-custom-link-to-image" target="_blank" rel="noopener">', '</a>' ),
+					'raw'             => sprintf( __( 'Learn : %1$s How to assign custom link for images? %2$s', 'responsive-addons-for-elementor' ), '<a href="https://cyberchimps.com/docs/widgets/image-gallery/#add-a-custom-link-to-image" target="_blank" rel="noopener">', '</a>' ),
 					'content_classes' => 'rael-editor-doc',
 					'condition'       => array(
 						'rael_click_action' => 'custom',
@@ -625,7 +625,7 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 			array(
 				'type'            => Controls_Manager::RAW_HTML,
 				/* translators: %s: documentation */
-				'raw'             => sprintf( __( 'Learn : %1$s How to assign captions for images? %2$s', 'responsive-addons-for-elementor' ), '<a href="https://cyberchimps.com/responsive-addons-for-elementor/docs/image-gallery/#how-to-add-a-caption-for-the-image" target="_blank" rel="noopener">', '</a>' ),
+				'raw'             => sprintf( __( 'Learn : %1$s How to assign captions for images? %2$s', 'responsive-addons-for-elementor' ), '<a href="https://cyberchimps.com/docs/widgets/image-gallery/#how-to-add-a-caption-for-the-image" target="_blank" rel="noopener">', '</a>' ),
 				'content_classes' => 'rael-editor-doc',
 				'condition'       => array(
 					'rael_gallery_caption!' => '',
@@ -688,7 +688,7 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 				array(
 					'type'            => Controls_Manager::RAW_HTML,
 					/* translators: %s: documentation */
-					'raw'             => sprintf( __( 'Click %1$s here %2$s to learn more about this.', 'responsive-addons-for-elementor' ), '<a href="https://cyberchimps.com/responsive-addons-for-elementor/docs/image-gallery/#lightbox-image-click-action" target="_blank" rel="noopener">', '</a>' ),
+					'raw'             => sprintf( __( 'Click %1$s here %2$s to learn more about this.', 'responsive-addons-for-elementor' ), '<a href="https://cyberchimps.com/docs/widgets/image-gallery/#lightbox-image-click-action" target="_blank" rel="noopener">', '</a>' ),
 					'content_classes' => 'rael-editor-doc',
 				)
 			);
@@ -711,7 +711,7 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 				array(
 					'type'            => Controls_Manager::RAW_HTML,
 					/* translators: %s: documentation */
-					'raw'             => sprintf( __( 'Learn : %1$s How to assign captions for images? %2$s', 'responsive-addons-for-elementor' ), '<a href="https://cyberchimps.com/responsive-addons-for-elementor/docs/image-gallery/#how-to-add-a-caption-for-the-image" target="_blank" rel="noopener">', '</a>' ),
+					'raw'             => sprintf( __( 'Learn : %1$s How to assign captions for images? %2$s', 'responsive-addons-for-elementor' ), '<a href="https://cyberchimps.com/docs/widgets/image-gallery/#how-to-add-a-caption-for-the-image" target="_blank" rel="noopener">', '</a>' ),
 					'content_classes' => 'rael-editor-doc',
 					'condition'       => array(
 						'rael_show_caption_lightbox' => 'yes',
@@ -1746,7 +1746,9 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'all_typography',
-				'scheme'    => Typography::TYPOGRAPHY_4,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'condition' => array(
 					'rael_gallery_style'          => array( 'grid', 'masonry', 'justified' ),
 					'rael_masonry_filters_enable' => 'yes',
@@ -1829,10 +1831,9 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 			array(
 				'label'     => __( 'Text Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_4,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_ACCENT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-img-gallery-tabs-dropdown .rael-filters-dropdown-button, {{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-masonry-filter' => 'color: {{VALUE}};',
 				),
@@ -1905,10 +1906,9 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 			array(
 				'label'     => __( 'Background Active / Hover Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_4,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_ACCENT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-masonry-filter:hover, {{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-current' => 'background-color: {{VALUE}};',
 				),
@@ -1924,10 +1924,9 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 			array(
 				'label'     => __( 'Border Hover Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_4,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_ACCENT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-masonry-filter:hover, {{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-current' => 'border-color: {{VALUE}};',
 				),
@@ -2686,7 +2685,7 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 	 * @return string help URL
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/image-gallery';
+		return 'https://cyberchimps.com/docs/widgets/image-gallery';
 	}
 
 	/**

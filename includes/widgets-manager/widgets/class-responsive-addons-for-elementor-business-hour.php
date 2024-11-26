@@ -13,7 +13,7 @@ use Elementor\Repeater;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Box_Shadow;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -376,7 +376,9 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 			array(
 				'name'     => 'rael_title_typography',
 				'selector' => '{{WRAPPER}} .rael-business-hour-title h3',
-				'scheme'   => Typography::TYPOGRAPHY_2,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
+				],
 			)
 		);
 
@@ -462,7 +464,9 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 			array(
 				'name'     => 'rael_list_typography',
 				'selector' => '{{WRAPPER}} .rael-business-hour-item',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 			)
 		);
 

@@ -85,7 +85,7 @@ class Responsive_Addons_For_Elementor_Theme_Archive_Posts extends Widget_Base {
 	 * @return string Help URL.
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/archive-posts/';
+		return 'https://cyberchimps.com/docs/widgets/archive-posts/';
 	}
 
 	/**

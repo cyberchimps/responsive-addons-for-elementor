@@ -262,6 +262,20 @@ class Module extends Module_Base {
 					);
 				}
 				break;
+			case 'primary_category':
+				$post_type = $this->extract_post_type( $data );
+
+				$taxonomies = get_object_taxonomies( $post_type );
+
+				$query_params = array(
+					'taxonomy'   => $taxonomies,
+					'search'     => $data['q'],
+					'hide_empty' => false,
+				);
+
+				$results = $this->search_taxonomies( $query_params, $data );
+
+				break;
 			default:
 				$results = apply_filters( 'rael_core_elements_query_control_get_autocomplete_' . $data['filter_type'], array(), $data );
 		}
@@ -599,7 +613,7 @@ class Module extends Module_Base {
 
 				// Return data and call your function according to your need for ajax call.
 				// You will have access to settings variable as well as some widget functions.
-				require_once RAEL_DIR . 'includes/widgets-manager/widgets/skins/template-blocks/skin-init.php';
+				require_once RAEL_DIR . 'includes/widgets-manager/widgets/skins/template-blocks/class-skin-init.php';
 				$skin = \Responsive_Addons_For_Elementor\WidgetsManager\Widgets\Skins\TemplateBlocks\Skin_Init::get_instance( $style_id );
 
 				// Here you will just need posts based on ajax requst to attache in layout.

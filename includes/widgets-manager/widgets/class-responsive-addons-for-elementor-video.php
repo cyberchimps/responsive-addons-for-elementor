@@ -95,7 +95,7 @@ class Responsive_Addons_For_Elementor_Video extends Widget_Base {
 	 * This function is used to return the help url.
 	 */
 	public function get_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs';
+		return 'https://cyberchimps.com/docs/widgets';
 	}
 	/**
 	 * This function is used to register the controls.

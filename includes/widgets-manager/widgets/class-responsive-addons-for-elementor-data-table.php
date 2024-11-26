@@ -78,7 +78,7 @@ class Responsive_Addons_For_Elementor_Data_Table extends Widget_Base {
 	 * Get custom help url function
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/data-table';
+		return 'https://cyberchimps.com/docs/widgets/data-table';
 	}
 	/**
 	 * Get saved templates function

@@ -81,7 +81,7 @@ class Responsive_Addons_For_Elementor_Theme_Post_Excerpt extends Widget_Base {
 	 * @return array Widget keywords.
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/post-excerpt';
+		return 'https://cyberchimps.com/docs/widgets/post-excerpt';
 	}
 
 	/**

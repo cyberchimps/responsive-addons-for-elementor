@@ -7,10 +7,10 @@
 
 namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets\ThemeBuilder;
 
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Responsive_Addons_For_Elementor\WidgetsManager\Widgets\ThemeBuilder\Woo_Widget_Base;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use Elementor\Controls_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -85,7 +85,7 @@ class Responsive_Addons_For_Elementor_Theme_Product_Price extends Woo_Widget_Bas
 	 * @return string Widget keywords.
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/';
+		return 'https://cyberchimps.com/docs/widgets/';
 	}
 
 	/**

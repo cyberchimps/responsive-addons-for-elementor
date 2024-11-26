@@ -74,7 +74,7 @@ class Responsive_Addons_For_Elementor_Theme_Product_Related extends Responsive_A
 	 * @access public
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/';
+		return 'https://cyberchimps.com/docs/widgets/';
 	}
 
 	/**

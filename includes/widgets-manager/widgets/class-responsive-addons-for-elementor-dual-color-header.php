@@ -87,7 +87,7 @@ class Responsive_Addons_For_Elementor_Dual_Color_Header extends Widget_Base {
 	 * @access public
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/dual-color-header';
+		return 'https://cyberchimps.com/docs/widgets/dual-color-header';
 	}
 
 	/**

@@ -107,7 +107,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 	 * @return string The custom help URL.
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/product-carousel';
+		return 'https://cyberchimps.com/docs/widgets/product-carousel';
 	}
 	/**
 	 * Load assets required for quick view functionality.

@@ -11,11 +11,11 @@ namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets;
 use Elementor\Widget_Base;
 use Elementor\Repeater;
 use Elementor\Controls_Manager;
-use Elementor\Core\Schemes\Color;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Utils;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Typography;
 use Elementor\Icons_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -166,11 +166,9 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 			array(
 				'label'            => esc_html__( 'Icon Color', 'responsive-addons-for-elementor' ),
 				'type'             => Controls_Manager::COLOR,
-				'scheme'           => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
-				'fa4compatibility' => 'rael_feature_list_icon',
+				'global'           => [
+					'default'       => Global_Colors::COLOR_PRIMARY,
+				],
 				'condition'        => array(
 					'rael_icon_style' => 'on',
 				),
@@ -182,10 +180,9 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 			array(
 				'label'            => esc_html__( 'Icon Background', 'responsive-addons-for-elementor' ),
 				'type'             => Controls_Manager::COLOR,
-				'scheme'           => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'           => [
+					'default'       => Global_Colors::COLOR_PRIMARY,
+				],
 				'fa4compatibility' => 'rael_feature_list_icon',
 				'condition'        => array(
 					'rael_icon_style' => 'on',
@@ -197,10 +194,9 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 			array(
 				'label'            => esc_html__( 'Icon Box Background', 'responsive-addons-for-elementor' ),
 				'type'             => Controls_Manager::COLOR,
-				'scheme'           => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'           => [
+					'default'       => Global_Colors::COLOR_PRIMARY,
+				],
 				'fa4compatibility' => 'rael_feature_list_icon',
 				'condition'        => array(
 					'rael_icon_style' => 'on',
@@ -497,10 +493,9 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Connector Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 				'default'   => '#37368e',
 				'selectors' => array(
 					'{{WRAPPER}} .connector-type-classic .connector'  => 'border-color: {{VALUE}};',
@@ -806,10 +801,9 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .rael-feature-list-content-box .rael-feature-list-title, {{WRAPPER}} .rael-feature-list-content-box .rael-feature-list-title > a, {{WRAPPER}} .rael-feature-list-content-box .rael-feature-list-title:visited' => 'color: {{VALUE}};',
 				),
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 			)
 		);
 
@@ -818,7 +812,9 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 			array(
 				'name'     => 'rael_feature_list_title_typography',
 				'selector' => '{{WRAPPER}} .rael-feature-list-content-box .rael-feature-list-title, {{WRAPPER}} .rael-feature-list-content-box .rael-feature-list-title a',
-				'scheme'   => Typography::TYPOGRAPHY_1,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 			)
 		);
 
@@ -840,10 +836,9 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .rael-feature-list-content-box .rael-feature-list-content' => 'color: {{VALUE}};',
 				),
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 			)
 		);
 
@@ -852,7 +847,9 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 			array(
 				'name'           => 'rael_feature_list_description_typography',
 				'selector'       => '{{WRAPPER}} .rael-feature-list-content-box .rael-feature-list-content',
-				'scheme'         => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'fields_options' => array(
 					'font_size' => array(
 						'default' => array(
@@ -883,7 +880,10 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 	 */
 	protected function render() {
 		$settings            = $this->get_settings_for_display();
-		$icon_circle_size    = intval( $settings['rael_feature_list_icon_circle_size']['size'] );
+		$icon_circle_size = 70;
+		if ( isset( $settings['rael_feature_list_icon_circle_size']['size'] ) ) {
+			$icon_circle_size = intval( $settings['rael_feature_list_icon_circle_size']['size'] );
+		}
 		$feature_list_css_id = 'rael-feature-list-' . esc_attr( $this->get_id() );
 
 		$icon_tablet_pos = isset( $settings['rael_feature_list_icon_position_tablet'] ) ? $settings['rael_feature_list_icon_position_tablet'] : '';
@@ -956,7 +956,7 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 			foreach ( $settings['rael_feature_list'] as $index => $item ) :
 
 				$icon_color     = ( 'on' === $item['rael_icon_style'] && isset( $item['rael_feature_list_icon_individual_color'] ) ) ? esc_attr( $item['rael_feature_list_icon_individual_color'] ) : '';
-				$icon_bg        = ( ( 'on' === $item['rael_icon_style'] ) ? ' style="background-color:' . esc_attr( $item['rael_feature_list_icon_bg_color'] ) . '"' : '' );
+				$icon_bg        = ( ( 'on' === $item['rael_icon_style'] ) ? ' ' . esc_attr( $item['rael_feature_list_icon_bg_color'] ) : '' );
 				$icon_box_bg    = ( ( 'on' === $item['rael_icon_style'] ) ? ' style="background-color:' . esc_attr( $item['rael_feature_list_icon_box_bg_color'] ) . '"' : '' );
 				$feat_title_tag = Utils::validate_html_tag( $settings['rael_feature_title'] );
 
@@ -1002,13 +1002,13 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 
 					<div class="rael-feature-list-icon-box">
 						<div class="rael-feature-list-icon-inner"<?php echo wp_kses_post( $icon_box_bg ); ?>>
-							<<?php echo wp_kses_post( $feature_icon_tag ) . ' ' . wp_kses_post( $this->get_render_attribute_string( 'rael_feature_list_icon' . $index ) ) . esc_attr( $this->get_render_attribute_string( 'rael_feature_list_link' . $index ) ) . esc_attr( $icon_bg ); ?>>
+							<<?php echo wp_kses_post( $feature_icon_tag ) . ' ' . wp_kses_post( $this->get_render_attribute_string( 'rael_feature_list_icon' . $index ) ) . esc_attr( $this->get_render_attribute_string( 'rael_feature_list_link' . $index ) ) . 'style="background-color:' . esc_attr( $icon_bg ) . '"' ?>>
 				<?php
 				if ( 'icon' === $item['rael_icon_type'] && $feature_has_icon ) {
 
 					if ( empty( $item['rael_feature_list_icon'] ) || isset( $item['__fa4_migrated']['rael_feature_list_icon_new'] ) ) {
 
-						if ( 'svg' === $item['rael_feature_list_icon_new']['library'] && $icon_color ) {
+						if ( $icon_color ) {
 							?>
 						<style>
 							<?php
@@ -1076,7 +1076,7 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 	 * @return string help URL
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/feature-list';
+		return 'https://cyberchimps.com/docs/widgets/feature-list';
 	}
 
 }

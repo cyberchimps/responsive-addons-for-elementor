@@ -8,14 +8,14 @@
 namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets\Skins;
 
 use Elementor\Controls_Manager;
-use Elementor\Core\Schemes;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Css_Filter;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
 use Elementor\Skin_Base as Elementor_Skin_Base;
 use Elementor\Widget_Base;
 use Elementor\Plugin;
-use Elementor\Core\Schemes\Color;
 use Elementor\Group_Control_Box_Shadow;
 use Responsive_Addons_For_Elementor\Helper\Helper;
 
@@ -701,10 +701,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Schemes\Color::get_type(),
-					'value' => Schemes\Color::COLOR_2,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_SECONDARY,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .elementor-post__title, {{WRAPPER}} .elementor-post__title a' => 'color: {{VALUE}};',
 				),
@@ -718,7 +717,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'title_typography',
-				'scheme'    => Schemes\Typography::TYPOGRAPHY_1,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'selector'  => '{{WRAPPER}} .elementor-post__title, {{WRAPPER}} .elementor-post__title a',
 				'condition' => array(
 					$this->get_control_id( 'show_title' ) => 'yes',
@@ -789,7 +790,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'meta_typography',
-				'scheme'    => Schemes\Typography::TYPOGRAPHY_2,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
+				],
 				'selector'  => '{{WRAPPER}} .elementor-post__meta-data',
 				'condition' => array(
 					$this->get_control_id( 'meta_data!' ) => array(),
@@ -846,7 +849,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'excerpt_typography',
-				'scheme'    => Schemes\Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector'  => '{{WRAPPER}} .elementor-post__excerpt p',
 				'condition' => array(
 					$this->get_control_id( 'show_excerpt' ) => 'yes',
@@ -890,10 +895,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Schemes\Color::get_type(),
-					'value' => Schemes\Color::COLOR_4,
-				),
+				'global'   => [
+					'default' => Global_Colors::COLOR_ACCENT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .elementor-post__read-more' => 'color: {{VALUE}};',
 				),
@@ -908,10 +912,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 			array(
 				'label'     => __( 'Hover Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Schemes\Color::get_type(),
-					'value' => Schemes\Color::COLOR_4,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_ACCENT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .elementor-post__read-more:hover' => 'color: {{VALUE}};',
 				),
@@ -927,7 +930,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 			array(
 				'name'      => 'read_more_typography',
 				'selector'  => '{{WRAPPER}} .elementor-post__read-more',
-				'scheme'    => Schemes\Typography::TYPOGRAPHY_4,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'condition' => array(
 					$this->get_control_id( 'show_read_more' ) => 'yes',
 					$this->get_control_id( 'read_more_type' ) => 'text',
@@ -960,7 +965,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 			array(
 				'name'      => 'read_more_button_typography',
 				'selector'  => '{{WRAPPER}} .elementor-button-text',
-				'scheme'    => Schemes\Typography::TYPOGRAPHY_4,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'condition' => array(
 					$this->get_control_id( 'show_read_more' ) => 'yes',
 					$this->get_control_id( 'read_more_type' ) => 'button',
@@ -1041,10 +1048,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 					array(
 						'label'     => __( 'Background Color', 'responsive-addons-for-elementor' ),
 						'type'      => Controls_Manager::COLOR,
-						'scheme'    => array(
-							'type'  => Color::get_type(),
-							'value' => Color::COLOR_4,
-						),
+						'global'    => [
+							'default' => Global_Colors::COLOR_ACCENT,
+						],
 						'selectors' => array(
 							'{{WRAPPER}} .elementor-button' => 'background-color: {{VALUE}};',
 						),

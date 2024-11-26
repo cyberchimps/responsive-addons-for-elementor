@@ -560,7 +560,7 @@ abstract class Skin_Style {
 				</button>
 			<?php
 		} else {
-				echo implode( PHP_EOL, wp_kses_post( $links ) );
+			echo implode( PHP_EOL, $links ); // phpcs:ignore
 		}
 		?>
 		</nav>

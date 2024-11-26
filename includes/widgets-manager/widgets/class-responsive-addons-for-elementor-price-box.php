@@ -10,9 +10,9 @@ namespace Responsive_Addons_For_Elementor\WidgetsManager\widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
-use Elementor\Core\Schemes\Color;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Icons_Manager;
-use Elementor\Core\Schemes\Typography;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
@@ -474,10 +474,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'label'      => __( 'Icon Color', 'responsive-addons-for-elementor' ),
 				'type'       => Controls_Manager::COLOR,
-				'scheme'     => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_4,
-				),
+				'global'     => [
+					'default' => Global_Colors::COLOR_ACCENT,
+				],
 				'conditions' => array(
 					'relation' => 'and',
 					'terms'    => array(
@@ -1112,10 +1111,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Background Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_2,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_SECONDARY,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-price-box-header' => 'background-color: {{VALUE}};',
 				),
@@ -1196,10 +1194,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 					array(
 						'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 						'type'      => Controls_Manager::COLOR,
-						'scheme'    => array(
-							'type'  => Color::get_type(),
-							'value' => Color::COLOR_3,
-						),
+						'global'    => [
+							'default' => Global_Colors::COLOR_TEXT,
+						],
 						'default'   => '',
 						'selectors' => array(
 							'{{WRAPPER}} .rael-price-box-header__icon i' => 'color: {{VALUE}};',
@@ -1243,10 +1240,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 					array(
 						'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 						'type'      => Controls_Manager::COLOR,
-						'scheme'    => array(
-							'type'  => Color::get_type(),
-							'value' => Color::COLOR_3,
-						),
+						'global'    => [
+							'default' => Global_Colors::COLOR_TEXT,
+						],
 						'default'   => '',
 						'selectors' => array(
 							'{{WRAPPER}} .rael-price-box-header__icon i:hover' => 'color: {{VALUE}};',
@@ -1308,10 +1304,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-price-box__heading' => 'color: {{VALUE}}',
 				),
@@ -1322,7 +1317,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'name'     => 'rael_heading_typography',
 				'selector' => '{{WRAPPER}} .rael-price-box__heading',
-				'scheme'   => Typography::TYPOGRAPHY_1,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 			)
 		);
 
@@ -1363,10 +1360,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'condition' => array(
 					'rael_price_box_layout!' => '2',
 				),
@@ -1380,7 +1376,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'name'      => 'rael_description_typography',
 				'selector'  => '{{WRAPPER}} .rael-price-box-description',
-				'scheme'    => Typography::TYPOGRAPHY_2,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
+				],
 				'condition' => array(
 					'rael_price_box_layout!' => '2',
 				),
@@ -1435,10 +1433,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'condition' => array(
 					'rael_price_box_layout' => '2',
 				),
@@ -1452,7 +1449,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'name'      => 'rael_description_typography_layout_2',
 				'selector'  => '{{WRAPPER}} .rael-price-box-description',
-				'scheme'    => Typography::TYPOGRAPHY_2,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
+				],
 				'condition' => array(
 					'rael_price_box_layout' => '2',
 				),
@@ -1594,7 +1593,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'name'     => 'rael_price_typography',
 				'selector' => '{{WRAPPER}} .rael-pricing-value',
-				'scheme'   => Typography::TYPOGRAPHY_1,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 			)
 		);
 
@@ -1752,10 +1753,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_2,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_SECONDARY,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-price-box__original-price' => 'color: {{VALUE}};',
 				),
@@ -1771,7 +1771,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'name'      => 'rael_original_price_typography',
 				'selector'  => '{{WRAPPER}} .rael-price-box__original-price',
-				'scheme'    => Typography::TYPOGRAPHY_1,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'condition' => array(
 					'rael_sale'            => 'yes',
 					'rael_original_price!' => '',
@@ -1832,10 +1834,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_2,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_SECONDARY,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-price-box__duration' => 'color: {{VALUE}}',
 				),
@@ -1850,7 +1851,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'name'      => 'rael_duration_typography',
 				'selector'  => '{{WRAPPER}} .rael-price-box__duration',
-				'scheme'    => Typography::TYPOGRAPHY_2,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
+				],
 				'condition' => array(
 					'rael_duration!' => '',
 				),
@@ -2025,10 +2028,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Text Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-price-box__features-list' => 'color: {{VALUE}}',
 				),
@@ -2040,7 +2042,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'name'     => 'rael_features_list_typography',
 				'selector' => '{{WRAPPER}} .rael-price-box__features-list li',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 			)
 		);
 
@@ -2134,10 +2138,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ddd',
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'condition' => array(
 					'rael_price_features_layout' => array( 'divider', 'borderbox' ),
 				),
@@ -2499,10 +2502,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Text Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_4,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_ACCENT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} a.rael-price-box__cta-link' => 'color: {{VALUE}};',
 				),
@@ -2517,7 +2519,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'name'      => 'rael_link_typography',
 				'selector'  => '{{WRAPPER}} a.rael-price-box__cta-link',
-				'scheme'    => Typography::TYPOGRAPHY_4,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'condition' => array(
 					'rael_price_cta_type' => 'link',
 				),
@@ -2575,7 +2579,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'name'      => 'rael_button_typography',
 				'selector'  => '{{WRAPPER}} .elementor-button, {{WRAPPER}} a.elementor-button',
-				'scheme'    => Typography::TYPOGRAPHY_4,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'condition' => array(
 					'rael_price_cta_type' => 'button',
 				),
@@ -2650,10 +2656,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 				array(
 					'label'     => __( 'Background Color', 'responsive-addons-for-elementor' ),
 					'type'      => Controls_Manager::COLOR,
-					'scheme'    => array(
-						'type'  => Color::get_type(),
-						'value' => Color::COLOR_4,
-					),
+					'global'    => [
+						'default' => Global_Colors::COLOR_ACCENT,
+					],
 					'selectors' => array(
 						'{{WRAPPER}} .elementor-button' => 'background-color: {{VALUE}};',
 					),
@@ -2850,10 +2855,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'   => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-price-box__disclaimer' => 'color: {{VALUE}}',
 				),
@@ -2867,7 +2871,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'name'      => 'rael_additional_info_typography',
 				'selector'  => '{{WRAPPER}} .rael-price-box__disclaimer',
-				'scheme'    => Typography::TYPOGRAPHY_3,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'condition' => array(
 					'rael_disclaimer_text!' => '',
 				),
@@ -3032,10 +3038,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Background Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_4,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_ACCENT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-price-box-ribbon-content' => 'background-color: {{VALUE}}',
 					'{{WRAPPER}} .rael-price-box-ribbon-3 .rael-price-box-ribbon-content:before' => 'border-left: 8px solid {{VALUE}};',
@@ -3076,7 +3081,9 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 			array(
 				'name'     => 'rael_ribbon_typography',
 				'selector' => '{{WRAPPER}} .rael-price-box-ribbon-content',
-				'scheme'   => Typography::TYPOGRAPHY_4,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 			)
 		);
 

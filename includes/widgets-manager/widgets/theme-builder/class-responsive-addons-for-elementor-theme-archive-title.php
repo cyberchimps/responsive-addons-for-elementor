@@ -61,7 +61,7 @@ class Responsive_Addons_For_Elementor_Theme_Archive_Title extends Base {
 	 * @return string Help URL.
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/archive-title';
+		return 'https://cyberchimps.com/docs/widgets/archive-title';
 	}
 
 	/**

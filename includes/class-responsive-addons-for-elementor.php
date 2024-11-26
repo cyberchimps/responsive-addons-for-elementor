@@ -683,6 +683,15 @@ class Responsive_Addons_For_Elementor {
 
 		$rael_path = 'responsive-addons-for-elementor/responsive-addons-for-elementor.php';
 
+		// Get the current value of 'rael_widgets_data_update' option
+        $exist_rael_widgets_data_update = get_option( 'rael_widgets_data_update', false );
+
+		// If the option does not exist, add it with a value of false
+		if ( ! $exist_rael_widgets_data_update) {
+			$rael_widgets_data->insert_widgets_data();
+            update_option( 'rael_widgets_data_update', true );
+		}
+
 		if ( ! function_exists( 'get_plugins' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/plugin.php';
 		}
@@ -694,7 +703,7 @@ class Responsive_Addons_For_Elementor {
 
 			$widgets = get_option( 'rael_widgets' );
 
-			if ( $widgets && version_compare( RAEL_VER, $installed_rael_version, '>=' ) ) {
+			if ( $widgets && version_compare( RAEL_VER, $installed_rael_version, '>' ) ) {
 				$rael_widgets_data->reset_widgets_data();
 				$widgets = get_option( 'rael_widgets' );
 			}

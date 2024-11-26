@@ -1928,6 +1928,6 @@ class Responsive_Addons_For_Elementor_Call_To_Action extends Widget_Base {
 	 * @return string help URL
 	 */
 	public function get_custom_help_url() {
-		return esc_url( 'https://cyberchimps.com/responsive-addons-for-elementor/docs/call-to-action/' );
+		return esc_url( 'https://cyberchimps.com/docs/widgets/call-to-action/' );
 	}
 }

@@ -49,7 +49,7 @@ class Responsive_Addons_For_Elementor_Theme_Post_Title extends Base {
 	 * Get custom help url
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/post-title';
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/post-title/';
 	}
 
 	/**

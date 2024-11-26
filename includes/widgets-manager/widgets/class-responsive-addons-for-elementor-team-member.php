@@ -10,9 +10,7 @@ namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets;
 
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Typography;
 use Elementor\Controls_Manager;
-use Elementor\Core\Schemes\Color;
 use Elementor\Widget_Base;
 use Elementor\Repeater;
 use Elementor\Utils;
@@ -2285,6 +2283,10 @@ class Responsive_Addons_For_Elementor_Team_Member extends Widget_Base {
 			$this->add_render_attribute( 'image', 'title', Control_Media::get_image_title( $rael_team_image ) );
 
 			$image_html = Group_Control_Image_Size::get_attachment_image_html( $settings, 'rael_team_thumbnail', 'rael_team_image' );
+		}
+
+		if ( ! isset( $rael_team_content_text_align ) ) {
+			$rael_team_content_text_align = 'text-center';
 		}
 
 		$this->add_render_attribute(

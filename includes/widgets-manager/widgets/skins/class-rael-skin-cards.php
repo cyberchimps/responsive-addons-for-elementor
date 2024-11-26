@@ -8,11 +8,11 @@
 namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets\Skins;
 
 use Elementor\Controls_Manager;
-use Elementor\Group_Control_Box_Shadow;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Widget_Base;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -463,10 +463,9 @@ class RAEL_Skin_Cards extends RAEL_Skin_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .elementor-post__card .elementor-post__badge' => 'background-color: {{VALUE}};',
 				),
-				'scheme'    => array(
-					'type'  => Schemes\Color::get_type(),
-					'value' => Schemes\Color::COLOR_4,
-				),
+				'global'   => [
+					'default' => Global_Colors::COLOR_ACCENT,
+				],
 				'condition' => array(
 					$this->get_control_id( 'show_badge' ) => 'yes',
 				),
@@ -552,7 +551,9 @@ class RAEL_Skin_Cards extends RAEL_Skin_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'badge_typography',
-				'scheme'    => Schemes\Typography::TYPOGRAPHY_4,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'selector'  => '{{WRAPPER}} .elementor-post__card .elementor-post__badge',
 				'exclude'   => array( 'font_size', 'line-height' ),
 				'condition' => array(

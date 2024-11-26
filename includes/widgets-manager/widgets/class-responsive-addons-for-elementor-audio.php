@@ -303,6 +303,6 @@ class Responsive_Addons_For_Elementor_Audio extends Widget_Base {
 	 * @return string help URL
 	 */
 	public function get_custom_help_url() {
-		return esc_url( 'https://cyberchimps.com/responsive-addons-for-elementor/docs/audio-player' );
+		return esc_url( 'https://cyberchimps.com/docs/widgets/audio-player' );
 	}
 }

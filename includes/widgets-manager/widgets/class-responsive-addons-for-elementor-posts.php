@@ -12,7 +12,6 @@ use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Responsive_Addons_For_Elementor\WidgetsManager\Widgets\Skins;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes;
 use Responsive_Addons_For_Elementor\WidgetsManager\Modules\QueryControl\Module as Module_Query;
 use Responsive_Addons_For_Elementor\WidgetsManager\Modules\QueryControl\Controls\Group_Control_Related;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
@@ -375,7 +374,9 @@ class Responsive_Addons_For_Elementor_Posts extends Widget_Base {
 			array(
 				'name'      => 'pagination_typography',
 				'selector'  => '{{WRAPPER}} .elementor-pagination',
-				'scheme'    => Schemes\Typography::TYPOGRAPHY_2,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
+				],
 				'condition' => array(
 					'pagination_type!' => 'infinite',
 				),
@@ -1422,6 +1423,6 @@ class Responsive_Addons_For_Elementor_Posts extends Widget_Base {
 	 * @return string help URL
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/posts';
+		return 'https://cyberchimps.com/docs/widgets/posts';
 	}
 }

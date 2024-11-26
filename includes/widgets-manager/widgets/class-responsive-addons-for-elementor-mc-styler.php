@@ -946,6 +946,6 @@ class Responsive_Addons_For_Elementor_MC_Styler extends Widget_Base {
 	 * @return string help URL
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/responsive-addons-for-elementor/docs/mailchimp-styler';
+		return 'https://cyberchimps.com/docs/widgets/mailchimp-styler';
 	}
 }
