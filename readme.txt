@@ -292,7 +292,7 @@ The Development Version of the Responsive Addons for Elementor plugin is located
 
 == Changelog ==
 
-= 1.6.3 - 16th December 2024 =
+= 1.6.3 - 17th December 2024 =
 - Improvement: Made compatible with Elementor version 3.26.
 - Fix: Removed Elementor deprecated code.
 
