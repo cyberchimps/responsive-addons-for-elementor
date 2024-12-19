@@ -11,7 +11,9 @@ use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Utils;
 use Elementor\Modules\DynamicTags\Module as TagsModule;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use Elementor\Group_Control_Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
@@ -989,10 +991,9 @@ class Responsive_Addons_For_Elementor_Modal_Popup extends Widget_Base {
 			array(
 				'label'     => __( 'Icon Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-modal-action i'   => 'color: {{VALUE}};',
 					'{{WRAPPER}} .rael-modal-action svg' => 'fill: {{VALUE}};',
@@ -1008,10 +1009,9 @@ class Responsive_Addons_For_Elementor_Modal_Popup extends Widget_Base {
 			array(
 				'label'     => __( 'Icon Hover Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-modal-action i:hover' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .rael-modal-action svg:hover' => 'fill: {{VALUE}};',
@@ -1457,10 +1457,9 @@ class Responsive_Addons_For_Elementor_Modal_Popup extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 				'selectors' => array(
 					'.raelmodal-{{ID}} .rael-modal-title-wrap .rael-modal-title' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .rael-modal-title-wrap .rael-modal-title' => 'color: {{VALUE}};',
@@ -1473,10 +1472,9 @@ class Responsive_Addons_For_Elementor_Modal_Popup extends Widget_Base {
 			array(
 				'label'     => __( 'Background Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_2,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_SECONDARY,
+				],
 				'selectors' => array(
 					'.raelmodal-{{ID}} .rael-modal-title-wrap' => 'background-color: {{VALUE}};',
 					'{{WRAPPER}} .rael-modal-title-wrap' => 'background-color: {{VALUE}};',
@@ -1508,7 +1506,9 @@ class Responsive_Addons_For_Elementor_Modal_Popup extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'title_typography',
-				'scheme'   => Typography::TYPOGRAPHY_1,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'selector' => '.raelmodal-{{ID}} .rael-modal-title-wrap .rael-modal-title, {{WRAPPER}} .rael-modal-title-wrap .rael-modal-title',
 			)
 		);
@@ -1532,10 +1532,9 @@ class Responsive_Addons_For_Elementor_Modal_Popup extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'selectors' => array(
 					'.raelmodal-{{ID}} .rael-content' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .rael-content'       => 'color: {{VALUE}};',
@@ -1894,7 +1893,9 @@ class Responsive_Addons_For_Elementor_Modal_Popup extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'content_typography',
-				'scheme'    => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector'  => '.raelmodal-{{ID}} .rael-content .rael-text-editor',
 				'separator' => 'before',
 				'condition' => array(
@@ -1936,7 +1937,9 @@ class Responsive_Addons_For_Elementor_Modal_Popup extends Widget_Base {
 			array(
 				'name'      => 'btn_typography',
 				'label'     => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'scheme'    => Typography::TYPOGRAPHY_4,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'selector'  => '{{WRAPPER}} .rael-modal-action-wrap a.elementor-button, {{WRAPPER}} .rael-modal-action-wrap .elementor-button',
 				'condition' => array(
 					'rael_modal_on' => 'button',
@@ -1984,10 +1987,9 @@ class Responsive_Addons_For_Elementor_Modal_Popup extends Widget_Base {
 				),
 				'fields_options' => array(
 					'color' => array(
-						'scheme' => array(
-							'type'  => Color::get_type(),
-							'value' => Color::COLOR_4,
-						),
+						'global'    => [
+							'default' => Global_Colors::COLOR_ACCENT,
+						],
 					),
 				),
 			)
@@ -2024,10 +2026,9 @@ class Responsive_Addons_For_Elementor_Modal_Popup extends Widget_Base {
 			array(
 				'label'     => __( 'Background Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_4,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_ACCENT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-modal-action-wrap a.elementor-button:hover, {{WRAPPER}} .rael-modal-action-wrap .elementor-button:hover' => 'background-color: {{VALUE}};',
 				),
@@ -2140,10 +2141,9 @@ class Responsive_Addons_For_Elementor_Modal_Popup extends Widget_Base {
 			array(
 				'label'     => __( 'Text Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'   => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-modal-action' => 'color: {{VALUE}};',
 				),
@@ -2159,10 +2159,9 @@ class Responsive_Addons_For_Elementor_Modal_Popup extends Widget_Base {
 				'label'     => __( 'Text Hover Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '',
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'   => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-modal-action:hover' => 'color: {{VALUE}};',
 				),
@@ -2177,7 +2176,9 @@ class Responsive_Addons_For_Elementor_Modal_Popup extends Widget_Base {
 			array(
 				'name'      => 'cta_text_typography',
 				'label'     => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'scheme'    => Typography::TYPOGRAPHY_4,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'selector'  => '{{WRAPPER}} .rael-modal-action-wrap .rael-modal-action',
 				'condition' => array(
 					'rael_modal_on' => 'text',

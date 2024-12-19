@@ -11276,7 +11276,7 @@ const {
 });
 
 if ( $( '.rael-particle-yes' ).length ) {
-	
+
 	Object.keys( window.scope_array ).forEach( function ( i ) {
 		$scope = window.scope_array[i];
 		particles_background_script( $scope );
@@ -11314,11 +11314,8 @@ function particles_background_script( $scope ) {
 		$content = $( '<div class="rael-particle-wrapper" id="rael-particle-' + id + '"></div>' );
 
 		if( element_type == 'column' ) {
-      if( $scope.find( '.elementor-background-overlay' ).length == 0 || $scope.find( '.elementor-column-wrap' ).length == 0 ) {
+      if( $scope.find( '.elementor-background-overlay' ).length == 0 ) {
         $scope.append( $content );
-      } else if( $scope.find( '.elementor-background-overlay' ).length == 0 && $scope.find( '.elementor-column-wrap' ).length != 0 ) {
-        $column = $scope.find( '.elementor-column-wrap' );
-        $column.after( $content );
       } else {
         $column = $scope.find( '.elementor-background-overlay' );   
         $column.after( $content ); 

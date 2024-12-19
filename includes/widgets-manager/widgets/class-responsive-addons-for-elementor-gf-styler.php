@@ -12,6 +12,8 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use Responsive_Addons_For_Elementor\Traits\Missing_Dependency;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -335,10 +337,9 @@ class Responsive_Addons_For_Elementor_Gf_Styler extends Widget_Base {
 			array(
 				'label'     => __( 'Label Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_2,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_SECONDARY,
+				],
 				'default'   => '',
 				'selectors' => array(
 					'{{WRAPPER}} .rael-gform-style .gfield_label,
@@ -362,10 +363,9 @@ class Responsive_Addons_For_Elementor_Gf_Styler extends Widget_Base {
 			array(
 				'label'     => __( 'Input Text / Placeholder Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_2,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_SECONDARY,
+				],
 				'selectors' => array(
 					'{{WRAPPER}} .rael-gform-style .ginput_container textarea,
 					{{WRAPPER}} .rael-gform-style .ginput_container textarea::placeholder,
@@ -385,10 +385,9 @@ class Responsive_Addons_For_Elementor_Gf_Styler extends Widget_Base {
 			array(
 				'label'     => __( 'Sublabel / Description Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_2,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_SECONDARY,
+				],
 				'default'   => '',
 				'selectors' => array(
 					'{{WRAPPER}} .rael-gform-style .ginput_container_creditcard input + span + label,
@@ -772,10 +771,9 @@ class Responsive_Addons_For_Elementor_Gf_Styler extends Widget_Base {
 			array(
 				'label'     => __( 'Selected Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_2,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_SECONDARY,
+				],
 				'condition' => array(
 					'gform_radio_check_custom!' => '',
 				),
@@ -1104,7 +1102,9 @@ class Responsive_Addons_For_Elementor_Gf_Styler extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'gf_message_typography',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-gform-style .gform_wrapper .validation_message',
 			)
 		);
@@ -1280,7 +1280,9 @@ class Responsive_Addons_For_Elementor_Gf_Styler extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'gform_error_validation_typography',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-gform-style .gform_wrapper div.validation_error,
 				{{WRAPPER}} .rael-gform-style .gform_wrapper div.gform_validation_errors',
 			)
@@ -1311,7 +1313,9 @@ class Responsive_Addons_For_Elementor_Gf_Styler extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'gform_success_validation_typography',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-gform-style .gform_confirmation_message',
 			)
 		);
@@ -1490,7 +1494,9 @@ class Responsive_Addons_For_Elementor_Gf_Styler extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'gform_title_typography',
-				'scheme'    => Typography::TYPOGRAPHY_1,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
 				'selector'  => '{{WRAPPER}} .rael-gform-form-title',
 				'condition' => array(
 					'gform_title_desc_option!' => 'none',
@@ -1503,10 +1509,9 @@ class Responsive_Addons_For_Elementor_Gf_Styler extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_1,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_PRIMARY,
+				],
 				'condition' => array(
 					'gform_title_desc_option!' => 'none',
 				),
@@ -1534,7 +1539,9 @@ class Responsive_Addons_For_Elementor_Gf_Styler extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'gform_desc_typography',
-				'scheme'    => Typography::TYPOGRAPHY_2,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
+				],
 				'selector'  => '{{WRAPPER}} .rael-gform-form-desc, {{WRAPPER}} .rael-gform-style .gform_description',
 				'condition' => array(
 					'gform_title_desc_option!' => 'none',
@@ -1546,10 +1553,9 @@ class Responsive_Addons_For_Elementor_Gf_Styler extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => array(
-					'type'  => Color::get_type(),
-					'value' => Color::COLOR_3,
-				),
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
+				],
 				'condition' => array(
 					'gform_title_desc_option!' => 'none',
 				),
@@ -1575,7 +1581,9 @@ class Responsive_Addons_For_Elementor_Gf_Styler extends Widget_Base {
 			array(
 				'name'     => 'gform_label_typography',
 				'label'    => 'Label Typography',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-gform-style .gfield_label,
 				{{WRAPPER}} .rael-gform-style .gfield_checkbox div label,
 				{{WRAPPER}} .rael-gform-style .gfield_checkbox li label,
@@ -1595,7 +1603,9 @@ class Responsive_Addons_For_Elementor_Gf_Styler extends Widget_Base {
 			array(
 				'name'     => 'gform_input_typography',
 				'label'    => 'Text Typography',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-gform-style .ginput_container select,
 				 {{WRAPPER}} .rael-gform-style .ginput_container textarea,
 				 {{WRAPPER}} .rael-gform-style .rael-gform-select-custom,
@@ -1609,7 +1619,9 @@ class Responsive_Addons_For_Elementor_Gf_Styler extends Widget_Base {
 			array(
 				'name'     => 'gform_input_desc_typography',
 				'label'    => 'Description Typography',
-				'scheme'   => Typography::TYPOGRAPHY_3,
+				'global'    => [
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				],
 				'selector' => '{{WRAPPER}} .rael-gform-style .gform_wrapper .gfield .gfield_description,
 				{{WRAPPER}} .rael-gform-style .ginput_container input + label,
 				{{WRAPPER}} .rael-gform-style .ginput_container select + label,
@@ -1640,7 +1652,9 @@ class Responsive_Addons_For_Elementor_Gf_Styler extends Widget_Base {
 			array(
 				'name'     => 'gform_btn_typography',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'scheme'   => Typography::TYPOGRAPHY_4,
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+				],
 				'selector' => '{{WRAPPER}} .rael-gform-style input[type="button"],
 				{{WRAPPER}} .rael-gform-style input[type=submit]',
 			)
