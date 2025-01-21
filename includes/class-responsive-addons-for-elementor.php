@@ -1102,6 +1102,23 @@ class Responsive_Addons_For_Elementor {
 		wp_register_style( 'rael-particles-style-rtl', RAEL_ASSETS_URL . 'lib/particles/particles-rtl.min.css', null, RAEL_VER );
 		wp_enqueue_style( 'rael-particles-style' );
 		wp_enqueue_style( 'rael-particles-style-rtl' );
+		wp_register_style('rael-sticky',RAEL_URL . 'admin/css/rael-sticky.css',array(),RAEL_VER);
+		wp_enqueue_style( 'rael-sticky' );
+		wp_enqueue_script(
+			'jet-resize-sensor',
+			RAEL_ASSETS_URL . 'lib/sticky-sidebar/ResizeSensor.min.js' ,
+			array( 'jquery' ),
+			'1.7.0',
+			true
+		);
+
+		wp_enqueue_script(
+			'jet-sticky-sidebar',
+			RAEL_ASSETS_URL .  'lib/sticky-sidebar/sticky-sidebar.min.js' ,
+			array( 'jquery', 'jet-resize-sensor' ),
+			'3.3.1',
+			true
+		);
 	}
 
 	/**
