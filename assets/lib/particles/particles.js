@@ -11276,7 +11276,9 @@ const {
 });
 
 if ( $( '.rael-particle-yes' ).length ) {
-
+  if ( undefined === window.scope_array ) {
+    return ;
+  }
 	Object.keys( window.scope_array ).forEach( function ( i ) {
 		$scope = window.scope_array[i];
 		particles_background_script( $scope );
