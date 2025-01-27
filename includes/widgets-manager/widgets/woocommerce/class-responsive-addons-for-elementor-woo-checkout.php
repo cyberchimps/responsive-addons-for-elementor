@@ -131,29 +131,9 @@ class Responsive_Addons_For_Elementor_Woo_Checkout extends Widget_Base {
 	 * @access protected
 	 */
 	protected function register_controls() {
-		if ( ! class_exists( 'woocommerce' ) ) {
-			$this->start_controls_section(
-				'rael_global_warning',
-				array(
-					'label' => __( 'Warning!', 'responsive-addons-for-elementor' ),
-				)
-			);
-
-			$this->add_control(
-				'rael_global_warning_text',
-				array(
-					'type'            => Controls_Manager::RAW_HTML,
-					'raw'             => __(
-						'<strong>WooCommerce</strong> is not installed/activated on your site. Please install and activate <a href="plugin-install.php?s=woocommerce&tab=search&type=term" target="_blank">WooCommerce</a> first.',
-						'responsive-addons-for-elementor'
-					),
-					'content_classes' => 'rael-warning',
-				)
-			);
-
-			$this->end_controls_section();
+		if ( ! class_exists( 'WooCommerce' ) ) {
+			$this->register_content_tab_missing_dep_warning_controls( 'WooCommerce', 'woocommerce' );
 			return;
-
 		}
 		/**
 		 * General Settings

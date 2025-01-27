@@ -577,42 +577,28 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Multi_Button() );
 							break;
 						case 'woo-products':
-							if ( class_exists( 'WooCommerce' ) ) {
 								Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Woo_Products() );
-							}
 							break;
 						case 'breadcrumb':
-							if ( class_exists( 'WooCommerce' ) ) {
 								Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Breadcrumb() );
-							}
 							break;
 						case 'product-category-grid':
-							if ( class_exists( 'WooCommerce' ) ) {
 								Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Product_Category_Grid() );
-							}
 							break;
 						case 'product-carousel':
-							if ( class_exists( 'WooCommerce' ) ) {
 								Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Product_Carousel() );
-							}
 							break;
 						case 'woo-checkout':
-							if ( class_exists( 'WooCommerce' ) ) {
 								Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Woo_Checkout() );
-							}
 							break;
 						case 'portfolio':
 							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Portfolio() );
 							break;
 						case 'menu-cart':
-							if ( class_exists( 'WooCommerce' ) ) {
 								Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_Menu_Cart() );
-							}
 							break;
 						case 'wc-add-to-cart':
-							if ( class_exists( 'WooCommerce' ) ) {
 								Plugin::instance()->widgets_manager->register( new Widgets\Woocommerce\Responsive_Addons_For_Elementor_WC_Add_To_Cart() );
-							}
 							break;
 						case 'modal-popup':
 							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Modal_Popup() );
