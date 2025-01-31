@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Business Hour Widget
  *
@@ -16,7 +17,7 @@ use Elementor\Group_Control_Typography;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Box_Shadow;
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 
 }
@@ -24,14 +25,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Elementor 'Business Hour' widget class.
  */
-class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
+class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base
+{
 
 	/**
 	 * Get name function
 	 *
 	 * @access public
 	 */
-	public function get_name() {
+	public function get_name()
+	{
 		return 'rael-business-hour';
 	}
 
@@ -40,8 +43,9 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 	 *
 	 * @access public
 	 */
-	public function get_title() {
-		return __( 'RAE Business Hour', 'responsive-addons-for-elementor' );
+	public function get_title()
+	{
+		return __('RAE Business Hour', 'responsive-addons-for-elementor');
 	}
 
 	/**
@@ -49,7 +53,8 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 	 *
 	 * @access public
 	 */
-	public function get_icon() {
+	public function get_icon()
+	{
 		return 'eicon-clock-o rael-badge';
 	}
 
@@ -58,8 +63,9 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 	 *
 	 * @access public
 	 */
-	public function get_categories() {
-		return array( 'responsive-addons-for-elementor' );
+	public function get_categories()
+	{
+		return array('responsive-addons-for-elementor');
 	}
 
 	/**
@@ -67,8 +73,9 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 	 *
 	 * @access public
 	 */
-	public function get_keywords() {
-		return array( 'watch', 'business', 'hour', 'time', 'business-hour' );
+	public function get_keywords()
+	{
+		return array('watch', 'business', 'hour', 'time', 'business-hour');
 	}
 
 	/**
@@ -76,13 +83,14 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 	 *
 	 * @access protected
 	 */
-	protected function register_controls() {
-		do_action( 'rael_start_register_controls', $this );
+	protected function register_controls()
+	{
+		do_action('rael_start_register_controls', $this);
 
 		$this->start_controls_section(
 			'section_business_hour',
 			array(
-				'label' => __( 'Business Hour', 'responsive-addons-for-elementor' ),
+				'label' => __('Business Hour', 'responsive-addons-for-elementor'),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
@@ -90,10 +98,10 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$this->add_control(
 			'rael_title',
 			array(
-				'label'       => __( 'Title', 'responsive-addons-for-elementor' ),
+				'label'       => __('Title', 'responsive-addons-for-elementor'),
 				'type'        => Controls_Manager::TEXT,
 				'label_block' => true,
-				'default'     => __( 'Working Hour', 'responsive-addons-for-elementor' ),
+				'default'     => __('Working Hour', 'responsive-addons-for-elementor'),
 				'dynamic'     => array(
 					'active' => true,
 				),
@@ -105,11 +113,11 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$repeater->add_control(
 			'rael_day',
 			array(
-				'label'       => __( 'Day', 'responsive-addons-for-elementor' ),
+				'label'       => __('Day', 'responsive-addons-for-elementor'),
 				'type'        => Controls_Manager::TEXT,
 				'label_block' => true,
-				'default'     => __( 'Monday', 'responsive-addons-for-elementor' ),
-				'placeholder' => __( 'Monday', 'responsive-addons-for-elementor' ),
+				'default'     => __('Monday', 'responsive-addons-for-elementor'),
+				'placeholder' => __('Monday', 'responsive-addons-for-elementor'),
 				'dynamic'     => array(
 					'active' => true,
 				),
@@ -119,11 +127,11 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$repeater->add_control(
 			'rael_time',
 			array(
-				'label'       => __( 'Time', 'responsive-addons-for-elementor' ),
+				'label'       => __('Time', 'responsive-addons-for-elementor'),
 				'type'        => Controls_Manager::TEXT,
 				'label_block' => true,
-				'default'     => __( '10:00AM - 07:00PM', 'responsive-addons-for-elementor' ),
-				'placeholder' => __( '10:00AM - 07:00PM', 'responsive-addons-for-elementor' ),
+				'default'     => __('10:00AM - 07:00PM', 'responsive-addons-for-elementor'),
+				'placeholder' => __('10:00AM - 07:00PM', 'responsive-addons-for-elementor'),
 				'dynamic'     => array(
 					'active' => true,
 				),
@@ -133,10 +141,10 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$repeater->add_control(
 			'rael_individual_style',
 			array(
-				'label'          => __( 'Individual Style?', 'responsive-addons-for-elementor' ),
+				'label'          => __('Individual Style?', 'responsive-addons-for-elementor'),
 				'type'           => Controls_Manager::SWITCHER,
-				'label_on'       => __( 'Yes', 'responsive-addons-for-elementor' ),
-				'label_off'      => __( 'No', 'responsive-addons-for-elementor' ),
+				'label_on'       => __('Yes', 'responsive-addons-for-elementor'),
+				'label_off'      => __('No', 'responsive-addons-for-elementor'),
 				'return_value'   => 'yes',
 				'default'        => 'no',
 				'style_transfer' => true,
@@ -146,7 +154,7 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$repeater->add_control(
 			'rael_day_time_color',
 			array(
-				'label'          => __( 'Text Color', 'responsive-addons-for-elementor' ),
+				'label'          => __('Text Color', 'responsive-addons-for-elementor'),
 				'type'           => Controls_Manager::COLOR,
 				'selectors'      => array(
 					'{{WRAPPER}} {{CURRENT_ITEM}}.rael-business-hour-item' => 'color: {{VALUE}};',
@@ -163,7 +171,7 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 			Group_Control_Border::get_type(),
 			array(
 				'name'           => 'rael_day_time_border',
-				'label'          => __( 'Border', 'responsive-addons-for-elementor' ),
+				'label'          => __('Border', 'responsive-addons-for-elementor'),
 				'selector'       => '{{WRAPPER}} {{CURRENT_ITEM}}.rael-business-hour-item',
 				'style_transfer' => true,
 				'condition'      => array(
@@ -176,8 +184,8 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 			Group_Control_Background::get_type(),
 			array(
 				'name'           => 'rael_day_time_background',
-				'label'          => __( 'Background', 'responsive-addons-for-elementor' ),
-				'types'          => array( 'classic', 'gradient' ),
+				'label'          => __('Background', 'responsive-addons-for-elementor'),
+				'types'          => array('classic', 'gradient'),
 				'selector'       => '{{WRAPPER}} {{CURRENT_ITEM}}.rael-business-hour-item',
 				'condition'      => array(
 					'rael_individual_style' => 'yes',
@@ -190,9 +198,9 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$repeater->add_control(
 			'rael_day_time_border_radius',
 			array(
-				'label'          => __( 'Border Radius', 'responsive-addons-for-elementor' ),
+				'label'          => __('Border Radius', 'responsive-addons-for-elementor'),
 				'type'           => Controls_Manager::DIMENSIONS,
-				'size_units'     => array( 'px', '%', 'em' ),
+				'size_units'     => array('px', '%', 'em'),
 				'selectors'      => array(
 					'{{WRAPPER}} {{CURRENT_ITEM}}.rael-business-hour-item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
@@ -206,9 +214,9 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$repeater->add_control(
 			'rael_day_time_margin',
 			array(
-				'label'          => __( 'Margin', 'responsive-addons-for-elementor' ),
+				'label'          => __('Margin', 'responsive-addons-for-elementor'),
 				'type'           => Controls_Manager::DIMENSIONS,
-				'size_units'     => array( 'px', '%', 'em' ),
+				'size_units'     => array('px', '%', 'em'),
 				'selectors'      => array(
 					'{{WRAPPER}} {{CURRENT_ITEM}}.rael-business-hour-item' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
@@ -228,32 +236,32 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 				'title_field' => '{{{ rael_day }}}',
 				'default'     => array(
 					array(
-						'rael_day'  => __( 'Monday', 'responsive-addons-for-elementor' ),
-						'rael_time' => __( '10:00AM - 07:00PM', 'responsive-addons-for-elementor' ),
+						'rael_day'  => __('Monday', 'responsive-addons-for-elementor'),
+						'rael_time' => __('10:00AM - 07:00PM', 'responsive-addons-for-elementor'),
 					),
 					array(
-						'rael_day'  => __( 'Tuesday', 'responsive-addons-for-elementor' ),
-						'rael_time' => __( '10:00AM - 07:00PM', 'responsive-addons-for-elementor' ),
+						'rael_day'  => __('Tuesday', 'responsive-addons-for-elementor'),
+						'rael_time' => __('10:00AM - 07:00PM', 'responsive-addons-for-elementor'),
 					),
 					array(
-						'rael_day'  => __( 'Wednesday', 'responsive-addons-for-elementor' ),
-						'rael_time' => __( '10:00AM - 07:00PM', 'responsive-addons-for-elementor' ),
+						'rael_day'  => __('Wednesday', 'responsive-addons-for-elementor'),
+						'rael_time' => __('10:00AM - 07:00PM', 'responsive-addons-for-elementor'),
 					),
 					array(
-						'rael_day'  => __( 'Thursday', 'responsive-addons-for-elementor' ),
-						'rael_time' => __( '10:00AM - 07:00PM', 'responsive-addons-for-elementor' ),
+						'rael_day'  => __('Thursday', 'responsive-addons-for-elementor'),
+						'rael_time' => __('10:00AM - 07:00PM', 'responsive-addons-for-elementor'),
 					),
 					array(
-						'rael_day'  => __( 'Friday', 'responsive-addons-for-elementor' ),
-						'rael_time' => __( '10:00AM - 07:00PM', 'responsive-addons-for-elementor' ),
+						'rael_day'  => __('Friday', 'responsive-addons-for-elementor'),
+						'rael_time' => __('10:00AM - 07:00PM', 'responsive-addons-for-elementor'),
 					),
 					array(
-						'rael_day'  => __( 'Saturday', 'responsive-addons-for-elementor' ),
-						'rael_time' => __( '10:00AM - 07:00PM', 'responsive-addons-for-elementor' ),
+						'rael_day'  => __('Saturday', 'responsive-addons-for-elementor'),
+						'rael_time' => __('10:00AM - 07:00PM', 'responsive-addons-for-elementor'),
 					),
 					array(
-						'rael_day'  => __( 'Sunday', 'responsive-addons-for-elementor' ),
-						'rael_time' => __( 'Closed', 'responsive-addons-for-elementor' ),
+						'rael_day'  => __('Sunday', 'responsive-addons-for-elementor'),
+						'rael_time' => __('Closed', 'responsive-addons-for-elementor'),
 					),
 				),
 			)
@@ -264,7 +272,7 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$this->start_controls_section(
 			'section_business_settings',
 			array(
-				'label' => __( 'Settings', 'responsive-addons-for-elementor' ),
+				'label' => __('Settings', 'responsive-addons-for-elementor'),
 				'tab'   => Controls_Manager::TAB_CONTENT,
 			)
 		);
@@ -272,20 +280,20 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$this->add_control(
 			'rael_title_alignment',
 			array(
-				'label'       => __( 'Title Alignment', 'responsive-addons-for-elementor' ),
+				'label'       => __('Title Alignment', 'responsive-addons-for-elementor'),
 				'type'        => Controls_Manager::CHOOSE,
 				'label_block' => false,
 				'options'     => array(
 					'left'   => array(
-						'title' => __( 'Left', 'responsive-addons-for-elementor' ),
+						'title' => __('Left', 'responsive-addons-for-elementor'),
 						'icon'  => 'eicon-text-align-left',
 					),
 					'center' => array(
-						'title' => __( 'Center', 'responsive-addons-for-elementor' ),
+						'title' => __('Center', 'responsive-addons-for-elementor'),
 						'icon'  => 'eicon-text-align-center',
 					),
 					'right'  => array(
-						'title' => __( 'Right', 'responsive-addons-for-elementor' ),
+						'title' => __('Right', 'responsive-addons-for-elementor'),
 						'icon'  => 'eicon-text-align-right',
 					),
 				),
@@ -299,20 +307,20 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$this->add_control(
 			'rael_day_alignment',
 			array(
-				'label'       => __( 'Day Alignment', 'responsive-addons-for-elementor' ),
+				'label'       => __('Day Alignment', 'responsive-addons-for-elementor'),
 				'type'        => Controls_Manager::CHOOSE,
 				'label_block' => false,
 				'options'     => array(
 					'left'   => array(
-						'title' => __( 'Left', 'responsive-addons-for-elementor' ),
+						'title' => __('Left', 'responsive-addons-for-elementor'),
 						'icon'  => 'eicon-text-align-left',
 					),
 					'center' => array(
-						'title' => __( 'Center', 'responsive-addons-for-elementor' ),
+						'title' => __('Center', 'responsive-addons-for-elementor'),
 						'icon'  => 'eicon-text-align-center',
 					),
 					'right'  => array(
-						'title' => __( 'Right', 'responsive-addons-for-elementor' ),
+						'title' => __('Right', 'responsive-addons-for-elementor'),
 						'icon'  => 'eicon-text-align-right',
 					),
 				),
@@ -326,20 +334,20 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$this->add_control(
 			'rael_time_alignment',
 			array(
-				'label'       => __( 'Time Alignment', 'responsive-addons-for-elementor' ),
+				'label'       => __('Time Alignment', 'responsive-addons-for-elementor'),
 				'type'        => Controls_Manager::CHOOSE,
 				'label_block' => false,
 				'options'     => array(
 					'left'   => array(
-						'title' => __( 'Left', 'responsive-addons-for-elementor' ),
+						'title' => __('Left', 'responsive-addons-for-elementor'),
 						'icon'  => 'eicon-text-align-left',
 					),
 					'center' => array(
-						'title' => __( 'Center', 'responsive-addons-for-elementor' ),
+						'title' => __('Center', 'responsive-addons-for-elementor'),
 						'icon'  => 'eicon-text-align-center',
 					),
 					'right'  => array(
-						'title' => __( 'Right', 'responsive-addons-for-elementor' ),
+						'title' => __('Right', 'responsive-addons-for-elementor'),
 						'icon'  => 'eicon-text-align-right',
 					),
 				),
@@ -355,15 +363,27 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$this->start_controls_section(
 			'section_business_hour_title_style',
 			array(
-				'label' => __( 'Title', 'responsive-addons-for-elementor' ),
+				'label' => __('Title', 'responsive-addons-for-elementor'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
+		);
+
+		$this->start_controls_tabs('rael_tabs_background');
+
+		/**
+		 * Normal.
+		 */
+		$this->start_controls_tab(
+			'rael_tab_background_normal',
+			[
+				'label' => esc_html__('Normal', 'elementor'),
+			]
 		);
 
 		$this->add_control(
 			'rael_title_color',
 			array(
-				'label'     => __( 'Text Color', 'responsive-addons-for-elementor' ),
+				'label'     => __('Text Color', 'responsive-addons-for-elementor'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .rael-business-hour-title h3' => 'color: {{VALUE}};',
@@ -386,28 +406,122 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 			Group_Control_Border::get_type(),
 			array(
 				'name'     => 'rael_title_border',
-				'label'    => __( 'Border', 'responsive-addons-for-elementor' ),
+				'label'    => __('Border', 'responsive-addons-for-elementor'),
 				'selector' => '{{WRAPPER}} .rael-business-hour-title',
 			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
+			[
+				'name' => 'rael_background',
+				'types' => ['classic', 'gradient'],
+				'fields_options' => [
+					'background' => [
+						'frontend_available' => true,
+					],
+				],
+				'selector' => '{{WRAPPER}} .rael-business-hour-title',
+			]
+		);
+
+		$this->end_controls_tab();
+
+		/**
+		 * Hover.
+		 */
+		$this->start_controls_tab(
+			'rael_tab_background_hover',
+			[
+				'label' => esc_html__('Hover', 'elementor'),
+			]
+		);
+
+		// Hover Text Color
+		$this->add_control(
+			'rael_title_color_hover',
 			array(
-				'name'      => 'rael_title_background',
-				'label'     => __( 'Background', 'responsive-addons-for-elementor' ),
-				'types'     => array( 'classic', 'gradient' ),
-				'selector'  => '{{WRAPPER}} .rael-business-hour-title',
-				'separator' => 'before',
+				'label'     => __('Text Color', 'responsive-addons-for-elementor'),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .rael-business-hour-title:hover h3' => 'color: {{VALUE}};',
+				),
 			)
 		);
+
+		// Hover Typography
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'rael_title_typography_hover',
+				'selector' => '{{WRAPPER}} .rael-business-hour-title:hover h3',
+				'global'   => [
+					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
+				],
+			)
+		);
+
+		// Hover Border
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'     => 'rael_title_border_hover',
+				'label'    => __('Border', 'responsive-addons-for-elementor'),
+				'selector' => '{{WRAPPER}} .rael-business-hour-title:hover',
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'rael_background_hover',
+				'selector' => '{{WRAPPER}} .rael-business-hour-title:hover',
+			]
+		);
+
+		$this->add_control(
+			'rael_background_hover_transition',
+			[
+				'label' => esc_html__('Transition Duration', 'elementor') . ' (s)',
+				'type' => Controls_Manager::SLIDER,
+				'default' => [
+					'size' => 0.3,
+				],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 3,
+						'step' => 0.1,
+					],
+				],
+				'render_type' => 'ui',
+				'separator' => 'before',
+				'selectors' => [
+					'{{WRAPPER}} .rael-business-hour-title' =>
+					'transition: background ease, border ease, color ease, font-size ease, font-weight ease, letter-spacing ease;
+						transition-duration: {{SIZE}}s;',
+					'{{WRAPPER}} .rael-business-hour-title h3' =>
+					'transition: background ease, border ease, color ease, font-size ease, font-weight ease, letter-spacing ease;
+						transition-duration: {{SIZE}}s;',
+
+					'{{WRAPPER}} .rael-business-hour-title:hover h3' =>
+					'transition-duration: {{SIZE}}s',
+					'{{WRAPPER}} .rael-business-hour-title:hover' =>
+					'transition-duration: {{SIZE}}s',
+				],
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 		$this->add_control(
 			'rael_title_border_radius',
 			array(
-				'label'      => __( 'Border Radius', 'responsive-addons-for-elementor' ),
+				'label'      => __('Border Radius', 'responsive-addons-for-elementor'),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%', 'em' ),
+				'size_units' => array('px', '%', 'em'),
 				'selectors'  => array(
 					'{{WRAPPER}} .rael-business-hour-title' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
@@ -417,9 +531,9 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$this->add_control(
 			'rael_title_padding',
 			array(
-				'label'      => __( 'Padding', 'responsive-addons-for-elementor' ),
+				'label'      => __('Padding', 'responsive-addons-for-elementor'),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%', 'em' ),
+				'size_units' => array('px', '%', 'em'),
 				'selectors'  => array(
 					'{{WRAPPER}} .rael-business-hour-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
@@ -429,9 +543,9 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$this->add_control(
 			'rael_title_margin',
 			array(
-				'label'      => __( 'Margin', 'responsive-addons-for-elementor' ),
+				'label'      => __('Margin', 'responsive-addons-for-elementor'),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%', 'em' ),
+				'size_units' => array('px', '%', 'em'),
 				'selectors'  => array(
 					'{{WRAPPER}} .rael-business-hour-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
@@ -443,7 +557,7 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$this->start_controls_section(
 			'section_business_hour_list_style',
 			array(
-				'label' => __( 'Hour List', 'responsive-addons-for-elementor' ),
+				'label' => __('Hour List', 'responsive-addons-for-elementor'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -451,7 +565,7 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$this->add_control(
 			'rael_list_color',
 			array(
-				'label'     => __( 'Text Color', 'responsive-addons-for-elementor' ),
+				'label'     => __('Text Color', 'responsive-addons-for-elementor'),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .rael-business-hour-item' => 'color: {{VALUE}};',
@@ -474,7 +588,7 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 			Group_Control_Border::get_type(),
 			array(
 				'name'     => 'rael_list_border',
-				'label'    => __( 'Border', 'responsive-addons-for-elementor' ),
+				'label'    => __('Border', 'responsive-addons-for-elementor'),
 				'selector' => '{{WRAPPER}} .rael-business-hour-item',
 			)
 		);
@@ -483,8 +597,8 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 			Group_Control_Background::get_type(),
 			array(
 				'name'      => 'rael_list_background',
-				'label'     => __( 'Background', 'responsive-addons-for-elementor' ),
-				'types'     => array( 'classic', 'gradient' ),
+				'label'     => __('Background', 'responsive-addons-for-elementor'),
+				'types'     => array('classic', 'gradient'),
 				'selector'  => '{{WRAPPER}} .rael-business-hour-item',
 				'separator' => 'before',
 			)
@@ -494,7 +608,7 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'     => 'rael_list_shadow',
-				'label'    => __( 'Box Shadow', 'responsive-addons-for-elementor' ),
+				'label'    => __('Box Shadow', 'responsive-addons-for-elementor'),
 				'selector' => '{{WRAPPER}} .rael-business-hour-item',
 			)
 		);
@@ -502,9 +616,9 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$this->add_control(
 			'rael_list_border_radius',
 			array(
-				'label'      => __( 'Border Radius', 'responsive-addons-for-elementor' ),
+				'label'      => __('Border Radius', 'responsive-addons-for-elementor'),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%', 'em' ),
+				'size_units' => array('px', '%', 'em'),
 				'selectors'  => array(
 					'{{WRAPPER}} .rael-business-hour-item' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
@@ -514,9 +628,9 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$this->add_control(
 			'rael_list_padding',
 			array(
-				'label'      => __( 'Padding', 'responsive-addons-for-elementor' ),
+				'label'      => __('Padding', 'responsive-addons-for-elementor'),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%', 'em' ),
+				'size_units' => array('px', '%', 'em'),
 				'selectors'  => array(
 					'{{WRAPPER}} .rael-business-hour-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
@@ -526,9 +640,9 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$this->add_control(
 			'rael_list_margin',
 			array(
-				'label'      => __( 'Margin', 'responsive-addons-for-elementor' ),
+				'label'      => __('Margin', 'responsive-addons-for-elementor'),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%', 'em' ),
+				'size_units' => array('px', '%', 'em'),
 				'selectors'  => array(
 					'{{WRAPPER}} .rael-business-hour-item' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
@@ -540,7 +654,7 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$this->start_controls_section(
 			'section_business_hour_container_style',
 			array(
-				'label' => __( 'Container', 'responsive-addons-for-elementor' ),
+				'label' => __('Container', 'responsive-addons-for-elementor'),
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
@@ -549,7 +663,7 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 			Group_Control_Border::get_type(),
 			array(
 				'name'     => 'rael_container_border',
-				'label'    => __( 'Border', 'responsive-addons-for-elementor' ),
+				'label'    => __('Border', 'responsive-addons-for-elementor'),
 				'selector' => '{{WRAPPER}} .rael-business-hour-wrapper ul',
 			)
 		);
@@ -558,8 +672,8 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 			Group_Control_Background::get_type(),
 			array(
 				'name'      => 'rael_container_background',
-				'label'     => __( 'Background', 'responsive-addons-for-elementor' ),
-				'types'     => array( 'classic', 'gradient' ),
+				'label'     => __('Background', 'responsive-addons-for-elementor'),
+				'types'     => array('classic', 'gradient'),
 				'selector'  => '{{WRAPPER}} .rael-business-hour-wrapper ul',
 				'separator' => 'before',
 			)
@@ -569,7 +683,7 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			array(
 				'name'     => 'rael_container_shadow',
-				'label'    => __( 'Box Shadow', 'responsive-addons-for-elementor' ),
+				'label'    => __('Box Shadow', 'responsive-addons-for-elementor'),
 				'selector' => '{{WRAPPER}} .rael-business-hour-wrapper ul',
 			)
 		);
@@ -577,9 +691,9 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$this->add_control(
 			'rael_container_border_radius',
 			array(
-				'label'      => __( 'Border Radius', 'responsive-addons-for-elementor' ),
+				'label'      => __('Border Radius', 'responsive-addons-for-elementor'),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%', 'em' ),
+				'size_units' => array('px', '%', 'em'),
 				'selectors'  => array(
 					'{{WRAPPER}} .rael-business-hour-wrapper ul' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
@@ -589,9 +703,9 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		$this->add_control(
 			'rael_container_padding',
 			array(
-				'label'      => __( 'Padding', 'responsive-addons-for-elementor' ),
+				'label'      => __('Padding', 'responsive-addons-for-elementor'),
 				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => array( 'px', '%', 'em' ),
+				'size_units' => array('px', '%', 'em'),
 				'selectors'  => array(
 					'{{WRAPPER}} .rael-business-hour-wrapper ul' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
@@ -599,7 +713,6 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
 	}
 
 	/**
@@ -607,42 +720,43 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 	 *
 	 * @access protected
 	 */
-	protected function render() {
+	protected function render()
+	{
 		$settings = $this->get_settings_for_display();
-		?>
+?>
 		<div class="rael-business-hour-wrapper">
 			<ul>
-				<?php if ( $settings['rael_title'] ) : ?>
+				<?php if ($settings['rael_title']) : ?>
 					<li class="rael-business-hour-title">
-						<?php printf( '<h3>%s</h3>', esc_html( $settings['rael_title'] ) ); ?>
+						<?php printf('<h3>%s</h3>', esc_html($settings['rael_title'])); ?>
 					</li>
 				<?php endif; ?>
 				<?php
-				if ( is_array( $settings['rael_business_hour_list'] ) && 0 !== count( $settings['rael_business_hour_list'] ) ) :
-					foreach ( $settings['rael_business_hour_list'] as $key => $item ) :
+				if (is_array($settings['rael_business_hour_list']) && 0 !== count($settings['rael_business_hour_list'])) :
+					foreach ($settings['rael_business_hour_list'] as $key => $item) :
 						// Day Element.
-						$day_key = $this->get_repeater_setting_key( 'rael_day', 'rael_business_hour_list', $key );
-						$this->add_inline_editing_attributes( $day_key, 'basic' );
-						$this->add_render_attribute( $day_key, 'class', 'rael-business-hour-day' );
+						$day_key = $this->get_repeater_setting_key('rael_day', 'rael_business_hour_list', $key);
+						$this->add_inline_editing_attributes($day_key, 'basic');
+						$this->add_render_attribute($day_key, 'class', 'rael-business-hour-day');
 						// Time Element.
-						$time_key = $this->get_repeater_setting_key( 'rael_time', 'rael_business_hour_list', $key );
-						$this->add_inline_editing_attributes( $time_key, 'basic' );
-						$this->add_render_attribute( $time_key, 'class', 'rael-business-hour-time' );
-						?>
-						<li class="rael-business-hour-item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>">
-							<?php if ( $item['rael_day'] ) : ?>
-								<span <?php echo wp_kses_post( $this->get_render_attribute_string( $day_key ) ); ?>><?php echo esc_html( $item['rael_day'] ); ?></span>
+						$time_key = $this->get_repeater_setting_key('rael_time', 'rael_business_hour_list', $key);
+						$this->add_inline_editing_attributes($time_key, 'basic');
+						$this->add_render_attribute($time_key, 'class', 'rael-business-hour-time');
+				?>
+						<li class="rael-business-hour-item elementor-repeater-item-<?php echo esc_attr($item['_id']); ?>">
+							<?php if ($item['rael_day']) : ?>
+								<span <?php echo wp_kses_post($this->get_render_attribute_string($day_key)); ?>><?php echo esc_html($item['rael_day']); ?></span>
 							<?php endif; ?>
-							<?php if ( $item['rael_time'] ) : ?>
-								<span <?php echo wp_kses_post( $this->get_render_attribute_string( $time_key ) ); ?>><?php echo esc_html( $item['rael_time'] ); ?></span>
+							<?php if ($item['rael_time']) : ?>
+								<span <?php echo wp_kses_post($this->get_render_attribute_string($time_key)); ?>><?php echo esc_html($item['rael_time']); ?></span>
 							<?php endif; ?>
 						</li>
-						<?php
+				<?php
 					endforeach;
 				endif;
 				?>
 			</ul>
 		</div>
-		<?php
+<?php
 	}
 }
