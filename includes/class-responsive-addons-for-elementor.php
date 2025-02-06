@@ -1653,6 +1653,9 @@ class Responsive_Addons_For_Elementor {
 					case 'gf-styler':
 						array_push( $css_files, $css_files_path . 'gfstyler/gfstyler' . $css_min_ext );
 						break;
+					case 'facebook-feed':
+						array_push( $css_files, $css_files_path . 'facebook-feed/facebook-feed' . $css_min_ext );
+						break;
 				}
 			}
 		}
@@ -2032,10 +2035,9 @@ class Responsive_Addons_For_Elementor {
 		$facebook_data = get_transient( $key );
 
 		if ( false === $facebook_data ) {
-			$facebook_data = wp_remote_retrieve_body( wp_remote_get( "https://graph.facebook.com/v11.0/{$page_id}/posts?fields=status_type,created_time,from,message,story,full_picture,permalink_url,attachments.limit(1){type,media_type,title,description,unshimmed_url},comments.summary(total_count),reactions.summary(total_count)&limit=99&access_token={$token}", array( 'timeout' => 70 ) ) );
+			$facebook_data = wp_remote_retrieve_body( wp_remote_get( "https://graph.facebook.com/v22.0/{$page_id}/posts?fields=id,message,story,created_time,full_picture,permalink_url,attachments{type,media_type,title,description,unshimmed_url},comments.summary(total_count){from},reactions.summary(total_count){from}&limit=99&access_token={$token}", array( 'timeout' => 70 ) ) );
 
 			$facebook_data = json_decode( $facebook_data, true );
-
 			if ( isset( $facebook_data['data'] ) ) {
 				set_transient( $key, $facebook_data, ( $settings['rael_facebook_feed_cache_limit'] * MINUTE_IN_SECONDS ) );
 			}
@@ -2067,7 +2069,7 @@ class Responsive_Addons_For_Elementor {
 					<div class="rael-fb-feed-item-content-container">
 					<header class="rael-fb-feed-item-header">
 						<div class="rael-fb-feed-item-user">
-							<a class="rael-fb-feed-user-image" href="' . $fb_url . $page_id . '" target="' . ( 'yes' === $settings['rael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v11.0/' . $page_id . '/picture" alt="' . $item['from']['name'] . '" class="rael-fb-feed-avatar"></a>
+							<a class="rael-fb-feed-user-image" href="' . $fb_url . $page_id . '" target="' . ( 'yes' === $settings['rael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v22.0/' . $page_id . '/picture" alt="' . $item['from']['name'] . '" class="rael-fb-feed-avatar"></a>
 							<a href="' . $fb_url . $page_id . '" target="' . ( 'yes' === $settings['rael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '"><p class="rael-fb-feed-username">' . $item['from']['name'] . '</p></a>
 						</div>';
 
@@ -2164,8 +2166,8 @@ class Responsive_Addons_For_Elementor {
 					if ( $settings['rael_facebook_feed_message'] && ! empty( $message ) ) {
 						$html .= '<div class="rael-fb-feed-item-content">
 													<div class="hover-user-content">
-														<img src="https://graph.facebook.com/v11.0/' . $page_id . '/picture" alt="' . $item['from']['name'] . '" class="rael-fb-feed-avatar">
-														<p class="rael-fb-feed-username">' . esc_html( $item['from']['name'] ) . '</p>
+														' . ( isset( $item['from']['name'] ) ? '<img src="https://graph.facebook.com/v22.0/' . $page_id . '/picture" alt="' . $item['from']['name'] . '" class="rael-fb-feed-avatar">' : '' ) . '
+														' . ( isset( $item['from']['name'] ) ? '<p class="rael-fb-feed-username">' . esc_html( $item['from']['name'] ) . '</p>' : '' ) . '
 													</div>
 													<p class="rael-fb-feed-message">' . esc_html( $message ) . '</p>
 												</div>';

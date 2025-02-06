@@ -336,6 +336,11 @@ class Responsive_Addons_For_Elementor_Widgets_Updater {
 				'docs'     => 'https://cyberchimps.com/docs/widgets/gravity-forms-styler',
 				'category' => 'form',
 			),
+			array(
+				'title'    => 'facebook-feed',
+				'docs'     => 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/facebook-feed/',
+				'category' => 'marketing',
+			)
 		);
 
 		return $widgets;
