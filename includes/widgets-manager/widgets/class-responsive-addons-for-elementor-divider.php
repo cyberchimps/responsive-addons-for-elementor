@@ -435,7 +435,6 @@ class Responsive_Addons_For_Elementor_Divider extends Widget_Base {
 			array(
 				'label'     => __( 'Style', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::SELECT,
-				'default'   => 'dashed',
 				'options'   => array(
 					'solid'  => __( 'Solid', 'responsive-addons-for-elementor' ),
 					'dashed' => __( 'Dashed', 'responsive-addons-for-elementor' ),
@@ -445,7 +444,8 @@ class Responsive_Addons_For_Elementor_Divider extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .rael-divider, {{WRAPPER}} .rael-divider__border' => 'border-style: {{VALUE}};',
 				),
-			)
+				'default'   => 'dashed',
+			),
 		);
 
 		$this->add_responsive_control(
@@ -1005,11 +1005,11 @@ class Responsive_Addons_For_Elementor_Divider extends Widget_Base {
 			'rael-divider'
 		);
 
-		if ( $settings['rael_divider_direction'] ) {
+		if ( isset($settings['rael_divider_direction']) ) {
 			$this->add_render_attribute( 'rael_divider', 'class', 'rael-divider-direction--' . $settings['rael_divider_direction'] );
 		}
 
-		if ( $settings['rael_divider_style'] ) {
+		if ( isset($settings['rael_divider_style']) ) {
 			$this->add_render_attribute( 'rael_divider', 'class', 'rael-divider-style--' . $settings['rael_divider_style'] );
 		}
 
