@@ -43,7 +43,7 @@ class Responsive_Addons_For_Elementor_Twitter_Feed extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Twitter Feed', 'responsive-addons-for-elementor' );
+		return __( 'X (Twitter) Feed', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -170,20 +170,11 @@ class Responsive_Addons_For_Elementor_Twitter_Feed extends Widget_Base {
 		);
 
 		$this->add_control(
-			'rael_app_key',
+			'rael_bearer_token',
 			array(
-				'label'       => __( 'Consumer Key', 'responsive-addons-for-elementor' ),
+				'label'       => __( 'Bearer Token', 'responsive-addons-for-elementor' ),
 				'type'        => Controls_Manager::TEXT,
-				'description' => __( '<a href="" >Get Consumer Key.</a> Create a new app or select an existing app and enter that app\'s <strong>consumer key</strong> here.', 'responsive-addons-for-elementor' ),
-			)
-		);
-
-		$this->add_control(
-			'rael_app_secret',
-			array(
-				'label'       => __( 'Consumer Secret', 'responsive-addons-for-elementor' ),
-				'type'        => Controls_Manager::TEXT,
-				'description' => __( '<a href="" >Get Consumer Secret.</a> Create a new app or select an existing app and enter that app\'s <strong>consumer secret</strong> here.', 'responsive-addons-for-elementor' ),
+				'description' => __( '<a href="https://developer.twitter.com/en/portal/dashboard" target="_blank">Get Bearer Token.</a> Create a new app or select an existing app and enter that app\'s <strong>bearer token</strong> here.', 'responsive-addons-for-elementor' ),
 			)
 		);
 
@@ -887,119 +878,77 @@ class Responsive_Addons_For_Elementor_Twitter_Feed extends Widget_Base {
 	 */
 	protected function render() {
 		$settings        = $this->get_settings_for_display();
-		$consumer_key    = $settings['rael_app_key'];
-		$consumer_secret = $settings['rael_app_secret'];
-		$account_name    = substr( $settings['rael_account_name'], 1 );
-		$hashtag         = $settings['rael_hashtag_name'];
-		$column_spacing  = isset( $settings['rael_column_spacing']['size'] ) ? $settings['rael_column_spacing']['size'] : 10;
+    	$account_name    = ltrim( $settings['rael_account_name'], '@' );
+    	$hashtag         = $settings['rael_hashtag_name'];
+    	$column_spacing  = $settings['rael_column_spacing']['size'] ?? 10;
+    	$token           = $settings['rael_bearer_token'] ?? '';
+		
+    	if ( empty( $token ) ) {
+    	    return;
+    	}
 
-		if ( empty( $consumer_key ) || empty( $consumer_secret ) ) {
-			return;
-		}
+    	$user_cache_key = $this->get_name() . '_' . $this->get_id() . '__user_object';
+    	$user_object    = get_transient( $user_cache_key );
 
-		$token                = get_option( $this->get_name() . '_' . $this->get_id() . '__token' );
-		$prev_consumer_key    = get_option( $this->get_name() . '_' . $this->get_id() . '__consumer_key' );
-		$prev_consumer_secret = get_option( $this->get_name() . '_' . $this->get_id() . '__consumer_secret' );
-		$tweets               = get_transient( $this->get_name() . '_' . $this->get_id() . '__' . $settings['rael_account_name'] . '__tweets_cache' );
+    	if ( empty( $user_object ) ) {
+        	$user_endpoint = "https://api.twitter.com/2/users/by/username/{$account_name}?user.fields=id,name,username,profile_image_url";
+        	$response      = wp_remote_get( $user_endpoint, [
+        	    'headers' => [ 'Authorization' => "Bearer $token" ]
+        	]);
 
-		if ( empty( $tweets->data ) ) {
-			if ( ! $token || ( $prev_consumer_key !== $consumer_key ) || ( $prev_consumer_secret !== $consumer_secret ) ) {
-				$credentials = base64_encode( $consumer_key . ':' . $consumer_secret ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
+        	if ( ! is_wp_error( $response ) && wp_remote_retrieve_response_code( $response ) === 200 ) {
+        	    $user_object = json_decode( wp_remote_retrieve_body( $response ) );
+        	    set_transient( $user_cache_key, $user_object, 1800 );
+        	}
+    	}
 
-				$args = array(
-					'method'      => 'POST',
-					'httpversion' => '1.1',
-					'blocking'    => true,
-					'headers'     => array(
-						'Authorization' => 'Basic ' . $credentials,
-						'Content-Type'  => 'application/x-www-form-urlencoded;charset=UTF-8',
-					),
-					'body'        => array( 'grant_type' => 'client_credentials' ),
-				);
+    	if ( empty( $user_object->data->id ) ) {
+        	return;
+    	}
 
-				$response = wp_remote_post( 'https://api.twitter.com/oauth2/token', $args );
+    	$user_id       = $user_object->data->id;
+    	$tweet_fields  = 'id,text,created_at,public_metrics,entities,attachments';
+    	$tweet_cache_key = $this->get_name() . '_' . $this->get_id() . '__tweets_cache';
+    	$tweets        = get_transient( $tweet_cache_key );
 
-				if ( ! is_wp_error( $response ) ) {
-					$body = json_decode( wp_remote_retrieve_body( $response ) );
+    	if ( empty( $tweets ) ) {
+    	    $tweet_endpoint = "https://api.twitter.com/2/users/{$user_id}/tweets?max_results=100&tweet.fields={$tweet_fields}";
+    	    $response       = wp_remote_get( $tweet_endpoint, [
+    	        'headers' => [ 'Authorization' => "Bearer $token" ]
+    	    ]);
 
-					if ( ! empty( $body ) ) {
-						update_option( $this->get_name() . '_' . $this->get_id() . '__token', $body->access_token );
-						update_option( $this->get_name() . '_' . $this->get_id() . '__consumer_key', $consumer_key );
-						update_option( $this->get_name() . '_' . $this->get_id() . '__consumer_secret', $consumer_secret );
+    	    if ( ! is_wp_error( $response ) && wp_remote_retrieve_response_code( $response ) === 200 ) {
+    	        $tweets = json_decode( wp_remote_retrieve_body( $response ) );
+    	        set_transient( $tweet_cache_key, $tweets, 1800 );
+    	    }
+    	}
 
-						$token = $body->access_token;
-					}
-				}
-			}
+    	if ( empty( $tweets->data ) ) {
+    	    return;
+    	}
 
-			$args = array(
-				'httpversion' => '1.1',
-				'blocking'    => true,
-				'headers'     => array(
-					'Authorization' => "Bearer {$token}",
-				),
-			);
+    	$tweets_data   = $tweets->data;
+    	$tweets_author = $user_object->data;
 
-			$response = wp_remote_get( "https://api.twitter.com/2/users/by/username/{$account_name}", $args );
+    	if ( $hashtag ) {
+        	$tweets_data = array_filter( $tweets_data, [ $this, 'filter_hashtag_data' ] );
+    	}
 
-			if ( ! is_wp_error( $response ) ) {
-				$body = json_decode( wp_remote_retrieve_body( $response ) );
+    	$tweets_data = array_splice( $tweets_data, 0, $settings['rael_post_limit'] );
 
-				if ( ! empty( $body ) && ! empty( $body->data ) ) {
-					$user_id = $body->data->id;
+    	$this->add_render_attribute('rael_twitter_feed', 'class', [
+        	'rael-twitter-feed',
+        	'rael-twitter-feed-' . $this->get_id(),
+        	'rael-twitter-feed--' . $settings['rael_content_layout'],
+        	'rael-twitter-feed--' . $settings['rael_column_grid'],
+        	'clearfix',
+    	]);
+    
+    	$this->add_render_attribute('rael_twitter_feed', 'data-gutter', $column_spacing);
 
-					$query_params    = 'max_results=100&exclude=retweets,replies&expansions=author_id,attachments.media_keys&tweet.fields=attachments,created_at,author_id,text,id,entities&user.fields=id,name,profile_image_url,username&media.fields=height,width,type,url';
-					$tweets_response = wp_remote_get( "https://api.twitter.com/2/users/{$user_id}/tweets?{$query_params}", $args );
-
-					$tweets = json_decode( wp_remote_retrieve_body( $tweets_response ) );
-
-					// Keeping the transient for 30 minutes.
-					set_transient( $this->get_name() . '_' . $this->get_id() . '__' . $settings['rael_account_name'] . '__tweets_cache', $tweets, 1800 );
-				}
-			}
-		}
-
-		if ( empty( $tweets ) || empty( $tweets->data ) || empty( $tweets->includes ) ) {
-			return;
-		}
-
-		$tweets_data   = $tweets->data;
-		$tweets_author = $tweets->includes->users[0];
-
-		if ( 'yes' === $settings['rael_show_media_elements'] ) {
-			if ( isset( $tweets->includes->media ) ) {
-				$tweets_media = $tweets->includes->media;
-			}
-		}
-
-		if ( $hashtag ) {
-			$tweets_data = array_filter( $tweets_data, array( $this, 'filter_hashtag_data' ) );
-		}
-
-		$tweets_data = array_splice( $tweets_data, 0, $settings['rael_post_limit'] );
-
-		$this->add_render_attribute(
-			'rael_twitter_feed',
-			'class',
-			array(
-				'rael-twitter-feed',
-				'rael-twitter-feed-' . $this->get_id(),
-				'rael-twitter-feed--' . $settings['rael_content_layout'],
-				'rael-twitter-feed--' . $settings['rael_column_grid'],
-				'clearfix',
-			)
-		);
-
-		$this->add_render_attribute(
-			'rael_twitter_feed',
-			'data-gutter',
-			$column_spacing
-		);
-
-		$this->add_render_attribute( 'rael_twitter_feed_item', 'class', 'rael-twitter-feed__item' );
-
-		$author_avatar = '<a href="https://twitter.com/' . $tweets_author->username . '" class="rael-twitter-feed__author-avatar" target="_blank"><img src="' . $tweets_author->profile_image_url . '" class="rael-twitter-feed__avatar-image--' . $settings['rael_avatar_style'] . '" alt="' . $tweets_author->name . '" /></a>';
-		?>
+    	$author_avatar = '<a href="https://twitter.com/' . $tweets_author->username . '" class="rael-twitter-feed__author-avatar" target="_blank">
+                        <img src="' . $tweets_author->profile_image_url . '" class="rael-twitter-feed__avatar-image--' . $settings['rael_avatar_style'] . '" alt="' . $tweets_author->name . '" />
+                      </a>'; ?>
 
 		<div <?php $this->print_render_attribute_string( 'rael_twitter_feed' ); ?>>
 			<?php foreach ( $tweets_data as $tweet ) : ?>
