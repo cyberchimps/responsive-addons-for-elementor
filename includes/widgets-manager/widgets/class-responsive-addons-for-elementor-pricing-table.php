@@ -1586,8 +1586,8 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 								endif;
 								?>
 								<?php if ( ! empty( $item['item_text'] ) ) : ?>
-									<span <?php echo esc_html( $this->get_render_attribute_string( $repeater_setting_key ) ); ?>>
-										<?php echo esc_html( $item['item_text'] ); ?>
+									<span <?php $this->print_render_attribute_string( $repeater_setting_key ); ?>>
+										<?php $this->print_unescaped_setting( 'item_text', 'features_list', $index ); ?>
 									</span>
 									<?php
 								else :
