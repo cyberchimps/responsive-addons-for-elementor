@@ -143,7 +143,7 @@ class Responsive_Addons_For_Elementor_Theme_Post_Excerpt extends Widget_Base {
 					),
 				),
 				'selectors' => array(
-					'{{WRAPPER}} .elementor-widget-container' => 'text-align: {{VALUE}};',
+					'{{WRAPPER}}' => 'text-align: {{VALUE}};',
 				),
 			)
 		);
@@ -157,7 +157,7 @@ class Responsive_Addons_For_Elementor_Theme_Post_Excerpt extends Widget_Base {
 					'default' => Global_Colors::COLOR_TEXT,
 				),
 				'selectors' => array(
-					'{{WRAPPER}} .elementor-widget-container' => 'color: {{VALUE}};',
+					'{{WRAPPER}}' => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -169,7 +169,7 @@ class Responsive_Addons_For_Elementor_Theme_Post_Excerpt extends Widget_Base {
 				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
 				),
-				'selector' => '{{WRAPPER}} .elementor-widget-container',
+				'selector' => '{{WRAPPER}}',
 			)
 		);
 

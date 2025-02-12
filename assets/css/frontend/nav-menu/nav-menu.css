@@ -517,7 +517,7 @@
 .elementor-widget-rael-nav-menu:not(.elementor-rael-nav-menu--toggle) .elementor-rael-menu-toggle {
   display: none; }
 
-.elementor-widget-rael-nav-menu .elementor-widget-container {
+.elementor-widget-rael-nav-menu {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

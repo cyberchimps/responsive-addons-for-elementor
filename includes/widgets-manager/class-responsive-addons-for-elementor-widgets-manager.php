@@ -706,7 +706,7 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 		$menu_cart_toggle_button_html = ob_get_clean();
 
 		if ( ! empty( $menu_cart_toggle_button_html ) ) {
-			$fragments['body:not(.elementor-editor-active) div.elementor-element.elementor-widget.elementor-widget-rael-wc-menu-cart div.rael-menu-cart__toggle.elementor-button-wrapper'] = $menu_cart_toggle_button_html;
+			$fragments['body:not(.elementor-editor-active) div.elementor-element.elementor-widget.elementor-widget-rael-wc-menu-cart div.rael-menu-cart__toggle'] = $menu_cart_toggle_button_html;
 		}
 
 		return $fragments;

@@ -10,7 +10,7 @@ class RaelTocHandler extends elementorModules.frontend.handlers.Base {
                 headerTitle: '.rael-toc__header-title',
                 collapseButton: '.rael-toc__toggle-button--collapse',
                 postContentContainer: '.elementor:not([data-elementor-type="header"]):not([data-elementor-type="footer"]):not([data-elementor-type="popup"])',
-                widgetContainer: '.elementor-widget-container'
+                widgetContainer: '.elementor-widget-rael-table-of-contents'
             },
             classes: {
                 activeItem: 'elementor-item-active',

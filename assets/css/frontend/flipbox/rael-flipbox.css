@@ -204,10 +204,10 @@
 .rael-flip-box-effect-fade .rael-flip-box:hover .rael-flip-box-back {
   opacity: 1; }
 
-.elementor-widget-rael-flip-box.rael-flip-box-flipped .elementor-widget-container .rael-flip-box-front {
+.elementor-widget-rael-flip-box.rael-flip-box-flipped .rael-flip-box-front {
   display: none; }
 
-.elementor-widget-rael-flip-box.rael-flip-box-flipped .elementor-widget-container .rael-flip-box-back {
+.elementor-widget-rael-flip-box.rael-flip-box-flipped .rael-flip-box-back {
   transform: none;
   opacity: 1; }
 
