@@ -607,9 +607,9 @@ class Responsive_Addons_For_Elementor_Google_Map extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'rael_info_window_title',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-google-map__info-window-title',
 			)
 		);

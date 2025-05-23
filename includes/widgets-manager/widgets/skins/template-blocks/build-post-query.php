@@ -166,7 +166,7 @@ class Build_Post_Query {
 						'terms'    => $settings[ 'tax_' . $index . '_' . $post_type . '_filter' ],
 						'operator' => $operator,
 					);
-					$tax_count++;
+					++$tax_count;
 				}
 			}
 		}

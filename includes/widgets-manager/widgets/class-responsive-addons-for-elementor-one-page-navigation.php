@@ -8,14 +8,14 @@
 
 namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets;
 
-use \Elementor\Controls_Manager;
-use \Elementor\Group_Control_Background;
-use \Elementor\Core\Kits\Documents\Tabs\Global_Typography;
-use \Elementor\Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Typography;
-use \Elementor\Utils;
-use \Elementor\Widget_Base;
+use Elementor\Controls_Manager;
+use Elementor\Group_Control_Background;
+use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
+use Elementor\Group_Control_Border;
+use Elementor\Group_Control_Box_Shadow;
+use Elementor\Group_Control_Typography;
+use Elementor\Utils;
+use Elementor\Widget_Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;   // Exit if accessed directly.
@@ -656,9 +656,9 @@ class Responsive_Addons_For_Elementor_One_Page_Navigation extends Widget_Base {
 			array(
 				'name'      => 'rael_tooltip_typography',
 				'label'     => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'global'   => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-				],
+				),
 				'selector'  => '{{WRAPPER}} .rael-nav-dot-tooltip',
 				'condition' => array(
 					'rael_nav_tooltip' => 'yes',
@@ -731,7 +731,7 @@ class Responsive_Addons_For_Elementor_One_Page_Navigation extends Widget_Base {
 						printf( '<li class="rael-one-page-nav-item">%1$s<a href="#" data-row-id="%2$s"><span class="rael-nav-dot-wrap"><span class="rael-nav-dot %3$s"></span></span></a></li>', wp_kses_post( $rael_dot_tooltip ), esc_html( $rael_section_id ), esc_html( $rael_dot_icon ) );
 					}
 
-					$i++;
+					++$i;
 				}
 				?>
 			</ul>
@@ -743,6 +743,4 @@ class Responsive_Addons_For_Elementor_One_Page_Navigation extends Widget_Base {
 	 * Render one page navigation widget output in the editor.
 	 */
 	protected function content_template() {     }
-
-
 }

@@ -70,7 +70,7 @@ abstract class Responsive_Addons_For_Elementor_Title_Widget_Base extends Element
 		$this->update_control(
 			'size',
 			array(
-				'condition' => [],
+				'condition' => array(),
 			)
 		);
 	}

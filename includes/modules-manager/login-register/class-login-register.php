@@ -368,7 +368,7 @@ class Login_Register {
 			}
 			if ( isset( $settings['rael_reg_email_message'] ) ) {
 				// Added esc_html to strip all tags from the message.
-				self::$email_options['message'] =  sanitize_text_field( $settings['rael_reg_email_message'] ) ;
+				self::$email_options['message'] = sanitize_text_field( $settings['rael_reg_email_message'] );
 			}
 			if ( isset( $settings['rael_reg_email_content_type'] ) ) {
 				self::$email_options['headers'] = 'Content-Type: text/' . $settings['rael_reg_email_content_type'] . '; charset=UTF-8' . "\r\n";
@@ -542,7 +542,7 @@ class Login_Register {
 	 *
 	 * @param     $name
 	 * @param     $data data to be
-	 * @param int             $time time in seconds. Default is 300s = 5 minutes
+	 * @param int $time time in seconds. Default is 300s = 5 minutes
 	 *
 	 * @return bool it returns true if the data saved, otherwise, false returned.
 	 */
@@ -580,7 +580,6 @@ class Login_Register {
 		}
 
 		return apply_filters( 'rael/login-register/new-user-email-data', $email_data, $user, $blogname );
-
 	}
 
 	/**
@@ -643,7 +642,7 @@ class Login_Register {
 	 * It replaces placeholders with dynamic value and returns it.
 	 *
 	 * @param        $message
-	 * @param string  $receiver
+	 * @param string $receiver
 	 *
 	 * @return null|string|string[]
 	 */

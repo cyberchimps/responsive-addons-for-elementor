@@ -546,6 +546,4 @@ class Responsive_Addons_For_Elementor_Back_To_Top extends Widget_Base {
 						<?php
 						// end container.
 	}
-
-
 }

@@ -2416,7 +2416,8 @@ class Responsive_Addons_For_Elementor_Team_Member extends Widget_Base {
 		<div class="style-circle rael-team-img-fit"> <?php endif; ?>
 			<?php if ( 'overlay_circle_hover' === $rael_team_style ) : ?>
 		<div class="image-card-v2 style-circle"> <?php endif; ?>
-			<div class="profile-image-card elementor-animation-<?php echo esc_attr( $team_hover_animation ); ?> rael-team-img rael-team-style-<?php echo esc_attr( $rael_team_style ); ?> <?php
+			<div class="profile-image-card elementor-animation-<?php echo esc_attr( $team_hover_animation ); ?> rael-team-img rael-team-style-<?php echo esc_attr( $rael_team_style ); ?>
+			<?php
 			if ( isset( $rael_team_content_text_align ) ) {
 				echo esc_attr( $rael_team_content_text_align );
 			}

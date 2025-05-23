@@ -3,7 +3,6 @@
  * RAEL Theme Builder's Admin part.
  *
  * @package  Responsive_Addons_For_Elementor
- * @package  Responsive_Addons_For_Elementor
  */
 
 namespace Responsive_Addons_For_Elementor\Admin\Theme_Builder;
@@ -71,16 +70,24 @@ class RAEL_HF_Admin {
 	/**
 	 * Parse query to filter specific temlpate type.
 	 *
-	 * @param object $query
+	 * @param object $query The filter query.
 	 */
 	public function prefix_parse_filter( $query ) {
 		global $pagenow;
-		$current_page = isset( $_GET[ $this->type_tax ] ) ? $_GET[ $this->type_tax ] : '';
+
+		$current_page = '';
+		
+		// $current_page = isset( $_GET[ $this->type_tax ] ) ? $_GET[ $this->type_tax ] : '';
+
+		if ( isset( $_GET[ $this->type_tax ] ) ) {
+			$current_page = sanitize_text_field( wp_unslash( $_GET[ $this->type_tax ] ) );
+		}
+
 
 		if ( is_admin() &&
 			'edit.php' == $pagenow &&
 			isset( $_GET[ $this->type_tax ] ) &&
-			$_GET[ $this->type_tax ] != '' ) {
+			'' != $current_page ) {
 
 			$query->query_vars['meta_key']     = 'rael_hf_template_type';
 			$query->query_vars['meta_value']   = $current_page;
@@ -91,7 +98,7 @@ class RAEL_HF_Admin {
 	/**
 	 * Print library types tabs.
 	 *
-	 * @param array $edit_links
+	 * @param array $edit_links Edit Links.
 	 *
 	 * @since 1.8.0 Added single-product.
 	 * @since 1.8.0 Added Product Archive
@@ -111,7 +118,12 @@ class RAEL_HF_Admin {
 			'product-archive' => esc_html__( 'Product Archive', 'responsive-addons-for-elementor' ),
 		);
 
-		$active_tab = isset( $_GET[ $this->type_tax ] ) ? $_GET[ $this->type_tax ] : 'all';
+		
+		// $active_tab = isset( $_GET[ $this->type_tax ] ) ? $_GET[ $this->type_tax ] : 'all';
+		$active_tab = isset( $_GET[ $this->type_tax ] )
+		? sanitize_text_field( wp_unslash( $_GET[ $this->type_tax ] ) )
+		: 'all';
+
 		$page_link  = admin_url( 'edit.php?post_type=' . $this->post_type );
 
 		if ( ! array_key_exists( $active_tab, $tabs ) ) {

@@ -1101,5 +1101,4 @@ abstract class Responsive_Addons_For_Elementor_Woo_Products_Base extends Woo_Wid
 	public function add_to_cart_wrapper( $string ) {
 		return '<div class="woocommerce-loop-product__buttons">' . $string . '</div>';
 	}
-
 }

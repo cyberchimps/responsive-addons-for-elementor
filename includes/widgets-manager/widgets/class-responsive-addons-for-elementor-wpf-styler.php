@@ -427,9 +427,9 @@ class Responsive_Addons_For_Elementor_WPF_Styler extends Widget_Base {
 			array(
 				'label'     => __( 'Label Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_SECONDARY,
-				],
+				),
 				'default'   => '',
 				'selectors' => array(
 					'{{WRAPPER}} .rael-wpf-style .wpforms-form .wpforms-field-label,
@@ -454,9 +454,9 @@ class Responsive_Addons_For_Elementor_WPF_Styler extends Widget_Base {
 			array(
 				'label'     => __( 'Input Text / Placeholder Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_SECONDARY,
-				],
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .rael-wpf-style .wpforms-form .wpforms-field input:not([type=submit]):not([type=image]):not([type=button]):not([type=file]):not([type=radio]):not([type=checkbox]),
 						{{WRAPPER}} .rael-wpf-style .wpforms-form .wpforms-field input::placeholder,
@@ -477,9 +477,9 @@ class Responsive_Addons_For_Elementor_WPF_Styler extends Widget_Base {
 			array(
 				'label'     => __( 'Sublabel / Description Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_SECONDARY,
-				],
+				),
 				'default'   => '',
 				'selectors' => array(
 					'{{WRAPPER}} .rael-wpf-style .wpforms-form .wpforms-field-description,
@@ -778,9 +778,9 @@ class Responsive_Addons_For_Elementor_WPF_Styler extends Widget_Base {
 			array(
 				'label'     => __( 'Selected Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_SECONDARY,
-				],
+				),
 				'condition' => array(
 					'wpf_radio_check_custom!' => '',
 				),
@@ -1164,9 +1164,9 @@ class Responsive_Addons_For_Elementor_WPF_Styler extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'wpf_message_typo',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-wpf-style label.wpforms-error',
 			)
 		);
@@ -1222,9 +1222,9 @@ class Responsive_Addons_For_Elementor_WPF_Styler extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'wpf_validation_typo',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-wpf-style .wpforms-confirmation-container-full,
 					{{WRAPPER}} .rael-wpf-style .wpforms-confirmation-container',
 			)
@@ -1472,9 +1472,9 @@ class Responsive_Addons_For_Elementor_WPF_Styler extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'title_typography',
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				),
 				'selector'  => '{{WRAPPER}} .rael-wpf-style .wpforms-title',
 				'condition' => array(
 					'form_title_desc_option!' => 'none',
@@ -1487,9 +1487,9 @@ class Responsive_Addons_For_Elementor_WPF_Styler extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_PRIMARY,
-				],
+				),
 				'condition' => array(
 					'form_title_desc_option!' => 'none',
 				),
@@ -1517,9 +1517,9 @@ class Responsive_Addons_For_Elementor_WPF_Styler extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'desc_typography',
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
-				],
+				),
 				'selector'  => '{{WRAPPER}} .rael-wpf-style .wpforms-description',
 				'condition' => array(
 					'form_title_desc_option!' => 'none',
@@ -1532,9 +1532,9 @@ class Responsive_Addons_For_Elementor_WPF_Styler extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_SECONDARY,
-				],
+				),
 				'condition' => array(
 					'form_title_desc_option!' => 'none',
 				),
@@ -1559,9 +1559,9 @@ class Responsive_Addons_For_Elementor_WPF_Styler extends Widget_Base {
 			array(
 				'name'     => 'form_label_typography',
 				'label'    => 'Label Typography',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-wpf-style .wpforms-form .wpforms-field-label,
 									{{WRAPPER}} .rael-wpf-style .wpforms-form .wpforms-field-radio li label,
 									{{WRAPPER}} .rael-wpf-style .wpforms-form .wpforms-field-checkbox li label,
@@ -1585,9 +1585,9 @@ class Responsive_Addons_For_Elementor_WPF_Styler extends Widget_Base {
 			array(
 				'name'     => 'input_typography',
 				'label'    => 'Input Text Typography',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-wpf-style .wpforms-form .wpforms-field input:not([type=submit]):not([type=image]):not([type=button]):not([type=file]):not([type=radio]):not([type=checkbox]),
 						{{WRAPPER}} .rael-wpf-style .wpforms-form .wpforms-field input::placeholder,
 						{{WRAPPER}} .rael-wpf-style .wpforms-form .wpforms-field textarea,
@@ -1603,9 +1603,9 @@ class Responsive_Addons_For_Elementor_WPF_Styler extends Widget_Base {
 			array(
 				'name'     => 'input_desc_typography',
 				'label'    => 'Sublabel / Description Typography',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-wpf-style .wpforms-form .wpforms-field-description,
 									{{WRAPPER}} .rael-wpf-style .wpforms-form .wpforms-field-sublabel,
 									{{WRAPPER}} .rael-wpf-style .wpforms-form .wpforms-field-likert_scale thead tr th',
@@ -1626,9 +1626,9 @@ class Responsive_Addons_For_Elementor_WPF_Styler extends Widget_Base {
 			array(
 				'name'     => 'btn_typography',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-wpf-style .wpforms-form button[type=submit], {{WRAPPER}} .rael-wpf-style .wpforms-form .wpforms-page-button',
 			)
 		);

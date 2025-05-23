@@ -15,10 +15,10 @@ class Elementor_Related_Query extends Elementor_Post_Query {
 	 * @param array       $query_args
 	 * @param array       $fallback_args
 	 */
-	public function __construct( $widget, $group_query_name, $query_args = [], $fallback_args = [] ) {
+	public function __construct( $widget, $group_query_name, $query_args = array(), $fallback_args = array() ) {
 		parent::__construct( $widget, $group_query_name, $query_args );
 		$this->related_post_id = -1;
-		$this->fallback_args = $fallback_args;
+		$this->fallback_args   = $fallback_args;
 	}
 
 	/**
@@ -71,8 +71,8 @@ class Elementor_Related_Query extends Elementor_Post_Query {
 
 	protected function set_common_args() {
 		parent::set_common_args();
-		$post_id = get_queried_object_id();
-		$this->related_post_id = is_singular() && ( 0 !== $post_id ) ? $post_id : null;
+		$post_id                       = get_queried_object_id();
+		$this->related_post_id         = is_singular() && ( 0 !== $post_id ) ? $post_id : null;
 		$this->query_args['post_type'] = get_post_type( $this->related_post_id );
 	}
 
@@ -80,8 +80,8 @@ class Elementor_Related_Query extends Elementor_Post_Query {
 		parent::set_post_exclude_args();
 
 		if ( $this->related_post_id ) {
-			$post_not_in = isset( $this->query_args['post__not_in'] ) ? $this->query_args['post__not_in'] : [];
-			$post_not_in[] = $this->related_post_id;
+			$post_not_in                      = isset( $this->query_args['post__not_in'] ) ? $this->query_args['post__not_in'] : array();
+			$post_not_in[]                    = $this->related_post_id;
 			$this->query_args['post__not_in'] = $post_not_in;
 		}
 	}
@@ -98,12 +98,12 @@ class Elementor_Related_Query extends Elementor_Post_Query {
 		}
 
 		$taxonomies = $this->get_widget_settings( 'related_taxonomies' );
-		$terms = [];
+		$terms      = array();
 		if ( is_string( $taxonomies ) ) {
-			$terms[ $taxonomies ] = wp_get_post_terms( $this->related_post_id, $taxonomies, [ 'fields' => 'tt_ids' ] );
+			$terms[ $taxonomies ] = wp_get_post_terms( $this->related_post_id, $taxonomies, array( 'fields' => 'tt_ids' ) );
 		} else {
 			foreach ( $taxonomies as $taxonomy ) {
-				$terms[ $taxonomy ] = wp_get_post_terms( $this->related_post_id, $taxonomy, [ 'fields' => 'tt_ids' ] );
+				$terms[ $taxonomy ] = wp_get_post_terms( $this->related_post_id, $taxonomy, array( 'fields' => 'tt_ids' ) );
 			}
 		}
 
@@ -125,7 +125,7 @@ class Elementor_Related_Query extends Elementor_Post_Query {
 	 */
 	private function set_fallback_arg_by_settings( $key, $value, $control_name = '' ) {
 		if ( empty( $this->fallback_args[ $key ] ) ) {
-			$settings = $this->widget->get_settings();
+			$settings                    = $this->widget->get_settings();
 			$this->fallback_args[ $key ] = ( '' === $control_name || empty( $settings[ $this->prefix . $control_name ] ) ) ? $value : $settings[ $this->prefix . $control_name ];
 		}
 	}
@@ -140,7 +140,7 @@ class Elementor_Related_Query extends Elementor_Post_Query {
 		$this->set_fallback_arg_by_settings( 'post_type', $post_types );
 
 		if ( 'fallback_by_id' === $this->get_widget_settings( 'related_fallback' ) ) {
-			$this->set_fallback_arg_by_settings( 'post__in', [ 0 ], 'fallback_ids' );
+			$this->set_fallback_arg_by_settings( 'post__in', array( 0 ), 'fallback_ids' );
 			$this->set_fallback_arg_by_settings( 'orderby', 'rand' );
 		} else { // recent posts.
 			$this->set_fallback_arg_by_settings( 'orderby', 'date' );

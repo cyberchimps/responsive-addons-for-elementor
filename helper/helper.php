@@ -205,7 +205,7 @@ class Helper {
 		return wp_kses( $content, self::get_allowed_tags() );
 	}
 
-	public static function validate_html_tags( $tag, $default_tag='div' ) {
+	public static function validate_html_tags( $tag, $default_tag = 'div' ) {
 		return array_key_exists( strtolower( $tag ), self::get_allowed_tags() ) ? $tag : $default_tag;
 	}
 
@@ -372,9 +372,8 @@ class Helper {
 	/**
 	 * Fix old query
 	 */
-
 	public static function fix_old_query( $settings ) {
-		 $update_query = false;
+		$update_query = false;
 
 		foreach ( $settings as $key => $value ) {
 			if ( strpos( $key, 'eaeposts_' ) !== false ) {
@@ -609,12 +608,11 @@ class Helper {
 			$html .= $term->name;
 			$html .= '</a>';
 			$html .= '</li>';
-			$count++;
+			++$count;
 		}
 		$html .= '</ul>';
 
 		return $html;
-
 	}
 
 	public static function include_with_variable( $file_path, $variables = array() ) {
@@ -636,19 +634,19 @@ class Helper {
 	 * @return array
 	 */
 	public static function get_post_orderby_options() {
-		 $orderby = array(
-			 'ID'            => 'Post ID',
-			 'author'        => 'Post Author',
-			 'title'         => 'Title',
-			 'date'          => 'Date',
-			 'modified'      => 'Last Modified Date',
-			 'parent'        => 'Parent Id',
-			 'rand'          => 'Random',
-			 'comment_count' => 'Comment Count',
-			 'menu_order'    => 'Menu Order',
-		 );
+		$orderby = array(
+			'ID'            => 'Post ID',
+			'author'        => 'Post Author',
+			'title'         => 'Title',
+			'date'          => 'Date',
+			'modified'      => 'Last Modified Date',
+			'parent'        => 'Parent Id',
+			'rand'          => 'Random',
+			'comment_count' => 'Comment Count',
+			'menu_order'    => 'Menu Order',
+		);
 
-		 return $orderby;
+		return $orderby;
 	}
 
 	/**
@@ -871,7 +869,7 @@ class Helper {
 								'iterator'      => $iterator,
 							)
 						);
-						$iterator++;
+						++$iterator;
 					}
 				}
 			}
@@ -1315,10 +1313,8 @@ class Helper {
 				if ( ( $taxonomy->show_ui ) && ( 'pa_' !== substr( $taxonomy_data, 0, 3 ) ) ) {
 					$taxonomies_list[ $taxonomy_data ] = $taxonomy->label;
 				}
-			} else {
-				if ( $taxonomy->show_ui ) {
+			} elseif ( $taxonomy->show_ui ) {
 					$taxonomies_list[ $taxonomy_data ] = $taxonomy->label;
-				}
 			}
 		}
 		return $taxonomies_list;
@@ -1529,6 +1525,4 @@ class Helper {
 			),
 		);
 	}
-
-
 }

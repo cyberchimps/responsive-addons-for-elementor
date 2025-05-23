@@ -784,10 +784,8 @@ class Responsive_Addons_For_Elementor_Sticky_Video extends Widget_Base {
 				if ( '' !== $settings['rael_sv_video_end_time'] ) {
 					$video_url .= ',' . esc_attr( $settings['rael_sv_video_end_time'] );
 				}
-			} else {
-				if ( '' !== $settings['rael_sv_video_end_time'] ) {
+			} elseif ( '' !== $settings['rael_sv_video_end_time'] ) {
 					$video_url .= '#t=0,' . esc_attr( $settings['rael_sv_video_end_time'] );
-				}
 			}
 		}
 

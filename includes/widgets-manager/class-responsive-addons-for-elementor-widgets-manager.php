@@ -322,7 +322,6 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 				require_once RAEL_DIR . 'includes/widgets-manager/widgets/woocommerce/class-responsive-addons-for-elementor-' . $data . '.php';
 			}
 		}
-
 	}
 
 	/**
@@ -942,7 +941,6 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 
 		return false;
 	}
-
 }
 
 Responsive_Addons_For_Elementor_Widgets_Manager::instance();

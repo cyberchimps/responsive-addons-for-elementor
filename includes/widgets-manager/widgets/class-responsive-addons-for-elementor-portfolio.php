@@ -544,7 +544,7 @@ class Responsive_Addons_For_Elementor_Portfolio extends Widget_Base {
 	 * @var array
 	 */
 	public $_query;
-	
+
 	public function query_posts() {
 		$query_args = array(
 			'posts_per_page' => $this->get_settings( 'posts_per_page' ),
@@ -609,7 +609,7 @@ class Responsive_Addons_For_Elementor_Portfolio extends Widget_Base {
 		}
 		usort(
 			$terms,
-			function( $a, $b ) {
+			function ( $a, $b ) {
 				return strcmp( $a->name, $b->name );
 			}
 		);
@@ -642,7 +642,7 @@ class Responsive_Addons_For_Elementor_Portfolio extends Widget_Base {
 	protected function render_post_header() {
 		global $post;
 		$tags_classes = array_map(
-			function( $tag ) {
+			function ( $tag ) {
 				return 'elementor-filter-' . $tag->term_id;
 			},
 			$post->tags

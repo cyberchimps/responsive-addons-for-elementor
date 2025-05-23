@@ -225,7 +225,6 @@ function get_rael_product_archive_id() {
 	}
 
 	return apply_filters( 'get_rael_product_archive_id', $product_archive_id );
-
 }
 /**
  * Display Header markup.
@@ -242,7 +241,6 @@ function rael_render_header() {
 		</header>
 
 	<?php
-
 }
 
 /**
@@ -259,7 +257,6 @@ function rael_render_footer() {
 			<?php RAEL_Theme_Builder::get_footer_content(); ?>
 		</footer>
 	<?php
-
 }
 
 /**

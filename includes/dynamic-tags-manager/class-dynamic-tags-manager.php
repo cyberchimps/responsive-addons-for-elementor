@@ -12,7 +12,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 use Responsive_Addons_For_Elementor\Traits\Singleton;
-use \Elementor\Plugin;
+use Elementor\Plugin;
 
 /**
  * Class Dynamic Tags Manager
@@ -33,7 +33,6 @@ class Dynamic_Tags_Manager {
 		add_action( 'elementor/dynamic_tags/register', array( $this, 'register_dynamic_tags' ) );
 
 		$this->load_dependencies();
-
 	}
 	public function load_dependencies() {
 		if ( class_exists( 'WooCommerce' ) ) {

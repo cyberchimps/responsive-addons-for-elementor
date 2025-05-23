@@ -16,17 +16,17 @@ abstract class Woo_Widget_Base extends Widget_Base {
 	protected $gettext_modifications;
 
 	public function get_categories() {
-		return [ 'responsive-addons-for-elementor' ];
+		return array( 'responsive-addons-for-elementor' );
 	}
 
 	protected function get_devices_default_args() {
-		$devices_required = [];
+		$devices_required = array();
 
 		// Make sure device settings can inherit from larger screen sizes' breakpoint settings.
 		foreach ( Breakpoints_Manager::get_default_config() as $breakpoint_name => $breakpoint_config ) {
-			$devices_required[ $breakpoint_name ] = [
+			$devices_required[ $breakpoint_name ] = array(
 				'required' => false,
-			];
+			);
 		}
 
 		return $devices_required;
@@ -35,22 +35,22 @@ abstract class Woo_Widget_Base extends Widget_Base {
 	protected function add_columns_responsive_control() {
 		$this->add_responsive_control(
 			'columns',
-			[
-				'label' => esc_html__( 'Columns', 'responsive-addons-for-elementor' ),
-				'type' => Controls_Manager::NUMBER,
-				'prefix_class' => 'elementor-grid%s-',
-				'min' => 1,
-				'max' => 12,
-				'default' => Products_Renderer::DEFAULT_COLUMNS_AND_ROWS,
-				'tablet_default' => '3',
-				'mobile_default' => '2',
-				'required' => true,
-				'device_args' => $this->get_devices_default_args(),
-				'min_affected_device' => [
+			array(
+				'label'               => esc_html__( 'Columns', 'responsive-addons-for-elementor' ),
+				'type'                => Controls_Manager::NUMBER,
+				'prefix_class'        => 'elementor-grid%s-',
+				'min'                 => 1,
+				'max'                 => 12,
+				'default'             => Products_Renderer::DEFAULT_COLUMNS_AND_ROWS,
+				'tablet_default'      => '3',
+				'mobile_default'      => '2',
+				'required'            => true,
+				'device_args'         => $this->get_devices_default_args(),
+				'min_affected_device' => array(
 					Controls_Stack::RESPONSIVE_DESKTOP => Controls_Stack::RESPONSIVE_TABLET,
-					Controls_Stack::RESPONSIVE_TABLET => Controls_Stack::RESPONSIVE_TABLET,
-				],
-			]
+					Controls_Stack::RESPONSIVE_TABLET  => Controls_Stack::RESPONSIVE_TABLET,
+				),
+			)
 		);
 	}
 
@@ -100,14 +100,14 @@ abstract class Woo_Widget_Base extends Widget_Base {
 	 * @return array
 	 */
 	public static function get_custom_border_type_options() {
-		return [
-			'none' => esc_html__( 'None', 'responsive-addons-for-elementor' ),
-			'solid' => esc_html__( 'Solid', 'responsive-addons-for-elementor' ),
+		return array(
+			'none'   => esc_html__( 'None', 'responsive-addons-for-elementor' ),
+			'solid'  => esc_html__( 'Solid', 'responsive-addons-for-elementor' ),
 			'double' => esc_html__( 'Double', 'responsive-addons-for-elementor' ),
 			'dotted' => esc_html__( 'Dotted', 'responsive-addons-for-elementor' ),
 			'dashed' => esc_html__( 'Dashed', 'responsive-addons-for-elementor' ),
 			'groove' => esc_html__( 'Groove', 'responsive-addons-for-elementor' ),
-		];
+		);
 	}
 
 	/**
@@ -118,7 +118,7 @@ abstract class Woo_Widget_Base extends Widget_Base {
 	 * @since 3.5.0
 	 */
 	protected function init_gettext_modifications() {
-		$this->gettext_modifications = [];
+		$this->gettext_modifications = array();
 	}
 
 	/**

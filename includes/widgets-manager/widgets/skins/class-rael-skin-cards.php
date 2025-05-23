@@ -463,9 +463,9 @@ class RAEL_Skin_Cards extends RAEL_Skin_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .elementor-post__card .elementor-post__badge' => 'background-color: {{VALUE}};',
 				),
-				'global'   => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_ACCENT,
-				],
+				),
 				'condition' => array(
 					$this->get_control_id( 'show_badge' ) => 'yes',
 				),
@@ -551,9 +551,9 @@ class RAEL_Skin_Cards extends RAEL_Skin_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'badge_typography',
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-				],
+				),
 				'selector'  => '{{WRAPPER}} .elementor-post__card .elementor-post__badge',
 				'exclude'   => array( 'font_size', 'line-height' ),
 				'condition' => array(
@@ -721,5 +721,4 @@ class RAEL_Skin_Cards extends RAEL_Skin_Base {
 		$this->render_meta_data();
 		$this->render_post_footer();
 	}
-
 }

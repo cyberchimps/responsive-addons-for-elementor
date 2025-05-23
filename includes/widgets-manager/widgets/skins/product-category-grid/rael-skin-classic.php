@@ -164,9 +164,9 @@ class RAEL_Skin_Classic extends Skin_Base {
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
 				'name'     => 'rael_content_title_typography',
 				'selector' => '{{WRAPPER}} .rael-product-category-grid__content-title a',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
-				],
+				),
 			)
 		);
 
@@ -231,9 +231,9 @@ class RAEL_Skin_Classic extends Skin_Base {
 				'label'     => __( 'Typography', 'responsive-addons-for-elementor' ),
 				'name'      => 'rael_content_count_typography',
 				'selector'  => '{{WRAPPER}} .rael-product-category-grid__product-count',
-				'global'   => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'condition' => array(
 					'rael_show_product_count' => 'yes',
 				),
@@ -268,5 +268,4 @@ class RAEL_Skin_Classic extends Skin_Base {
 	public function render() {
 		$this->parent->render();
 	}
-
 }

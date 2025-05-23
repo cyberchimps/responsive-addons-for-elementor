@@ -3680,7 +3680,7 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 
 		$this->end_controls_section();
 	}
-	
+
 	/**
 	 * Form Logo Position
 	 *
@@ -3694,35 +3694,35 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 	 * @var string
 	 */
 	protected $page_id;
-	
+
 	/**
 	 * Should print login form?
 	 *
 	 * @var bool
 	 */
 	protected $should_print_login_form;
-	
+
 	/**
 	 * Should print registration form?
 	 *
 	 * @var bool
 	 */
 	protected $should_print_registration_form;
-	
+
 	/**
 	 * Form Image URL
 	 *
 	 * @var string
 	 */
 	protected $form_image_url;
-	
+
 	/**
 	 * Logo URL
 	 *
 	 * @var string
 	 */
 	protected $logo_url;
-	
+
 	/**
 	 * Render
 	 *
@@ -4019,7 +4019,7 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 						foreach ( $register_input_fields as  $key => $item ) {
 							$field_type         = $item['rael_field_type'];
 							$dynamic_field_name = "{$field_type}_exists";
-							$$dynamic_field_name ++; // NOTE, double $$ intentional. Dynamically update the var check eg. $username_exists++ to prevent user from using the same field twice
+							$$dynamic_field_name++; // NOTE, double $$ intentional. Dynamically update the var check eg. $username_exists++ to prevent user from using the same field twice
 							// is same field repeated?
 							if ( $$dynamic_field_name > 1 ) {
 								$repeated_form_input_types[] = $form_input_types[ $field_type ];

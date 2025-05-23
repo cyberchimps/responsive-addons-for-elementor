@@ -827,7 +827,7 @@ abstract class Skin_Style {
 			$query->the_post();
 			include RAEL_DIR . 'includes/widgets-manager/widgets/skins/templates/content-post-' . str_replace( '_', '-', $style_id ) . '.php';
 
-			$count++;
+			++$count;
 		}
 
 		wp_reset_postdata();

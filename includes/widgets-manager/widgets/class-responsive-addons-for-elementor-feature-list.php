@@ -164,12 +164,12 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 		$repeater->add_control(
 			'rael_feature_list_icon_individual_color',
 			array(
-				'label'            => esc_html__( 'Icon Color', 'responsive-addons-for-elementor' ),
-				'type'             => Controls_Manager::COLOR,
-				'global'           => [
-					'default'       => Global_Colors::COLOR_PRIMARY,
-				],
-				'condition'        => array(
+				'label'     => esc_html__( 'Icon Color', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'global'    => array(
+					'default' => Global_Colors::COLOR_PRIMARY,
+				),
+				'condition' => array(
 					'rael_icon_style' => 'on',
 				),
 			)
@@ -180,9 +180,9 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 			array(
 				'label'            => esc_html__( 'Icon Background', 'responsive-addons-for-elementor' ),
 				'type'             => Controls_Manager::COLOR,
-				'global'           => [
-					'default'       => Global_Colors::COLOR_PRIMARY,
-				],
+				'global'           => array(
+					'default' => Global_Colors::COLOR_PRIMARY,
+				),
 				'fa4compatibility' => 'rael_feature_list_icon',
 				'condition'        => array(
 					'rael_icon_style' => 'on',
@@ -194,9 +194,9 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 			array(
 				'label'            => esc_html__( 'Icon Box Background', 'responsive-addons-for-elementor' ),
 				'type'             => Controls_Manager::COLOR,
-				'global'           => [
-					'default'       => Global_Colors::COLOR_PRIMARY,
-				],
+				'global'           => array(
+					'default' => Global_Colors::COLOR_PRIMARY,
+				),
 				'fa4compatibility' => 'rael_feature_list_icon',
 				'condition'        => array(
 					'rael_icon_style' => 'on',
@@ -493,9 +493,9 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 			array(
 				'label'     => esc_html__( 'Connector Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_PRIMARY,
-				],
+				),
 				'default'   => '#37368e',
 				'selectors' => array(
 					'{{WRAPPER}} .connector-type-classic .connector'  => 'border-color: {{VALUE}};',
@@ -801,9 +801,9 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .rael-feature-list-content-box .rael-feature-list-title, {{WRAPPER}} .rael-feature-list-content-box .rael-feature-list-title > a, {{WRAPPER}} .rael-feature-list-content-box .rael-feature-list-title:visited' => 'color: {{VALUE}};',
 				),
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_PRIMARY,
-				],
+				),
 			)
 		);
 
@@ -812,9 +812,9 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 			array(
 				'name'     => 'rael_feature_list_title_typography',
 				'selector' => '{{WRAPPER}} .rael-feature-list-content-box .rael-feature-list-title, {{WRAPPER}} .rael-feature-list-content-box .rael-feature-list-title a',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				),
 			)
 		);
 
@@ -836,9 +836,9 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .rael-feature-list-content-box .rael-feature-list-content' => 'color: {{VALUE}};',
 				),
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_TEXT,
-				],
+				),
 			)
 		);
 
@@ -847,9 +847,9 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 			array(
 				'name'           => 'rael_feature_list_description_typography',
 				'selector'       => '{{WRAPPER}} .rael-feature-list-content-box .rael-feature-list-content',
-				'global'   => [
+				'global'         => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'fields_options' => array(
 					'font_size' => array(
 						'default' => array(
@@ -879,7 +879,7 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 	 * @access protected
 	 */
 	protected function render() {
-		$settings            = $this->get_settings_for_display();
+		$settings         = $this->get_settings_for_display();
 		$icon_circle_size = 70;
 		if ( isset( $settings['rael_feature_list_icon_circle_size']['size'] ) ) {
 			$icon_circle_size = intval( $settings['rael_feature_list_icon_circle_size']['size'] );
@@ -1002,7 +1002,7 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 
 					<div class="rael-feature-list-icon-box">
 						<div class="rael-feature-list-icon-inner"<?php echo wp_kses_post( $icon_box_bg ); ?>>
-							<<?php echo wp_kses_post( $feature_icon_tag ) . ' ' . wp_kses_post( $this->get_render_attribute_string( 'rael_feature_list_icon' . $index ) ) . $this->get_render_attribute_string( 'rael_feature_list_link' . $index ) . 'style="background-color:' . esc_attr( $icon_bg ) . '"' ?>>
+							<<?php echo wp_kses_post( $feature_icon_tag ) . ' ' . wp_kses_post( $this->get_render_attribute_string( 'rael_feature_list_icon' . $index ) ) . $this->get_render_attribute_string( 'rael_feature_list_link' . $index ) . 'style="background-color:' . esc_attr( $icon_bg ) . '"'; ?>>
 				<?php
 				if ( 'icon' === $item['rael_icon_type'] && $feature_has_icon ) {
 
@@ -1078,5 +1078,4 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 	public function get_custom_help_url() {
 		return 'https://cyberchimps.com/docs/widgets/feature-list';
 	}
-
 }

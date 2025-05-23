@@ -86,7 +86,7 @@ class Responsive_Addons_For_Elementor_Logo_Carousel extends Widget_Base {
 	public function get_style_depends() {
 		return array(
 			'swiper',
-			'e-swiper',	
+			'e-swiper',
 		);
 	}
 	/**
@@ -696,9 +696,9 @@ class Responsive_Addons_For_Elementor_Logo_Carousel extends Widget_Base {
 			array(
 				'name'     => 'rael_logo_title_typography',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-logo-carousel__item-title',
 			)
 		);
@@ -1323,7 +1323,7 @@ class Responsive_Addons_For_Elementor_Logo_Carousel extends Widget_Base {
 							</div>
 							<?php
 						endif;
-						$i++;
+						++$i;
 					endforeach;
 					?>
 				</div>

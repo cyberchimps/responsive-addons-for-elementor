@@ -86,7 +86,7 @@ class Responsive_Addons_For_Elementor_Slider extends Widget_Base {
 			'font-awesome-5-all',
 			'font-awesome-4-shim',
 			'swiper',
-			'e-swiper',	
+			'e-swiper',
 		);
 	}
 	/**
@@ -189,9 +189,9 @@ class Responsive_Addons_For_Elementor_Slider extends Widget_Base {
 		$repeater->add_control(
 			'background_overlay',
 			array(
-				'label'      => __( 'Background Overlay', 'responsive-addons-for-elementor' ),
-				'type'       => Controls_Manager::SWITCHER,
-				'default'    => '',
+				'label'     => __( 'Background Overlay', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'default'   => '',
 				'condition' => array( 'background_image[id]!' => '' ),
 			)
 		);
@@ -263,9 +263,9 @@ class Responsive_Addons_For_Elementor_Slider extends Widget_Base {
 		$repeater->add_control(
 			'background_ken_burns',
 			array(
-				'label'      => __( 'Ken Burns Effect', 'responsive-addons-for-elementor' ),
-				'type'       => Controls_Manager::SWITCHER,
-				'default'    => '',
+				'label'     => __( 'Ken Burns Effect', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'default'   => '',
 				'condition' => array( 'background_image[id]!' => '' ),
 			)
 		);
@@ -858,9 +858,9 @@ class Responsive_Addons_For_Elementor_Slider extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'heading_typography',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				),
 				'selector' => '{{WRAPPER}} .responsive-slide-heading',
 			)
 		);
@@ -908,9 +908,9 @@ class Responsive_Addons_For_Elementor_Slider extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'description_typography',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
-				],
+				),
 				'selector' => '{{WRAPPER}} .responsive-slide-description',
 			)
 		);
@@ -939,9 +939,9 @@ class Responsive_Addons_For_Elementor_Slider extends Widget_Base {
 			\Elementor\Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'button_typography',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'selector' => '{{WRAPPER}} .responsive-slide-button',
 			)
 		);
@@ -1405,7 +1405,7 @@ class Responsive_Addons_For_Elementor_Slider extends Widget_Base {
 			$slide_html       = '<div class="swiper-slide-bg' . $ken_class . '" data-ken-burns="' . $active_ken_burns . '"></div>' . $slide_html;
 
 			$slides[] = '<div class="elementor-repeater-item-' . $slide['_id'] . ' swiper-slide">' . $slide_html . '</div>';
-			$slide_count++;
+			++$slide_count;
 		}
 
 		$prev      = 'left';
@@ -1446,7 +1446,6 @@ class Responsive_Addons_For_Elementor_Slider extends Widget_Base {
 			</div>
 		</div>
 		<?php
-
 	}
 
 	/**

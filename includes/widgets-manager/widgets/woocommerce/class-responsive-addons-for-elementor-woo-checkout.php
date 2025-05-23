@@ -14,17 +14,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use \Elementor\Controls_Manager;
-use \Elementor\Frontend;
-use \Elementor\Group_Control_Background;
-use \Elementor\Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Typography;
-use \Elementor\Widget_Base;
-use \Elementor\Icons_Manager;
-use \Responsive_Addons_For_Elementor\Traits\Missing_Dependency;
-use \Responsive_Addons_For_Elementor\Traits\RAEL_Products_Comparable;
-use \Responsive_Addons_For_Elementor\Traits\Helper_Woo_Checkout;
+use Elementor\Controls_Manager;
+use Elementor\Frontend;
+use Elementor\Group_Control_Background;
+use Elementor\Group_Control_Border;
+use Elementor\Group_Control_Box_Shadow;
+use Elementor\Group_Control_Typography;
+use Elementor\Widget_Base;
+use Elementor\Icons_Manager;
+use Responsive_Addons_For_Elementor\Traits\Missing_Dependency;
+use Responsive_Addons_For_Elementor\Traits\RAEL_Products_Comparable;
+use Responsive_Addons_For_Elementor\Traits\Helper_Woo_Checkout;
 
 /**
  * 'RAEL Woo Checkout' widget class.
@@ -3690,5 +3690,4 @@ class Responsive_Addons_For_Elementor_Woo_Checkout extends Widget_Base {
 		</div>
 		<?php
 	}
-
 }

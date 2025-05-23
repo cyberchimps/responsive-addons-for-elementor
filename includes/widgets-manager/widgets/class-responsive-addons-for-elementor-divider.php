@@ -688,9 +688,9 @@ class Responsive_Addons_For_Elementor_Divider extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'rael_divider_text_typography',
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-				],
+				),
 				'selector'  => '{{WRAPPER}} .rael-divider__text',
 				'condition' => array(
 					'rael_divider_type' => 'text',
@@ -1005,11 +1005,11 @@ class Responsive_Addons_For_Elementor_Divider extends Widget_Base {
 			'rael-divider'
 		);
 
-		if ( isset($settings['rael_divider_direction']) ) {
+		if ( isset( $settings['rael_divider_direction'] ) ) {
 			$this->add_render_attribute( 'rael_divider', 'class', 'rael-divider-direction--' . $settings['rael_divider_direction'] );
 		}
 
-		if ( isset($settings['rael_divider_style']) ) {
+		if ( isset( $settings['rael_divider_style'] ) ) {
 			$this->add_render_attribute( 'rael_divider', 'class', 'rael-divider-style--' . $settings['rael_divider_style'] );
 		}
 

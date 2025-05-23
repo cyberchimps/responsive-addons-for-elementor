@@ -863,9 +863,9 @@ class Responsive_Addons_For_Elementor_Product_Category_Grid extends Widget_Base 
 			array(
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
 				'name'     => 'rael_load_more_button',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-product-category-grid__load-more-button',
 			)
 		);
@@ -1010,10 +1010,9 @@ class Responsive_Addons_For_Elementor_Product_Category_Grid extends Widget_Base 
 		} elseif ( 'child' === $settings['rael_query_type'] ) {
 			if ( 'none' !== $settings['rael_parent_category'] && ! empty( $settings['rael_parent_category'] ) ) {
 				$query_args['child_of'] = $settings['rael_parent_category'];
-			} else {
-				if ( is_admin() ) {
+			} elseif ( is_admin() ) {
 					return printf( '<div class="rael-pcg__category-selection-error">%s</div>', __( 'Select Parent Category from <strong>Query > Child Categories of</strong>.', 'responsive-addons-for-elementor' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				}
+
 			}
 		}
 

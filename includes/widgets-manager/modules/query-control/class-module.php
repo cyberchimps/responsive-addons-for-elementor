@@ -111,7 +111,6 @@ class Module extends Module_Base {
 				'description' => __( 'Set to Yes to avoid duplicate posts from showing up on the page. This only affects the frontend.', 'responsive-addons-for-elementor' ),
 			)
 		);
-
 	}
 
 	/**
@@ -150,7 +149,6 @@ class Module extends Module_Base {
 		}
 
 		return $results;
-
 	}
 
 	/**
@@ -389,7 +387,6 @@ class Module extends Module_Base {
 				}
 			}
 		}
-
 	}
 
 	/**

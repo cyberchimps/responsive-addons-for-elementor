@@ -240,5 +240,4 @@ class Responsive_Addons_For_Elementor_Theme_Product_Archive extends Woo_Products
 	public function get_group_name() {
 		return 'woocommerce';
 	}
-
 }

@@ -39,7 +39,7 @@ class Elementor_Post_Query {
 	 */
 	public function get_query() {
 		$this->get_query_args();
-		
+
 		$offset_control = $this->get_widget_settings( 'offset' );
 
 		$query_id = $this->get_widget_settings( 'query_id' );
@@ -59,7 +59,7 @@ class Elementor_Post_Query {
 		remove_filter( 'found_posts', array( $this, 'fix_query_found_posts' ), 1 );
 
 		Module::add_to_avoid_list( wp_list_pluck( $query->posts, 'ID' ) );
-		
+
 		return $query;
 	}
 

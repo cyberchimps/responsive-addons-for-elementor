@@ -45,7 +45,6 @@ if ( ! class_exists( 'RaelCrossSiteCopyPasteLoader' ) ) {
 			if ( isset( $enable_copy_paste ) && ( 1 == $enable_copy_paste ) ) {
 				require_once RAEL_DIR . 'ext/cross-site-cp/class-rael-cs-copy-paste-btn.php';
 			}
-
 		}
 
 		/**
@@ -78,7 +77,6 @@ if ( ! class_exists( 'RaelCrossSiteCopyPasteLoader' ) ) {
 			}
 			return self::$rael_instance;
 		}
-
 	}
 }
 

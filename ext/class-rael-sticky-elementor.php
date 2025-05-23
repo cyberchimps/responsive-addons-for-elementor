@@ -193,10 +193,9 @@ if ( ! class_exists( 'Rael_Sticky_Elementor' ) ) {
 		 * @param array  $args    Element arguments.
 		 */
 		public function register_sticky_controls( $section, $section_id, $args ) {
-			
-			if ( ! (( 'section' === $section->get_name() && 'section_background' === $section_id ) || ( 'container' === $section->get_name()  && 'section_background' === $section_id  )) ) 
-			{
-				return ;
+
+			if ( ! ( ( 'section' === $section->get_name() && 'section_background' === $section_id ) || ( 'container' === $section->get_name() && 'section_background' === $section_id ) ) ) {
+				return;
 			}
 
 			$section->start_controls_section(
@@ -406,7 +405,6 @@ if ( ! class_exists( 'Rael_Sticky_Elementor' ) ) {
 					'elements_data' => $this->columns_data,
 				)
 			);
-
 		}
 
 		/**

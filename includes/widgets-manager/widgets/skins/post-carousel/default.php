@@ -91,7 +91,7 @@ if ( 'two' === $settings['rael_post_preset_style'] ) :
 									$html .= $term->name;
 									$html .= '</a>';
 									$html .= '</li>';
-									$count++;
+									++$count;
 								}
 								$html .= '</ul>';
 								echo wp_kses_post( $html );
@@ -170,7 +170,7 @@ if ( 'two' === $settings['rael_post_preset_style'] ) :
 									$html .= $term->name;
 									$html .= '</a>';
 									$html .= '</li>';
-									$count++;
+									++$count;
 								}
 								$html .= '</ul>';
 								echo wp_kses_post( $html );

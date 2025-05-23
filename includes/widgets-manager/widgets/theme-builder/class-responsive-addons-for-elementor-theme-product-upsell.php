@@ -304,5 +304,4 @@ class Responsive_Addons_For_Elementor_Theme_Product_Upsell extends Responsive_Ad
 	 * @access public
 	 */
 	public function render_plain_content() {}
-
 }

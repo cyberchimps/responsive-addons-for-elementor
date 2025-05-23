@@ -1,4 +1,11 @@
 <?php
+/**
+ * Trait for product comparison
+ *
+ * @package responsive-addons-for-elementor
+ * @since 1.0.0
+ */
+
 namespace Responsive_Addons_For_Elementor\Traits;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,6 +26,10 @@ use Responsive_Addons_For_Elementor\Helper\Helper;
  * @since 1.6.0
  */
 trait RAEL_Products_Comparable {
+
+	/**
+	 * Get the WooCommerce attribute taxonomies.
+	 */
 	public static function get_wc_attr_taxonomies_list() {
 		$attributes_tax = wc_get_attribute_taxonomies();
 		$data           = array();
@@ -28,6 +39,9 @@ trait RAEL_Products_Comparable {
 		return $data;
 	}
 
+	/**
+	 * Get the themes.
+	 */
 	public static function get_themes() {
 		return apply_filters(
 			'rael/woo_product_compare/default_themes',
@@ -43,6 +57,9 @@ trait RAEL_Products_Comparable {
 		);
 	}
 
+	/**
+	 * Get the field types.
+	 */
 	public static function get_field_types() {
 		$default_types = array(
 			'image'       => __( 'Image', 'responsive-addons-for-elementor' ),
@@ -59,6 +76,9 @@ trait RAEL_Products_Comparable {
 		return apply_filters( 'rael/woo_product_compare/default-fields', array_merge( $default_types, self::get_wc_attr_taxonomies_list() ) );
 	}
 
+	/**
+	 * Get the default repeater fields.
+	 */
 	public static function get_default_repeater_fields() {
 		return apply_filters(
 			'rael/woo_product_compare/default-repeater-fields',
@@ -111,6 +131,12 @@ trait RAEL_Products_Comparable {
 		);
 	}
 
+	/**
+	 * Display the compare button.
+	 *
+	 * @param mixed  $id ID for the button.
+	 * @param string $btn_type Type of the button.
+	 */
 	public static function print_compare_button( $id = false, $btn_type = 'text' ) {
 		if ( empty( $id ) ) {
 			global $product;
@@ -142,12 +168,12 @@ trait RAEL_Products_Comparable {
 	/**
 	 * It renders product compare table and it accepts an argument with 3 keys, products, fields and ds. Explanation is given below.
 	 *
-	 * @param array $options  {
+	 * @param array $options  Options 
 	 *
 	 * @var array   $products list of WC_product object
 	 * @var array   $fields   list of WC_Product feature fields
 	 * @var array   $ds       Widget's display settings array
-	 * }
+	 * 
 	 */
 	public static function render_compare_table( $options ) {
 		$products = $fields = $ds = array();
@@ -189,7 +215,7 @@ trait RAEL_Products_Comparable {
 								<i class="fas fa-trash rael-wc-remove" data-product-id="<?php echo esc_attr( $product_id ); ?>" title="<?php esc_attr_e( 'Remove', 'responsive-addons-for-elementor' ); ?>"></i>
 							</td>
 							<?php
-							$rm_index ++;
+							++$rm_index;
 						}
 						echo '</tr>';
 					}
@@ -197,7 +223,7 @@ trait RAEL_Products_Comparable {
 					$count = 1;
 					foreach ( $fields as $field => $name ) {
 						$f_heading_class = 1 === $count ? 'first-th' : '';
-						$count ++;
+						++$count;
 						?>
 						<tr class="<?php echo esc_attr( $field ); ?>">
 							<th class="thead <?php echo esc_attr( $f_heading_class ); ?>">
@@ -207,16 +233,13 @@ trait RAEL_Products_Comparable {
 										if ( ! empty( $title ) ) {
 											printf( wp_kses_post( "<{$title_tag} class='rael-products-compare__title'>%s</{$title_tag}>" ), wp_kses_post( Helper::strip_tags_keeping_allowed_tags( $title ) ) );
 										}
-									} else {
-										if ( 'theme-5' === $theme && $field === 'title' ) {
+									} elseif ( 'theme-5' === $theme && $field === 'title' ) {
 											echo '&nbsp;';
-										} else {
-											if ( ! empty( $icon ) ) {
-												self::print_icon( $icon );
-											}
-											printf( '<span class="field-name">%s</span>', wp_kses_post( Helper::strip_tags_keeping_allowed_tags( $name ) ) );
-
+									} else {
+										if ( ! empty( $icon ) ) {
+											self::print_icon( $icon );
 										}
+										printf( '<span class="field-name">%s</span>', wp_kses_post( Helper::strip_tags_keeping_allowed_tags( $name ) ) );
 									}
 									?>
 								</div>
@@ -264,7 +287,7 @@ trait RAEL_Products_Comparable {
 								</td>
 
 								<?php
-								++ $index;
+								++$index;
 							}
 							?>
 
@@ -294,7 +317,7 @@ trait RAEL_Products_Comparable {
 								?>
 								<td class="<?php echo esc_attr( $product_class ); ?>"><?php echo wp_kses_post( $product->fields['price'] ); ?></td>
 								<?php
-								++ $index;
+								++$index;
 							endforeach;
 							?>
 
@@ -324,7 +347,7 @@ trait RAEL_Products_Comparable {
 									<?php woocommerce_template_loop_add_to_cart(); ?>
 								</td>
 								<?php
-								++ $index;
+								++$index;
 							endforeach;
 							?>
 
@@ -650,10 +673,8 @@ trait RAEL_Products_Comparable {
 		foreach ( $fields as $field ) {
 			if ( isset( $df[ $field['rael_products_field_type'] ] ) ) {
 				$fields_to_show[ $field['rael_products_field_type'] ] = Helper::strip_tags_keeping_allowed_tags( $field['rael_products_field_label'] );
-			} else {
-				if ( taxonomy_exists( $field['rael_products_field_type'] ) ) {
+			} elseif ( taxonomy_exists( $field['rael_products_field_type'] ) ) {
 					$fields_to_show[ $field['rael_products_field_type'] ] = wc_attribute_label( $field['rael_products_field_type'] );
-				}
 			}
 		}
 

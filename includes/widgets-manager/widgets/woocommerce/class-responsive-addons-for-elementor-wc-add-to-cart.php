@@ -20,6 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Responsive_Addons_For_Elementor_WC_Add_To_Cart extends Widget_Button {
 	use Missing_Dependency;
+
 	/**
 	 * Retrieve the widget name.
 	 *
@@ -277,7 +278,7 @@ class Responsive_Addons_For_Elementor_WC_Add_To_Cart extends Widget_Button {
 			return;
 		}
 
-		$text_callback = function() {
+		$text_callback = function () {
 			ob_start();
 			$this->render_text();
 

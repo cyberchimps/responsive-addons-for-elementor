@@ -32,6 +32,7 @@ use Responsive_Addons_For_Elementor\Helper\Helper;
  */
 class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 	use Missing_Dependency;
+
 	/**
 	 * Constructor for the RAE Product Carousel widget class.
 	 *
@@ -93,7 +94,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 	public function get_style_depends() {
 		return array(
 			'swiper',
-			'e-swiper',	
+			'e-swiper',
 		);
 	}
 	/**
@@ -282,7 +283,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 					'terms'    => $settings[ $setting_key ],
 				);
 			}
-			$tax_query_count++;
+			++$tax_query_count;
 		}
 
 		return $args;
@@ -1142,7 +1143,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .rael-product-carousel' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
 					'{{WRAPPER}} .rael-product-carousel .rael-pc__product-image img, {{WRAPPER}} .rael-product-carousel > .rael-pc__product-image-wrapper'
-														 => 'border-radius: {{TOP}}px {{RIGHT}}px 0 0;',
+														=> 'border-radius: {{TOP}}px {{RIGHT}}px 0 0;',
 				),
 			)
 		);
@@ -2990,7 +2991,9 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 
 		if ( 'yes' === $settings['rael_pc_dots'] ) {
 			?>
-			<div class="swiper-pagination swiper-pagination-<?php echo esc_attr( $this->get_id() ) . ' ' . wp_kses_post( $settings['rael_pc_dots_preset'] );
+			<div class="swiper-pagination swiper-pagination-
+			<?php
+			echo esc_attr( $this->get_id() ) . ' ' . wp_kses_post( $settings['rael_pc_dots_preset'] );
 			?>
 			">
 			</div>

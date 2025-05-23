@@ -819,9 +819,9 @@ class RAEL_Offcanvas extends Widget_Base {
 			array(
 				'name'     => 'text_typography',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-				],
+				),
 				'selector' => '.rael-offcanvas-content-{{ID}} .rael-offcanvas-body, .rael-offcanvas-content-{{ID}} .rael-offcanvas-body *:not(.fas):not(.eicon):not(.fab):not(.far):not(.fa)',
 			)
 		);
@@ -864,9 +864,9 @@ class RAEL_Offcanvas extends Widget_Base {
 			array(
 				'name'     => 'links_typography',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-				],
+				),
 				'selector' => '.rael-offcanvas-content-{{ID}} .rael-offcanvas-body a',
 			)
 		);
@@ -926,9 +926,9 @@ class RAEL_Offcanvas extends Widget_Base {
 			array(
 				'name'     => 'rael_offcanvas_title_typography',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-				],
+				),
 				'selector' => '.rael-offcanvas-content-{{ID}} .rael-offcanvas-title h3',
 			)
 		);
@@ -1173,9 +1173,9 @@ class RAEL_Offcanvas extends Widget_Base {
 			array(
 				'name'     => 'button_typography',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-offcanvas-toggle',
 			)
 		);

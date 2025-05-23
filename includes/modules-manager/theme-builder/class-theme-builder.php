@@ -50,7 +50,7 @@ class RAEL_Theme_Builder {
 	 */
 	private function __construct() {
 		$this->template = get_template();
-		$this->dir      = dirname( __FILE__ ) . '/';
+		$this->dir      = __DIR__ . '/';
 
 		$is_elementor_callable = ( defined( 'ELEMENTOR_VERSION' ) && is_callable( 'Elementor\Plugin::instance' ) ) ? true : false;
 
@@ -88,7 +88,6 @@ class RAEL_Theme_Builder {
 
 			add_shortcode( 'rael_theme_template', array( $this, 'render_template' ) );
 		}
-
 	}
 
 	/**
@@ -98,7 +97,6 @@ class RAEL_Theme_Builder {
 	 */
 	public function setup_fallback_support() {
 		require_once RAEL_DIR . 'themes/default/class-rael-default-compat.php';
-
 	}
 
 	/**
@@ -635,10 +633,8 @@ class RAEL_Theme_Builder {
 				}
 				if ( '0' != $raeltermlayoutid ) {
 					$archive_template_id = $raeltermlayoutid;
-				} else {
-					if ( ! empty( $product_shop_custom_page_id ) ) {
+				} elseif ( ! empty( $product_shop_custom_page_id ) ) {
 						$archive_template_id = $product_shop_custom_page_id;
-					}
 				}
 				return $archive_template_id;
 			}
