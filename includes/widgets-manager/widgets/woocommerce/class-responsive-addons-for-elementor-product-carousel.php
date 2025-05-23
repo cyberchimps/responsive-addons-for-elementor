@@ -202,7 +202,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 		$args                          = array(
 			'post_type'      => 'product',
 			'post_status'    => array( 'publish', 'pending', 'future' ),
-			'posts_per_page' => $settings['rael_pc_products_count'] ?: 4,
+			'posts_per_page' => ( isset( $settings['rael_pc_products_count'] ) && $settings['rael_pc_products_count'] !== '' ) ? $settings['rael_pc_products_count'] : 4,
 			'order'          => $settings['rael_pc_order'],
 			'offset'         => $settings['rael_pc_product_offset'],
 			'tax_query'      => array(

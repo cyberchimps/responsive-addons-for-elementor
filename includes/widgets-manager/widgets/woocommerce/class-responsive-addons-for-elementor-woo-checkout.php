@@ -315,9 +315,6 @@ class Responsive_Addons_For_Elementor_Woo_Checkout extends Widget_Base {
 						'active' => true,
 					),
 					'default'   => __( 'Product', 'responsive-addons-for-elementor' ),
-					'dynamic'   => array(
-						'active' => true,
-					),
 					'condition' => array(
 						'rael_woo_checkout_table_header_text' => 'yes',
 					),
@@ -332,9 +329,6 @@ class Responsive_Addons_For_Elementor_Woo_Checkout extends Widget_Base {
 						'active' => true,
 					),
 					'default'   => __( 'Quantity', 'responsive-addons-for-elementor' ),
-					'dynamic'   => array(
-						'active' => true,
-					),
 					'condition' => array(
 						'rael_woo_checkout_table_header_text' => 'yes',
 					),
@@ -349,9 +343,6 @@ class Responsive_Addons_For_Elementor_Woo_Checkout extends Widget_Base {
 						'active' => true,
 					),
 					'default'   => __( 'Price', 'responsive-addons-for-elementor' ),
-					'dynamic'   => array(
-						'active' => true,
-					),
 					'condition' => array(
 						'rael_woo_checkout_table_header_text' => 'yes',
 					),
@@ -418,9 +409,6 @@ class Responsive_Addons_For_Elementor_Woo_Checkout extends Widget_Base {
 					'active' => true,
 				),
 				'default'   => __( 'Continue Shopping', 'responsive-addons-for-elementor' ),
-				'dynamic'   => array(
-					'active' => true,
-				),
 				'condition' => array(
 					'rael_woo_checkout_shop_link' => 'yes',
 				),

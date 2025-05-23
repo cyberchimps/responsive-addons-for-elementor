@@ -605,9 +605,8 @@ class Responsive_Addons_For_Elementor_FAQ extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .rael-faq-container .rael-faq-accordion' => 'border-color: {{VALUE}};',
-					'{{WRAPPER}} .rael-faq-accordion .rael-accordion-content' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .rael-faq-accordion .rael-accordion-content' => 'border-color: {{VALUE}}; border-top-color: {{VALUE}};',
 					'{{WRAPPER}} .rael-faq-container:last-child' => 'border-color: {{VALUE}};',
-					'{{WRAPPER}} .rael-faq-accordion .rael-accordion-content' => 'border-top-color: {{VALUE}};',
 				),
 				'default'   => '#D4D4D4',
 				'condition' => array(

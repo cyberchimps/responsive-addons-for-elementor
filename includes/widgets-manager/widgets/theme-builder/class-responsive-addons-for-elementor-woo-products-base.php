@@ -367,8 +367,7 @@ abstract class Responsive_Addons_For_Elementor_Woo_Products_Base extends Woo_Wid
 				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
 				),
-				'selector' => '{{WRAPPER}}.elementor-wc-products ul.products li.product .price del .amount  ',
-				'selector' => '{{WRAPPER}}.elementor-wc-products ul.products li.product .price del ',
+				'selector' => '{{WRAPPER}}.elementor-wc-products ul.products li.product .price del, {{WRAPPER}}.elementor-wc-products ul.products li.product .price del .amount',
 			)
 		);
 

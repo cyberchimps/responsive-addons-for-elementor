@@ -81,19 +81,5 @@ if ( ! class_exists( 'RaelCrossSiteCopyPasteLoader' ) ) {
 }
 
 
-/**
- * Returns Instanse of the RAEL Cross Site Copy Paste
- */
-
-if ( ! function_exists( 'rael_cs_init' ) ) {
-	/**
-	 * Initialize the RAEL Cross Site Copy Paste functionality.
-	 *
-	 * @return RaelCrossSiteCopyPasteLoader The singleton instance of the RaelCrossSiteCopyPasteLoader class.
-	 */
-	function rael_cs_init() {
-		return RaelCrossSiteCopyPasteLoader::get_instance();
-	}
-}
-
-rael_cs_init();
+// Initialize the RAEL Cross Site Copy Paste loader.
+RaelCrossSiteCopyPasteLoader::get_instance();

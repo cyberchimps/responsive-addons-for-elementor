@@ -581,7 +581,6 @@ class Responsive_Addons_For_Elementor_Sticky_Video extends Widget_Base {
 					'{{WRAPPER}} .plyr__control.plyr__tab-focus' => 'box-shadow: 0 0 0 5px {{VALUE}};',
 					'{{WRAPPER}} .plyr__control--overlaid' => 'background: {{VALUE}};',
 					'{{WRAPPER}} .plyr--video .plyr__control.plyr__tab-focus' => 'background: {{VALUE}};',
-					'{{WRAPPER}} .plyr__control--overlaid' => 'background: {{VALUE}};',
 					'{{WRAPPER}} .plyr--video .plyr__control:hover' => 'background: {{VALUE}};',
 				),
 			)

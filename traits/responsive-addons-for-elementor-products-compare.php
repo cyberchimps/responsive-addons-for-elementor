@@ -806,7 +806,6 @@ trait RAEL_Products_Comparable {
 			array(
 				'label'       => __( 'Fields to show', 'responsive-addons-for-elementor' ),
 				'type'        => Controls_Manager::REPEATER,
-				'default'     => __( 'Select the fields to show in the comparison table', 'responsive-addons-for-elementor' ),
 				'fields'      => $repeater->get_controls(),
 				'default'     => $this->get_default_repeater_fields(),
 				'title_field' => '{{ rael_products_field_label }}',
@@ -924,7 +923,6 @@ trait RAEL_Products_Comparable {
 				'default'   => '#fff',
 				'selectors' => array(
 					'{{WRAPPER}} .rael-products .woocommerce li.product .rael-wc-compare-button.rael-wc-compare' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .rael-products.rael-product-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-products__link' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .rael-products.rael-product-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-products__link' => 'color: {{VALUE}};',
 				),
 			)
