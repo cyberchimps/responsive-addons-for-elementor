@@ -683,7 +683,7 @@ class Responsive_Addons_For_Elementor {
 	 * @param $options Array
 	 * @since 1.6.6
 	 */
-	function rael_wp_upe_upgrade_completed( $upgrader_object, $options ) {
+	public function rael_wp_upe_upgrade_completed( $upgrader_object, $options ) {
 		// The path to our plugin's main file
 		$our_plugin = RAEL_PATH;
 		if ( isset( $options['action'], $options['type'], $options['plugins'] ) &&

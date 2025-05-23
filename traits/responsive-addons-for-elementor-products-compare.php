@@ -176,7 +176,9 @@ trait RAEL_Products_Comparable {
 	 * 
 	 */
 	public static function render_compare_table( $options ) {
-		$products = $fields = $ds = array();
+		$products = array();
+		$fields = array();
+		$ds = array();
 		extract( $options );
 		$not_found_text         = isset( $ds['rael_products_no_products_found_text'] ) ? $ds['rael_products_no_products_found_text'] : '';
 		$title                  = isset( $ds['rael_products_table_title'] ) ? $ds['rael_products_table_title'] : '';
@@ -187,7 +189,8 @@ trait RAEL_Products_Comparable {
 		$linkable_img           = isset( $ds['rael_products_linkable_image'] ) ? $ds['rael_products_linkable_image'] : '';
 		$highlighted_product_id = ! empty( $ds['highlighted_product_id'] ) ? intval( $ds['highlighted_product_id'] ) : null;
 		$icon                   = ! empty( $ds['rael_products_field_icon'] ) && ! empty( $ds['rael_products_field_icon']['value'] ) ? $ds['rael_products_field_icon'] : array();
-		$theme_wrap_class       = $theme = '';
+		$theme_wrap_class       = '';
+		$theme                  = '';
 
 		if ( ! empty( $ds['rael_product_compare_theme'] ) ) {
 			$theme            = esc_attr( $ds['rael_product_compare_theme'] );
@@ -494,11 +497,14 @@ trait RAEL_Products_Comparable {
 							break;
 						case 'sku':
 							$sku                       = $product->get_sku();
-							! $sku && $sku             = '-';
+							if ( ! $sku ) {
+								$sku = '-';
+							}
 							$product->fields[ $field ] = $sku;
 							break;
 						case 'weight':
-							if ( $weight = $product->get_weight() ) {
+							$weight = $product->get_weight();
+							if ( $weight ) {
 								$weight = wc_format_localized_decimal( $weight ) . ' ' . esc_attr( get_option( 'woocommerce_weight_unit' ) );
 							} else {
 								$weight = '-';
@@ -507,7 +513,10 @@ trait RAEL_Products_Comparable {
 							break;
 						case 'dimension':
 							$dimensions                  = function_exists( 'wc_format_dimensions' ) ? wc_format_dimensions( $product->get_dimensions( false ) ) : $product->get_dimensions();
-							! $dimensions && $dimensions = '-';
+							if ( ! $dimensions ){
+								$dimensions = '-';
+							}
+
 							$product->fields[ $field ]   = sprintf( '<span>%s</span>', esc_html( $dimensions ) );
 							break;
 						default:
@@ -600,11 +609,14 @@ trait RAEL_Products_Comparable {
 							break;
 						case 'sku':
 							$sku                       = $product->get_sku();
-							! $sku && $sku             = '-';
+							if ( ! $sku ) {
+								$sku = '-';
+							}
 							$product->fields[ $field ] = $sku;
 							break;
 						case 'weight':
-							if ( $weight = $product->get_weight() ) {
+							$weight = $product->get_weight();
+							if ( $weight ) {
 								$weight = wc_format_localized_decimal( $weight ) . ' ' . esc_attr( get_option( 'woocommerce_weight_unit' ) );
 							} else {
 								$weight = '-';

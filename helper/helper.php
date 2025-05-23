@@ -1202,7 +1202,8 @@ class Helper {
 		}
 
 		$search  = ! empty( $_GET['term'] ) ? sanitize_text_field( $_GET['term'] ) : '';
-		$results = $post_list = array();
+		$results = array();
+		$post_list = array();
 		switch ( $source_name ) {
 			case 'taxonomy':
 				$args = array(
