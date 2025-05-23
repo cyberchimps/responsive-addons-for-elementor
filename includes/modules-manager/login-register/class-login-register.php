@@ -261,11 +261,10 @@ class Login_Register {
 
 		// prepare vars and flag errors.
 		$tc_check = ! empty( $_POST['terms_and_conditions_check'] ) ? sanitize_text_field( $_POST['terms_and_conditions_check'] ) : '';
-		if ( 'nonexistant' === $_POST['no_terms_and_conditions_check'] ) {
-			// do nothing if there are no terms and conditions to accept.
-		} elseif ( 'checked' !== $tc_check && ! isset( $_POST['no_terms_and_conditions_check'] ) ) {
+		if ( 'checked' !== $tc_check && ! isset( $_POST['no_terms_and_conditions_check'] ) ) {
 			$errors['terms_conditions'] = isset( $settings['rael_error_tc'] ) ? $settings['rael_error_tc'] : __( 'Please accept the Terms & Conditions and try again.', 'responsive-addons-for-elementor' );
 		}
+		
 		if ( isset( $_POST['g_recaptcha_enabled'] ) && ! $this->rael_lr_validate_recaptcha() ) {
 			$errors['recaptcha'] = isset( $settings['rael_error_recaptcha'] ) ? $settings['rael_error_recaptcha'] : __( 'You did not pass the reCAPTCHA validation.', 'responsive-addons-for-elementor' );
 		}

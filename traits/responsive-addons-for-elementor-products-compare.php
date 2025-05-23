@@ -706,9 +706,9 @@ trait RAEL_Products_Comparable {
 
 		$this->start_controls_section( 'rael_products_content_tab_product_compare_section', $section_args );
 
-		if ( 'rael-product-compare' === $this->get_name() ) {
+		// if ( 'rael-product-compare' === $this->get_name() ) {
 			// Controls to be added if the current widget is Product Compare widget.
-		}
+		// }
 
 		$this->add_control(
 			'rael_product_compare_theme',

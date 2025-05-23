@@ -2131,7 +2131,7 @@ class Responsive_Addons_For_Elementor {
 					<div class="rael-fb-feed-item-content-container">
 					<header class="rael-fb-feed-item-header">
 						<div class="rael-fb-feed-item-user">
-							' . isset( $item['from']['id'] ) ? '<a class="rael-fb-feed-user-image" href="' . $fb_url . $page_id . '" target="' . ( 'yes' === $settings['rael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v22.0/' . $page_id . '/picture" alt="' . $item['from']['name'] . '" class="rael-fb-feed-avatar"></a>' : '' . '
+							' . isset( $item['from']['id'] ) ? '<a class="rael-fb-feed-user-image" href="' . $fb_url . $page_id . '" target="' . ( 'yes' === $settings['rael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v22.0/' . $page_id . '/picture" alt="' . $item['from']['name'] . '" class="rael-fb-feed-avatar"></a>' :  '
 							<a href="' . $fb_url . $page_id . '" target="' . ( 'yes' === $settings['rael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '"><p class="rael-fb-feed-username">' . $item['from']['name'] . '</p></a>
 						</div>';
 

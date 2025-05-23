@@ -3893,7 +3893,7 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 								<?php } ?>
 							</div>
 						</div>
-						<?php if ( $show_remember_me && ! empty( $remember_me_text ) || $show_fp ) { ?>
+						<?php if ( ( $show_remember_me && ! empty( $remember_me_text ) ) || $show_fp ) { ?>
 							<div class="rael-additional-form-options">
 							<?php if ( $show_remember_me && ! empty( $remember_me_text ) ) { ?>
 								<div class="rael-remember-me">
