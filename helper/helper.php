@@ -599,7 +599,7 @@ class Helper {
 
 		$html = '<ul class="rael-post-carousel-categories">';
 		foreach ( $terms as $term ) {
-			if ( $count === absint( $length ) ) {
+			if ( absint( $length ) === $count ) {
 				break;
 			}
 			$link  = ( 'category' === $term_type ) ? get_category_link( $term->term_id ) : get_tag_link( $term->term_id );
@@ -1309,7 +1309,7 @@ class Helper {
 		$taxonomies_list = array();
 		foreach ( $all_taxonomies as $taxonomy_data ) {
 			$taxonomy = get_taxonomy( $taxonomy_data );
-			if ( $skip_terms === true ) {
+			if ( true === $skip_terms ) {
 				if ( ( $taxonomy->show_ui ) && ( 'pa_' !== substr( $taxonomy_data, 0, 3 ) ) ) {
 					$taxonomies_list[ $taxonomy_data ] = $taxonomy->label;
 				}

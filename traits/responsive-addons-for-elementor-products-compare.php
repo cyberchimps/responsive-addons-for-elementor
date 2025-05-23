@@ -233,7 +233,7 @@ trait RAEL_Products_Comparable {
 										if ( ! empty( $title ) ) {
 											printf( wp_kses_post( "<{$title_tag} class='rael-products-compare__title'>%s</{$title_tag}>" ), wp_kses_post( Helper::strip_tags_keeping_allowed_tags( $title ) ) );
 										}
-									} elseif ( 'theme-5' === $theme && $field === 'title' ) {
+									} elseif ( 'theme-5' === $theme && 'title' === $field ) {
 											echo '&nbsp;';
 									} else {
 										if ( ! empty( $icon ) ) {
@@ -254,12 +254,12 @@ trait RAEL_Products_Comparable {
 							foreach ( $products as $product_id => $product ) {
 								$is_highlighted = $product_id === $highlighted_product_id;
 								$highlighted    = $is_highlighted ? 'featured' : '';
-								$product_class  = ( $index % 2 == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted"
+								$product_class  = ( ( $index % 2 ) == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted"
 								?>
 								<td class="<?php echo esc_attr( $product_class ); ?>">
 									<span>
 									<?php
-									if ( $field === 'image' ) {
+									if ( 'image' === $field ) {
 										echo '<span class="img-inner">';
 										if ( 'theme-4' === $theme && $is_highlighted && $ribbon ) {
 											printf( '<span class="ribbon">%s</span>', esc_html( $ribbon ) );
@@ -313,7 +313,7 @@ trait RAEL_Products_Comparable {
 							$index = 0;
 							foreach ( $products as $product_id => $product ) :
 								$highlighted   = $product_id === $highlighted_product_id ? 'featured' : '';
-								$product_class = ( $index % 2 == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted"
+								$product_class = ( ( $index % 2 ) == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted"
 								?>
 								<td class="<?php echo esc_attr( $product_class ); ?>"><?php echo wp_kses_post( $product->fields['price'] ); ?></td>
 								<?php
@@ -341,7 +341,7 @@ trait RAEL_Products_Comparable {
 							$index = 0;
 							foreach ( $products as $product_id => $product ) :
 								$highlighted   = $product_id === $highlighted_product_id ? 'featured' : '';
-								$product_class = ( $index % 2 == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted"
+								$product_class = ( ( $index % 2 ) == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted"
 								?>
 								<td class="<?php echo esc_attr( $product_class ); ?>">
 									<?php woocommerce_template_loop_add_to_cart(); ?>

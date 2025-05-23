@@ -687,8 +687,8 @@ class Responsive_Addons_For_Elementor {
 		// The path to our plugin's main file
 		$our_plugin = RAEL_PATH;
 		if ( isset( $options['action'], $options['type'], $options['plugins'] ) &&
-			$options['action'] === 'update' &&
-			$options['type'] === 'plugin' ) {
+			'update' === $options['action'] &&
+			'plugin' === $options['type'] ) {
 
 			// Iterate through the updated plugins
 			foreach ( $options['plugins'] as $plugin ) {
@@ -2350,7 +2350,7 @@ class Responsive_Addons_For_Elementor {
 	 * @return array
 	 */
 	public function rael_rate_plugin_link( $links, $file ) {
-		if ( $file !== plugin_basename( RAEL_PATH ) ) {
+		if ( plugin_basename( RAEL_PATH ) !== $file ) {
 			return $links;
 		}
 

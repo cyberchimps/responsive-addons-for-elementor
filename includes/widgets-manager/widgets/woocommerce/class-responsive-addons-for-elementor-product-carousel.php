@@ -216,14 +216,14 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 			),
 		);
 
-		if ( $order_by == '_price' || $order_by == '_sku' ) {
+		if ( '_price' == $order_by  || '_sku' == $order_by ) {
 			$args['orderby']  = 'meta_value_num';
 			$args['meta_key'] = $order_by;
 		} else {
 			$args['orderby'] = $order_by;
 		}
 
-		if ( $filter == 'featured_products' ) {
+		if ( 'featured_products' == $filter ) {
 			$count                       = isset( $args['tax_query'] ) ? count( $args['tax_query'] ) : 0;
 			$args['tax_query'][ $count ] =
 				array(
@@ -233,13 +233,13 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 				);
 		}
 
-		if ( $filter == 'best_selling_products' ) {
+		if ( 'best_selling_products' == $filter ) {
 			$args['meta_key'] = 'total_sales';
 			$args['orderby']  = 'meta_value_num';
 			$args['order']    = 'DESC';
 		}
 
-		if ( $filter == 'top_products' ) {
+		if ( 'top_products' == $filter ) {
 			$args['meta_key'] = '_wc_average_rating';
 			$args['orderby']  = 'meta_value_num';
 			$args['order']    = 'DESC';
@@ -253,7 +253,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 			);
 		}
 
-		if ( $filter == 'sale_products' ) {
+		if ( 'sale_products' == $filter ) {
 			$count                        = isset( $args['meta_query'] ) ? count( $args['meta_query'] ) : 0;
 			$args['meta_query'][ $count ] = array(
 				'relation' => 'OR',
