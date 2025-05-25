@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Responsive_Addons_For_Elementor {
 
-	
+
 	const MINIMUM_ELEMENTOR_VERSION = '3.10.0';
 
 	/**
