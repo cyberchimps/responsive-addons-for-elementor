@@ -54,7 +54,7 @@ class Responsive_Addons_For_Elementor_Data_Table extends Widget_Base {
 	 * Get title function
 	 */
 	public function get_title() {
-		return __( 'RAE Data Table', 'responsive-addons-for-elementor' );
+		return __( 'Data Table', 'responsive-addons-for-elementor' );
 	}
 	/**
 	 * Get icon function

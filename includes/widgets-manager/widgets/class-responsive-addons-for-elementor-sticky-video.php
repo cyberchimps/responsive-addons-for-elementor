@@ -49,7 +49,7 @@ class Responsive_Addons_For_Elementor_Sticky_Video extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Sticky Video', 'responsive-addons-for-elementor' );
+		return __( 'Sticky Video', 'responsive-addons-for-elementor' );
 	}
 
 	/**

@@ -49,7 +49,7 @@ class Responsive_Addons_For_Elementor_Price_Box extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Price Box', 'responsive-addons-for-elementor' );
+		return __( 'Price Box', 'responsive-addons-for-elementor' );
 	}
 
 	/**

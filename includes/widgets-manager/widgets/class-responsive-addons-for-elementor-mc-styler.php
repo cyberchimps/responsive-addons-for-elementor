@@ -52,7 +52,7 @@ class Responsive_Addons_For_Elementor_MC_Styler extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Mailchimp Styler', 'responsive-addons-for-elementor' );
+		return __( 'Mailchimp Styler', 'responsive-addons-for-elementor' );
 	}
 
 	/**

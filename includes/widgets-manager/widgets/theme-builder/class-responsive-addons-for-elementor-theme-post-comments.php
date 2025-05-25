@@ -37,7 +37,7 @@ class Responsive_Addons_For_Elementor_Theme_Post_Comments extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'RAE Post Comments', 'responsive-addons-for-elementor' );
+		return esc_html__( 'Post Comments', 'responsive-addons-for-elementor' );
 	}
 
 	/**

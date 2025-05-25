@@ -34,7 +34,7 @@ class Responsive_Addons_For_Elementor_WC_Add_To_Cart extends Widget_Button {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Custom Add To Cart', 'responsive-addons-for-elementor' );
+		return __( 'Custom Add To Cart', 'responsive-addons-for-elementor' );
 	}
 	/**
 	 * Retrieve the widget icon.

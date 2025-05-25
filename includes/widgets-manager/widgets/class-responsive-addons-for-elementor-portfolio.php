@@ -15,6 +15,7 @@ use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
 use Responsive_Addons_For_Elementor\WidgetsManager\Modules\QueryControl\Module as Module_Query;
 use Responsive_Addons_For_Elementor\WidgetsManager\Modules\QueryControl\Controls\Group_Control_Related;
+use Responsive_Addons_For_Elementor\Helper\Helper;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;   // Exit if accessed directly.
 }
@@ -59,7 +60,7 @@ class Responsive_Addons_For_Elementor_Portfolio extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE PortFolio', 'responsive-addons-for-elementor' );
+		return __( 'PortFolio', 'responsive-addons-for-elementor' );
 	}
 	/**
 	 * Get widget icon.
@@ -630,9 +631,9 @@ class Responsive_Addons_For_Elementor_Portfolio extends Widget_Base {
 		}
 		$tag = $this->get_settings( 'title_tag' );
 		?>
-		<<?php echo wp_kses_post( $tag ); ?> class="responsive-portfolio-item__title">
+		<<?php echo wp_kses_post( Helper::validate_html_tags( $tag ) ); ?> class="responsive-portfolio-item__title">
 		<?php the_title(); ?>
-		</<?php echo wp_kses_post( $tag ); ?>>
+		</<?php echo wp_kses_post( Helper::validate_html_tags( $tag ) ); ?>>
 		<?php
 	}
 	/**

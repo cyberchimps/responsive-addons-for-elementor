@@ -170,7 +170,7 @@ class RaelSliderHandler extends elementorModules.frontend.handlers.Base {
       return;
     }
 
-    this.swipers.raelslider = new Swiper($raelslider, this.getSwiperSettings()); // Expose the swiper instance in the frontend
+    this.swipers.raelslider = new RAELSwiper($raelslider, this.getSwiperSettings()); // Expose the swiper instance in the frontend
 
     $raelslider.data("swiper", this.swipers.raelslider); // The Ken Burns effect will only apply on the specific slides that toggled the effect ON,
     // since it depends on an additional class besides 'responsive-ken-burns--active'

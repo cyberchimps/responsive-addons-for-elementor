@@ -35,7 +35,7 @@ class Responsive_Addons_For_Elementor_Theme_Post_Navigation extends Widget_Base 
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Post Navigation', 'responsive-addons-for-elementor' );
+		return __( 'Post Navigation', 'responsive-addons-for-elementor' );
 	}
 
 	/**

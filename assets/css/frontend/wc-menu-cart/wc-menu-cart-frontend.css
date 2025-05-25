@@ -290,4 +290,9 @@
 .rael-menu-cart--buttons-stacked .rael-menu-cart__footer-buttons {
   grid-template-columns: 1fr; }
 
+.rael-menu-cart-icon {
+  display: inline-block;
+  fill: currentColor;
+}
+
 /*# sourceMappingURL=wc-menu-cart-frontend.css.map */

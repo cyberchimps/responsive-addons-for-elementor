@@ -65,7 +65,7 @@ class RAEL_Offcanvas extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE OffCanvas', 'responsive-addons-for-elementor' );
+		return __( 'OffCanvas', 'responsive-addons-for-elementor' );
 	}
 	/**
 	 * Get the icon for the widget.

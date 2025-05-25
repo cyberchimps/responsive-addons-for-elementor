@@ -38,7 +38,7 @@ class Responsive_Addons_For_Elementor_Theme_Product_Upsell extends Responsive_Ad
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'RAE Upsells', 'responsive-addons-for-elementor' );
+		return esc_html__( 'Product Upsells', 'responsive-addons-for-elementor' );
 	}
 
 	/**

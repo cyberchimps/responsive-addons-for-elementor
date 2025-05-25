@@ -49,7 +49,7 @@ class Responsive_Addons_For_Elementor_Dual_Color_Header extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Dual Color Header', 'responsive-addons-for-elementor' );
+		return __( 'Dual Color Header', 'responsive-addons-for-elementor' );
 	}
 
 	/**

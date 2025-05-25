@@ -39,7 +39,7 @@ class Responsive_Addons_For_Elementor_Theme_Product_Related extends Responsive_A
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'RAE Product Related', 'responsive-addons-for-elementor' );
+		return esc_html__( 'Product Related', 'responsive-addons-for-elementor' );
 	}
 
 	/**

@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="responsive-addons-for-elementor-getting-started-page">
 	<div class="responsive-addons-for-elementor-header">
 		<div class="responsive-addons-for-elementor-brand">
-		<img class="responsive-addons-for-elementor-logo" src="<?php echo esc_url( RAEL_URL ) . 'admin/images/rae-logo.png'; ?>" alt="responsive-thumbnail">
+		<img class="responsive-addons-for-elementor-logo" src="<?php echo esc_url( RAEL_URL ) . 'admin/images/rae-logo.svg'; ?>" alt="responsive-thumbnail">
 			<div class="responsive-addons-for-elementor-version"><?php echo esc_html( RAEL_VER ); ?></div>
 		</div>
 		<p class="responsive-addons-for-elementor-brand-desc"><?php esc_html_e( 'Thank you for choosing Responsive Addons for Elementor - The most powerful page builder addons plugin.', 'responsive-addons-for-elementor' ); ?></p>

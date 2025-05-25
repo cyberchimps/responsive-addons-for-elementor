@@ -47,7 +47,7 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 	 * @return string
 	 */
 	public function get_title() {
-		return __( 'RAE Testimonial Slider', 'responsive-addons-for-elementor' );
+		return __( 'Testimonial Slider', 'responsive-addons-for-elementor' );
 	}
 	/**
 	 * Get the icon for the widget displayed in the editor.
@@ -74,6 +74,8 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 		return array(
 			'font-awesome-5-all',
 			'font-awesome-4-shim',
+			'swiper',
+			'e-swiper',	
 		);
 	}
 	/**

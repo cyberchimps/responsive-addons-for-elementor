@@ -17,6 +17,7 @@ use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Utils;
+use Responsive_Addons_For_Elementor\Helper\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -49,7 +50,7 @@ class Responsive_Addons_For_Elementor_Logo_Carousel extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Logo Carousel', 'responsive-addons-for-elementor' );
+		return __( 'Logo Carousel', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -77,7 +78,17 @@ class Responsive_Addons_For_Elementor_Logo_Carousel extends Widget_Base {
 	public function get_categories() {
 		return array( 'responsive-addons-for-elementor' );
 	}
-
+	/**
+	 * Get the stylesheets required for the widget.
+	 *
+	 * @return array
+	 */
+	public function get_style_depends() {
+		return array(
+			'swiper',
+			'e-swiper',	
+		);
+	}
 	/**
 	 * Get widget keywords.
 	 *
@@ -1294,7 +1305,7 @@ class Responsive_Addons_For_Elementor_Logo_Carousel extends Widget_Base {
 									</div>
 									<?php
 									if ( ! empty( $item['rael_logo_item_title'] ) ) {
-										printf( '<%1$s class="rael-logo-carousel__item-title">', esc_attr( $settings['rael_logo_item_title_html_tag'] ) );
+										printf( '<%1$s class="rael-logo-carousel__item-title">', esc_attr( Helper::validate_html_tags( $settings['rael_logo_item_title_html_tag'] ) ) );
 
 										if ( ! empty( $item['rael_logo_item_link']['url'] ) ) {
 											echo '<a ' . wp_kses_post( $this->get_render_attribute_string( "rael_logo_item_{$i}" ) ) . '>';
@@ -1305,7 +1316,7 @@ class Responsive_Addons_For_Elementor_Logo_Carousel extends Widget_Base {
 										if ( ! empty( $item['rael_logo_item_link']['url'] ) ) {
 											echo '</a>';
 										}
-										printf( '</%1$s>', wp_kses_post( $settings['rael_logo_item_title_html_tag'] ) );
+										printf( '</%1$s>', wp_kses_post( Helper::validate_html_tags( $settings['rael_logo_item_title_html_tag'] ) ) );
 									}
 									?>
 								</div>

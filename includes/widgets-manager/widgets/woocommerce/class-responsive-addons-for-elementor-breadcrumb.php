@@ -49,7 +49,7 @@ class Responsive_Addons_For_Elementor_Breadcrumb extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE WooCommerce Breadcrumbs', 'responsive-addons-for-elementor' );
+		return __( 'WooCommerce Breadcrumbs', 'responsive-addons-for-elementor' );
 	}
 
 	/**

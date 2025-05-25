@@ -42,7 +42,7 @@ class Responsive_Addons_For_Elementor_Theme_Product_Meta extends Woo_Widget_Base
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'RAE Product Meta', 'responsive-addons-for-elementor' );
+		return esc_html__( 'Product Meta', 'responsive-addons-for-elementor' );
 	}
 
 	/**

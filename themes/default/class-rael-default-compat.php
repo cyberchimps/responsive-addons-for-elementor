@@ -41,10 +41,6 @@ class RAEL_Default_Compat {
 			add_action( 'rael_footer', 'rael_render_footer' );
 		}
 
-		if ( rael_single_enabled() || rael_archive_enabled() || get_rael_error_404_id() || rael_single_page_enabled() ) {
-			// Replace templates.
-			add_filter( 'template_include', array( $this, 'override_single' ), 11 /* After Plugins/WooCommerce */ );
-		}
 	}
 
 	/**
@@ -77,27 +73,6 @@ class RAEL_Default_Compat {
 		ob_start();
 		locate_template( $templates, true );
 		ob_get_clean();
-	}
-
-	/**
-	 * Function for overriding the single,archive templates in the elmentor way.
-	 *
-	 * @return void
-	 */
-	public function override_single() {
-
-		if ( is_404() ) {
-			require RAEL_DIR . 'themes/default/rael-header-footer-single.php';
-		}
-		if ( is_page() ) {
-			require RAEL_DIR . 'themes/default/rael-header-footer-single.php';
-		}
-		if ( is_single() ) {
-			require RAEL_DIR . 'themes/default/rael-header-footer-single.php';
-		}
-		if ( is_archive() ) {
-			require RAEL_DIR . 'themes/default/rael-header-footer-archive.php';
-		}
 	}
 
 }

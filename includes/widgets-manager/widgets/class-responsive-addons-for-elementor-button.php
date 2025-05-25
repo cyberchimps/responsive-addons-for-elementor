@@ -55,7 +55,7 @@ class Responsive_Addons_For_Elementor_Button extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Button', 'responsive-addons-for-elementor' );
+		return __( 'Button', 'responsive-addons-for-elementor' );
 	}
 
 	/**

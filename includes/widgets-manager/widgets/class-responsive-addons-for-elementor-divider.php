@@ -15,6 +15,7 @@ use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Utils;
+use Responsive_Addons_For_Elementor\Helper\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -48,7 +49,7 @@ class Responsive_Addons_For_Elementor_Divider extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'RAE Divider', 'responsive-addons-for-elementor' );
+		return esc_html__( 'Divider', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -434,7 +435,6 @@ class Responsive_Addons_For_Elementor_Divider extends Widget_Base {
 			array(
 				'label'     => __( 'Style', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::SELECT,
-				'default'   => 'dashed',
 				'options'   => array(
 					'solid'  => __( 'Solid', 'responsive-addons-for-elementor' ),
 					'dashed' => __( 'Dashed', 'responsive-addons-for-elementor' ),
@@ -444,7 +444,8 @@ class Responsive_Addons_For_Elementor_Divider extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .rael-divider, {{WRAPPER}} .rael-divider__border' => 'border-style: {{VALUE}};',
 				),
-			)
+				'default'   => 'dashed',
+			),
 		);
 
 		$this->add_responsive_control(
@@ -1004,11 +1005,11 @@ class Responsive_Addons_For_Elementor_Divider extends Widget_Base {
 			'rael-divider'
 		);
 
-		if ( $settings['rael_divider_direction'] ) {
+		if ( isset($settings['rael_divider_direction']) ) {
 			$this->add_render_attribute( 'rael_divider', 'class', 'rael-divider-direction--' . $settings['rael_divider_direction'] );
 		}
 
-		if ( $settings['rael_divider_style'] ) {
+		if ( isset($settings['rael_divider_style']) ) {
 			$this->add_render_attribute( 'rael_divider', 'class', 'rael-divider-style--' . $settings['rael_divider_style'] );
 		}
 
@@ -1046,7 +1047,7 @@ class Responsive_Addons_For_Elementor_Divider extends Widget_Base {
 						<?php endif; ?>
 						<span class="rael-divider__content">
 							<?php if ( $settings['rael_divider_type'] && 'text' === $settings['rael_divider_type'] ) : ?>
-								<?php printf( '<%1$s %2$s>%3$s</%1$s>', wp_kses_post( $settings['rael_divider_text_html_tag'] ), wp_kses_post( $this->get_render_attribute_string( 'rael_divider_text' ) ), wp_kses_post( $settings['rael_divider_text'] ) ); ?>
+								<?php printf( '<%1$s %2$s>%3$s</%1$s>', wp_kses_post( Helper::validate_html_tags( $settings['rael_divider_text_html_tag'] ) ), wp_kses_post( $this->get_render_attribute_string( 'rael_divider_text' ) ), wp_kses_post( $settings['rael_divider_text'] ) ); ?>
 							<?php elseif ( 'icon' === $settings['rael_divider_type'] ) : ?>
 								<span <?php $this->print_render_attribute_string( 'rael_divider_content' ); ?>>
 									<?php if ( $icon_migrated || $icon_is_new ) : ?>

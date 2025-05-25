@@ -68,7 +68,7 @@ class Responsive_Addons_For_Elementor_Product_Category_Grid extends Widget_Base 
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Product Category Grid', 'responsive-addons-for-elementor' );
+		return __( 'Product Category Grid', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -1037,7 +1037,7 @@ class Responsive_Addons_For_Elementor_Product_Category_Grid extends Widget_Base 
 	 * @since 1.2.2
 	 * @access protected
 	 */
-	protected function render() {}
+	// protected function render() {}
 
 	/**
 	 * Render the widget on the frontend.
@@ -1050,7 +1050,7 @@ class Responsive_Addons_For_Elementor_Product_Category_Grid extends Widget_Base 
 	 *
 	 * @access public
 	 */
-	public function _render() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
+	public function render() { // phpcs:ignore PSR2.Methods.MethodDeclaration.Underscore
 		if ( ! class_exists( 'WooCommerce' ) ) {
 			return;
 		}

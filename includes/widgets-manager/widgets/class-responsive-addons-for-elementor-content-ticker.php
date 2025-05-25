@@ -48,7 +48,7 @@ class Responsive_Addons_For_Elementor_Content_Ticker extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'RAE Content Ticker', 'responsive-addons-for-elementor' );
+		return esc_html__( 'Content Ticker', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -78,7 +78,17 @@ class Responsive_Addons_For_Elementor_Content_Ticker extends Widget_Base {
 	public function get_categories() {
 		return array( 'responsive-addons-for-elementor' );
 	}
-
+	/**
+	 * Get the stylesheets required for the widget.
+	 *
+	 * @return array
+	 */
+	public function get_style_depends() {
+		return array(
+			'swiper',
+			'e-swiper',	
+		);
+	}
 	/**
 	 * Get widget Keywords.
 	 *
@@ -974,12 +984,12 @@ class Responsive_Addons_For_Elementor_Content_Ticker extends Widget_Base {
 
 		if ( 'dynamic' === $settings['rael_ticker_type'] ) {
 
-			if ( \file_exists( $this->get_template( $settings['rael_dynamic_template_Layout'] ) ) ) {
+			if ( \file_exists( $this->get_template( sanitize_file_name( $settings['rael_dynamic_template_Layout'] ) ) ) ) {
 				$query = new \WP_Query( $args );
 				if ( $query->have_posts() ) {
 					while ( $query->have_posts() ) {
 						$query->the_post();
-						include $this->get_template( $settings['rael_dynamic_template_Layout'] );
+						include $this->get_template( sanitize_file_name( $settings['rael_dynamic_template_Layout'] ) );
 					}
 					wp_reset_postdata();
 				}
@@ -987,11 +997,11 @@ class Responsive_Addons_For_Elementor_Content_Ticker extends Widget_Base {
 				echo '<div class="swiper-slide"><a href="#" class="ticker-content">' . esc_html__( 'No content found!', 'responsive-addons-for-elementor' ) . '</a></div>';
 			}
 		} elseif ( 'custom' === $settings['rael_ticker_type'] ) {
-			if ( \file_exists( $this->get_template( $settings['rael_dynamic_template_Layout'] ) ) ) {
+			if ( \file_exists( $this->get_template( sanitize_file_name( $settings['rael_dynamic_template_Layout'] ) ) ) ) {
 				foreach ( $settings['rael_ticker_custom_contents'] as $content ) {
 					echo wp_kses_post(
 						Helper::include_with_variable(
-							$this->get_template( $settings['rael_dynamic_template_Layout'] ),
+							$this->get_template( sanitize_file_name( $settings['rael_dynamic_template_Layout'] ) ),
 							array(
 								'content' => Helper::rael_wp_kses( $content['rael_ticker_custom_content'] ),
 								'link'    => $content['rael_ticker_custom_content_link'],

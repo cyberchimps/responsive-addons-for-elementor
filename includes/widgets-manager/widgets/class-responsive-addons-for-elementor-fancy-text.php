@@ -40,7 +40,7 @@ class Responsive_Addons_For_Elementor_Fancy_Text extends Widget_Base {
 	 * @access public
 	 */
 	public function get_title() {
-		return __( 'RAE Fancy Text', 'responsive-addons-for-elementor' );
+		return __( 'Fancy Text', 'responsive-addons-for-elementor' );
 	}
 
 	/**

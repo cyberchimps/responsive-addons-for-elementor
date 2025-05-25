@@ -190,7 +190,7 @@ Base = elementorModules.frontend.handlers.Base.extend({
             return;
         }
 
-        this.Swipers.main = new Swiper(this.elements.$mainSwiper, this.getSwiperOptions()); // Expose the swiper instance in the frontend
+        this.Swipers.main = new RAELSwiper(this.elements.$mainSwiper, this.getSwiperOptions()); // Expose the swiper instance in the frontend
 
         this.elements.$mainSwiper.data('swiper', this.Swipers.main);
 

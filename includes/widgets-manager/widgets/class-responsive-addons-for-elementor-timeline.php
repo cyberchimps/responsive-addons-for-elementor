@@ -53,7 +53,7 @@ class Responsive_Addons_For_Elementor_Timeline extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Timeline', 'responsive-addons-for-elementor' );
+		return __( 'Timeline', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -1436,7 +1436,10 @@ class Responsive_Addons_For_Elementor_Timeline extends Widget_Base {
 				if ( ! empty( $value['rael_gallery'] ) && 'before' === $value['rael_image_position'] ) {
 					echo '<figure class="rael-timeline__image-gallery before-title">';
 					foreach ( $value['rael_gallery'] as $id => $image ) {
-									echo wp_get_attachment_image( $image['id'], $value['rael_image_size'], false, array( 'alt' => wp_get_attachment_caption( $image['id'] ) ) );
+						$alt_text = get_post_meta( $image['id'], '_wp_attachment_image_alt', true ); // Fetch alt text
+    					$alt_text = !empty( $alt_text ) ? esc_attr( $alt_text ) : ''; // escape alt text
+
+						echo wp_get_attachment_image( $image['id'], $value['rael_image_size'], false, array( 'alt' => $alt_text ) );
 					}
 					echo '</figure>';
 				}

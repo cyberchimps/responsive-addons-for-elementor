@@ -114,7 +114,10 @@ if ( ! class_exists( 'RAEL_Particles_Background' ) ) {
                                     jQuery.cachedScript( lib_url ).done(function(){
                                         var flag = true;
                                     });
-                                }
+                                }else{
+									var lib_url = rael_particles.particles_lib;
+									jQuery.cachedScript( lib_url );
+								}
                             });
                         });
                              jQuery( document ).on( "ready elementor/popup/show", () => {

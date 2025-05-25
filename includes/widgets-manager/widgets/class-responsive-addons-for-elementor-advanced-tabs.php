@@ -19,6 +19,7 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Icons_Manager;
 use Elementor\Plugin;
+use Responsive_Addons_For_Elementor\Helper\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -54,7 +55,7 @@ class Responsive_Addons_For_Elementor_Advanced_Tabs extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Advanced Tabs', 'responsive-addons-for-elementor' );
+		return __( 'Advanced Tabs', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -1314,7 +1315,7 @@ class Responsive_Addons_For_Elementor_Advanced_Tabs extends Widget_Base {
 								<?php elseif ( 'image' === $tab['rael_advanced_tabs_icon_type'] ) : ?>
 									<img src="<?php echo esc_attr( $tab['rael_advanced_tabs_tab_title_image']['url'] ); ?>" alt="<?php echo esc_attr( get_post_meta( $tab['rael_advanced_tabs_tab_title_image']['id'], '_wp_attachment_image_alt', true ) ); ?>">
 								<?php endif; ?>
-							<?php endif; ?> <<?php echo esc_html( $settings['rael_advanced_tabs_heading_tag'] ); ?> class="rael-tab-title"><?php echo wp_kses_post( $tab['rael_advanced_tabs_tab_title'] ); ?></<?php echo esc_html( $settings['rael_advanced_tabs_heading_tag'] ); ?>>
+							<?php endif; ?> <<?php echo esc_html( Helper::validate_html_tags( $settings['rael_advanced_tabs_heading_tag'] ) ); ?> class="rael-tab-title"><?php echo wp_kses_post( $tab['rael_advanced_tabs_tab_title'] ); ?></<?php echo esc_html( Helper::validate_html_tags( $settings['rael_advanced_tabs_heading_tag'] ) ); ?>>
 
 						</li>
 					<?php endforeach; ?>

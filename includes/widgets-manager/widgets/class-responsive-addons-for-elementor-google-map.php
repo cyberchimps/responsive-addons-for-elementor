@@ -44,7 +44,7 @@ class Responsive_Addons_For_Elementor_Google_Map extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Google Map', 'responsive-addons-for-elementor' );
+		return __( 'Google Map', 'responsive-addons-for-elementor' );
 	}
 
 	/**

@@ -21,6 +21,7 @@ use Elementor\Group_Control_Text_Shadow;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Control_Media;
+use Responsive_Addons_For_Elementor\Helper\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -63,7 +64,7 @@ class Responsive_Addons_For_Elementor_Banner extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Banner', 'responsive-addons-for-elementor' );
+		return __( 'Banner', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -1181,7 +1182,7 @@ class Responsive_Addons_For_Elementor_Banner extends Widget_Base {
 
 		$this->add_inline_editing_attributes( 'rael_banner_description', 'advanced' );
 
-		$title_tag  = $settings['rael_banner_title_tag'];
+		$title_tag  = Helper::validate_html_tags( $settings['rael_banner_title_tag'] );
 		$title      = $settings['rael_banner_title'];
 		$full_title = '<div class="rael-banner-title-wrap"><' . wp_kses_post( $title_tag ) . ' ' . $this->get_render_attribute_string( 'rael_banner_title' ) . '>' . $title . '</' . wp_kses_post( $title_tag ) . '></div>';
 

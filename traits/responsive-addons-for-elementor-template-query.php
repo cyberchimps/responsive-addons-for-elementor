@@ -224,7 +224,7 @@ trait RAEL_Template_Query {
 	 * @return string include-able full template path.
 	 */
 	public function get_template( $filename ) {
-
+		$filename = sanitize_file_name( $filename );
 		if ( in_array( $filename, array_keys( $this->get_template_options() ) ) ) {
 			$file = $this->get_template_options()[ $filename ];
 			return $file;

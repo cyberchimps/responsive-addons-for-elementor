@@ -52,7 +52,7 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Login | Registration Form', 'responsive-addons-for-elementor' );
+		return __( 'Login | Registration Form', 'responsive-addons-for-elementor' );
 	}
 
 	/**

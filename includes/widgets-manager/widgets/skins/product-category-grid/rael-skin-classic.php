@@ -260,13 +260,13 @@ class RAEL_Skin_Classic extends Skin_Base {
 	/**
 	 * Skin render method.
 	 *
-	 * This implementation uses the _render() of the widget.
+	 * This implementation uses the render() of the widget.
 	 *
 	 * @since 1.2.2
 	 * @access public
 	 */
 	public function render() {
-		$this->parent->_render();
+		$this->parent->render();
 	}
 
 }

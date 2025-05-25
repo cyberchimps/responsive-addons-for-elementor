@@ -58,7 +58,7 @@ class Responsive_Addons_For_Elementor_Media_Carousel extends Widget_Base {
 	 * @return string
 	 */
 	public function get_title() {
-		return __( 'RAE Media Carousel', 'responsive-addons-for-elementor' );
+		return __( 'Media Carousel', 'responsive-addons-for-elementor' );
 	}
 	/**
 	 * Get the widget icon.
@@ -83,6 +83,29 @@ class Responsive_Addons_For_Elementor_Media_Carousel extends Widget_Base {
 	 */
 	public function get_categories() {
 		return array( 'responsive-addons-for-elementor' );
+	}
+	/**
+	 * Get the stylesheets required for the widget.
+	 *
+	 * @return array
+	 */
+	public function get_style_depends() {
+		return array(
+			'font-awesome-5-all',
+			'font-awesome-4-shim',
+			'swiper',
+			'e-swiper',	
+		);
+	}
+	/**
+	 * Get the scripts required for the widget.
+	 *
+	 * @return array
+	 */
+	public function get_script_depends() {
+		return array(
+			'font-awesome-4-shim',
+		);
 	}
 	/**
 	 * Get the default values for the repeater.
@@ -1141,11 +1164,11 @@ class Responsive_Addons_For_Elementor_Media_Carousel extends Widget_Base {
 					<?php endif; ?>
 					<?php if ( $settings['rael_show_arrows'] ) : ?>
 						<div class="elementor-swiper-button elementor-swiper-button-prev">
-							<i class="eicon-chevron-left" aria-hidden="true"></i>
+							<i class="fa fa-angle-left" aria-hidden="true"></i>
 							<span class="elementor-screen-only"><?php esc_html_e( 'Previous', 'responsive-addons-for-elementor' ); ?></span>
 						</div>
 						<div class="elementor-swiper-button elementor-swiper-button-next">
-							<i class="eicon-chevron-right" aria-hidden="true"></i>
+							<i class="fa fa-angle-right" aria-hidden="true"></i>
 							<span class="elementor-screen-only"><?php esc_html_e( 'Next', 'responsive-addons-for-elementor' ); ?></span>
 						</div>
 					<?php endif; ?>

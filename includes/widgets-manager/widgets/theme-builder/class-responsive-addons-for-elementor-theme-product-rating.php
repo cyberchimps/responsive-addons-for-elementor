@@ -39,7 +39,7 @@ class Responsive_Addons_For_Elementor_Theme_Product_Rating extends Woo_Widget_Ba
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'RAE Product Rating', 'responsive-addons-for-elementor' );
+		return esc_html__( 'Product Rating', 'responsive-addons-for-elementor' );
 	}
 
 	/**

@@ -48,7 +48,7 @@ class Responsive_Addons_For_Elementor_Post_Carousel extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Post Carousel', 'responsive-addons-for-elementor' );
+		return __( 'Post Carousel', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -76,7 +76,17 @@ class Responsive_Addons_For_Elementor_Post_Carousel extends Widget_Base {
 	public function get_categories() {
 		return array( 'responsive-addons-for-elementor' );
 	}
-
+	/**
+	 * Get the stylesheets required for the widget.
+	 *
+	 * @return array
+	 */
+	public function get_style_depends() {
+		return array(
+			'swiper',
+			'e-swiper',	
+		);
+	}
 	/**
 	 * Get Custom help URL
 	 *
@@ -2607,7 +2617,7 @@ class Responsive_Addons_For_Elementor_Post_Carousel extends Widget_Base {
 	 * @return string The full path to the template file.
 	 */
 	private function get_template( $template_name ) {
-		$file_name = RAEL_DIR . 'includes/widgets-manager/widgets/skins/post-carousel/' . $template_name . '.php';
+		$file_name = RAEL_DIR . 'includes/widgets-manager/widgets/skins/post-carousel/' . sanitize_file_name( $template_name ) . '.php';
 		return $file_name;
 	}
 

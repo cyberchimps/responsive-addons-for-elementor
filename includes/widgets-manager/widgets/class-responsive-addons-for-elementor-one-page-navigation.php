@@ -38,7 +38,7 @@ class Responsive_Addons_For_Elementor_One_Page_Navigation extends Widget_Base {
 	 * Retrieve one page navigation widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE One Page Navigation', 'responsive-addons-for-elementor' );
+		return __( 'One Page Navigation', 'responsive-addons-for-elementor' );
 	}
 
 	/**

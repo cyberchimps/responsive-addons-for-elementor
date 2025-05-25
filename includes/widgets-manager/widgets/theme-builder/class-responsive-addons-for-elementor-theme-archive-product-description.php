@@ -38,7 +38,7 @@ class Responsive_Addons_For_Elementor_Theme_Archive_Product_Description extends 
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'RAE Archive Description', 'responsive-addons-for-elementor' );
+		return esc_html__( 'Archive Description', 'responsive-addons-for-elementor' );
 	}
 
 	/**

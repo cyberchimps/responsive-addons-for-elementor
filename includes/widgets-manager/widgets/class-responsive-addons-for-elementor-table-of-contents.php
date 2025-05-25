@@ -51,7 +51,7 @@ class Responsive_Addons_For_Elementor_Table_Of_Contents extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Table Of Contents', 'responsive-addons-for-elementor' );
+		return __( 'Table Of Contents', 'responsive-addons-for-elementor' );
 	}
 
 	/**

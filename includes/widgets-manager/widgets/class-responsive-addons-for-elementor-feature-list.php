@@ -50,7 +50,7 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Feature List', 'responsive-addons-for-elementor' );
+		return __( 'Feature List', 'responsive-addons-for-elementor' );
 	}
 
 	/**

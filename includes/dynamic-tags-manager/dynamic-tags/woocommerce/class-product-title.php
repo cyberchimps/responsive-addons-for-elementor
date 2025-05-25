@@ -11,7 +11,7 @@ class RAEL_Product_Title extends Base_Tag {
 	}
 
 	public function get_title() {
-		return esc_html__( 'RAE Product Title', 'responsive-addons-for-elementor' );
+		return esc_html__( 'Product Title', 'responsive-addons-for-elementor' );
 	}
 
 	protected function register_controls() {

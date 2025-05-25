@@ -56,7 +56,7 @@ class Responsive_Addons_For_Elementor_Cf_Styler extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Contact Form 7 Styler', 'responsive-addons-for-elementor' );
+		return __( 'Contact Form 7 Styler', 'responsive-addons-for-elementor' );
 	}
 
 	/**

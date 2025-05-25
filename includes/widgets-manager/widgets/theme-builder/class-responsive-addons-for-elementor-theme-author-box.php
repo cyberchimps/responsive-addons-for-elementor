@@ -20,6 +20,7 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Utils;
 use Elementor\Widget_Base;
+use Responsive_Addons_For_Elementor\Helper\Helper;
 
 /**
  * Widget class for the RAEL Author Box in the Theme Builder.
@@ -42,7 +43,7 @@ class Responsive_Addons_For_Elementor_Theme_Author_Box extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'RAE Author Box', 'responsive-addons-for-elementor' );
+		return esc_html__( 'Author Box', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -911,9 +912,9 @@ class Responsive_Addons_For_Elementor_Theme_Author_Box extends Widget_Base {
 
 			<div class="rael-author-box__text">
 				<?php if ( $print_name ) : ?>
-					<<?php echo wp_kses_post( $link_tag ); ?> <?php echo wp_kses_post( $this->get_render_attribute_string( 'rael_ab_author_link' ) ); ?>>
-						<?php echo '<' . wp_kses_post( $author_name_tag ) . ' class="rael-author-box__name">' . esc_html( $author['display_name'] ) . '</' . wp_kses_post( $author_name_tag ) . '>'; ?>
-					</<?php echo wp_kses_post( $link_tag ); ?>>
+					<<?php echo wp_kses_post( Helper::validate_html_tags( $link_tag ) ); ?> <?php echo wp_kses_post( $this->get_render_attribute_string( 'rael_ab_author_link' ) ); ?>>
+						<?php echo '<' . wp_kses_post( Helper::validate_html_tags( $author_name_tag ) ) . ' class="rael-author-box__name">' . esc_html( $author['display_name'] ) . '</' . wp_kses_post( Helper::validate_html_tags( $author_name_tag ) ) . '>'; ?>
+					</<?php echo wp_kses_post( Helper::validate_html_tags( $link_tag ) ); ?>>
 				<?php endif; ?>
 
 				<?php if ( $print_bio ) : ?>

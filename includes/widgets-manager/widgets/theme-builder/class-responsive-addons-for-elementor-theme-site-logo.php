@@ -45,7 +45,7 @@ class Responsive_Addons_For_Elementor_Theme_Site_Logo extends Widget_Image {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Site Logo', 'responsive-addons-for-elementor' );
+		return __( 'Site Logo', 'responsive-addons-for-elementor' );
 	}
 
 	/**

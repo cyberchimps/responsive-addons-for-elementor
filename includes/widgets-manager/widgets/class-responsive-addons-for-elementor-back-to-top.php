@@ -47,7 +47,7 @@ class Responsive_Addons_For_Elementor_Back_To_Top extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'RAE Back to Top', 'responsive-addons-for-elementor' );
+		return esc_html__( 'Back to Top', 'responsive-addons-for-elementor' );
 	}
 
 	/**

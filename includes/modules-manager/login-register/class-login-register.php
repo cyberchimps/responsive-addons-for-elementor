@@ -367,7 +367,8 @@ class Login_Register {
 				self::$email_options['subject'] = $settings['rael_reg_email_subject'];
 			}
 			if ( isset( $settings['rael_reg_email_message'] ) ) {
-				self::$email_options['message'] = $settings['rael_reg_email_message'];
+				// Added esc_html to strip all tags from the message.
+				self::$email_options['message'] =  sanitize_text_field( $settings['rael_reg_email_message'] ) ;
 			}
 			if ( isset( $settings['rael_reg_email_content_type'] ) ) {
 				self::$email_options['headers'] = 'Content-Type: text/' . $settings['rael_reg_email_content_type'] . '; charset=UTF-8' . "\r\n";

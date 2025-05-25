@@ -21,6 +21,7 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Border;
+use Responsive_Addons_For_Elementor\Helper\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -54,7 +55,7 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Icon Box', 'responsive-addons-for-elementor' );
+		return __( 'Icon Box', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -2201,7 +2202,8 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			$this->add_render_attribute( 'rael_infobox_classname', 'class', ' elementor-animation-' . $settings['rael_info_box_hover_animation'] );
 
 			if ( 'above-title' === $settings['rael_image_position'] || 'below-title' === $settings['rael_image_position'] ) {
-				$this->add_render_attribute( 'rael_infobox_classname', 'class', ' rael-infobox--' . $settings['rael_align'] );
+				$align = isset( $settings['rael_align'] ) ? $settings['rael_align'] : 'center';
+    			$this->add_render_attribute( 'rael_infobox_classname', 'class', ' rael-infobox--' . $align );
 			}
 			if ( 'left-title' === $settings['rael_image_position'] || 'left' === $settings['rael_image_position'] ) {
 				$this->add_render_attribute( 'rael_infobox_classname', 'class', ' rael-infobox--left' );
@@ -2496,9 +2498,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			$this->add_render_attribute( 'rael_title', 'class', 'rael-infobox__title' );
 			$this->add_inline_editing_attributes( 'rael_title', 'basic' );
 
-			echo '<' . esc_attr( $settings['rael_title_tag'] ) . ' ' . wp_kses_post( $this->get_render_attribute_string( 'rael_title' ) ) . '>';
+			echo '<' . esc_attr( Helper::validate_html_tags( $settings['rael_title_tag'], 'h3' ) ) . ' ' . wp_kses_post( $this->get_render_attribute_string( 'rael_title' ) ) . '>';
 			echo wp_kses_post( $dynamic_settings['rael_title'] );
-			echo '</' . esc_attr( $settings['rael_title_tag'] ) . '>';
+			echo '</' . esc_attr( Helper::validate_html_tags( $settings['rael_title_tag'], 'h3' ) ) . '>';
 		}
 		echo '</div>';
 		$this->render_image( 'right-title', $settings );
@@ -2902,6 +2904,17 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 		#>
 
 		<#
+		    // Define an array of allowed HTML tags
+		    let allowedTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'p'];
+
+		    // Ensure settings.rael_title_tag exists and is a valid string
+		    let titleTag = settings.rael_title_tag ? settings.rael_title_tag.toLowerCase() : '';
+
+		    // Function to validate the HTML tag (scope is within the template)
+		    let validatedTag = allowedTags.includes(titleTag) ? titleTag : 'h3';
+		#>
+
+		<#
 		function render_title() {
 		var flag = false;
 		if ( ( 'photo' == settings.rael_image_type && 'left-title' == settings.rael_image_position ) || ( 'icon' == settings.rael_image_type && 'left-title' == settings.rael_image_position ) ) {
@@ -2922,10 +2935,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 				<# view.addRenderAttribute('rael_title', 'class', 'rael-infobox__title'); #>
 				<# view.addInlineEditingAttributes('rael_title', 'basic'); #>
 
-				<{{{ settings.rael_title_tag }}} {{{ view.getRenderAttributeString('rael_title') }}}>
-				{{{ settings.rael_title }}}
-			</
-			{{{ settings.rael_title_tag }}}>
+				<{{{ validatedTag }}} {{{ view.getRenderAttributeString('rael_title') }}}>
+				    {{{ settings.rael_title }}}
+				</{{{ validatedTag }}}>
 		</div>
 		<# render_image( 'right-title' ); #>
 		<# if ( flag ) { #>

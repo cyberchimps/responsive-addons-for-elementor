@@ -15,6 +15,7 @@ use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Typography;
 use Responsive_Addons_For_Elementor\Traits\Missing_Dependency;
 use WPSEO_Breadcrumbs;
+use Responsive_Addons_For_Elementor\Helper\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -41,7 +42,7 @@ class Responsive_Addons_For_Elementor_Breadcrumbs extends Widget_Base {
 	 * @access public
 	 */
 	public function get_title() {
-		return __( 'RAE Breadcrumbs', 'responsive-addons-for-elementor' );
+		return __( 'Breadcrumbs', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -240,7 +241,7 @@ class Responsive_Addons_For_Elementor_Breadcrumbs extends Widget_Base {
 	 * @access private
 	 */
 	private function get_html_tag() {
-		$html_tag = $this->get_settings( 'rael_html_tag' );
+		$html_tag = Helper::validate_html_tags( $this->get_settings( 'rael_html_tag' ) );
 
 		if ( empty( $html_tag ) ) {
 			$html_tag = 'p';

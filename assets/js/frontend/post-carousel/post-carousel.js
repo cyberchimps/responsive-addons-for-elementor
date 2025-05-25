@@ -106,7 +106,7 @@ var RAELWidgetPostCarouselHandler = function ($scope, $) {
 
   var swiperPromise = function swiperPromise(swiperElement, swiperConfig) {
     return new Promise(function (resolve, reject) {
-      var swiperInstance = new Swiper(swiperElement, swiperConfig);
+      var swiperInstance = new RAELSwiper(swiperElement, swiperConfig);
       resolve(swiperInstance);
     });
   };

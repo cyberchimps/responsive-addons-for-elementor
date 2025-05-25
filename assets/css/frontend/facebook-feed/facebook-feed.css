@@ -1,0 +1,306 @@
+.rael-facebook-feed-error-container .rael-fb-error-message {
+    margin: 0 auto;
+    padding: 1em;
+    color: #856404;
+    background-color: #ffea83;
+    border-left: 10px solid #856404;
+    border-radius: 0.5em;
+    width: fit-content; }
+  
+  .heightFix:after, .heightFix:before {
+    content: "";
+    display: table;
+    clear: both; }
+  
+  .rael-facebook-feed-container {
+    transition: all 400ms ease-in-out; }
+  
+  .rael-fb-load-more, .rael-fb-load-more-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5em auto; }
+  
+  .lds-ring {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-right: 1.6em; }
+  
+  .animate-show {
+    display: flex;
+    animation: slide-in 200ms ease-in-out; }
+  
+  @keyframes slide-in {
+    from {
+      left: 2em;
+      visibility: hidden; }
+    to {
+      left: 0em;
+      visibility: visible; } }
+  
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    margin: 8px;
+    border: 4px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent; }
+  
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s; }
+  
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s; }
+  
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s; }
+  
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg); }
+    100% {
+      transform: rotate(360deg); } }
+  
+  .rael-fb-feed-item-header {
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    background-color: lightblue;
+    height: 4em; }
+  
+  .rael-facebook-feed-url-title {
+    padding-top: 6px;
+    font-size: 1.4em;
+    margin: 4px 0 !important; }
+  
+  .rael-fb-feed-item-user {
+    display: flex;
+    align-items: center; }
+  
+  .rael-fb-feed-item-user > a > p {
+    margin: 0; }
+  
+  .rael-fb-feed-item-user {
+    width: 100%; }
+  
+  .rael-fb-feed-user-image {
+    transform: scale(0.6);
+    border-radius: 50%; }
+  
+  .rael-fb-feed-user-image > img {
+    border-radius: 50%; }
+  
+  .rael-fb-feed-media-link {
+    display: block;
+    position: relative;
+    background-color: black;
+    border-radius: 5px;
+    line-height: 0; }
+  
+  .rael-fb-feed-content-image-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    color: white; }
+  
+  .rael-fb-feed-content-image {
+    opacity: 0.6; }
+  
+  .rael-fb-feed-item-content {
+    padding: 0.5em 1em;
+    word-wrap: braelk-word; }
+  
+  .rael-fb-feed-item-content > p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.3;
+    margin: 0; }
+  
+  .rael-fb-feed-url-preview {
+    padding: 1em;
+    word-braelk: braelk-word; }
+  
+  .rael-fb-feed-url-host {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+    text-transform: uppercase;
+    margin-bottom: 5px; }
+  
+  .rael-facebofbok-feed-url-title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-top: 0;
+    margin-bottom: 6px;
+    padding-top: 12px; }
+  
+  .rael-fb-feed-url-description {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 0; }
+  
+  .rael-fb-feed-item-footer {
+    background-color: lightblue;
+    padding: 0.7em;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 5px; }
+  
+  .rael-fb-feed-item {
+    height: fit-content;
+    width: fit-content; }
+  
+  .rael-fb-feed-img, .rael-fb-feed-content-image {
+    border-radius: 5px;
+    box-shadow: none !important;
+    display: flex; }
+  
+  .rael-fb-feed-post-time {
+    width: 35%;
+    margin-right: 0.4em; }
+  
+  .rael-fb-feed-item-content-container {
+    margin: 1em;
+    border-style: double;
+    border-width: 9px;
+    border-radius: 15px; }
+  
+  .rael-fb-feed-avatar {
+    box-shadow: none !important; }
+  
+  .rael-fb-feed-posts.rael-col-1 .rael-fb-feed-item {
+    float: none;
+    width: 100%; }
+  
+  @media only screen and (max-width: 979px) {
+    .rael-fb-feed-posts.rael-col-1 .rael-fb-feed-item {
+      width: 50%; } }
+  
+  @media only screen and (max-width: 480px) {
+    .rael-fb-feed-posts.rael-col-1 .rael-fb-feed-item {
+      width: 100%; } }
+  
+  .rael-fb-feed-posts.rael-col-2 .rael-fb-feed-item {
+    float: left;
+    width: 50%; }
+  
+  @media only screen and (max-width: 979px) {
+    .rael-fb-feed-posts.rael-col-2 .rael-fb-feed-item {
+      width: 50%; } }
+  
+  @media only screen and (max-width: 480px) {
+    .rael-fb-feed-posts.rael-col-2 .rael-fb-feed-item {
+      width: 100%; } }
+  
+  .rael-fb-feed-posts.rael-col-3 .rael-fb-feed-item {
+    float: left;
+    width: 33.3333%; }
+  
+  @media only screen and (max-width: 979px) {
+    .rael-fb-feed-posts.rael-col-3 .rael-fb-feed-item {
+      width: 50%; } }
+  
+  @media only screen and (max-width: 480px) {
+    .rael-fb-feed-posts.rael-col-3 .rael-fb-feed-item {
+      width: 100%; } }
+  
+  .rael-fb-feed-posts.rael-col-4 .rael-fb-feed-item {
+    float: left;
+    width: 25%; }
+  
+  @media only screen and (max-width: 979px) {
+    .rael-fb-feed-posts.rael-col-4 .rael-fb-feed-item {
+      width: 50%; } }
+  
+  @media only screen and (max-width: 480px) {
+    .rael-fb-feed-posts.rael-col-4 .rael-fb-feed-item {
+      width: 100%; } }
+  
+  .rael-fb-feed-posts.rael-col-5 .rael-fb-feed-item {
+    float: left;
+    width: 20%; }
+  
+  @media only screen and (max-width: 979px) {
+    .rael-fb-feed-posts.rael-col-5 .rael-fb-feed-item {
+      width: 50%; } }
+  
+  @media only screen and (max-width: 480px) {
+    .rael-fb-feed-posts.rael-col-5 .rael-fb-feed-item {
+      width: 100%; } }
+  
+  .rael-fb-feed-posts.rael-col-6 .rael-fb-feed-item {
+    float: left;
+    width: 16.6666%; }
+  
+  @media only screen and (max-width: 979px) {
+    .rael-fb-feed-posts.rael-col-6 .rael-fb-feed-item {
+      width: 50%; } }
+  
+  @media only screen and (max-width: 480px) {
+    .rael-fb-feed-posts.rael-col-6 .rael-fb-feed-item {
+      width: 100%; } }
+  
+  .rael-fb-feed-item-overlay-inner {
+    width: 100%; }
+  
+  .rael-fb-feed-meta {
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    grid-column-gap: 3em; }
+  
+  .hover-container {
+    position: relative;
+    width: fit-content; }
+  
+  .hover-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    line-height: 0;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 250ms ease-in-out; }
+    .hover-content .hover-user-content {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.6em; }
+      .hover-content .hover-user-content img {
+        border-radius: 50%;
+        height: 42px; }
+      .hover-content .hover-user-content .rael-fb-feed-username {
+        font-size: 0.9em;
+        font-weight: 600;
+        line-height: normal;
+        margin-left: 0.8em;
+        margin-bottom: 0; }
+  
+  .hover-container:hover .hover-content {
+    opacity: 1; }
+  
+  @media (max-width: 660px) and (min-width: 485px) {
+    .rael-fb-feed-post-time {
+      font-size: 13px; } }
+  
+  /*# sourceMappingURL=facebook-feed.css.map */

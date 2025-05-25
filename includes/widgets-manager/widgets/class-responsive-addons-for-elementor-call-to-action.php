@@ -19,6 +19,7 @@ use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
 use Elementor\Icons_Manager;
 use Elementor\Utils;
+use Responsive_Addons_For_Elementor\Helper\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;   // Exit if accessed directly.
@@ -55,7 +56,7 @@ class Responsive_Addons_For_Elementor_Call_To_Action extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Call To Action', 'responsive-addons-for-elementor' );
+		return __( 'Call To Action', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -1584,7 +1585,7 @@ class Responsive_Addons_For_Elementor_Call_To_Action extends Widget_Base {
 	protected function render() {
 		$settings = $this->get_settings_for_display();
 
-		$title_tag         = $settings['title_tag'];
+		$title_tag         = Helper::validate_html_tags( $settings['title_tag'] );
 		$wrapper_tag       = 'div';
 		$button_tag        = 'a';
 		$bg_image          = '';
@@ -1740,9 +1741,9 @@ class Responsive_Addons_For_Elementor_Call_To_Action extends Widget_Base {
 			<?php endif; ?>
 
 			<?php if ( ! empty( $settings['title'] ) ) : ?>
-				<<?php echo esc_attr( $title_tag ) . ' ' . wp_kses_post( $this->get_render_attribute_string( 'title' ) ); ?>>
+				<<?php echo esc_attr( Helper::validate_html_tags( $title_tag ) ) . ' ' . wp_kses_post( $this->get_render_attribute_string( 'title' ) ); ?>>
 				<?php echo esc_html( $settings['title'] ); ?>
-				</<?php echo esc_attr( $title_tag ); ?>>
+				</<?php echo esc_attr( Helper::validate_html_tags( $title_tag ) ); ?>>
 			<?php endif; ?>
 
 			<?php if ( ! empty( $settings['description'] ) ) : ?>
@@ -1894,7 +1895,7 @@ class Responsive_Addons_For_Elementor_Call_To_Action extends Widget_Base {
 		</div>
 		<# } #>
 		<# if ( settings.title ) { #>
-		<{{ settings.title_tag }} {{{ view.getRenderAttributeString( 'title' ) }}}>{{{ settings.title }}}</{{ settings.title_tag }}>
+		<{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }} {{{ view.getRenderAttributeString( 'title' ) }}}>{{{ settings.title }}}</{{ elementor.helpers.validateHTMLTag( settings.title_tag ) }}>
 		<# } #>
 
 		<# if ( settings.description ) { #>

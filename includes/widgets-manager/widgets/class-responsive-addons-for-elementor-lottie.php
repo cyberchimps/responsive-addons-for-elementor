@@ -50,7 +50,7 @@ class Responsive_Addons_For_Elementor_Lottie extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Lottie', 'responsive-addons-for-elementor' );
+		return __( 'Lottie', 'responsive-addons-for-elementor' );
 	}
 
 	/**

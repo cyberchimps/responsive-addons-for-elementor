@@ -203,7 +203,7 @@ class GalleryCarousel extends Base {
         return;
       }
   
-      this.swipers.gallery = new Swiper($gallery, this.getSwiperSettings()); // Expose the swiper instance in the frontend
+      this.swipers.gallery = new RAELSwiper($gallery, this.getSwiperSettings()); // Expose the swiper instance in the frontend
       
       $gallery.data("swiper", this.swipers.gallery); // The Ken Burns effect will only apply on the specific slides that toggled the effect ON,
       // since it depends on an additional class besides 'responsive-ken-burns--active'

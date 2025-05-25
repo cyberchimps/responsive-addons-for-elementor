@@ -213,7 +213,7 @@ class TestimonialSliderHandler extends elementorModules.frontend.handlers.Base {
             return;
         }
 
-        this.swipers.main = new Swiper(this.elements.$mainSwiper, this.getSwiperOptions()); // Expose the swiper instance in the frontend
+        this.swipers.main = new RAELSwiper(this.elements.$mainSwiper, this.getSwiperOptions()); // Expose the swiper instance in the frontend
 
         this.elements.$mainSwiper.data('swiper', this.swipers.main);
 

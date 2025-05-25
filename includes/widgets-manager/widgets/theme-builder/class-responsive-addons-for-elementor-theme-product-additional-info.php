@@ -30,7 +30,7 @@ class Responsive_Addons_For_Elementor_Theme_Product_Additional_Info extends Woo_
 	 * Get widget title
 	 */
 	public function get_title() {
-		return esc_html__( 'RAE Product Additional Information', 'responsive-addons-for-elementor' );
+		return esc_html__( 'Product Additional Information', 'responsive-addons-for-elementor' );
 	}
 
 	/**

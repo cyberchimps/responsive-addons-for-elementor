@@ -47,7 +47,7 @@ class Responsive_Addons_For_Elementor_Image_Hotspot extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Image Hotspot', 'responsive-addons-for-elementor' );
+		return __( 'Image Hotspot', 'responsive-addons-for-elementor' );
 	}
 
 	/**

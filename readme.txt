@@ -3,9 +3,11 @@ Contributors: cyberchimps
 Donate Link: https://cyberchimps.com
 Tags: elementor, elementor addons, elementor widget, woocommerce elementor, page builder plugin
 Requires at least: 5.0
-Tested up to: 6.7
+Tested up to: 6.8
+Elementor tested up to: 3.29
+Elementor Pro tested up to: 3.29
 Requires PHP: 5.6
-Stable tag: 1.6.2
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -289,6 +291,47 @@ If you like Responsive Addons for Elementor, consider checking out our other Wor
 The Development Version of the Responsive Addons for Elementor plugin is located at [https://github.com/cyberchimps/responsive-addons-for-elementor](https://github.com/cyberchimps/responsive-addons-for-elementor)
 
 == Changelog ==
+
+= 1.7.0 - 30th April 2025 =
+- Improvement: Post Title Widget - Added Size setting.
+- Fix: Flipbox Widget - Fixed the icon appearing issue on flip effect.
+
+= 1.6.9.1 - 28th March 2025 =
+- Fix: Enhanced Security: Strengthened the codebase.
+
+= 1.6.9 - 25th March 2025 =
+- Fix: Enhanced Security: Strengthened the codebase.
+- Fix: Menu Cart Widget - Fixed the cart icon visibility issue.
+- Fix: Fixed PHP warnings.
+
+= 1.6.8 - 5th March 2025 =
+- Fix: Fixed REA to RAE migration issue of theme builder templates.
+- Fix: Fixed PHP warnings.
+
+= 1.6.7 - 20th February 2025 =
+- New: Facebook Feed Widget.
+- Fix: Fixed X (Twitter) Feed widget deprecated API.
+- Fix: Fixed RAE sticky column settings not working.
+- Fix: Removed Elementor deprecated code.
+- Fix: Minor bug fixes.
+
+= 1.6.6 - 11th February 2025 =
+- Fix: Particle Background settings.
+- Fix: Team member widget issue.
+- Improvement: Added theme builder category in all widget screen.
+- Improvement: Minor UI improvements.
+
+= 1.6.5 - 22nd January 2025 =
+- Fix: Made carousel and slider widgets compatible with latest Elementor version 3.27.
+- Fix: Enhanced Security: Strengthened the codebase.
+
+= 1.6.4 - 14th January 2025 =
+- Fix: Fixed minor warnings.
+- Fix: FAQ Widget - Resolved missing parent element error for [role]s.
+
+= 1.6.3 - 17th December 2024 =
+- Improvement: Made compatible with Elementor version 3.26.
+- Fix: Removed Elementor deprecated code.
 
 = 1.6.2 - 21st November 2024 =
 - Improvement: RAE Posts - Added a funtionality to sort the posts based on primary category with yoast SEO premium.

@@ -36,7 +36,7 @@ class Responsive_Addons_For_Elementor_Theme_Post_Featured_Image extends Elemento
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'RAE Featured Image', 'responsive-addons-for-elementor' );
+		return esc_html__( 'Featured Image', 'responsive-addons-for-elementor' );
 	}
 
 	/**

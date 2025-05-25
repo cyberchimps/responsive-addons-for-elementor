@@ -56,7 +56,7 @@ class Responsive_Addons_For_Elementor_Team_Member extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Team Member', 'responsive-addons-for-elementor' );
+		return __( 'Team Member', 'responsive-addons-for-elementor' );
 	}
 
 	/**

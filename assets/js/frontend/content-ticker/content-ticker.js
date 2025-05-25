@@ -80,7 +80,7 @@ var swiperLoader = function swiperLoader(swiperElement, swiperConfig) {
 var swiperPromise = function swiperPromise(swiperElement, swiperConfig) {
 	return new Promise(function (resolve, reject) {
 
-	var swiperInstance = new Swiper(swiperElement, swiperConfig);
+	var swiperInstance = new RAELSwiper(swiperElement, swiperConfig);
 	  resolve(swiperInstance);
 });
 };

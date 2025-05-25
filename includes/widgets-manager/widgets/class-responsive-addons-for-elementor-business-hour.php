@@ -41,7 +41,7 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 	 * @access public
 	 */
 	public function get_title() {
-		return __( 'RAE Business Hour', 'responsive-addons-for-elementor' );
+		return __( 'Business Hour', 'responsive-addons-for-elementor' );
 	}
 
 	/**

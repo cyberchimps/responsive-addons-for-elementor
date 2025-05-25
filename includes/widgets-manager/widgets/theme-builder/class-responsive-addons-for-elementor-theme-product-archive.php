@@ -44,7 +44,7 @@ class Responsive_Addons_For_Elementor_Theme_Product_Archive extends Woo_Products
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( ' RAE Archive Products', 'responsive-addons-for-elementor' );
+		return esc_html__( ' Archive Products', 'responsive-addons-for-elementor' );
 	}
 
 	/**

@@ -63,7 +63,7 @@ var RAELLogoCarouselHandler = function($scope, $) {
         carousel_options.items = 1;
     }
 
-    let swiper = new Swiper($carousel, carousel_options);
+    let swiper = new RAELSwiper($carousel, carousel_options);
   
     if ($pause_on_hover) {
         $carousel.on({

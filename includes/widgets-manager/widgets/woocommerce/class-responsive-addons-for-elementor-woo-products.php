@@ -121,7 +121,7 @@ class Responsive_Addons_For_Elementor_Woo_Products extends Widget_Base {
 	 * @return string The widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Products', 'responsive-addons-for-elementor' );
+		return __( 'Products', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -3793,7 +3793,7 @@ class Responsive_Addons_For_Elementor_Woo_Products extends Widget_Base {
 	 * @access private
 	 */
 	private function get_template( $template_name ) {
-		$file_name = RAEL_DIR . 'includes/widgets-manager/widgets/skins/woo-products/' . $template_name . '.php';
+		$file_name = RAEL_DIR . 'includes/widgets-manager/widgets/skins/woo-products/' . sanitize_file_name( $template_name ) . '.php';
 		return $file_name;
 	}
 

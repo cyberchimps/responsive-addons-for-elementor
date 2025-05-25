@@ -61,7 +61,7 @@ class Responsive_Addons_For_Elementor_Countdown extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Countdown', 'responsive-addons-for-elementor' );
+		return __( 'Countdown', 'responsive-addons-for-elementor' );
 	}
 
 	/**

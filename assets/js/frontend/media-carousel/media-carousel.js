@@ -111,7 +111,7 @@ MediaCarouselHandler = Base.extend({
             breakpoints: breakpointsSettings,
             handleElementorBreakpoints: true
         };
-        this.Swipers.main.controller.control = this.Swipers.thumbs = new Swiper(this.elements.$thumbsSwiper, thumbsSliderOptions);
+        this.Swipers.main.controller.control = this.Swipers.thumbs = new RAELSwiper(this.elements.$thumbsSwiper, thumbsSliderOptions);
 
         this.elements.$thumbsSwiper.data('swiper', this.Swipers.thumbs);
         this.Swipers.thumbs.controller.control = this.Swipers.main;

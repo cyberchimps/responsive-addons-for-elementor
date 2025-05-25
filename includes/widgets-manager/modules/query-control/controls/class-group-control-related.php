@@ -41,7 +41,6 @@ class Group_Control_Related extends Group_Control_Query {
 
 		$fields['post_type']['options']['related']                = __( 'Related', 'responsive-addons-for-elementor' );
 		$fields['include_term_ids']['condition']['post_type!'][]  = 'related';
-		$fields['include_primary_category']['condition']['post_type!'][]  = 'related';
 		$fields['related_taxonomies']['condition']['post_type'][] = 'related';
 		$fields['include_authors']['condition']['post_type!'][]   = 'related';
 		$fields['exclude_authors']['condition']['post_type!'][]   = 'related';

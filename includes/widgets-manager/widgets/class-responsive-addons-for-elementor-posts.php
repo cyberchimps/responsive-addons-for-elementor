@@ -76,7 +76,7 @@ class Responsive_Addons_For_Elementor_Posts extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Posts', 'responsive-addons-for-elementor' );
+		return __( 'Posts', 'responsive-addons-for-elementor' );
 	}
 
 	/**

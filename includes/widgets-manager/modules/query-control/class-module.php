@@ -262,20 +262,6 @@ class Module extends Module_Base {
 					);
 				}
 				break;
-			case 'primary_category':
-				$post_type = $this->extract_post_type( $data );
-
-				$taxonomies = get_object_taxonomies( $post_type );
-
-				$query_params = array(
-					'taxonomy'   => $taxonomies,
-					'search'     => $data['q'],
-					'hide_empty' => false,
-				);
-
-				$results = $this->search_taxonomies( $query_params, $data );
-
-				break;
 			default:
 				$results = apply_filters( 'rael_core_elements_query_control_get_autocomplete_' . $data['filter_type'], array(), $data );
 		}

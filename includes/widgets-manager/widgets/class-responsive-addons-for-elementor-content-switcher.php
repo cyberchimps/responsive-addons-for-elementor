@@ -14,6 +14,7 @@ use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
+use Responsive_Addons_For_Elementor\Helper\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -61,7 +62,7 @@ class Responsive_Addons_For_Elementor_Content_Switcher extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Content Switcher', 'responsive-addons-for-elementor' );
+		return __( 'Content Switcher', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -1186,7 +1187,7 @@ class Responsive_Addons_For_Elementor_Content_Switcher extends Widget_Base {
 		<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'rael_ct_wrapper' ) ); ?>>
 			<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'rael_ct_toggle' ) ); ?>>
 				<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'rael_ct_section_heading_1' ) ); ?>>
-					<<?php echo esc_attr( $settings['rael_ct_headings_tag'] ); ?> <?php echo wp_kses_post( $this->get_render_attribute_string( 'rael_ct_content_1_heading' ) ); ?> ><?php echo wp_kses_post( $this->get_settings_for_display( 'rael_ct_content_1_heading' ) ); ?></<?php echo esc_attr( $settings['rael_ct_headings_tag'] ); ?>>
+					<<?php echo esc_attr( Helper::validate_html_tags( $settings['rael_ct_headings_tag'] ) ); ?> <?php echo wp_kses_post( $this->get_render_attribute_string( 'rael_ct_content_1_heading' ) ); ?> ><?php echo wp_kses_post( $this->get_settings_for_display( 'rael_ct_content_1_heading' ) ); ?></<?php echo esc_attr( Helper::validate_html_tags( $settings['rael_ct_headings_tag'] ) ); ?>>
 				</div>
 				<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'rael_ct_btn' ) ); ?>>
 		<?php $switch_html = ''; ?>
@@ -1223,7 +1224,7 @@ class Responsive_Addons_For_Elementor_Content_Switcher extends Widget_Base {
 
 				</div>
 				<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'rael_ct_section_heading_2' ) ); ?>>
-					<<?php echo esc_attr( $settings['rael_ct_headings_tag'] ); ?> <?php echo wp_kses_post( $this->get_render_attribute_string( 'rael_ct_content_2_heading' ) ); ?> ><?php echo wp_kses_post( $this->get_settings_for_display( 'rael_ct_content_2_heading' ) ); ?></<?php echo esc_attr( $settings['rael_ct_content_2_heading'] ); ?>>
+					<<?php echo esc_attr( Helper::validate_html_tags( $settings['rael_ct_headings_tag'] ) ); ?> <?php echo wp_kses_post( $this->get_render_attribute_string( 'rael_ct_content_2_heading' ) ); ?> ><?php echo wp_kses_post( $this->get_settings_for_display( 'rael_ct_content_2_heading' ) ); ?></<?php echo esc_attr( Helper::validate_html_tags( $settings['rael_ct_headings_tag'] ) ); ?>>
 				</div>
 			</div>
 			<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'rael_ct_toggle_sections' ) ); ?>>

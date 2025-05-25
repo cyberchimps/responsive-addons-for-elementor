@@ -44,7 +44,7 @@ class Responsive_Addons_For_Elementor_Reviews extends Widget_Base {
 	 * Get title function
 	 */
 	public function get_title() {
-		return __( 'RAE Reviews', 'responsive-addons-for-elementor' );
+		return __( 'Reviews', 'responsive-addons-for-elementor' );
 	}
 
 	/**

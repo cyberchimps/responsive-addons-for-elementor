@@ -205,8 +205,8 @@ class Helper {
 		return wp_kses( $content, self::get_allowed_tags() );
 	}
 
-	public static function validate_html_tags( $tag ) {
-		return array_key_exists( strtolower( $tag ), self::get_allowed_tags() ) ? $tag : 'div';
+	public static function validate_html_tags( $tag, $default_tag='div' ) {
+		return array_key_exists( strtolower( $tag ), self::get_allowed_tags() ) ? $tag : $default_tag;
 	}
 
 	public static function ajax_get_compare_table() {

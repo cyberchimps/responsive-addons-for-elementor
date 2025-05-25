@@ -47,7 +47,7 @@ class Responsive_Addons_For_Elementor_Nav_Menu extends Widget_Base {
 	 * @return string
 	 */
 	public function get_title() {
-		return __( 'RAE Nav Menu', 'responsive-addons-for-elementor' );
+		return __( 'Nav Menu', 'responsive-addons-for-elementor' );
 	}
 	/**
 	 * Get the icon for the navigation menu.

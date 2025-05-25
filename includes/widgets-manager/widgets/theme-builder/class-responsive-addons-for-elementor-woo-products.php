@@ -21,7 +21,7 @@ class Woo_Products extends Responsive_Addons_For_Elementor_Woo_Products_Base {
 	}
 
 	public function get_title() {
-		return esc_html__( 'RAE Products', 'responsive-addons-for-elementor' );
+		return esc_html__( 'Products', 'responsive-addons-for-elementor' );
 	}
 
 	public function get_icon() {

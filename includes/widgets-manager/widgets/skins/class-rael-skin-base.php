@@ -1343,11 +1343,11 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 
 		$tag = $this->get_instance_value( 'title_tag' );
 		?>
-		<<?php echo wp_kses_post( $tag ); ?> class="elementor-post__title">
+		<<?php echo wp_kses_post( Helper::validate_html_tags( $tag ) ); ?> class="elementor-post__title">
 		<a href="<?php echo esc_url( $this->current_permalink ); ?>" <?php echo esc_attr( $optional_attributes_html ); ?>>
 			<?php the_title(); ?>
 		</a>
-		</<?php echo wp_kses_post( $tag ); ?>>
+		</<?php echo wp_kses_post( Helper::validate_html_tags( $tag ) ); ?>>
 		<?php
 	}
 	/**

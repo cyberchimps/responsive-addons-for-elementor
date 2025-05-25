@@ -46,7 +46,7 @@ class Responsive_Addons_For_Elementor_Slider extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Slider', 'responsive-addons-for-elementor' );
+		return __( 'Slider', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -76,7 +76,29 @@ class Responsive_Addons_For_Elementor_Slider extends Widget_Base {
 	public function get_categories() {
 		return array( 'responsive-addons-for-elementor' );
 	}
-
+	/**
+	 * Get the stylesheets required for the widget.
+	 *
+	 * @return array
+	 */
+	public function get_style_depends() {
+		return array(
+			'font-awesome-5-all',
+			'font-awesome-4-shim',
+			'swiper',
+			'e-swiper',	
+		);
+	}
+	/**
+	 * Get the scripts required for the widget.
+	 *
+	 * @return array
+	 */
+	public function get_script_depends() {
+		return array(
+			'font-awesome-4-shim',
+		);
+	}
 	/**
 	 * Get button sizes.
 	 *
@@ -170,15 +192,7 @@ class Responsive_Addons_For_Elementor_Slider extends Widget_Base {
 				'label'      => __( 'Background Overlay', 'responsive-addons-for-elementor' ),
 				'type'       => Controls_Manager::SWITCHER,
 				'default'    => '',
-				'conditions' => array(
-					'terms' => array(
-						array(
-							'name'     => 'background_image[url]',
-							'operator' => '!=',
-							'value'    => '',
-						),
-					),
-				),
+				'condition' => array( 'background_image[id]!' => '' ),
 			)
 		);
 
@@ -252,20 +266,7 @@ class Responsive_Addons_For_Elementor_Slider extends Widget_Base {
 				'label'      => __( 'Ken Burns Effect', 'responsive-addons-for-elementor' ),
 				'type'       => Controls_Manager::SWITCHER,
 				'default'    => '',
-				'conditions' => array(
-					'terms' => array(
-						array(
-							'name'     => 'background_image[url]',
-							'operator' => '!=',
-							'value'    => '',
-						),
-						array(
-							'name'     => 'background_image[url]',
-							'operator' => '!=',
-							'value'    => '',
-						),
-					),
-				),
+				'condition' => array( 'background_image[id]!' => '' ),
 			)
 		);
 
@@ -1348,7 +1349,6 @@ class Responsive_Addons_For_Elementor_Slider extends Widget_Base {
 
 		$slides      = array();
 		$slide_count = 0;
-
 		foreach ( $settings['slides'] as $slide ) {
 			$slide_html       = '';
 			$btn_attributes   = '';
@@ -1385,8 +1385,7 @@ class Responsive_Addons_For_Elementor_Slider extends Widget_Base {
 			}
 
 			$slide_html .= '</div>';
-
-			if ( $slide['slide_image'] && 'yes' === $slide['slide_image_show'] ) {
+			if ( 'yes' === $slide['slide_image_show'] && $slide['slide_image'] ) {
 				$slide_html .= '<div class="responsive-slide-image"></div>';
 			}
 
@@ -1435,11 +1434,11 @@ class Responsive_Addons_For_Elementor_Slider extends Widget_Base {
 					<?php endif; ?>
 					<?php if ( $show_arrows ) : ?>
 						<div class="responsive-swiper-button responsive-swiper-button-prev">
-							<i class="eicon-chevron-<?php echo esc_attr( $prev ); ?>" aria-hidden="true"></i>
+							<i class="fa fa-angle-<?php echo esc_attr( $prev ); ?>" aria-hidden="true"></i>
 							<span class="elementor-screen-only"><?php esc_html_e( 'Previous', 'responsive-addons-for-elementor' ); ?></span>
 						</div>
 						<div class="responsive-swiper-button responsive-swiper-button-next">
-							<i class="eicon-chevron-<?php echo esc_attr( $next ); ?>" aria-hidden="true"></i>
+							<i class="fa fa-angle-<?php echo esc_attr( $next ); ?>" aria-hidden="true"></i>
 							<span class="elementor-screen-only"><?php esc_html_e( 'Next', 'responsive-addons-for-elementor' ); ?></span>
 						</div>
 					<?php endif; ?>

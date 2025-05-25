@@ -49,7 +49,7 @@ class Responsive_Addons_For_Elementor_Video extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Video', 'responsive-addons-for-elementor' );
+		return __( 'Video', 'responsive-addons-for-elementor' );
 	}
 
 	/**

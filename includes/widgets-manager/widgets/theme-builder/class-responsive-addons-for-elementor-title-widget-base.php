@@ -66,6 +66,13 @@ abstract class Responsive_Addons_For_Elementor_Title_Widget_Base extends Element
 				'default' => 'h1',
 			)
 		);
+
+		$this->update_control(
+			'size',
+			array(
+				'condition' => [],
+			)
+		);
 	}
 
 	/**

@@ -28,7 +28,7 @@ class Responsive_Addons_For_Elementor_Theme_Post_Title extends Base {
 	 * Get widget title
 	 */
 	public function get_title() {
-		return esc_html__( 'RAE Post Title', 'responsive-addons-for-elementor' );
+		return esc_html__( 'Post Title', 'responsive-addons-for-elementor' );
 	}
 
 	/**

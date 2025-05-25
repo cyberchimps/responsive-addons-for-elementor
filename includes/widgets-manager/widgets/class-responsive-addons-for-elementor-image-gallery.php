@@ -17,6 +17,7 @@ use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Control_Media;
+use Responsive_Addons_For_Elementor\Helper\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;   // Exit if accessed directly.
@@ -52,7 +53,7 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Image Gallery', 'responsive-addons-for-elementor' );
+		return __( 'Image Gallery', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -80,7 +81,17 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 	public function get_categories() {
 		return array( 'responsive-addons-for-elementor' );
 	}
-
+	/**
+	 * Get the stylesheets required for the widget.
+	 *
+	 * @return array
+	 */
+	public function get_style_depends() {
+		return array(
+			'swiper',
+			'e-swiper',	
+		);
+	}
 	/**
 	 * Get placeholder image source.
 	 *
@@ -1967,7 +1978,7 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 		$images_count = count( $settings['rael_wp_gallery'] );
 		?>
 		<div class="swiper-gallery">
-			<div class="swiper-container gallery-carousel rael-caption-<?php echo esc_attr( $settings['rael_gallery_caption'] ); ?> swiper-gallery" dir="<?php echo esc_attr( $direction ); ?>">
+			<div class="swiper<?php echo esc_attr( RAEL_SWIPER_CONTAINER ); ?> gallery-carousel rael-caption-<?php echo esc_attr( $settings['rael_gallery_caption'] ); ?> swiper-gallery" dir="<?php echo esc_attr( $direction ); ?>">
 				<div class="swiper-wrapper rael-img-gallery-wrap">
 					<?php $this->print_image_gallery( $gallery ); ?>
 				</div>
@@ -2087,9 +2098,9 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 		}
 
 		$output  = '<div class="rael-grid-img-caption ' . $settings['rael_caption_animation'] . ' ">';
-		$output .= '<' . $settings['rael_caption_tag'] . ' class="rael-grid-caption-text">';
+		$output .= '<' . Helper::validate_html_tags( $settings['rael_caption_tag'] ) . ' class="rael-grid-caption-text">';
 		$output .= $image['caption'];
-		$output .= '</' . $settings['rael_caption_tag'] . '>';
+		$output .= '</' . Helper::validate_html_tags( $settings['rael_caption_tag'] ) . '>';
 		$output .= '<p class="rael-img-description">' . $image['description'] . '</p>';
 		$output .= '</div>';
 
@@ -2109,14 +2120,14 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 		?>
 		<style type="text/css">
 			<?php echo '.rael-grid-item-content:hover .',esc_html( $animation_name ); ?> > p, /* variable escaped before hand. */
-			<?php echo '.rael-grid-item-content:hover .',esc_html( $animation_name ); ?> > <?php echo esc_html( $caption_tag ); ?>{
+			<?php echo '.rael-grid-item-content:hover .',esc_html( $animation_name ); ?> > <?php echo esc_html( Helper::validate_html_tags( $caption_tag ) ); ?>{
 				animation:
 					<?php echo esc_html( $animation_name ),'-in'; ?>
 					<?php echo esc_html( $animation_speed ),'ms'; ?>
 					ease-out;
 			}
 			<?php echo '.rael-grid-item-content:not( :hover ) .',esc_html( $animation_name ); ?> > p,
-			<?php echo '.rael-grid-item-content:not( :hover ) .',esc_html( $animation_name ); ?> > <?php echo esc_html( $caption_tag ); ?>{
+			<?php echo '.rael-grid-item-content:not( :hover ) .',esc_html( $animation_name ); ?> > <?php echo esc_html( Helper::validate_html_tags( $caption_tag ) ); ?>{
 				animation:
 					<?php echo esc_html( $animation_name ),'-out'; ?>
 					<?php echo esc_html( $animation_speed ),'ms'; ?>

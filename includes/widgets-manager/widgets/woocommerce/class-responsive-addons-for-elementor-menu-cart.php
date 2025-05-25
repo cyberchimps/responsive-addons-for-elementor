@@ -41,7 +41,7 @@ class Responsive_Addons_For_Elementor_Menu_Cart extends Widget_Base {
 	 * @return string The widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Menu Cart', 'responsive-addons-for-elementor' );
+		return __( 'Menu Cart', 'responsive-addons-for-elementor' );
 	}
 	/**
 	 * Retrieves the icon of the widget.

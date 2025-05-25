@@ -37,7 +37,7 @@ class Responsive_Addons_For_Elementor_Theme_Product_Data_Tabs extends Woo_Widget
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'RAE Product Data Tabs', 'responsive-addons-for-elementor' );
+		return esc_html__( 'Product Data Tabs', 'responsive-addons-for-elementor' );
 	}
 
 	/**

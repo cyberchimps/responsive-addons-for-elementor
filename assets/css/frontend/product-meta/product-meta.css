@@ -1,5 +1,5 @@
 /*Css Rule for divider to work in table and stacked view*/
-.elementor-widget-container .rael_product_meta .rael-detail-container::after {
+.rael_product_meta .rael-detail-container::after {
   position: absolute;
   bottom: 0;
   left: 0;

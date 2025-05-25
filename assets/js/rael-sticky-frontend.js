@@ -98,10 +98,112 @@
   var RaelSticky = {
     init: function init() {
       elementor.hooks.addAction('frontend/element_ready/column', RaelSticky.elementorColumn);
+      elementor.hooks.addAction('frontend/element_ready/container', RaelSticky.elementorColumn);
+
       elementorFrontend.hooks.addAction('frontend/element_ready/section', RaelSticky.setStickySection);
       elementorFrontend.hooks.addAction('frontend/element_ready/container', RaelSticky.setStickySection);
       $(RaelSticky.stickySection);
     },
+    elementorColumn: function( $scope ) {
+			var $target  = $scope,
+				$window  = $( window ),
+				columnId = $target.data( 'id' ),
+				editMode = Boolean( elementor.isEditMode() ),
+				settings = {},
+				stickyInstance = null,
+				stickyInstanceOptions = {
+					topSpacing: 50,
+					bottomSpacing: 50,
+					containerSelector: '.elementor-section',
+					innerWrapperSelector: '.elementor-widget-wrap',
+				};
+
+			if ( ! editMode ) {
+				settings = $target.data( 'rael-sticky-column-settings' );
+
+				if ( $target.hasClass( 'rael-sticky-column-sticky' ) ) {
+					if ( -1 !== settings['stickyOn'].indexOf( elementorFrontend.getCurrentDeviceMode() ) ) {
+						$target.each( function() {
+
+							var $this  = $( this ),
+
+							elementType = $this.data( 'element_type' );
+
+							if ( elementType !== 'container' ){
+									stickyInstanceOptions.topSpacing = settings['topSpacing'];
+									stickyInstanceOptions.bottomSpacing = settings['bottomSpacing'];
+
+									$target.data( 'stickyColumnInit', true );
+									stickyInstance = new StickySidebar( $target[0], stickyInstanceOptions );
+
+									$window.on( 'resize.RaelStickyColumnSticky orientationchange.RaelStickyColumnSticky', RaelStickyTools.debounce( 50, resizeDebounce ) );
+							
+							} else {
+								$this.addClass( 'rael-sticky-container-sticky' );
+								$this.css({ 
+									'top': settings['topSpacing'], 
+									'bottom': settings['bottomSpacing']
+								});
+							}
+						});
+					}
+				}
+
+			} else {
+				return false;
+			}
+
+			function resizeDebounce() {
+				var currentDeviceMode = elementorFrontend.getCurrentDeviceMode(),
+					availableDevices  = settings['stickyOn'] || [],
+					isInit            = $target.data( 'stickyColumnInit' );
+
+				if ( -1 !== availableDevices.indexOf( currentDeviceMode ) ) {
+
+					if ( ! isInit ) {
+						$target.data( 'stickyColumnInit', true );
+						stickyInstance = new StickySidebar( $target[0], stickyInstanceOptions );
+						stickyInstance.updateSticky();
+					}
+				} else {
+					$target.data( 'stickyColumnInit', false );
+					stickyInstance.destroy();
+				}
+			}
+
+		},
+
+		columnEditorSettings: function( columnId ) {
+			var editorElements = null,
+				columnData     = {};
+
+			if ( ! window.elementor.hasOwnProperty( 'elements' ) ) {
+				return false;
+			}
+
+			editorElements = window.elementor.elements;
+
+			if ( ! editorElements.models ) {
+				return false;
+			}
+
+			$.each( editorElements.models, function( index, obj ) {
+
+				$.each( obj.attributes.elements.models, function( index, obj ) {
+					if ( columnId == obj.id ) {
+						columnData = obj.attributes.settings.attributes;
+					}
+				} );
+
+			} );
+      const result = {
+				'sticky': columnData['rael_sticky_column_sticky_enable'] || false,
+				'topSpacing': columnData['rael_sticky_column_sticky_top_spacing'] || 50,
+				'bottomSpacing': columnData['rael_sticky_column_sticky_bottom_spacing'] || 50,
+				'stickyOn': columnData['rael_sticky_column_sticky_enable_on'] || [ 'desktop', 'tablet', 'mobile']
+			}
+			return result;
+		},
     getStickySectionsDesktop: [],
     getStickySectionsTablet: [],
     getStickySectionsMobile: [],
@@ -287,6 +389,25 @@
     }
   };
   $(window).on('elementor/frontend/init', RaelSticky.init);
+
+  var RaelStickyTools = {
+    debounce: function( threshold, callback ) {
+      var timeout;
+
+			return function debounced( $event ) {
+				function delayed() {
+					callback.call( this, $event );
+					timeout = null;
+				}
+
+				if ( timeout ) {
+					clearTimeout( timeout );
+				}
+
+				timeout = setTimeout( delayed, threshold );
+			};
+		}
+	}
 })(jQuery, window.elementorFrontend);
 
 /***/ })

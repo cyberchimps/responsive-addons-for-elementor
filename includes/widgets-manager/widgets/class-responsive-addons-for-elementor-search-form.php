@@ -50,7 +50,7 @@ class Responsive_Addons_For_Elementor_Search_Form extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'RAE Search Bar', 'responsive-addons-for-elementor' );
+		return __( 'Search Bar', 'responsive-addons-for-elementor' );
 	}
 
 	/**

@@ -157,7 +157,7 @@ if ( ! class_exists( 'Rael_Sticky_Elementor' ) ) {
 			$type     = isset( $data['elType'] ) ? $data['elType'] : 'column';
 			$settings = $data['settings'];
 
-			if ( 'column' !== $type ) {
+			if ( 'column' !== $type && 'container' !== $type ) {
 				return;
 			}
 

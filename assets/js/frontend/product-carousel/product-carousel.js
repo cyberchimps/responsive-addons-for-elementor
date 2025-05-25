@@ -42,7 +42,7 @@ var RAELProductCarouselHandler = function($scope, $) {
 
     var swiperPromise = function(swiperElement, swiperConfig) {
         return new Promise(function(resolve, reject) {
-            var swiperInstance = new Swiper(swiperElement, swiperConfig);
+            var swiperInstance = new RAELSwiper(swiperElement, swiperConfig);
             resolve(swiperInstance);
         })
     };

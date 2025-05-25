@@ -1,5 +1,5 @@
 /**
- * Swiper 5.3.6
+ * RAELSwiper 5.3.6
  * Most modern mobile touch slider and framework with hardware accelerated transitions
  * http://swiperjs.com
  *
@@ -13,7 +13,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.Swiper = factory());
+  (global = global || self, global.RAELSwiper = factory());
 }(this, function () { 'use strict';
 
   /**
@@ -3944,8 +3944,9 @@
 
   var extendedDefaults = {};
 
-  var Swiper = /*@__PURE__*/(function (SwiperClass) {
-    function Swiper() {
+  var RAELSwiper = /*@__PURE__*/(function (SwiperClass) {
+    function RAELSwiper() {
+      
       var assign;
 
       var args = [], len = arguments.length;
@@ -3966,13 +3967,13 @@
 
       Object.keys(prototypes).forEach(function (prototypeGroup) {
         Object.keys(prototypes[prototypeGroup]).forEach(function (protoMethod) {
-          if (!Swiper.prototype[protoMethod]) {
-            Swiper.prototype[protoMethod] = prototypes[prototypeGroup][protoMethod];
+          if (!RAELSwiper.prototype[protoMethod]) {
+            RAELSwiper.prototype[protoMethod] = prototypes[prototypeGroup][protoMethod];
           }
         });
       });
 
-      // Swiper Instance
+      // RAELSwiper Instance
       var swiper = this;
       if (typeof swiper.modules === 'undefined') {
         swiper.modules = {};
@@ -4021,7 +4022,7 @@
         var swipers = [];
         $el.each(function (index, containerEl) {
           var newParams = Utils.extend({}, params, { el: containerEl });
-          swipers.push(new Swiper(newParams));
+          swipers.push(new RAELSwiper(newParams));
         });
         return swipers;
       }
@@ -4038,7 +4039,7 @@
       } else {
         $wrapperEl = $el.children(("." + (swiper.params.wrapperClass)));
       }
-      // Extend Swiper
+      // Extend RAELSwiper
       Utils.extend(swiper, {
         $el: $el,
         el: el,
@@ -4158,13 +4159,13 @@
       return swiper;
     }
 
-    if ( SwiperClass ) Swiper.__proto__ = SwiperClass;
-    Swiper.prototype = Object.create( SwiperClass && SwiperClass.prototype );
-    Swiper.prototype.constructor = Swiper;
+    if ( SwiperClass ) RAELSwiper.__proto__ = SwiperClass;
+    RAELSwiper.prototype = Object.create( SwiperClass && SwiperClass.prototype );
+    RAELSwiper.prototype.constructor = RAELSwiper;
 
     var staticAccessors = { extendedDefaults: { configurable: true },defaults: { configurable: true },Class: { configurable: true },$: { configurable: true } };
 
-    Swiper.prototype.slidesPerViewDynamic = function slidesPerViewDynamic () {
+    RAELSwiper.prototype.slidesPerViewDynamic = function slidesPerViewDynamic () {
       var swiper = this;
       var params = swiper.params;
       var slides = swiper.slides;
@@ -4199,7 +4200,7 @@
       return spv;
     };
 
-    Swiper.prototype.update = function update () {
+    RAELSwiper.prototype.update = function update () {
       var swiper = this;
       if (!swiper || swiper.destroyed) { return; }
       var snapGrid = swiper.snapGrid;
@@ -4242,7 +4243,7 @@
       swiper.emit('update');
     };
 
-    Swiper.prototype.changeDirection = function changeDirection (newDirection, needUpdate) {
+    RAELSwiper.prototype.changeDirection = function changeDirection (newDirection, needUpdate) {
       if ( needUpdate === void 0 ) needUpdate = true;
 
       var swiper = this;
@@ -4275,7 +4276,7 @@
       return swiper;
     };
 
-    Swiper.prototype.init = function init () {
+    RAELSwiper.prototype.init = function init () {
       var swiper = this;
       if (swiper.initialized) { return; }
 
@@ -4330,7 +4331,7 @@
       swiper.emit('init');
     };
 
-    Swiper.prototype.destroy = function destroy (deleteInstance, cleanStyles) {
+    RAELSwiper.prototype.destroy = function destroy (deleteInstance, cleanStyles) {
       if ( deleteInstance === void 0 ) deleteInstance = true;
       if ( cleanStyles === void 0 ) cleanStyles = true;
 
@@ -4391,7 +4392,7 @@
       return null;
     };
 
-    Swiper.extendDefaults = function extendDefaults (newDefaults) {
+    RAELSwiper.extendDefaults = function extendDefaults (newDefaults) {
       Utils.extend(extendedDefaults, newDefaults);
     };
 
@@ -4411,9 +4412,9 @@
       return $;
     };
 
-    Object.defineProperties( Swiper, staticAccessors );
+    Object.defineProperties( RAELSwiper, staticAccessors );
 
-    return Swiper;
+    return RAELSwiper;
   }(SwiperClass));
 
   var Device$1 = {
@@ -7212,11 +7213,11 @@
       }
       if (Array.isArray(controlled)) {
         for (var i = 0; i < controlled.length; i += 1) {
-          if (controlled[i] !== byController && controlled[i] instanceof Swiper) {
+          if (controlled[i] !== byController && controlled[i] instanceof RAELSwiper) {
             setControlledTranslate(controlled[i]);
           }
         }
-      } else if (controlled instanceof Swiper && byController !== controlled) {
+      } else if (controlled instanceof RAELSwiper && byController !== controlled) {
         setControlledTranslate(controlled);
       }
     },
@@ -7244,11 +7245,11 @@
       }
       if (Array.isArray(controlled)) {
         for (i = 0; i < controlled.length; i += 1) {
-          if (controlled[i] !== byController && controlled[i] instanceof Swiper) {
+          if (controlled[i] !== byController && controlled[i] instanceof RAELSwiper) {
             setControlledTransition(controlled[i]);
           }
         }
-      } else if (controlled instanceof Swiper && byController !== controlled) {
+      } else if (controlled instanceof RAELSwiper && byController !== controlled) {
         setControlledTransition(controlled);
       }
     },
@@ -8620,7 +8621,7 @@
     },
   };
 
-  // Swiper Class
+  // RAELSwiper Class
 
   var components = [
     Device$1,
@@ -8649,13 +8650,13 @@
     Thumbs$1
   ];
 
-  if (typeof Swiper.use === 'undefined') {
-    Swiper.use = Swiper.Class.use;
-    Swiper.installModule = Swiper.Class.installModule;
+  if (typeof RAELSwiper.use === 'undefined') {
+    RAELSwiper.use = RAELSwiper.Class.use;
+    RAELSwiper.installModule = RAELSwiper.Class.installModule;
   }
 
-  Swiper.use(components);
+  RAELSwiper.use(components);
 
-  return Swiper;
+  return RAELSwiper;
 
 }));
