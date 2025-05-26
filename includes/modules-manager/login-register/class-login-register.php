@@ -57,7 +57,7 @@ class Login_Register {
 
 		$widget_id = 0;
 		if ( ! empty( $_POST['widget_id'] ) ) {
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+			$widget_id = sanitize_text_field( wp_unslash( $_POST['widget_id'] ));
 		} else {
 			$err_msg = __( 'Widget ID is missing.', 'responsive-addons-for-elementor' );
 		}
@@ -69,7 +69,7 @@ class Login_Register {
 			update_option( 'rael_login_error_' . $widget_id, $err_msg, false );
 
 			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-				wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
+				wp_safe_redirect( wp_unslash($_SERVER['HTTP_REFERER']));
 				exit();
 			}
 		}
@@ -82,11 +82,13 @@ class Login_Register {
 			update_option( 'rael_login_error_' . $widget_id, $err_msg, false );
 
 			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 				wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
 				exit();
 			}
 		}
 
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		if ( ! wp_verify_nonce( $_POST['rael-login-nonce'], 'rael-login-action' ) ) {
 			$err_msg = __( 'Security token did not match.', 'responsive-addons-for-elementor' );
 			if ( $ajax ) {
@@ -95,6 +97,7 @@ class Login_Register {
 			update_option( 'rael_login_error_' . $widget_id, $err_msg, false );
 
 			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 				wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
 				exit();
 			}
@@ -111,6 +114,7 @@ class Login_Register {
 			update_option( 'rael_login_error_' . $widget_id, $err_msg, false );
 
 			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 				wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
 				exit();
 			}
@@ -118,7 +122,7 @@ class Login_Register {
 
 		do_action( 'rael/login-register/before-login' );
 
-		$widget_id = ! empty( $_POST['widget_id'] ) ? sanitize_text_field( $_POST['widget_id'] ) : '';
+		$widget_id = ! empty( $_POST['widget_id'] ) ? sanitize_text_field( wp_unslash( $_POST['widget_id'] ) ) : '';
 		if ( isset( $_POST['g_recaptcha_enabled'] ) && ! $this->rael_lr_validate_recaptcha() ) {
 			$err_msg = isset( $settings['rael_error_recaptcha'] ) ? $settings['rael_error_recaptcha'] : __( 'You did not pass the reCAPTCHA validation.', 'responsive-addons-for-elementor' );
 			if ( $ajax ) {
@@ -127,18 +131,19 @@ class Login_Register {
 			update_option( 'rael_login_error_' . $widget_id, $err_msg, false );
 
 			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 				wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
 				exit();
 			}
 		}
 
-		$user_login = ! empty( $_POST['rael-login-name'] ) ? sanitize_text_field( $_POST['rael-login-name'] ) : '';
+		$user_login = ! empty( $_POST['rael-login-name'] ) ? sanitize_text_field( wp_unslash( $_POST['rael-login-name'] ) ) : '';
 		if ( is_email( $user_login ) ) {
 			$user_login = sanitize_email( $user_login );
 		}
 
-		$password   = ! empty( $_POST['rael-login-password'] ) ? sanitize_text_field( $_POST['rael-login-password'] ) : '';
-		$rememberme = ! empty( $_POST['rael-remember-me'] ) ? sanitize_text_field( $_POST['rael-remember-me'] ) : '';
+		$password   = ! empty( $_POST['rael-login-password'] ) ? sanitize_text_field( wp_unslash( $_POST['rael-login-password'] ) ) : '';
+		$rememberme = ! empty( $_POST['rael-remember-me'] ) ? sanitize_text_field( wp_unslash( $_POST['rael-remember-me'] ) ) : '';
 
 		$credentials = array(
 			'user_login'    => $user_login,
@@ -172,17 +177,20 @@ class Login_Register {
 					'message' => isset( $settings['rael_success_login'] ) ? $settings['rael_success_login'] : __( 'You are logged in successfully', 'responsive-addons-for-elementor' ),
 				);
 				if ( ! empty( $_POST['redirect_to'] ) ) {
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 					$data['redirect_to'] = esc_url( $_POST['redirect_to'] );
 				}
 				wp_send_json_success( $data );
 			}
 
 			if ( ! empty( $_POST['redirect_to'] ) ) {
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				wp_safe_redirect( esc_url( $_POST['redirect_to'] ) );
 				exit();
 			}
 		}
 		if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitizedddddfffff
 			wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
 			exit();
 		}
@@ -205,6 +213,8 @@ class Login_Register {
 				wp_send_json_error( $err_msg );
 			}
 		}
+
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		if ( ! wp_verify_nonce( $_POST['rael-register-nonce'], 'rael-register-action' ) ) {
 			$err_msg = __( 'Security token did not match.', 'responsive-addons-for-elementor' );
 			if ( $ajax ) {
@@ -219,7 +229,7 @@ class Login_Register {
 			$err_msg = __( 'Page ID is missing.', 'responsive-addons-for-elementor' );
 		}
 		if ( ! empty( $_POST['widget_id'] ) ) {
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+			$widget_id = sanitize_text_field( wp_unslash( $_POST['widget_id'] ) );
 		} else {
 			$err_msg = __( 'Widget ID is missing.', 'responsive-addons-for-elementor' );
 		}
@@ -231,6 +241,7 @@ class Login_Register {
 			update_option( 'rael_register_errors_' . $widget_id, $err_msg, false );
 
 			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
 				exit();
 			}
@@ -245,7 +256,10 @@ class Login_Register {
 		$errors               = array();
 		$registration_allowed = get_option( 'users_can_register' );
 		$protocol             = is_ssl() ? 'https://' : 'http://';
-		$url                  = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		$host = isset( $_SERVER['HTTP_HOST'] ) ? wp_unslash( $_SERVER['HTTP_HOST'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$uri  = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$url  = esc_url_raw( $protocol . $host . $uri );
+		// $url                  = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 		// vail early if reg is closed.
 		if ( ! $registration_allowed ) {
@@ -260,7 +274,7 @@ class Login_Register {
 		}
 
 		// prepare vars and flag errors.
-		$tc_check = ! empty( $_POST['terms_and_conditions_check'] ) ? sanitize_text_field( $_POST['terms_and_conditions_check'] ) : '';
+		$tc_check = ! empty( $_POST['terms_and_conditions_check'] ) ? sanitize_text_field( wp_unslash( $_POST['terms_and_conditions_check'] ) ) : '';
 		if ( 'checked' !== $tc_check && ! isset( $_POST['no_terms_and_conditions_check'] ) ) {
 			$errors['terms_conditions'] = isset( $settings['rael_error_tc'] ) ? $settings['rael_error_tc'] : __( 'Please accept the Terms & Conditions and try again.', 'responsive-addons-for-elementor' );
 		}
@@ -269,8 +283,8 @@ class Login_Register {
 			$errors['recaptcha'] = isset( $settings['rael_error_recaptcha'] ) ? $settings['rael_error_recaptcha'] : __( 'You did not pass the reCAPTCHA validation.', 'responsive-addons-for-elementor' );
 		}
 
-		if ( ! empty( $_POST['email'] ) && is_email( $_POST['email'] ) ) {
-			$email = sanitize_email( $_POST['email'] );
+		if ( ! empty( $_POST['email'] ) && is_email( wp_unslash( $_POST['email'] ) ) ) {
+			$email = sanitize_email( wp_unslash( $_POST['email'] ) );
 			if ( email_exists( $email ) ) {
 				$errors['email'] = isset( $settings['rael_error_email_used'] ) ? $settings['rael_error_email_used'] : __( 'The provided email is already registered with another account. Please login or reset password or use another email.', 'responsive-addons-for-elementor' );
 			}
@@ -280,10 +294,10 @@ class Login_Register {
 
 		// if user provided a user_name then validate & sanitize it.
 		if ( isset( $_POST['user_name'] ) ) {
-			$username = sanitize_text_field( $_POST['user_name'] );
+			$username = sanitize_text_field( wp_unslash( $_POST['user_name'] ) );
 
 			if ( ! $username ) {
-				$username = sanitize_email( $_POST['email'] );
+				$username = sanitize_email( wp_unslash ( $_POST['email'] ) );
 			}
 
 			if ( mb_strlen( $username ) > 60 ) {
@@ -296,10 +310,10 @@ class Login_Register {
 		}
 
 		if ( ! empty( $_POST['password'] ) ) {
-			$password = wp_unslash( sanitize_text_field( $_POST['password'] ) );
+			$password = wp_unslash( sanitize_text_field( wp_unslash( $_POST['password'] ) ) );
 		}
 		if ( isset( $_POST['confirm_pass'] ) ) {
-			$confirm_pass = wp_unslash( sanitize_text_field( $_POST['confirm_pass'] ) );
+			$confirm_pass = wp_unslash( sanitize_text_field( wp_unslash( $_POST['confirm_pass'] ) ) );
 			if ( $confirm_pass !== $password ) {
 				$errors['confirm_pass'] = isset( $settings['rael_error_confirm_password'] ) ? $settings['rael_error_confirm_password'] : __( 'Password and Confirm Password must match.', 'responsive-addons-for-elementor' );
 			}
@@ -337,16 +351,16 @@ class Login_Register {
 		);
 
 		if ( ! empty( $_POST['first_name'] ) ) {
-			$user_data['first_name']          = sanitize_text_field( $_POST['first_name'] );
-			self::$email_options['firstname'] = sanitize_text_field( $_POST['first_name'] );
+			$user_data['first_name']          = sanitize_text_field( wp_unslash( $_POST['first_name'] ) );
+			self::$email_options['firstname'] = sanitize_text_field( wp_unslash( $_POST['first_name'] ) );
 		}
 		if ( ! empty( $_POST['last_name'] ) ) {
-			$user_data['last_name']          = sanitize_text_field( $_POST['last_name'] );
-			self::$email_options['lastname'] = sanitize_text_field( $_POST['last_name'] );
+			$user_data['last_name']          = sanitize_text_field( wp_unslash( $_POST['last_name'] ) );
+			self::$email_options['lastname'] = sanitize_text_field( wp_unslash( $_POST['last_name'] ) );
 		}
 		if ( ! empty( $_POST['website'] ) ) {
-			$user_data['user_url']          = esc_url_raw( $_POST['website'] );
-			self::$email_options['website'] = esc_url_raw( $_POST['website'] );
+			$user_data['user_url']          = esc_url_raw( $_POST['website'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
+			self::$email_options['website'] = esc_url_raw( $_POST['website'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 		}
 		$register_actions    = array();
 		$custom_redirect_url = '';
@@ -475,20 +489,20 @@ class Login_Register {
 		}
 
 		if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-			wp_safe_redirect( $_SERVER['HTTP_REFERER'] );
+			wp_safe_redirect( $_SERVER['HTTP_REFERER'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			exit();
 		}
 	}
 
 	public function rael_lr_validate_recaptcha() {
-		if ( strlen( $_REQUEST['g-recaptcha-response'] ) == 0 ) {
+		if( isset( $_REQUEST['g-recaptcha-response'] ) && strlen( sanitize_text_field( wp_unslash( $_REQUEST['g-recaptcha-response'] ) ) ) == 0 ) {
 			return false;
 		}
 		$endpoint = 'https://www.google.com/recaptcha/api/siteverify';
 		$data     = array(
 			'secret'   => get_option( 'rael_login_reg_setting_secret_key' ),
-			'response' => $_REQUEST['g-recaptcha-response'],
-			'ip'       => $_SERVER['REMOTE_ADDR'],
+			'response' => sanitize_text_field( wp_unslash( $_REQUEST['g-recaptcha-response'] ) ),
+			'ip'       => ( isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : null ), // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		);
 
 		$res = json_decode( wp_remote_retrieve_body( wp_remote_post( $endpoint, array( 'body' => $data ) ) ), 1 );

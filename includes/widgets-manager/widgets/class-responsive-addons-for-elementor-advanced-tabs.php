@@ -1232,7 +1232,7 @@ class Responsive_Addons_For_Elementor_Advanced_Tabs extends Widget_Base {
 				<figure class = "rae-figure">
 			<?php endif; ?>
 			<?php if ( $link ) : ?>
-					<a href = "<?php echo $link['url']; ?>" data-elementor-open-lightbox= "<?php echo $tab['rael_advanced_tabs_tab_image_open_lightbox']; ?>" >
+					<a href = "<?php echo esc_url($link['url']); ?>" data-elementor-open-lightbox= "<?php echo esc_attr($tab['rael_advanced_tabs_tab_image_open_lightbox']); ?>" >
 			<?php endif; ?>
 				<?php Group_Control_Image_Size::print_attachment_image_html( $tab, 'rael_advanced_tabs_tab_image' ); ?>
 			<?php if ( $link ) : ?>

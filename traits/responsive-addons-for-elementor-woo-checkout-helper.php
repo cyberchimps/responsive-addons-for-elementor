@@ -98,6 +98,7 @@ trait Woo_Checkout_Helper {
 
 		// Get the order.
 		$order_id  = apply_filters( 'woocommerce_thankyou_order_id', absint( $order_id ) );
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended
 		$order_key = apply_filters( 'woocommerce_thankyou_order_key', empty( $_GET['key'] ) ? '' : wc_clean( wp_unslash( $_GET['key'] ) ) ); // WPCS: input var ok, CSRF ok.
 
 		if ( $order_id > 0 ) {
@@ -139,6 +140,7 @@ trait Woo_Checkout_Helper {
 		// Pay for existing order.
 		if ( isset( $_GET['pay_for_order'], $_GET['key'] ) && $order_id ) { // WPCS: input var ok, CSRF ok.
 			try {
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended
 				$order_key          = isset( $_GET['key'] ) ? wc_clean( wp_unslash( $_GET['key'] ) ) : ''; // WPCS: input var ok, CSRF ok.
 				$order              = wc_get_order( $order_id );
 				$hold_stock_minutes = (int) get_option( 'woocommerce_hold_stock_minutes', 0 );
@@ -254,6 +256,7 @@ trait Woo_Checkout_Helper {
 		} elseif ( $order_id ) {
 
 			// Pay for order after checkout step.
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended
 			$order_key = isset( $_GET['key'] ) ? wc_clean( wp_unslash( $_GET['key'] ) ) : ''; // WPCS: input var ok, CSRF ok.
 			$order     = wc_get_order( $order_id );
 

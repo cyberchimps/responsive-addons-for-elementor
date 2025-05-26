@@ -1002,7 +1002,7 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 
 					<div class="rael-feature-list-icon-box">
 						<div class="rael-feature-list-icon-inner"<?php echo wp_kses_post( $icon_box_bg ); ?>>
-							<<?php echo wp_kses_post( $feature_icon_tag ) . ' ' . wp_kses_post( $this->get_render_attribute_string( 'rael_feature_list_icon' . $index ) ) . $this->get_render_attribute_string( 'rael_feature_list_link' . $index ) . 'style="background-color:' . esc_attr( $icon_bg ) . '"'; ?>>
+							<<?php echo wp_kses_post( $feature_icon_tag ) . ' ' . wp_kses_post( $this->get_render_attribute_string( 'rael_feature_list_icon' . $index ) ) . wp_kses_post( $this->get_render_attribute_string( 'rael_feature_list_link' . $index ) ) . 'style="background-color:' . esc_attr( $icon_bg ) . '"'; ?>>
 				<?php
 				if ( 'icon' === $item['rael_icon_type'] && $feature_has_icon ) {
 

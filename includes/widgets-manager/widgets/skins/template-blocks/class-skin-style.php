@@ -803,7 +803,7 @@ abstract class Skin_Style {
 
 		ob_start();
 
-		$term = ( isset( $_POST['data']['term'] ) ) ? $_POST['data']['term'] : '';
+		$term = ( isset( $_POST['data']['term'] ) ) ? sanitize_text_field( wp_unslash( $_POST['data']['term'] ) ) : '';
 
 		self::$settings = $widget->get_settings_for_display();
 		require_once RAEL_DIR . 'includes/widgets-manager/widgets/skins/template-blocks/class-build-post-query.php';
@@ -847,7 +847,7 @@ abstract class Skin_Style {
 
 		ob_start();
 
-		$term = ( isset( $_POST['data']['term'] ) ) ? $_POST['data']['term'] : '';
+		$term = ( isset( $_POST['data']['term'] ) ) ? sanitize_text_field( wp_unslash( $_POST['data']['term'] ) ) : '';
 
 		self::$settings  = $widget->get_settings_for_display();
 		self::$query_obj = new Build_Post_Query( $style_id, self::$settings, $term );

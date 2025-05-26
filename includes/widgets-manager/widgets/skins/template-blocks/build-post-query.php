@@ -127,7 +127,7 @@ class Build_Post_Query {
 			$control_id = $control_id . '_';
 		}
 
-		if ( '' !== $_POST['data']['paged'] ) {
+		if ( isset( $_POST['data']['paged'] ) && '' !== sanitize_text_field( wp_unslash( $_POST['data']['paged']) ) )  {
 			$paged = self::get_paged();
 		} else {
 			$paged = '1';
@@ -223,7 +223,7 @@ class Build_Post_Query {
 		global $wp_the_query, $paged;
 
 		if ( isset( $_POST['data']['paged'] ) && '' !== $_POST['data']['paged'] ) {
-			return $_POST['data']['paged'];
+			return sanitize_text_field( wp_unslash( $_POST['data']['paged'] ) );
 		}
 
 		// Check the 'paged' query var.

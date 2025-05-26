@@ -43,7 +43,7 @@ trait Helper_Woo_Checkout {
 	 * @since  1.8.0
 	 */
 	public function rael_woo_checkout_post_code_validate() {
-		$data     = ( isset( $_POST['data'] ) ) ? $_POST['data'] : null;
+		$data = isset( $_POST['data'] ) ? sanitize_text_field( wp_unslash( $_POST['data'] ) ) : null;
 		$validate = true;
 		if ( isset( $data['postcode'] ) ) {
 
