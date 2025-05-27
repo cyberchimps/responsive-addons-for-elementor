@@ -205,7 +205,12 @@ class Responsive_Addons_For_Elementor_WC_Add_To_Cart extends Widget_Button {
 		if ( ! empty( $settings['product_id'] ) ) {
 			$product_id = $settings['product_id'];
 		} elseif ( wp_doing_ajax() ) {
-			$product_id = $_POST['post_id']; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+			if(!isset($_POST['post_id']) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['post_id'] ) ) ) ){
+				return;
+			}
+			
+			$product_id = wp_unslash( $_POST['post_id'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		} else {
 			$product_id = get_queried_object_id();
 		}

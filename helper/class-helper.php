@@ -225,6 +225,11 @@ class Helper {
 
 	public static function rael_product_quickview_popup() {
 		// Verify Nonce.
+
+		if( (! isset($_POST['security']) ) || !wp_verify_nonce( sanitize_text_field( wp_unslash ($_POST['security'] ) ), 'rael_products' ) ){
+			return;
+		}
+
 		$widget_id  = isset( $_POST['widget_id'] ) ? sanitize_key( $_POST['widget_id'] ) : '';
 		$product_id = isset( $_POST['product_id'] ) ? sanitize_key( $_POST['product_id'] ) : '';
 		$page_id    = isset( $_POST['page_id'] ) ? sanitize_key( $_POST['page_id'] ) : '';
@@ -234,7 +239,7 @@ class Helper {
 		}
 		global $post, $product;
 		$product = wc_get_product( $product_id );
-		$post    = get_post( $product_id );
+		$post    = get_post( $product_id ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 		setup_postdata( $post );
 
 		$settings = self::get_widget_settings( $page_id, $widget_id );
@@ -323,6 +328,11 @@ class Helper {
 	public static function rael_product_add_to_cart() {
 
 		$ajax       = wp_doing_ajax();
+		if( (! isset($_POST['nonce']) ) || !wp_verify_nonce( sanitize_text_field( wp_unslash ($_POST['nonce'] ) ), 'rael_products' ) ){
+			return;
+		}
+
+
 		$cart_items = isset( $_POST['cart_item_data'] ) ? sanitize_text_field( wp_unslash( $_POST['cart_item_data'] ) ) : array();
 		$variation  = array();
 		if ( ! empty( $cart_items ) ) {
@@ -973,6 +983,9 @@ class Helper {
 			parse_str( $settings_raw, $settings );
 		}
 	
+		if( (! isset($_POST['nonce']) ) || !wp_verify_nonce( sanitize_text_field( wp_unslash ($_POST['nonce'] ) ), 'rael_products' ) ){
+			return;
+		}
 
 		$pagination_number = isset( $_POST['number'] ) ? absint( wp_unslash( $_POST['number'] ) ) : 1;
 		$pagination_limit  = isset( $_POST['limit'] )  ? absint( wp_unslash( $_POST['limit'] ) )  : 10;
@@ -1040,6 +1053,10 @@ class Helper {
 
 		// wp_parse_str( $_REQUEST['args'], $args );
 		// wp_parse_str( $_REQUEST['settings'], $settings );
+
+		if( (! isset($_POST['nonce']) ) || !wp_verify_nonce( sanitize_text_field( wp_unslash ($_POST['nonce'] ) ), 'rael_products' ) ){
+			return;
+		}
 
 		$pagination_number = isset( $_POST['number'] ) ? absint( wp_unslash( $_POST['number'] ) ) : 1;
 		$pagination_limit  = isset( $_POST['limit'] )  ? absint( wp_unslash( $_POST['limit'] ) )  : 10;
@@ -1295,6 +1312,10 @@ class Helper {
 	}
 
 	public static function rael_ajax_select2_get_posts_value_titles() {
+
+		if( (! isset($_POST['nonce']) ) || !wp_verify_nonce( sanitize_text_field( wp_unslash ($_POST['nonce'] ) ), 'responsive-addons-for-elementor' ) ){
+			return;
+		}
 
 		if ( empty( $_POST['id'] ) ) {
 			wp_send_json_error( array() );

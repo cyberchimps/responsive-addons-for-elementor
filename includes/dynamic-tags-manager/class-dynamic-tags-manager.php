@@ -36,7 +36,7 @@ class Dynamic_Tags_Manager {
 	}
 	public function load_dependencies() {
 		if ( class_exists( 'WooCommerce' ) ) {
-			require_once RAEL_DIR . '/includes/dynamic-tags-manager/dynamic-tags/woocommerce/traits/tag-product_id.php';
+			require_once RAEL_DIR . '/includes/dynamic-tags-manager/dynamic-tags/woocommerce/traits/tag-product-id.php';
 			require_once RAEL_DIR . '/includes/dynamic-tags-manager/dynamic-tags/woocommerce/class-base-tag.php';
 		}
 	}

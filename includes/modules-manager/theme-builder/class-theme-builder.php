@@ -17,9 +17,9 @@ use Elementor;
 use Responsive_Addons_For_Elementor\Helper\Helper;
 
 /**
- * Class RAEL Theme Builder
+ * Class Theme Builder
  */
-class RAEL_Theme_Builder {
+class Theme_Builder {
 	use Singleton;
 
 	/**
@@ -113,7 +113,7 @@ class RAEL_Theme_Builder {
 
 		// Load WPML & Polylang Compatibility if WPML is installed and activated.
 		if ( defined( 'ICL_SITEPRESS_VERSION' ) || defined( 'POLYLANG_BASENAME' ) ) {
-			require_once $this->dir . 'compatibility/class-theme-wpml-compatibility.php';
+			require_once $this->dir . 'compatibility/class-hf-wpml-compatibility.php';
 		}
 
 		require_once $this->dir . 'conditions/class-rael-conditions.php';

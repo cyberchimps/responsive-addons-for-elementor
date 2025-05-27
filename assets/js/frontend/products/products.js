@@ -224,7 +224,8 @@ var RAELProductsHandler = function($scope, $) {
                 limit: lmt,
                 args: args,
                 template: templateInfo,
-                settings: settings
+                settings: settings,
+                nonce: localize.nonce
             },
             beforeSend: function beforeSend() {
                 $(widgetClass).addClass("rael-products__loader");

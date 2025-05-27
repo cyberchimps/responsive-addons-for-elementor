@@ -444,7 +444,8 @@ var _isArray = _interopRequireDefault(__webpack_require__(279));
               data: {
                 post_type: obj.data.source_type,
                 source_name: obj.data.source_name,
-                id: ids
+                id: ids,
+                nonce: rael_ajax_select2_localize.nonce
               }
             }).done(function (response) {
               if (response.success && "undefined" !== typeof response.data.results) {

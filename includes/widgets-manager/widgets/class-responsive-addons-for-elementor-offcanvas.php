@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Elementor widget that displays Offcanvas.
  */
-class RAEL_Offcanvas extends Widget_Base {
+class Responsive_Addons_For_Elementor_Offcanvas extends Widget_Base {
 	/**
 	 * Static property to store page templates
 	 *

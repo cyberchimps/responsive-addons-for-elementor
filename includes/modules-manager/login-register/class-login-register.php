@@ -33,10 +33,29 @@ class Login_Register {
 
 	public function login_or_register_user() {
 		// login or register form?
-		do_action( 'rael/login-register/before-processing-login-register', $_POST );
+
+		if ( isset( $_SERVER['REQUEST_METHOD'] ) && 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
+			return;
+		}
+
+		do_action( 'rael/login-register/before-processing-login-register', $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		if ( isset( $_POST['rael-login-submit'] ) ) {
+			if (
+				! isset( $_POST['rael-login-nonce'] ) ||
+				! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['rael-login-nonce'] ) ), 'rael-login-action' )
+			) {
+				wp_send_json_error( 'Login nonce verification failed.' );
+				return;
+			}
 			$this->log_user_in();
 		} elseif ( isset( $_POST['rael-register-submit'] ) ) {
+			if (
+				! isset( $_POST['rael-register-nonce'] ) ||
+				! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['rael-register-nonce'] ) ), 'rael-register-action' )
+			) {
+				wp_send_json_error( 'Register nonce verification failed.' );
+				return;
+			}
 			$this->register_user();
 		}
 		do_action( 'rael/login-register/after-processing-login-register', $_POST );

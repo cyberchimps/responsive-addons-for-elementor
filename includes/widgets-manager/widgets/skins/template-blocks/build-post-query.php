@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
 /**
  * RAEL Build Post Query.
  *
@@ -127,6 +127,10 @@ class Build_Post_Query {
 			$control_id = $control_id . '_';
 		}
 
+		if( (! isset($_POST['nonce']) ) || !wp_verify_nonce( sanitize_text_field( wp_unslash ($_POST['nonce'] ) ), 'rael_products' ) ){
+			return;
+		}
+
 		if ( isset( $_POST['data']['paged'] ) && '' !== sanitize_text_field( wp_unslash( $_POST['data']['paged']) ) )  {
 			$paged = self::get_paged();
 		} else {
@@ -221,6 +225,10 @@ class Build_Post_Query {
 	public static function get_paged() {
 
 		global $wp_the_query, $paged;
+
+		if( (! isset($_POST['nonce']) ) || !wp_verify_nonce( sanitize_text_field( wp_unslash ($_POST['nonce'] ) ), 'rael_products' ) ){
+			return;
+		}
 
 		if ( isset( $_POST['data']['paged'] ) && '' !== $_POST['data']['paged'] ) {
 			return sanitize_text_field( wp_unslash( $_POST['data']['paged'] ) );

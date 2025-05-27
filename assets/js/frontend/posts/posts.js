@@ -302,7 +302,8 @@ $( 'body' ).on( 'click', '.rael-post-pagination .rael_pagination_load_more', fun
                 data:
                 {
                     term,postPerPage,paged,pid,widget_id,skin
-                }
+                },
+                nonce: localize.nonce
             },
             success: function success( data )
             {
