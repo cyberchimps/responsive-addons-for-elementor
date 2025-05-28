@@ -85,7 +85,7 @@ if ( 'two' === $settings['rael_post_preset_style'] ) :
 									if ( 0 === $count ) {
 										$html .= '<li class="rael-post-carousel__meta-cat-icon"><i class="far fa-folder-open"></i></li>';
 									}
-									$url  = ( 'category' === $settings['rael_post_terms'] ) ? get_category_link( $custom_term->term_id ) : get_tag_link( $custom_term->term_id );
+									$url   = ( 'category' === $settings['rael_post_terms'] ) ? get_category_link( $custom_term->term_id ) : get_tag_link( $custom_term->term_id );
 									$html .= '<li>';
 									$html .= '<a href="' . esc_url( $url ) . '">';
 									$html .= $custom_term->name;
@@ -164,7 +164,7 @@ if ( 'two' === $settings['rael_post_preset_style'] ) :
 									if ( 0 === $count ) {
 										$html .= '<li class="rael-post-carousel__meta-cat-icon"><i class="far fa-folder-open"></i></li>';
 									}
-									$url  = ( 'category' === $settings['rael_post_terms'] ) ? get_category_link( $custom_term->term_id ) : get_tag_link( $custom_term->term_id );
+									$url   = ( 'category' === $settings['rael_post_terms'] ) ? get_category_link( $custom_term->term_id ) : get_tag_link( $custom_term->term_id );
 									$html .= '<li>';
 									$html .= '<a href="' . esc_url( $url ) . '">';
 									$html .= $custom_term->name;

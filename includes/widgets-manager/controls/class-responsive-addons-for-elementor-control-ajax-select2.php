@@ -49,7 +49,7 @@ class Responsive_Addons_For_Elementor_Control_Ajax_Select2 extends Base_Data_Con
 				'browser'       => __( 'Browser', 'responsive-addons-for-elementor' ),
 				'date_time'     => __( 'Date & Time', 'responsive-addons-for-elementor' ),
 				'dynamic_field' => __( 'Dynamic Field', 'responsive-addons-for-elementor' ),
-				'nonce'    		=> wp_create_nonce( 'responsive-addons-for-elementor' ),
+				'nonce'         => wp_create_nonce( 'responsive-addons-for-elementor' ),
 			)
 		);
 

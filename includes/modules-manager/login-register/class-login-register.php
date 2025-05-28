@@ -76,7 +76,7 @@ class Login_Register {
 
 		$widget_id = 0;
 		if ( ! empty( $_POST['widget_id'] ) ) {
-			$widget_id = sanitize_text_field( wp_unslash( $_POST['widget_id'] ));
+			$widget_id = sanitize_text_field( wp_unslash( $_POST['widget_id'] ) );
 		} else {
 			$err_msg = __( 'Widget ID is missing.', 'responsive-addons-for-elementor' );
 		}
@@ -88,7 +88,7 @@ class Login_Register {
 			update_option( 'rael_login_error_' . $widget_id, $err_msg, false );
 
 			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-				wp_safe_redirect( wp_unslash($_SERVER['HTTP_REFERER']));
+				wp_safe_redirect( wp_unslash( $_SERVER['HTTP_REFERER'] ) );
 				exit();
 			}
 		}
@@ -275,9 +275,9 @@ class Login_Register {
 		$errors               = array();
 		$registration_allowed = get_option( 'users_can_register' );
 		$protocol             = is_ssl() ? 'https://' : 'http://';
-		$host = isset( $_SERVER['HTTP_HOST'] ) ? wp_unslash( $_SERVER['HTTP_HOST'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$uri  = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$url  = esc_url_raw( $protocol . $host . $uri );
+		$host                 = isset( $_SERVER['HTTP_HOST'] ) ? wp_unslash( $_SERVER['HTTP_HOST'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$uri                  = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$url                  = esc_url_raw( $protocol . $host . $uri );
 		// $url                  = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 		// vail early if reg is closed.
@@ -297,7 +297,7 @@ class Login_Register {
 		if ( 'checked' !== $tc_check && ! isset( $_POST['no_terms_and_conditions_check'] ) ) {
 			$errors['terms_conditions'] = isset( $settings['rael_error_tc'] ) ? $settings['rael_error_tc'] : __( 'Please accept the Terms & Conditions and try again.', 'responsive-addons-for-elementor' );
 		}
-		
+
 		if ( isset( $_POST['g_recaptcha_enabled'] ) && ! $this->rael_lr_validate_recaptcha() ) {
 			$errors['recaptcha'] = isset( $settings['rael_error_recaptcha'] ) ? $settings['rael_error_recaptcha'] : __( 'You did not pass the reCAPTCHA validation.', 'responsive-addons-for-elementor' );
 		}
@@ -316,7 +316,7 @@ class Login_Register {
 			$username = sanitize_text_field( wp_unslash( $_POST['user_name'] ) );
 
 			if ( ! $username ) {
-				$username = sanitize_email( wp_unslash ( $_POST['email'] ) );
+				$username = sanitize_email( wp_unslash( $_POST['email'] ) );
 			}
 
 			if ( mb_strlen( $username ) > 60 ) {
@@ -514,7 +514,7 @@ class Login_Register {
 	}
 
 	public function rael_lr_validate_recaptcha() {
-		if( isset( $_REQUEST['g-recaptcha-response'] ) && strlen( sanitize_text_field( wp_unslash( $_REQUEST['g-recaptcha-response'] ) ) ) == 0 ) {
+		if ( isset( $_REQUEST['g-recaptcha-response'] ) && strlen( sanitize_text_field( wp_unslash( $_REQUEST['g-recaptcha-response'] ) ) ) == 0 ) {
 			return false;
 		}
 		$endpoint = 'https://www.google.com/recaptcha/api/siteverify';

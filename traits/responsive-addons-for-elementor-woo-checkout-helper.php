@@ -65,7 +65,7 @@ trait Woo_Checkout_Helper {
 		// Get checkout object.
 		$checkout = WC()->checkout();
 
-		if( ! wp_verify_nonce($_POST) ){
+		if ( ! wp_verify_nonce( $_POST ) ) {
 			wc_get_template( 'checkout/cart-errors.php', array( 'checkout' => $checkout ) );
 			wc_clear_notices();
 		}
@@ -102,7 +102,7 @@ trait Woo_Checkout_Helper {
 		$order = false;
 
 		// Get the order.
-		$order_id  = apply_filters( 'woocommerce_thankyou_order_id', absint( $order_id ) );
+		$order_id = apply_filters( 'woocommerce_thankyou_order_id', absint( $order_id ) );
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended
 		$order_key = apply_filters( 'woocommerce_thankyou_order_key', empty( $_GET['key'] ) ? '' : wc_clean( wp_unslash( $_GET['key'] ) ) ); // WPCS: input var ok, CSRF ok.
 
@@ -143,7 +143,7 @@ trait Woo_Checkout_Helper {
 		$order_id = absint( $order_id );
 
 		// Pay for existing order.
-		if ( ( isset( $_GET['pay_for_order'], $_GET['key'] ) && $order_id ) || (! wp_verify_nonce($_GET)) ) { // WPCS: input var ok, CSRF ok.
+		if ( ( isset( $_GET['pay_for_order'], $_GET['key'] ) && $order_id ) || ( ! wp_verify_nonce( $_GET ) ) ) { // WPCS: input var ok, CSRF ok.
 			try {
 				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended
 				$order_key          = isset( $_GET['key'] ) ? wc_clean( wp_unslash( $_GET['key'] ) ) : ''; // WPCS: input var ok, CSRF ok.

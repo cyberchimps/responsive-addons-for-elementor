@@ -803,7 +803,7 @@ abstract class Skin_Style {
 
 		ob_start();
 
-		if( (! isset($_POST['nonce']) ) || !wp_verify_nonce( sanitize_text_field( wp_unslash ($_POST['nonce'] ) ), 'rael_products' ) ){
+		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_products' ) ) {
 			return;
 		}
 
@@ -851,7 +851,7 @@ abstract class Skin_Style {
 
 		ob_start();
 
-		if( (! isset($_POST['nonce']) ) || !wp_verify_nonce( sanitize_text_field( wp_unslash ($_POST['nonce'] ) ), 'rael_products' ) ){
+		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_products' ) ) {
 			return;
 		}
 

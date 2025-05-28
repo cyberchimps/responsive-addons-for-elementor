@@ -216,7 +216,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 			),
 		);
 
-		if ( '_price' == $order_by  || '_sku' == $order_by ) {
+		if ( '_price' == $order_by || '_sku' == $order_by ) {
 			$args['orderby']  = 'meta_value_num';
 			$args['meta_key'] = $order_by;
 		} else {

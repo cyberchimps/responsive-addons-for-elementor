@@ -127,11 +127,11 @@ class Build_Post_Query {
 			$control_id = $control_id . '_';
 		}
 
-		if( (! isset($_POST['nonce']) ) || !wp_verify_nonce( sanitize_text_field( wp_unslash ($_POST['nonce'] ) ), 'rael_products' ) ){
+		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_products' ) ) {
 			return;
 		}
 
-		if ( isset( $_POST['data']['paged'] ) && '' !== sanitize_text_field( wp_unslash( $_POST['data']['paged']) ) )  {
+		if ( isset( $_POST['data']['paged'] ) && '' !== sanitize_text_field( wp_unslash( $_POST['data']['paged'] ) ) ) {
 			$paged = self::get_paged();
 		} else {
 			$paged = '1';
@@ -226,7 +226,7 @@ class Build_Post_Query {
 
 		global $wp_the_query, $paged;
 
-		if( (! isset($_POST['nonce']) ) || !wp_verify_nonce( sanitize_text_field( wp_unslash ($_POST['nonce'] ) ), 'rael_products' ) ){
+		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_products' ) ) {
 			return;
 		}
 
