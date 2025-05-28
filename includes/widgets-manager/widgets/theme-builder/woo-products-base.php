@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
 
 namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets\ThemeBuilder;
 

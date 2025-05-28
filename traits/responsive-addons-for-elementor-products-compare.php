@@ -184,10 +184,14 @@ trait RAEL_Products_Comparable
 	 */
 	public static function render_compare_table($options)
 	{
-		$products = array();
-		$fields = array();
-		$ds = array();
-		extract($options);
+		$products = isset($options['products']) ? $options['products'] : array();
+		$fields   = isset($options['fields']) ? $options['fields'] : array();
+		$ds       = isset($options['ds']) ? $options['ds'] : array();
+
+		// $products = array();
+		// $fields = array();
+		// $ds = array();
+		// extract($options);
 		$not_found_text         = isset($ds['rael_products_no_products_found_text']) ? $ds['rael_products_no_products_found_text'] : '';
 		$title                  = isset($ds['rael_products_table_title']) ? $ds['rael_products_table_title'] : '';
 		$title_tag              = isset($ds['rael_products_table_title_tag']) ? Helper::validate_html_tags($ds['rael_products_table_title_tag']) : 'h1';
@@ -1036,7 +1040,9 @@ trait RAEL_Products_Comparable
 
 	public function register_style_tab_compare_button_general_section($css_classes = array())
 	{
-		extract($css_classes);
+		// extract($css_classes);
+		$container_class = isset($css_classes['container_class']) ? $css_classes['container_class'] : '{{WRAPPER}} .rael-products-compare-modal';
+
 
 		$this->start_controls_section(
 			'rael_style_tab_compare_table_general_section',
@@ -1049,7 +1055,7 @@ trait RAEL_Products_Comparable
 			)
 		);
 
-		$container_class = ! empty($container_class) ? $container_class : '{{WRAPPER}} .rael-products-compare-modal';
+		// $container_class = ! empty($container_class) ? $container_class : '{{WRAPPER}} .rael-products-compare-modal';
 
 		$this->add_responsive_control(
 			'rael_product_compare_container_width',
@@ -1171,10 +1177,15 @@ trait RAEL_Products_Comparable
 
 	public function register_style_tab_table_style_section($css_classes = array())
 	{
-		extract($css_classes);
-		$table            = isset($table) ? $table : '{{WRAPPER}} .rael-products-compare-wrapper table';
-		$table_title      = isset($table_title) ? $table_title : '{{WRAPPER}} .rael-products-compare-wrapper .rael-products-compare__modal-title';
-		$table_title_wrap = isset($table_title_wrap) ? $table_title_wrap : '{{WRAPPER}} .rael-products-compare-wrapper .first-th';
+		// extract($css_classes);
+		// $table            = isset($table) ? $table : '{{WRAPPER}} .rael-products-compare-wrapper table';
+		// $table_title      = isset($table_title) ? $table_title : '{{WRAPPER}} .rael-products-compare-wrapper .rael-products-compare__modal-title';
+		// $table_title_wrap = isset($table_title_wrap) ? $table_title_wrap : '{{WRAPPER}} .rael-products-compare-wrapper .first-th';
+
+		$table            = isset($css_classes['table']) ? $css_classes['table'] : '{{WRAPPER}} .rael-products-compare-wrapper table';
+		$table_title      = isset($css_classes['table_title']) ? $css_classes['table_title'] : '{{WRAPPER}} .rael-products-compare-wrapper .rael-products-compare__modal-title';
+		$table_title_wrap = isset($css_classes['table_title_wrap']) ? $css_classes['table_title_wrap'] : '{{WRAPPER}} .rael-products-compare-wrapper .first-th';
+
 
 		$this->start_controls_section(
 			'rael_style_tab_table_style_section',

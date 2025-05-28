@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-class Woo_Products extends Responsive_Addons_For_Elementor_Woo_Products_Base {
+class Responsive_Addons_For_Elementor_Woo_Products extends Responsive_Addons_For_Elementor_Woo_Products_Base {
 
 	public function get_name() {
 		return 'rael-woocommerce-products';

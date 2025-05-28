@@ -628,7 +628,7 @@ class Helper {
 
 	public static function include_with_variable( $file_path, $variables = array() ) {
 		if ( file_exists( $file_path ) ) {
-			extract( $variables );
+			extract( $variables ); // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
 
 			ob_start();
 

@@ -145,7 +145,7 @@ class Dynamic_Tags_Manager {
 
 			if ( str_starts_with( $tag, 'woocommerce' ) ) {
 				$class_name = ucwords( str_replace( '-', '_', substr( $tag, 12 ) ), '_' );
-				$class_name = __NAMESPACE__ . "\DynamicTags\\WooCommerce\\RAEL_{$class_name}";
+				$class_name = __NAMESPACE__ . "\DynamicTags\\WooCommerce\\{$class_name}";
 			}
 
 			$dynamic_tags->register( new $class_name() );
