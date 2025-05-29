@@ -1116,6 +1116,12 @@ class Responsive_Addons_For_Elementor {
 					case 'media-carousel':
 					case 'post-carousel':
 					case 'reviews':
+						if ( ! isset( $included_libs['rael-swiper'] ) ) {
+							$included_libs['rael-swiper'] = true;
+							wp_enqueue_script( 'rael-swiper', RAEL_ASSETS_URL . 'lib/swiper/swiper.js', array(), RAEL_VER, true );
+							wp_localize_script( 'rael-swiper', 'rael_elementor_swiper', $swiper_class );
+						}
+						break;
 					case 'slider':
 					case 'testimonial-slider':
 						if ( ! isset( $included_libs['rael-swiper'] ) ) {
