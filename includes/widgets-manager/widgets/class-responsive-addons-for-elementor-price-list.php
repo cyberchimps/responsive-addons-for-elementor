@@ -308,9 +308,9 @@ class Responsive_Addons_For_Elementor_Price_List extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'heading_typography',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-price-list-header',
 			)
 		);
@@ -320,9 +320,9 @@ class Responsive_Addons_For_Elementor_Price_List extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_PRIMARY,
-				],
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .rael-price-list-title' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .rael-price-list .rael-price-list-price' => 'color: {{VALUE}};',
@@ -375,9 +375,9 @@ class Responsive_Addons_For_Elementor_Price_List extends Widget_Base {
 			array(
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
 				'name'     => 'badge_typography',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-				],
+				),
 				'exclude'  => array(
 					'letter_spacing',
 				),
@@ -478,9 +478,9 @@ class Responsive_Addons_For_Elementor_Price_List extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'original_price_typography',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-price-list-original-price',
 			)
 		);
@@ -499,9 +499,9 @@ class Responsive_Addons_For_Elementor_Price_List extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'   => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_TEXT,
-				],
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .rael-price-list-description' => 'color: {{VALUE}};',
 				),
@@ -512,9 +512,9 @@ class Responsive_Addons_For_Elementor_Price_List extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'description_typography',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-price-list-description',
 			)
 		);
@@ -575,9 +575,9 @@ class Responsive_Addons_For_Elementor_Price_List extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_SECONDARY,
-				],
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .rael-price-list-separator' => 'border-bottom-color: {{VALUE}};',
 				),
@@ -818,9 +818,9 @@ class Responsive_Addons_For_Elementor_Price_List extends Widget_Base {
 										<?php
 										if ( 'icon' === $item['badge'] && $item['badge_icon']['value'] ) {
 											$icon = sprintf( '<i class="%1$s" aria-hidden="true" title="%2$s"></i>', $item['badge_icon']['value'], $item['badge_icon_title'] );
-											echo sprintf( '<span class="rael-price-list-badge-icon">%s</span>', wp_kses_post( $icon ) );
+											printf( '<span class="rael-price-list-badge-icon">%s</span>', wp_kses_post( $icon ) );
 										} elseif ( 'text' === $item['badge'] && $item['badge_text'] ) {
-											echo sprintf( '<span class="rael-price-list-badge-text">%s</span>', esc_html( $item['badge_text'] ) );
+											printf( '<span class="rael-price-list-badge-text">%s</span>', esc_html( $item['badge_text'] ) );
 										}
 										?>
 									</div>

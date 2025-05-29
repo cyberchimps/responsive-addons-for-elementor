@@ -78,20 +78,20 @@ if ( 'two' === $settings['rael_post_preset_style'] ) :
 							if ( ! empty( $terms ) ) {
 								$html  = '<ul class="rael-post-carousel__meta-categories">';
 								$count = 0;
-								foreach ( $terms as $term ) {
+								foreach ( $terms as $custom_term ) {
 									if ( intval( $settings['rael_post_terms_max_length'] ) === $count ) {
 										break;
 									}
 									if ( 0 === $count ) {
 										$html .= '<li class="rael-post-carousel__meta-cat-icon"><i class="far fa-folder-open"></i></li>';
 									}
-									$link  = ( 'category' === $settings['rael_post_terms'] ) ? get_category_link( $term->term_id ) : get_tag_link( $term->term_id );
+									$url   = ( 'category' === $settings['rael_post_terms'] ) ? get_category_link( $custom_term->term_id ) : get_tag_link( $custom_term->term_id );
 									$html .= '<li>';
-									$html .= '<a href="' . esc_url( $link ) . '">';
-									$html .= $term->name;
+									$html .= '<a href="' . esc_url( $url ) . '">';
+									$html .= $custom_term->name;
 									$html .= '</a>';
 									$html .= '</li>';
-									$count++;
+									++$count;
 								}
 								$html .= '</ul>';
 								echo wp_kses_post( $html );
@@ -157,20 +157,20 @@ if ( 'two' === $settings['rael_post_preset_style'] ) :
 							if ( ! empty( $terms ) ) {
 								$html  = '<ul class="rael-post-carousel__meta-categories">';
 								$count = 0;
-								foreach ( $terms as $term ) {
+								foreach ( $terms as $custom_term ) {
 									if ( intval( $settings['rael_post_terms_max_length'] ) === $count ) {
 										break;
 									}
 									if ( 0 === $count ) {
 										$html .= '<li class="rael-post-carousel__meta-cat-icon"><i class="far fa-folder-open"></i></li>';
 									}
-									$link  = ( 'category' === $settings['rael_post_terms'] ) ? get_category_link( $term->term_id ) : get_tag_link( $term->term_id );
+									$url   = ( 'category' === $settings['rael_post_terms'] ) ? get_category_link( $custom_term->term_id ) : get_tag_link( $custom_term->term_id );
 									$html .= '<li>';
-									$html .= '<a href="' . esc_url( $link ) . '">';
-									$html .= $term->name;
+									$html .= '<a href="' . esc_url( $url ) . '">';
+									$html .= $custom_term->name;
 									$html .= '</a>';
 									$html .= '</li>';
-									$count++;
+									++$count;
 								}
 								$html .= '</ul>';
 								echo wp_kses_post( $html );

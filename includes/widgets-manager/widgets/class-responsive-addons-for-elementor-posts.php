@@ -374,9 +374,9 @@ class Responsive_Addons_For_Elementor_Posts extends Widget_Base {
 			array(
 				'name'      => 'pagination_typography',
 				'selector'  => '{{WRAPPER}} .elementor-pagination',
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
-				],
+				),
 				'condition' => array(
 					'pagination_type!' => 'infinite',
 				),
@@ -1311,7 +1311,6 @@ class Responsive_Addons_For_Elementor_Posts extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
 	}
 	/**
 	 * Register Controls for the Widget.

@@ -80,7 +80,6 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 		if ( 'rael-posts' === $this->parent->get_name() ) {
 			$this->register_data_position_controls();
 		}
-
 	}
 	/**
 	 * Register control thumbnail
@@ -276,7 +275,6 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 				),
 			)
 		);
-
 	}
 	/**
 	 * Register excerpt_controls
@@ -363,7 +361,6 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 				),
 			)
 		);
-
 	}
 	/**
 	 * Register link_controls
@@ -701,9 +698,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_SECONDARY,
-				],
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .elementor-post__title, {{WRAPPER}} .elementor-post__title a' => 'color: {{VALUE}};',
 				),
@@ -717,9 +714,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'title_typography',
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				),
 				'selector'  => '{{WRAPPER}} .elementor-post__title, {{WRAPPER}} .elementor-post__title a',
 				'condition' => array(
 					$this->get_control_id( 'show_title' ) => 'yes',
@@ -790,9 +787,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'meta_typography',
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
-				],
+				),
 				'selector'  => '{{WRAPPER}} .elementor-post__meta-data',
 				'condition' => array(
 					$this->get_control_id( 'meta_data!' ) => array(),
@@ -849,9 +846,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'excerpt_typography',
-				'global'   => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'selector'  => '{{WRAPPER}} .elementor-post__excerpt p',
 				'condition' => array(
 					$this->get_control_id( 'show_excerpt' ) => 'yes',
@@ -895,9 +892,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'   => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_ACCENT,
-				],
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .elementor-post__read-more' => 'color: {{VALUE}};',
 				),
@@ -912,9 +909,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 			array(
 				'label'     => __( 'Hover Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_ACCENT,
-				],
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .elementor-post__read-more:hover' => 'color: {{VALUE}};',
 				),
@@ -930,9 +927,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 			array(
 				'name'      => 'read_more_typography',
 				'selector'  => '{{WRAPPER}} .elementor-post__read-more',
-				'global'   => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-				],
+				),
 				'condition' => array(
 					$this->get_control_id( 'show_read_more' ) => 'yes',
 					$this->get_control_id( 'read_more_type' ) => 'text',
@@ -965,9 +962,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 			array(
 				'name'      => 'read_more_button_typography',
 				'selector'  => '{{WRAPPER}} .elementor-button-text',
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-				],
+				),
 				'condition' => array(
 					$this->get_control_id( 'show_read_more' ) => 'yes',
 					$this->get_control_id( 'read_more_type' ) => 'button',
@@ -1048,9 +1045,9 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 					array(
 						'label'     => __( 'Background Color', 'responsive-addons-for-elementor' ),
 						'type'      => Controls_Manager::COLOR,
-						'global'    => [
+						'global'    => array(
 							'default' => Global_Colors::COLOR_ACCENT,
-						],
+						),
 						'selectors' => array(
 							'{{WRAPPER}} .elementor-button' => 'background-color: {{VALUE}};',
 						),
@@ -1280,7 +1277,6 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 		wp_reset_postdata();
 
 		$this->render_loop_footer();
-
 	}
 	/**
 	 * Function filter_excerpt_length
@@ -1750,7 +1746,6 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 	 * Function render_amp
 	 */
 	public function render_amp() {
-
 	}
 	/**
 	 * Trims a string to a specified number of words.

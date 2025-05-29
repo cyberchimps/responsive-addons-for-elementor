@@ -390,7 +390,6 @@ class Responsive_Addons_For_Elementor_Multi_Button extends Widget_Base {
 				),
 			)
 		);
-
 	}
 
 	/**
@@ -450,9 +449,9 @@ class Responsive_Addons_For_Elementor_Multi_Button extends Widget_Base {
 				'name'     => 'rael_button_typography',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
 				'selector' => '{{WRAPPER}} .rael-multi-button',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-				],
+				),
 			)
 		);
 
@@ -562,9 +561,9 @@ class Responsive_Addons_For_Elementor_Multi_Button extends Widget_Base {
 			array(
 				'name'     => $id_prefix . '_typography',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-multi-button__' . $type . '-btn',
 			)
 		);
@@ -712,9 +711,9 @@ class Responsive_Addons_For_Elementor_Multi_Button extends Widget_Base {
 			array(
 				'name'     => 'rael_connector_typography',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-multi-button__connector',
 			)
 		);
@@ -876,12 +875,10 @@ class Responsive_Addons_For_Elementor_Multi_Button extends Widget_Base {
 		} else {
 			if ( empty( $attributes['class'] ) ) {
 				$attributes['class'] = $settings[ $old_icon ];
-			} else {
-				if ( is_array( $attributes['class'] ) ) {
+			} elseif ( is_array( $attributes['class'] ) ) {
 					$attributes['class'][] = $settings[ $old_icon ];
-				} else {
-					$attributes['class'] .= ' ' . $settings[ $old_icon ];
-				}
+			} else {
+				$attributes['class'] .= ' ' . $settings[ $old_icon ];
 			}
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			printf( '<i %s></i>', \Elementor\Utils::render_html_attributes( $attributes ) );

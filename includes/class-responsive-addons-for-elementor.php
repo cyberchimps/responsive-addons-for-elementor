@@ -11,7 +11,7 @@ use Elementor\Utils;
 use Elementor\Plugin;
 use Elementor\Icons_Manager;
 use Responsive_Addons_For_Elementor\Helper\Helper;
-use \Responsive_Addons_For_Elementor\Traits\Woo_Checkout_Helper;
+use Responsive_Addons_For_Elementor\Traits\Woo_Checkout_Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -151,10 +151,10 @@ class Responsive_Addons_For_Elementor {
 		add_action( 'admin_init', array( $this, 'rael_notice_dismissed' ) );
 		add_action( 'admin_init', array( $this, 'rael_notice_change_timeout' ) );
 
-		add_action( 'upgrader_process_complete', array($this,'rael_wp_upe_upgrade_completed') , 10, 2 );
+		add_action( 'upgrader_process_complete', array( $this, 'rael_wp_upe_upgrade_completed' ), 10, 2 );
 
 		// Add rated links to plugin's description in plugins table
-		add_filter('plugin_row_meta', array($this, 'rael_rate_plugin_link'), 10, 2);
+		add_filter( 'plugin_row_meta', array( $this, 'rael_rate_plugin_link' ), 10, 2 );
 
 		$this->load_dependencies();
 		$this->define_admin_hooks();
@@ -412,7 +412,6 @@ class Responsive_Addons_For_Elementor {
 		}
 
 		return $updated_array;
-
 	}
 
 	/**
@@ -606,7 +605,7 @@ class Responsive_Addons_For_Elementor {
 			update_option( 'responsive_addons_for_elementor_review_notice', true );
 		} elseif ( false === (bool) get_transient( 'responsive_addons_for_elementor_ask_review_flag' ) && false === get_option( 'responsive_addons_for_elementor_review_notice_dismissed' ) ) {
 			$image_path = RAEL_URL . 'admin/images/rae-icon.svg';
-			echo sprintf(
+			printf(
 				'<div class="notice notice-warning rael-ask-for-review-notice">
 					<div class="rael-ask-for-review-notice-container">
 						<div class="rael-notice-image">
@@ -646,7 +645,6 @@ class Responsive_Addons_For_Elementor {
 			);
 			do_action( 'tag_review' );
 		}
-
 	}
 
 	/**
@@ -680,30 +678,31 @@ class Responsive_Addons_For_Elementor {
 	/**
 	 * This function runs when WordPress completes its upgrade process
 	 * It iterates through each plugin updated to see if ours is included
+	 *
 	 * @param $upgrader_object Array
 	 * @param $options Array
 	 * @since 1.6.6
 	 */
-	function rael_wp_upe_upgrade_completed( $upgrader_object, $options ) {
+	public function rael_wp_upe_upgrade_completed( $upgrader_object, $options ) {
 		// The path to our plugin's main file
 		$our_plugin = RAEL_PATH;
 		if ( isset( $options['action'], $options['type'], $options['plugins'] ) &&
-			$options['action'] === 'update' &&
-			$options['type'] === 'plugin' ) {
-			
-		   // Iterate through the updated plugins
-		   foreach( $options['plugins'] as $plugin ) {
-			   if( $plugin === $our_plugin ) {
-					//to check this function is getting called or not.
-					error_log('Responsive Addons for Elementor plugin updated');
-					//added new theme builder widgets in the dashboard.
+			'update' === $options['action'] &&
+			'plugin' === $options['type'] ) {
+
+			// Iterate through the updated plugins
+			foreach ( $options['plugins'] as $plugin ) {
+				if ( $plugin === $our_plugin ) {
+					// to check this function is getting called or not.
+					error_log( 'Responsive Addons for Elementor plugin updated' );
+					// added new theme builder widgets in the dashboard.
 					include_once RAEL_DIR . 'includes/class-responsive-addons-for-elementor-widgets-updater.php';
 					$rael_widgets_data = new Responsive_Addons_For_Elementor_Widgets_Updater();
 
 					$rael_widgets_data->insert_widgets_data();
-			   }
-		   }
-    	}
+				}
+			}
+		}
 	}
 
 	/**
@@ -719,12 +718,12 @@ class Responsive_Addons_For_Elementor {
 		$rael_path = 'responsive-addons-for-elementor/responsive-addons-for-elementor.php';
 
 		// Get the current value of 'rael_widgets_data_update' option
-        $exist_rael_widgets_data_update = get_option( 'rael_widgets_data_update', false );
+		$exist_rael_widgets_data_update = get_option( 'rael_widgets_data_update', false );
 
 		// If the option does not exist, add it with a value of false
-		if ( ! $exist_rael_widgets_data_update) {
+		if ( ! $exist_rael_widgets_data_update ) {
 			$rael_widgets_data->insert_widgets_data();
-            update_option( 'rael_widgets_data_update', true );
+			update_option( 'rael_widgets_data_update', true );
 		}
 
 		$exist_rael_theme_builder_widgets_data_update = get_option( 'rael_theme_builder_widgets_data_update', false );
@@ -800,9 +799,9 @@ class Responsive_Addons_For_Elementor {
 		require_once RAEL_DIR . 'admin/class-responsive-addons-for-elementor-admin-settings.php';
 		require_once RAEL_DIR . 'admin/classes/class-responsive-addons-for-elementor-attachment.php';
 		include_once RAEL_DIR . 'traits/responsive-addons-for-elementor-template-query.php';
-		include_once RAEL_DIR . 'helper/helper.php';
+		include_once RAEL_DIR . 'helper/class-helper.php';
 		include_once RAEL_DIR . 'admin/class-responsive-addons-for-elementor-rst-install-helper.php';
-		require_once RAEL_DIR . 'ext/cross-site-cp/class-rael-cs-copy-paste-loader.php';
+		require_once RAEL_DIR . 'ext/cross-site-cp/class-raelcrosssitecopypasteloader.php';
 		include_once RAEL_DIR . 'traits/responsive-addons-for-elementor-singleton.php';
 		include_once RAEL_DIR . 'traits/responsive-addons-for-elementor-missing-dependency.php';
 		require_once RAEL_DIR . 'traits/responsive-addons-for-elementor-products-compare.php';
@@ -1158,11 +1157,11 @@ class Responsive_Addons_For_Elementor {
 		wp_register_style( 'rael-particles-style-rtl', RAEL_ASSETS_URL . 'lib/particles/particles-rtl.min.css', null, RAEL_VER );
 		wp_enqueue_style( 'rael-particles-style' );
 		wp_enqueue_style( 'rael-particles-style-rtl' );
-		wp_register_style('rael-sticky',RAEL_URL . 'admin/css/rael-sticky.css',array(),RAEL_VER);
+		wp_register_style( 'rael-sticky', RAEL_URL . 'admin/css/rael-sticky.css', array(), RAEL_VER );
 		wp_enqueue_style( 'rael-sticky' );
 		wp_enqueue_script(
 			'jet-resize-sensor',
-			RAEL_ASSETS_URL . 'lib/sticky-sidebar/ResizeSensor.min.js' ,
+			RAEL_ASSETS_URL . 'lib/sticky-sidebar/ResizeSensor.min.js',
 			array( 'jquery' ),
 			RAEL_VER,
 			true
@@ -1170,7 +1169,7 @@ class Responsive_Addons_For_Elementor {
 
 		wp_enqueue_script(
 			'jet-sticky-sidebar',
-			RAEL_ASSETS_URL .  'lib/sticky-sidebar/sticky-sidebar.min.js' ,
+			RAEL_ASSETS_URL . 'lib/sticky-sidebar/sticky-sidebar.min.js',
 			array( 'jquery', 'jet-resize-sensor' ),
 			RAEL_VER,
 			true
@@ -1826,7 +1825,6 @@ class Responsive_Addons_For_Elementor {
 				array( $this, 'rael_theme_builder_notice_callback' )
 			);
 		}
-
 	}
 
 	/**
@@ -2043,7 +2041,6 @@ class Responsive_Addons_For_Elementor {
 
 		wp_register_style( 'rael-select2-style', RAEL_URL . 'admin/assets/lib/select2/select2.css', array(), RAEL_VER );
 		wp_enqueue_style( 'rael-select2-style' );
-
 	}
 
 	/**
@@ -2134,7 +2131,7 @@ class Responsive_Addons_For_Elementor {
 					<div class="rael-fb-feed-item-content-container">
 					<header class="rael-fb-feed-item-header">
 						<div class="rael-fb-feed-item-user">
-							' . isset( $item['from']['id'] ) ? '<a class="rael-fb-feed-user-image" href="' . $fb_url . $page_id . '" target="' . ( 'yes' === $settings['rael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v22.0/' . $page_id . '/picture" alt="' . $item['from']['name'] . '" class="rael-fb-feed-avatar"></a>' : '' . '
+							' . isset( $item['from']['id'] ) ? '<a class="rael-fb-feed-user-image" href="' . $fb_url . $page_id . '" target="' . ( 'yes' === $settings['rael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v22.0/' . $page_id . '/picture" alt="' . $item['from']['name'] . '" class="rael-fb-feed-avatar"></a>' : '
 							<a href="' . $fb_url . $page_id . '" target="' . ( 'yes' === $settings['rael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '"><p class="rael-fb-feed-username">' . $item['from']['name'] . '</p></a>
 						</div>';
 
@@ -2182,12 +2179,10 @@ class Responsive_Addons_For_Elementor {
 											<div class="rael-facebook-feed-preview-overlay"><i class="far fa-play-circle" aria-hidden="true"></i></div>
 										</a>';
 						}
-					} else {
-						if ( isset( $settings['rael_facebook_feed_is_show_preview_thumbnail'] ) && 'yes' === $settings['rael_facebook_feed_is_show_preview_thumbnail'] ) {
+					} elseif ( isset( $settings['rael_facebook_feed_is_show_preview_thumbnail'] ) && 'yes' === $settings['rael_facebook_feed_is_show_preview_thumbnail'] ) {
 							$html .= '<a href="' . $item['permalink_url'] . '" target="' . ( 'yes' === $settings['rael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '" class="rael-fb-feed-preview-img">
 											<img class="rael-fb-feed-img" src="' . $photo . '">
 										</a>';
-						}
 					}
 					$html .= '</div>';
 				}
@@ -2213,12 +2208,10 @@ class Responsive_Addons_For_Elementor {
 					} else {
 						$photo_url = $photo;
 					}
-				} else {
-					if ( empty( $settings['rael_overlay_image']['url'] ) ) {
+				} elseif ( empty( $settings['rael_overlay_image']['url'] ) ) {
 						$photo_url = RAEL_ASSETS_URL . 'images/facebook-feed/abstract_leaves.png';
-					} else {
-						$photo_url = $settings['rael_overlay_image']['url'];
-					}
+				} else {
+					$photo_url = $settings['rael_overlay_image']['url'];
 				}
 				$html .= '<a href="' . $item['permalink_url'] . '" target="' . ( $settings['rael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '" class="rael-fb-feed-item">
 						<div class="rael-fb-feed-item-content-container hover-container">
@@ -2349,22 +2342,21 @@ class Responsive_Addons_For_Elementor {
 	}
 
 	/**
-     * Add links to plugin's description in plugins table
-     *
-     * @param array  $links  Initial list of links.
-     * @param string $file   Basename of current plugin.
-     *
-     * @return array
-     */
-    public function rael_rate_plugin_link( $links, $file ) {
-		if ( $file !== plugin_basename( RAEL_PATH ) ) {
+	 * Add links to plugin's description in plugins table
+	 *
+	 * @param array  $links  Initial list of links.
+	 * @param string $file   Basename of current plugin.
+	 *
+	 * @return array
+	 */
+	public function rael_rate_plugin_link( $links, $file ) {
+		if ( plugin_basename( RAEL_PATH ) !== $file ) {
 			return $links;
 		}
-		
-		$rate_url = 'https://wordpress.org/support/plugin/responsive-addons-for-elementor/reviews/';
+
+		$rate_url  = 'https://wordpress.org/support/plugin/responsive-addons-for-elementor/reviews/';
 		$rate_link = '<a target="_blank" href="' . esc_url( $rate_url ) . '" title="' . esc_attr__( 'Rate the plugin', 'responsive-addons' ) . '">' . esc_html__( 'Rate the plugin ★★★★★', 'responsive-addons' ) . '</a>';
-		$links[] = $rate_link;
+		$links[]   = $rate_link;
 		return $links;
 	}
-
 }

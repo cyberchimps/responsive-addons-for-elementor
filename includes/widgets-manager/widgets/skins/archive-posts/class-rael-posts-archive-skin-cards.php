@@ -18,6 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class RAEL_Posts_Archive_Skin_Cards extends RAEL_Skin_Cards {
 	use RAEL_Posts_Archive_Skin_Base;
+
 	/**
 	 * Register archive post section layout
 	 */
@@ -49,5 +50,5 @@ class RAEL_Posts_Archive_Skin_Cards extends RAEL_Skin_Cards {
 	/**
 	 * Remove `posts_per_page` control.
 	 */
-	protected function register_post_count_control(){}
+	protected function register_post_count_control() {}
 }

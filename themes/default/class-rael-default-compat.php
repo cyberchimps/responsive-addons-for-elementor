@@ -40,7 +40,6 @@ class RAEL_Default_Compat {
 			// Display RAEL's footer in the replaced footer.
 			add_action( 'rael_footer', 'rael_render_footer' );
 		}
-
 	}
 
 	/**
@@ -74,7 +73,6 @@ class RAEL_Default_Compat {
 		locate_template( $templates, true );
 		ob_get_clean();
 	}
-
 }
 
 new RAEL_Default_Compat();

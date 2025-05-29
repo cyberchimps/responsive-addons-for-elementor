@@ -13,4 +13,3 @@ use Responsive_Addons_For_Elementor\ModulesManager\Theme_Builder\RAEL_Theme_Buil
 RAEL_Theme_Builder::get_archive_content();
 
 @get_footer();
-

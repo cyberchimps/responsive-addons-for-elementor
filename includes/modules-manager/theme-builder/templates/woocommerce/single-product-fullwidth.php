@@ -10,8 +10,8 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see 	    https://docs.woocommerce.com/document/template-structure/
- * @author 		Cyerchimps
+ * @see         https://docs.woocommerce.com/document/template-structure/
+ * @author      Cyerchimps
  * @version     1.8.0
  */
 
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if( class_exists('\Elementor\Plugin') ){
+if ( class_exists( '\Elementor\Plugin' ) ) {
 	\Elementor\Plugin::$instance->frontend->add_body_class( 'elementor-template-full-width' );
 }
 
@@ -34,14 +34,17 @@ do_action( 'elementor/page_templates/header-footer/before_content' ); ?>
 
 
 
-		<?php while ( have_posts() ) : the_post(); ?>
+		<?php
+		while ( have_posts() ) :
+			the_post();
+			?>
 
 			<?php wc_get_template_part( 'content', 'single-product' ); ?>
 
 		<?php endwhile; // end of the loop. ?>
 
 
-<?php 
+<?php
 
 /**
  * After Header-Footer page template content.

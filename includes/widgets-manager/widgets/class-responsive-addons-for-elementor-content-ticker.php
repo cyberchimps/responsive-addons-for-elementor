@@ -8,12 +8,12 @@
 
 namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets;
 
-use \Elementor\Controls_Manager;
-use \Elementor\Group_Control_Border;
-use \Elementor\Group_Control_Typography;
+use Elementor\Controls_Manager;
+use Elementor\Group_Control_Border;
+use Elementor\Group_Control_Typography;
 use Elementor\Modules\DynamicTags\Module as TagsModule;
-use \Elementor\Widget_Base;
-use \Responsive_Addons_For_Elementor\Helper\Helper;
+use Elementor\Widget_Base;
+use Responsive_Addons_For_Elementor\Helper\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;   // Exit if accessed directly.
@@ -86,7 +86,7 @@ class Responsive_Addons_For_Elementor_Content_Ticker extends Widget_Base {
 	public function get_style_depends() {
 		return array(
 			'swiper',
-			'e-swiper',	
+			'e-swiper',
 		);
 	}
 	/**
@@ -1060,5 +1060,4 @@ class Responsive_Addons_For_Elementor_Content_Ticker extends Widget_Base {
 			return $html;
 		}
 	}
-
 }

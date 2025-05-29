@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
 /**
  * RAEL Build Post Query.
  *
@@ -127,7 +127,11 @@ class Build_Post_Query {
 			$control_id = $control_id . '_';
 		}
 
-		if ( '' !== $_POST['data']['paged'] ) {
+		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_products' ) ) {
+			return;
+		}
+
+		if ( isset( $_POST['data']['paged'] ) && '' !== sanitize_text_field( wp_unslash( $_POST['data']['paged'] ) ) ) {
 			$paged = self::get_paged();
 		} else {
 			$paged = '1';
@@ -166,7 +170,7 @@ class Build_Post_Query {
 						'terms'    => $settings[ 'tax_' . $index . '_' . $post_type . '_filter' ],
 						'operator' => $operator,
 					);
-					$tax_count++;
+					++$tax_count;
 				}
 			}
 		}
@@ -222,8 +226,12 @@ class Build_Post_Query {
 
 		global $wp_the_query, $paged;
 
+		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_products' ) ) {
+			return;
+		}
+
 		if ( isset( $_POST['data']['paged'] ) && '' !== $_POST['data']['paged'] ) {
-			return $_POST['data']['paged'];
+			return sanitize_text_field( wp_unslash( $_POST['data']['paged'] ) );
 		}
 
 		// Check the 'paged' query var.

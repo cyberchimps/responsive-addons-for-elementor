@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.8.0
  */
-class Responsive_Addons_For_Elementor_Theme_Product_Archive extends Woo_Products {
+class Responsive_Addons_For_Elementor_Theme_Product_Archive extends Responsive_Addons_For_Elementor_Woo_Products {
 
 	/**
 	 * Retrieve the widget name.
@@ -240,5 +240,4 @@ class Responsive_Addons_For_Elementor_Theme_Product_Archive extends Woo_Products
 	public function get_group_name() {
 		return 'woocommerce';
 	}
-
 }

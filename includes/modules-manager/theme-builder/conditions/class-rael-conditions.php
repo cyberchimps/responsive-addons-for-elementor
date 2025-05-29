@@ -967,22 +967,20 @@ class RAEL_Conditions {
 							if ( false !== $post_id && $current_post_type == $post_type ) { // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison 
 								$display = true;
 							}
-						} else {
-							if ( is_archive() ) {
+						} elseif ( is_archive() ) {
 								$current_post_type = get_post_type();
-								if ( $current_post_type == $post_type ) { // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
-									if ( 'archive' === $archive_type ) {
-										$display = true;
-									} elseif ( 'taxarchive' === $archive_type ) {
-										$obj              = get_queried_object();
-										$current_taxonomy = '';
-										if ( '' !== $obj && null !== $obj ) {
-											$current_taxonomy = $obj->taxonomy;
-										}
+							if ( $current_post_type == $post_type ) { // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
+								if ( 'archive' === $archive_type ) {
+									$display = true;
+								} elseif ( 'taxarchive' === $archive_type ) {
+									$obj              = get_queried_object();
+									$current_taxonomy = '';
+									if ( '' !== $obj && null !== $obj ) {
+										$current_taxonomy = $obj->taxonomy;
+									}
 
-										if ( $current_taxonomy == $taxonomy ) { // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
-											$display = true;
-										}
+									if ( $current_taxonomy == $taxonomy ) { // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
+										$display = true;
 									}
 								}
 							}

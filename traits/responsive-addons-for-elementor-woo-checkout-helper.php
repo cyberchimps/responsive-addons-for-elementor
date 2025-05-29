@@ -1,28 +1,51 @@
 <?php
+/**
+ * Helper trait for Woo Checkout.
+ *
+ * @package responsive-addons-for-elementor
+ * @since 1.0.0
+ */
+
 namespace Responsive_Addons_For_Elementor\Traits;
 
-use \Elementor\Icons_Manager;
-use \Exception;
-use \Responsive_Addons_For_Elementor\Helper\Helper as CheckoutHelperCLass;
-use \Responsive_Addons_For_Elementor\WidgetsManager\Widgets\Woocommerce\Woo_Checkout;
+use Elementor\Icons_Manager;
+use Exception;
+use Responsive_Addons_For_Elementor\Helper\Helper as CheckoutHelperCLass;
+use Responsive_Addons_For_Elementor\WidgetsManager\Widgets\Woocommerce\Woo_Checkout;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
 trait Woo_Checkout_Helper {
 
+	/**
+	 * Setting data array.
+	 *
+	 * @var $setting_data
+	 */
 	public static $setting_data = array();
 
 
+	/**
+	 * Get the checkout settings.
+	 */
 	public static function rael_get_woo_checkout_settings() {
 		return self::$setting_data;
 	}
 
+
+	/**
+	 * Set the checkout settings.
+	 *
+	 * @param mixed $setting Setting element.
+	 */
 	public static function rael_set_woo_checkout_settings( $setting ) {
 		self::$setting_data = $setting;
 	}
 	/**
 	 * Show the checkout.
+	 *
+	 * @param mixed $settings Checkout settings.
 	 */
 	public static function rael_checkout( $settings ) {
 		// Show non-cart errors.
@@ -42,7 +65,12 @@ trait Woo_Checkout_Helper {
 		// Get checkout object.
 		$checkout = WC()->checkout();
 
-		if ( empty( $_POST ) && wc_notice_count( 'error' ) > 0 ) { // WPCS: input var ok, CSRF ok.
+		if ( ! wp_verify_nonce( $_POST ) ) {
+			wc_get_template( 'checkout/cart-errors.php', array( 'checkout' => $checkout ) );
+			wc_clear_notices();
+		}
+
+		if ( ( empty( $_POST ) && wc_notice_count( 'error' ) > 0 ) ) { // WPCS: input var ok, CSRF ok.
 
 			wc_get_template( 'checkout/cart-errors.php', array( 'checkout' => $checkout ) );
 			wc_clear_notices();
@@ -55,26 +83,27 @@ trait Woo_Checkout_Helper {
 				wc_add_notice( __( 'The order totals have been updated. Please confirm your order by pressing the "Place order" button at the bottom of the page.', 'responsive-addons-for-elementor' ) );
 			}
 
-			if ( $settings['rael_woo_checkout_layout'] == 'default' ) {
+			if ( 'default' === $settings['rael_woo_checkout_layout'] ) {
 				echo esc_html( self::render_default_template_( $checkout, $settings ) );
-			} else {
-				if ( $settings['rael_woo_checkout_layout'] == 'split' ) {
+			} elseif ( 'split' === $settings['rael_woo_checkout_layout'] ) {
 					echo esc_html( self::woo_checkout_render_split_template_( $checkout, $settings ) );
-				} elseif ( $settings['rael_woo_checkout_layout'] == 'multi-steps' ) {
-					echo esc_html( self::woo_checkout_render_multi_steps_template_( $checkout, $settings ) );
-				}
+			} elseif ( 'multi-steps' === $settings['rael_woo_checkout_layout'] ) {
+				echo esc_html( self::woo_checkout_render_multi_steps_template_( $checkout, $settings ) );
 			}
 		}
 	}
 
 	/**
-	 * Show the Order Received page.
+	 * Show the Order Received page.\
+	 *
+	 * @param int $order_id Order ID.
 	 */
 	public static function rael_order_received( $order_id = 0 ) {
 		$order = false;
 
 		// Get the order.
-		$order_id  = apply_filters( 'woocommerce_thankyou_order_id', absint( $order_id ) );
+		$order_id = apply_filters( 'woocommerce_thankyou_order_id', absint( $order_id ) );
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended
 		$order_key = apply_filters( 'woocommerce_thankyou_order_key', empty( $_GET['key'] ) ? '' : wc_clean( wp_unslash( $_GET['key'] ) ) ); // WPCS: input var ok, CSRF ok.
 
 		if ( $order_id > 0 ) {
@@ -102,6 +131,10 @@ trait Woo_Checkout_Helper {
 
 	/**
 	 * Show the pay page.
+	 *
+	 * @param int $order_id Order ID.
+	 *
+	 * @throws Exception If the order is invalid, unauthorized, already paid, or if any item is no longer in stock.
 	 */
 	public static function rael_order_pay( $order_id ) {
 
@@ -110,8 +143,9 @@ trait Woo_Checkout_Helper {
 		$order_id = absint( $order_id );
 
 		// Pay for existing order.
-		if ( isset( $_GET['pay_for_order'], $_GET['key'] ) && $order_id ) { // WPCS: input var ok, CSRF ok.
+		if ( ( isset( $_GET['pay_for_order'], $_GET['key'] ) && $order_id ) || ( ! wp_verify_nonce( $_GET ) ) ) { // WPCS: input var ok, CSRF ok.
 			try {
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended
 				$order_key          = isset( $_GET['key'] ) ? wc_clean( wp_unslash( $_GET['key'] ) ) : ''; // WPCS: input var ok, CSRF ok.
 				$order              = wc_get_order( $order_id );
 				$hold_stock_minutes = (int) get_option( 'woocommerce_hold_stock_minutes', 0 );
@@ -227,6 +261,7 @@ trait Woo_Checkout_Helper {
 		} elseif ( $order_id ) {
 
 			// Pay for order after checkout step.
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Recommended
 			$order_key = isset( $_GET['key'] ) ? wc_clean( wp_unslash( $_GET['key'] ) ) : ''; // WPCS: input var ok, CSRF ok.
 			$order     = wc_get_order( $order_id );
 
@@ -255,7 +290,7 @@ trait Woo_Checkout_Helper {
 	 */
 	public static function rael_coupon_template() {
 		$settings = self::rael_get_woo_checkout_settings();
-		if ( get_option( 'woocommerce_enable_coupons' ) === 'no' || $settings['rael_woo_checkout_coupon_hide'] === 'yes' ) {
+		if ( 'no' == get_option( 'woocommerce_enable_coupons' ) || 'yes' == $settings['rael_woo_checkout_coupon_hide'] ) {
 			return;
 		}
 		?>
@@ -387,6 +422,8 @@ trait Woo_Checkout_Helper {
 
 	/**
 	 * Show the order review.
+	 *
+	 * @param mixed $settings Checkout settings.
 	 */
 	public static function checkout_order_review_default( $settings ) {
 		?>
@@ -394,7 +431,7 @@ trait Woo_Checkout_Helper {
 		<div class="rael-checkout-review-order-table">
 			<ul class="rael-order-review-table">
 				<?php
-				if ( $settings['rael_woo_checkout_layout'] == 'default' ) {
+				if ( 'default' == $settings['rael_woo_checkout_layout'] ) {
 					?>
 					<li class="table-header">
 						<div class="table-col-1"><?php echo esc_html( CheckoutHelperCLass::rael_wp_kses( $settings['rael_woo_checkout_table_product_text'] ) ); ?></div>
@@ -427,14 +464,14 @@ trait Woo_Checkout_Helper {
 									echo esc_html( CheckoutHelperCLass::rael_wp_kses( $name ) );
 									?>
 									<?php
-									if ( $settings['rael_woo_checkout_layout'] == 'split' || $settings['rael_woo_checkout_layout'] == 'multi-steps' ) {
+									if ( 'split' === $settings['rael_woo_checkout_layout'] || 'multi-steps' === $settings['rael_woo_checkout_layout'] ) {
 										echo wp_kses_post( apply_filters( 'woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $cart_item['quantity'] ) . '</strong>', $cart_item, $cart_item_key ) );
 									} // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
 									?>
 									<?php echo wc_get_formatted_cart_item_data( $cart_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 								</div>
 							</div>
-							<?php if ( $settings['rael_woo_checkout_layout'] == 'default' ) { ?>
+							<?php if ( 'default' == $settings['rael_woo_checkout_layout'] ) { ?>
 							<div class="table-col-2 product-quantity">
 								<?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', $cart_item['quantity'], $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
@@ -456,15 +493,15 @@ trait Woo_Checkout_Helper {
 				<?php $woo_checkout_order_details_change_label_settings = ! empty( $settings['rael_woo_checkout_table_header_text'] ) ? CheckoutHelperCLass::rael_wp_kses( $settings['rael_woo_checkout_table_header_text'] ) : ''; ?>
 
 				<?php
-				if ( $settings['rael_woo_checkout_shop_link'] == 'yes' ) {
+				if ( 'yes' == $settings['rael_woo_checkout_shop_link'] ) {
 					?>
 					<div class="back-to-shop">
 						<a class="back-to-shopping" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
-							<?php // if($woo_checkout_order_details_change_label_settings == 'yes') : ?>
-<!--                                <i class="fas fa-long-arrow-alt-left"></i>--><?php // echo CheckoutHelperCLass::rael_wp_kses($settings['rael_woo_checkout_shop_link_text']); ?>
-							<?php // else : ?>
-<!--                                <i class="fas fa-long-arrow-alt-left"></i>--><?php // esc_html_e( 'Continue Shopping', 'responsive-addons-for-elementor' ); ?>
-							<?php // endif; ?>
+							<?php // if($woo_checkout_order_details_change_label_settings == 'yes'). ?>
+<!--                                <i class="fas fa-long-arrow-alt-left"></i>--><?php // echo CheckoutHelperCLass::rael_wp_kses($settings['rael_woo_checkout_shop_link_text']);. ?>
+							<?php // else. ?>
+<!--                                <i class="fas fa-long-arrow-alt-left"></i>--><?php // esc_html_e( 'Continue Shopping', 'responsive-addons-for-elementor' );. ?>
+							<?php // endif. ?>
 							<i class="fas fa-long-arrow-alt-left"></i><?php echo esc_html( CheckoutHelperCLass::rael_wp_kses( $settings['rael_woo_checkout_shop_link_text'] ) ); ?>
 						</a>
 					</div>
@@ -472,7 +509,7 @@ trait Woo_Checkout_Helper {
 
 				<div class="footer-content">
 					<div class="cart-subtotal">
-						<?php if ( $woo_checkout_order_details_change_label_settings == 'yes' ) : ?>
+						<?php if ( 'yes' == $woo_checkout_order_details_change_label_settings ) : ?>
 							<div><?php echo esc_html( CheckoutHelperCLass::rael_wp_kses( $settings['rael_woo_checkout_table_subtotal_text'] ) ); ?></div>
 						<?php else : ?>
 							<?php esc_html_e( 'Subtotal', 'responsive-addons-for-elementor' ); ?>
@@ -525,7 +562,7 @@ trait Woo_Checkout_Helper {
 					<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
 
 					<div class="order-total">
-						<?php if ( $woo_checkout_order_details_change_label_settings == 'yes' ) : ?>
+						<?php if ( 'yes' == $woo_checkout_order_details_change_label_settings ) : ?>
 							<div><?php echo esc_html( CheckoutHelperCLass::rael_wp_kses( $settings['rael_woo_checkout_table_total_text'] ) ); ?></div>
 						<?php else : ?>
 							<?php esc_html_e( 'Total', 'responsive-addons-for-elementor' ); ?>
@@ -551,6 +588,9 @@ trait Woo_Checkout_Helper {
 
 	/**
 	 * Show the default layout.
+	 *
+	 * @param mixed $checkout Checkout object.
+	 * @param mixed $settings Checkout settings.
 	 */
 	public static function render_default_template_( $checkout, $settings ) {
 		?>
@@ -589,10 +629,12 @@ trait Woo_Checkout_Helper {
 
 		<?php
 		do_action( 'woocommerce_after_checkout_form', $checkout );
-
 	}
 	/**
 	 * Show the split layout.
+	 *
+	 * @param mixed $checkout Checkout object.
+	 * @param mixed $settings Checkout settings.
 	 */
 	public static function woo_checkout_render_split_template_( $checkout, $settings ) {
 
@@ -682,6 +724,9 @@ trait Woo_Checkout_Helper {
 	}
 	/**
 	 * Show the multi step layout.
+	 *
+	 * @param mixed $checkout Checkout object.
+	 * @param mixed $settings Checkout settings.
 	 */
 	public static function woo_checkout_render_multi_steps_template_( $checkout, $settings ) {
 
@@ -931,6 +976,12 @@ trait Woo_Checkout_Helper {
 		<?php
 	}
 
+
+	/**
+	 * Get a custom name for shipping package
+	 *
+	 * @param string $name Package name.
+	 */
 	public function custom_shipping_package_name( $name ) {
 		if ( ! empty( self::$setting_data['rael_woo_checkout_table_shipping_text'] ) ) {
 			$name = self::$setting_data['rael_woo_checkout_table_shipping_text'];
@@ -940,6 +991,8 @@ trait Woo_Checkout_Helper {
 
 	/**
 	 * Added all actions
+	 *
+	 * @param mixed $settings Checkout settings.
 	 */
 	public function rael_woo_checkout_add_actions( $settings ) {
 
@@ -951,7 +1004,7 @@ trait Woo_Checkout_Helper {
 			add_action( 'woocommerce_before_checkout_form', array( $this, 'rael_coupon_template' ), 10 );
 		}
 
-		if ( $settings['rael_woo_checkout_layout'] == 'default' ) {
+		if ( 'default' == $settings['rael_woo_checkout_layout'] ) {
 			if ( ! did_action( 'woocommerce_before_checkout_form' ) ) {
 				add_action( 'woocommerce_before_checkout_form', array( $this, 'checkout_order_review_template' ), 9 );
 			}
@@ -978,5 +1031,4 @@ trait Woo_Checkout_Helper {
 		remove_action( 'woocommerce_checkout_billing', array( $wc_checkout_instance, 'checkout_form_shipping' ) );
 		add_filter( 'woocommerce_shipping_package_name', array( $this, 'custom_shipping_package_name' ), 10, 3 );
 	}
-
 }

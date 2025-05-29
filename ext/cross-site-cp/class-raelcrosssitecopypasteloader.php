@@ -38,21 +38,20 @@ if ( ! class_exists( 'RaelCrossSiteCopyPasteLoader' ) ) {
 		 */
 		public function load_files() {
 			if ( did_action( 'elementor/loaded' ) ) {
-				require_once RAEL_DIR . 'includes/settings/rael-cs-options.php';
+				require_once RAEL_DIR . 'includes/settings/class-raelcrosssitecopypastesettings.php';
 			}
 			$enable_copy_paste = get_option( 'rael_enable_copy_paste_btn' );
 
 			if ( isset( $enable_copy_paste ) && ( 1 == $enable_copy_paste ) ) {
-				require_once RAEL_DIR . 'ext/cross-site-cp/class-rael-cs-copy-paste-btn.php';
+				require_once RAEL_DIR . 'ext/cross-site-cp/class-raelcrosssitecopypastebtn.php';
 			}
-
 		}
 
 		/**
 		 * Initalized RAEL Cross Site copy paste tab setting.
 		 */
 		public function rael_cs_copy_paste_tab_settings_init() {
-			require_once RAEL_DIR . 'includes/settings/rael-cs-controls.php';
+			require_once RAEL_DIR . 'includes/settings/class-raelcrosssitecopypastecontrols.php';
 			add_action(
 				'elementor/kit/register_tabs',
 				function ( Kit $kit ) {
@@ -78,24 +77,9 @@ if ( ! class_exists( 'RaelCrossSiteCopyPasteLoader' ) ) {
 			}
 			return self::$rael_instance;
 		}
-
 	}
 }
 
 
-/**
- * Returns Instanse of the RAEL Cross Site Copy Paste
- */
-
-if ( ! function_exists( 'rael_cs_init' ) ) {
-	/**
-	 * Initialize the RAEL Cross Site Copy Paste functionality.
-	 *
-	 * @return RaelCrossSiteCopyPasteLoader The singleton instance of the RaelCrossSiteCopyPasteLoader class.
-	 */
-	function rael_cs_init() {
-		return RaelCrossSiteCopyPasteLoader::get_instance();
-	}
-}
-
-rael_cs_init();
+// Initialize the RAEL Cross Site Copy Paste loader.
+RaelCrossSiteCopyPasteLoader::get_instance();

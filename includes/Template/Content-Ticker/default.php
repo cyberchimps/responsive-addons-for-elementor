@@ -16,11 +16,11 @@ if ( isset( $content ) && isset( $link ) ) {
 	if ( ! empty( $link['url'] ) ) {
 		echo '<a href="' . esc_url( $link['url'] ) . '" ';
 
-		if ( $link['is_external'] == 'on' ) {
+		if ( 'on' == $link['is_external'] ) {
 			echo 'target="_blank" ';
 		}
 
-		if ( $link['nofollow'] == 'on' ) {
+		if ( 'on' == $link['nofollow'] ) {
 			echo 'rel="nofollow"';
 		}
 

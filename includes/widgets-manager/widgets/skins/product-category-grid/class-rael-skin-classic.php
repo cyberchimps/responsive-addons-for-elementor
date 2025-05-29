@@ -1,6 +1,6 @@
 <?php
 /**
- * RAEL Minimal Skin.
+ * RAEL Classic Skin.
  *
  * @since    1.2.2
  * @package  Responsive_Addons_For_Elementor
@@ -21,11 +21,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * RAEL Skin Minimal class.
+ * RAEL Skin Classic class.
  *
  * @since 1.2.2
  */
-class RAEL_Skin_Minimal extends Skin_Base {
+class RAEL_Skin_Classic extends Skin_Base {
 	/**
 	 * Retrieve the skin id.
 	 *
@@ -35,7 +35,7 @@ class RAEL_Skin_Minimal extends Skin_Base {
 	 * @return string Skin ID.
 	 */
 	public function get_id() {
-		return 'rael_minimal';
+		return 'rael_classic';
 	}
 
 	/**
@@ -47,7 +47,7 @@ class RAEL_Skin_Minimal extends Skin_Base {
 	 * @return string Skin title(escaped).
 	 */
 	public function get_title() {
-		return __( 'Minimal', 'responsive-addons-for-elementor' );
+		return __( 'Classic', 'responsive-addons-for-elementor' );
 	}
 
 	/**
@@ -90,30 +90,6 @@ class RAEL_Skin_Minimal extends Skin_Base {
 			array(
 				'label' => __( 'Content', 'responsive-addons-for-elementor' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
-
-		$this->add_control(
-			'rael_content_alignment',
-			array(
-				'label'        => __( 'Alignment', 'responsive-addons-for-elementor' ),
-				'type'         => Controls_Manager::CHOOSE,
-				'default'      => 'left',
-				'options'      => array(
-					'left'   => array(
-						'title' => __( 'Left', 'responsive-addons-for-elementor' ),
-						'icon'  => 'eicon-text-align-left',
-					),
-					'center' => array(
-						'title' => __( 'Center', 'responsive-addons-for-elementor' ),
-						'icon'  => 'eicon-text-align-center',
-					),
-					'right'  => array(
-						'title' => __( 'Right', 'responsive-addons-for-elementor' ),
-						'icon'  => 'eicon-text-align-right',
-					),
-				),
-				'prefix_class' => 'rael-product-category-grid--align-',
 			)
 		);
 
@@ -188,9 +164,9 @@ class RAEL_Skin_Minimal extends Skin_Base {
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
 				'name'     => 'rael_content_title_typography',
 				'selector' => '{{WRAPPER}} .rael-product-category-grid__content-title a',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
-				],
+				),
 			)
 		);
 
@@ -231,7 +207,7 @@ class RAEL_Skin_Minimal extends Skin_Base {
 		$this->add_responsive_control(
 			'rael_content_count_spacing',
 			array(
-				'label'      => __( 'Top Spacing', 'responsive-addons-for-elementor' ),
+				'label'      => __( 'Left Spacing', 'responsive-addons-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px' ),
 				'range'      => array(
@@ -241,7 +217,7 @@ class RAEL_Skin_Minimal extends Skin_Base {
 					),
 				),
 				'selectors'  => array(
-					'{{WRAPPER}} .rael-product-category-grid__product-count' => 'margin-top: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .rael-product-category-grid__product-count' => 'margin-left: {{SIZE}}{{UNIT}};',
 				),
 				'condition'  => array(
 					'rael_show_product_count' => 'yes',
@@ -255,9 +231,9 @@ class RAEL_Skin_Minimal extends Skin_Base {
 				'label'     => __( 'Typography', 'responsive-addons-for-elementor' ),
 				'name'      => 'rael_content_count_typography',
 				'selector'  => '{{WRAPPER}} .rael-product-category-grid__product-count',
-				'global'   => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'condition' => array(
 					'rael_show_product_count' => 'yes',
 				),
@@ -292,5 +268,4 @@ class RAEL_Skin_Minimal extends Skin_Base {
 	public function render() {
 		$this->parent->render();
 	}
-
 }

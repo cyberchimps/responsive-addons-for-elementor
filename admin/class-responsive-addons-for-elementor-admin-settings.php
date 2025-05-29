@@ -111,5 +111,4 @@ class Responsive_Addons_For_Elementor_Admin_Settings {
 
 		wp_send_json_success();
 	}
-
 }

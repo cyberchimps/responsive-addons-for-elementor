@@ -376,9 +376,9 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 			array(
 				'name'     => 'rael_title_typography',
 				'selector' => '{{WRAPPER}} .rael-business-hour-title h3',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
-				],
+				),
 			)
 		);
 
@@ -464,9 +464,9 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 			array(
 				'name'     => 'rael_list_typography',
 				'selector' => '{{WRAPPER}} .rael-business-hour-item',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 			)
 		);
 
@@ -599,7 +599,6 @@ class Responsive_Addons_For_Elementor_Business_Hour extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
 	}
 
 	/**

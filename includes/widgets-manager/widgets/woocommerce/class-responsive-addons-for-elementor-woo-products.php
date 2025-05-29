@@ -3682,7 +3682,7 @@ class Responsive_Addons_For_Elementor_Woo_Products extends Widget_Base {
 		$settings['layout_mode']    = $settings['rael_products_layout'];
 		$settings['rael_widget_id'] = $widget_id;
 
-		if ( 'source_dynamic' === $settings['rael_post_type'] && is_archive() || ! empty( $_REQUEST['post_type'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ( 'source_dynamic' === $settings['rael_post_type'] && is_archive() ) || ! empty( $_REQUEST['post_type'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$settings['posts_per_page'] = $settings['rael_products_count'] ? $settings['rael_products_count'] : 4;
 			$settings['offset']         = $settings['rael_products_offset'];
 			$args                       = Helper::get_query_args( $settings );

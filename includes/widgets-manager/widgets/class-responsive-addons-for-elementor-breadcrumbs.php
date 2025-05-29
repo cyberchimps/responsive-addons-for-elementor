@@ -260,6 +260,5 @@ class Responsive_Addons_For_Elementor_Breadcrumbs extends Widget_Base {
 			$html_tag = $this->get_html_tag();
 			WPSEO_Breadcrumbs::breadcrumb( '<' . $html_tag . ' id="breadcrumbs">', '</' . $html_tag . '>' );
 		}
-
 	}
 }

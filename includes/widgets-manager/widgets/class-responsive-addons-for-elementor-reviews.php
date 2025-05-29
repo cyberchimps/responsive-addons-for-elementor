@@ -1041,7 +1041,6 @@ class Responsive_Addons_For_Elementor_Reviews extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
 	}
 
 	/**
@@ -1276,7 +1275,7 @@ class Responsive_Addons_For_Elementor_Reviews extends Widget_Base {
 				<div class="swiper-wrapper">
 					<?php
 					foreach ( $settings['slides'] as $index => $slide ) :
-						$this->slide_prints_count++;
+						++$this->slide_prints_count;
 						?>
 						<div class="swiper-slide">
 							<?php $this->print_slide( $slide, $settings, 'slide-' . $index . '-' . $this->slide_prints_count ); ?>

@@ -1,4 +1,12 @@
 <?php
+
+/**
+ * Trait for product comparison
+ *
+ * @package responsive-addons-for-elementor
+ * @since 1.0.0
+ */
+
 namespace Responsive_Addons_For_Elementor\Traits;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,6 +27,11 @@ use Responsive_Addons_For_Elementor\Helper\Helper;
  * @since 1.6.0
  */
 trait RAEL_Products_Comparable {
+
+
+	/**
+	 * Get the WooCommerce attribute taxonomies.
+	 */
 	public static function get_wc_attr_taxonomies_list() {
 		$attributes_tax = wc_get_attribute_taxonomies();
 		$data           = array();
@@ -28,6 +41,9 @@ trait RAEL_Products_Comparable {
 		return $data;
 	}
 
+	/**
+	 * Get the themes.
+	 */
 	public static function get_themes() {
 		return apply_filters(
 			'rael/woo_product_compare/default_themes',
@@ -43,6 +59,9 @@ trait RAEL_Products_Comparable {
 		);
 	}
 
+	/**
+	 * Get the field types.
+	 */
 	public static function get_field_types() {
 		$default_types = array(
 			'image'       => __( 'Image', 'responsive-addons-for-elementor' ),
@@ -59,6 +78,9 @@ trait RAEL_Products_Comparable {
 		return apply_filters( 'rael/woo_product_compare/default-fields', array_merge( $default_types, self::get_wc_attr_taxonomies_list() ) );
 	}
 
+	/**
+	 * Get the default repeater fields.
+	 */
 	public static function get_default_repeater_fields() {
 		return apply_filters(
 			'rael/woo_product_compare/default-repeater-fields',
@@ -111,6 +133,12 @@ trait RAEL_Products_Comparable {
 		);
 	}
 
+	/**
+	 * Display the compare button.
+	 *
+	 * @param mixed  $id ID for the button.
+	 * @param string $btn_type Type of the button.
+	 */
 	public static function print_compare_button( $id = false, $btn_type = 'text' ) {
 		if ( empty( $id ) ) {
 			global $product;
@@ -121,15 +149,15 @@ trait RAEL_Products_Comparable {
 		}
 
 		$loader      = '<svg class="rael-wc-compare-loader" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style=" shape-rendering: auto; width: 14px;" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-            <g transform="translate(50,50)">
-              <g transform="scale(0.7)">
-              <circle cx="0" cy="0" r="50" fill="#c1c1c1"></circle>
-              <circle cx="0" cy="-28" r="15" fill="#ffffff">
-                <animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" keyTimes="0;1" values="0 0 0;360 0 0"></animateTransform>
-              </circle>
-              </g>
-            </g>
-            </svg>';
+				<g transform="translate(50,50)">
+				<g transform="scale(0.7)">
+				<circle cx="0" cy="0" r="50" fill="#c1c1c1"></circle>
+				<circle cx="0" cy="-28" r="15" fill="#ffffff">
+					<animateTransform attributeName="transform" type="rotate" dur="1s" repeatCount="indefinite" keyTimes="0;1" values="0 0 0;360 0 0"></animateTransform>
+				</circle>
+				</g>
+				</g>
+				</svg>';
 		$fa_icon     = '<i class="fas fa-exchange-alt"></i>';
 		$btn_content = '<span class="rael-wc-compare-text">' . __( 'Compare', 'responsive-addons-for-elementor' ) . '</span>';
 		if ( 'icon' === $btn_type ) {
@@ -142,26 +170,32 @@ trait RAEL_Products_Comparable {
 	/**
 	 * It renders product compare table and it accepts an argument with 3 keys, products, fields and ds. Explanation is given below.
 	 *
-	 * @param array $options  {
+	 * @param array $options  Options
 	 *
 	 * @var array   $products list of WC_product object
 	 * @var array   $fields   list of WC_Product feature fields
 	 * @var array   $ds       Widget's display settings array
-	 * }
 	 */
 	public static function render_compare_table( $options ) {
-		$products = $fields = $ds = array();
-		extract( $options );
+		$products = isset( $options['products'] ) ? $options['products'] : array();
+		$fields   = isset( $options['fields'] ) ? $options['fields'] : array();
+		$ds       = isset( $options['ds'] ) ? $options['ds'] : array();
+
+		// $products = array();
+		// $fields = array();
+		// $ds = array();
+		// extract($options);
 		$not_found_text         = isset( $ds['rael_products_no_products_found_text'] ) ? $ds['rael_products_no_products_found_text'] : '';
 		$title                  = isset( $ds['rael_products_table_title'] ) ? $ds['rael_products_table_title'] : '';
 		$title_tag              = isset( $ds['rael_products_table_title_tag'] ) ? Helper::validate_html_tags( $ds['rael_products_table_title_tag'] ) : 'h1';
-		$ribbon                 = isset( $ds['rael_products_compare_ribbon'] ) ? Helper::strip_tags_keeping_allowed_tags( $ds['rael_products__compare_ribbon'] ) : '';
+		$ribbon                 = isset( $ds['rael_products_compare_ribbon'] ) ? Helper::strip_tags_keeping_allowed_tags( $ds['rael_products_compare_ribbon'] ) : '';
 		$repeat_price           = isset( $ds['rael_products_repeat_price'] ) ? $ds['rael_products_repeat_price'] : '';
 		$repeat_add_to_cart     = isset( $ds['rael_products_repeat_add_to_cart'] ) ? $ds['rael_products_repeat_add_to_cart'] : '';
 		$linkable_img           = isset( $ds['rael_products_linkable_image'] ) ? $ds['rael_products_linkable_image'] : '';
 		$highlighted_product_id = ! empty( $ds['highlighted_product_id'] ) ? intval( $ds['highlighted_product_id'] ) : null;
 		$icon                   = ! empty( $ds['rael_products_field_icon'] ) && ! empty( $ds['rael_products_field_icon']['value'] ) ? $ds['rael_products_field_icon'] : array();
-		$theme_wrap_class       = $theme = '';
+		$theme_wrap_class       = '';
+		$theme                  = '';
 
 		if ( ! empty( $ds['rael_product_compare_theme'] ) ) {
 			$theme            = esc_attr( $ds['rael_product_compare_theme'] );
@@ -172,166 +206,163 @@ trait RAEL_Products_Comparable {
 			<?php do_action( 'rael/products_compare/before_main_table' ); ?>
 			<table class="rael-products-compare-table table-responsive">
 				<tbody>
-				<?php if ( empty( $products ) ) { ?>
-					<tr class="no-products">
-						<td><?php echo esc_html( $not_found_text ); ?></td>
-					</tr>
-					<?php
-				} else {
+					<?php if ( empty( $products ) ) { ?>
+						<tr class="no-products">
+							<td><?php echo esc_html( $not_found_text ); ?></td>
+						</tr>
+						<?php
+					} else {
 
-					// for product grid, show remove button
-					if ( 'Responsive_Addons_For_Elementor\WidgetsManager\Widgets\Woocommerce\Responsive_Addons_For_Elementor_Woo_Products' !== self::class ) {
-						echo '<tr class="remove-row"><th class="remove-th">&nbsp;</th>';
-						$rm_index = 0;
-						foreach ( $products as $product_id => $product ) {
-							?>
-							<td class="rm-col<?php echo esc_attr( $rm_index ); ?>">
-								<i class="fas fa-trash rael-wc-remove" data-product-id="<?php echo esc_attr( $product_id ); ?>" title="<?php esc_attr_e( 'Remove', 'responsive-addons-for-elementor' ); ?>"></i>
-							</td>
-							<?php
-							$rm_index ++;
+						// for product grid, show remove button
+						if ( 'Responsive_Addons_For_Elementor\WidgetsManager\Widgets\Woocommerce\Responsive_Addons_For_Elementor_Woo_Products' !== self::class ) {
+							echo '<tr class="remove-row"><th class="remove-th">&nbsp;</th>';
+							$rm_index = 0;
+							foreach ( $products as $product_id => $product ) {
+								?>
+								<td class="rm-col<?php echo esc_attr( $rm_index ); ?>">
+									<i class="fas fa-trash rael-wc-remove" data-product-id="<?php echo esc_attr( $product_id ); ?>" title="<?php esc_attr_e( 'Remove', 'responsive-addons-for-elementor' ); ?>"></i>
+								</td>
+								<?php
+								++$rm_index;
+							}
+							echo '</tr>';
 						}
-						echo '</tr>';
-					}
 
-					$count = 1;
-					foreach ( $fields as $field => $name ) {
-						$f_heading_class = 1 === $count ? 'first-th' : '';
-						$count ++;
-						?>
-						<tr class="<?php echo esc_attr( $field ); ?>">
-							<th class="thead <?php echo esc_attr( $f_heading_class ); ?>">
-								<div class="rael-products-compare__table-header">
-									<?php
-									if ( 'image' === $field ) {
-										if ( ! empty( $title ) ) {
-											printf( wp_kses_post( "<{$title_tag} class='rael-products-compare__title'>%s</{$title_tag}>" ), wp_kses_post( Helper::strip_tags_keeping_allowed_tags( $title ) ) );
-										}
-									} else {
-										if ( 'theme-5' === $theme && $field === 'title' ) {
+						$count = 1;
+						foreach ( $fields as $field => $name ) {
+							$f_heading_class = 1 === $count ? 'first-th' : '';
+							++$count;
+							?>
+							<tr class="<?php echo esc_attr( $field ); ?>">
+								<th class="thead <?php echo esc_attr( $f_heading_class ); ?>">
+									<div class="rael-products-compare__table-header">
+										<?php
+										if ( 'image' === $field ) {
+											if ( ! empty( $title ) ) {
+												printf( wp_kses_post( "<{$title_tag} class='rael-products-compare__title'>%s</{$title_tag}>" ), wp_kses_post( Helper::strip_tags_keeping_allowed_tags( $title ) ) );
+											}
+										} elseif ( 'theme-5' === $theme && 'title' === $field ) {
 											echo '&nbsp;';
 										} else {
 											if ( ! empty( $icon ) ) {
 												self::print_icon( $icon );
 											}
 											printf( '<span class="field-name">%s</span>', wp_kses_post( Helper::strip_tags_keeping_allowed_tags( $name ) ) );
-
 										}
-									}
-									?>
-								</div>
-							</th>
-
-							<?php
-							$index = 0;
-							/**
-							 * @var int        $product_id
-							 * @var WC_Product $product
-							 */
-							foreach ( $products as $product_id => $product ) {
-								$is_highlighted = $product_id === $highlighted_product_id;
-								$highlighted    = $is_highlighted ? 'featured' : '';
-								$product_class  = ( $index % 2 == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted"
-								?>
-								<td class="<?php echo esc_attr( $product_class ); ?>">
-									<span>
-									<?php
-									if ( $field === 'image' ) {
-										echo '<span class="img-inner">';
-										if ( 'theme-4' === $theme && $is_highlighted && $ribbon ) {
-											printf( '<span class="ribbon">%s</span>', esc_html( $ribbon ) );
-										}
-
-										if ( 'yes' === $linkable_img ) {
-											printf( "<a href='%s'>", esc_url( $product->get_permalink() ) );
-										}
-									}
-
-									echo ! empty( $product->fields[ $field ] ) ? esc_attr( $product->fields[ $field ] ) : '&nbsp;';
-
-									if ( 'image' === $field ) {
-										if ( 'yes' === $linkable_img ) {
-											echo '</a>';
-										}
-										if ( 'theme-4' === $theme ) {
-											echo ! empty( $product->fields['title'] ) ? sprintf( "<p class='rael-products_product-title'>%s</p>", esc_html( $product->fields['title'] ) ) : '&nbsp;';
-											echo ! empty( $product->fields['price'] ) ? wp_kses_post( $product->fields['price'] ) : '&nbsp;';
-										}
-										echo '</span>';
-									}
-									?>
-									</span>
-								</td>
+										?>
+									</div>
+								</th>
 
 								<?php
-								++ $index;
-							}
-							?>
+								$index = 0;
+								/**
+								 * @var int        $product_id
+								 * @var WC_Product $product
+								 */
+								foreach ( $products as $product_id => $product ) {
+									$is_highlighted = $product_id === $highlighted_product_id;
+									$highlighted    = $is_highlighted ? 'featured' : '';
+									$product_class  = ( ( $index % 2 ) == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted"
+									?>
+									<td class="<?php echo esc_attr( $product_class ); ?>">
+										<span>
+											<?php
+											if ( 'image' === $field ) {
+												echo '<span class="img-inner">';
+												if ( 'theme-4' === $theme && $is_highlighted && $ribbon ) {
+													printf( '<span class="ribbon">%s</span>', esc_html( $ribbon ) );
+												}
 
-						</tr>
+												if ( 'yes' === $linkable_img ) {
+													printf( "<a href='%s'>", esc_url( $product->get_permalink() ) );
+												}
+											}
+
+											echo ! empty( $product->fields[ $field ] ) ? esc_attr( $product->fields[ $field ] ) : '&nbsp;';
+
+											if ( 'image' === $field ) {
+												if ( 'yes' === $linkable_img ) {
+													echo '</a>';
+												}
+												if ( 'theme-4' === $theme ) {
+													echo ! empty( $product->fields['title'] ) ? sprintf( "<p class='rael-products_product-title'>%s</p>", esc_html( $product->fields['title'] ) ) : '&nbsp;';
+													echo ! empty( $product->fields['price'] ) ? wp_kses_post( $product->fields['price'] ) : '&nbsp;';
+												}
+												echo '</span>';
+											}
+											?>
+										</span>
+									</td>
+
+									<?php
+									++$index;
+								}
+								?>
+
+							</tr>
+
+						<?php } ?>
+
+						<?php if ( 'yes' === $repeat_price && isset( $fields['price'] ) ) : ?>
+							<tr class="rael-products-compare__price repeated">
+								<th class="thead">
+									<div class="rael-products-compare__table-header">
+										<?php
+										if ( ! empty( $icon ) ) {
+											self::print_icon( $icon );
+										}
+										printf( '<span class="field-name">%s</span>', esc_html( $fields['price'] ) );
+
+										?>
+									</div>
+								</th>
+
+								<?php
+								$index = 0;
+								foreach ( $products as $product_id => $product ) :
+									$highlighted   = $product_id === $highlighted_product_id ? 'featured' : '';
+									$product_class = ( ( $index % 2 ) == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted"
+									?>
+									<td class="<?php echo esc_attr( $product_class ); ?>"><?php echo wp_kses_post( $product->fields['price'] ); ?></td>
+									<?php
+									++$index;
+								endforeach;
+								?>
+
+							</tr>
+						<?php endif; ?>
+
+						<?php if ( 'yes' === $repeat_add_to_cart && isset( $fields['add-to-cart'] ) ) : ?>
+							<tr class="rael-products-compare__add-to-cart repeated">
+								<th class="thead">
+									<div class="rael-products-compare__table-header">
+										<?php
+										if ( ! empty( $icon ) ) {
+											self::print_icon( $icon );
+										}
+										printf( '<span class="field-name">%s</span>', esc_html( $fields['add-to-cart'] ) );
+										?>
+									</div>
+								</th>
+
+								<?php
+								$index = 0;
+								foreach ( $products as $product_id => $product ) :
+									$highlighted   = $product_id === $highlighted_product_id ? 'featured' : '';
+									$product_class = ( ( $index % 2 ) == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted"
+									?>
+									<td class="<?php echo esc_attr( $product_class ); ?>">
+										<?php woocommerce_template_loop_add_to_cart(); ?>
+									</td>
+									<?php
+									++$index;
+								endforeach;
+								?>
+
+							</tr>
+						<?php endif; ?>
 
 					<?php } ?>
-
-					<?php if ( 'yes' === $repeat_price && isset( $fields['price'] ) ) : ?>
-						<tr class="rael-products-compare__price repeated">
-							<th class="thead">
-								<div class="rael-products-compare__table-header">
-									<?php
-									if ( ! empty( $icon ) ) {
-										self::print_icon( $icon );
-									}
-									printf( '<span class="field-name">%s</span>', esc_html( $fields['price'] ) );
-
-									?>
-								</div>
-							</th>
-
-							<?php
-							$index = 0;
-							foreach ( $products as $product_id => $product ) :
-								$highlighted   = $product_id === $highlighted_product_id ? 'featured' : '';
-								$product_class = ( $index % 2 == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted"
-								?>
-								<td class="<?php echo esc_attr( $product_class ); ?>"><?php echo wp_kses_post( $product->fields['price'] ); ?></td>
-								<?php
-								++ $index;
-							endforeach;
-							?>
-
-						</tr>
-					<?php endif; ?>
-
-					<?php if ( 'yes' === $repeat_add_to_cart && isset( $fields['add-to-cart'] ) ) : ?>
-						<tr class="rael-products-compare__add-to-cart repeated">
-							<th class="thead">
-								<div class="rael-products-compare__table-header">
-									<?php
-									if ( ! empty( $icon ) ) {
-										self::print_icon( $icon );
-									}
-									printf( '<span class="field-name">%s</span>', esc_html( $fields['add-to-cart'] ) );
-									?>
-								</div>
-							</th>
-
-							<?php
-							$index = 0;
-							foreach ( $products as $product_id => $product ) :
-								$highlighted   = $product_id === $highlighted_product_id ? 'featured' : '';
-								$product_class = ( $index % 2 == 0 ? 'odd' : 'even' ) . " col_{$index} product_{$product_id} $highlighted"
-								?>
-								<td class="<?php echo esc_attr( $product_class ); ?>">
-									<?php woocommerce_template_loop_add_to_cart(); ?>
-								</td>
-								<?php
-								++ $index;
-							endforeach;
-							?>
-
-						</tr>
-					<?php endif; ?>
-
-				<?php } ?>
 				</tbody>
 			</table>
 			<?php do_action( 'rael/products_compare/after_main_table' ); ?>
@@ -351,18 +382,20 @@ trait RAEL_Products_Comparable {
 			$err_msg = __( 'Page ID is missing', 'responsive-addons-for-elementor' );
 		}
 		if ( ! empty( $_POST['widget_id'] ) ) {
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+			$widget_id = sanitize_text_field( wp_unslash( $_POST['widget_id'] ) );
 		} else {
 			$err_msg = __( 'Widget ID is missing', 'responsive-addons-for-elementor' );
 		}
 		if ( ! empty( $_POST['product_id'] ) ) {
-			$product_id = sanitize_text_field( $_POST['product_id'] );
+			$product_id = sanitize_text_field( wp_unslash( $_POST['product_id'] ) );
 		} else {
 			$err_msg = __( 'Product ID is missing', 'responsive-addons-for-elementor' );
 		}
 
 		if ( ! empty( $_POST['product_ids'] ) ) {
-			$product_ids = wp_unslash( json_decode( $_POST['product_ids'] ) );
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$product_ids = json_decode( wp_unslash( $_POST['product_ids'] ) );
+
 		}
 
 		if ( empty( $product_ids ) ) {
@@ -390,7 +423,10 @@ trait RAEL_Products_Comparable {
 
 			return false;
 		}
-		if ( empty( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'rael_products' ) ) {
+
+		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
+
+		if ( empty( $nonce ) || ! wp_verify_nonce( $nonce, 'rael_products' ) ) {
 			if ( $ajax ) {
 				wp_send_json_error( __( 'Security token did not match', 'responsive-addons-for-elementor' ) );
 			}
@@ -470,12 +506,15 @@ trait RAEL_Products_Comparable {
 							$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $availability['availability'] ) );
 							break;
 						case 'sku':
-							$sku                       = $product->get_sku();
-							! $sku && $sku             = '-';
+							$sku = $product->get_sku();
+							if ( ! $sku ) {
+								$sku = '-';
+							}
 							$product->fields[ $field ] = $sku;
 							break;
 						case 'weight':
-							if ( $weight = $product->get_weight() ) {
+							$weight = $product->get_weight();
+							if ( $weight ) {
 								$weight = wc_format_localized_decimal( $weight ) . ' ' . esc_attr( get_option( 'woocommerce_weight_unit' ) );
 							} else {
 								$weight = '-';
@@ -483,9 +522,12 @@ trait RAEL_Products_Comparable {
 							$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $weight ) );
 							break;
 						case 'dimension':
-							$dimensions                  = function_exists( 'wc_format_dimensions' ) ? wc_format_dimensions( $product->get_dimensions( false ) ) : $product->get_dimensions();
-							! $dimensions && $dimensions = '-';
-							$product->fields[ $field ]   = sprintf( '<span>%s</span>', esc_html( $dimensions ) );
+							$dimensions = function_exists( 'wc_format_dimensions' ) ? wc_format_dimensions( $product->get_dimensions( false ) ) : $product->get_dimensions();
+							if ( ! $dimensions ) {
+								$dimensions = '-';
+							}
+
+							$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $dimensions ) );
 							break;
 						default:
 							if ( taxonomy_exists( $field ) ) {
@@ -576,12 +618,15 @@ trait RAEL_Products_Comparable {
 							$product->fields[ $field ] = sprintf( '<span>%s</span>', esc_html( $availability['availability'] ) );
 							break;
 						case 'sku':
-							$sku                       = $product->get_sku();
-							! $sku && $sku             = '-';
+							$sku = $product->get_sku();
+							if ( ! $sku ) {
+								$sku = '-';
+							}
 							$product->fields[ $field ] = $sku;
 							break;
 						case 'weight':
-							if ( $weight = $product->get_weight() ) {
+							$weight = $product->get_weight();
+							if ( $weight ) {
 								$weight = wc_format_localized_decimal( $weight ) . ' ' . esc_attr( get_option( 'woocommerce_weight_unit' ) );
 							} else {
 								$weight = '-';
@@ -650,10 +695,8 @@ trait RAEL_Products_Comparable {
 		foreach ( $fields as $field ) {
 			if ( isset( $df[ $field['rael_products_field_type'] ] ) ) {
 				$fields_to_show[ $field['rael_products_field_type'] ] = Helper::strip_tags_keeping_allowed_tags( $field['rael_products_field_label'] );
-			} else {
-				if ( taxonomy_exists( $field['rael_products_field_type'] ) ) {
-					$fields_to_show[ $field['rael_products_field_type'] ] = wc_attribute_label( $field['rael_products_field_type'] );
-				}
+			} elseif ( taxonomy_exists( $field['rael_products_field_type'] ) ) {
+				$fields_to_show[ $field['rael_products_field_type'] ] = wc_attribute_label( $field['rael_products_field_type'] );
 			}
 		}
 
@@ -673,9 +716,9 @@ trait RAEL_Products_Comparable {
 
 		$this->start_controls_section( 'rael_products_content_tab_product_compare_section', $section_args );
 
-		if ( 'rael-product-compare' === $this->get_name() ) {
-			// Controls to be added if the current widget is Product Compare widget.
-		}
+		// if ( 'rael-product-compare' === $this->get_name() ) {
+		// Controls to be added if the current widget is Product Compare widget.
+		// }
 
 		$this->add_control(
 			'rael_product_compare_theme',
@@ -773,7 +816,6 @@ trait RAEL_Products_Comparable {
 			array(
 				'label'       => __( 'Fields to show', 'responsive-addons-for-elementor' ),
 				'type'        => Controls_Manager::REPEATER,
-				'default'     => __( 'Select the fields to show in the comparison table', 'responsive-addons-for-elementor' ),
 				'fields'      => $repeater->get_controls(),
 				'default'     => $this->get_default_repeater_fields(),
 				'title_field' => '{{ rael_products_field_label }}',
@@ -854,8 +896,8 @@ trait RAEL_Products_Comparable {
 				'size_units' => array( 'px', '%', 'em' ),
 				'selectors'  => array(
 					'{{WRAPPER}} .rael-products .woocommerce li.product .rael-wc-compare-button.rael-wc-compare,
-                    {{WRAPPER}} .rael-products.rael-product-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-products__link,
-                    {{WRAPPER}} .rael-products.rael-product-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-wc-compare' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						{{WRAPPER}} .rael-products.rael-product-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-products__link,
+						{{WRAPPER}} .rael-products.rael-product-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-wc-compare' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -868,8 +910,8 @@ trait RAEL_Products_Comparable {
 				'size_units' => array( 'px', '%', 'em' ),
 				'selectors'  => array(
 					'{{WRAPPER}} .rael-products .woocommerce li.product .rael-wc-compare-button.rael-wc-compare,
-                    {{WRAPPER}} .rael-products.rael-product-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-products__link,
-                    {{WRAPPER}} .rael-products.rael-product-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-wc-compare' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+						{{WRAPPER}} .rael-products.rael-product-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-products__link,
+						{{WRAPPER}} .rael-products.rael-product-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-wc-compare' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);
@@ -892,7 +934,6 @@ trait RAEL_Products_Comparable {
 				'selectors' => array(
 					'{{WRAPPER}} .rael-products .woocommerce li.product .rael-wc-compare-button.rael-wc-compare' => 'color: {{VALUE}};',
 					'{{WRAPPER}} .rael-products.rael-product-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-products__link' => 'color: {{VALUE}};',
-					'{{WRAPPER}} .rael-products.rael-product-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-products__link' => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -904,8 +945,8 @@ trait RAEL_Products_Comparable {
 				'label'    => __( 'Background', 'responsive-addons-for-elementor' ),
 				'types'    => array( 'classic', 'gradient' ),
 				'selector' => '{{WRAPPER}} .rael-products .woocommerce li.product .rael-wc-compare-button.rael-wc-compare,
-				{{WRAPPER}} .rael-products.rael-product-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-products__link,
-				{{WRAPPER}} .rael-products.rael-product-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-wc-compare',
+					{{WRAPPER}} .rael-products.rael-product-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-products__link,
+					{{WRAPPER}} .rael-products.rael-product-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-wc-compare',
 			)
 		);
 
@@ -957,8 +998,8 @@ trait RAEL_Products_Comparable {
 				'label'    => __( 'Background', 'responsive-addons-for-elementor' ),
 				'types'    => array( 'classic', 'gradient' ),
 				'selector' => '{{WRAPPER}} .rael-products .woocommerce li.product .rael-wc-comapre-button.rael-wc-compare:hover,
-                {{WRAPPER}} .rael-products.rael-products-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-products__link:hover,
-                {{WRAPPER}} .rael-products.rael-products-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-wc-compare:hover',
+					{{WRAPPER}} .rael-products.rael-products-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-products__link:hover,
+					{{WRAPPER}} .rael-products.rael-products-overlay .woocommerce ul.products li.product .rael-products__overlay .rael-wc-compare:hover',
 			)
 		);
 
@@ -984,7 +1025,8 @@ trait RAEL_Products_Comparable {
 	}
 
 	public function register_style_tab_compare_button_general_section( $css_classes = array() ) {
-		extract( $css_classes );
+		// extract($css_classes);
+		$container_class = isset( $css_classes['container_class'] ) ? $css_classes['container_class'] : '{{WRAPPER}} .rael-products-compare-modal';
 
 		$this->start_controls_section(
 			'rael_style_tab_compare_table_general_section',
@@ -997,7 +1039,7 @@ trait RAEL_Products_Comparable {
 			)
 		);
 
-		$container_class = ! empty( $container_class ) ? $container_class : '{{WRAPPER}} .rael-products-compare-modal';
+		// $container_class = ! empty($container_class) ? $container_class : '{{WRAPPER}} .rael-products-compare-modal';
 
 		$this->add_responsive_control(
 			'rael_product_compare_container_width',
@@ -1118,10 +1160,14 @@ trait RAEL_Products_Comparable {
 	}
 
 	public function register_style_tab_table_style_section( $css_classes = array() ) {
-		extract( $css_classes );
-		$table            = isset( $table ) ? $table : '{{WRAPPER}} .rael-products-compare-wrapper table';
-		$table_title      = isset( $table_title ) ? $table_title : '{{WRAPPER}} .rael-products-compare-wrapper .rael-products-compare__modal-title';
-		$table_title_wrap = isset( $table_title_wrap ) ? $table_title_wrap : '{{WRAPPER}} .rael-products-compare-wrapper .first-th';
+		// extract($css_classes);
+		// $table            = isset($table) ? $table : '{{WRAPPER}} .rael-products-compare-wrapper table';
+		// $table_title      = isset($table_title) ? $table_title : '{{WRAPPER}} .rael-products-compare-wrapper .rael-products-compare__modal-title';
+		// $table_title_wrap = isset($table_title_wrap) ? $table_title_wrap : '{{WRAPPER}} .rael-products-compare-wrapper .first-th';
+
+		$table            = isset( $css_classes['table'] ) ? $css_classes['table'] : '{{WRAPPER}} .rael-products-compare-wrapper table';
+		$table_title      = isset( $css_classes['table_title'] ) ? $css_classes['table_title'] : '{{WRAPPER}} .rael-products-compare-wrapper .rael-products-compare__modal-title';
+		$table_title_wrap = isset( $css_classes['table_title_wrap'] ) ? $css_classes['table_title_wrap'] : '{{WRAPPER}} .rael-products-compare-wrapper .first-th';
 
 		$this->start_controls_section(
 			'rael_style_tab_table_style_section',
@@ -2236,7 +2282,7 @@ trait RAEL_Products_Comparable {
 			'rael_products_compare_section_style_' . $pfx,
 			array(
 				'label'     => sprintf(
-				// translators: %d represents the product column number.
+					// translators: %d represents the product column number.
 					__( 'Product Column %d', 'responsive-addons-for-elementor' ),
 					$title_number
 				),

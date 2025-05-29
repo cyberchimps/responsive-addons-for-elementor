@@ -85,7 +85,6 @@ class Modules_Manager {
 			}
 		}
 	}
-
 }
 
 Modules_Manager::instance();

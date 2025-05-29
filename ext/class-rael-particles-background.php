@@ -152,7 +152,7 @@ if ( ! class_exists( 'RAEL_Particles_Background' ) ) {
 		 * @param array  $args Additional arguments.
 		 */
 		public function register_controls( $element, $section_id, $args ) {
-			if ( ( 'section' === $element->get_name() && 'section_background' === $section_id ) || ( 'column' === $element->get_name() && 'section_style' === $section_id )  || ( 'container' === $element->get_name()  && 'section_background' === $section_id  ) ) {
+			if ( ( 'section' === $element->get_name() && 'section_background' === $section_id ) || ( 'column' === $element->get_name() && 'section_style' === $section_id ) || ( 'container' === $element->get_name() && 'section_background' === $section_id ) ) {
 
 				$element->start_controls_section(
 					'rael_particles',
