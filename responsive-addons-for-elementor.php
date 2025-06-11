@@ -3,7 +3,7 @@
  * Plugin Name: Responsive Addons for Elementor
  * Plugin URI:  https://cyberchimps.com/responsive-addons-for-elementor/
  * Description: Responsive Addons for Elementor plugin adds Elementor widgets and seamlessly integrates with any Elementor Package (Free, Pro). It is compatible with all popular WordPress themes.
- * Version:     1.7.2
+ * Version:     1.7.3
  * Author:      Cyberchimps.com
  * Author URI:  https://cyberchimps.com/responsive-addons-for-elementor/
  * License:     GPL v2 or later
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'RAEL_VER', '1.7.2' );
+define( 'RAEL_VER', '1.7.3' );
 define( 'RAEL_DIR', plugin_dir_path( __FILE__ ) );
 define( 'RAEL_URL', plugins_url( '/', __FILE__ ) );
 define( 'RAEL_PATH', plugin_basename( __FILE__ ) );

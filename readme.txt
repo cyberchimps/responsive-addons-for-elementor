@@ -7,7 +7,7 @@ Tested up to: 6.8
 Elementor tested up to: 3.29
 Elementor Pro tested up to: 3.29
 Requires PHP: 5.6
-Stable tag: 1.7.2
+Stable tag: 1.7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -291,6 +291,9 @@ If you like Responsive Addons for Elementor, consider checking out our other Wor
 The Development Version of the Responsive Addons for Elementor plugin is located at [https://github.com/cyberchimps/responsive-addons-for-elementor](https://github.com/cyberchimps/responsive-addons-for-elementor)
 
 == Changelog ==
+
+= 1.7.3 - 11th June 2025 =
+- Fix: Resolved the UI issues affecting the Elementor container.
 
 = 1.7.2 - 9th June 2025 =
 - Improvement: Made theme builder display conditions dynamic based on selected template type.
