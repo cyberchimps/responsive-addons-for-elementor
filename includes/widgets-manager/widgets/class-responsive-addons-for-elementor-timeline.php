@@ -674,9 +674,9 @@ class Responsive_Addons_For_Elementor_Timeline extends Widget_Base {
 			array(
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
 				'name'     => 'rael_content_box',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-timeline__content',
 			)
 		);
@@ -1009,9 +1009,9 @@ class Responsive_Addons_For_Elementor_Timeline extends Widget_Base {
 			array(
 				'name'     => 'rael_title',
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-timeline__title',
 			)
 		);
@@ -1092,9 +1092,9 @@ class Responsive_Addons_For_Elementor_Timeline extends Widget_Base {
 			array(
 				'name'      => 'rael_time',
 				'label'     => __( 'Time Typography', 'responsive-addons-for-elementor' ),
-				'global'   => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'selector'  => '{{WRAPPER}} .rael-timeline__date .time',
 				'condition' => array(
 					'rael_show_time' => 'yes',
@@ -1158,9 +1158,9 @@ class Responsive_Addons_For_Elementor_Timeline extends Widget_Base {
 			array(
 				'label'     => __( 'Date Typography', 'responsive-addons-for-elementor' ),
 				'name'      => 'rael_time_date',
-				'global'   => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'selector'  => '{{WRAPPER}} .rael-timeline__date .date',
 				'condition' => array(
 					'rael_show_date' => 'yes',
@@ -1220,9 +1220,9 @@ class Responsive_Addons_For_Elementor_Timeline extends Widget_Base {
 			array(
 				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
 				'name'     => 'rael_button',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-timeline__button',
 			)
 		);
@@ -1437,7 +1437,7 @@ class Responsive_Addons_For_Elementor_Timeline extends Widget_Base {
 					echo '<figure class="rael-timeline__image-gallery before-title">';
 					foreach ( $value['rael_gallery'] as $id => $image ) {
 						$alt_text = get_post_meta( $image['id'], '_wp_attachment_image_alt', true ); // Fetch alt text
-    					$alt_text = !empty( $alt_text ) ? esc_attr( $alt_text ) : ''; // escape alt text
+						$alt_text = ! empty( $alt_text ) ? esc_attr( $alt_text ) : ''; // escape alt text
 
 						echo wp_get_attachment_image( $image['id'], $value['rael_image_size'], false, array( 'alt' => $alt_text ) );
 					}

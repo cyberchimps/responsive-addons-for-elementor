@@ -32,6 +32,7 @@ use Responsive_Addons_For_Elementor\Helper\Helper;
  */
 class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 	use Missing_Dependency;
+
 	/**
 	 * Constructor for the RAE Product Carousel widget class.
 	 *
@@ -93,7 +94,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 	public function get_style_depends() {
 		return array(
 			'swiper',
-			'e-swiper',	
+			'e-swiper',
 		);
 	}
 	/**
@@ -201,7 +202,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 		$args                          = array(
 			'post_type'      => 'product',
 			'post_status'    => array( 'publish', 'pending', 'future' ),
-			'posts_per_page' => $settings['rael_pc_products_count'] ?: 4,
+			'posts_per_page' => ( isset( $settings['rael_pc_products_count'] ) && '' !== $settings['rael_pc_products_count'] ) ? $settings['rael_pc_products_count'] : 4,
 			'order'          => $settings['rael_pc_order'],
 			'offset'         => $settings['rael_pc_product_offset'],
 			'tax_query'      => array(
@@ -215,14 +216,14 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 			),
 		);
 
-		if ( $order_by == '_price' || $order_by == '_sku' ) {
+		if ( '_price' == $order_by || '_sku' == $order_by ) {
 			$args['orderby']  = 'meta_value_num';
 			$args['meta_key'] = $order_by;
 		} else {
 			$args['orderby'] = $order_by;
 		}
 
-		if ( $filter == 'featured_products' ) {
+		if ( 'featured_products' == $filter ) {
 			$count                       = isset( $args['tax_query'] ) ? count( $args['tax_query'] ) : 0;
 			$args['tax_query'][ $count ] =
 				array(
@@ -232,13 +233,13 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 				);
 		}
 
-		if ( $filter == 'best_selling_products' ) {
+		if ( 'best_selling_products' == $filter ) {
 			$args['meta_key'] = 'total_sales';
 			$args['orderby']  = 'meta_value_num';
 			$args['order']    = 'DESC';
 		}
 
-		if ( $filter == 'top_products' ) {
+		if ( 'top_products' == $filter ) {
 			$args['meta_key'] = '_wc_average_rating';
 			$args['orderby']  = 'meta_value_num';
 			$args['order']    = 'DESC';
@@ -252,7 +253,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 			);
 		}
 
-		if ( $filter == 'sale_products' ) {
+		if ( 'sale_products' == $filter ) {
 			$count                        = isset( $args['meta_query'] ) ? count( $args['meta_query'] ) : 0;
 			$args['meta_query'][ $count ] = array(
 				'relation' => 'OR',
@@ -282,7 +283,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 					'terms'    => $settings[ $setting_key ],
 				);
 			}
-			$tax_query_count++;
+			++$tax_query_count;
 		}
 
 		return $args;
@@ -1142,7 +1143,7 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .rael-product-carousel' => 'border-radius: {{TOP}}px {{RIGHT}}px {{BOTTOM}}px {{LEFT}}px;',
 					'{{WRAPPER}} .rael-product-carousel .rael-pc__product-image img, {{WRAPPER}} .rael-product-carousel > .rael-pc__product-image-wrapper'
-														 => 'border-radius: {{TOP}}px {{RIGHT}}px 0 0;',
+														=> 'border-radius: {{TOP}}px {{RIGHT}}px 0 0;',
 				),
 			)
 		);
@@ -2990,7 +2991,9 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 
 		if ( 'yes' === $settings['rael_pc_dots'] ) {
 			?>
-			<div class="swiper-pagination swiper-pagination-<?php echo esc_attr( $this->get_id() ) . ' ' . wp_kses_post( $settings['rael_pc_dots_preset'] );
+			<div class="swiper-pagination swiper-pagination-
+			<?php
+			echo esc_attr( $this->get_id() ) . ' ' . wp_kses_post( $settings['rael_pc_dots_preset'] );
 			?>
 			">
 			</div>

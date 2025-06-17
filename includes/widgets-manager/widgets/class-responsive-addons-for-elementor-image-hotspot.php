@@ -777,7 +777,6 @@ class Responsive_Addons_For_Elementor_Image_Hotspot extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
 	}
 
 	/**

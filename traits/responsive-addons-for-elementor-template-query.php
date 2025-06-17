@@ -1,4 +1,11 @@
 <?php
+/**
+ * Trait for template queries
+ *
+ * @package responsive-addons-for-elementor
+ * @since 1.0.0
+ */
+
 namespace Responsive_Addons_For_Elementor\Traits;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -8,8 +15,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 trait RAEL_Template_Query {
 
 
+	/**
+	 * The current widget's name
+	 *
+	 * @var $current_widget_name
+	 */
 	public $current_widget_name = '';
 
+	/**
+	 * Set widget name
+	 *
+	 * @param string $name Widget name.
+	 */
 	public function set_widget_name( $name = '' ) {
 		$this->current_widget_name = $name;
 	}
@@ -17,7 +34,7 @@ trait RAEL_Template_Query {
 	/**
 	 * Get only filename
 	 *
-	 * @param   string
+	 * @param   string $path Path of file.
 	 * @return  string
 	 */
 	public function get_filename_only( $path ) {
@@ -28,7 +45,7 @@ trait RAEL_Template_Query {
 	/**
 	 * Retrieves Template name from file header.
 	 *
-	 * @array
+	 * @var $template_headers
 	 */
 	private $template_headers = array(
 		'Template Name' => 'Template Name',
@@ -97,7 +114,7 @@ trait RAEL_Template_Query {
 	 * @return array
 	 */
 	private function get_template_files() {
-		 $templates = array();
+		$templates = array();
 
 		if ( is_dir( $this->get_template_dir() ) ) {
 			$templates['rael'] = scandir( $this->get_template_dir(), 1 );
@@ -121,9 +138,9 @@ trait RAEL_Template_Query {
 				foreach ( $handler as $handle ) {
 					if ( strpos( $handle, '.php' ) !== false ) {
 
-						if ( $key === 'rael' ) {
+						if ( 'rael' === $key ) {
 							$path = sprintf( '%s/%s', $this->get_template_dir(), $handle );
-						} elseif ( $key === 'theme' ) {
+						} elseif ( 'theme' === $key ) {
 							$path = sprintf( '%s/%s', $this->theme_templates_dir(), $handle );
 						}
 
@@ -145,7 +162,7 @@ trait RAEL_Template_Query {
 	 *
 	 * Retrieves template list from template directory.
 	 *
-	 * @param false $sort
+	 * @param false $sort Sorting parameter.
 	 * @return array
 	 */
 	public function get_template_list_for_dropdown( $sort = false ) {
@@ -160,7 +177,7 @@ trait RAEL_Template_Query {
 						$template_info = get_file_data( $path, $this->template_headers );
 						$template_name = $template_info['Template Name'];
 						$template_key  = str_replace( ' ', '-', strtolower( $template_name ) );
-						if ( $template_name === 'Default' ) {
+						if ( 'Default' === $template_name ) {
 							$files[ $template_key ] = sprintf( '%s (%s)', ucfirst( $template_name ), ucfirst( 'rae' ) );
 						} else {
 							$files[ $template_key ] = sprintf( '%s (%s)', ucfirst( $template_name ), ucfirst( $key ) );
@@ -175,11 +192,18 @@ trait RAEL_Template_Query {
 		return $files;
 	}
 
+	/**
+	 *
+	 * Get the path.
+	 *
+	 * @param mixed $key Path key.
+	 * @param mixed $handle Path handle.
+	 */
 	public function _get_path( $key, $handle ) {
 		$path = '';
-		if ( $key == 'rael' ) {
+		if ( 'rael' == $key ) {
 			$path = sprintf( '%s/%s', $this->get_template_dir(), $handle );
-		} elseif ( $key === 'theme' ) {
+		} elseif ( 'theme' === $key ) {
 			$path = sprintf( '%s/%s', $this->theme_templates_dir(), $handle );
 		}
 		return $path;
@@ -219,7 +243,7 @@ trait RAEL_Template_Query {
 	/**
 	 * Retrieve template
 	 *
-	 * @param string $filename
+	 * @param string $filename Name of the file.
 	 *
 	 * @return string include-able full template path.
 	 */
@@ -247,7 +271,7 @@ trait RAEL_Template_Query {
 	/**
 	 * Get directory name based on given file name
 	 *
-	 * @param $filename
+	 * @param string $filename Name of the file.
 	 * @return int|string
 	 */
 	protected function get_temp_dir_name( $filename ) {

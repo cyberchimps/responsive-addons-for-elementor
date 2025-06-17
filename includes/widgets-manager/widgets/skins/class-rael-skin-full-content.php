@@ -15,6 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class RAEL_Skin_Full_Content extends RAEL_Skin_Classic {
 	use RAEL_Skin_Content_Base;
+
 	/**
 	 * Get the ID of the skin.
 	 *

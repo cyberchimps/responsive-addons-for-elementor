@@ -776,29 +776,28 @@ class Responsive_Addons_For_Elementor_Video extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
 	}
 
 	/**
-	 * This function changes the youtube url to support share button youtube url 
+	 * This function changes the youtube url to support share button youtube url
 	 */
-
-
-	private function extractVideoID($url) {
+	private function extractVideoID( $url ) {
 		// Define the regex pattern for matching the video ID
 		$pattern = '/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/';
-		preg_match($pattern, $url, $matches);
-		
-		if (!empty($matches[1])) {
+		preg_match( $pattern, $url, $matches );
+
+		if ( ! empty( $matches[1] ) ) {
 			return $matches[1];
 		} else {
 			return null;
 		}
 	}
-	private function rael_youtube_video_url_sanitize($url){
-		if(!(str_contains($url,"youtu.be/") || str_contains($url,"youtube.com/embed/"))) return $url;
+	private function rael_youtube_video_url_sanitize( $url ) {
+		if ( ! ( str_contains( $url, 'youtu.be/' ) || str_contains( $url, 'youtube.com/embed/' ) ) ) {
+			return $url;
+		}
 
-		$video_id = $this->extractVideoID($url);
+		$video_id = $this->extractVideoID( $url );
 
 		$url = "https://www.youtube.com/watch?v={$video_id}";
 
@@ -824,10 +823,10 @@ class Responsive_Addons_For_Elementor_Video extends Widget_Base {
 		$rael_video_glow               = $settings['rael_video_glow'];
 		$rael_video_popup_button_icons = $settings['rael_video_popup_button_icons'];
 
-		$rael_video_popup_url = $this->rael_youtube_video_url_sanitize($rael_video_popup_url);
+		$rael_video_popup_url = $this->rael_youtube_video_url_sanitize( $rael_video_popup_url );
 
 		$rael_video_url = $rael_video_popup_url . "?autoplay={$rael_video_popup_auto_play}&loop={$rael_video_popup_video_loop}&controls={$rael_video_popup_video_player_control}&mute={$rael_video_popup_video_mute}&start={$rael_video_popup_start_time}&end={$rael_video_popup_end_time}&version=3";
-		
+
 		?>
 		<div class="rael-video-content">
 			<a href="<?php echo esc_url( $rael_video_url ); ?>" class="rael-video-popup rael-video-popup-btn <?php echo esc_attr( 'yes' === $rael_video_glow ? 'glow-btn' : '' ); ?>">
@@ -853,5 +852,4 @@ class Responsive_Addons_For_Elementor_Video extends Widget_Base {
 		</div>
 		<?php
 	}
-
 }

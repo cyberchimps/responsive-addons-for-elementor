@@ -94,7 +94,7 @@ class Responsive_Addons_For_Elementor_Media_Carousel extends Widget_Base {
 			'font-awesome-5-all',
 			'font-awesome-4-shim',
 			'swiper',
-			'e-swiper',	
+			'e-swiper',
 		);
 	}
 	/**
@@ -1118,7 +1118,6 @@ class Responsive_Addons_For_Elementor_Media_Carousel extends Widget_Base {
 		$settings['rael_show_arrows']     = false;
 
 		$this->print_slider( $settings );
-
 	}
 	/**
 	 * Print method for rendering the Elementor slider.
@@ -1151,7 +1150,7 @@ class Responsive_Addons_For_Elementor_Media_Carousel extends Widget_Base {
 				<div class="swiper-wrapper">
 					<?php
 					foreach ( $settings['rael_slides'] as $index => $slide ) :
-						$this->slide_prints_count++;
+						++$this->slide_prints_count;
 						?>
 						<div class="swiper-slide">
 							<?php $this->print_slide( $slide, $settings, 'slide-' . $index . '-' . $this->slide_prints_count ); ?>
@@ -1219,7 +1218,7 @@ class Responsive_Addons_For_Elementor_Media_Carousel extends Widget_Base {
 					$this->add_render_attribute( $element_key . '_link', 'class', 'elementor-clickable' );
 				}
 
-				$this->lightbox_slide_index++;
+				++$this->lightbox_slide_index;
 			}
 
 			if ( 'video' === $slide['rael_type'] && $slide['rael_video']['url'] ) {
@@ -1359,5 +1358,4 @@ class Responsive_Addons_For_Elementor_Media_Carousel extends Widget_Base {
 	public function get_custom_help_url() {
 		return 'https://cyberchimps.com/docs/widgets/media-carousel';
 	}
-
 }

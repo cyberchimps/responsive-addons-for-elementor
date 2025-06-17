@@ -27,6 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Responsive_Addons_For_Elementor_Menu_Cart extends Widget_Base {
 	use Missing_Dependency;
+
 	/**
 	 * Retrieves the name of the widget.
 	 *

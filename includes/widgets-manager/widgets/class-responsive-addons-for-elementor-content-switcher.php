@@ -467,9 +467,9 @@ class Responsive_Addons_For_Elementor_Content_Switcher extends Widget_Base {
 				'label'     => __( 'Color 1', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#61CE70',
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_ACCENT,
-				],
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .rael-ct__slider' => 'background-color: {{VALUE}};',
 					'{{WRAPPER}} .rael-ct__toggle input[type="checkbox"] + label:before' => 'background-color: {{VALUE}};',
@@ -486,9 +486,9 @@ class Responsive_Addons_For_Elementor_Content_Switcher extends Widget_Base {
 				'label'     => __( 'Color 2', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#7A7A7A',
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_TEXT,
-				],
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .rael-ct__switcher:checked + .rael-ct__slider' => 'background-color: {{VALUE}};',
 					'{{WRAPPER}} .rael-ct__switcher:focus + .rael-ct__slider'     => '-webkit-box-shadow: 0 0 1px {{VALUE}};box-shadow: 0 0 1px {{VALUE}};',
@@ -504,9 +504,9 @@ class Responsive_Addons_For_Elementor_Content_Switcher extends Widget_Base {
 			array(
 				'label'     => __( 'Controller Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_ACCENT,
-				],
+				),
 				'default'   => '#ffffff',
 				'selectors' => array(
 					'{{WRAPPER}} .rael-ct__slider:before' => 'background-color: {{VALUE}};',
@@ -569,9 +569,9 @@ class Responsive_Addons_For_Elementor_Content_Switcher extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_PRIMARY,
-				],
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .rael-ct__heading-1' => 'color: {{VALUE}};',
 				),
@@ -584,9 +584,9 @@ class Responsive_Addons_For_Elementor_Content_Switcher extends Widget_Base {
 			array(
 				'name'     => 'rael_ct_heading_1_typography',
 				'selector' => '{{WRAPPER}} .rael-ct__heading-1',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				),
 			)
 		);
 
@@ -604,9 +604,9 @@ class Responsive_Addons_For_Elementor_Content_Switcher extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_PRIMARY,
-				],
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .rael-ct__heading-2' => 'color: {{VALUE}};',
 				),
@@ -619,9 +619,9 @@ class Responsive_Addons_For_Elementor_Content_Switcher extends Widget_Base {
 			array(
 				'name'     => 'rael_ct_heading_2_typography',
 				'selector' => '{{WRAPPER}} .rael-ct__heading-2',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				),
 			)
 		);
 
@@ -804,9 +804,9 @@ class Responsive_Addons_For_Elementor_Content_Switcher extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_TEXT,
-				],
+				),
 				'condition' => array(
 					'rael_ct_content_1_content_type' => 'content',
 				),
@@ -821,9 +821,9 @@ class Responsive_Addons_For_Elementor_Content_Switcher extends Widget_Base {
 			array(
 				'name'      => 'rael_ct_content_1_typography',
 				'selector'  => '{{WRAPPER}} .rael-ct__content-1.rael-ct__section-1',
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'condition' => array(
 					'rael_ct_content_1_content_type' => 'content',
 				),
@@ -848,9 +848,9 @@ class Responsive_Addons_For_Elementor_Content_Switcher extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_TEXT,
-				],
+				),
 				'condition' => array(
 					'rael_ct_content_2_content_type' => 'content',
 				),
@@ -865,9 +865,9 @@ class Responsive_Addons_For_Elementor_Content_Switcher extends Widget_Base {
 			array(
 				'name'      => 'rael_ct_content_2_typography',
 				'selector'  => '{{WRAPPER}} .rael-ct__content-2.rael-ct__section-2',
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'condition' => array(
 					'rael_ct_content_2_content_type' => 'content',
 				),

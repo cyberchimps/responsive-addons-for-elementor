@@ -12,7 +12,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 use Responsive_Addons_For_Elementor\Traits\Singleton;
-use \Elementor\Plugin;
+use Elementor\Plugin;
 
 /**
  * Class Dynamic Tags Manager
@@ -33,11 +33,10 @@ class Dynamic_Tags_Manager {
 		add_action( 'elementor/dynamic_tags/register', array( $this, 'register_dynamic_tags' ) );
 
 		$this->load_dependencies();
-
 	}
 	public function load_dependencies() {
 		if ( class_exists( 'WooCommerce' ) ) {
-			require_once RAEL_DIR . '/includes/dynamic-tags-manager/dynamic-tags/woocommerce/traits/tag-product_id.php';
+			require_once RAEL_DIR . '/includes/dynamic-tags-manager/dynamic-tags/woocommerce/traits/tag-product-id.php';
 			require_once RAEL_DIR . '/includes/dynamic-tags-manager/dynamic-tags/woocommerce/class-base-tag.php';
 		}
 	}
@@ -146,7 +145,7 @@ class Dynamic_Tags_Manager {
 
 			if ( str_starts_with( $tag, 'woocommerce' ) ) {
 				$class_name = ucwords( str_replace( '-', '_', substr( $tag, 12 ) ), '_' );
-				$class_name = __NAMESPACE__ . "\DynamicTags\\WooCommerce\\RAEL_{$class_name}";
+				$class_name = __NAMESPACE__ . "\DynamicTags\\WooCommerce\\{$class_name}";
 			}
 
 			$dynamic_tags->register( new $class_name() );

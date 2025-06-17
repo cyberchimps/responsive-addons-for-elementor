@@ -310,9 +310,9 @@ class Responsive_Addons_For_Elementor_Fancy_Text extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'typography',
-				'global'         => [
+				'global'         => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				),
 				'fields_options' => array(
 					'typography'  => array( 'default' => 'yes' ),
 					'font_size'   => array( 'default' => array( 'size' => 22 ) ),
@@ -417,9 +417,9 @@ class Responsive_Addons_For_Elementor_Fancy_Text extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'rael_fancy_text_strings_typography',
-				'global'         => [
+				'global'         => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				),
 				'fields_options' => array(
 					'typography'  => array( 'default' => 'yes' ),
 					'font_size'   => array( 'default' => array( 'size' => 22 ) ),
@@ -547,9 +547,9 @@ class Responsive_Addons_For_Elementor_Fancy_Text extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'           => 'ending_typography',
-				'global'         => [
-					'default'     => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				'global'         => array(
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				),
 				'fields_options' => array(
 					'typography'  => array( 'default' => 'yes' ),
 					'font_size'   => array( 'default' => array( 'size' => 22 ) ),
@@ -561,7 +561,6 @@ class Responsive_Addons_For_Elementor_Fancy_Text extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-
 	}
 
 	/**
@@ -635,7 +634,6 @@ class Responsive_Addons_For_Elementor_Fancy_Text extends Widget_Base {
 		<div class="clearfix"></div>
 
 		<?php
-
 	}
 
 	/**
@@ -644,5 +642,4 @@ class Responsive_Addons_For_Elementor_Fancy_Text extends Widget_Base {
 	 * @access protected
 	 */
 	protected function content_template() {}
-
 }

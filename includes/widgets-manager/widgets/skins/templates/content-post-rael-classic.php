@@ -25,19 +25,19 @@ if ( empty( $post ) ) {
 	<?php $this->render_featured_image(); ?>
 	<div class="elementor-post__text">
 		<?php
-		$content_positions_key = [
+		$content_positions_key = array(
 			empty( $this->get_instance_value( 'title_position' ) ) ? 0 : $this->get_instance_value( 'title_position' ),
 			empty( $this->get_instance_value( 'meta_data_position' ) ) ? 0 : $this->get_instance_value( 'meta_data_position' ),
 			empty( $this->get_instance_value( 'excerpt_position' ) ) ? 0 : $this->get_instance_value( 'excerpt_position' ),
 			empty( $this->get_instance_value( 'read_more_position' ) ) ? 0 : $this->get_instance_value( 'read_more_position' ),
-		];
+		);
 
-		$content_positions_value = [
+		$content_positions_value = array(
 			'render_title',
 			'render_meta_data',
 			'render_excerpt',
 			'render_read_more',
-		];
+		);
 
 		$positions = array_combine( $content_positions_key, $content_positions_value );
 		$temp      = ksort( $positions );

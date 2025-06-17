@@ -897,12 +897,10 @@ class Responsive_Addons_For_Elementor_Theme_Post_Info extends Widget_Base {
 			} elseif ( 'none' === $item['rael_meta_data_show_icon'] ) {
 				$item_data['icon'] = '';
 			}
-		} else {
-			if ( 'custom' === $item['rael_meta_data_show_icon'] && ! empty( $item['rael_meta_data_selected_icon'] ) ) {
+		} elseif ( 'custom' === $item['rael_meta_data_show_icon'] && ! empty( $item['rael_meta_data_selected_icon'] ) ) {
 				$item_data['selected_icon'] = $item['rael_meta_data_selected_icon'];
-			} elseif ( 'none' === $item['rael_meta_data_show_icon'] ) {
-				$item_data['selected_icon'] = array();
-			}
+		} elseif ( 'none' === $item['rael_meta_data_show_icon'] ) {
+			$item_data['selected_icon'] = array();
 		}
 
 		$migrated  = isset( $item['__fa4_migrated']['selected_icon'] );
@@ -1170,5 +1168,4 @@ class Responsive_Addons_For_Elementor_Theme_Post_Info extends Widget_Base {
 
 		return $item_data;
 	}
-
 }

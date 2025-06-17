@@ -21,6 +21,7 @@ use Responsive_Addons_For_Elementor\WidgetsManager\Widgets\Skins\RAEL_Skin_Class
  */
 class RAEL_Posts_Archive_Skin_Classic extends RAEL_Skin_Classic {
 	use RAEL_Posts_Archive_Skin_Base;
+
 	/**
 	 * Register control actions
 	 */
@@ -51,7 +52,7 @@ class RAEL_Posts_Archive_Skin_Classic extends RAEL_Skin_Classic {
 	/**
 	 * Remove `posts_per_page` control.
 	 */
-	protected function register_post_count_control(){}
+	protected function register_post_count_control() {}
 
 	/**
 	 * Registers controls for the given widget.

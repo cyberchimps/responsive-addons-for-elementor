@@ -803,7 +803,11 @@ abstract class Skin_Style {
 
 		ob_start();
 
-		$term = ( isset( $_POST['data']['term'] ) ) ? $_POST['data']['term'] : '';
+		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_products' ) ) {
+			return;
+		}
+
+		$term = ( isset( $_POST['data']['term'] ) ) ? sanitize_text_field( wp_unslash( $_POST['data']['term'] ) ) : '';
 
 		self::$settings = $widget->get_settings_for_display();
 		require_once RAEL_DIR . 'includes/widgets-manager/widgets/skins/template-blocks/class-build-post-query.php';
@@ -827,7 +831,7 @@ abstract class Skin_Style {
 			$query->the_post();
 			include RAEL_DIR . 'includes/widgets-manager/widgets/skins/templates/content-post-' . str_replace( '_', '-', $style_id ) . '.php';
 
-			$count++;
+			++$count;
 		}
 
 		wp_reset_postdata();
@@ -847,7 +851,11 @@ abstract class Skin_Style {
 
 		ob_start();
 
-		$term = ( isset( $_POST['data']['term'] ) ) ? $_POST['data']['term'] : '';
+		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_products' ) ) {
+			return;
+		}
+
+		$term = ( isset( $_POST['data']['term'] ) ) ? sanitize_text_field( wp_unslash( $_POST['data']['term'] ) ) : '';
 
 		self::$settings  = $widget->get_settings_for_display();
 		self::$query_obj = new Build_Post_Query( $style_id, self::$settings, $term );

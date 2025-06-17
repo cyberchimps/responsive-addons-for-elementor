@@ -35,6 +35,4 @@ class Skin_Classic extends Skin_Style {
 		}
 		return self::$instance;
 	}
-
 }
-

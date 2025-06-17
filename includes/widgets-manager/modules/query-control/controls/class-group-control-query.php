@@ -487,7 +487,7 @@ class Group_Control_Query extends Group_Control_Base {
 				'include',
 				'include_ids',
 				'include_term_ids',
-				'include_authors'
+				'include_authors',
 			)
 		);
 
@@ -558,7 +558,6 @@ class Group_Control_Query extends Group_Control_Base {
 		}
 
 		return $fields;
-
 	}
 
 	/**

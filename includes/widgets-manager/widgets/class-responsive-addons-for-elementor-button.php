@@ -432,8 +432,8 @@ class Responsive_Addons_For_Elementor_Button extends Widget_Base {
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .rael-icon'       => 'color: {{VALUE}};',
-					'{{WRAPPER}} .rael-button svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}} .rael-icon'            => 'color: {{VALUE}};',
+					'{{WRAPPER}} .rael-button svg'      => 'fill: {{VALUE}};',
 					'{{WRAPPER}} .rael-button svg path' => 'fill: {{VALUE}};',
 				),
 			)
@@ -522,9 +522,9 @@ class Responsive_Addons_For_Elementor_Button extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'text_typography',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-text',
 			)
 		);
@@ -562,9 +562,9 @@ class Responsive_Addons_For_Elementor_Button extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'     => 'hover_text_typography',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-text',
 			)
 		);
@@ -618,7 +618,7 @@ class Responsive_Addons_For_Elementor_Button extends Widget_Base {
 	private function allowed_html_tags() {
 		$tags_allowed = wp_kses_allowed_html( 'post' );
 
-		$tags_allowed['svg'] = array(
+		$tags_allowed['svg']  = array(
 			'g'           => array(),
 			'width'       => array(),
 			'height'      => array(),
@@ -633,7 +633,7 @@ class Responsive_Addons_For_Elementor_Button extends Widget_Base {
 			'x'           => array(),
 			'y'           => array(),
 			'style'       => array(),
-			'path'    => array(
+			'path'        => array(
 				'id'    => array(),
 				'class' => array(),
 				'd'     => array(),

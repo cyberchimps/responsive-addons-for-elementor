@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
 
 namespace Responsive_Addons_For_Elementor\WidgetsManager\Widgets\ThemeBuilder;
 
@@ -356,8 +356,7 @@ abstract class Responsive_Addons_For_Elementor_Woo_Products_Base extends Woo_Wid
 				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
 				),
-				'selector' => '{{WRAPPER}}.elementor-wc-products ul.products li.product .price del .amount  ',
-				'selector' => '{{WRAPPER}}.elementor-wc-products ul.products li.product .price del ',
+				'selector' => '{{WRAPPER}}.elementor-wc-products ul.products li.product .price del, {{WRAPPER}}.elementor-wc-products ul.products li.product .price del .amount',
 			)
 		);
 
@@ -1090,5 +1089,4 @@ abstract class Responsive_Addons_For_Elementor_Woo_Products_Base extends Woo_Wid
 	public function add_to_cart_wrapper( $string ) {
 		return '<div class="woocommerce-loop-product__buttons">' . $string . '</div>';
 	}
-
 }

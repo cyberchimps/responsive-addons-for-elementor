@@ -31,7 +31,7 @@ define( 'RAEL_PLUGIN_SHORT_NAME', 'RAE' );
 if ( 'active' === get_option( 'elementor_experiment-e_swiper_latest' ) ) {
 	define( 'RAEL_ELEMENTOR_SWIPER', true );
 	define( 'RAEL_SWIPER_CONTAINER', '' );
-} else if(defined( 'ELEMENTOR_VERSION' ) && version_compare( ELEMENTOR_VERSION, '3.26.0', '>=' )) {
+} elseif ( defined( 'ELEMENTOR_VERSION' ) && version_compare( ELEMENTOR_VERSION, '3.26.0', '>=' ) ) {
 	define( 'RAEL_ELEMENTOR_SWIPER', true );
 	define( 'RAEL_SWIPER_CONTAINER', '' );
 } else {

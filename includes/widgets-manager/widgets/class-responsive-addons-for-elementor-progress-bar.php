@@ -778,9 +778,9 @@ class Responsive_Addons_For_Elementor_Progress_Bar extends Widget_Base {
 			array(
 				'name'     => 'progress_bar_title_typography',
 				'label'    => __( 'Title', 'responsive-addons-for-elementor' ),
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-progressbar-title',
 			)
 		);
@@ -803,9 +803,9 @@ class Responsive_Addons_For_Elementor_Progress_Bar extends Widget_Base {
 			array(
 				'name'     => 'progress_bar_count_typography',
 				'label'    => __( 'Counter', 'responsive-addons-for-elementor' ),
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				),
 				'selector' => '{{WRAPPER}} .rael-progressbar-count-wrap',
 			)
 		);
@@ -828,9 +828,9 @@ class Responsive_Addons_For_Elementor_Progress_Bar extends Widget_Base {
 			array(
 				'name'      => 'progress_bar_after_typography',
 				'label'     => __( 'Prefix/Postfix', 'responsive-addons-for-elementor' ),
-				'global'   => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				),
 				'selector'  => '{{WRAPPER}} .rael-progressbar-half-circle-after span',
 				'condition' => array(
 					'rael_progress_bar_layout' => 'half_circle',
@@ -1026,5 +1026,4 @@ class Responsive_Addons_For_Elementor_Progress_Bar extends Widget_Base {
             </div>';
 		}
 	}
-
 }

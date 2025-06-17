@@ -251,6 +251,4 @@ class Responsive_Addons_For_Elementor_Theme_Product_Price extends Woo_Widget_Bas
 	 * @access public
 	 */
 	public function render_plain_content() {}
-
-
 }

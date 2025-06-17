@@ -640,7 +640,6 @@ class Module extends QueryControlModule {
 		return array(
 			'results' => $results,
 		);
-
 	}
 
 	/**

@@ -40,7 +40,7 @@ class Responsive_Addons_For_Elementor_Advanced_Tabs extends Widget_Base {
 	 *
 	 * @return string Widget name.
 	 */
- 
+
 	public $widget_image;
 	public function get_name() {
 		return 'rael-advanced-tabs';
@@ -343,7 +343,7 @@ class Responsive_Addons_For_Elementor_Advanced_Tabs extends Widget_Base {
 				'type'    => Controls_Manager::SELECT,
 				'options' => array(
 					'content'  => __( 'Content', 'responsive-addons-for-elementor' ),
-					'image'  => __( 'Image', 'responsive-addons-for-elementor' ),
+					'image'    => __( 'Image', 'responsive-addons-for-elementor' ),
 					'template' => __( 'Saved Templates', 'responsive-addons-for-elementor' ),
 				),
 				'default' => 'content',
@@ -377,126 +377,126 @@ class Responsive_Addons_For_Elementor_Advanced_Tabs extends Widget_Base {
 
 		$repeater->add_control(
 			'rael_advanced_tabs_tab_image',
-			[
-				'label' => esc_html__( 'Choose Image', 'responsive-addons-for-elementor' ),
-				'type' => Controls_Manager::MEDIA,
-				'dynamic' => [
+			array(
+				'label'     => esc_html__( 'Choose Image', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::MEDIA,
+				'dynamic'   => array(
 					'active' => true,
-				],
-				'default' => [
+				),
+				'default'   => array(
 					'url' => Utils::get_placeholder_image_src(),
 
-				],
-				'condition'     => array(
+				),
+				'condition' => array(
 					'rael_advanced_tabs_text_type' => 'image',
 				),
-			]
+			)
 		);
 
 		$repeater->add_group_control(
 			Group_Control_Image_Size::get_type(),
-			[
-				'name' => 'rael_advanced_tabs_tab_image', // Usage: `{name}_size` and `{name}_custom_dimension`, in this case `image_size` and `image_custom_dimension`.
-				'default' => 'large',
-				'condition' => [
-					'rael_advanced_tabs_text_type' => 'image',
+			array(
+				'name'      => 'rael_advanced_tabs_tab_image', // Usage: `{name}_size` and `{name}_custom_dimension`, in this case `image_size` and `image_custom_dimension`.
+				'default'   => 'large',
+				'condition' => array(
+					'rael_advanced_tabs_text_type'       => 'image',
 					'rael_advanced_tabs_tab_image[url]!' => '',
-				],
-			]
+				),
+			)
 		);
 
 		$repeater->add_control(
 			'rael_advanced_tabs_tab_image_caption_source',
-			[
-				'label' => esc_html__( 'Caption', 'responsive-addons-for-elementor' ),
-				'type' => Controls_Manager::SELECT,
-				'options' => [
-					'none' => esc_html__( 'None', 'responsive-addons-for-elementor' ),
+			array(
+				'label'     => esc_html__( 'Caption', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::SELECT,
+				'options'   => array(
+					'none'       => esc_html__( 'None', 'responsive-addons-for-elementor' ),
 					'attachment' => esc_html__( 'Attachment Caption', 'responsive-addons-for-elementor' ),
-					'custom' => esc_html__( 'Custom Caption', 'responsive-addons-for-elementor' ),
-				],
-				'default' => 'none',
-				'condition' => [
-					'rael_advanced_tabs_text_type' => 'image',
+					'custom'     => esc_html__( 'Custom Caption', 'responsive-addons-for-elementor' ),
+				),
+				'default'   => 'none',
+				'condition' => array(
+					'rael_advanced_tabs_text_type'       => 'image',
 					'rael_advanced_tabs_tab_image[url]!' => '',
-				],
-			]
+				),
+			)
 		);
 
 		$repeater->add_control(
 			'rael_advanced_tabs_tab_image_caption',
-			[
-				'label' => esc_html__( 'Custom Caption', 'responsive-addons-for-elementor' ),
-				'type' => Controls_Manager::TEXT,
-				'default' => '',
+			array(
+				'label'       => esc_html__( 'Custom Caption', 'responsive-addons-for-elementor' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => '',
 				'placeholder' => esc_html__( 'Enter your image caption', 'elementor' ),
-				'condition' => [
+				'condition'   => array(
 					'rael_advanced_tabs_tab_image_caption_source' => 'custom',
 					'rael_advanced_tabs_tab_image[url]!' => '',
-				],
-				'dynamic' => [
+				),
+				'dynamic'     => array(
 					'active' => true,
-				],
-			]
+				),
+			)
 		);
 
 		$repeater->add_control(
 			'rael_advanced_tabs_tab_image_link_to',
-			[
-				'label' => esc_html__( 'Link', 'responsive-addons-for-elementor' ),
-				'type' => Controls_Manager::SELECT,
-				'default' => 'none',
-				'options' => [
-					'none' => esc_html__( 'None', 'responsive-addons-for-elementor' ),
-					'file' => esc_html__( 'Media File', 'responsive-addons-for-elementor' ),
+			array(
+				'label'     => esc_html__( 'Link', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'none',
+				'options'   => array(
+					'none'   => esc_html__( 'None', 'responsive-addons-for-elementor' ),
+					'file'   => esc_html__( 'Media File', 'responsive-addons-for-elementor' ),
 					'custom' => esc_html__( 'Custom URL', 'responsive-addons-for-elementor' ),
-				],
-				'condition' => [
-					'rael_advanced_tabs_text_type' => 'image',
+				),
+				'condition' => array(
+					'rael_advanced_tabs_text_type'       => 'image',
 					'rael_advanced_tabs_tab_image[url]!' => '',
-				],
-			]
+				),
+			)
 		);
 
 		$repeater->add_control(
 			'rael_advanced_tabs_tab_image_link',
-			[
-				'label' => esc_html__( 'Link', 'responsive-addons-for-elementor' ),
-				'type' => Controls_Manager::URL,
-				'dynamic' => [
+			array(
+				'label'      => esc_html__( 'Link', 'responsive-addons-for-elementor' ),
+				'type'       => Controls_Manager::URL,
+				'dynamic'    => array(
 					'active' => true,
-				],
-				'condition' => [
-					'rael_advanced_tabs_text_type' => 'image',
+				),
+				'condition'  => array(
+					'rael_advanced_tabs_text_type'         => 'image',
 					'rael_advanced_tabs_tab_image_link_to' => 'custom',
-					'rael_advanced_tabs_tab_image[url]!' => '',
-				],
+					'rael_advanced_tabs_tab_image[url]!'   => '',
+				),
 				'show_label' => false,
-			]
+			)
 		);
 
 		$repeater->add_control(
 			'rael_advanced_tabs_tab_image_open_lightbox',
-			[
-				'label' => esc_html__( 'Lightbox', 'responsive-addons-for-elementor' ),
-				'type' => Controls_Manager::SELECT,
+			array(
+				'label'       => esc_html__( 'Lightbox', 'responsive-addons-for-elementor' ),
+				'type'        => Controls_Manager::SELECT,
 				'description' => sprintf(
 					/* translators: 1: Link open tag, 2: Link close tag. */
 					esc_html__( 'Manage your site’s lightbox settings in the %1$sLightbox panel%2$s.', 'elementor' ),
 					'<a href="javascript: $e.run( \'panel/global/open\' ).then( () => $e.route( \'panel/global/settings-lightbox\' ) )">',
 					'</a>'
 				),
-				'default' => 'default',
-				'options' => [
+				'default'     => 'default',
+				'options'     => array(
 					'default' => esc_html__( 'Default', 'responsive-addons-for-elementor' ),
-					'yes' => esc_html__( 'Yes', 'responsive-addons-for-elementor' ),
-					'no' => esc_html__( 'No', 'responsive-addons-for-elementor' ),
-				],
-				'condition' => [
+					'yes'     => esc_html__( 'Yes', 'responsive-addons-for-elementor' ),
+					'no'      => esc_html__( 'No', 'responsive-addons-for-elementor' ),
+				),
+				'condition'   => array(
 					'rael_advanced_tabs_tab_image_link_to' => 'file',
-					'rael_advanced_tabs_tab_image[url]!' => '',
-				],
-			]
+					'rael_advanced_tabs_tab_image[url]!'   => '',
+				),
+			)
 		);
 
 		$this->add_control(
@@ -515,108 +515,107 @@ class Responsive_Addons_For_Elementor_Advanced_Tabs extends Widget_Base {
 		);
 
 		$this->end_controls_section();
-		
+
 		$this->start_controls_section(
 			'rael_advanced_tabs_tab_image_style',
-			[
+			array(
 				'label' => esc_html__( 'Image', 'responsive-addons-for-elementor' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
-			]
+			)
 		);
-
 
 		$this->add_responsive_control(
 			'rael_advanced_tabs_tab_image_align',
-			[
-				'label' => esc_html__( 'Alignment', 'responsive-addons-for-elementor' ),
-				'type' => Controls_Manager::CHOOSE,
-				'options' => [
-					'flex-start' => [
+			array(
+				'label'     => esc_html__( 'Alignment', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::CHOOSE,
+				'options'   => array(
+					'flex-start' => array(
 						'title' => esc_html__( 'Left', 'responsive-addons-for-elementor' ),
-						'icon' => 'eicon-text-align-left',
-					],
-					'center' => [
+						'icon'  => 'eicon-text-align-left',
+					),
+					'center'     => array(
 						'title' => esc_html__( 'Center', 'responsive-addons-for-elementor' ),
-						'icon' => 'eicon-text-align-center',
-					],
-					'flex-end' => [
+						'icon'  => 'eicon-text-align-center',
+					),
+					'flex-end'   => array(
 						'title' => esc_html__( 'Right', 'responsive-addons-for-elementor' ),
-						'icon' => 'eicon-text-align-right',
-					],
-				],
-				'default' => 'center',
-				'selectors' => [
+						'icon'  => 'eicon-text-align-right',
+					),
+				),
+				'default'   => 'center',
+				'selectors' => array(
 					'{{WRAPPER}} .rael-tabs-content .active, {{WRAPPER}} .rael-tabs-content .active a' => 'display: flex; flex-direction: column;',
 					'{{WRAPPER}} img , {{WRAPPER}} figure' => 'align-self: {{VALUE}}; margin: 0px 0px;',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_responsive_control(
 			'rael_advanced_tabs_tab_image_width',
-			[
-				'label' => esc_html__( 'Width', 'responsive-addons-for-elementor' ),
-				'type' => Controls_Manager::SLIDER,
-				'default' => [
+			array(
+				'label'          => esc_html__( 'Width', 'responsive-addons-for-elementor' ),
+				'type'           => Controls_Manager::SLIDER,
+				'default'        => array(
 					'unit' => '%',
-				],
-				'tablet_default' => [
+				),
+				'tablet_default' => array(
 					'unit' => '%',
-				],
-				'mobile_default' => [
+				),
+				'mobile_default' => array(
 					'unit' => '%',
-				],
-				'size_units' => [ 'px', '%', 'em', 'rem', 'vw', 'custom' ],
-				'range' => [
-					'%' => [
+				),
+				'size_units'     => array( 'px', '%', 'em', 'rem', 'vw', 'custom' ),
+				'range'          => array(
+					'%'  => array(
 						'min' => 1,
 						'max' => 100,
-					],
-					'px' => [
+					),
+					'px' => array(
 						'min' => 1,
 						'max' => 1000,
-					],
-					'vw' => [
+					),
+					'vw' => array(
 						'min' => 1,
 						'max' => 100,
-					],
-				],
-				'selectors' => [
+					),
+				),
+				'selectors'      => array(
 					'{{WRAPPER}} figure, .rael-tabs-content>.clearfix>a>img , .rael-tabs-content>.clearfix>img' => 'width: {{SIZE}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Border::get_type(),
-			[
-				'name' => 'image_border',
-				'selector' => '{{WRAPPER}} img',
+			array(
+				'name'      => 'image_border',
+				'selector'  => '{{WRAPPER}} img',
 				'separator' => 'before',
-			]
+			)
 		);
 
 		$this->add_responsive_control(
 			'rael_advanced_tabs_tab_image_image_border_radius',
-			[
-				'label' => esc_html__( 'Border Radius', 'elementor' ),
-				'type' => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
-				'selectors' => [
+			array(
+				'label'      => esc_html__( 'Border Radius', 'elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%', 'em', 'rem', 'custom' ),
+				'selectors'  => array(
 					'{{WRAPPER}} img' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
+				),
+			)
 		);
 
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
-			[
-				'name' => 'image_box_shadow',
-				'exclude' => [
+			array(
+				'name'     => 'image_box_shadow',
+				'exclude'  => array(
 					'box_shadow_position',
-				],
+				),
 				'selector' => '{{WRAPPER}} img',
-			]
+			)
 		);
 
 		$this->end_controls_section();
@@ -1205,65 +1204,63 @@ class Responsive_Addons_For_Elementor_Advanced_Tabs extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	protected function render_image($tab) {
-	
-	
+	protected function render_image( $tab ) {
+
 		if ( empty( $tab['rael_advanced_tabs_tab_image']['url'] ) ) {
 			return;
 		}
-	
+
 		$link = false;
-		
+
 		if ( 'none' === $tab['rael_advanced_tabs_tab_image_link_to'] ) {
 			$link = false;
-		}
-		elseif ( 'custom' === $tab['rael_advanced_tabs_tab_image_link_to'] ) {
+		} elseif ( 'custom' === $tab['rael_advanced_tabs_tab_image_link_to'] ) {
 			if ( empty( $tab['rael_advanced_tabs_tab_image_link']['url'] ) ) {
 				$link = false;
 			}
 			$link = $tab['rael_advanced_tabs_tab_image_link'];
-		}
-		else {
-			$link = [
+		} else {
+			$link = array(
 				'url' => $tab['rael_advanced_tabs_tab_image']['url'],
-			];
-		}	
+			);
+		}
 
-		$has_caption = ! empty( $tab['rael_advanced_tabs_tab_image_caption_source'] ) && 'none' !== $tab['rael_advanced_tabs_tab_image_caption_source'] ;
-		 ?>
+		$has_caption = ! empty( $tab['rael_advanced_tabs_tab_image_caption_source'] ) && 'none' !== $tab['rael_advanced_tabs_tab_image_caption_source'];
+		?>
 
 			<?php if ( $has_caption ) : ?>
 				<figure class = "rae-figure">
 			<?php endif; ?>
 			<?php if ( $link ) : ?>
-					<a href = "<?php echo $link['url']; ?>" data-elementor-open-lightbox= "<?php echo $tab['rael_advanced_tabs_tab_image_open_lightbox']?>" >
+					<a href = "<?php echo esc_url( $link['url'] ); ?>" data-elementor-open-lightbox= "<?php echo esc_attr( $tab['rael_advanced_tabs_tab_image_open_lightbox'] ); ?>" >
 			<?php endif; ?>
-				<?php Group_Control_Image_Size::print_attachment_image_html( $tab,"rael_advanced_tabs_tab_image" ); ?>
+				<?php Group_Control_Image_Size::print_attachment_image_html( $tab, 'rael_advanced_tabs_tab_image' ); ?>
 			<?php if ( $link ) : ?>
 					</a>
 			<?php endif; ?>
 			<?php if ( $has_caption ) : ?>
-					<figcaption class = "rae-caption" ><?php
+					<figcaption class = "rae-caption" >
+					<?php
 						$caption = '';
-						if ( ! empty( $tab['rael_advanced_tabs_tab_image_caption_source'] ) ) {
-							switch ( $tab['rael_advanced_tabs_tab_image_caption_source'] ) {
-								case 'attachment':
-									$caption = wp_get_attachment_caption( $tab['rael_advanced_tabs_tab_image']['id'] );
-									break;
-								case 'custom':
-									$caption = ! Utils::is_empty( $tab['rael_advanced_tabs_tab_image_caption'] ) ? $tab['rael_advanced_tabs_tab_image_caption'] : '';
-							}
+					if ( ! empty( $tab['rael_advanced_tabs_tab_image_caption_source'] ) ) {
+						switch ( $tab['rael_advanced_tabs_tab_image_caption_source'] ) {
+							case 'attachment':
+								$caption = wp_get_attachment_caption( $tab['rael_advanced_tabs_tab_image']['id'] );
+								break;
+							case 'custom':
+								$caption = ! Utils::is_empty( $tab['rael_advanced_tabs_tab_image_caption'] ) ? $tab['rael_advanced_tabs_tab_image_caption'] : '';
 						}
-						echo wp_kses_post( $caption ) ;
-					?></figcaption>
+					}
+						echo wp_kses_post( $caption );
+					?>
+					</figcaption>
 			<?php endif; ?>
 			<?php if ( $has_caption ) : ?>
 				</figure>
 			<?php endif; ?>
 		<?php
-			
 	}
-	
+
 	/**
 	 * Render function
 	 *
@@ -1295,7 +1292,8 @@ class Responsive_Addons_For_Elementor_Advanced_Tabs extends Widget_Base {
 		if ( 'yes' !== $settings['rael_advanced_responsive_vertical_layout'] ) {
 			$this->add_render_attribute( 'rael_tab_wrapper', 'class', 'responsive-vertical-layout' );
 		}
-		$this->add_render_attribute( 'rael_tab_icon_position', 'class', esc_attr( $settings['rael_advanced_tab_icon_position'] ) ); ?>
+		$this->add_render_attribute( 'rael_tab_icon_position', 'class', esc_attr( $settings['rael_advanced_tab_icon_position'] ) );
+		?>
 		<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'rael_tab_wrapper' ) ); ?>>
 			<div class="rael-tabs-nav">
 				<ul <?php echo wp_kses_post( $this->get_render_attribute_string( 'rael_tab_icon_position' ) ); ?>>
@@ -1330,14 +1328,17 @@ class Responsive_Addons_For_Elementor_Advanced_Tabs extends Widget_Base {
 					<div class="clearfix <?php echo esc_attr( $tab['rael_advanced_tabs_tab_show_as_default'] ); ?>">
 						<?php if ( 'content' === $tab['rael_advanced_tabs_text_type'] ) : ?>
 							<?php echo do_shortcode( $tab['rael_advanced_tabs_tab_content'] ); ?>
-						<?php elseif ( 'image' === $tab['rael_advanced_tabs_text_type'] ) : { ?>
-							<?php $this->render_image($tab);?>
+							<?php
+						elseif ( 'image' === $tab['rael_advanced_tabs_text_type'] ) :
+							{;
+							?>
+							<?php $this->render_image( $tab ); ?>
 						<?php } elseif ( 'template' === $tab['rael_advanced_tabs_text_type'] ) : ?>
-							<?php	
+							<?php
 							if ( ! empty( $tab['rael_primary_templates'] ) ) {
-								$allowed_html = wp_kses_allowed_html('post');
-								$allowed_html['style'] = true; 
-								echo wp_kses(Plugin::$instance->frontend->get_builder_content( $tab['rael_primary_templates'], true ), $allowed_html);
+								$allowed_html          = wp_kses_allowed_html( 'post' );
+								$allowed_html['style'] = true;
+								echo wp_kses( Plugin::$instance->frontend->get_builder_content( $tab['rael_primary_templates'], true ), $allowed_html );
 							}
 							?>
 						<?php endif; ?>
@@ -1347,5 +1348,4 @@ class Responsive_Addons_For_Elementor_Advanced_Tabs extends Widget_Base {
 		</div>
 		<?php
 	}
-
 }

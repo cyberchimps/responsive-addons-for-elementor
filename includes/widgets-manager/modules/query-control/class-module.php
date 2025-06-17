@@ -111,7 +111,6 @@ class Module extends Module_Base {
 				'description' => __( 'Set to Yes to avoid duplicate posts from showing up on the page. This only affects the frontend.', 'responsive-addons-for-elementor' ),
 			)
 		);
-
 	}
 
 	/**
@@ -150,7 +149,6 @@ class Module extends Module_Base {
 		}
 
 		return $results;
-
 	}
 
 	/**
@@ -389,7 +387,6 @@ class Module extends Module_Base {
 				}
 			}
 		}
-
 	}
 
 	/**
@@ -509,9 +506,9 @@ class Module extends Module_Base {
 	public function get_query( $widget, $name, $query_args = array(), $fallback_args = array() ) {
 		$prefix    = $name . '_';
 		$post_type = $widget->get_settings( $prefix . 'post_type' );
-		include_once __DIR__ . '/classes/elementor-post-query.php';
+		include_once __DIR__ . '/classes/class-elementor-post-query.php';
 		if ( 'related' === $post_type ) {
-			include_once __DIR__ . '/classes/elementor-related-query.php';
+			include_once __DIR__ . '/classes/class-elementor-related-query.php';
 			$elementor_query = new Elementor_Related_Query( $widget, $name, $query_args, $fallback_args );
 		} else {
 			$elementor_query = new Elementor_Post_Query( $widget, $name, $query_args );

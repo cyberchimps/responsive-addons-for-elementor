@@ -616,9 +616,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 				'selector'       => '{{WRAPPER}} .elementor-button',
 				'fields_options' => array(
 					'color' => array(
-						'global'   => [
+						'global' => array(
 							'default' => Global_Colors::COLOR_ACCENT,
-						],
+						),
 					),
 				),
 			)
@@ -745,9 +745,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 				'selector'       => '{{WRAPPER}} a.elementor-button:hover, {{WRAPPER}} .elementor-button:hover',
 				'fields_options' => array(
 					'color' => array(
-						'global'   => [
+						'global' => array(
 							'default' => Global_Colors::COLOR_ACCENT,
-						],
+						),
 					),
 				),
 			)
@@ -849,9 +849,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'   => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_ACCENT,
-				],
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .rael-infobox__separator' => 'border-top-color: {{VALUE}};',
 				),
@@ -1099,9 +1099,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			array(
 				'label'      => __( 'Icon Color', 'responsive-addons-for-elementor' ),
 				'type'       => Controls_Manager::COLOR,
-				'global'     => [
+				'global'     => array(
 					'default' => Global_Colors::COLOR_PRIMARY,
-				],
+				),
 				'conditions' => array(
 					'relation' => 'and',
 					'terms'    => array(
@@ -1130,9 +1130,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Background Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_SECONDARY,
-				],
+				),
 				'default'   => '',
 				'condition' => array(
 					'rael_image_type' => array( 'icon', 'photo' ),
@@ -1170,9 +1170,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Border Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_PRIMARY,
-				],
+				),
 				'condition' => array(
 					'rael_image_type'   => array( 'icon', 'photo' ),
 					'rael_icon_border!' => 'none',
@@ -1898,9 +1898,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'rael_title_typography',
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				),
 				'selector'  => '{{WRAPPER}} .rael-infobox__title',
 				'condition' => array(
 					'rael_title!' => '',
@@ -1912,9 +1912,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_PRIMARY,
-				],
+				),
 				'default'   => '',
 				'condition' => array(
 					'rael_title!' => '',
@@ -1967,9 +1967,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'rael_description_typography',
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 				'selector'  => '{{WRAPPER}} .rael-infobox__description',
 				'condition' => array(
 					'rael_description!' => '',
@@ -1981,9 +1981,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Description Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'   => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_TEXT,
-				],
+				),
 				'default'   => '',
 				'condition' => array(
 					'rael_description!' => '',
@@ -2022,9 +2022,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'rael_cta_typography',
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
-				],
+				),
 				'selector'  => '{{WRAPPER}} .rael-infobox__cta-link, {{WRAPPER}} .elementor-button, {{WRAPPER}} a.elementor-button',
 				'condition' => array(
 					'rael_cta_type' => array( 'link', 'button' ),
@@ -2036,9 +2036,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 			array(
 				'label'     => __( 'Link Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_ACCENT,
-				],
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .rael-infobox__cta-link' => 'color: {{VALUE}};',
 				),
@@ -2204,7 +2204,7 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 
 			if ( 'above-title' === $settings['rael_image_position'] || 'below-title' === $settings['rael_image_position'] ) {
 				$align = isset( $settings['rael_align'] ) ? $settings['rael_align'] : 'center';
-    			$this->add_render_attribute( 'rael_infobox_classname', 'class', ' rael-infobox--' . $align );
+				$this->add_render_attribute( 'rael_infobox_classname', 'class', ' rael-infobox--' . $align );
 			}
 			if ( 'left-title' === $settings['rael_image_position'] || 'left' === $settings['rael_image_position'] ) {
 				$this->add_render_attribute( 'rael_infobox_classname', 'class', ' rael-infobox--left' );
@@ -2242,11 +2242,9 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 					$this->add_render_attribute( 'rael_infobox_classname', 'class', ' rael-infobox--reverse-order-mobile' );
 				}
 			}
-		} else {
-			if ( 'left' === $settings['rael_overall_align'] || 'center' === $settings['rael_overall_align'] || 'right' === $settings['rael_overall_align'] ) {
+		} elseif ( 'left' === $settings['rael_overall_align'] || 'center' === $settings['rael_overall_align'] || 'right' === $settings['rael_overall_align'] ) {
 				$classname = ' rael-infobox--' . $settings['rael_overall_align'];
 				$this->add_render_attribute( 'rael_infobox_classname', 'class', $classname );
-			}
 		}
 
 		$this->add_render_attribute( 'rael_infobox_classname', 'class', ' rael-infobox-link-type-' . $settings['rael_cta_type'] );
@@ -2904,14 +2902,14 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 		#>
 
 		<#
-		    // Define an array of allowed HTML tags
-		    let allowedTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'p'];
+			// Define an array of allowed HTML tags
+			let allowedTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'p'];
 
-		    // Ensure settings.rael_title_tag exists and is a valid string
-		    let titleTag = settings.rael_title_tag ? settings.rael_title_tag.toLowerCase() : '';
+			// Ensure settings.rael_title_tag exists and is a valid string
+			let titleTag = settings.rael_title_tag ? settings.rael_title_tag.toLowerCase() : '';
 
-		    // Function to validate the HTML tag (scope is within the template)
-		    let validatedTag = allowedTags.includes(titleTag) ? titleTag : 'h3';
+			// Function to validate the HTML tag (scope is within the template)
+			let validatedTag = allowedTags.includes(titleTag) ? titleTag : 'h3';
 		#>
 
 		<#
@@ -2936,7 +2934,7 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 				<# view.addInlineEditingAttributes('rael_title', 'basic'); #>
 
 				<{{{ validatedTag }}} {{{ view.getRenderAttributeString('rael_title') }}}>
-				    {{{ settings.rael_title }}}
+					{{{ settings.rael_title }}}
 				</{{{ validatedTag }}}>
 		</div>
 		<# render_image( 'right-title' ); #>

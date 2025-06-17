@@ -112,5 +112,4 @@ class Current_Query_Renderer extends Base_Products_Renderer {
 
 		return $query_args;
 	}
-
 }

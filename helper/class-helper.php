@@ -205,7 +205,7 @@ class Helper {
 		return wp_kses( $content, self::get_allowed_tags() );
 	}
 
-	public static function validate_html_tags( $tag, $default_tag='div' ) {
+	public static function validate_html_tags( $tag, $default_tag = 'div' ) {
 		return array_key_exists( strtolower( $tag ), self::get_allowed_tags() ) ? $tag : $default_tag;
 	}
 
@@ -225,6 +225,11 @@ class Helper {
 
 	public static function rael_product_quickview_popup() {
 		// Verify Nonce.
+
+		if ( ( ! isset( $_POST['security'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['security'] ) ), 'rael_products' ) ) {
+			return;
+		}
+
 		$widget_id  = isset( $_POST['widget_id'] ) ? sanitize_key( $_POST['widget_id'] ) : '';
 		$product_id = isset( $_POST['product_id'] ) ? sanitize_key( $_POST['product_id'] ) : '';
 		$page_id    = isset( $_POST['page_id'] ) ? sanitize_key( $_POST['page_id'] ) : '';
@@ -234,7 +239,7 @@ class Helper {
 		}
 		global $post, $product;
 		$product = wc_get_product( $product_id );
-		$post    = get_post( $product_id );
+		$post    = get_post( $product_id ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 		setup_postdata( $post );
 
 		$settings = self::get_widget_settings( $page_id, $widget_id );
@@ -322,8 +327,12 @@ class Helper {
 
 	public static function rael_product_add_to_cart() {
 
-		$ajax       = wp_doing_ajax();
-		$cart_items = isset( $_POST['cart_item_data'] ) ? $_POST['cart_item_data'] : array();
+		$ajax = wp_doing_ajax();
+		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_products' ) ) {
+			return;
+		}
+
+		$cart_items = isset( $_POST['cart_item_data'] ) ? sanitize_text_field( wp_unslash( $_POST['cart_item_data'] ) ) : array();
 		$variation  = array();
 		if ( ! empty( $cart_items ) ) {
 			foreach ( $cart_items as $key => $value ) {
@@ -334,7 +343,7 @@ class Helper {
 		}
 
 		if ( isset( $_POST['product_data'] ) ) {
-			foreach ( $_POST['product_data'] as $item ) {
+			foreach ( sanitize_text_field( wp_unslash( $_POST['product_data'] ) ) as $item ) {
 				$product_id   = isset( $item['product_id'] ) ? sanitize_text_field( $item['product_id'] ) : 0;
 				$variation_id = isset( $item['variation_id'] ) ? sanitize_text_field( $item['variation_id'] ) : 0;
 				$quantity     = isset( $item['quantity'] ) ? sanitize_text_field( $item['quantity'] ) : 0;
@@ -348,6 +357,7 @@ class Helper {
 		}
 		wp_send_json_success();
 	}
+
 	public static function get_terms_list( $taxonomy = 'category', $key = 'term_id' ) {
 		$options = array();
 		$terms   = get_terms(
@@ -372,9 +382,8 @@ class Helper {
 	/**
 	 * Fix old query
 	 */
-
 	public static function fix_old_query( $settings ) {
-		 $update_query = false;
+		$update_query = false;
 
 		foreach ( $settings as $key => $value ) {
 			if ( strpos( $key, 'eaeposts_' ) !== false ) {
@@ -600,7 +609,7 @@ class Helper {
 
 		$html = '<ul class="rael-post-carousel-categories">';
 		foreach ( $terms as $term ) {
-			if ( $count === absint( $length ) ) {
+			if ( absint( $length ) === $count ) {
 				break;
 			}
 			$link  = ( 'category' === $term_type ) ? get_category_link( $term->term_id ) : get_tag_link( $term->term_id );
@@ -609,17 +618,16 @@ class Helper {
 			$html .= $term->name;
 			$html .= '</a>';
 			$html .= '</li>';
-			$count++;
+			++$count;
 		}
 		$html .= '</ul>';
 
 		return $html;
-
 	}
 
 	public static function include_with_variable( $file_path, $variables = array() ) {
 		if ( file_exists( $file_path ) ) {
-			extract( $variables );
+			extract( $variables ); // phpcs:ignore WordPress.PHP.DontExtract.extract_extract
 
 			ob_start();
 
@@ -636,19 +644,19 @@ class Helper {
 	 * @return array
 	 */
 	public static function get_post_orderby_options() {
-		 $orderby = array(
-			 'ID'            => 'Post ID',
-			 'author'        => 'Post Author',
-			 'title'         => 'Title',
-			 'date'          => 'Date',
-			 'modified'      => 'Last Modified Date',
-			 'parent'        => 'Parent Id',
-			 'rand'          => 'Random',
-			 'comment_count' => 'Comment Count',
-			 'menu_order'    => 'Menu Order',
-		 );
+		$orderby = array(
+			'ID'            => 'Post ID',
+			'author'        => 'Post Author',
+			'title'         => 'Title',
+			'date'          => 'Date',
+			'modified'      => 'Last Modified Date',
+			'parent'        => 'Parent Id',
+			'rand'          => 'Random',
+			'comment_count' => 'Comment Count',
+			'menu_order'    => 'Menu Order',
+		);
 
-		 return $orderby;
+		return $orderby;
 	}
 
 	/**
@@ -760,7 +768,10 @@ class Helper {
 	public static function ajax_load_more() {
 		$ajax = wp_doing_ajax();
 
-		parse_str( $_POST['args'], $args );
+		$args = array();
+		if ( isset( $_POST['args'] ) ) {
+			parse_str( sanitize_text_field( wp_unslash( $_POST['args'] ) ), $args );
+		}
 		if ( empty( $_POST['nonce'] ) ) {
 			$err_msg = __( 'Insecure form submitted without security token', 'responsive-addons-for-elementor' );
 			if ( $ajax ) {
@@ -769,6 +780,7 @@ class Helper {
 			return false;
 		}
 
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		if ( ! wp_verify_nonce( $_POST['nonce'], 'rael_products_load_more' ) ) {
 			$err_msg = __( 'Security token did not match', 'responsive-addons-for-elementor' );
 			if ( $ajax ) {
@@ -788,7 +800,7 @@ class Helper {
 		}
 
 		if ( ! empty( $_POST['widget_id'] ) ) {
-			$widget_id = sanitize_text_field( $_POST['widget_id'] );
+			$widget_id = sanitize_text_field( wp_unslash( $_POST['widget_id'] ) );
 		} else {
 			$err_msg = __( 'Widget ID is missing', 'responsive-addons-for-elementor' );
 			if ( $ajax ) {
@@ -806,12 +818,13 @@ class Helper {
 		$settings['rael_widget_id'] = $widget_id;
 		$settings['rael_page_id']   = $page_id;
 		$html                       = '';
-		$class                      = '\\' . str_replace( '\\\\', '\\', isset( $_REQUEST['class'] ) ? $_REQUEST['class'] : '' );
-		$args['offset']             = (int) $args['offset'] + ( ( (int) $_REQUEST['page'] - 1 ) * (int) $args['posts_per_page'] );
-
+		$class                      = '\\' . str_replace( '\\\\', '\\', isset( $_REQUEST['class'] ) ? $_REQUEST['class'] : '' );// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		if ( isset( $_REQUEST['page'] ) ) {
+			$args['offset'] = (int) $args['offset'] + ( ( (int) $_REQUEST['page'] - 1 ) * (int) $args['posts_per_page'] );
+		}
 		if ( isset( $_REQUEST['taxonomy'] ) && isset( $_REQUEST['taxonomy']['taxonomy'] ) && 'all' !== $_REQUEST['taxonomy']['taxonomy'] ) {
 			$args['tax_query'] = array(
-				$_REQUEST['taxonomy'],
+				sanitize_text_field( wp_unslash( $_REQUEST['taxonomy'] ) ),
 			);
 		}
 
@@ -824,7 +837,7 @@ class Helper {
 			'read_more_link_target_blank' => isset( $settings['read_more_link_target_blank'] ) ? 'target="_blank"' : '',
 		);
 
-		$template = self::sanitize_template_param( $_REQUEST['template'] );
+		$template = isset( $_REQUEST['template'] ) ? self::sanitize_template_param( wp_unslash( $_REQUEST['template'] ) ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		if ( $template ) {
 			$dir_path = sprintf( '%sincludes', trailingslashit( RAEL_DIR ) );
@@ -871,7 +884,7 @@ class Helper {
 								'iterator'      => $iterator,
 							)
 						);
-						$iterator++;
+						++$iterator;
 					}
 				}
 			}
@@ -952,11 +965,26 @@ class Helper {
 	}
 
 	public static function ajax_rael_products_pagination_product() {
-		wp_parse_str( $_REQUEST['args'], $args );
-		wp_parse_str( $_REQUEST['settings'], $settings );
+		$args_raw = isset( $_REQUEST['args'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['args'] ) ) : '';
+		$args     = array();
 
-		$pagination_number = absint( $_POST['number'] );
-		$pagination_limit  = absint( $_POST['limit'] );
+		if ( is_string( $args_raw ) ) {
+			parse_str( $args_raw, $args );
+		}
+
+		$settings_raw = isset( $_REQUEST['settings'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['settings'] ) ) : '';
+		$settings     = array();
+
+		if ( is_string( $settings_raw ) ) {
+			parse_str( $settings_raw, $settings );
+		}
+
+		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_products' ) ) {
+			return;
+		}
+
+		$pagination_number = isset( $_POST['number'] ) ? absint( wp_unslash( $_POST['number'] ) ) : 1;
+		$pagination_limit  = isset( $_POST['limit'] ) ? absint( wp_unslash( $_POST['limit'] ) ) : 10;
 
 		$args['posts_per_page'] = $pagination_limit;
 
@@ -967,7 +995,13 @@ class Helper {
 			$args['offset']          = $pagination_offset_value;
 		}
 
-		$template = self::sanitize_template_param( $_REQUEST['template'] );
+		$template = '';
+
+		if ( isset( $_REQUEST['template'] ) ) {
+			$template = self::sanitize_template_param(
+				sanitize_text_field( wp_unslash( $_REQUEST['template'] ) )
+			);
+		}
 
 		$dir_path = sprintf( '%sincludes', trailingslashit( RAEL_DIR ) );
 
@@ -995,11 +1029,33 @@ class Helper {
 	}
 
 	public static function ajax_rael_woo_product_pagination() {
-		wp_parse_str( $_REQUEST['args'], $args );
-		wp_parse_str( $_REQUEST['settings'], $settings );
 
-		$pagination_number = absint( $_POST['number'] );
-		$pagination_limit  = absint( $_POST['limit'] );
+		$args_raw = isset( $_REQUEST['args'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['args'] ) ) : '';
+		$args     = array();
+
+		if ( is_string( $args_raw ) ) {
+			parse_str( $args_raw, $args );
+		}
+
+		$settings_raw = isset( $_REQUEST['settings'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['settings'] ) ) : '';
+		$settings     = array();
+
+		if ( is_string( $settings_raw ) ) {
+			parse_str( $settings_raw, $settings );
+		}
+
+		// wp_parse_str( $_REQUEST['args'], $args );
+		// wp_parse_str( $_REQUEST['settings'], $settings );
+
+		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_products' ) ) {
+			return;
+		}
+
+		$pagination_number = isset( $_POST['number'] ) ? absint( wp_unslash( $_POST['number'] ) ) : 1;
+		$pagination_limit  = isset( $_POST['limit'] ) ? absint( wp_unslash( $_POST['limit'] ) ) : 10;
+
+		// $pagination_number = absint( $_POST['number'] );
+		// $pagination_limit  = absint( $_POST['limit'] );
 
 		$pagination_args                   = $args;
 		$pagination_args['posts_per_page'] = -1;
@@ -1196,15 +1252,16 @@ class Helper {
 		$source_name = 'post_type';
 
 		if ( ! empty( $_GET['post_type'] ) ) {
-			$post_type = sanitize_text_field( $_GET['post_type'] );
+			$post_type = sanitize_text_field( wp_unslash( $_GET['post_type'] ) );
 		}
 
 		if ( ! empty( $_GET['source_name'] ) ) {
-			$source_name = sanitize_text_field( $_GET['source_name'] );
+			$source_name = sanitize_text_field( wp_unslash( $_GET['source_name'] ) );
 		}
 
-		$search  = ! empty( $_GET['term'] ) ? sanitize_text_field( $_GET['term'] ) : '';
-		$results = $post_list = array();
+		$search    = ! empty( $_GET['term'] ) ? sanitize_text_field( wp_unslash( $_GET['term'] ) ) : '';
+		$results   = array();
+		$post_list = array();
 		switch ( $source_name ) {
 			case 'taxonomy':
 				$args = array(
@@ -1249,15 +1306,22 @@ class Helper {
 
 	public static function rael_ajax_select2_get_posts_value_titles() {
 
+		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'responsive-addons-for-elementor' ) ) {
+			return;
+		}
+
 		if ( empty( $_POST['id'] ) ) {
 			wp_send_json_error( array() );
 		}
 
-		if ( empty( array_filter( $_POST['id'] ) ) ) {
+		$ids = isset( $_POST['id'] ) ? array_map( 'absint', wp_unslash( $_POST['id'] ) ) : array();
+
+		if ( empty( array_filter( $ids ) ) ) {
 			wp_send_json_error( array() );
 		}
+
 		$ids         = array_map( 'intval', $_POST['id'] );
-		$source_name = ! empty( $_POST['source_name'] ) ? sanitize_text_field( $_POST['source_name'] ) : '';
+		$source_name = ! empty( $_POST['source_name'] ) ? sanitize_text_field( wp_unslash( $_POST['source_name'] ) ) : '';
 
 		switch ( $source_name ) {
 			case 'taxonomy':
@@ -1268,8 +1332,10 @@ class Helper {
 					'include'    => implode( ',', $ids ),
 				);
 
-				if ( 'all' !== $_POST['post_type'] ) {
-					$args['taxonomy'] = sanitize_text_field( $_POST['post_type'] );
+				$post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : '';
+
+				if ( 'all' !== $post_type ) {
+					$args['taxonomy'] = sanitize_text_field( wp_unslash( $_POST['post_type'] ) );
 				}
 
 				$response = wp_list_pluck( get_terms( $args ), 'name', 'term_id' );
@@ -1288,7 +1354,7 @@ class Helper {
 			default:
 				$post_info = get_posts(
 					array(
-						'post_type' => sanitize_text_field( $_POST['post_type'] ),
+						'post_type' => sanitize_text_field( wp_unslash( $_POST['post_type'] ) ),
 						'include'   => implode( ',', $ids ),
 					)
 				);
@@ -1311,14 +1377,12 @@ class Helper {
 		$taxonomies_list = array();
 		foreach ( $all_taxonomies as $taxonomy_data ) {
 			$taxonomy = get_taxonomy( $taxonomy_data );
-			if ( $skip_terms === true ) {
+			if ( true === $skip_terms ) {
 				if ( ( $taxonomy->show_ui ) && ( 'pa_' !== substr( $taxonomy_data, 0, 3 ) ) ) {
 					$taxonomies_list[ $taxonomy_data ] = $taxonomy->label;
 				}
-			} else {
-				if ( $taxonomy->show_ui ) {
+			} elseif ( $taxonomy->show_ui ) {
 					$taxonomies_list[ $taxonomy_data ] = $taxonomy->label;
-				}
 			}
 		}
 		return $taxonomies_list;
@@ -1529,6 +1593,4 @@ class Helper {
 			),
 		);
 	}
-
-
 }

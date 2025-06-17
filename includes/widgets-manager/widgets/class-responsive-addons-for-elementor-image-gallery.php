@@ -89,7 +89,7 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 	public function get_style_depends() {
 		return array(
 			'swiper',
-			'e-swiper',	
+			'e-swiper',
 		);
 	}
 	/**
@@ -1757,9 +1757,9 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			array(
 				'name'      => 'all_typography',
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-				],
+				),
 				'condition' => array(
 					'rael_gallery_style'          => array( 'grid', 'masonry', 'justified' ),
 					'rael_masonry_filters_enable' => 'yes',
@@ -1842,9 +1842,9 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 			array(
 				'label'     => __( 'Text Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_ACCENT,
-				],
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .rael-img-gallery-tabs-dropdown .rael-filters-dropdown-button, {{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-masonry-filter' => 'color: {{VALUE}};',
 				),
@@ -1917,9 +1917,9 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 			array(
 				'label'     => __( 'Background Active / Hover Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_ACCENT,
-				],
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-masonry-filter:hover, {{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-current' => 'background-color: {{VALUE}};',
 				),
@@ -1935,9 +1935,9 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 			array(
 				'label'     => __( 'Border Hover Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_ACCENT,
-				],
+				),
 				'selectors' => array(
 					'{{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-masonry-filter:hover, {{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-current' => 'border-color: {{VALUE}};',
 				),
@@ -1954,7 +1954,6 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 		$this->end_controls_tabs();
 
 		$this->end_controls_section();
-
 	}
 
 	/**
@@ -2119,18 +2118,18 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 		$animation_speed = $settings['rael_caption_animation_speed'];
 		?>
 		<style type="text/css">
-			<?php echo '.rael-grid-item-content:hover .',esc_html( $animation_name ); ?> > p, /* variable escaped before hand. */
-			<?php echo '.rael-grid-item-content:hover .',esc_html( $animation_name ); ?> > <?php echo esc_html( Helper::validate_html_tags( $caption_tag ) ); ?>{
+			<?php echo '.rael-grid-item-content:hover .', esc_html( $animation_name ); ?> > p, /* variable escaped before hand. */
+			<?php echo '.rael-grid-item-content:hover .', esc_html( $animation_name ); ?> > <?php echo esc_html( Helper::validate_html_tags( $caption_tag ) ); ?>{
 				animation:
-					<?php echo esc_html( $animation_name ),'-in'; ?>
-					<?php echo esc_html( $animation_speed ),'ms'; ?>
+					<?php echo esc_html( $animation_name ), '-in'; ?>
+					<?php echo esc_html( $animation_speed ), 'ms'; ?>
 					ease-out;
 			}
-			<?php echo '.rael-grid-item-content:not( :hover ) .',esc_html( $animation_name ); ?> > p,
-			<?php echo '.rael-grid-item-content:not( :hover ) .',esc_html( $animation_name ); ?> > <?php echo esc_html( Helper::validate_html_tags( $caption_tag ) ); ?>{
+			<?php echo '.rael-grid-item-content:not( :hover ) .', esc_html( $animation_name ); ?> > p,
+			<?php echo '.rael-grid-item-content:not( :hover ) .', esc_html( $animation_name ); ?> > <?php echo esc_html( Helper::validate_html_tags( $caption_tag ) ); ?>{
 				animation:
-					<?php echo esc_html( $animation_name ),'-out'; ?>
-					<?php echo esc_html( $animation_speed ),'ms'; ?>
+					<?php echo esc_html( $animation_name ), '-out'; ?>
+					<?php echo esc_html( $animation_speed ), 'ms'; ?>
 					ease-out;
 			}
 			/* Slide up animation */

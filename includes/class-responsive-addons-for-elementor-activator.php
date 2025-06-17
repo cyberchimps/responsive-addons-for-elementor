@@ -9,7 +9,7 @@
  * @subpackage responsive-addons-for-elementor/includes
  */
 
- use Elementor\Plugin;
+use Elementor\Plugin;
 /**
  * Fired during plugin activation.
  *
@@ -50,12 +50,12 @@ class Responsive_Addons_For_Elementor_Activator {
 		if ( $plugin_version && is_plugin_active( $plugin_slug ) && version_compare( $plugin_version, '2.0.5', '<' ) ) {
 			update_site_option( 'is_old_responsive_elementor_addons_active', true );
 		}
-		
-		//when the migration is complete change the template prefix from rea to rael
+
+		// when the migration is complete change the template prefix from rea to rael
 		$done_migration_theme_builder_templates = get_option( 'rael_done_migration_theme_builder_templates', false );
 
-		$migrate_success_transient =  ('yes' === get_site_transient( 'rea_to_rae_migration_complete' ));
-		$migrate_success_option = ('complete' === get_option( 'rea_to_rae_migration_process' ));
+		$migrate_success_transient = ( 'yes' === get_site_transient( 'rea_to_rae_migration_complete' ) );
+		$migrate_success_option    = ( 'complete' === get_option( 'rea_to_rae_migration_process' ) );
 
 		$to_migrate_templates = $migrate_success_transient && $migrate_success_option;
 
@@ -66,7 +66,6 @@ class Responsive_Addons_For_Elementor_Activator {
 	}
 	/**
 	 * To import the templates correctly from rea to rae migrate.
-	 *
 	 */
 	public static function responsive_addons_for_elementor_backup_theme_builder_template_db() {
 
@@ -95,7 +94,7 @@ class Responsive_Addons_For_Elementor_Activator {
 
 		if ( empty( $results ) ) {
 			return;
-		}				
+		}
 
 		$theme_builder_ids = array();
 

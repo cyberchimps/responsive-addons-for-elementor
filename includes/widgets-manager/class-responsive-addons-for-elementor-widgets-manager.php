@@ -244,7 +244,7 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 
 		include_once RAEL_DIR . '/includes/widgets-manager/controls/class-responsive-addons-for-elementor-control-media-select.php';
 		include_once RAEL_DIR . '/includes/widgets-manager/controls/class-responsive-addons-for-elementor-control-visual-select.php';
-		require_once RAEL_DIR . '/includes/widgets-manager/controls/class-responsive-addons-for-elementor-ajax-select2.php';
+		require_once RAEL_DIR . '/includes/widgets-manager/controls/class-responsive-addons-for-elementor-control-ajax-select2.php';
 
 		$controls_manager->register( new Controls\Responsive_Addons_For_Elementor_Control_Media_Select() );
 		$controls_manager->register( new Controls\Responsive_Addons_For_Elementor_Control_Visual_Select() );
@@ -279,7 +279,7 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 		require_once RAEL_DIR . '/includes/widgets-manager/widgets/theme-builder/class-responsive-addons-for-elementor-title-widget-base.php';
 
 		if ( class_exists( 'WooCommerce' ) ) {
-			require_once RAEL_DIR . '/includes/widgets-manager/widgets/theme-builder/class-responsive-addons-for-elementor-woo-widget-base.php';
+			require_once RAEL_DIR . '/includes/widgets-manager/widgets/theme-builder/class-woo-widget-base.php';
 			require_once RAEL_DIR . '/includes/widgets-manager/widgets/theme-builder/class-responsive-addons-for-elementor-woo-products-base.php';
 			require_once RAEL_DIR . '/includes/widgets-manager/widgets/theme-builder/class-responsive-addons-for-elementor-woo-products.php';
 		}
@@ -322,7 +322,6 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 				require_once RAEL_DIR . 'includes/widgets-manager/widgets/woocommerce/class-responsive-addons-for-elementor-' . $data . '.php';
 			}
 		}
-
 	}
 
 	/**
@@ -529,7 +528,7 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Post_Carousel() );
 							break;
 						case 'offcanvas':
-							Plugin::instance()->widgets_manager->register( new Widgets\RAEL_Offcanvas() );
+							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Offcanvas() );
 							break;
 						case 'nav-menu':
 							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Nav_Menu() );
@@ -942,7 +941,6 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 
 		return false;
 	}
-
 }
 
 Responsive_Addons_For_Elementor_Widgets_Manager::instance();

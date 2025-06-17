@@ -35,6 +35,4 @@ class Skin_Card extends Skin_Style {
 		}
 		return self::$instance;
 	}
-
 }
-

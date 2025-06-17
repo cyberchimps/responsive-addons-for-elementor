@@ -893,7 +893,7 @@ class Responsive_Addons_For_Elementor_Dual_Color_Header extends Widget_Base {
 		if ( $settings['rael_dual_color_header_dual_title_color_gradient_first'] && $settings['rael_dual_color_header_dual_title_color_gradient_second'] ) {
 			$gradient_style = 'style="background: -webkit-linear-gradient(' . $settings['rael_dual_color_header_dual_title_color_gradient_first'] . ', ' . $settings['rael_dual_color_header_dual_title_color_gradient_second'] . ');-webkit-background-clip: text;
             -webkit-text-fill-color: transparent;"';
-		};
+		}
 		$icon_migrated = isset( $settings['__fa4_migrated']['rael_dual_color_header_icon_new'] );
 		$icon_is_new   = empty( $settings['rael_dual_color_header_icon'] );
 
@@ -999,5 +999,4 @@ class Responsive_Addons_For_Elementor_Dual_Color_Header extends Widget_Base {
 
 		<?php
 	}
-
 }

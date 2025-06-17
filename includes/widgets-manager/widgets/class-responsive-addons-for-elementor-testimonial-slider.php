@@ -75,7 +75,7 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 			'font-awesome-5-all',
 			'font-awesome-4-shim',
 			'swiper',
-			'e-swiper',	
+			'e-swiper',
 		);
 	}
 	/**
@@ -689,9 +689,9 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .responsive-testimonial__text' => 'color: {{VALUE}}',
 				),
-				'global'   => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_TEXT,
-				],
+				),
 			)
 		);
 
@@ -700,9 +700,9 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 			array(
 				'name'     => 'content_typography',
 				'selector' => '{{WRAPPER}} .responsive-testimonial__text',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				],
+				),
 			)
 		);
 
@@ -723,9 +723,9 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .responsive-testimonial__name' => 'color: {{VALUE}}',
 				),
-				'global'   => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_TEXT,
-				],
+				),
 			)
 		);
 
@@ -734,9 +734,9 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 			array(
 				'name'     => 'name_typography',
 				'selector' => '{{WRAPPER}} .responsive-testimonial__name',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
+				),
 			)
 		);
 
@@ -757,9 +757,9 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .responsive-testimonial__title' => 'color: {{VALUE}}',
 				),
-				'global'    => [
+				'global'    => array(
 					'default' => Global_Colors::COLOR_PRIMARY,
-				],
+				),
 			)
 		);
 
@@ -768,9 +768,9 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 			array(
 				'name'     => 'title_typography',
 				'selector' => '{{WRAPPER}} .responsive-testimonial__title',
-				'global'   => [
+				'global'   => array(
 					'default' => Global_Typography::TYPOGRAPHY_SECONDARY,
-				],
+				),
 			)
 		);
 
@@ -1400,7 +1400,7 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 				<div class="swiper-wrapper">
 					<?php
 					foreach ( $settings['slides'] as $index => $slide ) :
-						$this->slide_prints_count++;
+						++$this->slide_prints_count;
 						?>
 						<div class="swiper-slide">
 							<?php $this->print_single_slide( $slide, $settings, 'slide-' . $index . '-' . $this->slide_prints_count ); ?>

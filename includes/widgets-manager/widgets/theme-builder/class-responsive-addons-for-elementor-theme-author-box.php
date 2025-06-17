@@ -829,7 +829,7 @@ class Responsive_Addons_For_Elementor_Theme_Author_Box extends Widget_Base {
 		$print_avatar = ( ( ! $custom_src && 'yes' === $settings['rael_ab_show_avatar'] ) || ( $custom_src && ! empty( $author['avatar'] ) ) );
 		$print_name   = ( ( ! $custom_src && 'yes' === $settings['rael_ab_show_name'] ) || ( $custom_src && ! empty( $author['display_name'] ) ) );
 		$print_bio    = ( ( ! $custom_src && 'yes' === $settings['rael_ab_show_biography'] ) || ( $custom_src && ! empty( $author['bio'] ) ) );
-		$print_link   = ( ( ! $custom_src && 'yes' === $settings['rael_ab_show_link'] ) && ! empty( $settings['rael_ab_link_text'] ) || ( $custom_src && ! empty( $author['posts_url'] ) && ! empty( $settings['rael_ab_link_text'] ) ) );
+		$print_link   = ( ( ( ! $custom_src && 'yes' === $settings['rael_ab_show_link'] ) && ! empty( $settings['rael_ab_link_text'] ) ) || ( ( $custom_src && ! empty( $author['posts_url'] ) && ! empty( $settings['rael_ab_link_text'] ) ) ) );
 
 		if ( ! empty( $settings['rael_ab_link_to'] ) || $custom_src ) {
 			if ( ( $custom_src || 'website' === $settings['rael_ab_link_to'] ) && ! empty( $author['website'] ) ) {
