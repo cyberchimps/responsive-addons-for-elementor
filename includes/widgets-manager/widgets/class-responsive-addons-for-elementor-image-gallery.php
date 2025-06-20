@@ -2486,11 +2486,18 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 				}
 				$image_wrap_tag = ( ! empty( $item_link ) ) ? 'a' : 'span';
 
-				if ( ! empty( $item_link ) ) {
+				if ( ! empty ( $item_link ) && 'lightbox' === $click_action ) {
 					$this->add_render_attribute(
 						'grid-media-' . $index,
 						array(
 							'href'                         => $item_link,
+							'data-elementor-open-lightbox' => 'yes',
+						)
+					);
+				} else if ( ! empty ( $item_link ) ) {
+					$this->add_render_attribute(
+						'grid-media-' . $index,
+						array(
 							'data-elementor-open-lightbox' => 'no',
 						)
 					);
