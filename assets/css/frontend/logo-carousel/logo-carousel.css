@@ -50,4 +50,7 @@
 .rael-logo-carousel-wrapper.swiper-container-wrapper-dots-outside .swiper-pagination {
   position: static; }
 
+.rael-logo-carousel-wrapper .swiper-autoheight {
+  height: 200px; }
+
 /*# sourceMappingURL=logo-carousel.css.map */

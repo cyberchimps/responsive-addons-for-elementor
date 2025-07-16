@@ -1186,7 +1186,7 @@ class Responsive_Addons_For_Elementor_Logo_Carousel extends Widget_Base {
 		$esc_id   = esc_attr( $this->get_id() );
 
 		$this->add_render_attribute( 'rael_logo_carousel_wrapper', 'class', 'swiper-container-wrapper rael-logo-carousel-wrapper' );
-		$this->add_render_attribute( 'rael_logo_carousel', 'class', 'swiper' . RAEL_SWIPER_CONTAINER . " rael-logo-carousel swiper-container-{$esc_id}" );
+		$this->add_render_attribute( 'rael_logo_carousel', 'class', 'swiper' . RAEL_SWIPER_CONTAINER . " rael-logo-carousel swiper-container-{$esc_id} .elementor-main-swiper" );
 		$this->add_render_attribute( 'rael_logo_carousel', 'data-pagination', ".swiper-pagination-{$esc_id}" );
 		$this->add_render_attribute( 'rael_logo_carousel', 'data-arrow-next', ".swiper-button-next-{$esc_id}" );
 		$this->add_render_attribute( 'rael_logo_carousel', 'data-arrow-prev', ".swiper-button-prev-{$esc_id}" );
@@ -1295,7 +1295,7 @@ class Responsive_Addons_For_Elementor_Logo_Carousel extends Widget_Base {
 												echo '<a ' . wp_kses_post( $this->get_render_attribute_string( "rael_logo_item_{$i}" ) ) . '>';
 											}
 
-											echo '<img class="rael-logo-carousel__logo-item-image" src="' . esc_url( $item['rael_logo_item_image']['url'] ) . '" alt="' . esc_attr( $item['rael_logo_item_alt_text'] ) . '" />';
+											echo '<img class="elementor-carousel-image " src="' . esc_url( $item['rael_logo_item_image']['url'] ) . '" alt="' . esc_attr( $item['rael_logo_item_alt_text'] ) . '" />';
 
 											if ( ! empty( $item['rael_logo_item_link']['url'] ) ) {
 												echo '</a>';
