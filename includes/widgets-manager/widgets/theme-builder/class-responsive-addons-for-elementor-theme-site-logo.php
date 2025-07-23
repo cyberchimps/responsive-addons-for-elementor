@@ -16,6 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Elementor\Widget_Image;
 use Elementor\Plugin;
 use Elementor\Utils;
+use Elementor\Controls_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -92,18 +93,28 @@ class Responsive_Addons_For_Elementor_Theme_Site_Logo extends Widget_Image {
 	 */
 	protected function register_controls() {
 		parent::register_controls();
-
+		
+		   // Get site logo ID
+        $logo_id = get_theme_mod('custom_logo');
+        $logo_url = $logo_id ? wp_get_attachment_image_url( $logo_id, 'full' ) : '';
+		
+		$this->update_control(
+			'section_image',
+			[
+				'label' => esc_html__( 'Site Logo', 'responsive-addons-for-elementor' ),
+			]
+		);
 		$this->update_control(
 			'image',
-			array(
-				'dynamic' => array(
-					'default' => Plugin::instance()->dynamic_tags->tag_data_to_tag_text( null, 'rael-site-logo' ),
-				),
-			),
-			array(
-				'recursive' => true,
-			)
+			[
+				'label' => esc_html__( 'Site Logo', 'responsive-addons-for-elementor' ),
+				'default' => [
+					'id'  => $logo_id,
+					'url' => $logo_url,
+				],
+			]
 		);
+
 
 		$this->remove_control( 'image_size' );
 
@@ -212,66 +223,66 @@ class Responsive_Addons_For_Elementor_Theme_Site_Logo extends Widget_Image {
 	 * @access protected
 	 */
 	protected function render() {
-		$settings = $this->get_settings_for_display();
+    $settings = $this->get_settings_for_display();
 
-		if ( empty( $settings['image']['url'] ) ) {
-			return;
-		}
+	$logo_url = '';
+if ( ! empty( $settings['image']['url'] ) ) {
+    $logo_url = $settings['image']['url'];
+} else {
+    $logo_id = get_theme_mod('custom_logo');
+    $logo_url = $logo_id ? wp_get_attachment_image_url( $logo_id, 'full' ) : Utils::get_placeholder_image_src();
+}
+if ( $logo_url ) {
+    echo '<img src="' . esc_url( $logo_url ) . '" alt="Site Logo">';
+}
+    if ( ! Plugin::$instance->experiments->is_feature_active( 'e_dom_optimization' ) ) {
+        $this->add_render_attribute( 'wrapper', 'class', 'elementor-image' );
+    }
 
-		if ( ! Plugin::$instance->experiments->is_feature_active( 'e_dom_optimization' ) ) {
-			$this->add_render_attribute( 'wrapper', 'class', 'elementor-image' );
-		}
+    $has_caption = $this->has_caption( $settings );
+    $link        = $this->get_link_url( $settings );
+    $image_class = ! empty( $settings['hover_animation'] ) ? 'elementor-animation-' . $settings['hover_animation'] : '';
 
-		$has_caption = $this->has_caption( $settings );
+    if ( $link ) {
+        $this->add_link_attributes( 'link', $link );
 
-		$link = $this->get_link_url( $settings );
+        if ( Plugin::$instance->editor->is_edit_mode() ) {
+            $this->add_render_attribute( 'link', [ 'class' => 'elementor-clickable' ] );
+        }
 
-		$image_class = ! empty( $settings['hover_animation'] ) ? 'elementor-animation-' . $settings['hover_animation'] : '';
+        if ( 'custom' !== $settings['link_to'] ) {
+            $this->add_lightbox_data_attributes( 'link', $settings['site_logo_image']['id'], $settings['open_lightbox'] );
+        }
+    }
 
-		if ( $link ) {
-			$this->add_link_attributes( 'link', $link );
+    if ( ! Plugin::$instance->experiments->is_feature_active( 'e_dom_optimization' ) ) {
+        echo '<div ' . $this->get_render_attribute_string( 'wrapper' ) . '>';
+    }
 
-			if ( Plugin::$instance->editor->is_edit_mode() ) {
-				$this->add_render_attribute(
-					'link',
-					array(
-						'class' => 'elementor-clickable',
-					)
-				);
-			}
+    if ( $has_caption ) {
+        echo '<figure class="wp-caption">';
+    }
 
-			if ( 'custom' !== $settings['link_to'] ) {
-				$this->add_lightbox_data_attributes( 'link', $settings['image']['id'], $settings['open_lightbox'] );
-			}
-		} ?>
-		<?php if ( ! Plugin::$instance->experiments->is_feature_active( 'e_dom_optimization' ) ) { ?>
-			<div <?php $this->print_render_attribute_string( 'wrapper' ); ?>>
-		<?php } ?>
-			<?php if ( $has_caption ) : ?>
-				<figure class="wp-caption">
-			<?php endif; ?>
-			<?php if ( $link ) : ?>
-					<a <?php $this->print_render_attribute_string( 'link' ); ?>>
-			<?php endif; ?>
-				<?php echo '<img src="' . esc_url( $settings['image']['url'] ) . '" class="' . esc_attr( $image_class ) . '" />'; ?>
-			<?php if ( $link ) : ?>
-					</a>
-			<?php endif; ?>
-			<?php if ( $has_caption ) : ?>
-					<figcaption class="widget-image-caption wp-caption-text">
-					<?php
-						echo wp_kses_post( $this->get_caption( $settings ) );
-					?>
-					</figcaption>
-			<?php endif; ?>
-			<?php if ( $has_caption ) : ?>
-				</figure>
-			<?php endif; ?>
-		<?php if ( ! Plugin::$instance->experiments->is_feature_active( 'e_dom_optimization' ) ) { ?>
-			</div>
-		<?php } ?>
-		<?php
-	}
+    if ( $link ) {
+        echo '<a ' . $this->get_render_attribute_string( 'link' ) . '>';
+    }
+
+    echo '<img src="' . esc_url( $settings['site_logo_image']['url'] ) . '" class="' . esc_attr( $image_class ) . '" />';
+
+    if ( $link ) {
+        echo '</a>';
+    }
+
+    if ( $has_caption ) {
+        echo '<figcaption class="widget-image-caption wp-caption-text">' . wp_kses_post( $this->get_caption( $settings ) ) . '</figcaption>';
+        echo '</figure>';
+    }
+
+    if ( ! Plugin::$instance->experiments->is_feature_active( 'e_dom_optimization' ) ) {
+        echo '</div>';
+    }
+}
+
 
 	/**
 	 * Render image widget output in the editor.
