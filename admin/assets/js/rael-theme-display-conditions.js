@@ -171,6 +171,7 @@
 			$this.attr( 'data-rule-id', new_id );
 
 			update_close_button( field_wrap );
+			filterDisplayConditions($('#rael_hf_template_type').val());
 		});
 
 		jQuery( '.rael-hf__display-condition-container' ).on( 'click', '.rael-hf__display-condition-delete', function(e) {
@@ -228,6 +229,45 @@
 			e.stopPropagation();
 			update_exclusion_button( true );
 		});
+
+		// Handle the template type change
+		// This is used to filter the display conditions based on the selected template type
+		// It will show or hide the options based on the template type selected
+		const selectedTemplateType = $('#rael_hf_template_type').val();
+
+		$('#rael_hf_template_type').on('change', function () {
+			$('select.rael-hf__display-condition-input').val('');
+			const selected = $(this).val();
+				filterDisplayConditions(selected);
+		});
+
+		function filterDisplayConditions(templateType) {
+			jQuery('select.rael-hf__display-condition-input').each(function () {
+				const $select = jQuery(this);
+
+				$select.find('optgroup').each(function () {
+					const $optgrp = jQuery(this);
+					const types = ($optgrp.data('template-types') || '').toString().split(',');
+					if (types.includes(templateType) || types.includes('all')) {
+						$optgrp.show();
+					} else {
+						$optgrp.hide();
+					}
+				});
+				$select.find('option').each(function () {
+					const $opt = jQuery(this);
+					const types = ($opt.data('template-types') || '').toString().split(',');
+					if (types.includes(templateType) || types.includes('all')) {
+						$opt.show();
+					} else {
+						$opt.hide();
+					}
+				});
+			});
+		}
+
+		// On page load
+		filterDisplayConditions(selectedTemplateType);
 		
 	});
 

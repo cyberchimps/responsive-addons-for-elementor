@@ -722,9 +722,9 @@ class Responsive_Addons_For_Elementor_Theme_Post_Navigation extends Widget_Base 
 		}
 
 		if ( ! empty( $settings['rael_pn_in_same_term'] ) && is_array( $settings['rael_pn_in_same_term'] ) && in_array( $post_type, $settings['rael_pn_in_same_term'], true ) ) {
-			if ( isset( $settings[ 'rael_' . $post_type . '_taxonomy' ] ) ) {
+			if ( isset( $settings[ 'rael_pn_' . $post_type . '_taxonomy' ] ) ) {
 				$in_same_term = true;
-				$taxonomy     = $settings[ 'rael_' . $post_type . '_taxonomy' ];
+				$taxonomy     = $settings[ 'rael_pn_' . $post_type . '_taxonomy' ];
 			}
 		}
 		?>

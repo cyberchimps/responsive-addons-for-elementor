@@ -35,7 +35,7 @@ class Products_Renderer extends Base_Products_Renderer {
 	const DEFAULT_COLUMNS_AND_ROWS   = 4;
 
 	/**
-	 * Constructor for the REA Product Carousel widget class.
+	 * Constructor for the RAEL Product Carousel widget class.
 	 *
 	 * @param array  $settings  Optional. An array of widget settings.
 	 * @param string $type  Optional. Type.

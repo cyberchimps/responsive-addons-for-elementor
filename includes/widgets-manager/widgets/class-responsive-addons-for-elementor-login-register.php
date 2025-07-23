@@ -777,7 +777,7 @@ class Responsive_Addons_For_Elementor_Login_Register extends Widget_Base {
 		$this->end_controls_section();
 	}
 	/**
-	 * REA login field controls.
+	 * RAEL login field controls.
 	 *
 	 * @access protected
 	 */

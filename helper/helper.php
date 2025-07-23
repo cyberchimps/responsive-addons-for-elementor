@@ -877,20 +877,17 @@ class Helper {
 			}
 		}
 
-		while ( ob_get_status() ) {
+		
+
+		while ( ob_get_level() ) {
 			ob_end_clean();
 		}
-		if ( function_exists( 'gzencode' ) ) {
-			$response = gzencode( wp_json_encode( $html ) );
 
-			header( 'Content-Type: application/json; charset=utf-8' );
-			header( 'Content-Encoding: gzip' );
-			header( 'Content-Length: ' . strlen( $response ) );
+		header( 'Content-Type: application/json; charset=utf-8' );
 
-			echo wp_kses_post( $response );
-		} else {
-			echo wp_kses_post( $html );
-		}
+		// Just output raw JSON — server will gzip if needed
+		echo wp_json_encode( $html );
+
 		wp_die();
 	}
 

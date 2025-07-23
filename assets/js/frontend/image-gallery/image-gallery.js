@@ -289,6 +289,21 @@ jQuery(window).on("elementor/frontend/init", function() {
         var sanitize_input = pattern.test( id );
         var isEditMode = false;
 
+        // Sanitize data-caption attributes to prevent XSS attacks
+        document.querySelectorAll("[data-caption]").forEach((el) => {
+          var val = el.getAttribute("data-caption");      
+          if (val) {
+              var sanitizedVal = val
+                  .replace(/&/g, "&amp;")
+                  .replace(/</g, "&lt;")
+                  .replace(/>/g, "&gt;")
+                  .replace(/\"/g, "&quot;")
+                  .replace(/'/g, "&#039;");
+      
+              el.setAttribute("data-caption", sanitizedVal);
+          }
+      });
+
         if ( 'undefined' == typeof $scope ) {
             return;
         }

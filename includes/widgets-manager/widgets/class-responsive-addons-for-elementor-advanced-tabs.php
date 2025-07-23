@@ -101,10 +101,10 @@ class Responsive_Addons_For_Elementor_Advanced_Tabs extends Widget_Base {
 	 * @since 1.0.0
 	 * @access public
 	 *
-	 * @return array Widget keywords.
+	 * @return string Help URL
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/docs/widgets/rea-advanced-tabs';
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/rea-advanced-tabs/';
 	}
 	/**
 	 * Get query post list.

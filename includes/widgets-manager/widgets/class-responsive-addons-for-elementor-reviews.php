@@ -69,6 +69,18 @@ class Responsive_Addons_For_Elementor_Reviews extends Widget_Base {
 	}
 
 	/**
+	 * Get the stylesheets required for the widget.
+	 *
+	 * @return array
+	 */
+	public function get_style_depends() {
+		return array(
+			'swiper',
+			'e-swiper',	
+		);
+	}
+
+	/**
 	 * Add repeater controls
 	 *
 	 * @param Repeater $repeater is a dynamic content widget.
@@ -1288,12 +1300,16 @@ class Responsive_Addons_For_Elementor_Reviews extends Widget_Base {
 						<div class="swiper-pagination"></div>
 					<?php endif; ?>
 					<?php if ( $settings['show_arrows'] ) : ?>
+						<?php 
+							$pa_next_arrow = 'fa fa-angle-right';
+							$pa_prev_arrow = 'fa fa-angle-left';
+						?>
 						<div class="responsive-swiper-button responsive-swiper-button-prev">
-							<i class="eicon-chevron-left" aria-hidden="true"></i>
+							<i class="<?php echo esc_attr( $pa_prev_arrow ); ?>"></i>
 							<span class="elementor-screen-only"><?php esc_html_e( 'Previous', 'responsive-addons-for-elementor' ); ?></span>
 						</div>
 						<div class="responsive-swiper-button responsive-swiper-button-next">
-							<i class="eicon-chevron-right" aria-hidden="true"></i>
+							<i class="<?php echo esc_attr( $pa_next_arrow ); ?>"></i>
 							<span class="elementor-screen-only"><?php esc_html_e( 'Next', 'responsive-addons-for-elementor' ); ?></span>
 						</div>
 					<?php endif; ?>

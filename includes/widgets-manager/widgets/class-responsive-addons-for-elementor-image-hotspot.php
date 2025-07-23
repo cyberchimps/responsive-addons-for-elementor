@@ -1,6 +1,6 @@
 <?php
 /**
- * REA Image Hotspot Widget
+ * RAEL Image Hotspot Widget
  *
  * @package Responsive_Addons_For_Elementor
  */

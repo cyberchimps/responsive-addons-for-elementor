@@ -1,6 +1,6 @@
 <?php
 /**
- * REA Feature List Widget
+ * RAEL Feature List Widget
  *
  * @since      1.2.2
  * @package    Responsive_Addons_For_Elementor
@@ -886,8 +886,8 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 		}
 		$feature_list_css_id = 'rael-feature-list-' . esc_attr( $this->get_id() );
 
-		$icon_tablet_pos = isset( $settings['rael_feature_list_icon_position_tablet'] ) ? $settings['rael_feature_list_icon_position_tablet'] : '';
-		$icon_mobile_pos = isset( $settings['rael_feature_list_icon_position_mobile'] ) ? $settings['rael_feature_list_icon_position_mobile'] : '';
+		$icon_tablet_pos = isset( $settings['rael_feature_list_icon_position_tablet'] ) ? $settings['rael_feature_list_icon_position_tablet'] : 'left';
+		$icon_mobile_pos = isset( $settings['rael_feature_list_icon_position_mobile'] ) ? $settings['rael_feature_list_icon_position_mobile'] : 'left';
 
 		$this->add_render_attribute(
 			'rael_feature_list_wrapper',
@@ -1002,7 +1002,7 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 
 					<div class="rael-feature-list-icon-box">
 						<div class="rael-feature-list-icon-inner"<?php echo wp_kses_post( $icon_box_bg ); ?>>
-							<<?php echo wp_kses_post( $feature_icon_tag ) . ' ' . wp_kses_post( $this->get_render_attribute_string( 'rael_feature_list_icon' . $index ) ) . esc_attr( $this->get_render_attribute_string( 'rael_feature_list_link' . $index ) ) . 'style="background-color:' . esc_attr( $icon_bg ) . '"' ?>>
+							<<?php echo wp_kses_post( $feature_icon_tag ) . ' ' . wp_kses_post( $this->get_render_attribute_string( 'rael_feature_list_icon' . $index ) ) . $this->get_render_attribute_string( 'rael_feature_list_link' . $index ) . 'style="background-color:' . esc_attr( $icon_bg ) . '"' ?>>
 				<?php
 				if ( 'icon' === $item['rael_icon_type'] && $feature_has_icon ) {
 
@@ -1056,7 +1056,7 @@ class Responsive_Addons_For_Elementor_Feature_List extends Widget_Base {
 							)
 						);//phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect
 						?>
-							><?php echo ! empty( $item['rael_feature_list_link']['url'] ) ? '<a' . wp_kses_post( $this->get_render_attribute_string( 'rael_feature_list_title_anchor' . $index ) ) . '>' : ''; ?><?php echo wp_kses_post( $item['rael_feature_title'] ); ?><?php echo ! empty( $item['rael_feature_list_link']['url'] ) ? '</a>' : ''; ?></<?php echo esc_attr( $feat_title_tag ); ?>
+							><?php echo ! empty( $item['rael_feature_list_link']['url'] ) ? '<a ' . wp_kses_post( $this->get_render_attribute_string( 'rael_feature_list_title_anchor' . $index ) ) . '>' : ''; ?><?php echo wp_kses_post( $item['rael_feature_title'] ); ?><?php echo ! empty( $item['rael_feature_list_link']['url'] ) ? '</a>' : ''; ?></<?php echo esc_attr( $feat_title_tag ); ?>
 						>
 						<p <?php echo wp_kses_post( $this->get_render_attribute_string( 'rael_feature_list_content' . $index ) ); ?>><?php echo wp_kses_post( $item['rael_feature_content'] ); ?></p>
 						</div>

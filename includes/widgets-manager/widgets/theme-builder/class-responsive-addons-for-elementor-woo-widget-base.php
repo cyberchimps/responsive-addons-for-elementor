@@ -1,6 +1,6 @@
 <?php
 /**
- * REA Theme Builder's woocommerce widget base abstract class.
+ * RAEL Theme Builder's woocommerce widget base abstract class.
  *
  * @package Responsive_Addons_For_Elementor
  */

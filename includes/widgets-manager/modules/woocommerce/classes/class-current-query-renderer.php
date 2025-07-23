@@ -24,7 +24,7 @@ class Current_Query_Renderer extends Base_Products_Renderer {
 	private $settings = array();
 
 	/**
-	 * Constructor for the REA Product Carousel widget class.
+	 * Constructor for the RAEL Product Carousel widget class.
 	 *
 	 * @param array  $settings  Optional. An array of widget settings.
 	 * @param string $type  Optional. Type.

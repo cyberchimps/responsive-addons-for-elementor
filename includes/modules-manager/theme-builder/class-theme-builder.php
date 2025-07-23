@@ -441,15 +441,19 @@ class RAEL_Theme_Builder {
 	 * @return mixed
 	 */
 	public static function get_settings( $setting = '' ) {
-		if ( 'header' === $setting || 'footer' === $setting || 'single-page' === $setting || 'single-post' === $setting || 'error-404' === $setting || 'archive' === $setting || 'single-product' === $setting || 'product-archive' === $setting ) {
-			$templates = self::get_template_id( $setting );
+		$valid_settings = array(
+			'header', 'footer', 'single-page', 'single-post',
+			'error-404', 'archive', 'single-product', 'product-archive'
+		);
 
-			$template = ! is_array( $templates ) ? $templates : $templates[0];
-
-			$template = apply_filters( "rael_hf_get_settings_{$setting}", $template );
-
-			return $template;
+		if ( ! in_array( $setting, $valid_settings, true ) ) {
+			return '';
 		}
+
+		$template_ids = self::get_template_id( $setting );
+		$template     = is_array( $template_ids ) ? $template_ids[0] : $template_ids;
+
+		return apply_filters( "rael_hf_get_settings_{$setting}", $template );
 	}
 
 	/**
@@ -463,18 +467,21 @@ class RAEL_Theme_Builder {
 	 * @return mixed  Template ID or empty string.
 	 */
 	public static function get_template_id( $type ) {
-		$option = array(
-			'location'  => 'rael_hf_include_locations',
-			'exclusion' => 'rael_hf_exclude_locations',
-			'users'     => 'rael_hf_target_user_roles',
+		$templates = RAEL_Conditions::instance()->get_posts_by_conditions(
+			'rael-theme-template',
+			array(
+				'location'  => 'rael_hf_include_locations',
+				'exclusion' => 'rael_hf_exclude_locations',
+				'users'     => 'rael_hf_target_user_roles',
+			)
 		);
 
-		$templates    = RAEL_Conditions::instance()->get_posts_by_conditions( 'rael-theme-template', $option );
 		$template_ids = array();
 
 		foreach ( $templates as $template ) {
-			if ( get_post_meta( absint( $template['id'] ), 'rael_hf_template_type', true ) === $type ) {
-				$template_ids[] = $template['id'];
+			$template_id = absint( $template['id'] );
+			if ( get_post_meta( $template_id, 'rael_hf_template_type', true ) === $type ) {
+				$template_ids[] = $template_id;
 			}
 		}
 

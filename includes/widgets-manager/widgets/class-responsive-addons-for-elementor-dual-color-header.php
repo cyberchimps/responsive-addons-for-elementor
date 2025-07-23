@@ -13,6 +13,7 @@ use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
 use Elementor\Icons_Manager;
+use Responsive_Addons_For_Elementor\Helper\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;   // Exit if accessed directly.
@@ -908,94 +909,111 @@ class Responsive_Addons_For_Elementor_Dual_Color_Header extends Widget_Base {
 		}
 		$separator_markup .= '</div>'; ?>
 
+		<?php
+		$title_tag = esc_attr( Helper::validate_html_tags( $settings['rael_title_tag'], 'h2' ) );
+		$dual_color_class = esc_attr( $settings['rael_dual_color_header_dual_color_selector'] );
+		$gradient_style_attr = esc_attr( $gradient_style );
+		$first_title = wp_kses_post( $settings['rael_dual_color_header_first_title'] );
+		$last_title = wp_kses_post( $settings['rael_dual_color_header_last_title'] );
+		$subtext = wp_kses_post( $settings['rael_dual_color_header_subtext'] );
+		$separator_position = $settings['rael_dual_color_header_separator_position'];
+		$show_icon = ( 'yes' === $settings['rael_show_dual_color_header_icon_content'] );
+		$separator_before = ( 'before_title' === $separator_position ) ? wp_kses( $separator_markup, $this->allowed_html_tags() ) : '';
+		$separator_after = ( 'after_title' === $separator_position ) ? wp_kses( $separator_markup, $this->allowed_html_tags() ) : '';
+		?>
+
 		<?php if ( 'dual-color-header-subtext-on-top' === $settings['rael_dual_color_header_type'] ) : ?>
 			<div class="rael-dual-color-header">
-			<span class="subtext"><?php echo wp_kses_post( $settings['rael_dual_color_header_subtext'] ); ?></span>
-			<?php echo ( 'before_title' === wp_kses_post( $settings['rael_dual_color_header_separator_position'] ) ? wp_kses( $separator_markup, $this->allowed_html_tags() ) : '' ); ?>
-			<<?php echo wp_kses_post( $settings['rael_title_tag'] ); ?> class="title"><span <?php echo wp_kses_post( $gradient_style ); ?> class="lead <?php echo wp_kses_post( $settings['rael_dual_color_header_dual_color_selector'] ); ?>"><?php echo wp_kses_post( $settings['rael_dual_color_header_first_title'] ); ?></span> <span><?php echo wp_kses_post( $settings['rael_dual_color_header_last_title'] ); ?></span></<?php echo wp_kses_post( $settings['rael_title_tag'] ); ?>>
-			<?php echo ( 'after_title' === wp_kses_post( $settings['rael_dual_color_header_separator_position'] ) ? wp_kses( $separator_markup, $this->allowed_html_tags() ) : '' ); ?>
-			<?php if ( 'yes' === $settings['rael_show_dual_color_header_icon_content'] ) : ?>
-				<?php
-				if ( $icon_is_new || $icon_migrated ) {
-					echo '<span class="rael-dual-color-header-svg-icon">';
-					Icons_Manager::render_icon( $settings['rael_dual_color_header_icon_new'], array( 'aria-hidden' => 'true' ) );
-					echo '</span>';
-
-				} else {
-					?>
-					<i class="<?php echo esc_attr( $settings['rael_dual_color_header_icon'] ); ?>"></i>
-				<?php } ?>
-			<?php endif; ?>
+				<span class="subtext"><?php echo $subtext; ?></span>
+				<?php echo $separator_before; ?>
+				<<?php echo $title_tag; ?> class="title">
+					<span style="<?php echo $gradient_style_attr; ?>" class="lead <?php echo $dual_color_class; ?>">
+						<?php echo $first_title; ?>
+					</span>
+					<span><?php echo $last_title; ?></span>
+				</<?php echo $title_tag; ?>>
+				<?php echo $separator_after; ?>
+				<?php if ( $show_icon ) : ?>
+					<?php if ( $icon_is_new || $icon_migrated ) : ?>
+						<span class="rael-dual-color-header-svg-icon">
+							<?php Icons_Manager::render_icon( $settings['rael_dual_color_header_icon_new'], array( 'aria-hidden' => 'true' ) ); ?>
+						</span>
+					<?php else : ?>
+						<i class="<?php echo esc_attr( $settings['rael_dual_color_header_icon'] ); ?>"></i>
+					<?php endif; ?>
+				<?php endif; ?>
 			</div>
 		<?php endif; ?>
 
 		<?php if ( 'dual-color-header-icon-subtext-on-top' === $settings['rael_dual_color_header_type'] ) : ?>
 			<div class="rael-dual-color-header">
-			<?php if ( 'yes' === $settings['rael_show_dual_color_header_icon_content'] ) : ?>
-				<?php
-				if ( $icon_is_new || $icon_migrated ) {
-					echo '<span class="rael-dual-color-header-svg-icon">';
-					Icons_Manager::render_icon( $settings['rael_dual_color_header_icon_new'], array( 'aria-hidden' => 'true' ) );
-					echo '</span>';
-
-				} else {
-					?>
-					<i class="<?php echo esc_attr( $settings['rael_dual_color_header_icon'] ); ?>"></i>
-				<?php } ?>
-			<?php endif; ?>
-			<span class="subtext"><?php echo wp_kses_post( $settings['rael_dual_color_header_subtext'] ); ?></span>
-			<?php echo ( 'before_title' === wp_kses_post( $settings['rael_dual_color_header_separator_position'] ) ? wp_kses( $separator_markup, $this->allowed_html_tags() ) : '' ); ?>
-			<<?php echo wp_kses_post( $settings['rael_title_tag'] ); ?> class="title"><span <?php echo wp_kses_post( $gradient_style ); ?> class="lead <?php echo wp_kses_post( $settings['rael_dual_color_header_dual_color_selector'] ); ?>"><?php echo wp_kses_post( $settings['rael_dual_color_header_first_title'] ); ?></span> <span><?php echo wp_kses_post( $settings['rael_dual_color_header_last_title'] ); ?></span></<?php echo wp_kses_post( $settings['rael_title_tag'] ); ?>>
-			<?php echo ( 'after_title' === wp_kses_post( $settings['rael_dual_color_header_separator_position'] ) ? wp_kses( $separator_markup, $this->allowed_html_tags() ) : '' ); ?>
+				<?php if ( $show_icon ) : ?>
+					<?php if ( $icon_is_new || $icon_migrated ) : ?>
+						<span class="rael-dual-color-header-svg-icon">
+							<?php Icons_Manager::render_icon( $settings['rael_dual_color_header_icon_new'], array( 'aria-hidden' => 'true' ) ); ?>
+						</span>
+					<?php else : ?>
+						<i class="<?php echo esc_attr( $settings['rael_dual_color_header_icon'] ); ?>"></i>
+					<?php endif; ?>
+				<?php endif; ?>
+				<span class="subtext"><?php echo $subtext; ?></span>
+				<?php echo $separator_before; ?>
+				<<?php echo $title_tag; ?> class="title">
+					<span style="<?php echo $gradient_style_attr; ?>" class="lead <?php echo $dual_color_class; ?>">
+						<?php echo $first_title; ?>
+					</span>
+					<span><?php echo $last_title; ?></span>
+				</<?php echo $title_tag; ?>>
+				<?php echo $separator_after; ?>
 			</div>
 		<?php endif; ?>
 
 		<?php if ( 'dual-color-header-icon-on-top' === $settings['rael_dual_color_header_type'] ) : ?>
 			<div class="rael-dual-color-header">
-			<?php if ( 'yes' === $settings['rael_show_dual_color_header_icon_content'] ) : ?>
-				<?php
-				if ( $icon_is_new || $icon_migrated ) {
-					echo '<span class="rael-dual-color-header-svg-icon">';
-					Icons_Manager::render_icon( $settings['rael_dual_color_header_icon_new'], array( 'aria-hidden' => 'true' ) );
-					echo '</span>';
-
-				} else {
-					?>
-					<i class="<?php echo esc_attr( $settings['rael_dual_color_header_icon'] ); ?>"></i>
-				<?php } ?>
-			<?php endif; ?>
-			<?php echo ( 'before_title' === wp_kses_post( $settings['rael_dual_color_header_separator_position'] ) ? wp_kses( $separator_markup, $this->allowed_html_tags() ) : '' ); ?>
-			<<?php echo wp_kses_post( $settings['rael_title_tag'] ); ?> class="title"><span <?php echo wp_kses_post( $gradient_style ); ?> class="lead <?php echo wp_kses_post( $settings['rael_dual_color_header_dual_color_selector'] ); ?>"><?php echo wp_kses_post( $settings['rael_dual_color_header_first_title'] ); ?></span> <span><?php echo wp_kses_post( $settings['rael_dual_color_header_last_title'] ); ?></span></<?php echo wp_kses_post( $settings['rael_title_tag'] ); ?>>
-			<?php echo ( 'after_title' === wp_kses_post( $settings['rael_dual_color_header_separator_position'] ) ? wp_kses( $separator_markup, $this->allowed_html_tags() ) : '' ); ?>
-			<span class="subtext"><?php echo wp_kses_post( $settings['rael_dual_color_header_subtext'] ); ?></span>
+				<?php if ( $show_icon ) : ?>
+					<?php if ( $icon_is_new || $icon_migrated ) : ?>
+						<span class="rael-dual-color-header-svg-icon">
+							<?php Icons_Manager::render_icon( $settings['rael_dual_color_header_icon_new'], array( 'aria-hidden' => 'true' ) ); ?>
+						</span>
+					<?php else : ?>
+						<i class="<?php echo esc_attr( $settings['rael_dual_color_header_icon'] ); ?>"></i>
+					<?php endif; ?>
+				<?php endif; ?>
+				<?php echo $separator_before; ?>
+				<<?php echo $title_tag; ?> class="title">
+					<span style="<?php echo $gradient_style_attr; ?>" class="lead <?php echo $dual_color_class; ?>">
+						<?php echo $first_title; ?>
+					</span>
+					<span><?php echo $last_title; ?></span>
+				</<?php echo $title_tag; ?>>
+				<?php echo $separator_after; ?>
+				<span class="subtext"><?php echo $subtext; ?></span>
 			</div>
 		<?php endif; ?>
 
 		<?php if ( 'dual-color-header-default' === $settings['rael_dual_color_header_type'] ) : ?>
 			<div class="rael-dual-color-header">
-			<?php echo ( 'before_title' === wp_kses_post( $settings['rael_dual_color_header_separator_position'] ) ? wp_kses( $separator_markup, $this->allowed_html_tags() ) : '' ); ?>
-			<<?php echo wp_kses_post( $settings['rael_title_tag'] ); ?> class="title"><span <?php echo wp_kses_post( $gradient_style ); ?> class="lead <?php echo wp_kses_post( $settings['rael_dual_color_header_dual_color_selector'] ); ?>">
-						<?php
-						echo wp_kses_post( $settings['rael_dual_color_header_first_title'] );
-						?>
-				</span> <span><?php echo wp_kses_post( $settings['rael_dual_color_header_last_title'] ); ?></span></<?php echo wp_kses_post( $settings['rael_title_tag'] ); ?>>
-			<?php echo ( 'after_title' === wp_kses_post( $settings['rael_dual_color_header_separator_position'] ) ? wp_kses( $separator_markup, $this->allowed_html_tags() ) : '' ); ?>
-			<span class="subtext"><?php echo wp_kses_post( $settings['rael_dual_color_header_subtext'] ); ?></span>
-
-			<?php if ( 'yes' === $settings['rael_show_dual_color_header_icon_content'] ) : ?>
-				<?php
-				if ( $icon_is_new || $icon_migrated ) {
-					echo '<span class="rael-dual-color-header-svg-icon">';
-						Icons_Manager::render_icon( $settings['rael_dual_color_header_icon_new'], array( 'aria-hidden' => 'true' ) );
-					echo '</span>';
-
-				} else {
-					?>
-					<i class="<?php echo esc_attr( $settings['rael_dual_color_header_icon'] ); ?>"></i>
-				<?php } ?>
-			<?php endif; ?>
+				<?php echo $separator_before; ?>
+				<<?php echo $title_tag; ?> class="title">
+					<span style="<?php echo $gradient_style_attr; ?>" class="lead <?php echo $dual_color_class; ?>">
+						<?php echo $first_title; ?>
+					</span>
+					<span><?php echo $last_title; ?></span>
+				</<?php echo $title_tag; ?>>
+				<?php echo $separator_after; ?>
+				<span class="subtext"><?php echo $subtext; ?></span>
+				<?php if ( $show_icon ) : ?>
+					<?php if ( $icon_is_new || $icon_migrated ) : ?>
+						<span class="rael-dual-color-header-svg-icon">
+							<?php Icons_Manager::render_icon( $settings['rael_dual_color_header_icon_new'], array( 'aria-hidden' => 'true' ) ); ?>
+						</span>
+					<?php else : ?>
+						<i class="<?php echo esc_attr( $settings['rael_dual_color_header_icon'] ); ?>"></i>
+					<?php endif; ?>
+				<?php endif; ?>
 			</div>
 		<?php endif; ?>
+
 
 		<?php
 	}

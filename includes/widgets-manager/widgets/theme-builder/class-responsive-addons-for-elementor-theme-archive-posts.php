@@ -1,6 +1,6 @@
 <?php
 /**
- * REA Theme archieve posts
+ * RAEL Theme archieve posts
  *
  * @package Responsive_Addons_For_Elementor
  */
@@ -21,12 +21,12 @@ use Responsive_Addons_For_Elementor\WidgetsManager\Widgets\Skins;
 use Responsive_Addons_For_Elementor\WidgetsManager\Modules\QueryControl\Module as Query_Control;
 
 /**
- * REA Theme archive posts.
+ * RAEL Theme archive posts.
  */
 class Responsive_Addons_For_Elementor_Theme_Archive_Posts extends Widget_Base {
 
 	/**
-	 * Get the WP_Query object used for querying posts in the REA Archive Posts Widget.
+	 * Get the WP_Query object used for querying posts in the RAEL Archive Posts Widget.
 	 *
 	 * This method returns the WP_Query object, allowing access to the queried posts and related information.
 	 *
@@ -530,7 +530,7 @@ class Responsive_Addons_For_Elementor_Theme_Archive_Posts extends Widget_Base {
 	}
 
 	/**
-	 * Get the WP_Query object used for querying posts in the REA Archive Posts Widget.
+	 * Get the WP_Query object used for querying posts in the RAEL Archive Posts Widget.
 	 *
 	 * @return \WP_Query The WP_Query object.
 	 */

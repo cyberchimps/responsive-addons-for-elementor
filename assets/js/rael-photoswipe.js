@@ -3202,7 +3202,7 @@ __webpack_require__(101);
 (function ($, window, document, undefined) {
   "use strict";
 
-  $.fn.REAinCarouselInit = function ($scope) {
+  $.fn.RAELinCarouselInit = function ($scope) {
     $scope = $scope || $(this);
     $scope.find('.rael-lightbox-video').photoSwipe({
       target: '.rael-open-video',
@@ -3220,23 +3220,23 @@ __webpack_require__(101);
   /**
    * Initializes general modules
    */
-  window.REAinInitElements = function ($scope) {
+  window.RAELinInitElements = function ($scope) {
     $scope = $scope || $(document);
 
     // Init Carousel and Lightbox
-    $.fn.REAinCarouselInit($scope);
+    $.fn.RAELinCarouselInit($scope);
   };
 
   /**
    * Initializes all Photoswipe modules
    */
-  window.REAInitAllModules = function ($scope) {
+  window.RAELInitAllModules = function ($scope) {
     $scope = $scope || $(document);
-    REAinInitElements($scope);
+    RAELinInitElements($scope);
   };
 
   // Init general modules
-  REAinInitElements();
+  RAELinInitElements();
 })(jQuery, window, document);
 
 /**
@@ -3252,7 +3252,7 @@ __webpack_require__(101);
     if (typeof wp.customize.selectiveRefresh !== 'undefined') {
       wp.customize.selectiveRefresh.bind('partial-content-rendered', function () {
         // Init photoswipe modules
-        REAInitAllModules($('body'));
+        RAELInitAllModules($('body'));
       });
     }
   }
@@ -3263,7 +3263,7 @@ __webpack_require__(101);
     $vcWindow = $('#vc_inline-frame', window.parent.document).contents().find('.vc_element');
 
     // Init photoswipe modules
-    REAInitAllModules($vcWindow);
+    RAELInitAllModules($vcWindow);
     $__window.trigger('resize');
   });
 })(jQuery, window, document);

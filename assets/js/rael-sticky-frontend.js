@@ -211,36 +211,92 @@
       var setStickySection = {
         target: $scope,
         isEditMode: Boolean(elementorFrontend.isEditMode()),
+        scrollHandler: null,
+        placeholder: null,
+        isSticky: false,
+        originalOffsetTop: null,
+    
         init: function init() {
-          if ('yes' === this.getSectionSetting('rael_sticky_section_sticky')) {
-            if (this.isEditMode) {
-              $(this.target[0]).addClass('rael-sticky-section-sticky--stuck');
-            }
-            if (!this.isEditMode) {
-              $(this.target[0]).addClass('rael-sticky-section-sticky--stuck').jetStickySection();
-            }
-            var availableDevices = this.getSectionSetting('rael_sticky_section_sticky_visibility') || [];
-            if (!availableDevices[0]) {
-              return;
-            }
-            if (-1 !== availableDevices.indexOf('desktop')) {
-              RaelSticky.getStickySectionsDesktop.push($scope);
-            }
-            if (-1 !== availableDevices.indexOf('tablet')) {
-              RaelSticky.getStickySectionsTablet.push($scope);
-            }
-            if (-1 !== availableDevices.indexOf('mobile')) {
-              RaelSticky.getStickySectionsMobile.push($scope);
-            }
-          } else {
-            if (this.isEditMode) {
-              $(this.target[0]).removeClass('rael-sticky-section-sticky--stuck');
-            }
+          var isStickyEnabled = this.getSectionSetting('rael_sticky_section_sticky') === 'yes';
+    
+          $(window).off('scroll.raelSticky-' + this.getUniqueID());
+          $(window).off('resize.raelSticky-' + this.getUniqueID());
+    
+          this.removeStickyStyles();
+    
+          if (!isStickyEnabled) {
+            return;
+          }
+    
+          this.originalOffsetTop = this.target.offset().top;
+    
+          this.makeStickyOnScroll(this.target[0]);
+    
+          var self = this;
+          $(window).on('resize.raelSticky-' + this.getUniqueID(), function resizeHandler() {
+            self.originalOffsetTop = self.target.offset().top;
+          });
+    
+          var devices = this.getSectionSetting('rael_sticky_section_sticky_visibility') || [];
+          if (-1 !== devices.indexOf('desktop')) {
+            RaelSticky.getStickySectionsDesktop.push($scope);
+          }
+          if (-1 !== devices.indexOf('tablet')) {
+            RaelSticky.getStickySectionsTablet.push($scope);
+          }
+          if (-1 !== devices.indexOf('mobile')) {
+            RaelSticky.getStickySectionsMobile.push($scope);
           }
         },
+    
+        makeStickyOnScroll: function makeStickyOnScroll(element) {
+          var $el = $(element);
+          this.placeholder = $('<div>').height($el.outerHeight()).hide();
+    
+          var self = this;
+          this.scrollHandler = function scrollHandler() {
+            var scrollTop = $(window).scrollTop();
+    
+            if (scrollTop >= self.originalOffsetTop && !self.isSticky) {
+              $el.after(self.placeholder.show());
+              $el.css({
+                position: 'fixed',
+                top: 0,
+                width: $el.outerWidth() + 'px',
+                zIndex: 1100
+              });
+              self.isSticky = true;
+            } else if (scrollTop < self.originalOffsetTop && self.isSticky) {
+              self.removeStickyStyles();
+            }
+          };
+    
+          $(window).on('scroll.raelSticky-' + this.getUniqueID(), this.scrollHandler);
+        },
+    
+        removeStickyStyles: function removeStickyStyles() {
+          var $el = $(this.target[0]);
+          $el.css({
+            position: '',
+            top: '',
+            width: '',
+            zIndex: ''
+          });
+    
+          if (this.placeholder) {
+            this.placeholder.hide();
+          }
+          this.isSticky = false;
+        },
+    
+        getUniqueID: function getUniqueID() {
+          return this.target.data('model-cid') || this.target.index();
+        },
+    
         getSectionSetting: function getSectionSetting(setting) {
-          var settings = {},
-            editMode = Boolean(elementorFrontend.isEditMode());
+          var settings = {};
+          var editMode = Boolean(elementorFrontend.isEditMode());
+    
           if (editMode) {
             if (!elementorFrontend.config.hasOwnProperty('elements')) {
               return;
@@ -248,26 +304,31 @@
             if (!elementorFrontend.config.elements.hasOwnProperty('data')) {
               return;
             }
-            var modelCID = this.target.data('model-cid'),
-              editorSectionData = elementorFrontend.config.elements.data[modelCID];
-            if (!editorSectionData) {
+            var modelCID = this.target.data('model-cid');
+            var sectionData = elementorFrontend.config.elements.data[modelCID];
+            if (!sectionData) {
               return;
             }
-            if (!editorSectionData.hasOwnProperty('attributes')) {
+            if (!sectionData.hasOwnProperty('attributes')) {
               return;
             }
-            settings = editorSectionData.attributes || {};
+            settings = sectionData.attributes || {};
           } else {
             settings = this.target.data('settings') || {};
           }
+    
           if (!settings[setting]) {
             return;
           }
+    
           return settings[setting];
         }
       };
+    
       setStickySection.init();
     },
+               
+    
     stickySection: function stickySection() {
       var stickySection = {
         isEditMode: Boolean(elementorFrontend.isEditMode()),

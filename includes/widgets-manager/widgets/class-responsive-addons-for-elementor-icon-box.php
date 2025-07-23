@@ -553,6 +553,7 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 				'selectors' => array(
 					'{{WRAPPER}} .elementor-button .elementor-align-icon-right,{{WRAPPER}} .rael-infobox__link-icon--after' => 'margin-left: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}} .elementor-button .elementor-align-icon-left, {{WRAPPER}} .rael-infobox__link-icon--before' => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .elementor-button .elementor-button-content-wrapper' => 'gap: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);
@@ -2678,8 +2679,7 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 	public function render_button_text() {
 		$settings = $this->get_settings_for_display();
 
-		$this->add_render_attribute( 'rael_infobox_content', 'class', 'elementor-button-content-wrapper' );
-		$this->add_render_attribute( 'icon-align', 'class', 'elementor-align-icon-' . $settings['rael_button_icon_position'] );
+		$this->add_render_attribute( 'rael_infobox_content', 'class', 'elementor-button-content-wrapper rael-infobox-align-icon-' . $settings['rael_button_icon_position'] );
 		$this->add_render_attribute( 'icon-align', 'class', 'elementor-button-icon' );
 
 		$this->add_render_attribute( 'rael_button_text', 'class', 'elementor-button-text' );
@@ -3019,9 +3019,7 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 		<div {{{ view.getRenderAttributeString( 'rael_btn_wrapper' ) }}}>
 		<a {{{ view.getRenderAttributeString( 'rael_button' ) }}}>
 		<#
-		view.addRenderAttribute( 'rael_infobox_content', 'class', 'elementor-button-content-wrapper' );
-
-		view.addRenderAttribute( 'icon-align', 'class', 'elementor-align-icon-' + settings.rael_button_icon_position );
+		view.addRenderAttribute( 'rael_infobox_content', 'class', 'elementor-button-content-wrapper rael-infobox-align-icon-' + settings.rael_button_icon_position );
 
 		view.addRenderAttribute( 'icon-align', 'class', 'elementor-button-icon' );
 

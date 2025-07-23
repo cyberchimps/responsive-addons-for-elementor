@@ -132,30 +132,63 @@ class RAEL_Conditions {
 		$post_types = apply_filters( 'rael_hf_display_condition_post_types', array_merge( $post_types, $custom_post_type ) );
 
 		$special_pages = array(
-			'special-404'    => __( '404 Page', 'responsive-addons-for-elementor' ),
-			'special-search' => __( 'Search Page', 'responsive-addons-for-elementor' ),
-			'special-blog'   => __( 'Blog / Posts Page', 'responsive-addons-for-elementor' ),
-			'special-front'  => __( 'Front Page', 'responsive-addons-for-elementor' ),
-			'special-date'   => __( 'Date Archive', 'responsive-addons-for-elementor' ),
-			'special-author' => __( 'Author Archive', 'responsive-addons-for-elementor' ),
+			'special-404'    => array(
+				'label'          => __( '404 Page', 'responsive-addons-for-elementor' ),
+				'template_types' => array( 'header', 'footer', 'error-404', 'single-page', 'single-post' ),
+			),
+			'special-search' => array(
+				'label'          => __( 'Search Page', 'responsive-addons-for-elementor' ),
+				'template_types' => array( 'header', 'footer', 'archive' ),
+			),
+			'special-blog'   => array(
+				'label'          => __( 'Blog / Posts Page', 'responsive-addons-for-elementor' ),
+				'template_types' => array( 'header', 'footer' ),
+			),
+			'special-front'  => array(
+				'label'          => __( 'Front Page', 'responsive-addons-for-elementor' ),
+				'template_types' => array( 'header', 'footer', 'single-page', 'single-post', 'error-404' ),
+			),
+			'special-date'   => array(
+				'label'          => __( 'Date Archive', 'responsive-addons-for-elementor' ),
+				'template_types' => array( 'header', 'footer', 'archive' ),
+			),
+			'special-author' => array(
+				'label'          => __( 'Author Archive', 'responsive-addons-for-elementor' ),
+				'template_types' => array( 'header', 'footer', 'archive' ),
+			),
 		);
 
 		if ( class_exists( 'WooCommerce' ) ) {
-			$special_pages['special-woo-shop'] = __( 'WooCommerce Shop Page', 'responsive-addons-for-elementor' );
+			$special_pages['special-woo-shop'] = array(
+				'label'          => __( 'WooCommerce Shop Page', 'responsive-addons-for-elementor' ),
+				'template_types' => array( 'product-archive', 'header', 'footer' ),
+			);
 		}
+
 
 		$selection_options = array(
 			'basic'         => array(
 				'label' => __( 'Basic', 'responsive-addons-for-elementor' ),
+				'template_types' => array( 'header', 'footer', 'single-post', 'single-page', 'archive', 'error-404' ),
 				'value' => array(
-					'basic-global'    => __( 'Entire Website', 'responsive-addons-for-elementor' ),
-					'basic-singulars' => __( 'All Singulars', 'responsive-addons-for-elementor' ),
-					'basic-archives'  => __( 'All Archives', 'responsive-addons-for-elementor' ),
+					'basic-global' => array(
+						'label' => __( 'Entire Website', 'responsive-addons-for-elementor' ),
+						'template_types' => array( 'header', 'footer' ), // only for header/footer
+					),
+					'basic-singulars' => array(
+						'label' => __( 'All Singulars', 'responsive-addons-for-elementor' ),
+						'template_types' => array( 'header', 'footer', 'single-post', 'single-page', 'error-404' ),
+					),
+					'basic-archives' => array(
+						'label' => __( 'All Archives', 'responsive-addons-for-elementor' ),
+						'template_types' => array( 'header', 'footer', 'archive', 'product-archive' ),
+					),
 				),
 			),
 
 			'special-pages' => array(
 				'label' => __( 'Special Pages', 'responsive-addons-for-elementor' ),
+				'template_types' => array( 'header', 'footer', 'single-post', 'single-page', 'archive', 'error-404', 'product-archive' ),
 				'value' => $special_pages,
 			),
 		);
@@ -176,19 +209,34 @@ class RAEL_Conditions {
 
 				foreach ( $post_types as $post_type ) {
 					$post_opt = self::get_post_target_rule_options( $post_type, $taxonomy );
+					if( empty( $post_opt ) ) continue;
+					$post_key = $post_opt['post_key'];
 
-					if ( isset( $selection_options[ $post_opt['post_key'] ] ) ) {
+					if ( isset( $selection_options[ $post_key ] ) ) {
+						// Merge values
 						if ( ! empty( $post_opt['value'] ) && is_array( $post_opt['value'] ) ) {
 							foreach ( $post_opt['value'] as $key => $value ) {
-								if ( ! in_array( $value, $selection_options[ $post_opt['post_key'] ]['value'] ) ) {
-									$selection_options[ $post_opt['post_key'] ]['value'][ $key ] = $value;
+								if ( ! isset( $selection_options[ $post_key ]['value'][ $key ] ) ) {
+									$selection_options[ $post_key ]['value'][ $key ] = $value;
 								}
 							}
 						}
+
+						// Merge template_types
+						if ( isset( $post_opt['template_types'] ) ) {
+							$existing = isset( $selection_options[ $post_key ]['template_types'] )
+								? $selection_options[ $post_key ]['template_types'] : array();
+
+							$merged = array_unique( array_merge( $existing, $post_opt['template_types'] ) );
+							$selection_options[ $post_key ]['template_types'] = $merged;
+						}
+
 					} else {
-						$selection_options[ $post_opt['post_key'] ] = array(
-							'label' => $post_opt['label'],
-							'value' => $post_opt['value'],
+						// Create new group
+						$selection_options[ $post_key ] = array(
+							'label'          => $post_opt['label'],
+							'value'          => $post_opt['value'],
+							'template_types' => $post_opt['template_types'],
 						);
 					}
 				}
@@ -198,8 +246,11 @@ class RAEL_Conditions {
 		$selection_options['specific-target'] = array(
 			'label' => __( 'Specific Target', 'responsive-addons-for-elementor' ),
 			'value' => array(
-				'specifics' => __( 'Specific Pages / Posts / Taxonomies, etc.', 'responsive-addons-for-elementor' ),
+				'specifics' => array(
+					'label' => __( 'Specific Pages / Posts / Taxonomies, etc.', 'responsive-addons-for-elementor' ),
+				),
 			),
+			'template_types' => array( 'header', 'footer', 'single-post', 'single-page', 'archive', 'error-404' ),
 		);
 
 		// Filter options displayed in the display conditions select field.
@@ -258,7 +309,11 @@ class RAEL_Conditions {
 
 		foreach ( $location_selection as $location_grp ) {
 			if ( isset( $location_grp['value'][ $key ] ) ) {
-				return $location_grp['value'][ $key ];
+				if( isset( $location_grp['value'][ $key ]['label'] ) ) {
+					return $location_grp['value'][ $key ]['label'];
+				} else {
+					return $location_grp['value'][ $key ];
+				}
 			}
 		}
 
@@ -681,12 +736,35 @@ class RAEL_Conditions {
 		/* Condition Selection */
 		$output .= '<div class="rael-hf__display-condition-wrapper" >';
 		$output .= '<select name="' . esc_attr( $input_name ) . '[rule][{{data.id}}]" class="rael-hf__display-condition-input form-control rael-hf-input">';
-		$output .= '<option value="">' . __( 'Select', 'responsive-addons-for-elementor' ) . '</option>';
+		$output .= '<option value="" data-template-types="all">' . __( 'Select', 'responsive-addons-for-elementor' ) . '</option>';
 
 		foreach ( $selection_options as $group => $group_data ) {
-			$output .= '<optgroup label="' . $group_data['label'] . '">';
+			$output .= '<optgroup label="' . esc_attr( $group_data['label'] ) . '" data-template-types="' . 
+					esc_attr( isset( $group_data['template_types'] ) && is_array( $group_data['template_types'] ) 
+						? implode( ',', $group_data['template_types'] ) 
+						: 'all' ) . '">';
+
 			foreach ( $group_data['value'] as $opt_key => $opt_value ) {
-				$output .= '<option value="' . $opt_key . '">' . $opt_value . '</option>';
+				$option_template_types = '';
+
+				if ( is_array( $opt_value ) ) {
+					$label = $opt_value['label'];
+					$option_template_types = ! empty( $opt_value['template_types'] )
+						? implode( ',', $opt_value['template_types'] )
+						: 'all';
+				} else {
+					$label = $opt_value;
+					$option_template_types = isset( $group_data['template_types'] )
+						? implode( ',', $group_data['template_types'] )
+						: 'all';
+				}
+
+				$output .= sprintf(
+					'<option value="%s" data-template-types="%s">%s</option>',
+					esc_attr( $opt_key ),
+					esc_attr( $option_template_types ),
+					esc_html( $label )
+				);
 			}
 			$output .= '</optgroup>';
 		}
@@ -733,15 +811,29 @@ class RAEL_Conditions {
 		$post_label  = ucwords( $post_type->label );
 		$post_name   = $post_type->name;
 		$post_option = array();
+		// Skip floating elements, my templates and theme builder post types.
+		if( 'floating-elements' === $post_key || 'my-templates' === $post_key || 'theme-builder' === $post_key ) {
+			return array();
+		}
 
+		$singular_templates         = array( 'header', 'footer', 'single-post', 'single-page', 'error-404' );
+		$archive_template           = array( 'header', 'footer', 'archive' );
+		$products_template          = array( 'header', 'footer', 'single-product' );
+		$products_archives_template = array( 'header', 'footer', 'product-archive' );
 		/* translators: %s post label */
 		$all_posts                          = sprintf( __( 'All %s', 'responsive-addons-for-elementor' ), $post_label );
-		$post_option[ $post_name . '|all' ] = $all_posts;
+		$post_option[ $post_name . '|all' ] = array(
+			'label'          => $all_posts,
+			'template_types' => 'product' === $post_name ? $products_template : $singular_templates,
+		);
 
 		if ( 'pages' !== $post_key ) {
 			/* translators: %s post label */
 			$all_archive                                = sprintf( __( 'All %s Archive', 'responsive-addons-for-elementor' ), $post_label );
-			$post_option[ $post_name . '|all|archive' ] = $all_archive;
+			$post_option[ $post_name . '|all|archive' ] = array(
+				'label'          => $all_archive,
+				'template_types' => 'product' === $post_name ? $products_archives_template : $archive_template,
+			);
 		}
 
 		if ( in_array( $post_type->name, $taxonomy->object_type ) ) { // phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
@@ -751,14 +843,28 @@ class RAEL_Conditions {
 			/* translators: %s taxonomy label */
 			$tax_archive = sprintf( __( 'All %s Archive', 'responsive-addons-for-elementor' ), $tax_label );
 
-			$post_option[ $post_name . '|all|taxarchive|' . $tax_name ] = $tax_archive;
+			$post_option[ $post_name . '|all|taxarchive|' . $tax_name ] = array(
+				'label'          => $tax_archive,
+				'template_types' => 'product' === $post_name ? $products_archives_template :  $archive_template,
+			);
 		}
 
-		$post_output['post_key'] = $post_key;
-		$post_output['label']    = $post_label;
-		$post_output['value']    = $post_option;
+		// Dynamically collect group-level template types based on children.
+		$group_template_types = array();
+		foreach ( $post_option as $opt ) {
+			if ( isset( $opt['template_types'] ) && is_array( $opt['template_types'] ) ) {
+				$group_template_types = array_merge( $group_template_types, $opt['template_types'] );
+			}
+		}
+		$group_template_types = array_unique( $group_template_types );
 
-		return $post_output;
+		// Return the final output.
+		return array(
+			'post_key'       => $post_key,
+			'label'          => $post_label,
+			'value'          => $post_option,
+			'template_types' => $group_template_types,
+		);
 	}
 
 	/**
@@ -794,20 +900,39 @@ class RAEL_Conditions {
 			$output .= '<span class="rael-hf__display-condition-delete dashicons dashicons-dismiss"></span>';
 			$output .= '<div class="rael-hf__display-condition-wrapper" >';
 			$output .= '<select name="' . esc_attr( $input_name ) . '[rule][' . $index . ']" class="rael-hf__display-condition-input form-control rael-hf-input">';
-			$output .= '<option value="">' . __( 'Select', 'responsive-addons-for-elementor' ) . '</option>';
+			$output .= '<option value="" data-template-types="all">' . __( 'Select', 'responsive-addons-for-elementor' ) . '</option>';
 
 			foreach ( $selection_options as $group => $group_data ) {
-				$output .= '<optgroup label="' . $group_data['label'] . '">';
+				$output .= '<optgroup label="' . esc_attr( $group_data['label'] ) . '" data-template-types="' . 
+					esc_attr( isset( $group_data['template_types'] ) && is_array( $group_data['template_types'] ) 
+						? implode( ',', $group_data['template_types'] ) 
+						: 'all' ) . '">';
+
 				foreach ( $group_data['value'] as $opt_key => $opt_value ) {
 
-					// specific rules.
-					$selected = '';
+					// Specific rules.
+					$selected = ( $data == $opt_key ) ? 'selected="selected"' : '';
 
-					if ( $data == $opt_key ) { // phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
-						$selected = 'selected="selected"';
+					// Get label and template types per option.
+					if ( is_array( $opt_value ) ) {
+						$label = isset( $opt_value['label'] ) ? $opt_value['label'] : $opt_key;
+						$template_types = isset( $opt_value['template_types'] )
+							? implode( ',', $opt_value['template_types'] )
+							: ( isset( $group_data['template_types'] ) ? implode( ',', $group_data['template_types'] ) : 'all' );
+					} else {
+						$label = $opt_value;
+						$template_types = isset( $group_data['template_types'] )
+							? implode( ',', $group_data['template_types'] )
+							: 'all';
 					}
 
-					$output .= '<option value="' . $opt_key . '" ' . $selected . '>' . $opt_value . '</option>';
+					$output .= sprintf(
+						'<option value="%s" %s data-template-types="%s">%s</option>',
+						esc_attr( $opt_key ),
+						$selected,
+						esc_attr( $template_types ),
+						esc_html( $label )
+					);
 				}
 				$output .= '</optgroup>';
 			}
@@ -1293,7 +1418,7 @@ class RAEL_Conditions {
 				case 'is_date':
 				case 'is_author':
 					$meta_args .= " OR pm.meta_value LIKE '%\"basic-archives\"%'";
-					$meta_args .= " OR pm.meta_value LIKE '%\"{$current_post_type}|all|archive\"%'";
+					if ( 'post' !== $current_post_type || 'page' !== $current_post_type ) $meta_args .= " OR pm.meta_value LIKE '%\"{$current_post_type}|all|archive\"%'";
 
 					if ( 'is_tax' === $current_page_type && ( is_category() || is_tag() || is_tax() ) ) {
 						if ( is_object( $q_obj ) ) {
@@ -1308,6 +1433,8 @@ class RAEL_Conditions {
 					break;
 				case 'is_home':
 					$meta_args .= " OR pm.meta_value LIKE '%\"special-blog\"%'";
+					$meta_args .= " OR pm.meta_value LIKE '%\"basic-archives\"%'";
+					$meta_args .= " OR pm.meta_value LIKE '%\"post|all|archive\"%'";
 					break;
 				case 'is_front_page':
 					$current_id      = esc_sql( get_the_id() );
@@ -1333,6 +1460,7 @@ class RAEL_Conditions {
 					break;
 				case 'is_woo_shop_page':
 					$meta_args .= " OR pm.meta_value LIKE '%\"special-woo-shop\"%'";
+					$meta_args .= " OR pm.meta_value LIKE '%\"product|all|archive\"%'";
 					break;
 				case '':
 					$current_post_id = get_the_id();

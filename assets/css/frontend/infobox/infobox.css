@@ -349,4 +349,7 @@
   text-align: right;
   justify-content: flex-start; }
 
+.rael-infobox .rael-infobox-align-icon-right {
+  flex-direction: row-reverse;
+}
 /*# sourceMappingURL=infobox.css.map */
