@@ -80,8 +80,6 @@ abstract class Skin_Style {
 	 */
 	public function render_featured_image() {
 
-		$settings = self::$settings;
-
 		$thumbnail = $this->get_instance_value( 'thumbnail' );
 
 		if ( 'none' === $thumbnail && ! Plugin::instance()->editor->is_edit_mode() ) {
@@ -89,7 +87,8 @@ abstract class Skin_Style {
 		}
 
 		$settings                 = self::$settings;
-		$setting_key              = $settings[ $this->rael_prepend_skin( 'thumbnail_size' ) . '_size' ];
+
+		$setting_key = $this->rael_prepend_skin( 'thumbnail_size' );
 		$settings[ $setting_key ] = array(
 			'id' => get_post_thumbnail_id(),
 		);
@@ -100,10 +99,11 @@ abstract class Skin_Style {
 		}
 
 		$optional_attributes_html = $this->get_optional_link_attributes_html();
+		$fit_height_class = ( isset( $settings['rael_classic_item_ratio']['size'] ) && $settings['rael_classic_item_ratio']['size'] != "" ) ? 'elementor-fit-height' : '';
 
 		?>
 		<a class="responsive-post__thumbnail__link" href="<?php echo esc_url( get_the_permalink() ); ?>" <?php echo esc_html( $optional_attributes_html ); ?>>
-			<div class="elementor-post__thumbnail"><?php echo wp_kses_post( $thumbnail_html ); ?></div>
+			<div class="elementor-post__thumbnail <?php echo esc_attr( $fit_height_class ); ?>"><?php Utils::print_unescaped_internal_string($thumbnail_html); ?></div>
 		</a>
 		<?php
 		if ( 'rael_cards' === $settings['_skin'] ) {
