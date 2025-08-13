@@ -7,7 +7,7 @@
 
 namespace Responsive_Addons_For_Elementor\Themes;
 
-use Responsive_Addons_For_Elementor\ModulesManager\Theme_Builder\RAEL_Theme_Builder;
+use Responsive_Addons_For_Elementor\ModulesManager\Theme_Builder\Theme_Builder;
 
 /**
  * Astra theme compatibility.

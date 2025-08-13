@@ -716,10 +716,6 @@ trait RAEL_Products_Comparable {
 
 		$this->start_controls_section( 'rael_products_content_tab_product_compare_section', $section_args );
 
-		// if ( 'rael-product-compare' === $this->get_name() ) {
-		// Controls to be added if the current widget is Product Compare widget.
-		// }
-
 		$this->add_control(
 			'rael_product_compare_theme',
 			array(
@@ -1160,10 +1156,6 @@ trait RAEL_Products_Comparable {
 	}
 
 	public function register_style_tab_table_style_section( $css_classes = array() ) {
-		// extract($css_classes);
-		// $table            = isset($table) ? $table : '{{WRAPPER}} .rael-products-compare-wrapper table';
-		// $table_title      = isset($table_title) ? $table_title : '{{WRAPPER}} .rael-products-compare-wrapper .rael-products-compare__modal-title';
-		// $table_title_wrap = isset($table_title_wrap) ? $table_title_wrap : '{{WRAPPER}} .rael-products-compare-wrapper .first-th';
 
 		$table            = isset( $css_classes['table'] ) ? $css_classes['table'] : '{{WRAPPER}} .rael-products-compare-wrapper table';
 		$table_title      = isset( $css_classes['table_title'] ) ? $css_classes['table_title'] : '{{WRAPPER}} .rael-products-compare-wrapper .rael-products-compare__modal-title';

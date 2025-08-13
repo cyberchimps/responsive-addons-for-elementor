@@ -5,7 +5,7 @@
  * @package  Responsive_Addons_For_Elementor
  */
 
-use Responsive_Addons_For_Elementor\ModulesManager\Theme_Builder\RAEL_Theme_Builder;
+use Responsive_Addons_For_Elementor\ModulesManager\Theme_Builder\Theme_Builder;
 
 /**
  * Checks if Header is enabled from RAEL.
@@ -13,7 +13,7 @@ use Responsive_Addons_For_Elementor\ModulesManager\Theme_Builder\RAEL_Theme_Buil
  * @return bool True if header is enabled. False if header is not enabled
  */
 function rael_header_enabled() {
-	$header_id = RAEL_Theme_Builder::get_settings( 'header', '' );
+	$header_id = Theme_Builder::get_settings( 'header', '' );
 	$status    = false;
 
 	if ( '' !== $header_id ) {
@@ -29,7 +29,7 @@ function rael_header_enabled() {
  * @return bool True if Footer is enabled. False if Footer is not enabled.
  */
 function rael_footer_enabled() {
-	$footer_id = RAEL_Theme_Builder::get_settings( 'footer', '' );
+	$footer_id = Theme_Builder::get_settings( 'footer', '' );
 	$status    = false;
 
 	if ( '' !== $footer_id ) {
@@ -47,7 +47,7 @@ function rael_footer_enabled() {
  * @return (String|boolean) Header ID or false.
  */
 function get_rael_header_id() {
-	$header_id = RAEL_Theme_Builder::get_settings( 'header', '' );
+	$header_id = Theme_Builder::get_settings( 'header', '' );
 
 	if ( '' === $header_id ) {
 		$header_id = false;
@@ -64,7 +64,7 @@ function get_rael_header_id() {
  * @return (String|boolean) Footer ID or false.
  */
 function get_rael_footer_id() {
-	$footer_id = RAEL_Theme_Builder::get_settings( 'footer', '' );
+	$footer_id = Theme_Builder::get_settings( 'footer', '' );
 
 	if ( '' === $footer_id ) {
 		$footer_id = false;
@@ -79,7 +79,7 @@ function get_rael_footer_id() {
  * @return bool True if Single template  is enabled. False if Single template is not enabled
  */
 function rael_single_page_enabled() {
-	$single_id = RAEL_Theme_Builder::get_settings( 'single-page', '' );
+	$single_id = Theme_Builder::get_settings( 'single-page', '' );
 	$status    = false;
 
 	if ( '' !== $single_id ) {
@@ -97,7 +97,7 @@ function rael_single_page_enabled() {
  * @return (String|boolean) Single Page ID or false.
  */
 function get_rael_single_page_id() {
-	$single_page_id = RAEL_Theme_Builder::get_settings( 'single-page', '' );
+	$single_page_id = Theme_Builder::get_settings( 'single-page', '' );
 
 	if ( '' === $single_page_id ) {
 		$single_page_id = false;
@@ -112,7 +112,7 @@ function get_rael_single_page_id() {
  * @return bool True if Single template  is enabled. False if Single template is not enabled
  */
 function rael_single_enabled() {
-	$single_id = RAEL_Theme_Builder::get_settings( 'single-post', '' );
+	$single_id = Theme_Builder::get_settings( 'single-post', '' );
 	$status    = false;
 
 	if ( '' !== $single_id ) {
@@ -129,7 +129,7 @@ function rael_single_enabled() {
  * @return (String|boolean) Single Post ID or false.
  */
 function get_rael_single_post_id() {
-	$single_post_id = RAEL_Theme_Builder::get_settings( 'single-post', '' );
+	$single_post_id = Theme_Builder::get_settings( 'single-post', '' );
 
 	if ( '' === $single_post_id ) {
 		$single_post_id = false;
@@ -146,7 +146,7 @@ function get_rael_single_post_id() {
  * @return (String|boolean) Error_404 ID or false.
  */
 function get_rael_error_404_id() {
-	$error_404_id = RAEL_Theme_Builder::get_settings( 'error-404', '' );
+	$error_404_id = Theme_Builder::get_settings( 'error-404', '' );
 
 	if ( '' === $error_404_id ) {
 		$error_404_id = false;
@@ -161,7 +161,7 @@ function get_rael_error_404_id() {
  * @return bool True if Archive template  is enabled. False if Archive template is not enabled
  */
 function rael_archive_enabled() {
-	$archive_id = RAEL_Theme_Builder::get_settings( 'archive', '' );
+	$archive_id = Theme_Builder::get_settings( 'archive', '' );
 	$status     = false;
 
 	if ( '' !== $archive_id ) {
@@ -178,7 +178,7 @@ function rael_archive_enabled() {
  * @return (String|boolean) Error_404 ID or false.
  */
 function get_rael_archive_id() {
-	$error_404_id = RAEL_Theme_Builder::get_settings( 'archive', '' );
+	$error_404_id = Theme_Builder::get_settings( 'archive', '' );
 
 	if ( '' === $error_404_id ) {
 		$error_404_id = false;
@@ -202,7 +202,7 @@ function get_rael_single_product_id() {
 
 	if ( is_product() ) {
 		if ( '' !== $single_product_id ) {
-			$single_product_id = RAEL_Theme_Builder::get_settings( 'single-product', '' );
+			$single_product_id = Theme_Builder::get_settings( 'single-product', '' );
 		}
 	}
 
@@ -220,7 +220,7 @@ function get_rael_product_archive_id() {
 	$product_archive_id = false;
 	if ( is_shop() || is_archive() || is_product_taxonomy() || is_product_category() || is_product_tag() || is_woocommerce() ) {
 		if ( '' !== $product_archive_id ) {
-			$product_archive_id = RAEL_Theme_Builder::get_settings( 'product-archive', '' );
+			$product_archive_id = Theme_Builder::get_settings( 'product-archive', '' );
 		}
 	}
 
@@ -237,7 +237,7 @@ function rael_render_header() {
 
 	?>
 		<header id="masthead" itemscope="itemscope" itemtype="https://schema.org/WPHeader">
-			<?php RAEL_Theme_Builder::get_header_content(); ?>
+			<?php Theme_Builder::get_header_content(); ?>
 		</header>
 
 	<?php
@@ -254,7 +254,7 @@ function rael_render_footer() {
 
 	?>
 		<footer itemtype="https://schema.org/WPFooter" itemscope="itemscope" id="colophon" role="contentinfo">
-			<?php RAEL_Theme_Builder::get_footer_content(); ?>
+			<?php Theme_Builder::get_footer_content(); ?>
 		</footer>
 	<?php
 }
@@ -267,7 +267,7 @@ function rael_render_single() {
 	if ( false == apply_filters( 'enable_rael_render_single', true ) ) {
 		return;
 	}
-	RAEL_Theme_Builder::get_single_content();
+	Theme_Builder::get_single_content();
 }
 
 /**
@@ -280,7 +280,7 @@ function rael_render_archive() {
 	if ( false == apply_filters( 'enable_rael_render_archive', true ) ) {
 		return;
 	}
-	RAEL_Theme_Builder::get_archive_content();
+	Theme_Builder::get_archive_content();
 }
 
 if ( ! function_exists( 'is_plugin_active' ) ) {
@@ -298,7 +298,7 @@ if ( ! is_plugin_active( 'responsive-elementor-addons/responsive-elementor-addon
 		 * @return boolean
 		 */
 		function rea_theme_template_render_at_location( $location ) {
-			$module  = RAEL_Theme_Builder::instance();
+			$module  = Theme_Builder::instance();
 			$content = false;
 
 			switch ( $location ) {

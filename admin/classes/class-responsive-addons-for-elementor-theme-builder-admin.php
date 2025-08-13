@@ -10,7 +10,7 @@ namespace Responsive_Addons_For_Elementor\Admin\Theme_Builder;
 
 use Responsive_Addons_For_Elementor;
 use Responsive_Addons_For_Elementor\ModulesManager\Theme_Builder\Conditions\RAEL_Conditions;
-use Responsive_Addons_For_Elementor\ModulesManager\Theme_Builder\RAEL_Theme_Builder;
+use Responsive_Addons_For_Elementor\ModulesManager\Theme_Builder\Theme_Builder;
 use Responsive_Addons_For_Elementor\Traits\Singleton;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -81,8 +81,6 @@ if ( ! class_exists( 'Responsive_Addons_For_Elementor_Theme_Builder_Admin' ) ) {
 			global $pagenow;
 
 			$current_page = '';
-
-			// $current_page = isset( $_GET[ $this->type_tax ] ) ? $_GET[ $this->type_tax ] : '';
 
 			if ( isset( $_GET[ $this->type_tax ] ) ) {
 				$current_page = sanitize_text_field( wp_unslash( $_GET[ $this->type_tax ] ) );
@@ -369,7 +367,7 @@ if ( ! class_exists( 'Responsive_Addons_For_Elementor_Theme_Builder_Admin' ) ) {
 				'capability_type'     => 'post',
 				'hierarchical'        => false,
 				'rewrite'             => false,
-				'supports'            => array( 'title', 'thumbnail', 'elementor' ),
+				'supports'            => array( 'title', 'thumbnail', 'elementor'),
 			);
 
 			register_post_type( 'rael-theme-template', $args );
@@ -636,7 +634,7 @@ if ( ! class_exists( 'Responsive_Addons_For_Elementor_Theme_Builder_Admin' ) ) {
 			$template_type = get_post_meta( $post->ID, 'rael_hf_template_type', true );
 
 			if ( '' !== $template_type ) {
-				$templates = RAEL_Theme_Builder::get_template_id( $template_type );
+				$templates = Theme_Builder::get_template_id( $template_type );
 
 				// Check if more than one template is selected for current template type.
 				if (is_array($templates) && isset($templates[1]) && $post->ID == $templates[0]) { // phpcs:ignore
@@ -812,4 +810,3 @@ if ( ! class_exists( 'Responsive_Addons_For_Elementor_Theme_Builder_Admin' ) ) {
 	// new Responsive_Addons_For_Elementor_Theme_Builder_Admin();
 	Responsive_Addons_For_Elementor_Theme_Builder_Admin::instance();
 }
-

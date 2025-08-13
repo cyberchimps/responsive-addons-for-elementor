@@ -77,8 +77,8 @@ class Modules_Manager {
 		foreach ( $modules as $module ) {
 			$class_file = "class-{$module}.php";
 			$class_name = ucwords( str_replace( '-', '_', $module ), '_' );
-			$class_name = __NAMESPACE__ . "\\{$class_name}\\RAEL_{$class_name}";
-
+			$class_name = __NAMESPACE__ . "\\{$class_name}\\{$class_name}";
+		
 			require_once "{$module}/{$class_file}";
 			if ( class_exists( $class_name ) ) {
 				$class_name::instance();

@@ -497,11 +497,6 @@ trait Woo_Checkout_Helper {
 					?>
 					<div class="back-to-shop">
 						<a class="back-to-shopping" href="<?php echo esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ); ?>">
-							<?php // if($woo_checkout_order_details_change_label_settings == 'yes'). ?>
-<!--                                <i class="fas fa-long-arrow-alt-left"></i>--><?php // echo CheckoutHelperCLass::rael_wp_kses($settings['rael_woo_checkout_shop_link_text']);. ?>
-							<?php // else. ?>
-<!--                                <i class="fas fa-long-arrow-alt-left"></i>--><?php // esc_html_e( 'Continue Shopping', 'responsive-addons-for-elementor' );. ?>
-							<?php // endif. ?>
 							<i class="fas fa-long-arrow-alt-left"></i><?php echo esc_html( CheckoutHelperCLass::rael_wp_kses( $settings['rael_woo_checkout_shop_link_text'] ) ); ?>
 						</a>
 					</div>

@@ -57,7 +57,7 @@
 												post_type: obj.data.source_type,
 												source_name: obj.data.source_name,
 												id: ids,
-												nonce: localize
+												nonce: localize.nonce
 											},
 										}
 									).done(

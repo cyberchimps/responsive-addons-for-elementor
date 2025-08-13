@@ -429,7 +429,7 @@ class Responsive_Addons_For_Elementor_Advanced_Tabs extends Widget_Base {
 				'label'       => esc_html__( 'Custom Caption', 'responsive-addons-for-elementor' ),
 				'type'        => Controls_Manager::TEXT,
 				'default'     => '',
-				'placeholder' => esc_html__( 'Enter your image caption', 'elementor' ),
+				'placeholder' => esc_html__( 'Enter your image caption', 'responsive-addons-for-elementor' ),
 				'condition'   => array(
 					'rael_advanced_tabs_tab_image_caption_source' => 'custom',
 					'rael_advanced_tabs_tab_image[url]!' => '',
@@ -482,7 +482,7 @@ class Responsive_Addons_For_Elementor_Advanced_Tabs extends Widget_Base {
 				'type'        => Controls_Manager::SELECT,
 				'description' => sprintf(
 					/* translators: 1: Link open tag, 2: Link close tag. */
-					esc_html__( 'Manage your site’s lightbox settings in the %1$sLightbox panel%2$s.', 'elementor' ),
+					esc_html__( 'Manage your site’s lightbox settings in the %1$sLightbox panel%2$s.', 'responsive-addons-for-elementor' ),
 					'<a href="javascript: $e.run( \'panel/global/open\' ).then( () => $e.route( \'panel/global/settings-lightbox\' ) )">',
 					'</a>'
 				),
@@ -598,7 +598,7 @@ class Responsive_Addons_For_Elementor_Advanced_Tabs extends Widget_Base {
 		$this->add_responsive_control(
 			'rael_advanced_tabs_tab_image_image_border_radius',
 			array(
-				'label'      => esc_html__( 'Border Radius', 'elementor' ),
+				'label'      => esc_html__( 'Border Radius', 'responsive-addons-for-elementor' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%', 'em', 'rem', 'custom' ),
 				'selectors'  => array(
@@ -1330,7 +1330,7 @@ class Responsive_Addons_For_Elementor_Advanced_Tabs extends Widget_Base {
 							<?php echo do_shortcode( $tab['rael_advanced_tabs_tab_content'] ); ?>
 							<?php
 						elseif ( 'image' === $tab['rael_advanced_tabs_text_type'] ) :
-							{;
+							{
 							?>
 							<?php $this->render_image( $tab ); ?>
 						<?php } elseif ( 'template' === $tab['rael_advanced_tabs_text_type'] ) : ?>

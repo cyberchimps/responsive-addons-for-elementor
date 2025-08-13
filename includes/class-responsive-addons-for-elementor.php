@@ -2353,7 +2353,7 @@ class Responsive_Addons_For_Elementor {
 		}
 
 		$rate_url  = 'https://wordpress.org/support/plugin/responsive-addons-for-elementor/reviews/';
-		$rate_link = '<a target="_blank" href="' . esc_url( $rate_url ) . '" title="' . esc_attr__( 'Rate the plugin', 'responsive-addons' ) . '">' . esc_html__( 'Rate the plugin ★★★★★', 'responsive-addons' ) . '</a>';
+		$rate_link = '<a target="_blank" href="' . esc_url( $rate_url ) . '" title="' . esc_attr__( 'Rate the plugin', 'responsive-addons-for-elementor' ) . '">' . esc_html__( 'Rate the plugin ★★★★★', 'responsive-addons-for-elementor' ) . '</a>';
 		$links[]   = $rate_link;
 		return $links;
 	}

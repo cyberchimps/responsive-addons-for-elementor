@@ -91,8 +91,7 @@ class Responsive_Addons_For_Elementor_Facebook_Feed extends Widget_Base {
 		$this->rael_card_body_styles();
 		$this->rael_card_footer_styles();
 		$this->rael_overlay_styles();
-		// added widget in RAE v1.6.7 but not added load more button
-		// $this->rael_load_more_button_styles();
+
 	}
 
 	protected function rael_facebook_account_settings() {
@@ -410,40 +409,6 @@ class Responsive_Addons_For_Elementor_Facebook_Feed extends Widget_Base {
 				),
 			)
 		);
-
-		// added widget in RAE v1.6.7 but not added load more button
-		// $this->add_control(
-		// 'rael_show_load_more_heading',
-		// array(
-		// 'label' => __( 'Load More Button', 'responsive-addons-for-elementor' ),
-		// 'type'  => Controls_Manager::HEADING,
-		// )
-		// );
-
-		// $this->add_control(
-		// 'rael_show_load_more',
-		// array(
-		// 'label'        => __( 'Show Load More', 'responsive-addons-for-elementor' ),
-		// 'type'         => Controls_Manager::SWITCHER,
-		// 'label_on'     => __( 'Show', 'responsive-addons-for-elementor' ),
-		// 'label_off'    => __( 'Hide', 'responsive-addons-for-elementor' ),
-		// 'return_value' => 'yes',
-		// 'default'      => 'no',
-		// )
-		// );
-
-		// $this->add_control(
-		// 'rael_loadmore_text',
-		// array(
-		// 'label'     => __( 'Label', 'responsive-addons-for-elementor' ),
-		// 'type'      => Controls_Manager::TEXT,
-		// 'dynamic'   => array( 'active' => true ),
-		// 'default'   => __( 'Load More', 'responsive-addons-for-elementor' ),
-		// 'condition' => array(
-		// 'rael_show_load_more' => array( 'yes' ),
-		// ),
-		// )
-		// );
 
 		$this->end_controls_section();
 	}
@@ -1066,180 +1031,6 @@ class Responsive_Addons_For_Elementor_Facebook_Feed extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	// added widget in RAE v1.6.7 but not added load more button
-	// protected function rael_load_more_button_styles() {
-
-	// $this->start_controls_section(
-	// 'rael_fb_post_load_more_button_style_section',
-	// array(
-	// 'label'     => __( 'Load More Button', 'responsive-addons-for-elementor' ),
-	// 'tab'       => Controls_Manager::TAB_STYLE,
-	// 'condition' => array(
-	// 'rael_show_load_more' => 'yes',
-	// ),
-	// )
-	// );
-
-	// $this->add_responsive_control(
-	// 'rael_fb_post_load_more_button_padding',
-	// array(
-	// 'label'      => __( 'Padding', 'responsive-addons-for-elementor' ),
-	// 'type'       => Controls_Manager::DIMENSIONS,
-	// 'size_units' => array( 'px', 'em', '%' ),
-	// 'selectors'  => array(
-	// '{{WRAPPER}} .rael-fb-load-more-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-	// ),
-	// )
-	// );
-
-	// $this->add_responsive_control(
-	// 'rael_fb_post_load_more_button_margin',
-	// array(
-	// 'label'      => __( 'Margin', 'responsive-addons-for-elementor' ),
-	// 'type'       => Controls_Manager::DIMENSIONS,
-	// 'size_units' => array( 'px', 'em', '%' ),
-	// 'selectors'  => array(
-	// '{{WRAPPER}} .rael-fb-load-more-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-	// ),
-	// )
-	// );
-	// $this->add_group_control(
-	// Group_Control_Typography::get_type(),
-	// array(
-	// 'name'     => 'rael_fb_post_load_more_button_typography',
-	// 'selector' => '{{WRAPPER}} .rael-fb-load-more-button > span',
-	// )
-	// );
-
-	// $this->add_group_control(
-	// Group_Control_Border::get_type(),
-	// array(
-	// 'name'     => 'rael_fb_post_load_more_button_border',
-	// 'label'    => __( 'Border', 'responsive-addons-for-elementor' ),
-	// 'selector' => '{{WRAPPER}} .rael-fb-load-more-button',
-	// )
-	// );
-
-	// $this->add_control(
-	// 'rael_fb_post_load_more_button_border-radius',
-	// array(
-	// 'label'     => __( 'Border Radius', 'responsive-addons-for-elementor' ),
-	// 'type'      => Controls_Manager::SLIDER,
-	// 'range'     => array(
-	// 'px' => array(
-	// 'max' => 100,
-	// ),
-	// ),
-	// 'selectors' => array(
-	// '{{WRAPPER}} .rael-fb-load-more-button' => 'border-radius: {{SIZE}}px;',
-	// ),
-	// )
-	// );
-
-	// $this->add_group_control(
-	// \Elementor\Group_Control_Box_Shadow::get_type(),
-	// array(
-	// 'name'     => 'rael_fb_post_load_more_button_shadow',
-	// 'selector' => '{{WRAPPER}} .rael-fb-load-more-button',
-	// )
-	// );
-
-	// $this->start_controls_tabs( 'rael_fb_post_load_more_button_tabs' );
-
-	// Normal State Tab.
-	// $this->start_controls_tab(
-	// 'rael_fb_post_load_more_button_normal',
-	// array(
-	// 'label' => __( 'Normal', 'responsive-addons-for-elementor' ),
-	// )
-	// );
-
-	// $this->add_control(
-	// 'rael_fb_post_load_more_button_normal_color',
-	// array(
-	// 'label'     => __( 'Text Color', 'responsive-addons-for-elementor' ),
-	// 'type'      => Controls_Manager::COLOR,
-	// 'selectors' => array(
-	// '{{WRAPPER}} .rael-fb-load-more-button' => 'color: {{VALUE}};',
-	// ),
-	// )
-	// );
-
-	// $this->add_control(
-	// 'rael_fb_post_load_more_button_normal_bg_color',
-	// array(
-	// 'label'     => __( 'Background Color', 'responsive-addons-for-elementor' ),
-	// 'type'      => Controls_Manager::COLOR,
-	// 'selectors' => array(
-	// '{{WRAPPER}} .rael-fb-load-more-button' => 'background-color: {{VALUE}};',
-	// ),
-	// )
-	// );
-
-	// $this->end_controls_tab();
-
-	// Hover State Tab.
-	// $this->start_controls_tab(
-	// 'rael_fb_post_load_more_button_hover',
-	// array(
-	// 'label' => __( 'Hover', 'responsive-addons-for-elementor' ),
-	// )
-	// );
-
-	// $this->add_control(
-	// 'rael_fb_post_load_more_button_hover_color',
-	// array(
-	// 'label'     => __( 'Text Color', 'responsive-addons-for-elementor' ),
-	// 'type'      => Controls_Manager::COLOR,
-	// 'selectors' => array(
-	// '{{WRAPPER}} .rael-fb-load-more-button:hover' => 'color: {{VALUE}};',
-	// ),
-	// )
-	// );
-
-	// $this->add_control(
-	// 'rael_fb_post_load_more_button_hover_bg_color',
-	// array(
-	// 'label'     => __( 'Background Color', 'responsive-addons-for-elementor' ),
-	// 'type'      => Controls_Manager::COLOR,
-	// 'selectors' => array(
-	// '{{WRAPPER}} .rael-fb-load-more-button:hover' => 'background: {{VALUE}};',
-	// ),
-	// )
-	// );
-
-	// $this->end_controls_tab();
-
-	// $this->end_controls_tabs();
-
-	// $this->add_responsive_control(
-	// 'rael_fb_post_load_more_button_alignment',
-	// array(
-	// 'label'     => __( 'Button Alignment', 'responsive-addons-for-elementor' ),
-	// 'type'      => Controls_Manager::CHOOSE,
-	// 'options'   => array(
-	// 'flex-start' => array(
-	// 'title' => __( 'Left', 'responsive-addons-for-elementor' ),
-	// 'icon'  => 'fa fa-align-left',
-	// ),
-	// 'center'     => array(
-	// 'title' => __( 'Center', 'responsive-addons-for-elementor' ),
-	// 'icon'  => 'fa fa-align-center',
-	// ),
-	// 'flex-end'   => array(
-	// 'title' => __( 'Right', 'responsive-addons-for-elementor' ),
-	// 'icon'  => 'fa fa-align-right',
-	// ),
-	// ),
-	// 'default'   => 'center',
-	// 'selectors' => array(
-	// '{{WRAPPER}} .rael-fb-load-more' => 'justify-content: {{VALUE}};',
-	// ),
-	// )
-	// );
-
-	// $this->end_controls_section();
-	// }
 
 	protected function render() {
 		$in_editor = Plugin::instance()->editor->is_edit_mode();
@@ -1266,26 +1057,6 @@ class Responsive_Addons_For_Elementor_Facebook_Feed extends Widget_Base {
 				<?php
 				echo '<div class="heightFix"></div>';
 				?>
-				<!-- added widget in RAE v1.6.7 but not added load more button -->
-				<!-- if ( 'yes' === $settings['rael_show_load_more'] ) { -->
-					<!-- ?> -->
-					<!-- <div class="rael-fb-load-more"> -->
-						<!-- <button -->
-							<!-- class="rael-fb-load-more-button" -->
-							<!-- id="rael-fb-load-more-button" -->
-							<!-- data-widget-id="<?php // echo esc_attr( $this->get_id() ); ?>" -->
-							<!-- data-post-id="<?php // echo esc_attr( $post_id ); ?>" -->
-							<!-- data-page="1"> -->
-							<!-- <div class="lds-ring" id="lds-ring"> -->
-								<!-- <div></div> -->
-								<!-- <div></div> -->
-								<!-- <div></div> -->
-								<!-- <div></div> -->
-							<!-- </div> -->
-							<!-- <span><?php // echo esc_html( $settings['rael_loadmore_text'] ); ?></span> -->
-						<!-- </button> -->
-					<!-- </div> -->
-				<?php // } ?>
 			<?php } ?>
 		</div>
 		<?php

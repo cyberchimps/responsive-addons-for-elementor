@@ -1707,7 +1707,7 @@ msgstr ""
 msgid "Transition Duration"
 msgstr ""
 
-#: ext/cross-site-cp/class-rael-cs-copy-paste-btn.php:56
+#: ext/cross-site-cp/class-raelcrosssitecopypastebtn.php:56
 msgid "Sorry, invalid nonce or empty content!"
 msgstr ""
 
@@ -2067,7 +2067,7 @@ msgstr ""
 msgid "RAE Product Title"
 msgstr ""
 
-#: includes/dynamic-tags-manager/dynamic-tags/woocommerce/traits/tag-product_id.php:15
+#: includes/dynamic-tags-manager/dynamic-tags/woocommerce/traits/tag-product-id.php:15
 #: includes/widgets-manager/wc-templates/cart/mini-cart.php:43
 #: includes/widgets-manager/widgets/woocommerce/class-responsive-addons-for-elementor-wc-add-to-cart.php:103
 #: includes/widgets-manager/widgets/woocommerce/class-responsive-addons-for-elementor-wc-add-to-cart.php:110
@@ -2337,7 +2337,7 @@ msgstr ""
 msgid "Cart"
 msgstr ""
 
-#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-ajax-select2.php:40
+#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-control-ajax-select2.php:40
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-search-form.php:121
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-search-form.php:160
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-search-form.php:177
@@ -2352,12 +2352,12 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-ajax-select2.php:41
+#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-control-ajax-select2.php:41
 #: traits/responsive-addons-for-elementor-products-compare.php:189
 msgid "Remove"
 msgstr ""
 
-#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-ajax-select2.php:42
+#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-control-ajax-select2.php:42
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-advanced-tabs.php:286
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-advanced-tabs.php:313
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-banner.php:155
@@ -2399,7 +2399,7 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-ajax-select2.php:43
+#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-control-ajax-select2.php:43
 #: includes/widgets-manager/modules/query-control/controls/class-group-control-query.php:383
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-banner.php:403
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-banner.php:798
@@ -2473,7 +2473,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-ajax-select2.php:44
+#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-control-ajax-select2.php:44
 #: includes/widgets-manager/wc-templates/cart/mini-cart.php:58
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-price-box.php:260
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-price-box.php:1575
@@ -2494,7 +2494,7 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
-#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-ajax-select2.php:45
+#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-control-ajax-select2.php:45
 #: includes/widgets-manager/widgets/woocommerce/class-responsive-addons-for-elementor-product-carousel.php:1856
 #: includes/widgets-manager/widgets/woocommerce/class-responsive-addons-for-elementor-wc-add-to-cart.php:138
 #: includes/widgets-manager/widgets/woocommerce/class-responsive-addons-for-elementor-woo-checkout.php:354
@@ -2502,7 +2502,7 @@ msgstr ""
 msgid "Quantity"
 msgstr ""
 
-#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-ajax-select2.php:46
+#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-control-ajax-select2.php:46
 #: includes/widgets-manager/wc-templates/cart/mini-cart.php:104
 #: includes/widgets-manager/widgets/woocommerce/class-responsive-addons-for-elementor-menu-cart.php:138
 #: includes/widgets-manager/widgets/woocommerce/class-responsive-addons-for-elementor-menu-cart.php:460
@@ -2511,23 +2511,23 @@ msgstr ""
 msgid "Subtotal"
 msgstr ""
 
-#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-ajax-select2.php:47
+#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-control-ajax-select2.php:47
 msgid "User Status"
 msgstr ""
 
-#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-ajax-select2.php:48
+#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-control-ajax-select2.php:48
 msgid "Post Type"
 msgstr ""
 
-#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-ajax-select2.php:49
+#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-control-ajax-select2.php:49
 msgid "Browser"
 msgstr ""
 
-#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-ajax-select2.php:50
+#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-control-ajax-select2.php:50
 msgid "Date & Time"
 msgstr ""
 
-#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-ajax-select2.php:51
+#: includes/widgets-manager/controls/class-responsive-addons-for-elementor-control-ajax-select2.php:51
 msgid "Dynamic Field"
 msgstr ""
 

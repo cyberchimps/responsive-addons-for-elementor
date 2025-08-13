@@ -31,13 +31,13 @@ if ( ! class_exists( 'Responsive_Addons_For_Elementor_Attachment' ) ) {
 		public function rae_custom_field_attachment_link( $form_fields, $post ) {
 
 			$form_fields['rael-custom-link'] = array(
-				'label' => sprintf( __( 'RAE - Custom Link', 'responsive-elementor-addons' ) ),
+				'label' => sprintf( __( 'RAE - Custom Link', 'responsive-addons-for-elementor' ) ),
 				'input' => 'text',
 				'value' => get_post_meta( $post->ID, 'rael-custom-link', true ),
 			);
 
 			$form_fields['rael-categories'] = array(
-				'label' => sprintf( __( 'RAE - Categories (Ex: Cat1, Cat2)', 'responsive-elementor-addons' ) ),
+				'label' => sprintf( __( 'RAE - Categories (Ex: Cat1, Cat2)', 'responsive-addons-for-elementor' ) ),
 				'input' => 'text',
 				'value' => get_post_meta( $post->ID, 'rael-categories', true ),
 			);
