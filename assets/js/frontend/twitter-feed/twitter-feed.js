@@ -1,28 +1,38 @@
-var RAELWidgetTwitterFeedHandler = function ($scope, $) {
-  if ("undefined" == typeof $scope) {
-    return;
-  }
+(function($) {
 
-  var gutter = $(".rael-twitter-feed--masonry", $scope).data("gutter");
-  var options = {
-    itemSelector: ".rael-twitter-feed__item",
-    percentPosition: true,
-    masonry: {
-      columnWidth: ".rael-twitter-feed__item",
-      gutter: gutter,
-    },
-  };
+    function RAELWidgetTwitterFeedHandler($scope) {
+        $scope.find('.rael-twitter-feed--masonry').each(function() {
+            var $container = $(this);
 
-  var twitter_feed = $(".rael-twitter-feed--masonry", $scope).isotope(options);
+            if (!$container.length) {
+                return;
+            }
 
-  twitter_feed.imagesLoaded().progress(function () {
-    twitter_feed.isotope("layout");
-  });
-};
+            var gutter = parseInt($container.data('gutter')) || 10;
+            var $grid = $container.isotope({
+                itemSelector: '.rael-twitter-feed__item',
+                layoutMode: 'masonry',
+                masonry: {
+                    columnWidth: ".rael-twitter-feed__item",
+                    gutter: gutter
+                }
+            });
 
-jQuery(window).on("elementor/frontend/init", function () {
-  elementorFrontend.hooks.addAction(
-    "frontend/element_ready/rael-twitter-feed.default",
-    RAELWidgetTwitterFeedHandler
-  );
-});
+            $grid.imagesLoaded().progress(function() {
+                $grid.isotope('layout');
+            });
+        });
+    }
+
+    $(window).on('elementor/frontend/init', function() {
+        elementorFrontend.hooks.addAction(
+            'frontend/element_ready/rael-twitter-feed.default',
+            function($scope) {
+                RAELWidgetTwitterFeedHandler($scope);
+            }
+        );
+
+        RAELWidgetTwitterFeedHandler($(document));
+    });
+
+})(jQuery);

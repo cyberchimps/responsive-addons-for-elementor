@@ -876,8 +876,8 @@ class Responsive_Addons_For_Elementor_Twitter_Feed extends Widget_Base {
 	 * @since 1.2.2
 	 * @access protected
 	 */
-	protected function render() {
-		$settings        = $this->get_settings_for_display();
+protected function render() {
+    $settings        = $this->get_settings_for_display();
     	$account_name    = ltrim( $settings['rael_account_name'], '@' );
     	$hashtag         = $settings['rael_hashtag_name'];
     	$column_spacing  = $settings['rael_column_spacing']['size'] ?? 10;
@@ -937,18 +937,19 @@ class Responsive_Addons_For_Elementor_Twitter_Feed extends Widget_Base {
     	$tweets_data = array_splice( $tweets_data, 0, $settings['rael_post_limit'] );
 
     	$this->add_render_attribute('rael_twitter_feed', 'class', [
-        	'rael-twitter-feed',
-        	'rael-twitter-feed-' . $this->get_id(),
-        	'rael-twitter-feed--' . $settings['rael_content_layout'],
-        	'rael-twitter-feed--' . $settings['rael_column_grid'],
-        	'clearfix',
-    	]);
-    
-    	$this->add_render_attribute('rael_twitter_feed', 'data-gutter', $column_spacing);
+        'rael-twitter-feed',
+        'rael-twitter-feed-' . $this->get_id(),
+        'rael-twitter-feed--' . $settings['rael_content_layout'],
+        'rael-twitter-feed--' . $settings['rael_column_grid'],
+        'clearfix',
+    ]);
 
-    	$author_avatar = '<a href="https://twitter.com/' . $tweets_author->username . '" class="rael-twitter-feed__author-avatar" target="_blank">
-                        <img src="' . $tweets_author->profile_image_url . '" class="rael-twitter-feed__avatar-image--' . $settings['rael_avatar_style'] . '" alt="' . $tweets_author->name . '" />
-                      </a>'; ?>
+		$this->add_render_attribute('rael_twitter_feed_item', 'class', 'rael-twitter-feed__item');
+		$this->add_render_attribute('rael_twitter_feed', 'data-gutter', $column_spacing);
+
+		$author_avatar = '<a href="https://twitter.com/' . $tweets_author->username . '" class="rael-twitter-feed__author-avatar" target="_blank">
+			<img src="' . $tweets_author->profile_image_url . '" class="rael-twitter-feed__avatar-image--' . $settings['rael_avatar_style'] . '" alt="' . $tweets_author->name . '" />
+		</a>'; ?>
 
 		<div <?php $this->print_render_attribute_string( 'rael_twitter_feed' ); ?>>
 			<?php foreach ( $tweets_data as $tweet ) : ?>
@@ -1020,29 +1021,34 @@ class Responsive_Addons_For_Elementor_Twitter_Feed extends Widget_Base {
 						}
 					endif;
 					?>
-				</div>
-			<?php endforeach; ?>
-		</div>
+            </div>
+        <?php endforeach; ?>
+    </div>
 
-		<?php
-		echo '<style>
-			.rael-twitter-feed-' . esc_attr( $this->get_id() ) . '.rael-twitter-feed--masonry.rael-twitter-feed--col-2 .rael-twitter-feed__item {
-				width: calc(50% - ' . esc_attr( ceil( $column_spacing / 2 ) ) . 'px);
-			}
+    <?php
+    echo '<style>
+        .rael-twitter-feed-' . esc_attr( $this->get_id() ) . '.rael-twitter-feed--masonry.rael-twitter-feed--col-2 .rael-twitter-feed__item {
+            width: calc(50% - ' . esc_attr( ceil( $column_spacing / 2 ) ) . 'px);
+        }
 
-			.rael-twitter-feed-' . esc_attr( $this->get_id() ) . '.rael-twitter-feed--masonry.rael-twitter-feed--col-3 .rael-twitter-feed__item {
-				width: calc(33.33% - ' . esc_attr( ceil( $column_spacing * 2 / 3 ) ) . 'px);
-			}
+        .rael-twitter-feed-' . esc_attr( $this->get_id() ) . '.rael-twitter-feed--masonry.rael-twitter-feed--col-3 .rael-twitter-feed__item {
+            width: calc(33.33% - ' . esc_attr( ceil( $column_spacing * 2 / 3 ) ) . 'px);
+        }
 
-			.rael-twitter-feed-' . esc_attr( $this->get_id() ) . '.rael-twitter-feed--masonry.rael-twitter-feed--col-4 .rael-twitter-feed__item {
-				width: calc(25% - ' . esc_attr( ceil( $column_spacing * 3 / 4 ) ) . 'px);
-			}
+        .rael-twitter-feed-' . esc_attr( $this->get_id() ) . '.rael-twitter-feed--masonry.rael-twitter-feed--col-4 .rael-twitter-feed__item {
+            width: calc(25% - ' . esc_attr( ceil( $column_spacing * 3 / 4 ) ) . 'px);
+        }
 
-			.rael-twitter-feed-' . esc_attr( $this->get_id() ) . '.rael-twitter-feed--masonry.rael-twitter-feed--col-2 .rael-twitter-feed__item,
+		.rael-twitter-feed-' . esc_attr( $this->get_id() ) . '.rael-twitter-feed--masonry.rael-twitter-feed--col-2 .rael-twitter-feed__item,
 			.rael-twitter-feed-' . esc_attr( $this->get_id() ) . '.rael-twitter-feed--masonry.rael-twitter-feed--col-3 .rael-twitter-feed__item,
 			.rael-twitter-feed-' . esc_attr( $this->get_id() ) . '.rael-twitter-feed--masonry.rael-twitter-feed--col-4 .rael-twitter-feed__item	{
-				margin-bottom: ' . esc_attr( $column_spacing ) . 'px;
-			}
+            margin-bottom: ' . esc_attr( $column_spacing ) . 'px;
+			word-wrap: break-word;
+			overflow-wrap: break-word;
+			word-break: break-word;
+			overflow: hidden;
+			box-sizing: border-box;
+        }
 
 			@media only screen and (min-width: 768px) and (max-width: 992px) {
 				.rael-twitter-feed-' . esc_attr( $this->get_id() ) . '.rael-twitter-feed--masonry.rael-twitter-feed--col-3 .rael-twitter-feed__item,
@@ -1050,8 +1056,8 @@ class Responsive_Addons_For_Elementor_Twitter_Feed extends Widget_Base {
 					width: calc(50% - ' . esc_attr( ceil( $column_spacing / 2 ) ) . 'px);
 				}
 			}
-		</style>';
-	}
+    </style>';
+}
 
 	/**
 	 * Checks whether the given tweet has required hashtag.
