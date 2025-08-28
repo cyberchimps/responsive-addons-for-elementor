@@ -2201,7 +2201,6 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 			if ( selector.hasClass('rael-masonry') ) {
 				layoutMode = 'masonry';
 			}
-
 			var filters = scope.find('.rael-masonry-filters');
 			var def_cat = '*';
 
@@ -2230,6 +2229,9 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 							lastRow : lastrow,
 							selector : 'div',
 						});
+						$justified_selector.justifiedGallery('norewind');
+						$justified_selector.justifiedGallery("update");
+
 					});
 			} else {
 				var masonryArgs = {
@@ -2253,6 +2255,11 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 						$isotopeObj.isotope( 'layout' );
 					});
 				});
+				 $(window).on('resize', function() {
+        if ($isotopeObj && $isotopeObj.isotope) {
+            $isotopeObj.isotope('layout');
+        }
+    });
 			}
 
 			if ( selector.hasClass('rael-cat-filters') ) {
