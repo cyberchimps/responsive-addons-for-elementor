@@ -97,8 +97,8 @@ class Responsive_Addons_For_Elementor {
 
 		// Facebook Feed.
 		add_action( 'render_facebook_feed', array( $this, 'rael_render_facebook_feed' ), 10 );
-		add_action( 'wp_ajax_facebook_feed_load_more', array( $this, 'rael_render_facebook_feed' ) );
-		add_action( 'wp_ajax_nopriv_facebook_feed_load_more', array( $this, 'rael_render_facebook_feed' ) );
+		add_action('wp_ajax_rael_facebook_feed_load_more', array($this, 'rael_facebook_feed_load_more'));
+		add_action('wp_ajax_nopriv_rael_facebook_feed_load_more', array($this, 'rael_facebook_feed_load_more'));
 
 		// Quick View.
 		add_action( 'wp_ajax_nopriv_rael_product_quickview_popup', array( Helper::class, 'rael_product_quickview_popup' ) );
@@ -131,6 +131,10 @@ class Responsive_Addons_For_Elementor {
 
 		add_action( 'admin_notices', array( $this, 'rael_migration_notice' ) );
 		add_action( 'wp_ajax_rael_rea_to_rae_migration', array( $this, 'rael_rea_to_rae_migration' ) );
+
+		//RAEL Facebook Feed
+		add_action('wp_ajax_rael_facebook_feed_load_more', array($this, 'rael_facebook_feed_load_more'));
+		add_action('wp_ajax_nopriv_rael_facebook_feed_load_more', array($this, 'rael_facebook_feed_load_more'));
 
 		global $blog_id;
 		if ( is_multisite() ) {
@@ -256,6 +260,84 @@ class Responsive_Addons_For_Elementor {
 		check_ajax_referer( 'rael-rea-to-rae-migration', '_nonce' );
 		self::responsive_addons_for_elementor_install_rae();
 	}
+	
+	/**
+	 * Facebook Feed Load More AJAX handler
+	 * This function handles the AJAX request to load more Facebook feed posts.
+	 * 
+	 * @since 1.7.4
+	 */
+	function rael_facebook_feed_load_more() {		
+		if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'rael_facebook_feed_nonce')) {
+			wp_send_json_error(__('Nonce verification failed', 'responsive-addons-for-elementor'));
+		}
+		
+		$widget_id = isset($_POST['widget_id']) ? sanitize_text_field($_POST['widget_id']) : '';
+		$post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
+
+		$offset = isset($_POST['offset']) ? intval($_POST['offset']) : null;
+		$limit  = isset($_POST['limit'])  ? intval($_POST['limit'])  : null;
+		if (empty($widget_id)) {
+			wp_send_json_error(__('Invalid widget ID', 'responsive-addons-for-elementor'));
+		}
+		
+		$document = \Elementor\Plugin::$instance->documents->get($post_id);
+		$settings = [];
+		
+		if ($document) {
+			$elements = $document->get_elements_data();
+			$widget_data = $this->rael_find_element_recursive($elements, $widget_id);
+			
+			if ($widget_data) {
+				$widget = \Elementor\Plugin::$instance->elements_manager->create_element_instance($widget_data);
+				$settings = $widget->get_settings_for_display();
+				
+				// Modify settings for pagination
+				if ($offset === null) {
+					$page = isset($_POST['page']) ? intval($_POST['page']) : 1;
+					$size = isset($settings['rael_facebook_feed_image_count']['size']) ? intval($settings['rael_facebook_feed_image_count']['size']) : 0;
+					$offset = $size * ($page - 1);
+				}
+				if ($limit !== null) {
+					$settings['rael_facebook_feed_image_count']['size'] = $limit;
+				}
+				
+				$settings['rael_facebook_feed_offset'] = $offset;
+
+				ob_start();
+				$this->rael_render_facebook_feed($settings);
+				$html = ob_get_clean();
+				
+				$key = 'rael_facebook_feed_' . hash('sha256', str_replace('.', '', $settings['rael_facebook_feed_page_id'] . $settings['rael_facebook_feed_access_token'])) . $settings['rael_facebook_feed_cache_limit'];
+				$facebook_data = get_transient($key);
+				$total_posts = isset($facebook_data['data']) ? count($facebook_data['data']) : 0;
+				$has_more = ($offset + $settings['rael_facebook_feed_image_count']['size']) < $total_posts;
+				
+				wp_send_json_success([
+					'html' => $html,
+					'has_more' => $has_more
+				]);
+			}
+		}
+		
+		wp_send_json_error(__('Unable to load widget settings', 'responsive-addons-for-elementor'));
+	}
+
+private function rael_find_element_recursive($elements, $widget_id) {
+    foreach ($elements as $element) {
+        if ($widget_id === $element['id']) {
+            return $element;
+        }
+        
+        if (!empty($element['elements'])) {
+            $found = $this->rael_find_element_recursive($element['elements'], $widget_id);
+            if ($found) {
+                return $found;
+            }
+        }
+    }
+    return false;
+}
 
 	/**
 	 * Install and Activates the RAE plugin.
@@ -1150,6 +1232,13 @@ class Responsive_Addons_For_Elementor {
 							wp_enqueue_style( 'rael-magnific-popup-style' );
 						}
 						break;
+					case 'facebook-feed':
+						wp_enqueue_script( 'rael-facebook-feed', RAEL_ASSETS_URL . 'js/frontend/facebook-feed/facebook-feed.min.js', array( 'jquery' ), RAEL_VER, true );
+						wp_localize_script('rael-facebook-feed', 'rael_facebook_feed_vars', array(
+							'ajaxurl' => admin_url('admin-ajax.php'),
+							'nonce' => wp_create_nonce('rael_facebook_feed_nonce')
+						));
+						break;
 				}
 			}
 		}
@@ -1724,6 +1813,7 @@ class Responsive_Addons_For_Elementor {
 						array_push( $css_files, $css_files_path . 'gfstyler/gfstyler' . $css_min_ext );
 						break;
 					case 'facebook-feed':
+						array_push( $js_files, $js_files_path . 'facebook-feed/facebook-feed' . $ext );
 						array_push( $css_files, $css_files_path . 'facebook-feed/facebook-feed' . $css_min_ext );
 						break;
 				}
@@ -2060,50 +2150,18 @@ class Responsive_Addons_For_Elementor {
 	 */
 	public function rael_render_facebook_feed( $settings ) {
 
-		// check if ajax request.
-		if ( ! empty( $_REQUEST['action'] ) && 'facebook_feed_load_more' === $_REQUEST['action'] ) {
-
-			$ajax = wp_doing_ajax();
-			// check ajax referer.
-			check_ajax_referer( 'facebook_feed_ajax_nonce' );
-
-			// init vars.
-			$page = isset( $_REQUEST['page'] ) ? intval( $_REQUEST['page'], 10 ) : 0;
-			if ( ! empty( $_POST['post_id'] ) ) {
-				$post_id = intval( $_POST['post_id'], 10 );
-			} else {
-				$err_msg = __( 'Post ID is missing', 'responsive-addons-for-elementor' );
-				if ( $ajax ) {
-					wp_send_json_error( $err_msg );
-				}
-				return false;
-			}
-			if ( ! empty( $_POST['widget_id'] ) ) {
-				$widget_id = sanitize_text_field( wp_unslash( $_POST['widget_id'] ) );
-			} else {
-				$err_msg = __( 'Widget ID is missing', 'responsive-addons-for-elementor' );
-				if ( $ajax ) {
-					wp_send_json_error( $err_msg );
-				}
-				return false;
-			}
-			$settings = $this->rael_get_widget_settings( $post_id, $widget_id );
-
-		} else {
-			$page = 0;
-		}
-
+		$page =0;
 		$html    = '';
 		$page_id = $settings['rael_facebook_feed_page_id'];
 		$token   = $settings['rael_facebook_feed_access_token'];
-
+		$offset = isset($settings['rael_facebook_feed_offset']) ? $settings['rael_facebook_feed_offset'] : 0;
 		if ( empty( $page_id ) || empty( $token ) ) {
 			return;
 		}
 
 		$key           = 'rael_facebook_feed_' . hash( 'sha256', str_replace( '.', '', $page_id . $token ) ) . $settings['rael_facebook_feed_cache_limit'];
 		$facebook_data = get_transient( $key );
-
+		
 		if ( false === $facebook_data ) {
 			$facebook_data = wp_remote_retrieve_body( wp_remote_get( "https://graph.facebook.com/v22.0/{$page_id}/posts?fields=id,message,story,created_time,full_picture,permalink_url,attachments{type,media_type,title,description,unshimmed_url},comments.summary(total_count){from},reactions.summary(total_count){from}&limit=99&access_token={$token}", array( 'timeout' => 70 ) ) );
 
@@ -2123,7 +2181,9 @@ class Responsive_Addons_For_Elementor {
 				$facebook_data = array_reverse( $facebook_data );
 				break;
 		}
-		$items = array_splice( $facebook_data, ( $page * $settings['rael_facebook_feed_image_count']['size'] ), $settings['rael_facebook_feed_image_count']['size'] );
+		$limit = isset($settings['rael_facebook_feed_image_count']['size']) ? intval( $settings['rael_facebook_feed_image_count']['size'] ) : 0;
+
+		$items = array_slice( $facebook_data, $offset, $limit );
 
 		foreach ( $items as $item ) {
 			$max           = 'rael_facebook_feed_message_max_length';
@@ -2139,8 +2199,8 @@ class Responsive_Addons_For_Elementor {
 					<div class="rael-fb-feed-item-content-container">
 					<header class="rael-fb-feed-item-header">
 						<div class="rael-fb-feed-item-user">
-							' . isset( $item['from']['id'] ) ? '<a class="rael-fb-feed-user-image" href="' . $fb_url . $page_id . '" target="' . ( 'yes' === $settings['rael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v22.0/' . $page_id . '/picture" alt="' . $item['from']['name'] . '" class="rael-fb-feed-avatar"></a>' : '' . '
-							<a href="' . $fb_url . $page_id . '" target="' . ( 'yes' === $settings['rael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '"><p class="rael-fb-feed-username">' . $item['from']['name'] . '</p></a>
+							' . ( isset( $item['from']['id'] ) ? '<a class="rael-fb-feed-user-image" href="' . $fb_url . $page_id . '" target="' . ( 'yes' === $settings['rael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '"><img src="https://graph.facebook.com/v22.0/' . $page_id . '/picture" alt="' . ( isset( $item['from']['name'] ) ? esc_html( $item['from']['name'] ) : '' ) . '" class="rael-fb-feed-avatar"></a>' : '' ) . '
+							<a href="' . $fb_url . $page_id . '" target="' . ( 'yes' === $settings['rael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '"><p class="rael-fb-feed-username">' . ( isset( $item['from']['name'] ) ? esc_html( $item['from']['name'] ) : '' ) . '</p></a>
 						</div>';
 
 				if ( $settings['rael_facebook_feed_date'] ) {
@@ -2156,7 +2216,7 @@ class Responsive_Addons_For_Elementor {
 
 				if ( ! empty( $photo ) || isset( $item['attachments']['data'] ) ) {
 					$html .= '<div class="rael-fb-feed-media-wrap">';
-					if ( 'shared_story' === $item['status_type'] ) {
+					if ( isset( $item['status_type'] ) && 'shared_story' === $item['status_type'] ) {
 						if ( isset( $settings['rael_facebook_feed_is_show_preview_thumbnail'] ) && 'yes' === $settings['rael_facebook_feed_is_show_preview_thumbnail'] ) {
 							$html .= '<a href="' . $item['permalink_url'] . '" target="' . ( 'yes' === $settings['rael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '" class="rael-fb-feed-media-link">';
 							if ( 'video' === $item['attachments']['data'][0]['media_type'] ) {
@@ -2180,7 +2240,7 @@ class Responsive_Addons_For_Elementor {
 							$html .= '<p class="rael-fb-feed-url-description">' . $item['attachments']['data'][0]['description'] . '</p>';
 						}
 						$html .= '</div>';
-					} elseif ( 'added_video' === $item['status_type'] ) {
+					} elseif ( isset( $item['status_type'] ) && 'added_video' === $item['status_type'] ) {
 						if ( isset( $settings['rael_facebook_feed_is_show_preview_thumbnail'] ) && 'yes' === $settings['rael_facebook_feed_is_show_preview_thumbnail'] ) {
 							$html .= '<a href="' . $item['permalink_url'] . '" target="' . ( 'yes' === $settings['rael_facebook_feed_link_target'] ? '_blank' : '_self' ) . '" class="rael-fb-feed-preview-img">
 											<img class="rael-fb-feed-img" src="' . $photo . '">
@@ -2257,26 +2317,6 @@ class Responsive_Addons_For_Elementor {
 			}
 		}
 
-		if ( isset( $_REQUEST['action'] ) && 'facebook_feed_load_more' === $_REQUEST['action'] ) {
-			$data = array(
-				'num_pages' => ceil( count( $facebook_data ) / $settings['rael_facebook_feed_image_count']['size'] ),
-				'html'      => $html,
-			);
-			while ( ob_get_status() ) {
-				ob_end_clean();
-			}
-			if ( function_exists( 'gzencode' ) ) {
-				$response = gzencode( wp_json_encode( $data ) );
-				header( 'Content-Type: application/json; charset=utf-8' );
-				header( 'Content-Encoding: gzip' );
-				header( 'Content-Length: ' . strlen( $response ) );
-
-				echo wp_kses_post( $response );
-			} else {
-				wp_send_json( $data );
-			}
-			wp_die();
-		}
 
 		echo wp_kses_post( $html );
 	}
