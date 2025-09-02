@@ -352,4 +352,22 @@
 .rael-infobox .rael-infobox-align-icon-right {
   flex-direction: row-reverse;
 }
+
+.rael-infobox__link-icon{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: inherit;
+    line-height: 1;
+}
+
+.rael-infobox__link-icon i,
+.rael-infobox__link-icon svg {
+    width: 1em;
+    height: 1em;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+
 /*# sourceMappingURL=infobox.css.map */

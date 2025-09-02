@@ -2540,7 +2540,7 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 		$dynamic_settings   = $this->get_settings_for_display();
 		$_custom_attributes = ( isset( $dynamic_settings['rael_text_link']['custom_attributes'] ) ) ? $dynamic_settings['rael_text_link']['custom_attributes'] : '';
 		$_custom_attr_arr   = ( '' === $_custom_attributes ) ? array() : explode( ',', $_custom_attributes );
-
+		$icon_size = !empty($settings['rael_button_icon_size']) ? ' elementor-icon-' . $settings['rael_button_icon_size'] : ' elementor-icon-sm';
 		if ( 'link' === $settings['rael_cta_type'] ) {
 			$_nofollow = ( 'on' === $dynamic_settings['rael_text_link']['nofollow'] ) ? '1' : '0';
 			$_target   = ( 'on' === $dynamic_settings['rael_text_link']['is_external'] ) ? '_blank' : '';
@@ -2571,7 +2571,7 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 								$migrated = isset( $settings['__fa4_migrated']['rael_new_button_icon'] );
 								$is_new   = ! isset( $settings['rael_button_icon'] );
 								?>
-								<span class="rael-infobox__link-icon rael-infobox__link-icon--before">
+								<span class="rael-infobox__link-icon rael-infobox__link-icon--before elementor-icon<?php echo esc_attr($icon_size); ?>">
 									<?php
 									if ( $is_new || $migrated ) :
 										Icons_Manager::render_icon( $settings['rael_new_button_icon'], array( 'aria-hidden' => 'true' ) );
@@ -2583,7 +2583,7 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 								</span>
 							<?php } ?>
 						<?php } elseif ( ! empty( $settings['rael_button_icon'] ) ) { ?>
-							<span class="rael-infobox__link-icon rael-infobox__link-icon--before">
+							<span class="rael-infobox__link-icon rael-infobox__link-icon--before elementor-icon<?php echo esc_attr($icon_size); ?>">
 								<i class="<?php echo esc_attr( $settings['rael_button_icon'] ); ?>" aria-hidden="true"></i>
 							</span>
 						<?php } ?>
@@ -2601,7 +2601,7 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 								$migrated = isset( $settings['__fa4_migrated']['rael_new_button_icon'] );
 								$is_new   = ! isset( $settings['rael_button_icon'] );
 								?>
-								<span class="rael-infobox__link-icon rael-infobox__link-icon--after">
+								<span class="rael-infobox__link-icon rael-infobox__link-icon--after elementor-icon<?php echo esc_attr($icon_size); ?>">
 									<?php
 									if ( $is_new || $migrated ) :
 										Icons_Manager::render_icon( $settings['rael_new_button_icon'], array( 'aria-hidden' => 'true' ) );
@@ -2613,7 +2613,7 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 								</span>
 							<?php } ?>
 						<?php } elseif ( ! empty( $settings['rael_button_icon'] ) ) { ?>
-							<span class="rael-infobox__link-icon rael-infobox__link-icon--after">
+							<span class="rael-infobox__link-icon rael-infobox__link-icon--after elementor-icon<?php echo esc_attr($icon_size); ?>">
 								<i class="<?php echo esc_attr( $settings['rael_button_icon'] ); ?>" aria-hidden="true"></i>
 							</span>
 						<?php } ?>
