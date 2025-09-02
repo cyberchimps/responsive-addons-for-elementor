@@ -342,9 +342,51 @@ trait RAEL_Skin_Content_Base {
 
 				// Split to pages.
 				setup_postdata( $post );
+				
+				$allowed_tags = wp_kses_allowed_html( 'post' );
 
+				$svg_args = array(
+					'svg'	=> array(
+						'class'           => true,
+						'aria-hidden'     => true,
+						'aria-labelledby' => true,
+						'role'            => true,
+						'xmlns'           => true,
+						'width'           => true,
+						'height'          => true,
+						'viewbox'         => true,
+						'fill'            => true,
+						'stroke'          => true,
+						'stroke-width'    => true,
+						'stroke-linecap'  => true,
+						'stroke-linejoin' => true,
+						'focusable'       => true,
+					),
+					'g' 	=> array(
+						'fill' => true, 
+						'stroke' => true, 
+						'class' => true
+					),
+					'path'	=>array(
+						'd'      => true,
+						'fill'   => true,
+						'stroke' => true,
+						'stroke-width' => true,
+						'class' => true
+					),
+					'circle' => array(
+						'cx'     => true,
+						'cy'     => true,
+						'r'      => true,
+						'fill'   => true,
+						'stroke' => true,
+					),
+				);
+				
+				$allowed_tags = array_merge($allowed_tags, $svg_args);
 				/** This filter is documented in wp-includes/post-template.php */
-				echo wp_kses_post( apply_filters( 'the_content', get_the_content() ) );
+				$content = apply_filters( 'the_content', get_the_content() );
+				echo wp_kses( $content ,  $allowed_tags  );
 
 				wp_link_pages(
 					array(
@@ -369,7 +411,7 @@ trait RAEL_Skin_Content_Base {
 		Plugin::instance()->editor->set_edit_mode( $is_edit_mode );
 
 		if ( $with_wrapper ) {
-			echo '<div class="elementor-post__content">' . wp_kses_post( balanceTags( $content, true ) ) . '</div>';
+			echo '<div class="elementor-post__content">' . wp_kses( balanceTags( $content, true ), $allowed_tags ) . '</div>';
 		} else {
 			echo ( $content ); //phpcs:ignore
 		}
