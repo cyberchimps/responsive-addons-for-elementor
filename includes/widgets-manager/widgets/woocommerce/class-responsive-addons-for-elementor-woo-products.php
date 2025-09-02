@@ -3765,24 +3765,6 @@ class Responsive_Addons_For_Elementor_Woo_Products extends Widget_Base {
 				?>
 			</div>
 		</div>
-		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				var $scope = jQuery(".elementor-element-<?php echo esc_attr( $this->get_id() ); ?>");
-				var $products = $('.rael-products .products', $scope);
-				var $layout_mode = $products.data('layout-mode');	
-				if ( 'masonry' === $layout_mode ) {
-					// init isotope
-					var $isotope_products = $products.isotope();
-					$isotope_products.imagesLoaded().progress( function() {
-						$isotope_products.isotope('layout');
-					})
-
-					$(window).on('resize', function() {
-						$isotope_products.isotope('layout');
-					});
-				}
-			});
-		</script>
 		<?php
 		remove_filter(
 			'woocommerce_product_add_to_cart_text',

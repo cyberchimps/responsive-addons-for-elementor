@@ -1148,6 +1148,10 @@ private function rael_find_element_recursive($elements, $widget_id) {
 							wp_enqueue_script( 'rael-swiper', RAEL_ASSETS_URL . 'lib/swiper/swiper.min.js', array(), RAEL_VER, true );
 							wp_localize_script( 'rael-swiper', 'rael_elementor_swiper', $swiper_class );
 						}
+						if ( ! isset( $included_libs['rael-isotope'] ) ) {
+							$included_libs['rael-isotope'] = true;
+							wp_enqueue_script( 'rael-isotope', RAEL_ASSETS_URL . 'lib/isotope/isotope.min.js', array( 'jquery' ), RAEL_VER, true );
+						}
 						break;
 					case 'image-gallery':
 						if ( ! isset( $included_libs['rael-fancybox'] ) ) {
