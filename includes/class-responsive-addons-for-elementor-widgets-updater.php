@@ -175,7 +175,7 @@ class Responsive_Addons_For_Elementor_Widgets_Updater {
 			array(
 				'title'    => 'gf-styler',
 				'name'     => 'Gravity Forms Styler',
-				'docs'     => 'https://cyberchimps.com/docs/widgets/gravity-forms-styler',
+				'docs'     => 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/gravity-forms-styler',
 				'category' => 'form',
 			),
 			array(

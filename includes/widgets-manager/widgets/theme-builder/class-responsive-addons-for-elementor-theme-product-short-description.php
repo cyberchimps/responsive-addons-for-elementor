@@ -72,7 +72,7 @@ class Responsive_Addons_For_Elementor_Theme_Product_Short_Description extends Wo
 	 * @access public
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/docs/widgets/';
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/short-description/';
 	}
 
 	/**

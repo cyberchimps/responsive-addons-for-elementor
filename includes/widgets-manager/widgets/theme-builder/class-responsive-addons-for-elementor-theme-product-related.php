@@ -69,15 +69,6 @@ class Responsive_Addons_For_Elementor_Theme_Product_Related extends Responsive_A
 	}
 
 	/**
-	 * Get custom help url.
-	 *
-	 * @access public
-	 */
-	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/docs/widgets/';
-	}
-
-	/**
 	 * Get_group_name function to get the group name.
 	 *
 	 * @access public

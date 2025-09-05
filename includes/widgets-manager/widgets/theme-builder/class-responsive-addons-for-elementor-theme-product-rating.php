@@ -74,7 +74,7 @@ class Responsive_Addons_For_Elementor_Theme_Product_Rating extends Woo_Widget_Ba
 	 * @access public
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/docs/widgets/';
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/product-rating/';
 	}
 
 	/**

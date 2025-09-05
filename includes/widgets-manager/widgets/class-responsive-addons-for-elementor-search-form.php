@@ -906,6 +906,6 @@ class Responsive_Addons_For_Elementor_Search_Form extends Widget_Base {
 	 * @return string help URL
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/docs/widgets/search-form';
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/search-form/';
 	}
 }

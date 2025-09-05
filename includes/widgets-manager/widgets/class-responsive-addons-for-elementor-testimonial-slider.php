@@ -1561,6 +1561,6 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 	 * @return string help URL
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/docs/widgets/testimonial-slider';
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/testimonial-slider-2/';
 	}
 }

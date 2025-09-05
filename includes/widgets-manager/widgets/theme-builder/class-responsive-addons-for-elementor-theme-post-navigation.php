@@ -73,7 +73,7 @@ class Responsive_Addons_For_Elementor_Theme_Post_Navigation extends Widget_Base 
 	 * @return array Widget keywords.
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/docs/widgets/post-navigation';
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/post-navigation/';
 	}
 
 	/**

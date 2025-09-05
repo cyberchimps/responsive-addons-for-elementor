@@ -85,7 +85,7 @@ class Responsive_Addons_For_Elementor_Theme_Product_Price extends Woo_Widget_Bas
 	 * @return string Widget keywords.
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/docs/widgets/';
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/product-price/';
 	}
 
 	/**

@@ -160,7 +160,7 @@ class Responsive_Addons_For_Elementor_Woo_Products extends Widget_Base {
 	 * @return string The widget icon.
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/docs/widgets/products';
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/products/';
 	}
 
 	/**

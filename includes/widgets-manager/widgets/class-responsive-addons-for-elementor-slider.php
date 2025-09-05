@@ -1524,6 +1524,6 @@ class Responsive_Addons_For_Elementor_Slider extends Widget_Base {
 	 * @return string help URL
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/docs/widgets/slider';
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/slider/';
 	}
 }

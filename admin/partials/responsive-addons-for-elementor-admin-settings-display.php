@@ -83,7 +83,7 @@ $langs = array(
 			<div class="responsive-addons-for-elementor-inner-settings responsive-addons-for-elementor-mailchimp-section">
 				<div class="resposive-elementor-addons-title-section">
 					<p class="responsive-addons-for-elementor-setting-title"><?php esc_html_e( 'RAE Mailchimp Settings', 'responsive-addons-for-elementor' ); ?></p>
-					<p class="responsive-addons-for-elementor-setting-desc"><?php esc_html_e( 'These setting apply to RAE Mailchimp Styler widget', 'responsive-addons-for-elementor' ); ?>.<a style="color: #2271b1; text-decoration: none;" href="https://cyberchimps.com/docs/widgets/mailchimp-styler/"><?php esc_html_e( ' Learn More.', 'responsive-addons-for-elementor' ); ?></a></p>
+					<p class="responsive-addons-for-elementor-setting-desc"><?php esc_html_e( 'These setting apply to RAE Mailchimp Styler widget', 'responsive-addons-for-elementor' ); ?>.<a style="color: #2271b1; text-decoration: none;" href="https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/mailchimp-styler/"><?php esc_html_e( ' Learn More.', 'responsive-addons-for-elementor' ); ?></a></p>
 				</div>
 				<div class="resposive-elementor-addons-setting-section responsive-addons-for-elementor-mailchimp-setting-section">
 					<div class="responsive-addons-for-elementor-setting">
@@ -96,7 +96,7 @@ $langs = array(
 			<div class="responsive-addons-for-elementor-inner-settings responsive-addons-for-elementor-gmap-section">
 			<div class="resposive-elementor-addons-title-section">
 				<p class="responsive-addons-for-elementor-setting-title"><?php esc_html_e( 'RAE Google Map settings', 'responsive-addons-for-elementor' ); ?></p>
-				<p class="responsive-addons-for-elementor-setting-desc"><?php esc_html_e( 'These settings apply to RAE Google Map widget.', 'responsive-addons-for-elementor' ); ?><a style="color: #2271b1; text-decoration: none;" href="https://cyberchimps.com/docs/widgets/google-map/"><?php esc_html_e( ' Learn More.', 'responsive-addons-for-elementor' ); ?></a></p>
+				<p class="responsive-addons-for-elementor-setting-desc"><?php esc_html_e( 'These settings apply to RAE Google Map widget.', 'responsive-addons-for-elementor' ); ?><a style="color: #2271b1; text-decoration: none;" href="https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/google-map/"><?php esc_html_e( ' Learn More.', 'responsive-addons-for-elementor' ); ?></a></p>
 			</div>
 			<div class="resposive-elementor-addons-setting-section responsive-addons-for-elementor-gmap-setting-section">	
 				<div class="responsive-addons-for-elementor-setting">
@@ -126,7 +126,7 @@ $langs = array(
 		<div class="responsive-addons-for-elementor-inner-settings responsive-addons-for-elementor-gmap-section">
 			<div class="resposive-elementor-addons-title-section">
 				<p class="responsive-addons-for-elementor-setting-title"><?php esc_html_e( 'RAE Login / Register Form Settings', 'responsive-addons-for-elementor' ); ?></p>
-				<p class="responsive-addons-for-elementor-setting-desc"><?php esc_html_e( 'These settings apply to RAE Login / Register Form widget.', 'responsive-addons-for-elementor' ); ?><a style="color: #2271b1; text-decoration: none;" href="https://cyberchimps.com/docs/widgets/login-register/"><?php esc_html_e( ' Learn More.', 'responsive-addons-for-elementor' ); ?></a></p>
+				<p class="responsive-addons-for-elementor-setting-desc"><?php esc_html_e( 'These settings apply to RAE Login / Register Form widget.', 'responsive-addons-for-elementor' ); ?><a style="color: #2271b1; text-decoration: none;" href="https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/login-register/"><?php esc_html_e( ' Learn More.', 'responsive-addons-for-elementor' ); ?></a></p>
 			</div>
 			<div class="resposive-elementor-addons-setting-section responsive-addons-for-elementor-gmap-setting-section">
 				<div class="responsive-addons-for-elementor-setting">

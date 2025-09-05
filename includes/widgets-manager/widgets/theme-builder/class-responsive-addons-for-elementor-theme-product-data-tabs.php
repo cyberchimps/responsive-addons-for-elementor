@@ -66,15 +66,6 @@ class Responsive_Addons_For_Elementor_Theme_Product_Data_Tabs extends Woo_Widget
 		return array( 'rael', 'woocommerce', 'shop', 'store', 'data', 'product', 'tabs' );
 	}
 
-	/**
-	 * Get custom help url.
-	 *
-	 * @access public
-	 */
-	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/docs/widgets/';
-	}
-
 
 	/**
 	 * Register all the control settings for the widget

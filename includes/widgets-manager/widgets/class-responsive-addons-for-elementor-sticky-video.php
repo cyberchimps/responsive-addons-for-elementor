@@ -103,7 +103,7 @@ class Responsive_Addons_For_Elementor_Sticky_Video extends Widget_Base {
 	 * @return string help URL
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/docs/widgets/sticky-video';
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/sticky-video/';
 	}
 	/**
 	 * Register controls for the Table of Contents widget.

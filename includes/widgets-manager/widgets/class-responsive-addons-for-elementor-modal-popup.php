@@ -2834,6 +2834,6 @@ class Responsive_Addons_For_Elementor_Modal_Popup extends Widget_Base {
 	 * @return string help URL
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/elementor-widgets/docs/modal-popup';
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/modal-popup/';
 	}
 }

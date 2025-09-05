@@ -1306,6 +1306,6 @@ class Responsive_Addons_For_Elementor_Cf_Styler extends Widget_Base {
 	 * @return string help URL
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/docs/widgets/contact-form-7-styler';
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/contact-form-7-styler-2/';
 	}
 }

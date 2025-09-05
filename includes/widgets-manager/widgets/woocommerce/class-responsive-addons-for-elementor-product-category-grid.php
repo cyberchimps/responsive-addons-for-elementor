@@ -106,7 +106,7 @@ class Responsive_Addons_For_Elementor_Product_Category_Grid extends Widget_Base 
 	 * @return string Help URL.
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/docs/widgets/product-category-grid';
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/product-category-grid/';
 	}
 
 	/**

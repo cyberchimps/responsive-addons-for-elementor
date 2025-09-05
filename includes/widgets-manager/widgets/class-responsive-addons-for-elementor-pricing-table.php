@@ -1794,6 +1794,6 @@ class Responsive_Addons_For_Elementor_Pricing_Table extends Widget_Base {
 	 * @return string help URL
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/docs/widgets/pricing-table';
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/pricing-table-2/';
 	}
 }

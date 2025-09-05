@@ -320,6 +320,6 @@ class Responsive_Addons_For_Elementor_WC_Add_To_Cart extends Widget_Button {
 	 * @return string help URL
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/elementor-widgets/docs/custom-add-to-cart';
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/custom-add-to-cart/';
 	}
 }

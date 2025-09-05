@@ -110,7 +110,7 @@ class Responsive_Addons_For_Elementor_Logo_Carousel extends Widget_Base {
 	 * @return string help URL
 	 */
 	public function get_custom_help_url() {
-		return 'https://cyberchimps.com/docs/widgets/logo-carousel';
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/logo-carousel/';
 	}
 
 	/**
