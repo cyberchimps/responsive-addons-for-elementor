@@ -796,7 +796,15 @@ class Responsive_Addons_For_Elementor_Search_Form extends Widget_Base {
 			);
 		} elseif ( 'text' === $settings['rael_button_type'] && 'full_screen' === $settings['rael_skin'] ) {
 			$icon_class = 'search';
+
+			$this->add_render_attribute(
+				'icon',
+				array(
+					'class' => 'fa fa-' . $icon_class,
+				)
+			);
 		}
+
 
 		$migration_allowed = Icons_Manager::is_migration_allowed();
 		$icon              = array(
@@ -808,7 +816,7 @@ class Responsive_Addons_For_Elementor_Search_Form extends Widget_Base {
 			<?php do_action( 'rael_search_form_before_input', $this ); ?>
 			<?php if ( 'full_screen' === $settings['rael_skin'] ) : ?>
 				<div class="rael-elementor-search-form__toggle">
-					<?php if ( ! $migration_allowed || ! Icons_Manager::render_icon( $icon, array( 'aria-hidden' => 'true' ) ) ) { ?>
+					<?php if ( ! $migration_allowed || ! Icons_Manager::render_icon( $settings['rael_icon'], array( 'aria-hidden' => 'true' ) ) ) { ?>
 						<i class="fa fas fa-search" aria-hidden="true"></i>
 					<?php } ?>
 					<span class="elementor-screen-only"><?php esc_html_e( 'Search', 'responsive-addons-for-elementor' ); ?></span>

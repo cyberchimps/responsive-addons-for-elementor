@@ -3634,6 +3634,7 @@ class Responsive_Addons_For_Elementor_Woo_Checkout extends Widget_Base {
 			'rael_woo_checkout_table_total_text'    => $settings['rael_woo_checkout_table_total_text'],
 		);
 		$this->rael_woo_checkout_add_actions( $settings );
+		$shop_page_url = wc_get_page_permalink( 'shop' );
 
 		?>
 		<div data-checkout="<?php echo wp_kses_post( htmlspecialchars( wp_json_encode( $order_review_change_data ), ENT_QUOTES, 'UTF-8' ) ); ?>" <?php echo wp_kses_post( $this->get_render_attribute_string( 'container' ) ); ?>>
@@ -3670,7 +3671,21 @@ class Responsive_Addons_For_Elementor_Woo_Checkout extends Widget_Base {
 					self::rael_order_received( $wp->query_vars['order-received'] );
 
 				} else {
-					self::rael_checkout( $settings );
+					// If cart is empty, show message instead of blank
+					if ( WC()->cart && WC()->cart->is_empty() ) {
+						echo '<div class="rael-woo-cart-empty">';
+						echo '<h2 class="wc-block-cart__empty-cart__title">' . esc_html__( 'Your cart is currently empty!', 'responsive-addons-for-elementor' ) . '</h2>';
+						
+						// Optional: add link to shop
+						if ( ! empty( $settings['rael_woo_checkout_shop_link'] ) ) {
+							echo '<a class="rael-woo-cart-empty-btn" href="' . esc_url( $shop_page_url) . '">';
+							echo esc_html( $settings['rael_woo_checkout_shop_link_text'] ?: __( 'Return to Shop', 'responsive-addons-for-elementor' ) );
+							echo '</a>';
+						}
+						echo '</div>';
+					} else {
+						self::rael_checkout( $settings );
+					}
 				}
 
 				?>

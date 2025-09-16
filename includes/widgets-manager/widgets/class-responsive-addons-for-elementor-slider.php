@@ -1451,72 +1451,7 @@ class Responsive_Addons_For_Elementor_Slider extends Widget_Base {
 	/**
 	 * Content template function
 	 */
-	protected function content_template() {
-		?>
-		<#
-		var direction        = elementorFrontend.config.is_rtl ? 'rtl' : 'ltr',
-		next             = elementorFrontend.config.is_rtl ? 'left' : 'right',
-		prev             = elementorFrontend.config.is_rtl ? 'right' : 'left',
-		navi             = settings.navigation,
-		showDots         = ( 'dots' == navi || 'both' == navi ),
-		showArrows       = ( 'arrows' == navi || 'both' == navi ),
-		buttonSize       = settings.button_size;
-		#>
-		<div class="responsive-swiper">
-			<div class="responsive-slides-wrapper responsive-main-swiper swiper-container" dir="{{ direction }}" data-animation="{{ settings.content_animation }}">
-				<div class="swiper-wrapper responsive-slides">
-					<# jQuery.each( settings.slides, function( index, slide ) { #>
-					<div class="elementor-repeater-item-{{ slide._id }} swiper-slide">
-						<#
-						var kenClass = '';
 
-						if ( '' != slide.background_ken_burns ) {
-							kenClass =  ' elementor-ken-burns elementor-ken-burns--' + slide.zoom_direction;
-						}
-						isKenActive = 'yes' === slide.background_ken_burns ? 'true' : 'false';
-						#>
-						<div class="swiper-slide-bg{{ kenClass }}" data-ken-burns="{{ isKenActive }}"></div>
-						<# if ( 'yes' == slide.background_overlay ) { #>
-						<div class="elementor-background-overlay"></div>
-						<# } #>
-						<div class="swiper-slide-inner">
-							<div class="swiper-slide-contents">
-								<# if ( slide.heading ) { #>
-								<div class="responsive-slide-heading">{{{ slide.heading }}}</div>
-								<# }
-								if ( slide.description ) { #>
-								<div class="responsive-slide-description">{{{ slide.description }}}</div>
-								<# }
-								if ( slide.button_text ) { #>
-								<div class="elementor-button responsive-slide-button responsive-size-{{ buttonSize }}">{{{ slide.button_text }}}</div>
-								<# } #>
-							</div>
-							<# if ( slide.slide_image_show ) { #>
-								<div class="responsive-slide-image"></div>
-							<# } #>
-						</div>
-					</div>
-					<# } ); #>
-				</div>
-				<# if ( 1 < settings.slides.length ) { #>
-				<# if ( showDots ) { #>
-				<div class="swiper-pagination"></div>
-				<# } #>
-				<# if ( showArrows ) { #>
-				<div class="responsive-swiper-button responsive-swiper-button-prev">
-					<i class="eicon-chevron-{{ prev }}" aria-hidden="true"></i>
-					<span class="elementor-screen-only"><?php esc_html_e( 'Previous', 'responsive-addons-for-elementor' ); ?></span>
-				</div>
-				<div class="responsive-swiper-button responsive-swiper-button-next">
-					<i class="eicon-chevron-{{ next }}" aria-hidden="true"></i>
-					<span class="elementor-screen-only"><?php esc_html_e( 'Next', 'responsive-addons-for-elementor' ); ?></span>
-				</div>
-				<# } #>
-				<# } #>
-			</div>
-		</div>
-		<?php
-	}
 
 	/**
 	 * Get Custom help URL

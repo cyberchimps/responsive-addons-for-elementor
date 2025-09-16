@@ -27,7 +27,11 @@
 
 .rael-ticker-wrap .rael-ticker .ticker-content {
   padding: 8px 12px;
-  line-height: 1.8; }
+  line-height: 1.8; 
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
 
 .rael-ticker-wrap .rael-ticker .ticker-content p {
   margin: 0; }
@@ -86,4 +90,8 @@
 .rael-ticker-wrap .swiper-button-next:after, .rael-ticker-wrap .swiper-button-prev:after {
   content: none; }
 
+.rael-ticker-wrap .ticker-content-link {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
 /*# sourceMappingURL=content-ticker.css.map */

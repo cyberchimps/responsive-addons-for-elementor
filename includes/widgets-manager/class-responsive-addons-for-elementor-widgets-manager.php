@@ -515,7 +515,7 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_WPF_Styler() );
 							break;
 						case 'content-ticker':
-							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Content_Ticker() );
+							\Elementor\Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Content_Ticker() );
 							break;
 						case 'pricing-table':
 							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Pricing_Table() );

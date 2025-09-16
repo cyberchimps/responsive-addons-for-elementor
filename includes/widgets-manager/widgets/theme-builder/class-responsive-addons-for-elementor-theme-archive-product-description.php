@@ -144,7 +144,7 @@ class Responsive_Addons_For_Elementor_Theme_Archive_Product_Description extends 
 				'label'     => esc_html__( 'Text Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => array(
-					'.woocommerce {{WRAPPER}} .term-description' => 'color: {{VALUE}}',
+					'{{WRAPPER}}' => 'color: {{VALUE}}',
 				),
 			)
 		);
@@ -154,7 +154,7 @@ class Responsive_Addons_For_Elementor_Theme_Archive_Product_Description extends 
 			array(
 				'name'     => 'text_typography',
 				'label'    => esc_html__( 'Typography', 'responsive-addons-for-elementor' ),
-				'selector' => '.woocommerce {{WRAPPER}} .term-description',
+				'selector' => '{{WRAPPER}}',
 			)
 		);
 
@@ -169,8 +169,43 @@ class Responsive_Addons_For_Elementor_Theme_Archive_Product_Description extends 
 	 * @access public
 	 */
 	protected function render() {
+		$this->add_render_attribute( 'wrapper', 'class', 'rael-woocommerce-archive-description' );
+
+    	echo '<div ' . $this->get_render_attribute_string( 'wrapper' ) . '>';
+		// Frontend render
 		do_action( 'woocommerce_archive_description' );
+
+		// Elementor editor preview fallback
+		if ( \Elementor\Plugin::$instance->editor->is_edit_mode() ) {
+			$desc = '';
+
+			// Fetch all product categories (including empty ones)
+			$terms = get_terms( [
+				'taxonomy'   => 'product_cat',
+				'hide_empty' => false,
+			] );
+
+			if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
+				foreach ( $terms as $term ) {
+					if ( ! empty( $term->description ) ) {
+						$desc = $term->description;
+						break; // stop at the first category that actually has a description
+					}
+				}
+			}
+
+			// Fallback if none of the categories have descriptions
+			if ( empty( $desc ) ) {
+				$desc = __( 'Example archive description preview.', 'responsive-addons-for-elementor' );
+			}
+
+			echo '<div class="woocommerce-archive-description">';
+			echo wp_kses_post( $desc );
+			echo '</div>';
+		}
+		echo '</div>'; //  wrapper
 	}
+
 
 	/**
 	 * Render plain content function for the widget
