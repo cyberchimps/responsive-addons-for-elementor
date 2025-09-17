@@ -39,6 +39,10 @@ class Responsive_Addons_For_Elementor_Woo_Products extends Responsive_Addons_For
 	}
 
 	protected function register_query_controls() {
+		 // Skip if WooCommerce is not active
+        if ( ! class_exists( 'WooCommerce' ) ) {
+            return;
+        }
 		$this->start_controls_section(
 			'rael_section_query',
 			array(
@@ -146,6 +150,16 @@ class Responsive_Addons_For_Elementor_Woo_Products extends Responsive_Addons_For
 	}
 
 	protected function register_controls() {
+		 // Skip if WooCommerce is not active
+    if ( ! class_exists( 'WooCommerce' ) ) {
+        return;
+    }
+
+    // Skip if WooCommerce has not fully initialized (prevents editor warnings)
+    if ( ! did_action( 'woocommerce_init' ) ) {
+        add_action( 'woocommerce_init', [ $this, 'register_controls' ] );
+        return;
+    }
 		$this->start_controls_section(
 			'rael_section_content',
 			array(
@@ -324,93 +338,94 @@ class Responsive_Addons_For_Elementor_Woo_Products extends Responsive_Addons_For
 		$this->end_controls_section();
 
 		parent::register_controls();
+		if (isset($this->get_controls()['section_design_box'])) {
+			$this->start_injection(
+				array(
+					'type' => 'section',
+					'at' => 'start',
+					'of' => 'section_design_box',
+				)
+			);
 
-		$this->start_injection(
-			array(
-				'type' => 'section',
-				'at'   => 'start',
-				'of'   => 'section_design_box',
-			)
-		);
-
-		$this->start_controls_section(
-			'rael_products_title_style',
-			array(
-				'label'      => esc_html__( 'Title', 'responsive-addons-for-elementor' ),
-				'tab'        => Controls_Manager::TAB_STYLE,
-				'condition'  => array(
-					'products_title_show!' => '',
-				),
-				'conditions' => array(
-					'relation' => 'or',
-					'terms'    => array(
-						array(
-							'name'     => Products_Renderer::QUERY_CONTROL_NAME . '_post_type',
-							'operator' => '=',
-							'value'    => 'related',
-						),
-						array(
-							'name'     => Products_Renderer::QUERY_CONTROL_NAME . '_post_type',
-							'operator' => '=',
-							'value'    => 'upsells',
-						),
-						array(
-							'name'     => Products_Renderer::QUERY_CONTROL_NAME . '_post_type',
-							'operator' => '=',
-							'value'    => 'cross_sells',
+			$this->start_controls_section(
+				'rael_products_title_style',
+				array(
+					'label' => esc_html__('Title', 'responsive-addons-for-elementor'),
+					'tab' => Controls_Manager::TAB_STYLE,
+					'condition' => array(
+						'products_title_show!' => '',
+					),
+					'conditions' => array(
+						'relation' => 'or',
+						'terms' => array(
+							array(
+								'name' => Products_Renderer::QUERY_CONTROL_NAME . '_post_type',
+								'operator' => '=',
+								'value' => 'related',
+							),
+							array(
+								'name' => Products_Renderer::QUERY_CONTROL_NAME . '_post_type',
+								'operator' => '=',
+								'value' => 'upsells',
+							),
+							array(
+								'name' => Products_Renderer::QUERY_CONTROL_NAME . '_post_type',
+								'operator' => '=',
+								'value' => 'cross_sells',
+							),
 						),
 					),
-				),
-			)
-		);
+				)
+			);
 
-		$this->add_control(
-			'rael_products_title_color',
-			array(
-				'label'     => esc_html__( 'Color', 'responsive-addons-for-elementor' ),
-				'type'      => Controls_Manager::COLOR,
-				'global'    => array(
-					'default' => Global_Colors::COLOR_PRIMARY,
-				),
-				'selectors' => array(
-					'{{WRAPPER}}' => '--products-title-color: {{VALUE}};',
-				),
-			)
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'     => 'products_title_typography',
-				'selector' => '{{WRAPPER}}.products-heading-show .related > h2, {{WRAPPER}}.products-heading-show .upsells > h2, {{WRAPPER}}.products-heading-show .cross-sells > h2',
-				'global'   => array(
-					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				),
-			)
-		);
-
-		$this->add_responsive_control(
-			'rael_products_title_spacing',
-			array(
-				'label'      => esc_html__( 'Spacing', 'responsive-addons-for-elementor' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => array( 'px' ),
-				'range'      => array(
-					'px' => array(
-						'min' => 0,
-						'max' => 100,
+			$this->add_control(
+				'rael_products_title_color',
+				array(
+					'label' => esc_html__('Color', 'responsive-addons-for-elementor'),
+					'type' => Controls_Manager::COLOR,
+					'global' => array(
+						'default' => Global_Colors::COLOR_PRIMARY,
 					),
-				),
-				'default'    => array( 'px' => 0 ),
-				'selectors'  => array(
-					'{{WRAPPER}}' => 'products-title-spacing: {{SIZE}}{{UNIT}};',
-				),
-			)
-		);
+					'selectors' => array(
+						'{{WRAPPER}}' => '--products-title-color: {{VALUE}};',
+					),
+				)
+			);
 
-		$this->end_controls_section();
+			$this->add_group_control(
+				Group_Control_Typography::get_type(),
+				array(
+					'name' => 'products_title_typography',
+					'selector' => '{{WRAPPER}}.products-heading-show .related > h2, {{WRAPPER}}.products-heading-show .upsells > h2, {{WRAPPER}}.products-heading-show .cross-sells > h2',
+					'global' => array(
+						'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+					),
+				)
+			);
 
-		$this->end_injection();
+			$this->add_responsive_control(
+				'rael_products_title_spacing',
+				array(
+					'label' => esc_html__('Spacing', 'responsive-addons-for-elementor'),
+					'type' => Controls_Manager::SLIDER,
+					'size_units' => array('px'),
+					'range' => array(
+						'px' => array(
+							'min' => 0,
+							'max' => 100,
+						),
+					),
+					'default' => array('px' => 0),
+					'selectors' => array(
+						'{{WRAPPER}}' => 'products-title-spacing: {{SIZE}}{{UNIT}};',
+					),
+				)
+			);
+
+			$this->end_controls_section();
+
+			$this->end_injection();
+		}
 	}
 
 	protected function get_shortcode_object( $settings ) {
@@ -423,7 +438,10 @@ class Responsive_Addons_For_Elementor_Woo_Products extends Responsive_Addons_For
 	}
 
 	protected function render() {
-
+  // Skip rendering if WooCommerce is not ready
+    if ( ! class_exists( 'WooCommerce' ) || ! function_exists( 'wc_get_products' ) ) {
+        return;
+    }
 		if ( WC()->session ) {
 			wc_print_notices();
 		}

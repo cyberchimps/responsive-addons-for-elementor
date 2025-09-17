@@ -149,42 +149,50 @@ class Responsive_Addons_For_Elementor_WC_Add_To_Cart extends Widget_Button {
 
 		parent::register_controls();
 
-		$this->update_control(
-			'link',
-			array(
-				'type'    => Controls_Manager::HIDDEN,
-				'default' => array(
-					'url' => '',
-				),
-			)
-		);
+		if ($this->get_controls('link')) {
+			$this->update_control(
+				'link',
+				array(
+					'type' => Controls_Manager::HIDDEN,
+					'default' => array(
+						'url' => '',
+					),
+				)
+			);
+		}
 
-		$this->update_control(
-			'text',
-			array(
-				'default'     => __( 'Add to Cart', 'responsive-addons-for-elementor' ),
-				'placeholder' => __( 'Add to Cart', 'responsive-addons-for-elementor' ),
-			)
-		);
+		if ($this->get_controls('text')) {
+			$this->update_control(
+				'text',
+				array(
+					'default' => __('Add to Cart', 'responsive-addons-for-elementor'),
+					'placeholder' => __('Add to Cart', 'responsive-addons-for-elementor'),
+				)
+			);
+		}
 
-		$this->update_control(
-			'selected_icon',
-			array(
-				'default' => array(
-					'value'   => 'fas fa-shopping-cart',
-					'library' => 'fa-solid',
-				),
-			)
-		);
+		if ($this->get_controls('selected_icon')) {
+			$this->update_control(
+				'selected_icon',
+				array(
+					'default' => array(
+						'value' => 'fas fa-shopping-cart',
+						'library' => 'fa-solid',
+					),
+				)
+			);
+		}
 
-		$this->update_control(
-			'size',
-			array(
-				'condition' => array(
-					'show_quantity' => '',
-				),
-			)
-		);
+		if ($this->get_controls('size')) {
+			$this->update_control(
+				'size',
+				array(
+					'condition' => array(
+						'show_quantity' => '',
+					),
+				)
+			);
+		}
 	}
 
 	/**

@@ -84,18 +84,19 @@ class Responsive_Addons_For_Elementor_Theme_Post_Featured_Image extends Elemento
 	 */
 	protected function register_controls() {
 		parent::register_controls();
-
-		$this->update_control(
-			'image',
-			array(
-				'dynamic' => array(
-					'default' => Plugin::instance()->dynamic_tags->tag_data_to_tag_text( null, 'rael-post-featured-image' ),
+		if ( $this->get_controls('image')){
+			$this->update_control(
+				'image',
+				array(
+					'dynamic' => array(
+						'default' => Plugin::instance()->dynamic_tags->tag_data_to_tag_text( null, 'rael-post-featured-image' ),
+					),
 				),
-			),
-			array(
-				'recursive' => true,
-			)
-		);
+				array(
+					'recursive' => true,
+				)
+			);
+		}
 	}
 
 	/**

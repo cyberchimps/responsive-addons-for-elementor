@@ -115,24 +115,28 @@ class Responsive_Addons_For_Elementor_Theme_Product_Title extends Widget_Heading
 	protected function register_controls() {
 		parent::register_controls();
 
-		$this->update_control(
-			'title',
-			array(
-				'dynamic' => array(
-					'default' => Plugin::$instance->dynamic_tags->tag_data_to_tag_text( null, 'rael-product-title-tag' ),
+		if ($this->get_controls('title')) {
+			$this->update_control(
+				'title',
+				array(
+					'dynamic' => array(
+						'default' => Plugin::$instance->dynamic_tags->tag_data_to_tag_text(null, 'rael-product-title-tag'),
+					),
 				),
-			),
-			array(
-				'recursive' => true,
-			)
-		);
+				array(
+					'recursive' => true,
+				)
+			);
+		}
 
-		$this->update_control(
-			'header_size',
-			array(
-				'default' => 'h1',
-			)
-		);
+		if ($this->get_controls('header_size')) {
+			$this->update_control(
+				'header_size',
+				array(
+					'default' => 'h1',
+				)
+			);
+		}
 	}
 
 	/**

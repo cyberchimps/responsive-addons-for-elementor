@@ -41,25 +41,27 @@ abstract class RAEL_Theme_Title_Widget_Base extends Elementor_Widget_Heading {
 		parent::register_controls();
 
 		$dynamic_tag_name = $this->get_dynamic_tag_name();
-
-		$this->update_control(
-			'title',
-			array(
-				'dynamic' => array(
-					'default' => Plugin::instance()->dynamic_tags->tag_data_to_tag_text( null, $dynamic_tag_name ),
+		if ($this->get_controls('title')) {
+			$this->update_control(
+				'title',
+				array(
+					'dynamic' => array(
+						'default' => Plugin::instance()->dynamic_tags->tag_data_to_tag_text(null, $dynamic_tag_name),
+					),
 				),
-			),
-			array(
-				'recursive' => true,
-			)
-		);
-
-		$this->update_control(
-			'header_size',
-			array(
-				'default' => 'h1',
-			)
-		);
+				array(
+					'recursive' => true,
+				)
+			);
+		}
+		if ($this->get_controls('header_size')) {
+			$this->update_control(
+				'header_size',
+				array(
+					'default' => 'h1',
+				)
+			);
+		}
 	}
 	/**
 	 * Render function

@@ -143,112 +143,113 @@ class Responsive_Addons_For_Elementor_Theme_Product_Upsell extends Responsive_Ad
 		$this->end_controls_section();
 
 		parent::register_controls();
+		if (isset($this->get_controls()['section_design_box'])) {
+			$this->start_injection(
+				array(
+					'at' => 'before',
+					'of' => 'section_design_box',
+				)
+			);
 
-		$this->start_injection(
-			array(
-				'at' => 'before',
-				'of' => 'section_design_box',
-			)
-		);
+			$this->start_controls_section(
+				'rael_section_heading_style',
+				array(
+					'label' => esc_html__('Heading', 'responsive-addons-for-elementor'),
+					'tab' => Controls_Manager::TAB_STYLE,
+				)
+			);
 
-		$this->start_controls_section(
-			'rael_section_heading_style',
-			array(
-				'label' => esc_html__( 'Heading', 'responsive-addons-for-elementor' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			)
-		);
+			$this->add_control(
+				'rael_show_heading',
+				array(
+					'label' => esc_html__('Heading', 'responsive-addons-for-elementor'),
+					'type' => Controls_Manager::SWITCHER,
+					'label_off' => esc_html__('Hide', 'responsive-addons-for-elementor'),
+					'label_on' => esc_html__('Show', 'responsive-addons-for-elementor'),
+					'default' => 'yes',
+					'return_value' => 'yes',
+					'prefix_class' => 'show-heading-',
+				)
+			);
 
-		$this->add_control(
-			'rael_show_heading',
-			array(
-				'label'        => esc_html__( 'Heading', 'responsive-addons-for-elementor' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_off'    => esc_html__( 'Hide', 'responsive-addons-for-elementor' ),
-				'label_on'     => esc_html__( 'Show', 'responsive-addons-for-elementor' ),
-				'default'      => 'yes',
-				'return_value' => 'yes',
-				'prefix_class' => 'show-heading-',
-			)
-		);
-
-		$this->add_control(
-			'rael_heading_color',
-			array(
-				'label'     => esc_html__( 'Color', 'responsive-addons-for-elementor' ),
-				'type'      => Controls_Manager::COLOR,
-				'global'    => array(
-					'default' => Global_Colors::COLOR_PRIMARY,
-				),
-				'selectors' => array(
-					'{{WRAPPER}}.elementor-wc-products .products > h2' => 'color: {{VALUE}}',
-				),
-				'condition' => array(
-					'rael_show_heading!' => '',
-				),
-			)
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'      => 'rael_heading_typography',
-				'global'    => array(
-					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				),
-				'selector'  => '{{WRAPPER}}.elementor-wc-products .products > h2',
-				'condition' => array(
-					'rael_show_heading!' => '',
-				),
-			)
-		);
-
-		$this->add_responsive_control(
-			'rael_heading_text_align',
-			array(
-				'label'     => esc_html__( 'Text Align', 'responsive-addons-for-elementor' ),
-				'type'      => Controls_Manager::CHOOSE,
-				'options'   => array(
-					'left'   => array(
-						'title' => esc_html__( 'Left', 'responsive-addons-for-elementor' ),
-						'icon'  => 'eicon-text-align-left',
+			$this->add_control(
+				'rael_heading_color',
+				array(
+					'label' => esc_html__('Color', 'responsive-addons-for-elementor'),
+					'type' => Controls_Manager::COLOR,
+					'global' => array(
+						'default' => Global_Colors::COLOR_PRIMARY,
 					),
-					'center' => array(
-						'title' => esc_html__( 'Center', 'responsive-addons-for-elementor' ),
-						'icon'  => 'eicon-text-align-center',
+					'selectors' => array(
+						'{{WRAPPER}}.elementor-wc-products .products > h2' => 'color: {{VALUE}}',
 					),
-					'right'  => array(
-						'title' => esc_html__( 'Right', 'responsive-addons-for-elementor' ),
-						'icon'  => 'eicon-text-align-right',
+					'condition' => array(
+						'rael_show_heading!' => '',
 					),
-				),
-				'selectors' => array(
-					'{{WRAPPER}}.elementor-wc-products .products > h2' => 'text-align: {{VALUE}}',
-				),
-				'condition' => array(
-					'rael_show_heading!' => '',
-				),
-			)
-		);
+				)
+			);
 
-		$this->add_responsive_control(
-			'rael_heading_spacing',
-			array(
-				'label'      => esc_html__( 'Spacing', 'responsive-addons-for-elementor' ),
-				'type'       => Controls_Manager::SLIDER,
-				'size_units' => array( 'px', 'em' ),
-				'selectors'  => array(
-					'{{WRAPPER}}.elementor-wc-products .products > h2' => 'margin-bottom: {{SIZE}}{{UNIT}}',
-				),
-				'condition'  => array(
-					'rael_show_heading!' => '',
-				),
-			)
-		);
+			$this->add_group_control(
+				Group_Control_Typography::get_type(),
+				array(
+					'name' => 'rael_heading_typography',
+					'global' => array(
+						'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+					),
+					'selector' => '{{WRAPPER}}.elementor-wc-products .products > h2',
+					'condition' => array(
+						'rael_show_heading!' => '',
+					),
+				)
+			);
 
-		$this->end_controls_section();
+			$this->add_responsive_control(
+				'rael_heading_text_align',
+				array(
+					'label' => esc_html__('Text Align', 'responsive-addons-for-elementor'),
+					'type' => Controls_Manager::CHOOSE,
+					'options' => array(
+						'left' => array(
+							'title' => esc_html__('Left', 'responsive-addons-for-elementor'),
+							'icon' => 'eicon-text-align-left',
+						),
+						'center' => array(
+							'title' => esc_html__('Center', 'responsive-addons-for-elementor'),
+							'icon' => 'eicon-text-align-center',
+						),
+						'right' => array(
+							'title' => esc_html__('Right', 'responsive-addons-for-elementor'),
+							'icon' => 'eicon-text-align-right',
+						),
+					),
+					'selectors' => array(
+						'{{WRAPPER}}.elementor-wc-products .products > h2' => 'text-align: {{VALUE}}',
+					),
+					'condition' => array(
+						'rael_show_heading!' => '',
+					),
+				)
+			);
 
-		$this->end_injection();
+			$this->add_responsive_control(
+				'rael_heading_spacing',
+				array(
+					'label' => esc_html__('Spacing', 'responsive-addons-for-elementor'),
+					'type' => Controls_Manager::SLIDER,
+					'size_units' => array('px', 'em'),
+					'selectors' => array(
+						'{{WRAPPER}}.elementor-wc-products .products > h2' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+					),
+					'condition' => array(
+						'rael_show_heading!' => '',
+					),
+				)
+			);
+
+			$this->end_controls_section();
+
+			$this->end_injection();
+		}
 	}
 
 	/**

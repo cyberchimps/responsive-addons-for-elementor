@@ -82,37 +82,58 @@ class Responsive_Addons_For_Elementor_Theme_Product_Archive extends Responsive_A
 	 * @access public
 	 */
 	protected function register_controls() {
+		if ( ! class_exists( 'WooCommerce' ) ) {
+	            return;
+        }
+
 		parent::register_controls();
 
-		$this->remove_responsive_control( 'columns' );
-		$this->remove_responsive_control( 'rael_rows' );
-		$this->remove_control( 'orderby' );
-		$this->remove_control( 'order' );
+		$controls = $this->get_controls();
 
-		$this->update_control(
-			'rael_products_class',
-			array(
-				'prefix_class' => 'rael-elementor-products-grid elementor-',
-			)
-		);
+		if ( isset( $controls['columns'] ) ) {
+			$this->remove_responsive_control( 'columns' );
+		}
+
+		if ( isset( $controls['rael_rows'] ) ) {
+			$this->remove_responsive_control( 'rael_rows' );
+		}
+		if (isset($controls['orderby'])) {
+			$this->remove_control('orderby');
+		}
+		if (isset($controls['order'])) {
+			$this->remove_control('order');
+		}
+
+		if (isset($controls['rael_products_class'])) {
+			$this->update_control(
+				'rael_products_class',
+				array(
+					'prefix_class' => 'rael-elementor-products-grid elementor-',
+				)
+			);
+		}
 
 		// Should be kept as hidden since required for "allow_order"
 		// paginate , allow_order , show_result_count is used as default because they are coming from current-query-render
 		// and product-renderer.
-		$this->update_control(
-			'paginate',
-			array(
-				'type'    => 'hidden',
-				'default' => 'yes',
-			)
-		);
+		if (isset($controls['paginate'])) {
+			$this->update_control(
+				'paginate',
+				array(
+					'type' => 'hidden',
+					'default' => 'yes',
+				)
+			);
+		}
 
-		$this->update_control(
-			'allow_order',
-			array(
-				'default' => 'yes',
-			)
-		);
+		if (isset($controls['allow_order'])) {
+			$this->update_control(
+				'allow_order',
+				array(
+					'default' => 'yes',
+				)
+			);
+		}
 
 		$this->start_injection(
 			array(
@@ -152,26 +173,32 @@ class Responsive_Addons_For_Elementor_Theme_Product_Archive extends Responsive_A
 
 		$this->end_injection();
 
-		$this->update_control(
-			'show_result_count',
-			array(
-				'default' => 'yes',
-			)
-		);
+		if (isset($controls['show_result_count'])) {
+			$this->update_control(
+				'show_result_count',
+				array(
+					'default' => 'yes',
+				)
+			);
+		}
 
-		$this->update_control(
-			'rael_section_query',
-			array(
-				'type' => 'hidden',
-			)
-		);
+		if (isset($controls['rael_section_query'])) {
+			$this->update_control(
+				'rael_section_query',
+				array(
+					'type' => 'hidden',
+				)
+			);
+		}
 
-		$this->update_control(
-			Products_Renderer::QUERY_CONTROL_NAME . '_post_type',
-			array(
-				'default' => 'current_query',
-			)
-		);
+		if (isset($controls[Products_Renderer::QUERY_CONTROL_NAME . '_post_type'])) {
+			$this->update_control(
+				Products_Renderer::QUERY_CONTROL_NAME . '_post_type',
+				array(
+					'default' => 'current_query',
+				)
+			);
+		}
 
 		$this->start_controls_section(
 			'rael_section_advanced',

@@ -93,47 +93,57 @@ class Responsive_Addons_For_Elementor_Theme_Site_Logo extends Widget_Image {
 	protected function register_controls() {
 		parent::register_controls();
 
-		$this->update_control(
-			'image',
-			array(
-				'dynamic' => array(
-					'default' => Plugin::instance()->dynamic_tags->tag_data_to_tag_text( null, 'rael-site-logo' ),
+		if ($this->get_controls('image')) {
+			$this->update_control(
+				'image',
+				array(
+					'dynamic' => array(
+						'default' => Plugin::instance()->dynamic_tags->tag_data_to_tag_text(null, 'rael-site-logo'),
+					),
 				),
-			),
-			array(
-				'recursive' => true,
-			)
-		);
+				array(
+					'recursive' => true,
+				)
+			);
+		}
+		if ($this->get_controls('image_size')) {
+			$this->remove_control('image_size');
+		}
 
-		$this->remove_control( 'image_size' );
+		if ($this->get_controls('link_to')) {
+			$this->update_control(
+				'link_to',
+				array(
+					'default' => 'custom',
+				)
+			);
+		}
 
-		$this->update_control(
-			'link_to',
-			array(
-				'default' => 'custom',
-			)
-		);
-
-		$this->update_control(
-			'link',
-			array(
-				'dynamic' => array(
-					'default' => Plugin::instance()->dynamic_tags->tag_data_to_tag_text( null, 'rael-site-url' ),
+		if ($this->get_controls('link')) {
+			$this->update_control(
+				'link',
+				array(
+					'dynamic' => array(
+						'default' => Plugin::instance()->dynamic_tags->tag_data_to_tag_text(null, 'rael-site-url'),
+					),
 				),
-			),
-			array(
-				'recursive' => true,
-			)
-		);
+				array(
+					'recursive' => true,
+				)
+			);
+		}
 
-		$this->update_control(
-			'caption_source',
-			array(
-				'options' => $this->get_caption_source_options(),
-			)
-		);
-
-		$this->remove_control( 'caption' );
+		if ($this->get_controls('caption_source')) {
+			$this->update_control(
+				'caption_source',
+				array(
+					'options' => $this->get_caption_source_options(),
+				)
+			);
+		}
+		if ($this->get_controls('caption')) {
+			$this->remove_control('caption');
+		}
 	}
 
 	/**
