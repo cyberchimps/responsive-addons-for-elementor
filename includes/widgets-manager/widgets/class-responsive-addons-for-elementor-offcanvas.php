@@ -1523,47 +1523,47 @@ class Responsive_Addons_For_Elementor_Offcanvas extends Widget_Base {
 		);
 		?>
 		<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'content_wrap' ) ); ?> >
-		<?php if ( '' != $settings['rael_toggle_text'] || '' == $settings['rael_toggle_text'] ) : ?>
-			<div class="rael-offcanvas-toggle-wrap">
-				<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'toggle-button' ) ); ?> >
-					<?php if ( isset( $settings['__fa4_migrated']['rael_button_icon_new'] ) || empty( $settings['button_icon'] ) ) { ?>
-						<?php if ( isset( $settings['rael_button_icon_new']['value']['url'] ) ) : ?>
-							<img class="rael-offcanvas-toggle-icon rael-offcanvas-toggle-svg-icon"
-								src="<?php echo esc_url( $settings['rael_button_icon_new']['value']['url'] ); ?>"
-								alt="<?php echo esc_attr( get_post_meta( $settings['rael_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true ) ); ?>">
-						<?php else : ?>
-							<span class="rael-offcanvas-toggle-icon <?php echo esc_attr( $settings['rael_button_icon_new']['value'] ); ?>"></span>
-						<?php endif; ?>
-					<?php } else { ?>
-						<span class="rael-offcanvas-toggle-icon <?php echo esc_attr( $settings['button_icon'] ); ?>"></span>
-					<?php } ?>
-					<span class="rael-toggle-text">
-						<?php echo esc_html( $settings['rael_toggle_text'] ); ?>
-					</span>
+			<?php if ( '' != $settings['rael_toggle_text'] || '' == $settings['rael_toggle_text'] ) : ?>
+				<div class="rael-offcanvas-toggle-wrap">
+					<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'toggle-button' ) ); ?> >
+						<?php if ( isset( $settings['__fa4_migrated']['rael_button_icon_new'] ) || empty( $settings['button_icon'] ) ) { ?>
+							<?php if ( isset( $settings['rael_button_icon_new']['value']['url'] ) ) : ?>
+								<img class="rael-offcanvas-toggle-icon rael-offcanvas-toggle-svg-icon"
+									src="<?php echo esc_url( $settings['rael_button_icon_new']['value']['url'] ); ?>"
+									alt="<?php echo esc_attr( get_post_meta( $settings['rael_button_icon_new']['value']['id'], '_wp_attachment_image_alt', true ) ); ?>">
+							<?php else : ?>
+								<span class="rael-offcanvas-toggle-icon <?php echo esc_attr( $settings['rael_button_icon_new']['value'] ); ?>"></span>
+							<?php endif; ?>
+						<?php } else { ?>
+							<span class="rael-offcanvas-toggle-icon <?php echo esc_attr( $settings['button_icon'] ); ?>"></span>
+						<?php } ?>
+						<span class="rael-toggle-text">
+							<?php echo esc_html( $settings['rael_toggle_text'] ); ?>
+						</span>
+					</div>
 				</div>
+			<?php endif; ?>
+
+			<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'content_sidebar' ) ); ?>>
+				<?php $this->render_close_button(); ?>
+					<div class="rael-offcanvas-body">
+						<?php
+						if ( 'sidebar' == $settings['rael_offcanvas_content_type'] ) :
+							$this->render_sidebar();
+							elseif ( 'content' == $settings['rael_offcanvas_content_type'] ) :
+								$this->render_custom_content();
+							elseif ( 'menu' == $settings['rael_offcanvas_content_type'] ) :
+								$this->render_nav_menu();
+							elseif ( 'saved_section' == $settings['rael_offcanvas_content_type'] && ! empty( $settings['rael_off_saved_section'] ) ) :
+								echo esc_html( \Elementor\Plugin::$instance->frontend->get_builder_content_for_display( $settings['rael_off_saved_section'] ) );
+							elseif ( 'saved_page_templates' == $settings['rael_offcanvas_content_type'] && ! empty( $settings['rael_off_page_templates'] ) ) :
+								echo esc_html( \Elementor\Plugin::$instance->frontend->get_builder_content_for_display( $settings['rael_off_page_templates'] ) );
+							elseif ( 'saved_modules' == $settings['rael_offcanvas_content_type'] && ! empty( $settings['rael_off_saved_modules'] ) ) :
+								echo esc_html( \Elementor\Plugin::$instance->frontend->get_builder_content_for_display( $settings['rael_off_saved_modules'] ) );
+							endif;
+							?>
 			</div>
-		<?php endif; ?>
-
-		<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'content_sidebar' ) ); ?>>
-			<?php $this->render_close_button(); ?>
-				<div class="rael-offcanvas-body">
-					<?php
-					if ( 'sidebar' == $settings['rael_offcanvas_content_type'] ) :
-						$this->render_sidebar();
-						elseif ( 'content' == $settings['rael_offcanvas_content_type'] ) :
-							$this->render_custom_content();
-						elseif ( 'menu' == $settings['rael_offcanvas_content_type'] ) :
-							$this->render_nav_menu();
-						elseif ( 'saved_section' == $settings['rael_offcanvas_content_type'] && ! empty( $settings['rael_off_saved_section'] ) ) :
-							echo esc_html( \Elementor\Plugin::$instance->frontend->get_builder_content_for_display( $settings['rael_off_saved_section'] ) );
-						elseif ( 'saved_page_templates' == $settings['rael_offcanvas_content_type'] && ! empty( $settings['rael_off_page_templates'] ) ) :
-							echo esc_html( \Elementor\Plugin::$instance->frontend->get_builder_content_for_display( $settings['rael_off_page_templates'] ) );
-						elseif ( 'saved_modules' == $settings['rael_offcanvas_content_type'] && ! empty( $settings['rael_off_saved_modules'] ) ) :
-							echo esc_html( \Elementor\Plugin::$instance->frontend->get_builder_content_for_display( $settings['rael_off_saved_modules'] ) );
-						endif;
-						?>
 		</div>
-
 		<?php
 	}
 
