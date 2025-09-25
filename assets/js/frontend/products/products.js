@@ -203,23 +203,6 @@ var RAELProductsHandler = function($scope, $) {
         // Definition should be for development purpose only.
     }
 
-    /* ---------------------------------------
-     * Masonry Layout/ Isotope Init
-     * ------------------------------------- */
-    var $products = $('.rael-products .products', $scope);
-    var $layout_mode = $products.data('layout-mode');	
-    if ( 'masonry' === $layout_mode ) {
-        // init isotope
-        var $isotope_products = $products.isotope();
-        $isotope_products.imagesLoaded().progress( function() {
-            $isotope_products.isotope('layout');
-        })
-
-        $(window).on('resize', function() {
-            $isotope_products.isotope('layout');
-        });
-    }
-
     $(".rael-products__pagination", $scope).on('click', 'a', function (e) {
         e.preventDefault();
         var $this = $(this),
@@ -303,8 +286,6 @@ var RAELProductsHandler = function($scope, $) {
 
         $('body').append($markup);
     }
-
-    
 }
 
 

@@ -3765,6 +3765,50 @@ class Responsive_Addons_For_Elementor_Woo_Products extends Widget_Base {
 				?>
 			</div>
 		</div>
+		
+		<?php 
+			$inline_js = "
+    jQuery(document).ready(function($){
+        var \$wrapper = $('#$wrapper_id');
+        var \$products = $('.products', \$wrapper);
+        var layout_mode = \$products.data('layout-mode');
+
+        function initMasonry() {
+            if (layout_mode === 'masonry' && typeof \$products.isotope === 'function') {
+                var \$iso = \$products.isotope();
+                if (typeof \$iso.imagesLoaded === 'function') {
+                    \$iso.imagesLoaded().progress(function() {
+                        \$iso.isotope('layout');
+                    });
+                }
+                \$(window).on('resize', function() {
+                    \$iso.isotope('layout');
+                });
+            }
+        }
+
+        // Check if products are in an Advanced Tab
+        var \$tabContent = \$wrapper.closest('.rael-tabs-content');
+        if (\$tabContent.length && !\$tabContent.hasClass('active')) {
+            // Wait for the tab to become active
+            \$tabContent.on('transitionend tabShown', function() {
+                initMasonry();
+            });
+
+            // In case some themes use a click event for tabs
+            \$tabContent.closest('.rael-advanced-tabs').find('.rael-tabs-nav ul li').on('click', function() {
+                if (\$tabContent.hasClass('active')) {
+                    setTimeout(initMasonry, 50); // small delay to ensure visible
+                }
+            });
+        } else {
+            // Not in tabs or already active
+            initMasonry();
+        }
+    });
+    ";
+    wp_add_inline_script( 'jquery', $inline_js );
+		?>
 		<?php
 		remove_filter(
 			'woocommerce_product_add_to_cart_text',

@@ -3693,4 +3693,13 @@ class Responsive_Addons_For_Elementor_Woo_Checkout extends Widget_Base {
 		</div>
 		<?php
 	}
+
+	/**
+	 * Get Custom help URL
+	 *
+	 * @return string help URL
+	 */
+	public function get_custom_help_url() {
+		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/woo-checkout/';
+	}
 }

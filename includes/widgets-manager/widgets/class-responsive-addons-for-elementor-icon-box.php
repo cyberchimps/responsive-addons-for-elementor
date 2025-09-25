@@ -181,11 +181,11 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 				'options' => array(
 					'photo' => array(
 						'title' => __( 'Image', 'responsive-addons-for-elementor' ),
-						'icon'  => 'fa fa-picture-o',
+						'icon'  => 'eicon-image-bold',
 					),
 					'icon'  => array(
 						'title' => __( 'Font Icon', 'responsive-addons-for-elementor' ),
-						'icon'  => 'fa fa-info-circle',
+						'icon'  => 'eicon-star-o',
 					),
 				),
 				'default' => 'icon',
@@ -501,7 +501,7 @@ class Responsive_Addons_For_Elementor_Icon_Box extends Widget_Base {
 						'rael_cta_type' => array( 'button', 'link' ),
 					),
 					'selectors' => array(
-						'{{WRAPPER}} .button-elem.elementor-icon svg' => 'top:4px',
+						'{{WRAPPER}} .button-elem.elementor-icon svg' => 'top:4px; font-size:22px;',
 					),
 					'render_type'      => 'template',
 				)

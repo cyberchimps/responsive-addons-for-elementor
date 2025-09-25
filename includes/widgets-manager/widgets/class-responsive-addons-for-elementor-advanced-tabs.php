@@ -280,15 +280,15 @@ class Responsive_Addons_For_Elementor_Advanced_Tabs extends Widget_Base {
 				'options'     => array(
 					'none'  => array(
 						'title' => esc_html__( 'None', 'responsive-addons-for-elementor' ),
-						'icon'  => 'fa fa-ban',
+						'icon'  => 'eicon-ban',
 					),
 					'icon'  => array(
 						'title' => esc_html__( 'Icon', 'responsive-addons-for-elementor' ),
-						'icon'  => 'fa fa-gear',
+						'icon'  => 'eicon-star-o',
 					),
 					'image' => array(
 						'title' => esc_html__( 'Image', 'responsive-addons-for-elementor' ),
-						'icon'  => 'fa fa-picture-o',
+						'icon'  => 'eicon-image-bold',
 					),
 				),
 				'default'     => 'icon',
