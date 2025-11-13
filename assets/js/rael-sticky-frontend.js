@@ -275,23 +275,36 @@
   if (scrollTop >= self.originalOffsetTop && !self.isSticky) {
     $el.after(self.placeholder.show());
     // base props (always applied)
+    // Fetch values from Elementor settings
+    const stickyZIndex =
+      self.getSectionSetting("rael_sticky_section_sticky_z_index");
+    const stickyMaxWidthSetting = self.getSectionSetting(
+      "rael_sticky_section_sticky_max_width"
+    );
+    const stickyMaxWidth =
+      stickyMaxWidthSetting && stickyMaxWidthSetting.size
+        ? stickyMaxWidthSetting.size + (stickyMaxWidthSetting.unit || "px")
+        : "";
+
     let cssProps = {
       position: "fixed",
       top: 0,
       width: elementWidth + "px",
-      zIndex: 1100,
+      zIndex: stickyZIndex,
+      maxWidth: stickyMaxWidth,
     };
-    // only apply offset if section has more than one column
     
+    // only apply offset if section has more than one column
+
     if ($parent.children(".elementor-element.e-con").length > 1) {
       const elementOffsetLeft = $el.offset().left;
       let elementOffsetValue = elementOffsetLeft;
 
-                cssProps["inset-inline-start"] = elementOffsetValue + "px";
-              }
+      cssProps["inset-inline-start"] = elementOffsetValue + "px";
+    }
     $el.css(cssProps);
-              self.isSticky = true;
-            } else if (scrollTop < self.originalOffsetTop && self.isSticky) {
+    self.isSticky = true;
+  } else if (scrollTop < self.originalOffsetTop && self.isSticky) {
               self.removeStickyStyles();
             }
           };
@@ -307,6 +320,7 @@
             width: "",
             zIndex: "",
             insetInlineStart: "",
+            maxWidth: "",
           });
     
           if (this.placeholder) {
