@@ -104,9 +104,10 @@ class Responsive_Addons_For_Elementor_Media_Carousel extends Widget_Base {
 	 */
 	public function get_script_depends() {
 		return array(
-			'font-awesome-4-shim',
+			'elementor-frontend',
 			'swiper',
 			'e-swiper',
+			'font-awesome-4-shim',
 		);
 	}
 	/**

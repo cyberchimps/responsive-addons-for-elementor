@@ -1250,7 +1250,7 @@ private function rael_find_element_recursive($elements, $widget_id) {
 							wp_localize_script( 'rael-swiper', 'rael_elementor_swiper', $swiper_class );
 							
 						}
-						wp_enqueue_script( 'rael-media-carousel', RAEL_ASSETS_URL . 'js/frontend/media-carousel/media-carousel.js', array(), RAEL_VER, true);// . $ext );
+						wp_enqueue_script( 'rael-media-carousel', RAEL_ASSETS_URL . 'js/frontend/media-carousel/media-carousel.js', array('jquery', 'elementor-frontend'), RAEL_VER, true);// . $ext );
 
 						break;
 					case 'slider':
