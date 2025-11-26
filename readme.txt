@@ -1,7 +1,7 @@
 === Responsive Addons for Elementor – Free Elementor Addons Plugin and Elementor Templates ===
 Contributors: cyberchimps
 Donate Link: https://cyberchimps.com
-Tags: elementor, elementor addons, elementor widget, woocommerce elementor, page builder plugin
+Tags: elementor, elementor addons, elementor widget, woocommerce elementor, elementor templates
 Requires at least: 5.0
 Tested up to: 6.8
 Elementor tested up to: 3.32
