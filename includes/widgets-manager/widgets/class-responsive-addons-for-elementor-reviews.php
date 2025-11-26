@@ -866,7 +866,7 @@ class Responsive_Addons_For_Elementor_Reviews extends Widget_Base {
 		$this->add_control(
 			'star_style',
 			array(
-				'label'        => __( 'Iconstarrr', 'responsive-addons-for-elementor' ),
+				'label'        => __( 'Icon', 'responsive-addons-for-elementor' ),
 				'type'         => Controls_Manager::SELECT,
 				'fa4compatibility' => 'icon',
 				'options'      => array(
