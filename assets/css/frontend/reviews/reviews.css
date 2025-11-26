@@ -272,17 +272,30 @@
   bottom: inherit; }
 
 .elementor-widget-rael-reviews .elementor-star-rating {
-  display: inline-flex;
+  display: inline-block;
   color: #CCD6DF;
+  font-family: eicons;
   font-size: 16px;
 }
 
 .elementor-widget-rael-reviews .elementor-star-rating i {
-  font-family: "Font Awesome 5 Free";
+  /* font-family: "Font Awesome 5 Free"; */
   display: inline-block;
   position: relative;
   font-style: normal;
   cursor: default; }
+
+  .elementor-widget-rael-reviews .elementor-star-rating i:before {
+  content: "\e934";
+  display: block;
+  font-size: inherit;
+  font-family: inherit;
+  position: absolute;
+  overflow: hidden;
+  color: #f0ad4e;
+  top: 0;
+  right: 0;
+  left: 0; }
 
 .elementor-widget-rael-reviews .elementor-star-rating i:before {
   content: none !important;  

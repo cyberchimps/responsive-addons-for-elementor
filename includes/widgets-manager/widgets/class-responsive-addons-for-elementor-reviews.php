@@ -866,7 +866,7 @@ class Responsive_Addons_For_Elementor_Reviews extends Widget_Base {
 		$this->add_control(
 			'star_style',
 			array(
-				'label'        => __( 'Iconstarrr', 'responsive-addons-for-elementor' ),
+				'label'        => __( 'Icon', 'responsive-addons-for-elementor' ),
 				'type'         => Controls_Manager::SELECT,
 				'fa4compatibility' => 'icon',
 				'options'      => array(
@@ -944,6 +944,9 @@ class Responsive_Addons_For_Elementor_Reviews extends Widget_Base {
 			// Solid stars (Font Awesome solid)
 			'{{WRAPPER}} .elementor-star-rating .rael-star-filled svg path' => 'fill: {{VALUE}};',
 			'{{WRAPPER}} .elementor-star-rating i:before' => 'color: {{VALUE}};',
+
+			'{{WRAPPER}} .elementor-star-rating .elementor-star-full:before' => 'color: {{VALUE}};',
+			'{{WRAPPER}} .elementor-star-rating .elementor-star-full' => 'color: {{VALUE}};',
 			'{{WRAPPER}}' => '--rael-star-color: {{VALUE}};',
 		),
 		'separator' => 'before',
@@ -959,6 +962,7 @@ $this->add_control(
 			// Outline stars (Font Awesome regular)
 			'{{WRAPPER}} .elementor-star-rating .rael-star-unmarked svg path' => 'fill: {{VALUE}};',
 			'{{WRAPPER}} .elementor-star-rating i' => 'color: {{VALUE}};',
+			'{{WRAPPER}} .elementor-star-rating .elementor-star-empty' => 'color: {{VALUE}};',
 			'{{WRAPPER}}' => '--rael-star-unmarked-color: {{VALUE}};',
 		),
 	)
@@ -1264,16 +1268,19 @@ $this->add_control(
 			echo '</div>';
 		} elseif ( 'star_unicode' === $settings['star_style'] ) {
 			$icon = ( 'outline' === $settings['unmarked_star_style'] ) ? '&#9734;' : '&#9733;';
-
+					
 			for ( $stars = 1; $stars <= 5; $stars++ ) {
-				if ( $stars <= $floored_rating ) {
-					$stars_html .= '<span class="elementor-star-full">' . $icon . '</span>';
-				} elseif ( $floored_rating + 1 === $stars && $rating != $floored_rating ) {
-					$stars_html .= '<span class="elementor-star-half">' . $icon . '</span>';
+				$rating_unicode        = (float) $slide['rating'] > 5 ? 5 : $slide['rating'];
+				$floored_rating_unicode = (int) $rating_unicode;
+				if ( $stars <= $floored_rating_unicode ) {
+
+					$stars_html .= '<i class="elementor-star-full">' . $icon . '</i>';
+				} elseif ( $floored_rating_unicode + 1 === $stars && $rating_unicode != $floored_rating_unicode ) { //phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
+					$stars_html .= '<i class="elementor-star-' . ( $rating_unicode - $floored_rating_unicode ) * 10 . '">' . $icon . '</i>';
 				} else {
-					$stars_html .= '<span class="elementor-star-empty">' . $icon . '</span>';
+					$stars_html .= '<i class="elementor-star-empty">' . $icon . '</i>';
 				}
-			}
+		}
 			echo '<div class="elementor-star-rating">' . $stars_html . '</div>';
 
 		}
