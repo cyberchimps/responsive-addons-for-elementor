@@ -85,6 +85,7 @@ foreach ( $widgets as $widget ) {
 	<div class="row rael-widget-cards-group">
 		<?php
 		foreach ( $widgets as $index => $widget ) {
+
 			$widget_status = $widget['status'] ? 'checked' : '';
 			// Fetch public custom post types (not builtin)
 			$custom_post_types = get_post_types(
@@ -139,9 +140,12 @@ foreach ( $widgets as $widget ) {
 				?>
 					<div class="rael-widgets-card-docs">
 						<a href="<?php echo esc_url( $widget['docs'] ); ?>" target="_blank"><?php esc_html_e( 'Docs', 'responsive-addons-for-elementor' ); ?></a> 
-						<?php if ($widget['title'] == 'duplicator') { ?>
-						<a href="#" class="rael-settings-trigger" data-widget="<?php echo esc_attr($widget['name']); ?>">
-        					<span title="Duplicator Settings" class="duplicator-settings-icon dashicons dashicons-admin-generic"></span>
+						<?php if ($widget['title'] == 'duplicator') {
+							
+							 ?>
+							<span class="rael-dup-separator">| </span>
+						<a href="#" class="rael-settings-trigger" data-widget="<?php echo esc_attr($widget['title']); ?>">
+							 <?php esc_html_e( 'Settings', 'responsive-addons-for-elementor' ); ?>
     					</a>
 						<div id="rael-settings-popup" class="rael-popup-overlay" style="display: none;">
 							<div class="rael-popup">
@@ -154,11 +158,15 @@ foreach ( $widgets as $widget ) {
 								<div class="rael-popup-body">
 									<label><?php esc_html_e( 'Select Post Types','responsive-addons-for-elementor'); ?></label>
 									<select id="rael-post-types">
-										<option value="all"><?php esc_html_e('All','responsive-addons-for-elementor'); ?></option>
-										<option value="post"><?php esc_html_e('Post','responsive-addons-for-elementor'); ?></option>
-    									<option value="page"><?php esc_html_e('Page','responsive-addons-for-elementor'); ?></option>
+										<?php 	
+											$get_selected_posttypes = get_option( 'rael_duplicator_allowed_post_types', array( 'all' ) );
+											$selected_type = $get_selected_posttypes[0];
+										?>
+										<option value="all" <?php selected( $selected_type, 'all' ); ?>><?php esc_html_e('All','responsive-addons-for-elementor'); ?></option>
+										<option value="post" <?php selected( $selected_type, 'post' ); ?>><?php esc_html_e('Post','responsive-addons-for-elementor'); ?></option>
+    									<option value="page" <?php selected( $selected_type, 'page' ); ?>><?php esc_html_e('Page','responsive-addons-for-elementor'); ?></option>
 										<?php foreach ( $custom_post_types as $type => $label ) : ?>
-											<option value="<?php echo esc_attr($type); ?>">
+											<option value="<?php echo esc_attr($type); ?>" <?php selected( $selected_type, $type ); ?>>
 												<?php echo esc_html($label); ?>
 											</option>
 										<?php endforeach; ?>
