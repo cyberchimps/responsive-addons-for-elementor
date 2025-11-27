@@ -133,8 +133,17 @@ if ( ! class_exists( 'RAEL_Duplicator' ) ) {
 		if ( is_wp_error( $new_id ) ) {
 			wp_die( $new_id->get_error_message() );
 		}
+		
+		// Get original post type.
+		$post_type = get_post_type( $post_id );
+		$redirect_url = admin_url( 'edit.php' );
+		
+		// If CPT (not 'post')
+		if ( 'post' !== $post_type ) {
+			$redirect_url = admin_url( 'edit.php?post_type=' . $post_type );
+		}
 
-		wp_redirect( admin_url( "post.php?action=edit" ) );
+		wp_redirect( $redirect_url );
 		exit;
 	}
 	public function rae_add_duplicate_nonce_field( $actions, $post ) {
