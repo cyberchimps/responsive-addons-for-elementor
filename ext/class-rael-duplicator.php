@@ -134,7 +134,7 @@ if ( ! class_exists( 'RAEL_Duplicator' ) ) {
 			wp_die( $new_id->get_error_message() );
 		}
 
-		wp_redirect( admin_url( "post.php?action=edit&post=$new_id" ) );
+		wp_redirect( admin_url( "post.php?action=edit" ) );
 		exit;
 	}
 	public function rae_add_duplicate_nonce_field( $actions, $post ) {

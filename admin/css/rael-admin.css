@@ -907,3 +907,7 @@ input:checked + .rael-widgets-slider:before {
 .rael-settings-trigger:focus{
 	box-shadow: none;
 }
+.rael-dup-separator{
+	font-size: 13px;
+	color: #6B7280;
+}
