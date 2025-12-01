@@ -547,38 +547,38 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 
     	$this->end_controls_section();
 		// ================== General Section ==================
-    $this->start_controls_section(
-        'general_section',
-        array(
-            'label' => __( 'General', 'responsive-addons-for-elementor' ),
-            'tab'   => Controls_Manager::TAB_CONTENT,
-        )
-    );
+		$this->start_controls_section(
+			'general_section',
+			array(
+				'label' => __( 'General', 'responsive-addons-for-elementor' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
 
-    $this->add_responsive_control(
-        'sticky_position_top_space',
-        array(
-            'label' => __( 'Sticky Position Top Space', 'responsive-addons-for-elementor' ),
-            'type' => Controls_Manager::SLIDER,
-            'size_units' => array( 'px', 'vh', '%' ),
-            'range' => array(
-                'px' => array(
-                    'min' => 0,
-                    'max' => 500,
+		$this->add_responsive_control(
+			'sticky_position_top_space',
+			array(
+				'label' => __( 'Sticky Position Top Space', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'vh', '%' ),
+				'range' => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 500,
+					),
+					'vh' => array(
+						'min' => 10,
+						'max' => 100,
+					),
+					'%'  => array(
+						'min' => 0,
+						'max' => 100,
+					),
 				),
-				'vh' => array(
-					'min' => 10,
-					'max' => 100,
-				),
-				'%'  => array(
-					'min' => 0,
-					'max' => 100,
-				),
-			),
-            'default' => array( 'size' => 150, 'unit' => 'px' ),
-			'render_type' => 'template', 
-        )
-    );
+				'default' => array( 'size' => 150, 'unit' => 'px' ),
+				'render_type' => 'template', 
+			)
+		);
 
     $this->add_responsive_control(
         'card_gap',
@@ -1854,6 +1854,8 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 
 	protected function render() {
 		$settings = $this->get_settings_for_display();
+
+
 		$items = [];
 		$rtl = ! empty( $settings['rtl_enable'] ) && $settings['rtl_enable'] === 'yes';
 		
@@ -1912,7 +1914,11 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 					'graphic_text' => $item['graphic_text'] ?? '',
 					'background_color' => $item['background_color'] ?? '',
 					'background_image' => ! empty( $item['background_image']['url'] ) ? $item['background_image']['url'] : '',
+					'content_type' => $item['content_type'] ?? null,
+					'item_template' => $item['item_template'] ?? null,
+					'item_section'  => $item['item_section'] ?? null,
 				];
+
 			}
 		}
 
@@ -1965,6 +1971,7 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 		if ( $rtl ) {
 			$wrapper_classes .= ' rtl-enabled';
 		}
+		
 
 		// Get the card height from settings
 		$card_height_value = ! empty( $settings['card_height']['size'] ) ? $settings['card_height']['size'] : 600;
@@ -2075,8 +2082,22 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
             )
         );
 			
-			echo '<div ' . wp_kses_post($this->get_render_attribute_string( 'card' . $index )) . '>';
+		echo '<div ' . wp_kses_post($this->get_render_attribute_string( 'card' . $index )) . '>';
+		if ( $item['content_type'] === 'section' && ! empty( $item['item_section'] ) ) {
+			echo '<div class="rael-section-fetch" data-target-id="' . esc_attr( $item['item_section'] ) . '"></div>';
+		}
 
+		else  if ( $item['content_type'] === 'template' && ! empty( $item['item_template'] ) ) {
+
+			$template_html = \Elementor\Plugin::$instance
+				->frontend
+				->get_builder_content_for_display( $item['item_template'] );
+
+			echo '<div class="rael-card-template">';
+			echo $template_html; // SAFE, rendered by Elementor
+			echo '</div>';
+		}
+		else{
 			// Card inner (flex container)
         	echo '<div class="rael-card-inner">';
 			
@@ -2485,7 +2506,7 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 			}
 
 			echo '</div>'; // .rael-card-inner
-			
+		}
 			echo '</div>'; // card
 		}
 
