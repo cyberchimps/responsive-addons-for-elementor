@@ -1,16 +1,6 @@
 (function ($) {
   "use strict";
 
-  var DEBUG = false;
-  function dlog() {
-    if (!DEBUG) return;
-    try {
-      console.log.apply(console, arguments);
-    } catch (e) {}
-  }
-
-  dlog("media-carousel.js loaded (smooth-version)");
-
   var MediaCarouselHandler = elementorModules.frontend.handlers.Base.extend({
     getDefaultSettings: function () {
       return {
@@ -33,10 +23,25 @@
       };
     },
 
+    // Robust device detection supporting multiple Elementor versions
+    getCurrentDevice: function () {
+      var fn =
+        (elementorFrontend && elementorFrontend.getCurrentDeviceMode) ||
+        (elementorFrontend &&
+          elementorFrontend.breakpoints &&
+          elementorFrontend.breakpoints.getActive) ||
+        null;
+      try {
+        return typeof fn === "function" ? fn() || "desktop" : "desktop";
+      } catch (e) {
+        return "desktop";
+      }
+    },
+
     getSpaceBetween: function (device) {
+      device = device || this.getCurrentDevice();
       var key =
-        "rael_space_between" +
-        (device && device !== "desktop" ? "_" + device : "");
+        "rael_space_between" + (device !== "desktop" ? "_" + device : "");
       var setting = this.getElementSettings(key);
       var val =
         typeof setting === "object" && setting !== null && "size" in setting
@@ -45,19 +50,20 @@
       return isNaN(val) ? 0 : val;
     },
 
-    getSlidesPerView: function (device) {
+    getSlidesPerViewFor: function (device) {
       var key =
-        "rael_slides_per_view" +
-        (device && device !== "desktop" ? "_" + device : "");
+        "rael_slides_per_view" + (device !== "desktop" ? "_" + device : "");
       var raw = this.getElementSettings(key);
-      var val =
-        typeof raw === "object" && raw !== null && "size" in raw
-          ? raw.size
-          : parseInt(raw, 10);
-
+      var val;
+      if (typeof raw === "object" && raw !== null && "size" in raw)
+        val = raw.size;
+      else val = parseInt(raw, 10);
       if (!isNaN(val) && val > 0) return val;
-      var fallback = this.getSettings("slidesPerView")[device] || 1;
-      return fallback;
+      return this.getSettings("slidesPerView")[device] || 1;
+    },
+
+    getSlidesPerView: function () {
+      return this.getSlidesPerViewFor(this.getCurrentDevice());
     },
 
     getSwiperOptions: function () {
@@ -66,16 +72,28 @@
         elementorFrontend.config &&
         elementorFrontend.config.breakpoints) || { md: 768, lg: 1025 };
 
-      var desktop = this.getSlidesPerView("desktop");
-      var tablet = this.getSlidesPerView("tablet");
-      var mobile = this.getSlidesPerView("mobile");
+      var desktop = this.getSlidesPerViewFor("desktop");
+      var tablet = this.getSlidesPerViewFor("tablet");
+      var mobile = this.getSlidesPerViewFor("mobile");
 
-      // loopedSlides: best practice to reduce clone alignment issues when loop true
       var loopedSlides = Math.max(desktop, tablet, mobile);
 
+      var navNext =
+        this.$element.find(".elementor-swiper-button-next")[0] ||
+        this.$element.find(".swiper-button-next")[0] ||
+        null;
+      var navPrev =
+        this.$element.find(".elementor-swiper-button-prev")[0] ||
+        this.$element.find(".swiper-button-prev")[0] ||
+        null;
+      var paginationEl =
+        this.$element.find(".swiper-pagination")[0] ||
+        this.$element.find(".elementor-swiper-pagination")[0] ||
+        null;
+
       var options = {
-        slidesPerView: mobile,
-        spaceBetween: this.getSpaceBetween("mobile"),
+        slidesPerView: this.getSlidesPerView(),
+        spaceBetween: this.getSpaceBetween(),
         centeredSlides: false,
         loop: settings.rael_loop === "yes",
         loopedSlides: settings.rael_loop === "yes" ? loopedSlides : 0,
@@ -86,8 +104,8 @@
         watchOverflow: true,
         observer: true,
         observeParents: true,
-        roundLengths: true, // <- avoid fractional pixel jitter
-        useTransform: true, // <- ensure transforms are used
+        roundLengths: true,
+        useTransform: true,
         preventInteractionOnTransition: true,
         autoplay:
           settings.rael_autoplay === "yes"
@@ -97,22 +115,16 @@
               }
             : false,
         navigation:
-          settings.rael_show_arrows === "yes"
+          settings.rael_show_arrows === "yes" && navNext && navPrev
             ? {
-                nextEl:
-                  this.$element.find(".elementor-swiper-button-next")[0] ||
-                  this.$element.find(".swiper-button-next")[0],
-                prevEl:
-                  this.$element.find(".elementor-swiper-button-prev")[0] ||
-                  this.$element.find(".swiper-button-prev")[0],
+                nextEl: navNext,
+                prevEl: navPrev,
               }
             : false,
         pagination:
-          settings.rael_pagination === "yes"
+          settings.rael_pagination === "yes" && paginationEl
             ? {
-                el:
-                  this.$element.find(".swiper-pagination")[0] ||
-                  this.$element.find(".elementor-swiper-pagination")[0],
+                el: paginationEl,
                 clickable: true,
               }
             : false,
@@ -126,160 +138,179 @@
             spaceBetween: this.getSpaceBetween("desktop"),
           },
         },
+        // helpful in editor iframe environment
+        resizeObserver: true,
       };
 
-      dlog("Swiper options==", options);
       return options;
     },
 
-    onInit: function () {
-      elementorModules.frontend.handlers.Base.prototype.onInit.apply(
-        this,
-        arguments
-      );
-
-      if (typeof Swiper === "undefined") {
-        console.error("Swiper is not loaded. Please enqueue Swiper.");
-        return;
-      }
-
-      var $main = this.elements.$mainSwiper;
-      if (!$main.length) {
-        dlog("No swiper container found in widget.");
-        return;
-      }
-
-      // remove only problematic inline width/transform; don't force flex rules
-      $main.find(".swiper-slide").each(function () {
-        var style = this.getAttribute("style");
-        if (style) {
-          style = style
-            .replace(/\bwidth\s*:\s*[^;]+;?/gi, "")
-            .replace(/\btransform\s*:\s*[^;]+;?/gi, "")
-            .replace(/^\s*;|;\s*$/g, "")
-            .trim();
-          if (style) this.setAttribute("style", style);
-          else this.removeAttribute("style");
-        }
-      });
-      $main.find(".swiper-wrapper").removeAttr("style");
-
-      // destroy safely
+    _destroySwiperSafe: function () {
       if (this.swiper && this.swiper.destroy) {
         try {
           this.swiper.destroy(true, true);
         } catch (e) {
-          dlog("Error destroying previous swiper:", e);
+          // ignore
         }
       }
-      this._isTransitioning = false; // guard flag
-      this._updateTimer = null;
+      this.swiper = null;
+
+      if (
+        this.elements &&
+        this.elements.$mainSwiper &&
+        this.elements.$mainSwiper.length
+      ) {
+        this.elements.$mainSwiper.find(".swiper-slide").each(function () {
+          this.removeAttribute("style");
+        });
+        this.elements.$mainSwiper.find(".swiper-wrapper").removeAttr("style");
+      }
+    },
+
+    buildSwiper: function () {
+      if (typeof Swiper === "undefined") {
+        console.error("Swiper is not loaded.");
+        return;
+      }
+
+      var $main = this.elements.$mainSwiper;
+      if (!$main.length) return;
+
+      // destroy if exists
+      this._destroySwiperSafe();
 
       var options = this.getSwiperOptions();
-      dlog("Initializing Swiper with options:", options);
 
       try {
-        var self = this;
         this.swiper = new Swiper($main[0], options);
         $main.data("swiper", this.swiper);
 
-        // guard: set when transition starts, unset when ends
+        var self = this;
         this.swiper.on("transitionStart", function () {
           self._isTransitioning = true;
         });
-
-        // delayed update AFTER transition end — avoid mid-animation recalcs
-        var postTransitionUpdate = function () {
-          clearTimeout(self._updateTimer);
-          self._updateTimer = setTimeout(function () {
-            // don't update while destroyed
-            if (!self.swiper || self.swiper.destroyed) return;
-            // only update if not in the middle of another transition
-            if (!self._isTransitioning) {
-              try {
-                self.swiper.update();
-                dlog("postTransition update fired");
-              } catch (e) {
-                dlog("update error:", e);
-              }
-            }
-          }, 160); // slightly longer delay to avoid editor timing issues
-        };
-
         this.swiper.on("transitionEnd", function () {
           self._isTransitioning = false;
-          postTransitionUpdate();
+          if (self.swiper && !self.swiper.destroyed) self.swiper.update();
         });
 
-        // resize -> delayed update (debounced)
-        this._resizeHandler = function () {
-          clearTimeout(self._updateTimer);
-          self._updateTimer = setTimeout(function () {
-            if (!self.swiper || self.swiper.destroyed) return;
-            if (!self._isTransitioning) {
-              try {
-                self.swiper.update();
-                dlog("resize-triggered update");
-              } catch (e) {
-                dlog("update error on resize:", e);
-              }
-            }
-          }, 160);
-        };
-        window.addEventListener("resize", this._resizeHandler, {
-          passive: true,
-        });
-
-        // small post-init update
-        setTimeout(function () {
-          if (self.swiper && !self.swiper.destroyed) {
-            try {
-              self.swiper.update();
-            } catch (e) {
-              dlog("initial delayed update error:", e);
-            }
-          }
-        }, 120);
+        // force update in editor after short delay
+        if (elementorFrontend.isEditMode && elementorFrontend.isEditMode()) {
+          setTimeout(function () {
+            if (self.swiper && !self.swiper.destroyed) self.swiper.update();
+          }, 150);
+        }
       } catch (err) {
         console.error("Swiper init failed:", err);
       }
     },
 
-    onElementChange: function (propertyName) {
-      if (!propertyName) return;
-      dlog("onElementChange:", propertyName);
+    _observeSlidesForEditor: function () {
+      // prevent multiple observers
+      if (this._slidesObserver) return;
 
-      if (propertyName.indexOf("width") === 0) {
-        if (this.swiper && this.swiper.update && !this._isTransitioning) {
-          try {
-            this.swiper.update();
-          } catch (e) {
-            dlog("update error on width change:", e);
-          }
-        }
+      var $main = this.elements.$mainSwiper;
+      if (!$main.length) return;
+
+      var wrapper = $main.find(".swiper-wrapper")[0];
+      if (!wrapper) {
+        var selfFallback = this;
+        setTimeout(function () {
+          selfFallback.buildSwiper();
+        }, 160);
+        return;
       }
 
+      var self = this;
+
+      // If slides already present -> build shortly
+      if (wrapper.children && wrapper.children.length > 0) {
+        setTimeout(function () {
+          self.buildSwiper();
+        }, 60);
+        return;
+      }
+
+      // Observe for children addition and init once present
+      this._slidesObserver = new MutationObserver(function () {
+        if (wrapper.children && wrapper.children.length > 0) {
+          try {
+            if (self._slidesObserver) {
+              self._slidesObserver.disconnect();
+              self._slidesObserver = null;
+            }
+          } catch (e) {}
+          setTimeout(function () {
+            self.buildSwiper();
+          }, 40);
+        }
+      });
+
+      try {
+        this._slidesObserver.observe(wrapper, { childList: true });
+      } catch (e) {
+        setTimeout(function () {
+          self.buildSwiper();
+        }, 160);
+      }
+    },
+
+    onInit: function () {
+      // parent onInit
+      elementorModules.frontend.handlers.Base.prototype.onInit.apply(
+        this,
+        arguments
+      );
+
+      // add resize handler
+      var that = this;
+      this._resizeHandler = function () {
+        if (that.swiper && !that.swiper.destroyed) that.swiper.update();
+      };
+      window.addEventListener("resize", this._resizeHandler, { passive: true });
+
+      // In editor use MutationObserver to wait for slides; on frontend init immediately
+      try {
+        if (
+          elementorFrontend &&
+          elementorFrontend.isEditMode &&
+          elementorFrontend.isEditMode()
+        ) {
+          this._observeSlidesForEditor();
+        } else {
+          this.buildSwiper();
+        }
+      } catch (e) {
+        // fallback
+        this.buildSwiper();
+      }
+    },
+
+    onElementChange: function (propertyName) {
+      // Only reinit for relevant props
       if (
-        propertyName.indexOf("rael_space_between") === 0 ||
-        propertyName.indexOf("rael_slides_per_view") === 0 ||
-        propertyName === "rael_loop" ||
-        propertyName === "rael_autoplay" ||
-        propertyName === "rael_show_arrows" ||
-        propertyName === "rael_pagination"
+        propertyName &&
+        (propertyName.indexOf("rael_slides_per_view") === 0 ||
+          propertyName.indexOf("rael_space_between") === 0 ||
+          propertyName === "rael_loop" ||
+          propertyName === "rael_autoplay" ||
+          propertyName === "rael_show_arrows" ||
+          propertyName === "rael_pagination" ||
+          propertyName === "rael_speed")
       ) {
         var self = this;
         clearTimeout(this._reinitTimer);
         this._reinitTimer = setTimeout(function () {
-          if (self.swiper && self.swiper.destroy) {
-            try {
-              self.swiper.destroy(true, true);
-            } catch (e) {
-              dlog("error destroying swiper during reinit:", e);
-            }
+          if (
+            elementorFrontend &&
+            elementorFrontend.isEditMode &&
+            elementorFrontend.isEditMode()
+          ) {
+            self._observeSlidesForEditor();
+          } else {
+            self.buildSwiper();
           }
-          self.onInit();
-        }, 150); // slightly larger debounce to avoid rapid re-init
-        return;
+        }, 120);
       }
 
       elementorModules.frontend.handlers.Base.prototype.onElementChange.apply(
@@ -289,22 +320,15 @@
     },
 
     onDestroy: function () {
-      if (this._resizeHandler) {
+      if (this._resizeHandler)
         window.removeEventListener("resize", this._resizeHandler);
-        this._resizeHandler = null;
-      }
-      if (this._updateTimer) {
-        clearTimeout(this._updateTimer);
-        this._updateTimer = null;
-      }
-      if (this.swiper && this.swiper.destroy) {
+      if (this._slidesObserver) {
         try {
-          this.swiper.destroy(true, true);
-        } catch (e) {
-          dlog("error destroying swiper onDestroy:", e);
-        }
-        this.swiper = null;
+          this._slidesObserver.disconnect();
+        } catch (e) {}
+        this._slidesObserver = null;
       }
+      this._destroySwiperSafe();
       elementorModules.frontend.handlers.Base.prototype.onDestroy.apply(
         this,
         arguments
@@ -312,17 +336,23 @@
     },
   });
 
-  // Register
+  // Register handler for frontend — must exactly match widget get_name()
   $(window).on("elementor/frontend/init", function () {
-    dlog("elementor/frontend/init");
-    elementorFrontend.hooks.addAction(
-      "frontend/element_ready/rael-media-carousel.default",
-      function ($scope) {
-        dlog("frontend/element_ready fired for rael-media-carousel", $scope);
-        elementorFrontend.elementsHandler.addHandler(MediaCarouselHandler, {
-          $element: $scope,
-        });
-      }
-    );
+    if (!elementorFrontend || !elementorModules) {
+      // If Elementor not ready yet, wait a tick to avoid ReferenceErrors
+      setTimeout(function () {
+        if (elementorFrontend && elementorModules) {
+          elementorFrontend.elementsHandler.attachHandler(
+            "rael-media-carousel",
+            MediaCarouselHandler
+          );
+        }
+      }, 50);
+    } else {
+      elementorFrontend.elementsHandler.attachHandler(
+        "rael-media-carousel",
+        MediaCarouselHandler
+      );
+    }
   });
 })(jQuery);

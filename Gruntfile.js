@@ -55,7 +55,7 @@ module.exports = function (grunt) {
           {
             expand: true,
             cwd: "assets/js/",
-            src: ["*.js", "!*.min.js"],
+            src: ["*.js", "!*.min.js", "!rae-duplicator-admin.js","!rae-duplicator-admin.min.js"],
             dest: "assets/js/",
             ext: ".min.js",
           },

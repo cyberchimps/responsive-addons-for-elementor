@@ -992,9 +992,9 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 					'%'  => array( 'min' => 0, 'max' => 100 ),
 				),
 				'selectors' => array(
-					'{{WRAPPER}} .rael-stacking-card' => 'width: {{SIZE}}{{UNIT}} !important; ',
+					'{{WRAPPER}} .rael-stacking-card' => 'width: {{SIZE}}{{UNIT}};',
 				),
-				'render_type' => 'template', 
+				'render_type' => 'ui', 
 			)
 		);
 

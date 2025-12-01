@@ -85,8 +85,52 @@ foreach ( $widgets as $widget ) {
 	<div class="row rael-widget-cards-group">
 		<?php
 		foreach ( $widgets as $index => $widget ) {
+
 			$widget_status = $widget['status'] ? 'checked' : '';
-			?>
+			// Fetch public custom post types (not builtin)
+			$custom_post_types = get_post_types(
+			[
+				'public'   => true,
+				'_builtin' => false,
+			],
+			'objects'
+		);
+
+		$filtered = [];
+
+		foreach ( $custom_post_types as $slug => $pt ) {
+
+			// AUTO-REMOVE all Elementor / Theme Builder CPTs
+			if (
+				// Elementor common slug patterns
+				strpos($slug, 'elementor') === 0 ||
+				strpos($slug, 'e-') === 0 ||
+				strpos($slug, 'elementor-') === 0 ||
+				strpos($slug, 'etheme') === 0 ||
+
+				// Elementor Pro Theme Builder labels
+				stripos($pt->label, 'elementor') !== false ||
+				stripos($pt->label, 'template') !== false ||
+				stripos($pt->label, 'theme') !== false ||
+				stripos($pt->label, 'builder') !== false ||
+
+				// Some versions use "Kit" for Theme Style Library
+				stripos($pt->label, 'kit') !== false
+			) {
+				continue;
+			}
+
+			// Exclude if needed
+			if ( in_array($slug, ['attachment', 'product'], true) ) {
+				continue;
+			}
+
+			$filtered[$slug] = $pt->label;
+		}
+
+		$custom_post_types = $filtered;
+
+		?>
 		<div class="col-lg-3 col-md-4 gy-3 rael-widget-category-card rael-widget-category-<?php echo esc_attr( $widget['category'] ); ?>">
 			<div class="rael-widgets-card d-flex justify-content-between h-100">
 				<div class="rael-widgets-card-text-content">
@@ -94,7 +138,49 @@ foreach ( $widgets as $widget ) {
 			<?php
 			if ( '' !== $widget['docs'] ) {
 				?>
-					<div class="rael-widgets-card-docs"><a href="<?php echo esc_url( $widget['docs'] ); ?>" target="_blank"><?php esc_html_e( 'Docs', 'responsive-addons-for-elementor' ); ?></a></div>
+					<div class="rael-widgets-card-docs">
+						<a href="<?php echo esc_url( $widget['docs'] ); ?>" target="_blank"><?php esc_html_e( 'Docs', 'responsive-addons-for-elementor' ); ?></a> 
+						<?php if ($widget['title'] == 'duplicator') {
+							
+							 ?>
+							<span class="rael-dup-separator">| </span>
+						<a href="#" class="rael-settings-trigger" data-widget="<?php echo esc_attr($widget['title']); ?>">
+							 <?php esc_html_e( 'Settings', 'responsive-addons-for-elementor' ); ?>
+    					</a>
+						<div id="rael-settings-popup" class="rael-popup-overlay" style="display: none;">
+							<div class="rael-popup">
+								<div class="rael-popup-header">
+									<h2 id="rael-popup-title"><?php esc_html_e('Duplicator','responsive-addons-for-elementor'); ?></h2>
+									<span class="rael-popup-close">&times;</span>
+								</div>
+								<hr class="rae-popup-hr"/>
+
+								<div class="rael-popup-body">
+									<label><?php esc_html_e( 'Select Post Types','responsive-addons-for-elementor'); ?></label>
+									<select id="rael-post-types">
+										<?php 	
+											$get_selected_posttypes = get_option( 'rael_duplicator_allowed_post_types', array( 'all' ) );
+											$selected_type = $get_selected_posttypes[0];
+										?>
+										<option value="all" <?php selected( $selected_type, 'all' ); ?>><?php esc_html_e('All','responsive-addons-for-elementor'); ?></option>
+										<option value="post" <?php selected( $selected_type, 'post' ); ?>><?php esc_html_e('Post','responsive-addons-for-elementor'); ?></option>
+    									<option value="page" <?php selected( $selected_type, 'page' ); ?>><?php esc_html_e('Page','responsive-addons-for-elementor'); ?></option>
+										<?php foreach ( $custom_post_types as $type => $label ) : ?>
+											<option value="<?php echo esc_attr($type); ?>" <?php selected( $selected_type, $type ); ?>>
+												<?php echo esc_html($label); ?>
+											</option>
+										<?php endforeach; ?>
+									</select>
+								</div>
+								<hr class="rae-popup-hr"/>
+								<div class="rael-popup-footer">
+									<button id="rael-popup-save" class="button button-primary"><?php esc_html_e('Save', 'responsive-addons-for-elementor'); ?></button>
+								</div>
+							</div>
+						</div>
+
+						<?php } ?>
+					</div>
 				<?php
 			}
 			?>

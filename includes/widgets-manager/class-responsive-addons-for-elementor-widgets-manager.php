@@ -196,6 +196,10 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 				'file'  => RAEL_DIR . 'ext/class-rael-sticky-elementor.php',
 				'class' => '\RAEL_Ext\Rael_Sticky_Elementor',			
 			),
+			'duplicator' => array(
+				'file'  => RAEL_DIR . 'ext/class-rael-duplicator.php',
+				'class' => '\RAEL_Ext\RAEL_Duplicator',			
+			),
 		);
 	}
 	/**
