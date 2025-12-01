@@ -125,13 +125,13 @@ if ( ! class_exists( 'RAEL_Duplicator' ) ) {
 		$nonce   = isset( $_GET['_wpnonce'] ) ? sanitize_text_field( $_GET['_wpnonce'] ) : '';
 
 		if ( ! wp_verify_nonce( $nonce, 'rael_duplicate_post_' . $post_id ) ) {
-			wp_die( __( 'Invalid request.', 'responsive-addons-for-elementor' ) );
+			wp_die( esc_html__( 'Invalid request.', 'responsive-addons-for-elementor' ) );
 		}
 
 		$new_id = $this->rae_duplicate( $post_id );
 
 		if ( is_wp_error( $new_id ) ) {
-			wp_die( $new_id->get_error_message() );
+			wp_die( esc_html($new_id->get_error_message() ));
 		}
 		
 		// Get original post type.
@@ -143,7 +143,7 @@ if ( ! class_exists( 'RAEL_Duplicator' ) ) {
 			$redirect_url = admin_url( 'edit.php?post_type=' . $post_type );
 		}
 
-		wp_redirect( $redirect_url );
+		wp_safe_redirect( $redirect_url );
 		exit;
 	}
 	public function rae_add_duplicate_nonce_field( $actions, $post ) {
@@ -163,7 +163,7 @@ private function rae_duplicate( $post_id ) {
 
     $original = get_post( $post_id );
     if ( ! $original ) {
-        return new WP_Error( 'invalid_post', __( 'Post not found.', 'responsive-addons' ) );
+        return new WP_Error( 'invalid_post', __( 'Post not found.', 'responsive-addons-for-elementor' ) );
     }
 
     // ---- 1. CREATE THE NEW POST ----
@@ -181,7 +181,7 @@ private function rae_duplicate( $post_id ) {
 
     $new_post_id = wp_insert_post( $new_post );
     if ( ! $new_post_id ) {
-        return new WP_Error( 'db_error', __( 'Failed to duplicate post.', 'responsive-addons' ) );
+        return new WP_Error( 'db_error', __( 'Failed to duplicate post.', 'responsive-addons-for-elementor' ) );
     }
 
     // ---- 2. COPY TAXONOMIES ----
@@ -214,6 +214,8 @@ private function rae_duplicate( $post_id ) {
 		);
 
 		$insert_values = '';
+		$placeholders = [];
+		$values       = [];	
 
 		foreach ( $post_meta as $meta ) {
 
@@ -223,23 +225,20 @@ private function rae_duplicate( $post_id ) {
 			if ( in_array( $key, $exclude ) ) {
 				continue;
 			}
-
-			if ( ! empty( $insert_values ) ) {
-				$insert_values .= ', ';
-			}
-
-			$insert_values .= $wpdb->prepare(
-				"( %d, %s, %s )",
-				$new_post_id,
-				$key,
-				$value
-			);
+			$placeholders[] = "(%d, %s, %s)";
+			$values[] = $new_post_id;
+			$values[] = $key;
+			$values[] = $value;
+			
 		}
 
-		if ( ! empty( $insert_values ) ) {
-			$wpdb->query(
-				"INSERT INTO $wpdb->postmeta ( post_id, meta_key, meta_value ) VALUES " . $insert_values
-			);
+		if ( ! empty( $placeholders ) ) {
+			
+
+			$sql = "INSERT INTO {$wpdb->postmeta} ( post_id, meta_key, meta_value ) VALUES " . implode(', ', $placeholders);
+			    
+			$wpdb->query( $wpdb->prepare( $sql, $values ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+
 		}
 	}
 
@@ -247,8 +246,11 @@ private function rae_duplicate( $post_id ) {
 }
 
 
+
+
+
 	public function rae_add_custom_column( $columns ) {
-		$columns['rae_duplicator'] = 'RAE Duplicator';
+		$columns['rae_duplicator'] =  esc_html__( 'RAE Duplicator', 'responsive-addons-for-elementor' );
 		return $columns;
 	}
 	
