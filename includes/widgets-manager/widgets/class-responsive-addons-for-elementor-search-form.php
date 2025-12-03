@@ -224,6 +224,30 @@ class Responsive_Addons_For_Elementor_Search_Form extends Widget_Base {
 			)
 		);
 
+		
+		$this->add_control(
+			'rael_toggle_icon',
+			array(
+				'label'        => __( 'Icon', 'responsive-addons-for-elementor' ),
+				'type'         => Controls_Manager::CHOOSE,
+				'default'      => 'search',
+				'options'      => array(
+					'search' => array(
+						'title' => __( 'Search', 'responsive-addons-for-elementor' ),
+						'icon'  => 'eicon-search',
+					),
+					'arrow'  => array(
+						'title' => __( 'Arrow', 'responsive-addons-for-elementor' ),
+						'icon'  => 'eicon-arrow-right',
+					),
+				),
+				'render_type'  => 'template',
+				'prefix_class' => 'rael-elementor-search-form--icon-',
+				'condition'    => array(
+					'rael_skin' => 'full_screen',
+				),
+			)
+		);
 		$this->add_control(
 			'rael_toggle_align',
 			array(
@@ -781,10 +805,27 @@ class Responsive_Addons_For_Elementor_Search_Form extends Widget_Base {
 
 		// Set the selected icon.
 		$icon_class = '';
+		$toggle_icon_class = '';
+		if ( 'full_screen' === $settings['rael_skin'] ) {
+			// RESET before adding new attribute
+    		$this->remove_render_attribute( 'icon' );
+			$toggle_icon_class = 'search';
+
+			if ( 'arrow' === $settings['rael_toggle_icon']) {
+				$toggle_icon_class = is_rtl() ? 'arrow-left' : 'arrow-right';
+			}
+
+			$this->add_render_attribute(
+				'icon_toggle',
+				array(
+					'class' => 'fa fa-' . $toggle_icon_class,
+				)
+			);
+		}
 		if ( 'icon' === $settings['rael_button_type'] ) {
 			$icon_class = 'search';
 
-			if ( 'arrow' === $settings['rael_icon'] ) {
+			if ( 'arrow' === $settings['rael_icon']) {
 				$icon_class = is_rtl() ? 'arrow-left' : 'arrow-right';
 			}
 
@@ -794,7 +835,7 @@ class Responsive_Addons_For_Elementor_Search_Form extends Widget_Base {
 					'class' => 'fa fa-' . $icon_class,
 				)
 			);
-		} elseif ( 'text' === $settings['rael_button_type'] && 'full_screen' === $settings['rael_skin'] ) {
+		} elseif ( 'text' === $settings['rael_button_type']) {
 			$icon_class = 'search';
 
 			$this->add_render_attribute(
@@ -814,11 +855,9 @@ class Responsive_Addons_For_Elementor_Search_Form extends Widget_Base {
 		?>
 		<form class="rael-elementor-search-form" role="search" action="<?php echo esc_url( home_url() ); ?>" method="get">
 			<?php do_action( 'rael_search_form_before_input', $this ); ?>
-			<?php if ( 'full_screen' === $settings['rael_skin'] ) : ?>
+			<?php if ( 'full_screen' === $settings['rael_skin'] ) :
 				<div class="rael-elementor-search-form__toggle">
-					<?php if ( ! $migration_allowed || ! Icons_Manager::render_icon( $settings['rael_icon'], array( 'aria-hidden' => 'true' ) ) ) { ?>
-						<i class="fa fas fa-search" aria-hidden="true"></i>
-					<?php } ?>
+						<i <?php echo wp_kses_post( $this->get_render_attribute_string( 'icon_toggle' ) ); ?> aria-hidden="true"></i>
 					<span class="elementor-screen-only"><?php esc_html_e( 'Search', 'responsive-addons-for-elementor' ); ?></span>
 				</div>
 			<?php endif; ?>
@@ -863,20 +902,20 @@ class Responsive_Addons_For_Elementor_Search_Form extends Widget_Base {
 	protected function content_template() {
 		?>
 		<#
-		var iconClass = 'fa fas fa-search';
+		function getIconClass(type) {
+			const isArrow = (type === 'arrow');
+			const direction = elementorCommon.config.isRTL ? 'left' : 'right';
 
-		if ( 'arrow' == settings.rael_icon ) {
-			if ( elementorCommon.config.isRTL ) {
-				iconClass = 'fa fas fa-arrow-left';
-			} else {
-				iconClass = 'fa fas fa-arrow-right';
-			}
+			return isArrow ? `fas fa-arrow-${direction}` : 'fas fa-search';
 		}
+
+		var iconClass       = getIconClass(settings.rael_icon);
+		var iconToggleClass = getIconClass(settings.rael_toggle_icon);
 		#>
 		<form class="rael-elementor-search-form" action="" role="search">
 			<# if ( 'full_screen' == settings.rael_skin ) { #>
 			<div class="rael-elementor-search-form__toggle">
-				<i class="fa fas fa-search" aria-hidden="true"></i>
+				<i class="{{ iconToggleClass }}" aria-hidden="true"></i>
 				<span class="elementor-screen-only"><?php esc_html_e( 'Search', 'responsive-addons-for-elementor' ); ?></span>
 			</div>
 			<# } #>
