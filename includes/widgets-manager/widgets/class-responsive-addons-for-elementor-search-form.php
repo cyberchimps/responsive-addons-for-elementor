@@ -111,6 +111,21 @@ class Responsive_Addons_For_Elementor_Search_Form extends Widget_Base {
 				'frontend_available' => true,
 			)
 		);
+		$this->add_control(
+		'rael_minimal_show_icon',
+			array(
+				'label'        => __( 'Show Icon', 'responsive-addons-for-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Show', 'responsive-addons-for-elementor' ),
+				'label_off'    => __( 'Hide', 'responsive-addons-for-elementor' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'condition' => array(
+					'rael_skin' => 'minimal',
+				),
+			)
+		);
+	
 
 		$this->add_control(
 			'rael_placeholder',
@@ -823,41 +838,43 @@ class Responsive_Addons_For_Elementor_Search_Form extends Widget_Base {
 				)
 			);
 		}
-		if ( 'icon' === $settings['rael_button_type'] ) {
-			$icon_class = 'search';
+		if ( 'classic' === $settings['rael_skin'] ) {
+			if ( 'icon' === $settings['rael_button_type'] ) {
+				$icon_class = 'search';
 
-			if ( 'arrow' === $settings['rael_icon']) {
-				$icon_class = is_rtl() ? 'arrow-left' : 'arrow-right';
+				if ( 'arrow' === $settings['rael_icon']) {
+					$icon_class = is_rtl() ? 'arrow-left' : 'arrow-right';
+				}
+
+				$this->add_render_attribute(
+					'icon',
+					array(
+						'class' => 'fa fa-' . $icon_class,
+					)
+				);
+			} elseif ( 'text' === $settings['rael_button_type']) {
+				$icon_class = 'search';
+
+				$this->add_render_attribute(
+					'icon',
+					array(
+						'class' => 'fa fa-' . $icon_class,
+					)
+				);
 			}
+			elseif ( 'both' === $settings['rael_button_type']) {
+				$icon_class = 'search';
 
-			$this->add_render_attribute(
-				'icon',
-				array(
-					'class' => 'fa fa-' . $icon_class,
-				)
-			);
-		} elseif ( 'text' === $settings['rael_button_type']) {
-			$icon_class = 'search';
-
-			$this->add_render_attribute(
-				'icon',
-				array(
-					'class' => 'fa fa-' . $icon_class,
-				)
-			);
-		}
-		elseif ( 'both' === $settings['rael_button_type']) {
-			$icon_class = 'search';
-
-			if ( 'arrow' === $settings['rael_icon']) {
-				$icon_class = is_rtl() ? 'arrow-left' : 'arrow-right';
+				if ( 'arrow' === $settings['rael_icon']) {
+					$icon_class = is_rtl() ? 'arrow-left' : 'arrow-right';
+				}
+				$this->add_render_attribute(
+					'icon',
+					array(
+						'class' => 'fa fa-' . $icon_class,
+					)
+				);
 			}
-			$this->add_render_attribute(
-				'icon',
-				array(
-					'class' => 'fa fa-' . $icon_class,
-				)
-			);
 		}
 
 
@@ -878,7 +895,9 @@ class Responsive_Addons_For_Elementor_Search_Form extends Widget_Base {
 			<div class="rael-elementor-search-form__container">
 				<?php if ( 'minimal' === $settings['rael_skin'] ) : ?>
 					<div class="rael-elementor-search-form__icon">
+						<?php  if( $settings['rael_minimal_show_icon'] == 'yes' ){ ?>
 						<i class="fa fa-search" aria-hidden="true"></i>
+						<?php } ?>
 						<span class="elementor-screen-only"><?php esc_html_e( 'Search', 'responsive-addons-for-elementor' ); ?></span>
 					</div>
 				<?php endif; ?>
@@ -959,7 +978,9 @@ class Responsive_Addons_For_Elementor_Search_Form extends Widget_Base {
 			<div class="rael-elementor-search-form__container">
 				<# if ( 'minimal' == settings.rael_skin ) { #>
 				<div class="rael-elementor-search-form__icon">
+					<# if( settings.rael_minimal_show_icon == 'yes' ) { #>
 					<i class="fa fas fa-search" aria-hidden="true"></i>
+					<# } #>
 					<span class="elementor-screen-only"><?php esc_html_e( 'Search', 'responsive-addons-for-elementor' ); ?></span>
 				</div>
 				<# } #>
@@ -982,8 +1003,6 @@ class Responsive_Addons_For_Elementor_Search_Form extends Widget_Base {
 						<i class="{{ iconClass }}" aria-hidden="true"></i>
 						<span class="elementor-screen-only"><?php esc_html_e( 'Submit', 'responsive-addons-for-elementor' ); ?></span>
 					<# } #>
-
-					
 				</button>
 				<# } #>
 			</div>
