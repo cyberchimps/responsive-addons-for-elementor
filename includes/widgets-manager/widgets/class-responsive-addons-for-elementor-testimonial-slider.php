@@ -660,7 +660,21 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 				'tab'   => Controls_Manager::TAB_STYLE,
 			)
 		);
-
+		$this->add_control(
+			'background_color',
+			array(
+				'label'     => __( 'Background Color', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'alpha'     => false,
+				'default' => '#e6e9ec',
+				'selectors' => array(
+					'{{WRAPPER}} .responsive-testimonial__content, {{WRAPPER}} .responsive-testimonial__content:after' => 'background-color: {{VALUE}}',
+				),
+				'condition' => array(
+					'skin' => 'bubble',
+				),
+			)
+		);
 		$this->add_responsive_control(
 			'content_gap',
 			array(
