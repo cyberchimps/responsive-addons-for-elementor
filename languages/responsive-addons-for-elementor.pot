@@ -13903,7 +13903,7 @@ msgid "Official"
 msgstr ""
 
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-reviews.php:869
-msgid "Iconstarrr"
+msgid "Icon"
 msgstr ""
 
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-reviews.php:886
