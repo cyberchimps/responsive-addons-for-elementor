@@ -294,6 +294,7 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 				'type'    => Controls_Manager::TEXT,
 				'default' => __( 'Creative Approaches', 'responsive-addons-for-elementor' ),
 				'render_type' => 'template', 
+				'condition' => array( 'content_type' => 'editor' ),
 			)
 		);
 
