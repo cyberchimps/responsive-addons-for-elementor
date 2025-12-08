@@ -75,6 +75,8 @@ class Responsive_Addons_For_Elementor_Reviews extends Widget_Base {
 	 */
 	public function get_style_depends() {
 		return array(
+			'font-awesome-5-all',
+        	'font-awesome-4-shim',
 			'swiper',
 			'e-swiper',	
 		);
@@ -866,6 +868,7 @@ class Responsive_Addons_For_Elementor_Reviews extends Widget_Base {
 			array(
 				'label'        => __( 'Icon', 'responsive-addons-for-elementor' ),
 				'type'         => Controls_Manager::SELECT,
+				'fa4compatibility' => 'icon',
 				'options'      => array(
 					'star_fontawesome' => 'Font Awesome',
 					'star_unicode'     => 'Unicode',
@@ -933,27 +936,38 @@ class Responsive_Addons_For_Elementor_Reviews extends Widget_Base {
 		);
 
 		$this->add_control(
-			'stars_color',
-			array(
-				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .elementor-star-rating i:before' => 'color: {{VALUE}}',
-				),
-				'separator' => 'before',
-			)
-		);
+	'stars_color',
+	array(
+		'label'     => __( 'Marked Star Color', 'responsive-addons-for-elementor' ),
+		'type'      => Controls_Manager::COLOR,
+		'selectors' => array(
+			// Solid stars (Font Awesome solid)
+			'{{WRAPPER}} .elementor-star-rating .rael-star-filled svg path' => 'fill: {{VALUE}};',
+			'{{WRAPPER}} .elementor-star-rating i:before' => 'color: {{VALUE}};',
 
-		$this->add_control(
-			'stars_unmarked_color',
-			array(
-				'label'     => __( 'Unmarked Color', 'responsive-addons-for-elementor' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .elementor-star-rating i' => 'color: {{VALUE}}',
-				),
-			)
-		);
+			'{{WRAPPER}} .elementor-star-rating .elementor-star-full:before' => 'color: {{VALUE}};',
+			'{{WRAPPER}} .elementor-star-rating .elementor-star-full' => 'color: {{VALUE}};',
+			'{{WRAPPER}}' => '--rael-star-color: {{VALUE}};',
+		),
+		'separator' => 'before',
+	)
+);
+
+$this->add_control(
+	'stars_unmarked_color',
+	array(
+		'label'     => __( 'Unmarked Star Color', 'responsive-addons-for-elementor' ),
+		'type'      => Controls_Manager::COLOR,
+		'selectors' => array(
+			// Outline stars (Font Awesome regular)
+			'{{WRAPPER}} .elementor-star-rating .rael-star-unmarked svg path' => 'fill: {{VALUE}};',
+			'{{WRAPPER}} .elementor-star-rating i' => 'color: {{VALUE}};',
+			'{{WRAPPER}} .elementor-star-rating .elementor-star-empty' => 'color: {{VALUE}};',
+			'{{WRAPPER}}' => '--rael-star-unmarked-color: {{VALUE}};',
+		),
+	)
+);
+
 
 		$this->end_controls_section();
 
@@ -1055,80 +1069,6 @@ class Responsive_Addons_For_Elementor_Reviews extends Widget_Base {
 		$this->end_controls_section();
 	}
 
-	/**
-	 * Print cite function
-	 *
-	 * @param array $slide has slide information.
-	 *
-	 * @param array $settings has slide settings.
-	 *
-	 * @since 1.0.0
-	 * @access private
-	 */
-	private function print_cite( $slide, $settings ) {
-		if ( empty( $slide['name'] ) && empty( $slide['title'] ) ) {
-			return '';
-		}
-
-		$html = '<cite class="elementor-testimonial__cite">';
-
-		if ( ! empty( $slide['name'] ) ) {
-			$html .= '<span class="responsive-testimonial__name">' . $slide['name'] . '</span>';
-		}
-
-		if ( ! empty( $slide['rating'] ) ) {
-			$html .= $this->render_stars( $slide, $settings );
-		}
-
-		if ( ! empty( $slide['title'] ) ) {
-			$html .= '<span class="responsive-testimonial__title">' . $slide['title'] . '</span>';
-		}
-		$html .= '</cite>';
-
-		return $html;
-	}
-
-	/**
-	 * Render Stars function
-	 *
-	 * @param array $slide has slide information.
-	 *
-	 * @param array $settings has slide settings.
-	 *
-	 * @since 1.0.0
-	 * @access protected
-	 */
-	protected function render_stars( $slide, $settings ) {
-		$icon = '&#xE934;';
-
-		if ( 'star_fontawesome' === $settings['star_style'] ) {
-			if ( 'outline' === $settings['unmarked_star_style'] ) {
-				$icon = '&#xE933;';
-			}
-		} elseif ( 'star_unicode' === $settings['star_style'] ) {
-			$icon = '&#9733;';
-
-			if ( 'outline' === $settings['unmarked_star_style'] ) {
-				$icon = '&#9734;';
-			}
-		}
-
-		$rating         = (float) $slide['rating'] > 5 ? 5 : $slide['rating'];
-		$floored_rating = (int) $rating;
-		$stars_html     = '';
-
-		for ( $stars = 1; $stars <= 5; $stars++ ) {
-			if ( $stars <= $floored_rating ) {
-				$stars_html .= '<i class="elementor-star-full">' . $icon . '</i>';
-			} elseif ( $floored_rating + 1 === $stars && $rating != $floored_rating ) { //phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
-				$stars_html .= '<i class="elementor-star-' . ( $rating - $floored_rating ) * 10 . '">' . $icon . '</i>';
-			} else {
-				$stars_html .= '<i class="elementor-star-empty">' . $icon . '</i>';
-			}
-		}
-
-		return '<div class="elementor-star-rating">' . $stars_html . '</div>';
-	}
 
 	/**
 	 * Print icon function
@@ -1245,7 +1185,113 @@ class Responsive_Addons_For_Elementor_Reviews extends Widget_Base {
 				<img <?php echo wp_kses_post( $this->get_render_attribute_string( $element_key . '-image' ) ); ?>>
 			</div>
 		<?php endif; ?>
-			<?php echo wp_kses_post( $this->print_cite( $slide, $settings ) ); ?>
+			<?php 
+				if ( empty( $slide['name'] ) && empty( $slide['title'] ) ) {
+					return '';
+				}
+
+		echo '<cite class="elementor-testimonial__cite">';
+
+		if ( ! empty( $slide['name'] ) ) {
+			echo '<span class="responsive-testimonial__name">' . $slide['name'] . '</span>';
+		}
+
+		if ( ! empty( $slide['rating'] ) ) {
+
+		$raw_rating = isset( $slide['rating'] ) ? $slide['rating'] : ( isset( $rating ) ? $rating : 0 );
+
+			// Defensive parse: some code earlier may have used wrong precedence. Force float.
+			$rating = floatval( $raw_rating );
+		// Font Awesome rendering
+		if ( 'star_fontawesome' === $settings['star_style'] ) {
+				$style_attr = ( 'outline' === $settings['unmarked_star_style'] ) ? 'data-style="outline"' : 'data-style="filled"';
+
+			// Round to one decimal to avoid floating noise, but keep fraction
+			$rating = round( $rating, 1 );
+
+			$floored_rating = floor( $rating );
+			$fraction = $rating - $floored_rating;
+
+			// decide half star when fraction is between 0.25 and 0.75 (flexible)
+			$has_half_star = ( $fraction >= 0.25 && $fraction < 0.75 );
+			echo '<div class="elementor-star-rating">';
+
+			for ( $stars = 1; $stars <= 5; $stars++ ) {
+				if ( $stars <= $floored_rating) {
+					// Filled star
+					$icon = [
+						'value'   => 'fas fa-star',
+						'library' => 'fa-solid',
+					];
+					echo '<span class="rael-star rael-star-filled" '.$style_attr.'>';
+					\Elementor\Icons_Manager::render_icon( $icon, [ 'aria-hidden' => 'true' ] );
+					echo '</span>';
+
+				} elseif ( $has_half_star && $stars == $floored_rating + 1  ) {
+					//  Half star (overlay)
+					//  Partially filled star (variable width)
+					$fill_width = round( $fraction * 100 ); // e.g. 0.7 => 70%
+
+					$icon_filled = [
+						'value'   => 'fas fa-star',
+						'library' => 'fa-solid',
+					];
+
+					$icon_unmarked = ( 'outline' === $settings['unmarked_star_style'] )
+						? [ 'value' => 'far fa-star', 'library' => 'fa-regular' ]
+						: [ 'value' => 'fas fa-star', 'library' => 'fa-solid' ];
+					
+
+					echo '<span class="rael-star rael-star-half" '.$style_attr.'>';
+						// Base (unmarked)
+						\Elementor\Icons_Manager::render_icon( $icon_unmarked, [ 'aria-hidden' => 'true' ] );
+						// Overlay (filled)
+						echo '<span class="rael-star-half-overlay" style="width:' . esc_attr( $fill_width ) . '%;">';
+							\Elementor\Icons_Manager::render_icon( $icon_filled, [ 'aria-hidden' => 'true' ] );
+						echo '</span>';
+					echo '</span>';
+				} else {
+					// Unmarked star
+					$icon_type = ( 'outline' === $settings['unmarked_star_style'] ) ? 'far fa-star' : 'fas fa-star';
+					$library   = ( 'outline' === $settings['unmarked_star_style'] ) ? 'fa-regular' : 'fa-solid';
+
+					$icon = [
+						'value'   => $icon_type,
+						'library' => $library,
+					];
+					echo '<span class="rael-star rael-star-unmarked">';
+					\Elementor\Icons_Manager::render_icon( $icon, [ 'aria-hidden' => 'true' ] );
+					echo '</span>';
+				}
+			}
+
+			echo '</div>';
+		} elseif ( 'star_unicode' === $settings['star_style'] ) {
+			$icon = ( 'outline' === $settings['unmarked_star_style'] ) ? '&#9734;' : '&#9733;';
+					
+			for ( $stars = 1; $stars <= 5; $stars++ ) {
+				$rating_unicode        = (float) $slide['rating'] > 5 ? 5 : $slide['rating'];
+				$floored_rating_unicode = (int) $rating_unicode;
+				if ( $stars <= $floored_rating_unicode ) {
+
+					$stars_html .= '<i class="elementor-star-full">' . $icon . '</i>';
+				} elseif ( $floored_rating_unicode + 1 === $stars && $rating_unicode != $floored_rating_unicode ) { //phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
+					$stars_html .= '<i class="elementor-star-' . ( $rating_unicode - $floored_rating_unicode ) * 10 . '">' . $icon . '</i>';
+				} else {
+					$stars_html .= '<i class="elementor-star-empty">' . $icon . '</i>';
+				}
+		}
+			echo '<div class="elementor-star-rating">' . $stars_html . '</div>';
+
+		}
+			
+		}
+
+		if ( ! empty( $slide['title'] ) ) {
+			echo  '<span class="responsive-testimonial__title">' . $slide['title'] . '</span>';
+		}
+		echo '</cite>';
+			?>
 			<?php echo $this->print_icon( $slide, $element_key ); // phpcs:ignore?> 
 			</<?php echo esc_attr( $header_tag ); ?>>
 		<?php endif; ?>

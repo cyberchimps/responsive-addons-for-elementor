@@ -1248,7 +1248,10 @@ private function rael_find_element_recursive($elements, $widget_id) {
 							$included_libs['rael-swiper'] = true;
 							wp_enqueue_script( 'rael-swiper', RAEL_ASSETS_URL . 'lib/swiper/swiper.js', array(), RAEL_VER, true );
 							wp_localize_script( 'rael-swiper', 'rael_elementor_swiper', $swiper_class );
+							
 						}
+						wp_enqueue_script( 'rael-media-carousel', RAEL_ASSETS_URL . 'js/frontend/media-carousel/media-carousel.js', array('jquery', 'elementor-frontend'), RAEL_VER, true);// . $ext );
+
 						break;
 					case 'slider':
 					case 'testimonial-slider':
@@ -1807,6 +1810,7 @@ private function rael_find_element_recursive($elements, $widget_id) {
 							array_push( $js_files, $js_files_path . 'testimonial/testimonial' . $ext );
 						}
 						array_push( $css_files, $css_files_path . 'testimonial-slider/testimonial-slider' . $css_min_ext );
+
 						array_push( $css_files, $css_files_path . 'media-carousel/media-carousel' . $css_min_ext );
 						break;
 					case 'twitter-feed':
@@ -1872,11 +1876,6 @@ private function rael_find_element_recursive($elements, $widget_id) {
 					case 'login-register':
 						array_push( $js_files, $js_files_path . 'login-register/login-register' . $ext );
 						array_push( $css_files, $css_files_path . 'login-register/login-register' . $css_min_ext );
-						break;
-					case 'media-carousel':
-						array_push( $js_files, $js_files_path . 'media-carousel/base-slider' . $ext );
-						array_push( $js_files, $js_files_path . 'media-carousel/media-carousel' . $ext );
-						array_push( $css_files, $css_files_path . 'media-carousel/media-carousel' . $css_min_ext );
 						break;
 					case 'google-map':
 						array_push( $js_files, $js_files_path . 'google-map/google-map' . $ext );

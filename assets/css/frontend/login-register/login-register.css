@@ -86,9 +86,9 @@
     position: relative; }
   .rael-login-form-container .rael-show-password {
     position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
+    top: 2px;
+    right: 2px;
+    height: 46px;
     display: flex;
     justify-content: center;
     align-items: center; }
@@ -283,6 +283,8 @@
   border-left: 3px solid red; }
 
 .rael-input {
-  width: 100%; }
+  width: 100%; 
+  height: 50px;
+}
 
 /*# sourceMappingURL=login-register.css.map */

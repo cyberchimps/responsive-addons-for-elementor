@@ -22,10 +22,6 @@
   margin-left: auto;
   margin-right: auto; }
 
-.rael-team-member .profile-card:hover {
-  -webkit-box-shadow: 0 42px 60px 0 rgba(0, 0, 0, 0.3);
-  box-shadow: 0 42px 60px 0 rgba(0, 0, 0, 0.3); }
-
 .rael-team-member .profile-card:hover .profile-body .profile-title {
   color: #2575fc; }
 

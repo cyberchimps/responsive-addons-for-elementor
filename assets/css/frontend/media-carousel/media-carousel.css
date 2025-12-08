@@ -101,5 +101,11 @@
   -webkit-transition: 0.3s ease;
   -o-transition: 0.3s ease;
   transition: 0.3s ease; }
-
+.swiper-wrapper {
+  box-sizing: border-box;
+}
+.swiper-slide {
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
 /*# sourceMappingURL=media-carousel.css.map */

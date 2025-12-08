@@ -255,8 +255,8 @@ if ( ! class_exists( 'Rael_Sticky_Elementor' ) ) {
 				array(
 					'label'       => esc_html__( 'Z-index', 'responsive-addons-for-elementor' ),
 					'type'        => Elementor\Controls_Manager::NUMBER,
-					'placeholder' => 1100,
-					'default'     => 1100,
+					'placeholder' => '',
+					'default'     => '1100',
 					'min'         => 1,
 					'max'         => 10000,
 					'step'        => 1,
@@ -266,6 +266,7 @@ if ( ! class_exists( 'Rael_Sticky_Elementor' ) ) {
 					'condition'   => array(
 						'rael_sticky_section_sticky' => 'yes',
 					),
+					'frontend_available' => true,
 				)
 			);
 
@@ -286,6 +287,7 @@ if ( ! class_exists( 'Rael_Sticky_Elementor' ) ) {
 					'condition' => array(
 						'rael_sticky_section_sticky' => 'yes',
 					),
+					'frontend_available' => true,
 				)
 			);
 

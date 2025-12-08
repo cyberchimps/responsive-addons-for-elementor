@@ -152,7 +152,6 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 					),
 				),
 				'selectors'      => array(
-					'{{WRAPPER}} .responsive-posts-container .elementor-post__thumbnail' => 'padding-bottom: calc( {{SIZE}} * 100% );',
 					'{{WRAPPER}}:after' => 'content: "{{SIZE}}"; position: absolute; color: transparent;',
 				),
 				'condition'      => array(
@@ -535,7 +534,7 @@ abstract class RAEL_Skin_Base extends Elementor_Skin_Base {
 				'label'              => __( 'Rows Gap', 'responsive-addons-for-elementor' ),
 				'type'               => Controls_Manager::SLIDER,
 				'default'            => array(
-					'size' => 35,
+					'size' => 20,
 				),
 				'range'              => array(
 					'px' => array(
