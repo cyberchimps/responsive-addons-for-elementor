@@ -155,6 +155,23 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 				'type'  => Controls_Manager::TEXTAREA,
 			)
 		);
+		
+
+		$repeater->add_control(
+			'testimonial_rating',
+			array(
+				'label'   => __( 'Testimonial Rating', 'responsive-addons-for-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => '5',
+				'options' => array(
+					'1' => '1',
+					'2' => '2',
+					'3' => '3',
+					'4' => '4',
+					'5' => '5',
+				),
+			)
+		);
 
 		$repeater->add_control(
 			'image',
@@ -192,6 +209,17 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 				'fields'    => $repeater->get_controls(),
 				'default'   => $this->get_repeater_defaults(),
 				'separator' => 'after',
+			)
+		);
+		$this->add_control(
+			'enable_rating',
+			array(
+				'label'        => __( 'Enable Rating', 'responsive-addons-for-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'responsive-addons-for-elementor' ),
+				'label_off'    => __( 'No', 'responsive-addons-for-elementor' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
 			)
 		);
 
@@ -977,8 +1005,93 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 
 		$this->end_controls_tab();
 		$this->end_controls_tabs();
+		
 
 		$this->end_controls_section();
+		$this->start_controls_section(
+    'section_rating_style',
+    [
+        'label' => __( 'Rating', 'responsive-addons-for-elementor' ),
+        'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
+    ]
+);
+
+$this->add_control(
+    'rating_color',
+    [
+        'label' => __( 'Color', 'responsive-addons-for-elementor' ),
+        'type'  => \Elementor\Controls_Manager::COLOR,
+		'default' => '#ffb400',
+        'selectors' => [
+			'{{WRAPPER}} .rael-rating-stars i' => 'color: {{VALUE}};',
+
+        ],
+    ]
+);
+
+$this->add_responsive_control(
+    'rating_font_size',
+    [
+        'label' => __( 'Font Size', 'responsive-addons-for-elementor' ),
+        'type' => \Elementor\Controls_Manager::SLIDER,
+        'range' => [
+            'px' => [
+                'min' => 8,
+                'max' => 60,
+            ],
+        ],
+		'default' => array('size' => '17', 'unit' => 'px' ),
+        'selectors' => [
+            '{{WRAPPER}} .rael-rating-stars i' => 'font-size: {{SIZE}}{{UNIT}};',
+        ],
+    ]
+);
+
+$this->add_responsive_control(
+    'rating_item_margin_right',
+    [
+        'label' => __( 'Items Margin Right', 'responsive-addons-for-elementor' ),
+        'type'  => \Elementor\Controls_Manager::SLIDER,
+        'range' => [
+            'px' => [
+                'min' => 0,
+                'max' => 40,
+            ],
+        ],
+        'selectors' => [
+            '{{WRAPPER}} .rael-rating-stars i' => 'margin-right: {{SIZE}}{{UNIT}};',
+        ],
+        'default' => [
+            'size' => 5,
+            'unit' => 'px',
+        ],
+    ]
+);
+
+$this->add_responsive_control(
+    'review_padding',
+    [
+        'label' => __( 'Review Padding', 'responsive-addons-for-elementor' ),
+        'type'  => \Elementor\Controls_Manager::DIMENSIONS,
+        'selectors' => [
+            '{{WRAPPER}} .rael-rating-stars' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+        ],
+    ]
+);
+
+$this->add_responsive_control(
+    'review_margin',
+    [
+        'label' => __( 'Review Margin', 'responsive-addons-for-elementor' ),
+        'type'  => \Elementor\Controls_Manager::DIMENSIONS,
+        'selectors' => [
+            '{{WRAPPER}} .rael-rating-stars' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+        ],
+    ]
+);
+
+$this->end_controls_section();
+
 
 		$this->start_controls_section(
 			'section_navigation',
@@ -1530,6 +1643,24 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 					?>
 				</div>
 				<div class="responsive-testimonial__content">
+					<?php $rating = intval( $slide['testimonial_rating'] );
+
+						echo '<div class="rael-rating-stars">';
+
+						// filled stars
+						for ( $i = 0; $i < $rating; $i++ ) {
+							echo '<i class="fas fa-star"></i>';
+						}
+
+						// outlined stars
+						for ( $i = $rating; $i < 5; $i++ ) {
+							echo '<i class="far fa-star"></i>';
+						}
+
+						echo '</div>';
+
+					?>
+
 					<div class="responsive-testimonial__text">
 						<?php echo esc_html( $slide['content'] ); ?>
 					</div>
