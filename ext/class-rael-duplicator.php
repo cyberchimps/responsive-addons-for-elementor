@@ -43,9 +43,9 @@ if ( ! class_exists( 'RAEL_Duplicator' ) ) {
 			add_filter( 'post_row_actions', array( $this, 'rae_add_duplicator_action' ), 10, 2 );
 			add_filter( 'page_row_actions', array( $this, 'rae_add_duplicator_action' ), 10, 2 );
 
-			// Bulk action
-			add_filter( 'bulk_actions-edit-post', array( $this, 'rae_register_bulk_action' ) );
+			// Bulk action for all post types
 			add_filter( 'handle_bulk_actions-edit-post', array( $this, 'rae_process_bulk_action' ), 10, 3 );
+			add_action( 'admin_init', array( $this, 'rae_register_bulk_actions_for_all_post_types' ) );
 			
 			// Admin action for duplication
 			add_action( 'admin_action_rael_duplicate_post', array( $this, 'rae_duplicate_post_handler' ) );
@@ -83,7 +83,11 @@ if ( ! class_exists( 'RAEL_Duplicator' ) ) {
 			'rael_duplicate_post_' . $post_id
 		);
 
-		return '<a href="' . esc_url( $url ) . '">RAE Duplicator</a>';
+		return sprintf(
+			'<a href="%s">%s</a>',
+			esc_url( $url ),
+			esc_html__( 'RAE Duplicator', 'responsive-addons-for-elementor' )
+		);
 	}
 
 
@@ -115,6 +119,53 @@ if ( ! class_exists( 'RAEL_Duplicator' ) ) {
 			$redirect_url
 		);
 	}
+	public function rae_register_bulk_actions_for_all_post_types() {
+
+    // Get all post types where UI is visible (post, page, CPTs)
+    $post_types = get_post_types( array( 'show_ui' => true ), 'names' );
+
+    // Get selected allowed post types
+    $allowed = get_option( 'rael_duplicator_allowed_post_types', array( 'all' ) );
+
+    foreach ( $post_types as $post_type ) {
+
+        // CASE 1: "all" is selected → show for ALL post types
+        if ( in_array( 'all', $allowed ) ) {
+
+            add_filter(
+                "bulk_actions-edit-{$post_type}",
+                array( $this, 'rae_register_bulk_action' )
+            );
+
+            add_filter(
+                "handle_bulk_actions-edit-{$post_type}",
+                array( $this, 'rae_process_bulk_action' ),
+                10,
+                3
+            );
+
+            continue; // move to next post type
+        }
+
+        // CASE 2: only specific post types selected
+        if ( in_array( $post_type, $allowed ) ) {
+
+            add_filter(
+                "bulk_actions-edit-{$post_type}",
+                array( $this, 'rae_register_bulk_action' )
+            );
+
+            add_filter(
+                "handle_bulk_actions-edit-{$post_type}",
+                array( $this, 'rae_process_bulk_action' ),
+                10,
+                3
+            );
+        }
+
+    }
+}
+
 
 	/**
 	 * Handle single duplication via admin action link

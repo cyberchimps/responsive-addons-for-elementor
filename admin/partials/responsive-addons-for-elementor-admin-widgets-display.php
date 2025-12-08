@@ -121,7 +121,7 @@ foreach ( $widgets as $widget ) {
 			}
 
 			// Exclude if needed
-			if ( in_array($slug, ['attachment', 'product'], true) ) {
+			if ( in_array($slug, ['attachment'], true) ) {
 				continue;
 			}
 
