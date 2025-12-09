@@ -39,6 +39,11 @@ if ( ! class_exists( 'RAEL_Duplicator' ) ) {
 			// Row actions for posts/pages
 			add_filter( 'manage_posts_columns', array( $this, 'rae_add_custom_column' ) );
 			add_filter( 'manage_pages_columns', array( $this, 'rae_add_custom_column' ) );
+
+			add_filter( 'default_hidden_columns', array( $this, 'rae_hide_duplicator_column_by_default' ), 10, 2 );
+			add_action( 'admin_enqueue_scripts', array( $this, 'rae_duplicator_admin_styles' ) );
+
+
 			
 			add_filter( 'post_row_actions', array( $this, 'rae_add_duplicator_action' ), 10, 2 );
 			add_filter( 'page_row_actions', array( $this, 'rae_add_duplicator_action' ), 10, 2 );
@@ -304,6 +309,42 @@ private function rae_duplicate( $post_id ) {
 		$columns['rae_duplicator'] =  esc_html__( 'RAE Duplicator', 'responsive-addons-for-elementor' );
 		return $columns;
 	}
+	public function rae_hide_duplicator_column_by_default( $hidden, $screen ) {
+
+		if ( empty( $screen->id ) ) {
+			return $hidden;
+		}
+
+		// Allowed list table screen IDs
+		$screens = array(
+			'edit-post',     // Posts
+			'edit-page',     // Pages
+			'edit-product',  // WooCommerce Products
+		);
+
+		// Apply only to above screens
+		if ( in_array( $screen->id, $screens, true ) ) {
+			$column = 'rae_duplicator';
+
+			if ( ! in_array( $column, $hidden, true ) ) {
+				$hidden[] = $column;
+			}
+		}
+
+		return $hidden;
+	}
+
+	public function rae_duplicator_admin_styles($hook) {
+		$screen = get_current_screen();
+		if ( ! $screen || ! in_array( $screen->id, [ 'edit-post', 'edit-page', 'edit-product' ], true ) ) {
+			return;
+		}
+
+		wp_add_inline_style( 'wp-admin', '
+			th.column-rae_duplicator, td.column-rae_duplicator { display: none !important; }
+		' );
+	}
+
 	
 	}
 
