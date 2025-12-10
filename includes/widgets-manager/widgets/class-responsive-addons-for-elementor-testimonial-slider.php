@@ -890,6 +890,16 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 				),
 			)
 		);
+		$this->add_responsive_control(
+			'image_margin',
+			array(
+				'label' => __( 'Margin', 'responsive-addons-for-elementor' ),
+				'type'  => Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .responsive-testimonial__image' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
 
 		$this->add_control(
 			'image_border',
