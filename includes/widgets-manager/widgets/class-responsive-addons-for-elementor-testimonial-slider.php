@@ -373,7 +373,7 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 				'render_type'        => 'template',
 				'frontend_available' => true,
 			)
-		);
+		);	
 
 		$this->add_control(
 			'pagination',
@@ -1009,88 +1009,88 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 
 		$this->end_controls_section();
 		$this->start_controls_section(
-    'section_rating_style',
-    [
-        'label' => __( 'Rating', 'responsive-addons-for-elementor' ),
-        'tab'   => \Elementor\Controls_Manager::TAB_STYLE,
-    ]
-);
+			'section_rating_style',
+			[
+				'label' => __( 'Rating', 'responsive-addons-for-elementor' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
 
-$this->add_control(
-    'rating_color',
-    [
-        'label' => __( 'Color', 'responsive-addons-for-elementor' ),
-        'type'  => \Elementor\Controls_Manager::COLOR,
-		'default' => '#ffb400',
-        'selectors' => [
-			'{{WRAPPER}} .rael-rating-stars i' => 'color: {{VALUE}};',
+		$this->add_control(
+			'rating_color',
+			[
+				'label' => __( 'Color', 'responsive-addons-for-elementor' ),
+				'type'  => Controls_Manager::COLOR,
+				'default' => '#ffb400',
+				'selectors' => [
+					'{{WRAPPER}} .rael-rating-stars i' => 'color: {{VALUE}};',
 
-        ],
-    ]
-);
+				],
+			]
+		);
 
-$this->add_responsive_control(
-    'rating_font_size',
-    [
-        'label' => __( 'Font Size', 'responsive-addons-for-elementor' ),
-        'type' => \Elementor\Controls_Manager::SLIDER,
-        'range' => [
-            'px' => [
-                'min' => 8,
-                'max' => 60,
-            ],
-        ],
-		'default' => array('size' => '17', 'unit' => 'px' ),
-        'selectors' => [
-            '{{WRAPPER}} .rael-rating-stars i' => 'font-size: {{SIZE}}{{UNIT}};',
-        ],
-    ]
-);
+		$this->add_responsive_control(
+			'rating_font_size',
+			[
+				'label' => __( 'Font Size', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 8,
+						'max' => 60,
+					],
+				],
+				'default' => array('size' => '17', 'unit' => 'px' ),
+				'selectors' => [
+					'{{WRAPPER}} .rael-rating-stars i' => 'font-size: {{SIZE}}{{UNIT}};',
+				],
+			]
+		);
 
-$this->add_responsive_control(
-    'rating_item_margin_right',
-    [
-        'label' => __( 'Items Margin Right', 'responsive-addons-for-elementor' ),
-        'type'  => \Elementor\Controls_Manager::SLIDER,
-        'range' => [
-            'px' => [
-                'min' => 0,
-                'max' => 40,
-            ],
-        ],
-        'selectors' => [
-            '{{WRAPPER}} .rael-rating-stars i' => 'margin-right: {{SIZE}}{{UNIT}};',
-        ],
-        'default' => [
-            'size' => 5,
-            'unit' => 'px',
-        ],
-    ]
-);
+		$this->add_responsive_control(
+			'rating_item_margin_right',
+			[
+				'label' => __( 'Items Margin Right', 'responsive-addons-for-elementor' ),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 40,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .rael-rating-stars i' => 'margin-right: {{SIZE}}{{UNIT}};',
+				],
+				'default' => [
+					'size' => 5,
+					'unit' => 'px',
+				],
+			]
+		);
 
-$this->add_responsive_control(
-    'review_padding',
-    [
-        'label' => __( 'Review Padding', 'responsive-addons-for-elementor' ),
-        'type'  => \Elementor\Controls_Manager::DIMENSIONS,
-        'selectors' => [
-            '{{WRAPPER}} .rael-rating-stars' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-        ],
-    ]
-);
+		$this->add_responsive_control(
+			'review_padding',
+			[
+				'label' => __( 'Review Padding', 'responsive-addons-for-elementor' ),
+				'type'  => Controls_Manager::DIMENSIONS,
+				'selectors' => [
+					'{{WRAPPER}} .rael-rating-stars' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 
-$this->add_responsive_control(
-    'review_margin',
-    [
-        'label' => __( 'Review Margin', 'responsive-addons-for-elementor' ),
-        'type'  => \Elementor\Controls_Manager::DIMENSIONS,
-        'selectors' => [
-            '{{WRAPPER}} .rael-rating-stars' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-        ],
-    ]
-);
+		$this->add_responsive_control(
+			'review_margin',
+			[
+				'label' => __( 'Review Margin', 'responsive-addons-for-elementor' ),
+				'type'  => Controls_Manager::DIMENSIONS,
+				'selectors' => [
+					'{{WRAPPER}} .rael-rating-stars' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 
-$this->end_controls_section();
+		$this->end_controls_section();
 
 
 		$this->start_controls_section(
@@ -1233,27 +1233,58 @@ $this->end_controls_section();
 				),
 			)
 		);
-
 		$this->add_control(
+			'pagination_style',
+			array(
+				'label'       => __( 'Choose Dots Style', 'responsive-addons-for-elementor' ),
+				'type'        => Controls_Manager::SELECT,
+				'label_block' => true,
+				'default'     => 'solid_circle',
+				'options'     => array(
+					'solid_circle'    => __( 'Solid Circle', 'responsive-addons-for-elementor' ),
+					'outline_circle'  => __( 'Outlined Circle', 'responsive-addons-for-elementor' ),
+					'bars'  => __( 'Bars', 'responsive-addons-for-elementor' ),
+				),
+				'prefix_class' => 'rael-pagination-style-',
+			)
+		);
+
+			$this->add_control(
 			'pagination_size',
 			array(
 				'label'     => __( 'Size', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::SLIDER,
 				'range'     => array(
 					'px' => array(
-						'max' => 20,
+						'max' => 20, 
 					),
 				),
+				'default'   => array(
+					'size' => 13,
+					'unit' => 'px',
+				),
 				'selectors' => array(
-					'{{WRAPPER}} .swiper-pagination-bullet' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
-					'{{WRAPPER}} .swiper-horizontal .swiper-pagination-progressbar' => 'height: {{SIZE}}{{UNIT}}',
-					'{{WRAPPER}} .swiper-pagination-fraction' => 'font-size: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}}.rael-pagination-style-solid_circle .swiper-pagination-bullet' =>
+						'height: {{SIZE}}{{UNIT}} !important; width: {{SIZE}}{{UNIT}} !important; border-radius: 50% !important;',
+
+					'{{WRAPPER}}.rael-pagination-style-outline_circle .swiper-pagination-bullet' =>
+						'height: {{SIZE}}{{UNIT}} !important; width: {{SIZE}}{{UNIT}} !important; border-radius: 50% !important;',
+
+					'{{WRAPPER}}.rael-pagination-style-bars .swiper-pagination-bullet' =>
+						'width: {{SIZE}}{{UNIT}} !important; height: 5px !important; border-radius: 10px !important;',
+
+					'{{WRAPPER}} .swiper-horizontal .swiper-pagination-progressbar' =>
+						'height: {{SIZE}}{{UNIT}} !important;',
+
+					'{{WRAPPER}} .swiper-pagination-fraction' =>
+						'font-size: {{SIZE}}{{UNIT}} !important;',
 				),
 				'condition' => array(
 					'pagination!' => '',
 				),
 			)
 		);
+
 
 		$this->add_control(
 			'pagination_color',
@@ -1263,6 +1294,17 @@ $this->end_controls_section();
 				'selectors' => array(
 					'{{WRAPPER}} .swiper-pagination-bullet:not(.swiper-pagination-bullet-active), {{WRAPPER}} .swiper-pagination-progressbar' => 'background-color: {{VALUE}}; opacity: 1;',
 					'{{WRAPPER}} .swiper-pagination-fraction' => 'color: {{VALUE}}',
+					/* Solid Circle – inactive bullets */
+					'{{WRAPPER}}.rael-pagination-style-solid_circle .swiper-pagination-bullet:not(.swiper-pagination-bullet-active)' =>
+						'background-color: {{VALUE}}; opacity: 1;',
+
+					/* Outline Circle – inactive bullets */
+					'{{WRAPPER}}.rael-pagination-style-outline_circle .swiper-pagination-bullet:not(.swiper-pagination-bullet-active)' =>
+						'background-color: transparent; border: 2px solid {{VALUE}}; opacity: 1;',
+
+					/* Bars – inactive bars */
+					'{{WRAPPER}}.rael-pagination-style-bars .swiper-pagination-bullet:not(.swiper-pagination-bullet-active)' =>
+						'background-color: {{VALUE}};',
 				),
 				'condition' => array(
 					'pagination!' => '',
@@ -1537,7 +1579,8 @@ $this->end_controls_section();
 				</div>
 				<?php if ( 1 < $slides_count ) : ?>
 					<?php if ( $settings['pagination'] ) : ?>
-						<div class="swiper-pagination"></div>
+						 
+							<div class="swiper-pagination"></div>
 					<?php endif; ?>
 					<?php if ( $settings['show_arrows'] ) : ?>
 						<?php
@@ -1643,21 +1686,24 @@ $this->end_controls_section();
 					?>
 				</div>
 				<div class="responsive-testimonial__content">
-					<?php $rating = intval( $slide['testimonial_rating'] );
+					<?php 
+						if($settings['enable_rating'] == 'yes') {
+							$rating = intval( $slide['testimonial_rating'] );
 
-						echo '<div class="rael-rating-stars">';
+							echo '<div class="rael-rating-stars">';
 
-						// filled stars
-						for ( $i = 0; $i < $rating; $i++ ) {
-							echo '<i class="fas fa-star"></i>';
+							// filled stars
+							for ( $i = 0; $i < $rating; $i++ ) {
+								echo '<i class="fas fa-star"></i>';
+							}
+
+							// outlined stars
+							for ( $i = $rating; $i < 5; $i++ ) {
+								echo '<i class="far fa-star"></i>';
+							}
+
+							echo '</div>';
 						}
-
-						// outlined stars
-						for ( $i = $rating; $i < 5; $i++ ) {
-							echo '<i class="far fa-star"></i>';
-						}
-
-						echo '</div>';
 
 					?>
 
