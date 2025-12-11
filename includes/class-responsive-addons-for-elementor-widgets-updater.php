@@ -147,7 +147,7 @@ class Responsive_Addons_For_Elementor_Widgets_Updater {
 			),
 			array(
 				'title'    => 'duplicator',
-				'docs'     => 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/duplicator/',
+				'docs'     => 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/rae-duplicator/',
 				'category' => 'extensions',
 			),
 			array(
