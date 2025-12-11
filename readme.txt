@@ -3,11 +3,11 @@ Contributors: cyberchimps
 Donate Link: https://cyberchimps.com
 Tags: elementor, elementor addons, widgets for elementor, header footer builder, elementor templates
 Requires at least: 5.0
-Tested up to: 6.8
-Elementor tested up to: 3.32
-Elementor Pro tested up to: 3.32
+Tested up to: 6.9
+Elementor tested up to: 3.33
+Elementor Pro tested up to: 3.33
 Requires PHP: 5.6
-Stable tag: 2.0.7
+Stable tag: 2.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -291,6 +291,10 @@ If you like Responsive Addons for Elementor, consider checking out our other Wor
 The Development Version of the Responsive Addons for Elementor plugin is located at [https://github.com/cyberchimps/responsive-addons-for-elementor](https://github.com/cyberchimps/responsive-addons-for-elementor)
 
 == Changelog ==
+
+= 2.0.8 - 12th December 2025 = 
+- New: RAE Extension – Duplicator: Added a one-click duplication feature for any page, post or custom post types, including full support for meta data, taxonomies and featured images.
+- Fix: Resolved Stacking Cards Widget issue where template selections failed to load, ensuring templates are fetched and displayed reliably in the widget settings.
 
 = 2.0.7 - 26th November 2025 = 
 - Fix: Implemented various bugfixes in the Testimonial Slider, Media carousel, Login signup form, Team Member, FAQ, Posts, Stacking Cards, Reviews widgets for improved stability.
