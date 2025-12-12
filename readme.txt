@@ -91,6 +91,8 @@ Let’s get started with the widget list.
 
 1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/banner-widget/" >Banner</a> – Responsive Addons for Elementor’s Banner widget enables you to create eye-catching interactive banners.
 
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/banner-widget/" >Before After Slider</a> – Easily showcase the pre and post image by using the RAE before after slider widget.
+
 1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/breadcrumb-widget/" >Breadcrumbs</a> – The widget displays a secondary navigation panel that reveals a user's location within a website.
 
 1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/business-hour-widget/" >Business Hours</a> – Business Hours allows you to display your business hours in a beautiful tabular way.
@@ -177,6 +179,8 @@ Let’s get started with the widget list.
 
 1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/slider/" >Slider</a> – Slider widget lets you quickly create a simple slider that works perfectly for your website.
 
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/docs/sticky-video/" >Stacking Cards</a> – Stacking Cards Widget delivers smooth, stacked scroll effects for a dynamic user experience.
+
 1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/docs/sticky-video/" >Sticky Video</a> – Sticky Video is a widget that allows you to add a video and make its position sticky when scrolling the page.
 
 1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/table-of-contents-widget/" >Table of Contents</a> — The widget organizes your page according to the H1 to H6 hierarchy levels.
@@ -237,32 +241,19 @@ Let’s get started with the widget list.
 
 ###Extension Modules###
 
-1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/cross-site-copy-paste/" >Cross site Copy Paste</a> — Cross-site copy-paste lets you easily replicate Elementor sections from one website to another with the ease of copy-paste functionality. It copies all the texts, columns, widgets, typography, design, and everything else. If you’re still not using the fantastic widgets from the Responsive Elementor Addons plugin, you can sign up for the Responsive Pro version.
+1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/cross-site-copy-paste/" >Cross site Copy Paste</a> — Cross-site copy-paste lets you easily replicate Elementor sections from one website to another with the ease of copy-paste functionality.
 
 1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/particles-background/" >Particles Background</a> – A particle background is an animated effect with moving particles, like snow or lights. It enhances the visual appeal of a website and gives it a more modern look.
 
 1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/sticky-section-widget/" >Sticky section</a> – The Elementor sticky sections improve navigation, increase conversions, enhance the design, and enhance accessibility by keeping important elements visible and accessible at all times. You can enhance your website by adding a sticky section today.
 
-
+1. <a href = "https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/rae-duplicator/" >RAE Duplicator</a> – Duplicates any page, post or custom post types in a single click.
 
 
 
 ###Theme Builder for Elementor###
 
 <a href = "https://cyberchimps.com/responsive-addons-for-elementor/theme-builder/" >Theme Builder</a> — Responsive Addons for Elementor’s Theme Builder is a user-friendly tool that empowers you to create and design templates for different sections of your website. Its drag-and-drop interface makes website customization a breeze. The tool also offers a feature that allows you to design and customize various sections of your website as templates, such as the header, footer, WooCommerce products, and more.
-
-
-##Responsive Addons for Elementor Reviews and Testimonials##
-
-Are You A Happy User Of Responsive Addons For Elementor?
-
-Testimonials from real customers:
-
-**Free and easy to use.**
-
-* Responsive Addons for Elementor is a versatile plugin that enhances Elementor with a rich collection of widgets, and templates. It’s user-friendly, highly customizable, and ensures responsive designs across all devices. This plugin is a must-have for anyone looking to extend Elementor’s capabilities effortlessly. Highly recommended!
-
-Give your valuable review on [WordPress](https://wordpress.org/plugins/responsive-addons-for-elementor/#reviews). 
 
 
 ##Support & Documentation##
