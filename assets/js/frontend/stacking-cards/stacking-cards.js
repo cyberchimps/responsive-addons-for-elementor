@@ -92,6 +92,68 @@ function initStackingCards($scope) {
   });
 }
 
+function copySectionContent() {
+    jQuery('.rael-section-fetch').each(function () {
+
+        let container = this;
+        let targetId = container.dataset.targetId;
+        if (!targetId) return;
+
+        let target = document.getElementById(targetId);
+        if (!target) return;
+
+        // Clone with CSS applied as inline styles
+        let clonedStyled = cloneWithAllStyles(target);
+
+        container.innerHTML = "";
+        container.appendChild(clonedStyled);
+    });
+}
+
+function waitForSectionAndCopy(maxRetries = 40) {
+    let attempts = 0;
+
+    function tryCopy() {
+        copySectionContent();
+
+        attempts++;
+
+        // If any section content copied successfully → stop retrying
+        if (jQuery('.rael-section-fetch').find('*').length > 0) {
+            return;
+        }
+
+        // Retry for a while until other widgets finish rendering
+        if (attempts < maxRetries) {
+            setTimeout(tryCopy, 250);
+        }
+    }
+
+    tryCopy();
+}
+function cloneWithAllStyles(sourceElement) {
+    let cloned = sourceElement.cloneNode(true);
+
+    copyComputedStyles(sourceElement, cloned);
+
+    let sourceChildren = sourceElement.children;
+    let clonedChildren = cloned.children;
+
+    for (let i = 0; i < sourceChildren.length; i++) {
+        copyComputedStyles(sourceChildren[i], clonedChildren[i]);
+    }
+
+    return cloned;
+}
+
+function copyComputedStyles(source, target) {
+    const computed = window.getComputedStyle(source);
+    for (let prop of computed) {
+        target.style[prop] = computed.getPropertyValue(prop);
+    }
+}
+
+
 // Elementor frontend + editor support
 jQuery(window).on("elementor/frontend/init", function () {
   if (
@@ -112,6 +174,8 @@ jQuery(window).on("elementor/frontend/init", function () {
         }
 
         initStackingCards($scope);
+        waitForSectionAndCopy();
+
       }
     );
   }
@@ -133,5 +197,19 @@ jQuery(window).on("elementor/frontend/init", function () {
         initStackingCards(jQuery(this));
       });
     });
+
+    // Run every time a widget finishes rendering inside editor
+    elementorFrontend.hooks.addAction(
+      "frontend/element_ready/global",
+      function() {
+        waitForSectionAndCopy();
+      }
+    );
+
+    // When a control is changed (live update)
+    elementor.channels.editor.on("change", function() {
+        waitForSectionAndCopy();
+    });
   }
+
 });

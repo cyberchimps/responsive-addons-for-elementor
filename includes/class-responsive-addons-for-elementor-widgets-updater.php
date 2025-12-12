@@ -146,6 +146,11 @@ class Responsive_Addons_For_Elementor_Widgets_Updater {
 				'category' => 'creativity',
 			),
 			array(
+				'title'    => 'duplicator',
+				'docs'     => 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/rae-duplicator/',
+				'category' => 'extensions',
+			),
+			array(
 				'title'    => 'facebook-feed',
 				'docs'     => 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/facebook-feed/',
 				'category' => 'marketing',
