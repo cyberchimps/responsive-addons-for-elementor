@@ -200,6 +200,10 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 				'file'  => RAEL_DIR . 'ext/class-rael-duplicator.php',
 				'class' => '\RAEL_Ext\RAEL_Duplicator',			
 			),
+			'animations' => array(
+				'file'  => RAEL_DIR . 'ext/class-rael-animations.php',
+				'class' => '\RAEL_Ext\Rael_Animations',			
+			),
 		);
 	}
 	/**

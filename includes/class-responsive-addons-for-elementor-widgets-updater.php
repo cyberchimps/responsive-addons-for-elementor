@@ -425,6 +425,11 @@ class Responsive_Addons_For_Elementor_Widgets_Updater {
 				'category' => 'themebuilder',
 			),
 			array(
+				'title'    => 'animations',
+				'docs'     => 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/rae-animations/',
+				'category' => 'extensions',
+			),
+			array(
 				'title'    => 'reviews',
 				'docs'     => 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/reviews',
 				'category' => 'marketing',
