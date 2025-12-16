@@ -191,3 +191,7 @@
 .elementor-widget-rael-search-form .protected-content-error-msg {
   font-family: var(--e-global-typography-secondary-font-family), Sans-serif;
   font-weight: var(--e-global-typography-secondary-font-weight); }
+
+.rael-elementor-search-form--skin-classic .rael-elementor-search-form .rael-elementor-search-form__container .rael-elementor-search-form__submit.both_cls{
+  min-width: 100px;
+}
