@@ -54,16 +54,46 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 		 */
 		
 		public function __construct() {
-			add_action( 'elementor/element/after_section_end', array( $this, 'register_animations_controls' ), 10, 3 );
+			add_action( 'elementor/frontend/before_enqueue_scripts', array( $this, 'enqueue_rae_animations_scripts' ), 9 );
+			add_action( 'elementor/element/container/section_effects/after_section_end', array( $this, 'register_animations_controls' ), 10, 2 );
+			add_action( 'elementor/element/section/section_effects/after_section_end', array( $this, 'register_animations_controls' ), 10, 2 );
+			add_action( 'elementor/element/column/section_effects/after_section_end', array( $this, 'register_animations_controls' ), 10, 2 );
+
+			
+			// add_action( 'elementor/frontend/section/after_render', array( $this, 'render_section_effects' ), 10, 2 );
+			// add_action( 'elementor/frontend/column/after_render', array( $this, 'render_column_effects' ), 10, 2 );
+
+			add_action( 'elementor/frontend/column/before_render', array( $this, 'render_effects' ), 10, 1 );
+			add_action( 'elementor/frontend/section/before_render', array( $this, 'render_effects' ), 10, 1 );
+			add_action( 'elementor/frontend/container/before_render', array( $this, 'render_effects' ), 10, 1 );
+
+		}
+		/**
+		 * Enqueue scripts
+		 *
+		 * @return void
+		 */
+		public function enqueue_rae_animations_scripts() {
+			if ( ! Helper::is_extension_active('animations') ) {
+				return;
+			}
+			wp_enqueue_script(
+				'rael-animations-frontend',
+				RAEL_ASSETS_URL . 'js/rael-animations.js',
+				array( 'jquery', 'elementor-frontend' ),
+				RAEL_VER,
+				true
+			);
+
 		}
 
 
-		public function register_animations_controls( $section, $section_id, $args ) {
+		public function register_animations_controls( $section, $args ) {
 			// Only add controls if extension is active
 			if ( ! Helper::is_extension_active( 'animations' ) ) {
 				return;
 			}
-			if ( ! ( ( 'section' === $section->get_name() && 'section_background' === $section_id ) || ( 'container' === $section->get_name() && 'section_background' === $section_id ) ) ) {
+			if ( ! ( ( 'section' === $section->get_name()) || ( 'container' === $section->get_name()  ) ) ) {
 				return;
 			}
 
@@ -88,35 +118,19 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 			$section->add_control(
 				'rae_animations_scroll_effects_type',
 				[
-					'label' => __( 'Scroll Effects Type', 'your-text-domain' ),
+					'label' => __( 'Scroll Effects Type', 'responsive-addons-for-elementor' ),
 					'type' => Controls_Manager::SELECT,
 					'default' => 'vertical_scroll',
 					'options' => [
-						'vertical_scroll' => __( 'Vertical Scroll', 'your-text-domain' ),
-						'horizontal_scroll' => __( 'Horizontal Scroll', 'your-text-domain' ),
+						'vertical_scroll' => __( 'Vertical Scroll', 'responsive-addons-for-elementor' ),
+						'horizontal_scroll' => __( 'Horizontal Scroll', 'responsive-addons-for-elementor' ),
 					],
 					'condition'    => array(
 						'rae_animations_scrolling_enable' => 'yes',
 					),
-					'label_block' => true, 
 				]
 			);
 			// Vertical scroll
-			// $section->add_control(
-			// 	'rae_animations_vertical_scroll',
-			// 	array(
-			// 		'label'        => __( 'Vertical Scroll', 'responsive-addons-for-elementor' ),
-			// 		'type'         => Controls_Manager::POPOVER_TOGGLE,
-			// 		'label_on'     => __( 'Edit', 'responsive-addons-for-elementor' ),
-			// 		'label_off'    => __( 'Edit', 'responsive-addons-for-elementor' ),
-			// 		'return_value' => 'yes',
-			// 		'condition'    => array(
-			// 			'rae_animations_scrolling_enable' => 'yes',
-			// 		),
-			// 	)
-			// );
-			// $section->start_popover();
-			
 
 			$section->add_control(
 				'rae_animations_vertical_direction',
@@ -145,9 +159,9 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 					),
 					'range' => array(
 						'px' => array(
-							'min' => -50,
-							'max' => 50,
-							'step' => 1,
+							'min' => 1,
+							'max' => 10,
+							'step' => 0.1,
 						),
 					),
 					'condition' => array(
@@ -188,26 +202,7 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 					],
 				]
 			);
-			//$section->end_popover();
-
-			// Horizontal Scroll
-
-			// $section->add_control(
-			// 	'rae_animations_horizontal_scroll',
-			// 	array(
-			// 		'label'        => __( 'Horizontal Scroll', 'responsive-addons-for-elementor' ),
-			// 		'type'         => Controls_Manager::POPOVER_TOGGLE,
-			// 		'label_on'     => __( 'Edit', 'responsive-addons-for-elementor' ),
-			// 		'label_off'    => __( 'Edit', 'responsive-addons-for-elementor' ),
-			// 		'return_value' => 'yes',
-			// 		'condition'    => array(
-			// 			'rae_animations_scroll_effects_type' => 'yes',
-			// 		),
-			// 	)
-			// );
-			//$section->start_popover();
-			
-
+			// Horizontal
 			$section->add_control(
 				'rae_animations_horizontal_direction',
 				array(
@@ -235,9 +230,9 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 					),
 					'range' => array(
 						'px' => array(
-							'min' => -50,
-							'max' => 50,
-							'step' => 1,
+							'min' => 1,
+							'max' => 10,
+							'step' => 0.1,
 						),
 					),
 					'condition' => array(
@@ -277,8 +272,516 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 					],
 				]
 			);
-			//$section->end_popover();
 
+			// Transparency
+			$section->add_control(
+				'rae_animations_transparency_enable',
+				array(
+					'label'        => __( 'Transparency', 'responsive-addons-for-elementor' ),
+					'type'         => Controls_Manager::SWITCHER,
+					'label_on'     => __( 'Yes', 'responsive-addons-for-elementor' ),
+					'label_off'    => __( 'No', 'responsive-addons-for-elementor' ),
+					'return_value' => 'yes',
+					'default'      => '',
+					'condition' => [
+						'rae_animations_scrolling_enable' => 'yes',
+					],
+					'separator' => 'before',
+				)
+			);
+			
+			$section->add_control(
+				'rae_animations_transparency_direction',
+				array(
+					'label'   => __( 'Direction', 'responsive-addons-for-elementor' ),
+					'type'    => Controls_Manager::SELECT,
+					'default' => 'fade_in',
+					'options' => array(
+						'fade_in'   => __( 'Fade In', 'responsive-addons-for-elementor' ),
+						'fade_out'   => __( 'Fade Out', 'responsive-addons-for-elementor' ),
+						'fade_out_in'   => __( 'Fade Out In', 'responsive-addons-for-elementor' ),
+						'fade_in_out'   => __( 'Fade In Out', 'responsive-addons-for-elementor' ),
+					),
+					'condition' => array(
+						'rae_animations_scrolling_enable' => 'yes',
+						'rae_animations_transparency_enable' => 'yes',
+					),
+				)
+			);
+
+			$section->add_control(
+				'rae_animations_transparency_level',
+				array(
+					'label' => __( 'Level', 'responsive-addons-for-elementor' ),
+					'type'  => Controls_Manager::SLIDER,
+					'default' => array(
+						'size' => 4,
+					),
+					'range' => array(
+						'px' => array(
+							'min' => 1,
+							'max' => 10,
+							'step' => 0.1,
+						),
+					),
+					'condition' => array(
+						'rae_animations_scrolling_enable' => 'yes',
+						'rae_animations_transparency_enable' => 'yes',
+					),
+				)
+			);
+
+			$section->add_control(
+				'rae_animations_transparency_viewport',
+				[
+					'label' => __( 'Viewport', 'responsive-addons-for-elementor' ),
+					'type'  => Controls_Manager::SLIDER,
+					'range' => [
+						'px' => [
+							'min' => 0,
+							'max' => 100,
+						],
+					],
+					'default' => [
+						'sizes' => [
+							'start' => 0,
+							'end'   => 100,
+						],
+						'unit'  => '%',
+					],
+					'labels' => [
+						__( 'Bottom', 'responsive-addons-for-elementor' ),
+						__( 'Top', 'responsive-addons-for-elementor' ),
+					],
+					'scales' => 1,
+					'handles' => 'range',
+					'condition' => [
+						'rae_animations_scrolling_enable' => 'yes',
+						'rae_animations_transparency_enable' => 'yes',
+					],
+				]
+			);
+
+			// Blur
+			$section->add_control(
+				'rae_animations_blur_enable',
+				array(
+					'label'        => __( 'Blur', 'responsive-addons-for-elementor' ),
+					'type'         => Controls_Manager::SWITCHER,
+					'label_on'     => __( 'Yes', 'responsive-addons-for-elementor' ),
+					'label_off'    => __( 'No', 'responsive-addons-for-elementor' ),
+					'return_value' => 'yes',
+					'default'      => '',
+					'condition' => [
+						'rae_animations_scrolling_enable' => 'yes',
+					],
+					'separator' => 'before',
+				)
+			);
+			
+			$section->add_control(
+				'rae_animations_blur_direction',
+				array(
+					'label'   => __( 'Direction', 'responsive-addons-for-elementor' ),
+					'type'    => Controls_Manager::SELECT,
+					'default' => 'fade_in',
+					'options' => array(
+						'fade_in'   => __( 'Fade In', 'responsive-addons-for-elementor' ),
+						'fade_out'   => __( 'Fade Out', 'responsive-addons-for-elementor' ),
+						'fade_out_in'   => __( 'Fade Out In', 'responsive-addons-for-elementor' ),
+						'fade_in_out'   => __( 'Fade In Out', 'responsive-addons-for-elementor' ),
+					),
+					'condition' => array(
+						'rae_animations_scrolling_enable' => 'yes',
+						'rae_animations_blur_enable' => 'yes',
+					),
+				)
+			);
+
+			$section->add_control(
+				'rae_animations_blur_level',
+				array(
+					'label' => __( 'Level', 'responsive-addons-for-elementor' ),
+					'type'  => Controls_Manager::SLIDER,
+					'default' => array(
+						'size' => 4,
+					),
+					'range' => array(
+						'px' => array(
+							'min' => 1,
+							'max' => 10,
+							'step' => 0.1,
+						),
+					),
+					'condition' => array(
+						'rae_animations_scrolling_enable' => 'yes',
+						'rae_animations_blur_enable' => 'yes',
+					),
+				)
+			);
+
+			$section->add_control(
+				'rae_animations_blur_viewport',
+				[
+					'label' => __( 'Viewport', 'responsive-addons-for-elementor' ),
+					'type'  => Controls_Manager::SLIDER,
+					'range' => [
+						'px' => [
+							'min' => 0,
+							'max' => 100,
+						],
+					],
+					'default' => [
+						'sizes' => [
+							'start' => 0,
+							'end'   => 100,
+						],
+						'unit'  => '%',
+					],
+					'labels' => [
+						__( 'Bottom', 'responsive-addons-for-elementor' ),
+						__( 'Top', 'responsive-addons-for-elementor' ),
+					],
+					'scales' => 1,
+					'handles' => 'range',
+					'condition' => [
+						'rae_animations_scrolling_enable' => 'yes',
+						'rae_animations_blur_enable' => 'yes',
+					],
+				]
+			);
+			// Scale
+			$section->add_control(
+				'rae_animations_scale_enable',
+				array(
+					'label'        => __( 'Scale', 'responsive-addons-for-elementor' ),
+					'type'         => Controls_Manager::SWITCHER,
+					'label_on'     => __( 'Yes', 'responsive-addons-for-elementor' ),
+					'label_off'    => __( 'No', 'responsive-addons-for-elementor' ),
+					'return_value' => 'yes',
+					'default'      => '',
+					'condition' => [
+						'rae_animations_scrolling_enable' => 'yes',
+					],
+					'separator' => 'before',
+				)
+			);
+			
+			$section->add_control(
+				'rae_animations_scale_direction',
+				array(
+					'label'   => __( 'Direction', 'responsive-addons-for-elementor' ),
+					'type'    => Controls_Manager::SELECT,
+					'default' => 'scale_up',
+					'options' => array(
+						'scale_up'   => __( 'Scale Up', 'responsive-addons-for-elementor' ),
+						'scale_down'   => __( 'Scale Down', 'responsive-addons-for-elementor' ),
+						'scale_down_up'   => __( 'Scale Down Up', 'responsive-addons-for-elementor' ),
+						'scale_up_down'   => __( 'Scale Up Down', 'responsive-addons-for-elementor' ),
+					),
+					'condition' => array(
+						'rae_animations_scrolling_enable' => 'yes',
+						'rae_animations_scale_enable' => 'yes',
+					),
+				)
+			);
+
+			$section->add_control(
+				'rae_animations_scale_speed',
+				array(
+					'label' => __( 'Speed', 'responsive-addons-for-elementor' ),
+					'type'  => Controls_Manager::SLIDER,
+					'default' => array(
+						'size' => 4,
+					),
+					'range' => array(
+						'px' => array(
+							'min' => 1,
+							'max' => 10,
+							'step' => 0.1,
+						),
+					),
+					'condition' => array(
+						'rae_animations_scrolling_enable' => 'yes',
+						'rae_animations_scale_enable' => 'yes',
+					),
+				)
+			);
+
+			$section->add_control(
+				'rae_animations_scale_viewport',
+				[
+					'label' => __( 'Viewport', 'responsive-addons-for-elementor' ),
+					'type'  => Controls_Manager::SLIDER,
+					'range' => [
+						'px' => [
+							'min' => 0,
+							'max' => 100,
+						],
+					],
+					'default' => [
+						'sizes' => [
+							'start' => 0,
+							'end'   => 100,
+						],
+						'unit'  => '%',
+					],
+					'labels' => [
+						__( 'Bottom', 'responsive-addons-for-elementor' ),
+						__( 'Top', 'responsive-addons-for-elementor' ),
+					],
+					'scales' => 1,
+					'handles' => 'range',
+					'condition' => [
+						'rae_animations_scrolling_enable' => 'yes',
+						'rae_animations_scale_enable' => 'yes',
+					],
+				]
+			);
+		// 	$transform_origin_conditions = [
+		// 	'relation' => 'or',
+		// 	'terms' => array_merge( $transform_origin_conditions, $transform_origin_conditions_hover ),
+		// ];
+
+		// Will override motion effect transform-origin.
+		$section->add_responsive_control(
+			'motion_fx_transform_x_anchor_point',
+			[
+				'label' => esc_html__( 'X Anchor Point', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => esc_html__( 'Left', 'responsive-addons-for-elementor' ),
+						'icon' => 'eicon-h-align-left',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'responsive-addons-for-elementor' ),
+						'icon' => 'eicon-h-align-center',
+					],
+					'right' => [
+						'title' => esc_html__( 'Right', 'responsive-addons-for-elementor' ),
+						'icon' => 'eicon-h-align-right',
+					],
+				],
+				'condition' => [
+						'rae_animations_scrolling_enable' => 'yes',
+						'rae_animations_scale_enable' => 'yes',
+					],
+				// 'selectors' => [
+				// 	'{{WRAPPER}}' => '--e-' . $transform_css_modifier . 'transform-origin-x: {{VALUE}}',
+				// ],
+			]
+		);
+
+		// Will override motion effect transform-origin.
+		$section->add_responsive_control(
+			'motion_fx_transform_y_anchor_point',
+			[
+				'label' => esc_html__( 'Y Anchor Point', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::CHOOSE,
+				'options' => [
+					'top' => [
+						'title' => esc_html__( 'Top', 'responsive-addons-for-elementor' ),
+						'icon' => 'eicon-v-align-top',
+					],
+					'center' => [
+						'title' => esc_html__( 'Center', 'responsive-addons-for-elementor' ),
+						'icon' => 'eicon-v-align-middle',
+					],
+					'bottom' => [
+						'title' => esc_html__( 'Bottom', 'responsive-addons-for-elementor' ),
+						'icon' => 'eicon-v-align-bottom',
+					],
+				],
+				'condition' => [
+						'rae_animations_scrolling_enable' => 'yes',
+						'rae_animations_scale_enable' => 'yes',
+					],
+				// 'selectors' => [
+				// 	'{{WRAPPER}}' => '--e-' . $transform_css_modifier . 'transform-origin-y: {{VALUE}}',
+				// ],
+			]
+		);
+		// Rotate
+			$section->add_control(
+				'rae_animations_rotate_enable',
+				array(
+					'label'        => __( 'Rotate', 'responsive-addons-for-elementor' ),
+					'type'         => Controls_Manager::SWITCHER,
+					'label_on'     => __( 'Yes', 'responsive-addons-for-elementor' ),
+					'label_off'    => __( 'No', 'responsive-addons-for-elementor' ),
+					'return_value' => 'yes',
+					'default'      => '',
+					'condition' => [
+						'rae_animations_scrolling_enable' => 'yes',
+					],
+					'separator' => 'before',
+				)
+			);
+			
+			$section->add_control(
+				'rae_animations_rotate_direction',
+				array(
+					'label'   => __( 'Direction', 'responsive-addons-for-elementor' ),
+					'type'    => Controls_Manager::SELECT,
+					'default' => 'to_left',
+					'options' => array(
+						'to_left'   => __( 'To Left', 'responsive-addons-for-elementor' ),
+						'to_right'   => __( 'To Right', 'responsive-addons-for-elementor' ),
+					),
+					'condition' => array(
+						'rae_animations_scrolling_enable' => 'yes',
+						'rae_animations_rotate_enable' => 'yes',
+					),
+				)
+			);
+
+			$section->add_control(
+				'rae_animations_rotate_speed',
+				array(
+					'label' => __( 'Speed', 'responsive-addons-for-elementor' ),
+					'type'  => Controls_Manager::SLIDER,
+					'default' => array(
+						'size' => 4,
+					),
+					'range' => array(
+						'px' => array(
+							'min' => 1,
+							'max' => 10,
+							'step' => 0.1,
+						),
+					),
+					'condition' => array(
+						'rae_animations_scrolling_enable' => 'yes',
+						'rae_animations_rotate_enable' => 'yes',
+					),
+				)
+			);
+
+			$section->add_control(
+				'rae_animations_rotate_viewport',
+				[
+					'label' => __( 'Viewport', 'responsive-addons-for-elementor' ),
+					'type'  => Controls_Manager::SLIDER,
+					'range' => [
+						'px' => [
+							'min' => 0,
+							'max' => 100,
+						],
+					],
+					'default' => [
+						'sizes' => [
+							'start' => 0,
+							'end'   => 100,
+						],
+						'unit'  => '%',
+					],
+					'labels' => [
+						__( 'Bottom', 'responsive-addons-for-elementor' ),
+						__( 'Top', 'responsive-addons-for-elementor' ),
+					],
+					'scales' => 1,
+					'handles' => 'range',
+					'condition' => [
+						'rae_animations_scrolling_enable' => 'yes',
+						'rae_animations_rotate_enable' => 'yes',
+					],
+				]
+			);
+			// Effects Relative To
+			$section->add_control(
+				'rae_animations_effects_relative_to',
+				[
+					'label' => __( 'Effects Relative To', 'responsive-addons-for-elementor' ),
+					'type' => Controls_Manager::SELECT,
+					'render_type' => 'none',
+					'condition' => [
+						'rae_animations_scrolling_enable' => 'yes',
+					],
+					'default' => 'viewport',
+					'options' => [
+						'default' => __( 'Default', 'responsive-addons-for-elementor' ),
+						'viewport' => __( 'Viewport', 'responsive-addons-for-elementor' ),
+						'page' => __( 'Entire Page', 'responsive-addons-for-elementor' ),
+					],
+					'frontend_available' => true,
+					'separator' => 'before',
+				]
+			);
+			// Entrance Animation
+			$section->add_responsive_control(
+				'rae_animations_entrance',
+				[
+					'label' => __( 'Entrance Animation', 'responsive-addons-for-elementor' ),
+					'type' => Controls_Manager::ANIMATION,
+					'frontend_available' => true,
+					'default' => 'none',
+					'separator' => 'before',
+				]
+			);
+
+			$section->add_control(
+				'rae_animations_entrance_duration',
+				[
+					'label' => __( 'Animation Duration', 'responsive-addons-for-elementor' ),
+					'type' => Controls_Manager::SELECT,
+					'default' => '1000',
+					'options' => [
+						'2000' => __( 'Slow', 'responsive-addons-for-elementor' ),
+						'1000' => __( 'Normal', 'responsive-addons-for-elementor' ),
+						'800' => __( 'Fast', 'responsive-addons-for-elementor' ),
+					],
+					'selectors' => [
+						'{{WRAPPER}} .e-floating-bars' => '--e-floating-bars-coupon-animation-duration: {{VALUE}}ms',
+					],
+					'prefix_class' => 'animated-',
+					'conditions' => [
+						'relation' => 'and',
+						'terms' => [
+							[
+								'name' => 'rae_animations_entrance',
+								'operator' => '!==',
+								'value' => '',
+							],
+							[
+								'name' => 'rae_animations_entrance',
+								'operator' => '!==',
+								'value' => 'none',
+							],
+						],
+					],
+				]
+			);
+
+			$section->add_control(
+				'rae_animations_entrance_animation_delay',
+				[
+					'label' => __( 'Animation Delay', 'responsive-addons-for-elementor' ) . ' (ms)',
+					'type' => Controls_Manager::NUMBER,
+					'min' => 0,
+					'step' => 100,
+					'selectors' => [
+						'{{WRAPPER}} .e-floating-bars' => '--e-floating-bars-coupon-animation-delay: {{SIZE}}ms;',
+					],
+					'render_type' => 'none',
+					'frontend_available' => true,
+					'conditions' => [
+						'relation' => 'and',
+						'terms' => [
+							[
+								'name' => 'rae_animations_entrance',
+								'operator' => '!==',
+								'value' => '',
+							],
+							[
+								'name' => 'rae_animations_entrance',
+								'operator' => '!==',
+								'value' => 'none',
+							],
+						],
+					],
+				]
+			);
 			$section->end_controls_section();
 		}
 
@@ -298,6 +801,127 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 			}
 			return self::$instance;
 		}
+
+		/* Get Scroll animations data */
+		protected function get_rael_scroll_effects_data( array $settings ) {
+	$data = [];
+
+	if ( empty( $settings['rae_animations_scrolling_enable'] ) ) {
+		return $data;
+	}
+
+	/* ------------------------------
+	 * Scroll (Vertical / Horizontal)
+	 * ------------------------------ */
+	if ( $settings['rae_animations_scroll_effects_type'] === 'horizontal_scroll' ) {
+		$viewport = $settings['rae_animations_horizontal_viewport']['sizes'] ?? [];
+
+		$data['scroll'] = [
+			'type'      => 'horizontal',
+			'direction' => $settings['rae_animations_horizontal_direction'] ?? 'to_left',
+			'speed'     => (float) ( $settings['rae_animations_horizontal_speed']['size'] ?? 1 ),
+			'start'     => (int) ( $viewport['start'] ?? 0 ),
+			'end'       => (int) ( $viewport['end'] ?? 100 ),
+		];
+	}
+
+	if ( $settings['rae_animations_scroll_effects_type'] === 'vertical_scroll' ) {
+		$viewport = $settings['rae_animations_vertical_viewport']['sizes'] ?? [];
+
+		$data['scroll'] = [
+			'type'      => 'vertical',
+			'direction' => $settings['rae_animations_vertical_direction'] ?? 'up',
+			'speed'     => (float) ( $settings['rae_animations_vertical_speed']['size'] ?? 1 ),
+			'start'     => (int) ( $viewport['start'] ?? 0 ),
+			'end'       => (int) ( $viewport['end'] ?? 100 ),
+		];
+	}
+
+	/* ------------------------------
+	 * Transparency
+	 * ------------------------------ */
+	if ( ! empty( $settings['rae_animations_transparency_enable'] ) ) {
+		$viewport = $settings['rae_animations_transparency_viewport']['sizes'] ?? [];
+
+		$data['opacity'] = [
+			'direction' => $settings['rae_animations_transparency_direction'],
+			'level'     => (float) ( $settings['rae_animations_transparency_level']['size'] ?? 1 ),
+			'start'     => (int) ( $viewport['start'] ?? 0 ),
+			'end'       => (int) ( $viewport['end'] ?? 100 ),
+		];
+	}
+
+	/* ------------------------------
+	 * Blur
+	 * ------------------------------ */
+	if ( ! empty( $settings['rae_animations_blur_enable'] ) ) {
+		$viewport = $settings['rae_animations_blur_viewport']['sizes'] ?? [];
+
+		$data['blur'] = [
+			'direction' => $settings['rae_animations_blur_direction'],
+			'level'     => (float) ( $settings['rae_animations_blur_level']['size'] ?? 1 ),
+			'start'     => (int) ( $viewport['start'] ?? 0 ),
+			'end'       => (int) ( $viewport['end'] ?? 100 ),
+		];
+	}
+
+	/* ------------------------------
+	 * Scale
+	 * ------------------------------ */
+	if ( ! empty( $settings['rae_animations_scale_enable'] ) ) {
+		$viewport = $settings['rae_animations_scale_viewport']['sizes'] ?? [];
+
+		$data['scale'] = [
+			'direction' => $settings['rae_animations_scale_direction'],
+			'speed'     => (float) ( $settings['rae_animations_scale_speed']['size'] ?? 1 ),
+			'origin_x'  => $settings['motion_fx_transform_x_anchor_point'] ?? 'center',
+			'origin_y'  => $settings['motion_fx_transform_y_anchor_point'] ?? 'center',
+			'start'     => (int) ( $viewport['start'] ?? 0 ),
+			'end'       => (int) ( $viewport['end'] ?? 100 ),
+		];
+	}
+
+	/* ------------------------------
+	 * Rotate
+	 * ------------------------------ */
+	if ( ! empty( $settings['rae_animations_rotate_enable'] ) ) {
+		$viewport = $settings['rae_animations_rotate_viewport']['sizes'] ?? [];
+
+		$data['rotate'] = [
+			'direction' => $settings['rae_animations_rotate_direction'],
+			'speed'     => (float) ( $settings['rae_animations_rotate_speed']['size'] ?? 1 ),
+			'start'     => (int) ( $viewport['start'] ?? 0 ),
+			'end'       => (int) ( $viewport['end'] ?? 100 ),
+		];
+	}
+
+	return $data;
+}
+
+
+		public function render_effects( $element ) {
+			$this->inject_rael_effects_attributes( $element );
+		}
+
+		protected function inject_rael_effects_attributes( $element ) {
+			$settings = $element->get_settings_for_display();
+			$effects  = $this->get_rael_scroll_effects_data( $settings );
+
+			if ( empty( $effects ) ) {
+				return;
+			}
+
+			$element->add_render_attribute( '_wrapper', [
+				'class' => 'rael-scroll-effects',
+				'data-rael-scroll-effects' => wp_json_encode( [
+					'effects'    => $effects,
+					'relativeTo' => $settings['rael_effects_relative_to'] ?? 'viewport',
+				] ),
+			] );
+		}
+
+
+
 	}
 
 	new Rael_Animations();

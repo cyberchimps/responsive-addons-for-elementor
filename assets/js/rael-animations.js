@@ -1,0 +1,177 @@
+(function ($) {
+	'use strict';
+console.log('in main RAE Animations funciton js====');
+	const RaelAnimations = {
+
+		init() {
+			this.cache();
+			this.bind();
+			this.update();
+		},
+
+		cache() {
+			this.$elements = $('.rael-scroll-effects');
+			this.windowHeight = window.innerHeight;
+		},
+
+		bind() {
+			$(window).on('scroll resize', () => {
+				this.windowHeight = window.innerHeight;
+				this.update();
+			});
+		},
+
+		update() {
+                    console.log('in animationsss update----');
+
+			const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            console.log('scrollTop=='+scrollTop);
+
+			this.$elements.each((i, el) => {
+				this.apply(el, scrollTop);
+			});
+		},
+
+		apply(element, scrollTop) {
+                console.log('in animationsss apply----');
+			const raw = element.dataset.raelScrollEffects;
+			if (!raw) return;
+
+			let config;
+			try {
+				config = JSON.parse(raw);
+			} catch (e) {
+				return;
+			}
+
+			const effects = config.effects || {};
+			const rect = element.getBoundingClientRect();
+
+			const elementTop = rect.top + scrollTop;
+			const elementHeight = rect.height;
+
+			const viewportStart = scrollTop + this.windowHeight;
+			const total = elementHeight + this.windowHeight;
+			const progress = Math.min(
+				Math.max((viewportStart - elementTop) / total, 0),
+				1
+			);
+
+			let transform = '';
+			let filter = '';
+			let opacity = null;
+
+			/* HORIZONTAL SCROLL */
+			if (effects.scroll && effects.scroll.type === 'horizontal') {
+				const p = this.range(progress, effects.scroll.start, effects.scroll.end);
+				const distance = p * effects.scroll.speed * 50;
+
+				if (effects.scroll.direction === 'to_left') {
+					transform += ` translateX(-${distance}px)`;
+				}
+
+				if (effects.scroll.direction === 'to_right') {
+					transform += ` translateX(${distance}px)`;
+				}
+			}
+
+			/* Vertical Scroll */
+			if (effects.scroll && effects.scroll.type === 'vertical') {
+				const p = this.range(progress, effects.scroll.start, effects.scroll.end);
+				const distance = p * effects.scroll.speed * 50;
+
+				if (effects.scroll.direction === 'up') {
+					transform += ` translateY(-${distance}px)`;
+				}
+
+				if (effects.scroll.direction === 'down') {
+					transform += ` translateY(${distance}px)`;
+				}
+			}
+
+			/* Opacity */
+			if (effects.opacity) {
+				const p = this.range(progress, effects.opacity.start, effects.opacity.end);
+				opacity = effects.opacity.direction === 'fade_in'
+					? p
+					: 1 - p;
+			}
+
+			/* Blur logic */
+			if (effects.blur) {
+				const p = this.range(progress, effects.blur.start, effects.blur.end);
+				filter += ` blur(${p * effects.blur.level}px)`;
+			}
+
+			/* Scale */
+			if (effects.scale) {
+				const p = this.range(progress, effects.scale.start, effects.scale.end);
+				const delta = p * effects.scale.speed * 0.1;
+
+				const scale = effects.scale.direction === 'scale_up'
+					? 1 + delta
+					: 1 - delta;
+
+				element.style.transformOrigin =
+					`${effects.scale.origin_x} ${effects.scale.origin_y}`;
+
+				transform += ` scale(${scale})`;
+			}
+
+			/* Rotate logic */
+			if (effects.rotate) {
+				const p = this.range(progress, effects.rotate.start, effects.rotate.end);
+				const deg = p * effects.rotate.speed * 10;
+
+				if (effects.rotate.direction === 'to_left') {
+					transform += ` rotate(-${deg}deg)`;
+				}
+
+				if (effects.rotate.direction === 'to_right') {
+					transform += ` rotate(${deg}deg)`;
+				}
+			}
+
+			/* Apply styles */
+			element.style.transform = transform.trim();
+
+			if (opacity !== null) {
+				element.style.opacity = opacity;
+			}
+
+			if (filter) {
+				element.style.filter = filter.trim();
+			}
+		},
+
+		range(progress, start, end) {
+			const s = start / 100;
+			const e = end / 100;
+
+			if (progress <= s) return 0;
+			if (progress >= e) return 1;
+
+			return (progress - s) / (e - s);
+		}
+	};
+
+	$(window).on('elementor/frontend/init', function () {
+        console.log('in inittttt');
+             if (elementorFrontend.isEditMode()) {
+            elementorFrontend.hooks.addAction(
+                'frontend/element_ready/global',
+            )
+        }
+		RaelAnimations.init();
+	});
+     // Editor live preview
+    // $(window).on('elementor:init', function () {
+    //     if (elementorFrontend.isEditMode()) {
+    //         elementorFrontend.hooks.addAction(
+    //             'frontend/element_ready/global',
+    //             RaelAnimations.init();
+    //         );
+    //     }
+    // });
+
+})(jQuery);
