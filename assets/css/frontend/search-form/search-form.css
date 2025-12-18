@@ -195,3 +195,22 @@
 .rael-elementor-search-form--skin-classic .rael-elementor-search-form .rael-elementor-search-form__container .rael-elementor-search-form__submit.both_cls{
   min-width: 100px;
 }
+.txt_icon svg path,
+.both_cls svg path{
+  fill: #ffffff;
+}
+.txt_icon {
+  padding: 9px;
+}
+.both_cls svg{
+  width: 17px;
+  height: 16px;
+} 
+.txt_icon svg{
+  width: 33px;
+  height: 33px;
+}
+.rael-elementor-search-form--skin-full_screen .rael-elementor-search-form__toggle svg{
+  width: 33px;
+  height: 33px;
+}

@@ -689,7 +689,7 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 			)
 		);
 		$this->add_control(
-			'background_color',
+			'testimonial_content_background_color',
 			array(
 				'label'     => __( 'Background Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
@@ -1040,9 +1040,9 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 		);
 
 		$this->add_responsive_control(
-			'rating_font_size',
+			'rating_icon_size',
 			[
-				'label' => __( 'Font Size', 'responsive-addons-for-elementor' ),
+				'label' => __( 'Icon Size', 'responsive-addons-for-elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
@@ -1256,6 +1256,9 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 					'bars'  => __( 'Bars', 'responsive-addons-for-elementor' ),
 				),
 				'prefix_class' => 'rael-pagination-style-',
+				'condition' => array(
+					'pagination' => 'bullets',
+				),
 			)
 		);
 
@@ -1301,6 +1304,7 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 			array(
 				'label'     => __( 'Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
+				'default'   => '#cccccc',
 				'selectors' => array(
 					'{{WRAPPER}} .swiper-pagination-bullet:not(.swiper-pagination-bullet-active), {{WRAPPER}} .swiper-pagination-progressbar' => 'background-color: {{VALUE}}; opacity: 1;',
 					'{{WRAPPER}} .swiper-pagination-fraction' => 'color: {{VALUE}}',
@@ -1327,6 +1331,7 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 			array(
 				'label'     => __( 'Active Dot Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
+				'default'   => '#000000',
 				'selectors' => array(
 					'{{WRAPPER}} .swiper-pagination-bullet-active' => 'background-color: {{VALUE}}',
 				),
