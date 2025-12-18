@@ -205,12 +205,15 @@
 .both_cls svg{
   width: 17px;
   height: 16px;
+  vertical-align: bottom;
 } 
-.txt_icon svg{
-  width: 33px;
-  height: 33px;
-}
 .rael-elementor-search-form--skin-full_screen .rael-elementor-search-form__toggle svg{
   width: 33px;
   height: 33px;
 }
+.rael-elementor-search-form__submit.txt_icon svg{
+  padding: 15px;
+}
+.rael-elementor-search-form--skin-full_screen .rael-elementor-search-form__toggle svg {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 3px; }
