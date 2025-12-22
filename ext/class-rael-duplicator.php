@@ -83,6 +83,10 @@ if ( ! class_exists( 'RAEL_Duplicator' ) ) {
 	 */
 	public function rae_get_duplicate_link( $post_id ) {
 
+		if ( ! $this->rae_user_can_duplicate_post( $post_id ) ) {
+			return '';
+		}
+
 		 $url = wp_nonce_url(
 			admin_url( 'admin.php?action=rael_duplicate_post&post=' . $post_id ),
 			'rael_duplicate_post_' . $post_id
@@ -100,6 +104,9 @@ if ( ! class_exists( 'RAEL_Duplicator' ) ) {
 	 * Add bulk action
 	 */
 	public function rae_register_bulk_action( $bulk_actions ) {
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			return $bulk_actions;
+		}
 		$bulk_actions['rael_duplicate'] = __( 'Duplicate', 'responsive-addons-for-elementor' );
 		return $bulk_actions;
 	}
@@ -115,6 +122,9 @@ if ( ! class_exists( 'RAEL_Duplicator' ) ) {
 		}
 
 		foreach ( $post_ids as $post_id ) {
+			if ( ! $this->rae_user_can_duplicate_post( $post_id ) ) {
+				continue;
+			}
 			$this->rae_duplicate( $post_id );
 		}
 
@@ -182,6 +192,10 @@ if ( ! class_exists( 'RAEL_Duplicator' ) ) {
 
 		if ( ! wp_verify_nonce( $nonce, 'rael_duplicate_post_' . $post_id ) ) {
 			wp_die( esc_html__( 'Invalid request.', 'responsive-addons-for-elementor' ) );
+		}
+
+		if ( ! $this->rae_user_can_duplicate_post( $post_id ) ) {
+			wp_die( esc_html__( 'You are not allowed to duplicate this post.', 'responsive-addons-for-elementor' ) );
 		}
 
 		$new_id = $this->rae_duplicate( $post_id );
@@ -344,6 +358,32 @@ private function rae_duplicate( $post_id ) {
 			th.column-rae_duplicator, td.column-rae_duplicator { display: none !important; }
 		' );
 	}
+
+	/* Added to Fix vulnerability */
+	private function rae_user_can_duplicate_post( $post_id ) {
+		$post = get_post( $post_id );
+		if ( ! $post ) {
+			return false;
+		}
+
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return false;
+		}
+
+		if ( current_user_can( 'contributor' ) && ! current_user_can( 'edit_others_posts' ) ) {
+
+			if ( $post->post_status !== 'publish' ) {
+				return false;
+			}
+
+			if ( ! empty( $post->post_password ) ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 
 	
 	}
