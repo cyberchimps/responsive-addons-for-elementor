@@ -7,7 +7,7 @@ Tested up to: 6.9
 Elementor tested up to: 3.33
 Elementor Pro tested up to: 3.33
 Requires PHP: 5.6
-Stable tag: 2.0.8
+Stable tag: 2.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -282,6 +282,21 @@ If you like Responsive Addons for Elementor, consider checking out our other Wor
 The Development Version of the Responsive Addons for Elementor plugin is located at [https://github.com/cyberchimps/responsive-addons-for-elementor](https://github.com/cyberchimps/responsive-addons-for-elementor)
 
 == Changelog ==
+
+= 2.0.9 – 24th December 2025 =
+- Improvement: RAE Testimonial Slider
+Added negative margin control for testimonial images to enable advanced overlapping layouts.
+Added navigation placement options, allowing arrows and dots to be positioned independently.
+Added star rating (review) option for testimonials.
+Added hover background color control for the entire slide or individual bubble.
+
+- Improvement: RAE Search Bar
+Added show/hide icon toggle for the Minimal skin.
+Added option to display both icon and text in the search button for the Classic skin.
+
+- Improvement: RAE Image Gallery
+Added Active Tab styling controls under Filterable Tabs in the Style tab for enhanced design flexibility.
+Added border radius control for filterable tabs to allow rounded and custom tab designs.
 
 = 2.0.8 - 12th December 2025 = 
 - New: RAE Extension – Duplicator: Added a one-click duplication feature for any page, post or custom post types, including full support for meta data, taxonomies and featured images.
