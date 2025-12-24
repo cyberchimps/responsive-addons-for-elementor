@@ -297,6 +297,7 @@ Added option to display both icon and text in the search button for the Classic 
 - Improvement: RAE Image Gallery
 Added Active Tab styling controls under Filterable Tabs in the Style tab for enhanced design flexibility.
 Added border radius control for filterable tabs to allow rounded and custom tab designs.
+
 - Fix: Enhanced Security: Strengthened the codebase.
 
 = 2.0.8 - 12th December 2025 = 
