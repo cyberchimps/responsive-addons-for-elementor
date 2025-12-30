@@ -90,6 +90,8 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 		return array(
 			'swiper',
 			'e-swiper',
+			'elementor-icons', 
+			'elementor-editor'
 		);
 	}
 	/**
@@ -1728,15 +1730,15 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 				'options'      => array(
 					'left'   => array(
 						'title' => __( 'Left', 'responsive-addons-for-elementor' ),
-						'icon'  => 'fa fa-align-left',
+						'icon'  => 'eicon-text-align-left',
 					),
 					'center' => array(
 						'title' => __( 'Center', 'responsive-addons-for-elementor' ),
-						'icon'  => 'fa fa-align-center',
+						'icon'  => 'eicon-text-align-center',
 					),
 					'right'  => array(
 						'title' => __( 'Right', 'responsive-addons-for-elementor' ),
-						'icon'  => 'fa fa-align-right',
+						'icon'  => 'eicon-text-align-right',
 					),
 				),
 				'default'      => 'center',
@@ -1882,6 +1884,17 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 				),
 			)
 		);
+		$this->add_responsive_control(
+			'rael_filterable_tab__border_radius',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'responsive-addons-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .rael-masonry-filter' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
 
 		$this->end_controls_tab();
 
@@ -1899,11 +1912,11 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 		$this->add_control(
 			'rael_cat_filter_hover_color',
 			array(
-				'label'     => __( 'Text Active / Hover Color', 'responsive-addons-for-elementor' ),
+				'label'     => __( 'Text Hover Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#ffffff',
 				'selectors' => array(
-					'{{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-masonry-filter:hover, {{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-current' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-masonry-filter:hover' => 'color: {{VALUE}};',
 				),
 				'condition' => array(
 					'rael_gallery_style'          => array( 'grid', 'masonry', 'justified' ),
@@ -1915,7 +1928,7 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 		$this->add_control(
 			'rael_cat_filter_bg_hover_color',
 			array(
-				'label'     => __( 'Background Active / Hover Color', 'responsive-addons-for-elementor' ),
+				'label'     => __( 'Background Hover Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'global'    => array(
 					'default' => Global_Colors::COLOR_ACCENT,
@@ -1929,22 +1942,97 @@ class Responsive_Addons_For_Elementor_Image_Gallery extends Widget_Base {
 				),
 			)
 		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'      => 'cat_filter_border_hover',
+				'label'     => __( 'Border', 'responsive-addons-for-elementor' ),
+				'selector'  => '{{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-masonry-filter:hover, {{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-filters-dropdown-button',
+				'condition' => array(
+					'rael_gallery_style'          => array( 'grid', 'masonry', 'justified' ),
+					'rael_masonry_filters_enable' => 'yes',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'rael_filterable_tab__border_radius_hover',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'responsive-addons-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .rael-masonry-filter:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->end_controls_tab();
+
+		//Active Tab
+		$this->start_controls_tab(
+			'rael_cat_filters_active',
+			array(
+				'label'     => __( 'Active', 'responsive-addons-for-elementor' ),
+				'condition' => array(
+					'rael_gallery_style'          => array( 'grid', 'masonry', 'justified' ),
+					'rael_masonry_filters_enable' => 'yes',
+				),
+			)
+		);
 
 		$this->add_control(
-			'rael_cat_filter_border_hover_color',
+			'rael_cat_filter_active_color',
 			array(
-				'label'     => __( 'Border Hover Color', 'responsive-addons-for-elementor' ),
+				'label'     => __( 'Text Active Color', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ffffff',
+				'selectors' => array(
+					'{{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-current' => 'color: {{VALUE}};',
+				),
+				'condition' => array(
+					'rael_gallery_style'          => array( 'grid', 'masonry', 'justified' ),
+					'rael_masonry_filters_enable' => 'yes',
+				),
+			)
+		);
+
+		$this->add_control(
+			'rael_cat_filter_bg_active_color',
+			array(
+				'label'     => __( 'Background Active Color', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'global'    => array(
 					'default' => Global_Colors::COLOR_ACCENT,
 				),
 				'selectors' => array(
-					'{{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-masonry-filter:hover, {{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-current' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-current' => 'background-color: {{VALUE}};',
 				),
 				'condition' => array(
-					'rael_gallery_style'             => array( 'grid', 'masonry', 'justified' ),
-					'rael_masonry_filters_enable'    => 'yes',
-					'rael_cat_filter_border_border!' => '',
+					'rael_gallery_style'          => array( 'grid', 'masonry', 'justified' ),
+					'rael_masonry_filters_enable' => 'yes',
+				),
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			array(
+				'name'      => 'cat_filter_border_active',
+				'label'     => __( 'Border', 'responsive-addons-for-elementor' ),
+				'selector'  => '{{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-masonry-filter.rael-current, {{WRAPPER}} .rael-gallery-parent .rael-masonry-filters .rael-filters-dropdown-button',
+				'condition' => array(
+					'rael_gallery_style'          => array( 'grid', 'masonry', 'justified' ),
+					'rael_masonry_filters_enable' => 'yes',
+				),
+			)
+		);
+		$this->add_responsive_control(
+			'rael_filterable_tab__border_radius_active',
+			array(
+				'label'      => esc_html__( 'Border Radius', 'responsive-addons-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', 'em', '%' ),
+				'selectors'  => array(
+					'{{WRAPPER}} .rael-masonry-filter.rael-current' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 			)
 		);

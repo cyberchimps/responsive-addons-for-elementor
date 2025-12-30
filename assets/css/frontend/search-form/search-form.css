@@ -191,3 +191,29 @@
 .elementor-widget-rael-search-form .protected-content-error-msg {
   font-family: var(--e-global-typography-secondary-font-family), Sans-serif;
   font-weight: var(--e-global-typography-secondary-font-weight); }
+
+.rael-elementor-search-form--skin-classic .rael-elementor-search-form .rael-elementor-search-form__container .rael-elementor-search-form__submit.both_cls{
+  min-width: 100px;
+}
+.txt_icon svg path,
+.both_cls svg path{
+  fill: #ffffff;
+}
+.txt_icon {
+  padding: 9px;
+}
+.both_cls svg{
+  width: 17px;
+  height: 16px;
+  vertical-align: bottom;
+} 
+.rael-elementor-search-form--skin-full_screen .rael-elementor-search-form__toggle svg{
+  width: 33px;
+  height: 33px;
+}
+.rael-elementor-search-form__submit.txt_icon svg{
+  padding: 15px;
+}
+.rael-elementor-search-form--skin-full_screen .rael-elementor-search-form__toggle svg {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 3px; }
