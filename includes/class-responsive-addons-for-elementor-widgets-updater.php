@@ -38,6 +38,11 @@ class Responsive_Addons_For_Elementor_Widgets_Updater {
 				'category' => 'content',
 			),
 			array(
+				'title'    => 'animations',
+				'docs'     => 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/rae-animations/',
+				'category' => 'extensions',
+			),
+			array(
 				'title'    => 'audio',
 				'docs'     => 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/audio-player',
 				'category' => 'content',
@@ -423,11 +428,6 @@ class Responsive_Addons_For_Elementor_Widgets_Updater {
 				'name'     => 'Post title',
 				'docs'     => 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/post-title/',
 				'category' => 'themebuilder',
-			),
-			array(
-				'title'    => 'animations',
-				'docs'     => 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/rae-animations/',
-				'category' => 'extensions',
 			),
 			array(
 				'title'    => 'reviews',
