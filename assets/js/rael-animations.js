@@ -30,6 +30,10 @@ console.log('in main RAE Animations funciton js====');
 			$('.rael-scroll-effects').each((i, el) => {
 				this.apply(el, scrollTop);
 			});
+			// ENTRANCE ANIMATIONS (once)
+			$('.rael-entrance').each((i, el) => {
+				this.handleEntrance(el);
+			});
 		},
 
 		apply(element, scrollTop) {
@@ -217,7 +221,17 @@ console.log('in main RAE Animations funciton js====');
 			if (progress >= e) return 1;
 
 			return (progress - s) / (e - s);
-		}
+		},
+		handleEntrance(element) {
+			if (element.__raeEntranceDone) return;
+
+			const animation = element.dataset.raeEntrance;
+			if (!animation || animation === 'none') return;
+
+			element.classList.add('animated', animation);
+			element.__raeEntranceDone = true;
+		},
+
 	};
 
 	$(window).on('elementor/frontend/init', function () {
