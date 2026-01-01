@@ -67,6 +67,10 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 			add_action( 'elementor/frontend/section/before_render', array( $this, 'render_effects' ), 10, 1 );
 			add_action( 'elementor/frontend/container/before_render', array( $this, 'render_effects' ), 10, 1 );
 
+			add_action( 'wp_enqueue_scripts', array( $this, 'rael_enqueue_motion_css' ), 20 );
+			add_action( 'elementor/editor/after_enqueue_styles',  array( $this, 'rael_enqueue_motion_css' ), 20 );
+
+
 		}
 		/**
 		 * Enqueue scripts
@@ -816,7 +820,7 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 	if ( $settings['rae_animations_scroll_effects_type'] === 'horizontal_scroll' ) {
 		$viewport = $settings['rae_animations_horizontal_viewport']['sizes'] ?? [];
 
-		$data['scroll'] = [
+		$data['translateX'] = [
 			'type'      => 'horizontal',
 			'direction' => $settings['rae_animations_horizontal_direction'] ?? 'to_left',
 			'speed'     => (float) ( $settings['rae_animations_horizontal_speed']['size'] ?? 1 ),
@@ -828,7 +832,7 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 	if ( $settings['rae_animations_scroll_effects_type'] === 'vertical_scroll' ) {
 		$viewport = $settings['rae_animations_vertical_viewport']['sizes'] ?? [];
 
-		$data['scroll'] = [
+		$data['translateY'] = [
 			'type'      => 'vertical',
 			'direction' => $settings['rae_animations_vertical_direction'] ?? 'up',
 			'speed'     => (float) ( $settings['rae_animations_vertical_speed']['size'] ?? 1 ),
@@ -920,7 +924,31 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 			] );
 		}
 
+		public function rael_enqueue_motion_css() {
 
+			$css = '
+			.rael-scroll-effects {
+				--translateX: 0px;
+				--translateY: 0px;
+				--rotateZ: 0deg;
+				--scale: 1;
+				--blur: 0px;
+				--opacity: 1;
+
+				transform:
+					translateX(var(--translateX))
+					translateY(var(--translateY))
+					rotateZ(var(--rotateZ))
+					scale(var(--scale));
+
+				filter: blur(var(--blur));
+				opacity: var(--opacity);
+
+				will-change: transform, filter, opacity;
+			}';
+
+			wp_add_inline_style('elementor-frontend', $css );
+		}
 
 	}
 
