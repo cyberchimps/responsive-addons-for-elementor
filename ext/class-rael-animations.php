@@ -922,6 +922,13 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 					'relativeTo' => $settings['rael_effects_relative_to'] ?? 'viewport',
 				] ),
 			] );
+			  // Add entrance animation
+			if ( ! empty( $settings['rae_animations_entrance'] ) && $settings['rae_animations_entrance'] !== 'none' ) {
+				$element->add_render_attribute( '_wrapper', [
+					'class' => 'rael-entrance',
+					'data-rae-entrance' => $settings['rae_animations_entrance'],
+				] );
+			}
 		}
 
 		public function rael_enqueue_motion_css() {
