@@ -55,13 +55,11 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 		
 		public function __construct() {
 			add_action( 'elementor/frontend/before_enqueue_scripts', array( $this, 'enqueue_rae_animations_scripts' ), 9 );
+			add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'enqueue_rae_animations_scripts' ), 9 );
+
 			add_action( 'elementor/element/container/section_effects/after_section_end', array( $this, 'register_animations_controls' ), 10, 2 );
 			add_action( 'elementor/element/section/section_effects/after_section_end', array( $this, 'register_animations_controls' ), 10, 2 );
 			add_action( 'elementor/element/column/section_effects/after_section_end', array( $this, 'register_animations_controls' ), 10, 2 );
-
-			
-			// add_action( 'elementor/frontend/section/after_render', array( $this, 'render_section_effects' ), 10, 2 );
-			// add_action( 'elementor/frontend/column/after_render', array( $this, 'render_column_effects' ), 10, 2 );
 
 			add_action( 'elementor/frontend/column/before_render', array( $this, 'render_effects' ), 10, 1 );
 			add_action( 'elementor/frontend/section/before_render', array( $this, 'render_effects' ), 10, 1 );
@@ -69,7 +67,6 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 
 			add_action( 'wp_enqueue_scripts', array( $this, 'rael_enqueue_motion_css' ), 20 );
 			add_action( 'elementor/editor/after_enqueue_styles',  array( $this, 'rael_enqueue_motion_css' ), 20 );
-
 
 		}
 		/**
@@ -117,7 +114,8 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 					'label_off'    => __( 'No', 'responsive-addons-for-elementor' ),
 					'return_value' => 'yes',
 					'default'      => '',
-				)
+				),
+				
 			);
 			$section->add_control(
 				'rae_animations_scroll_effects_type',
@@ -542,86 +540,86 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 					],
 				]
 			);
-		// 	$transform_origin_conditions = [
-		// 	'relation' => 'or',
-		// 	'terms' => array_merge( $transform_origin_conditions, $transform_origin_conditions_hover ),
-		// ];
+			// 	$transform_origin_conditions = [
+			// 	'relation' => 'or',
+			// 	'terms' => array_merge( $transform_origin_conditions, $transform_origin_conditions_hover ),
+			// ];
 
-		// Will override motion effect transform-origin.
-		$section->add_responsive_control(
-			'motion_fx_transform_x_anchor_point',
-			[
-				'label' => esc_html__( 'X Anchor Point', 'responsive-addons-for-elementor' ),
-				'type' => Controls_Manager::CHOOSE,
-				'options' => [
-					'left' => [
-						'title' => esc_html__( 'Left', 'responsive-addons-for-elementor' ),
-						'icon' => 'eicon-h-align-left',
+			// Will override motion effect transform-origin.
+			$section->add_responsive_control(
+				'motion_fx_transform_x_anchor_point',
+				[
+					'label' => esc_html__( 'X Anchor Point', 'responsive-addons-for-elementor' ),
+					'type' => Controls_Manager::CHOOSE,
+					'options' => [
+						'left' => [
+							'title' => esc_html__( 'Left', 'responsive-addons-for-elementor' ),
+							'icon' => 'eicon-h-align-left',
+						],
+						'center' => [
+							'title' => esc_html__( 'Center', 'responsive-addons-for-elementor' ),
+							'icon' => 'eicon-h-align-center',
+						],
+						'right' => [
+							'title' => esc_html__( 'Right', 'responsive-addons-for-elementor' ),
+							'icon' => 'eicon-h-align-right',
+						],
 					],
-					'center' => [
-						'title' => esc_html__( 'Center', 'responsive-addons-for-elementor' ),
-						'icon' => 'eicon-h-align-center',
-					],
-					'right' => [
-						'title' => esc_html__( 'Right', 'responsive-addons-for-elementor' ),
-						'icon' => 'eicon-h-align-right',
-					],
-				],
-				'condition' => [
-						'rae_animations_scrolling_enable' => 'yes',
-						'rae_animations_scale_enable' => 'yes',
-					],
-				// 'selectors' => [
-				// 	'{{WRAPPER}}' => '--e-' . $transform_css_modifier . 'transform-origin-x: {{VALUE}}',
-				// ],
-			]
-		);
-
-		// Will override motion effect transform-origin.
-		$section->add_responsive_control(
-			'motion_fx_transform_y_anchor_point',
-			[
-				'label' => esc_html__( 'Y Anchor Point', 'responsive-addons-for-elementor' ),
-				'type' => Controls_Manager::CHOOSE,
-				'options' => [
-					'top' => [
-						'title' => esc_html__( 'Top', 'responsive-addons-for-elementor' ),
-						'icon' => 'eicon-v-align-top',
-					],
-					'center' => [
-						'title' => esc_html__( 'Center', 'responsive-addons-for-elementor' ),
-						'icon' => 'eicon-v-align-middle',
-					],
-					'bottom' => [
-						'title' => esc_html__( 'Bottom', 'responsive-addons-for-elementor' ),
-						'icon' => 'eicon-v-align-bottom',
-					],
-				],
-				'condition' => [
-						'rae_animations_scrolling_enable' => 'yes',
-						'rae_animations_scale_enable' => 'yes',
-					],
-				// 'selectors' => [
-				// 	'{{WRAPPER}}' => '--e-' . $transform_css_modifier . 'transform-origin-y: {{VALUE}}',
-				// ],
-			]
-		);
-		// Rotate
-			$section->add_control(
-				'rae_animations_rotate_enable',
-				array(
-					'label'        => __( 'Rotate', 'responsive-addons-for-elementor' ),
-					'type'         => Controls_Manager::SWITCHER,
-					'label_on'     => __( 'Yes', 'responsive-addons-for-elementor' ),
-					'label_off'    => __( 'No', 'responsive-addons-for-elementor' ),
-					'return_value' => 'yes',
-					'default'      => '',
 					'condition' => [
-						'rae_animations_scrolling_enable' => 'yes',
-					],
-					'separator' => 'before',
-				)
+							'rae_animations_scrolling_enable' => 'yes',
+							'rae_animations_scale_enable' => 'yes',
+						],
+					// 'selectors' => [
+					// 	'{{WRAPPER}}' => '--e-' . $transform_css_modifier . 'transform-origin-x: {{VALUE}}',
+					// ],
+				]
 			);
+
+			// Will override motion effect transform-origin.
+			$section->add_responsive_control(
+				'motion_fx_transform_y_anchor_point',
+				[
+					'label' => esc_html__( 'Y Anchor Point', 'responsive-addons-for-elementor' ),
+					'type' => Controls_Manager::CHOOSE,
+					'options' => [
+						'top' => [
+							'title' => esc_html__( 'Top', 'responsive-addons-for-elementor' ),
+							'icon' => 'eicon-v-align-top',
+						],
+						'center' => [
+							'title' => esc_html__( 'Center', 'responsive-addons-for-elementor' ),
+							'icon' => 'eicon-v-align-middle',
+						],
+						'bottom' => [
+							'title' => esc_html__( 'Bottom', 'responsive-addons-for-elementor' ),
+							'icon' => 'eicon-v-align-bottom',
+						],
+					],
+					'condition' => [
+							'rae_animations_scrolling_enable' => 'yes',
+							'rae_animations_scale_enable' => 'yes',
+						],
+					// 'selectors' => [
+					// 	'{{WRAPPER}}' => '--e-' . $transform_css_modifier . 'transform-origin-y: {{VALUE}}',
+					// ],
+				]
+			);
+			// Rotate
+				$section->add_control(
+					'rae_animations_rotate_enable',
+					array(
+						'label'        => __( 'Rotate', 'responsive-addons-for-elementor' ),
+						'type'         => Controls_Manager::SWITCHER,
+						'label_on'     => __( 'Yes', 'responsive-addons-for-elementor' ),
+						'label_off'    => __( 'No', 'responsive-addons-for-elementor' ),
+						'return_value' => 'yes',
+						'default'      => '',
+						'condition' => [
+							'rae_animations_scrolling_enable' => 'yes',
+						],
+						'separator' => 'before',
+					)
+				);
 			
 			$section->add_control(
 				'rae_animations_rotate_direction',
@@ -738,7 +736,7 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 					'selectors' => [
 						'{{WRAPPER}} .e-floating-bars' => '--e-floating-bars-coupon-animation-duration: {{VALUE}}ms',
 					],
-					'prefix_class' => 'animated-',
+
 					'conditions' => [
 						'relation' => 'and',
 						'terms' => [
@@ -808,99 +806,90 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 
 		/* Get Scroll animations data */
 		protected function get_rael_scroll_effects_data( array $settings ) {
-	$data = [];
+			$data = [];
 
-	if ( empty( $settings['rae_animations_scrolling_enable'] ) ) {
-		return $data;
-	}
+			if ( empty( $settings['rae_animations_scrolling_enable'] ) || $settings['rae_animations_scrolling_enable'] !== 'yes' ) {
+				return $data;
+			}
 
-	/* ------------------------------
-	 * Scroll (Vertical / Horizontal)
-	 * ------------------------------ */
-	if ( $settings['rae_animations_scroll_effects_type'] === 'horizontal_scroll' ) {
-		$viewport = $settings['rae_animations_horizontal_viewport']['sizes'] ?? [];
+			/*  Horizontal Scroll (Translate X) */
+			if ( $settings['rae_animations_scroll_effects_type'] === 'horizontal_scroll' ) {
+				$viewport = $settings['rae_animations_horizontal_viewport']['sizes'] ?? [];
 
-		$data['translateX'] = [
-			'type'      => 'horizontal',
-			'direction' => $settings['rae_animations_horizontal_direction'] ?? 'to_left',
-			'speed'     => (float) ( $settings['rae_animations_horizontal_speed']['size'] ?? 1 ),
-			'start'     => (int) ( $viewport['start'] ?? 0 ),
-			'end'       => (int) ( $viewport['end'] ?? 100 ),
-		];
-	}
+				$data['translateX'] = [
+					'type'      => 'horizontal',
+					'direction' => $settings['rae_animations_horizontal_direction'] ?? 'to_left',
+					'speed'     => (float) ( $settings['rae_animations_horizontal_speed']['size'] ?? 4 ),
+					'start'     => (int) ( $viewport['start'] ?? 0 ),
+					'end'       => (int) ( $viewport['end'] ?? 100 ),
+				];
+			}
 
-	if ( $settings['rae_animations_scroll_effects_type'] === 'vertical_scroll' ) {
-		$viewport = $settings['rae_animations_vertical_viewport']['sizes'] ?? [];
+			/* Vertical Scroll (Translate Y) */
+			if ( $settings['rae_animations_scroll_effects_type'] === 'vertical_scroll' ) {
+				$viewport = $settings['rae_animations_vertical_viewport']['sizes'] ?? [];
 
-		$data['translateY'] = [
-			'type'      => 'vertical',
-			'direction' => $settings['rae_animations_vertical_direction'] ?? 'up',
-			'speed'     => (float) ( $settings['rae_animations_vertical_speed']['size'] ?? 1 ),
-			'start'     => (int) ( $viewport['start'] ?? 0 ),
-			'end'       => (int) ( $viewport['end'] ?? 100 ),
-		];
-	}
+				$data['translateY'] = [
+					'type'      => 'vertical',
+					'direction' => $settings['rae_animations_vertical_direction'] ?? 'up',
+					'speed'     => (float) ( $settings['rae_animations_vertical_speed']['size'] ?? 4 ),
+					'start'     => (int) ( $viewport['start'] ?? 0 ),
+					'end'       => (int) ( $viewport['end'] ?? 100 ),
+				];
+			}
 
-	/* ------------------------------
-	 * Transparency
-	 * ------------------------------ */
-	if ( ! empty( $settings['rae_animations_transparency_enable'] ) ) {
-		$viewport = $settings['rae_animations_transparency_viewport']['sizes'] ?? [];
+			/* Transparency (Opacity) */
+			if ( ! empty( $settings['rae_animations_transparency_enable'] ) && $settings['rae_animations_transparency_enable'] === 'yes' ) {
+				$viewport = $settings['rae_animations_transparency_viewport']['sizes'] ?? [];
 
-		$data['opacity'] = [
-			'direction' => $settings['rae_animations_transparency_direction'],
-			'level'     => (float) ( $settings['rae_animations_transparency_level']['size'] ?? 1 ),
-			'start'     => (int) ( $viewport['start'] ?? 0 ),
-			'end'       => (int) ( $viewport['end'] ?? 100 ),
-		];
-	}
+				$data['opacity'] = [
+					'direction' => $settings['rae_animations_transparency_direction'] ?? 'fade_in',
+					'level'     => (float) ( $settings['rae_animations_transparency_level']['size'] ?? 4 ),
+					'start'     => (int) ( $viewport['start'] ?? 0 ),
+					'end'       => (int) ( $viewport['end'] ?? 100 ),
+				];
+			}
 
-	/* ------------------------------
-	 * Blur
-	 * ------------------------------ */
-	if ( ! empty( $settings['rae_animations_blur_enable'] ) ) {
-		$viewport = $settings['rae_animations_blur_viewport']['sizes'] ?? [];
+			/* Blur */
+			if ( ! empty( $settings['rae_animations_blur_enable'] ) && $settings['rae_animations_blur_enable'] === 'yes' ) {
+				$viewport = $settings['rae_animations_blur_viewport']['sizes'] ?? [];
 
-		$data['blur'] = [
-			'direction' => $settings['rae_animations_blur_direction'],
-			'level'     => (float) ( $settings['rae_animations_blur_level']['size'] ?? 1 ),
-			'start'     => (int) ( $viewport['start'] ?? 0 ),
-			'end'       => (int) ( $viewport['end'] ?? 100 ),
-		];
-	}
+				$data['blur'] = [
+					'direction' => $settings['rae_animations_blur_direction'] ?? 'fade_in',
+					'level'     => (float) ( $settings['rae_animations_blur_level']['size'] ?? 4 ),
+					'start'     => (int) ( $viewport['start'] ?? 0 ),
+					'end'       => (int) ( $viewport['end'] ?? 100 ),
+				];
+			}
 
-	/* ------------------------------
-	 * Scale
-	 * ------------------------------ */
-	if ( ! empty( $settings['rae_animations_scale_enable'] ) ) {
-		$viewport = $settings['rae_animations_scale_viewport']['sizes'] ?? [];
+			/* Scale */
+			if ( ! empty( $settings['rae_animations_scale_enable'] ) && $settings['rae_animations_scale_enable'] === 'yes' ) {
+				$viewport = $settings['rae_animations_scale_viewport']['sizes'] ?? [];
 
-		$data['scale'] = [
-			'direction' => $settings['rae_animations_scale_direction'],
-			'speed'     => (float) ( $settings['rae_animations_scale_speed']['size'] ?? 1 ),
-			'origin_x'  => $settings['motion_fx_transform_x_anchor_point'] ?? 'center',
-			'origin_y'  => $settings['motion_fx_transform_y_anchor_point'] ?? 'center',
-			'start'     => (int) ( $viewport['start'] ?? 0 ),
-			'end'       => (int) ( $viewport['end'] ?? 100 ),
-		];
-	}
+				$data['scale'] = [
+					'direction' => $settings['rae_animations_scale_direction'] ?? 'scale_up',
+					'speed'     => (float) ( $settings['rae_animations_scale_speed']['size'] ?? 4 ),
+					'origin_x'  => $settings['motion_fx_transform_x_anchor_point'] ?? 'center',
+					'origin_y'  => $settings['motion_fx_transform_y_anchor_point'] ?? 'center',
+					'start'     => (int) ( $viewport['start'] ?? 0 ),
+					'end'       => (int) ( $viewport['end'] ?? 100 ),
+				];
+			}
 
-	/* ------------------------------
-	 * Rotate
-	 * ------------------------------ */
-	if ( ! empty( $settings['rae_animations_rotate_enable'] ) ) {
-		$viewport = $settings['rae_animations_rotate_viewport']['sizes'] ?? [];
+			/* Rotate */
+			if ( ! empty( $settings['rae_animations_rotate_enable'] ) && $settings['rae_animations_rotate_enable'] === 'yes' ) {
+				$viewport = $settings['rae_animations_rotate_viewport']['sizes'] ?? [];
 
-		$data['rotate'] = [
-			'direction' => $settings['rae_animations_rotate_direction'],
-			'speed'     => (float) ( $settings['rae_animations_rotate_speed']['size'] ?? 1 ),
-			'start'     => (int) ( $viewport['start'] ?? 0 ),
-			'end'       => (int) ( $viewport['end'] ?? 100 ),
-		];
-	}
+				$data['rotate'] = [
+					'direction' => $settings['rae_animations_rotate_direction'] ?? 'to_left',
+					'speed'     => (float) ( $settings['rae_animations_rotate_speed']['size'] ?? 4 ),
+					'start'     => (int) ( $viewport['start'] ?? 0 ),
+					'end'       => (int) ( $viewport['end'] ?? 100 ),
+				];
+			}
 
-	return $data;
-}
+			return $data;
+		}
 
 
 		public function render_effects( $element ) {
@@ -908,28 +897,53 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 		}
 
 		protected function inject_rael_effects_attributes( $element ) {
-			$settings = $element->get_settings_for_display();
-			$effects  = $this->get_rael_scroll_effects_data( $settings );
+    $settings = $element->get_settings_for_display();
+    $effects  = $this->get_rael_scroll_effects_data( $settings );
 
-			if ( empty( $effects ) ) {
-				return;
-			}
-
-			$element->add_render_attribute( '_wrapper', [
-				'class' => 'rael-scroll-effects',
-				'data-rael-scroll-effects' => wp_json_encode( [
-					'effects'    => $effects,
-					'relativeTo' => $settings['rael_effects_relative_to'] ?? 'viewport',
-				] ),
-			] );
-			  // Add entrance animation
-			if ( ! empty( $settings['rae_animations_entrance'] ) && $settings['rae_animations_entrance'] !== 'none' ) {
-				$element->add_render_attribute( '_wrapper', [
-					'class' => 'rael-entrance',
-					'data-rae-entrance' => $settings['rae_animations_entrance'],
-				] );
-			}
-		}
+    if ( ! empty( $effects ) ) {
+        $element->add_render_attribute( '_wrapper', [
+            'class' => 'rael-scroll-effects',
+            'data-rael-scroll-effects' => wp_json_encode( [
+                'effects'    => $effects,
+                'relativeTo' => $settings['rae_animations_effects_relative_to'] ?? 'viewport',
+            ] ),
+        ] );
+    }
+    
+    // Add entrance animation
+    if ( ! empty( $settings['rae_animations_entrance'] ) && $settings['rae_animations_entrance'] !== 'none' ) {
+        $element->add_render_attribute( '_wrapper', [
+            'class' => 'rael-entrance',
+            'data-rae-entrance' => $settings['rae_animations_entrance'],
+        ] );
+        
+        // Add animation duration
+        $duration = $settings['rae_animations_entrance_duration'] ?? '1000';
+        $element->add_render_attribute( '_wrapper', [
+            'data-rae-animation-duration' => $duration,
+        ] );
+        
+        // Add duration class based on value
+        $duration_classes = [
+            '2000' => 'rae-duration-slow',
+            '1000' => 'rae-duration-normal',
+            '800'  => 'rae-duration-fast'
+        ];
+        
+        if ( isset( $duration_classes[ $duration ] ) ) {
+            $element->add_render_attribute( '_wrapper', [
+                'class' => $duration_classes[ $duration ],
+            ] );
+        }
+        
+        // Add animation delay
+        if ( ! empty( $settings['rae_animations_entrance_animation_delay'] ) ) {
+            $element->add_render_attribute( '_wrapper', [
+                'data-rae-animation-delay' => $settings['rae_animations_entrance_animation_delay'],
+            ] );
+        }
+    }
+}
 
 		public function rael_enqueue_motion_css() {
 

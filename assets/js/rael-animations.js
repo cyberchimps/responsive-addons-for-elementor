@@ -1,254 +1,699 @@
-(function ($) {
-	'use strict';
-console.log('in main RAE Animations funciton js====');
-	const RaelAnimations = {
+(function($) {
+    'use strict';
 
-		init() {
-			this.cache();
-			this.bind();
-			this.update();
-		},
+    /* ---------------------------------------------------------
+     * Utilities
+     * --------------------------------------------------------- */
 
-		cache() {
-			//this.$elements = $('.rael-scroll-effects');
-			this.windowHeight = window.innerHeight;
-		},
+    function getRealContainer($scope) {
+        if ($scope.hasClass('e-con')) return $scope;
+        if ($scope.is('section.elementor-section')) return $scope;
 
-		bind() {
-			$(window).on('scroll resize', () => {
-				this.windowHeight = window.innerHeight;
-				this.update();
-			});
-		},
+        const $column = $scope.closest('.elementor-column');
+        if ($column.length) return $column;
 
-		update() {
-                    console.log('in animationsss update----');
+        return $scope;
+    }
 
-			const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            console.log('scrollTop=='+scrollTop);
+    function getElementSettings($scope) {
+        if (!elementorFrontend.isEditMode()) {
+            return $scope.data('settings') || {};
+        }
 
-			$('.rael-scroll-effects').each((i, el) => {
-				this.apply(el, scrollTop);
-			});
-			// ENTRANCE ANIMATIONS (once)
-			$('.rael-entrance').each((i, el) => {
-				this.handleEntrance(el);
-			});
-		},
+        if ($scope.data('model-cid')) {
+            const modelCID = $scope.data('model-cid');
+            const elementData = elementorFrontend.config.elements?.data?.[modelCID];
+            
+            if (elementData) {
+                return elementData.attributes || {};
+            }
+        }
 
-		apply(element, scrollTop) {
-            console.log('in animationsss apply----');
-			const raw = element.dataset.raelScrollEffects;
-			if (!raw) return;
+        // Fallback: try to get settings from data attribute
+        try {
+            return JSON.parse($scope.attr('data-settings') || '{}');
+        } catch (e) {
+            return {};
+        }
+    }
 
-			let config;
-			try {
-				config = JSON.parse(raw);
-			} catch (e) {
-				return;
-			}
+    function buildEffectsFromSettings(settings) {
+        const effects = {};
+        
+        // Check if scroll effects are enabled
+        if (settings.rae_animations_scrolling_enable !== 'yes') {
+            return null;
+        }
 
-			const effects = config.effects || {};
-			const rect = element.getBoundingClientRect();
+        /* ------------------------------
+         * Horizontal Scroll (Translate X)
+         * ------------------------------ */
+        if (settings.rae_animations_scroll_effects_type === 'horizontal_scroll') {
+            const viewport = settings.rae_animations_horizontal_viewport?.sizes || {};
+            
+            effects.translateX = {
+                type: 'horizontal',
+                direction: settings.rae_animations_horizontal_direction || 'to_left',
+                speed: parseFloat(settings.rae_animations_horizontal_speed?.size) || 4,
+                start: parseInt(viewport.start) || 0,
+                end: parseInt(viewport.end) || 100
+            };
+        }
 
-			const elementTop = rect.top + scrollTop;
-			const elementHeight = rect.height;
+        /* ------------------------------
+         * Vertical Scroll (Translate Y)
+         * ------------------------------ */
+        if (settings.rae_animations_scroll_effects_type === 'vertical_scroll') {
+            const viewport = settings.rae_animations_vertical_viewport?.sizes || {};
+            
+            effects.translateY = {
+                type: 'vertical',
+                direction: settings.rae_animations_vertical_direction || 'up',
+                speed: parseFloat(settings.rae_animations_vertical_speed?.size) || 4,
+                start: parseInt(viewport.start) || 0,
+                end: parseInt(viewport.end) || 100
+            };
+        }
 
-			const viewportStart = scrollTop + this.windowHeight;
-			const total = elementHeight + this.windowHeight;
-			const progress = Math.min(
-				Math.max((viewportStart - elementTop) / total, 0),
-				1
-			);
+        /* ------------------------------
+         * Transparency (Opacity)
+         * ------------------------------ */
+        if (settings.rae_animations_transparency_enable === 'yes') {
+            const viewport = settings.rae_animations_transparency_viewport?.sizes || {};
+            
+            effects.opacity = {
+                direction: settings.rae_animations_transparency_direction || 'fade_in',
+                level: parseFloat(settings.rae_animations_transparency_level?.size) || 4,
+                start: parseInt(viewport.start) || 0,
+                end: parseInt(viewport.end) || 100
+            };
+        }
 
-			/* HORIZONTAL SCROLL */
-			if (effects.translateX) {
+        /* ------------------------------
+         * Blur
+         * ------------------------------ */
+        if (settings.rae_animations_blur_enable === 'yes') {
+            const viewport = settings.rae_animations_blur_viewport?.sizes || {};
+            
+            effects.blur = {
+                direction: settings.rae_animations_blur_direction || 'fade_in',
+                level: parseFloat(settings.rae_animations_blur_level?.size) || 4,
+                start: parseInt(viewport.start) || 0,
+                end: parseInt(viewport.end) || 100
+            };
+        }
 
-				const start = effects.translateX.start / 100;
-				const end   = effects.translateX.end / 100;
+        /* ------------------------------
+         * Scale
+         * ------------------------------ */
+        if (settings.rae_animations_scale_enable === 'yes') {
+            const viewport = settings.rae_animations_scale_viewport?.sizes || {};
+            
+            effects.scale = {
+                direction: settings.rae_animations_scale_direction || 'scale_up',
+                speed: parseFloat(settings.rae_animations_scale_speed?.size) || 4,
+                origin_x: settings.motion_fx_transform_x_anchor_point || 'center',
+                origin_y: settings.motion_fx_transform_y_anchor_point || 'center',
+                start: parseInt(viewport.start) || 0,
+                end: parseInt(viewport.end) || 100
+            };
+        }
 
-				// Apply ONLY when scrolling within viewport range
-				if (progress > start && progress < end) {
-					const p = this.range(
-						progress,
-						effects.translateX.start,
-						effects.translateX.end
-					);
+        /* ------------------------------
+         * Rotate
+         * ------------------------------ */
+        if (settings.rae_animations_rotate_enable === 'yes') {
+            const viewport = settings.rae_animations_rotate_viewport?.sizes || {};
+            
+            effects.rotate = {
+                direction: settings.rae_animations_rotate_direction || 'to_left',
+                speed: parseFloat(settings.rae_animations_rotate_speed?.size) || 4,
+                start: parseInt(viewport.start) || 0,
+                end: parseInt(viewport.end) || 100
+            };
+        }
 
-					let value = (1 - p) * effects.translateX.speed * 50;
+        return Object.keys(effects).length ? effects : null;
+    }
 
-					// Elementor-style direction handling
-					if (effects.translateX.direction === 'to_right') {
-						value *= -1;
-					}
+    /* ---------------------------------------------------------
+     * Core Animation Engine
+     * --------------------------------------------------------- */
 
-					element.style.setProperty(
-						'--translateX',
-						value.toFixed(3) + 'px'
-					);
-				} 
+    const RaelAnimations = {
+        init() {
+            this.isEditor = elementorFrontend.isEditMode();
+            this.windowHeight = this.getViewportHeight();
+            this.scrollTop = this.getScrollTop();
+            
+            // Setup listeners
+            this.setupListeners();
+            
+            // Initial scan for elements
+            this.scanElements();
+            
+            // Initial update
+            this.update();
+        },
 
-			}
+        getViewportHeight() {
+            return window.innerHeight;
+        },
 
-			/* Vertical Scroll */
+        getScrollTop() {
+            if (this.isEditor) {
+                // In editor mode, we need to find the preview iframe
+                const previewFrame = document.querySelector('#elementor-preview-iframe, .elementor-preview-iframe');
+                if (previewFrame && previewFrame.contentWindow) {
+                    return previewFrame.contentWindow.pageYOffset || 
+                           previewFrame.contentDocument?.documentElement.scrollTop || 0;
+                }
+                return 0;
+            }
+            return window.pageYOffset || document.documentElement.scrollTop;
+        },
 
-			if (effects.translateY) {
+        setupListeners() {
+            // Scroll listener
+            if (this.isEditor) {
+                // In editor mode, listen to iframe scroll
+                const previewFrame = document.querySelector('#elementor-preview-iframe, .elementor-preview-iframe');
+                if (previewFrame && previewFrame.contentWindow) {
+                    $(previewFrame.contentWindow).on('scroll', () => {
+                        this.onScroll();
+                    });
+                    $(previewFrame.contentWindow).on('resize', () => {
+                        this.onResize();
+                    });
+                }
+            } else {
+                $(window).on('scroll', () => {
+                    this.onScroll();
+                });
+                $(window).on('resize', () => {
+                    this.onResize();
+                });
+            }
 
-				const start = effects.translateY.start / 100;
-				const end   = effects.translateY.end / 100;
+            // Elementor specific events
+            $(window).on('elementor/frontend/init', () => {
+                // Listen for new elements
+                elementorFrontend.hooks.addAction('frontend/element_ready/global', ($scope) => {
+                    this.processElement($scope);
+                });
+                
+                // Listen for settings changes in editor
+                if (this.isEditor) {
+                    elementor.channels.editor.on('change', (model) => {
+                        setTimeout(() => {
+                            this.scanElements();
+                            this.update();
+                            this.updateEntranceAnimations();
+                        }, 50);
+                    });
+                }
+            });
 
-				// Apply ONLY when scrolling within viewport range
-				if (progress > start && progress < end) {
-					const p = this.range(
-						progress,
-						effects.translateY.start,
-						effects.translateY.end
-					);
+            // Use requestAnimationFrame for smooth updates
+            this.rafUpdate = () => {
+                this.update();
+                this.rafId = requestAnimationFrame(this.rafUpdate);
+            };
+            
+            // Start RAF updates
+            this.rafId = requestAnimationFrame(this.rafUpdate);
+        },
 
-					let value = (1 - p) * effects.translateY.speed * 50;
+        onScroll() {
+            this.scrollTop = this.getScrollTop();
+            // RAF handles the update
+        },
 
-					// Elementor-style direction handling
-					if (effects.translateY.direction === 'up') {
-						value *= -1;
-					}
-					element.style.setProperty(
-						'--translateX',
-						value.toFixed(3) + 'px'
-					);
-					element.style.setProperty(
-						'--translateY',
-						-value.toFixed(3) + 'px'
-					);
-				} 
+        onResize() {
+            this.windowHeight = this.getViewportHeight();
+            this.scanElements();
+        },
 
-			}
-			/* Opacity */
-			if (effects.opacity) {
-				const p = this.range(progress, effects.opacity.start, effects.opacity.end);
-				opacity = effects.opacity.direction === 'fade_in'
-					? p
-					: 1 - p;
-			}
+        scanElements() {
+            // Find all elements with scroll effects
+            this.elements = [];
+            
+            document.querySelectorAll('.rael-scroll-effects').forEach(element => {
+                this.elements.push(element);
+            });
+        },
 
-			/* Blur logic */
-			if (effects.blur) {
-				const p = this.range(progress, effects.blur.start, effects.blur.end);
-				filter += ` blur(${p * effects.blur.level}px)`;
-			}
+        processElement($scope) {
+            const $target = getRealContainer($scope);
+            const settings = getElementSettings($scope);
+            const effects = buildEffectsFromSettings(settings);
 
-			/* Scale */
-			if (effects.scale) {
-				const start = effects.scale.start / 100;
-				const end   = effects.scale.end / 100;
+            if (effects) {
+                $target.addClass('rael-scroll-effects');
+                
+                // Store effects in data attribute
+                $target.attr('data-rael-scroll-effects', JSON.stringify({
+                    effects: effects,
+                    relativeTo: settings.rae_animations_effects_relative_to || 'viewport'
+                }));
+                
+                // Add to elements array
+                if (!this.elements.includes($target[0])) {
+                    this.elements.push($target[0]);
+                }
+            }
 
-				if (progress > start && progress < end) {
-					const p = this.range(progress, effects.scale.start, effects.scale.end);
-					const delta = p * effects.scale.speed * 0.1;
+            // Handle entrance animation
+            this.setupEntranceAnimation($target, settings);
+        },
 
-					const scale =
-						effects.scale.direction === 'scale_down'
-							? 1 - delta
-							: 1 + delta;
+        setupEntranceAnimation($element, settings) {
+            if (settings.rae_animations_entrance && settings.rae_animations_entrance !== 'none') {
+                // Remove any existing animation classes
+                $element.removeClass('animated rael-animated');
+                $element.removeClass(settings.rae_animations_entrance);
+                
+                // Add new animation class
+                $element.addClass('rael-entrance');
+                $element.attr('data-rae-entrance', settings.rae_animations_entrance);
+                
+                // Set animation duration
+                const duration = settings.rae_animations_entrance_duration || '1000';
+                $element.attr('data-rae-animation-duration', duration);
+                
+                // Remove old duration classes
+                $element.removeClass('rae-duration-slow rae-duration-normal rae-duration-fast');
+                
+                // Add duration class based on value
+                if (duration === '2000') {
+                    $element.addClass('rae-duration-slow');
+                } else if (duration === '1000') {
+                    $element.addClass('rae-duration-normal');
+                } else if (duration === '800') {
+                    $element.addClass('rae-duration-fast');
+                }
+                
+                // Set animation delay
+                const delay = settings.rae_animations_entrance_animation_delay || '0';
+                $element.attr('data-rae-animation-delay', delay);
+                
+                // Mark as not animated yet
+                $element.removeClass('animated');
+                $element[0].__raeEntranceDone = false;
+            } else {
+                $element.removeClass('rael-entrance animated rael-animated');
+                $element.removeAttr('data-rae-entrance data-rae-animation-duration data-rae-animation-delay');
+            }
+        },
 
-					element.style.setProperty('--scale', scale.toFixed(3));
-					element.style.transformOrigin =
-						`${effects.scale.origin_x} ${effects.scale.origin_y}`;
-				} else {
-					element.style.setProperty('--scale', '1');
-				}
-			}
+        update() {
+            if (!this.elements.length) return;
 
-			/* Rotate logic */
-			if (effects.rotate) {
-	const start = effects.rotate.start / 100;
-	const end   = effects.rotate.end / 100;
+            // Process each element
+            this.elements.forEach(element => {
+                this.applyEffects(element);
+            });
 
-	if (progress >= start && progress <= end) {
-		const p = this.range(
-			progress,
-			effects.rotate.start,
-			effects.rotate.end
-		);
+            // Handle entrance animations
+            this.handleEntranceAnimations();
+        },
 
-		let deg = p * effects.rotate.speed * 10;
+        applyEffects(element) {
+            let effectsData;
+            
+            // Get effects data
+            if (this.isEditor) {
+                // In editor mode, get from current settings
+                const $scope = $(element);
+                const settings = getElementSettings($scope);
+                const effects = buildEffectsFromSettings(settings);
+                
+                if (!effects) {
+                    $scope.removeClass('rael-scroll-effects');
+                    return;
+                }
+                
+                effectsData = {
+                    effects: effects,
+                    relativeTo: settings.rae_animations_effects_relative_to || 'viewport'
+                };
+            } else {
+                // Frontend mode - get from data attribute
+                const rawData = element.getAttribute('data-rael-scroll-effects');
+                if (!rawData) return;
+                
+                try {
+                    effectsData = JSON.parse(rawData);
+                } catch (e) {
+                    return;
+                }
+            }
 
-		if (effects.rotate.direction === 'to_right') {
-			deg *= -1;
-		}
+            const effects = effectsData.effects;
+            const relativeTo = effectsData.relativeTo || 'viewport';
+            
+            if (!effects) return;
 
-		/* ----------------------------------
-		 * Elementor-style anchor handling
-		 * ---------------------------------- */
+            // Calculate scroll progress
+            const progress = this.calculateProgress(element, relativeTo);
+            
+            // Apply each effect
+            this.applyEffect(element, 'translateX', effects.translateX, progress);
+            this.applyEffect(element, 'translateY', effects.translateY, progress);
+            this.applyEffect(element, 'opacity', effects.opacity, progress);
+            this.applyEffect(element, 'blur', effects.blur, progress);
+            this.applyEffect(element, 'scale', effects.scale, progress);
+            this.applyEffect(element, 'rotate', effects.rotate, progress);
+        },
 
-		const originX = effects.rotate.origin_x || 'center';
-		const originY = effects.rotate.origin_y || 'center';
+        calculateProgress(element, relativeTo) {
+            const rect = element.getBoundingClientRect();
+            const elementTop = rect.top + this.scrollTop;
+            const elementHeight = rect.height;
+            
+            let startPosition, endPosition;
+            
+            switch(relativeTo) {
+                case 'page':
+                    // Entire page height
+                    const pageHeight = Math.max(
+                        document.body.scrollHeight,
+                        document.documentElement.scrollHeight
+                    );
+                    startPosition = 0;
+                    endPosition = pageHeight - this.windowHeight;
+                    break;
+                    
+                case 'viewport':
+                default:
+                    // Relative to viewport
+                    startPosition = elementTop - this.windowHeight;
+                    endPosition = elementTop + elementHeight;
+                    break;
+            }
+            
+            // Calculate progress (0 to 1)
+            let progress = (this.scrollTop - startPosition) / (endPosition - startPosition);
+            progress = Math.min(Math.max(progress, 0), 1);
+            
+            return progress;
+        },
 
-		// Store origin vars (CSS swaps X/Y)
-		element.style.setProperty('--e-transform-origin-x', originX);
-		element.style.setProperty('--e-transform-origin-y', originY);
+        applyEffect(element, effectType, effectConfig, progress) {
+            if (!effectConfig) return;
+            
+            // Map progress to viewport range
+            const mappedProgress = this.range(progress, effectConfig.start, effectConfig.end);
+            
+            switch(effectType) {
+                case 'translateX':
+                    this.applyTranslateX(element, effectConfig, mappedProgress);
+                    break;
+                    
+                case 'translateY':
+                    this.applyTranslateY(element, effectConfig, mappedProgress);
+                    break;
+                    
+                case 'opacity':
+                    this.applyOpacity(element, effectConfig, mappedProgress);
+                    break;
+                    
+                case 'blur':
+                    this.applyBlur(element, effectConfig, mappedProgress);
+                    break;
+                    
+                case 'scale':
+                    this.applyScale(element, effectConfig, mappedProgress);
+                    break;
+                    
+                case 'rotate':
+                    this.applyRotate(element, effectConfig, mappedProgress);
+                    break;
+            }
+        },
 
-		// Translate compensation (Elementor math-lite)
-		const translateMap = {
-			left:   -50,
-			right:  50,
-			top:    -50,
-			bottom: 50,
-			center: 0
-		};
+        applyTranslateX(element, config, progress) {
+            let value = (1 - progress) * config.speed * 20;
+            
+            // Adjust direction
+            if (config.direction === 'to_left') {
+                value = -Math.abs(value);
+            } else if (config.direction === 'to_right') {
+                value = Math.abs(value);
+            }
+            
+            element.style.setProperty('--translateX', `${value}px`);
+        },
 
-		const tx = translateMap[originX] || 0;
-		const ty = translateMap[originY] || 0;
+        applyTranslateY(element, config, progress) {
+            let value = (1 - progress) * config.speed * 20;
+            
+            // Adjust direction
+            if (config.direction === 'up') {
+                value = Math.abs(value);
+            } else if (config.direction === 'down') {
+                value = -Math.abs(value);
+            }
+            
+            element.style.setProperty('--translateY', `${value}px`);
+        },
 
-		element.style.setProperty('--translateX', tx + 'px');
-		element.style.setProperty('--translateY', ty + 'px');
+        applyOpacity(element, config, progress) {
+            let opacity = 1;
+            const level = config.level || 1;
+            
+            switch(config.direction) {
+                case 'fade_in':
+                    opacity = progress * level;
+                    break;
+                    
+                case 'fade_out':
+                    opacity = 1 - (progress * level);
+                    break;
+                    
+                case 'fade_out_in':
+                    if (progress < 0.5) {
+                        opacity = 1 - (progress * 2 * level);
+                    } else {
+                        opacity = (progress - 0.5) * 2 * level;
+                    }
+                    break;
+                    
+                case 'fade_in_out':
+                    if (progress < 0.5) {
+                        opacity = progress * 2 * level;
+                    } else {
+                        opacity = 1 - ((progress - 0.5) * 2 * level);
+                    }
+                    break;
+            }
+            
+            opacity = Math.min(Math.max(opacity, 0), 1);
+            element.style.setProperty('--opacity', opacity);
+        },
 
-		// Apply rotation
-		element.style.setProperty(
-			'--rotateZ',
-			deg.toFixed(2) + 'deg'
-		);
-	}
-}
+        applyBlur(element, config, progress) {
+            let blur = 0;
+            const level = config.level || 1;
+            
+            switch(config.direction) {
+                case 'fade_in':
+                    blur = progress * level * 10;
+                    break;
+                    
+                case 'fade_out':
+                    blur = (1 - progress) * level * 10;
+                    break;
+                    
+                case 'fade_out_in':
+                    if (progress < 0.5) {
+                        blur = progress * 2 * level * 10;
+                    } else {
+                        blur = (1 - progress) * 2 * level * 10;
+                    }
+                    break;
+                    
+                case 'fade_in_out':
+                    if (progress < 0.5) {
+                        blur = (1 - progress * 2) * level * 10;
+                    } else {
+                        blur = ((progress - 0.5) * 2) * level * 10;
+                    }
+                    break;
+            }
+            
+            element.style.setProperty('--blur', `${blur}px`);
+        },
 
-		
-		},
+        applyScale(element, config, progress) {
+            let scale = 1;
+            const speed = config.speed || 1;
+            
+            switch(config.direction) {
+                case 'scale_up':
+                    scale = 1 + (progress * speed * 0.2);
+                    break;
+                    
+                case 'scale_down':
+                    scale = 1 - (progress * speed * 0.2);
+                    break;
+                    
+                case 'scale_down_up':
+                    if (progress < 0.5) {
+                        scale = 1 - (progress * 2 * speed * 0.2);
+                    } else {
+                        scale = 1 - ((1 - progress) * 2 * speed * 0.2);
+                    }
+                    break;
+                    
+                case 'scale_up_down':
+                    if (progress < 0.5) {
+                        scale = 1 + (progress * 2 * speed * 0.2);
+                    } else {
+                        scale = 1 + ((1 - progress) * 2 * speed * 0.2);
+                    }
+                    break;
+            }
+            
+            scale = Math.max(scale, 0.1);
+            element.style.setProperty('--scale', scale);
+            
+            // Set transform origin
+            element.style.transformOrigin = `${config.origin_x} ${config.origin_y}`;
+        },
 
-		range(progress, start, end) {
-			const s = start / 100;
-			const e = end / 100;
+        applyRotate(element, config, progress) {
+            let rotate = progress * config.speed * 20;
+            
+            // Adjust direction
+            if (config.direction === 'to_left') {
+                rotate = -Math.abs(rotate);
+            } else if (config.direction === 'to_right') {
+                rotate = Math.abs(rotate);
+            }
+            
+            element.style.setProperty('--rotateZ', `${rotate}deg`);
+        },
 
-			if (progress <= s) return 0;
-			if (progress >= e) return 1;
+        range(progress, start, end) {
+            const s = start / 100;
+            const e = end / 100;
+            
+            if (progress <= s) return 0;
+            if (progress >= e) return 1;
+            
+            return (progress - s) / (e - s);
+        },
 
-			return (progress - s) / (e - s);
-		},
-		handleEntrance(element) {
-			if (element.__raeEntranceDone) return;
+        handleEntranceAnimations() {
+            const self = this;
+            
+            document.querySelectorAll('.rael-entrance:not(.animated)').forEach(element => {
+                const animation = element.getAttribute('data-rae-entrance');
+                if (!animation || animation === 'none') return;
+                
+                // Check if element is in viewport
+                const rect = element.getBoundingClientRect();
+                const isInViewport = (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.bottom >= 0 &&
+                    rect.left <= (window.innerWidth || document.documentElement.clientWidth) &&
+                    rect.right >= 0
+                );
+                
+                if (isInViewport && !element.__raeEntranceDone) {
+                    this.triggerEntranceAnimation(element);
+                }
+            });
+        },
 
-			const animation = element.dataset.raeEntrance;
-			if (!animation || animation === 'none') return;
+        triggerEntranceAnimation(element) {
+            const animation = element.getAttribute('data-rae-entrance');
+            const delay = element.getAttribute('data-rae-animation-delay') || 0;
+            const duration = element.getAttribute('data-rae-animation-duration') || '1000';
+            
+            // Apply animation after delay
+            setTimeout(() => {
+                // Add animation classes
+                element.classList.add('animated', animation, 'rael-animated');
+                
+                // Set animation duration from data attribute
+                element.style.animationDuration = duration + 'ms';
+                
+                // Mark as animated
+                element.__raeEntranceDone = true;
+                
+                // Remove animation class after completion
+                const animationDuration = parseInt(duration) + parseInt(delay);
+                setTimeout(() => {
+                    element.classList.remove(animation);
+                }, animationDuration);
+                
+            }, parseInt(delay));
+        },
 
-			element.classList.add('animated', animation);
-			element.__raeEntranceDone = true;
-		},
+        updateEntranceAnimations() {
+            // Reset all entrance animations when settings change
+            document.querySelectorAll('.rael-entrance').forEach(element => {
+                element.classList.remove('animated', 'rael-animated');
+                
+                // Remove any animation class
+                const currentAnimation = element.getAttribute('data-rae-entrance');
+                if (currentAnimation) {
+                    element.classList.remove(currentAnimation);
+                }
+                
+                // Reset flag
+                element.__raeEntranceDone = false;
+            });
+        },
 
-	};
+        destroy() {
+            if (this.rafId) {
+                cancelAnimationFrame(this.rafId);
+            }
+            
+            // Remove event listeners
+            $(window).off('scroll resize');
+        }
+    };
 
-	$(window).on('elementor/frontend/init', function () {
+    /* ---------------------------------------------------------
+     * Initialize
+     * --------------------------------------------------------- */
 
-		const initAnimations = () => {
-			RaelAnimations.init();
-		};
+    $(window).on('elementor/frontend/init', function() {
+        // Initialize animations
+        RaelAnimations.init();
+        
+        // Process existing elements
+        elementorFrontend.hooks.addAction('frontend/element_ready/global', function($scope) {
+            RaelAnimations.processElement($scope);
+            RaelAnimations.scanElements();
+        });
+        
+        // Handle sections and containers specifically
+        elementorFrontend.hooks.addAction('frontend/element_ready/section', function($scope) {
+            RaelAnimations.processElement($scope);
+            RaelAnimations.scanElements();
+        });
+        
+        elementorFrontend.hooks.addAction('frontend/element_ready/container', function($scope) {
+            RaelAnimations.processElement($scope);
+            RaelAnimations.scanElements();
+        });
+        
+        elementorFrontend.hooks.addAction('frontend/element_ready/column', function($scope) {
+            RaelAnimations.processElement($scope);
+            RaelAnimations.scanElements();
+        });
+    });
 
-		// Frontend
-		initAnimations();
+    // Initialize on DOM ready if Elementor is already loaded
+    $(document).ready(function() {
+        if (typeof elementorFrontend !== 'undefined') {
+            $(window).trigger('elementor/frontend/init');
+        }
+    });
 
-		// Editor live preview (CRITICAL)
-		if (elementorFrontend.isEditMode()) {
-			elementorFrontend.hooks.addAction(
-				'frontend/element_ready/global',
-				initAnimations
-			);
-		}
-	});
 })(jQuery);
