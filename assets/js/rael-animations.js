@@ -45,9 +45,7 @@
             return null;
         }
 
-        /* ------------------------------
-         * Horizontal Scroll (Translate X)
-         * ------------------------------ */
+        /* Horizontal Scroll (Translate X) */
         if (settings.rae_animations_scroll_effects_type === 'horizontal_scroll') {
             const viewport = settings.rae_animations_horizontal_viewport?.sizes || {};
             
@@ -60,9 +58,7 @@
             };
         }
 
-        /* ------------------------------
-         * Vertical Scroll (Translate Y)
-         * ------------------------------ */
+        /* Vertical Scroll (Translate Y) */
         if (settings.rae_animations_scroll_effects_type === 'vertical_scroll') {
             const viewport = settings.rae_animations_vertical_viewport?.sizes || {};
             
@@ -75,9 +71,7 @@
             };
         }
 
-        /* ------------------------------
-         * Transparency (Opacity)
-         * ------------------------------ */
+        /* Transparency (Opacity) */
         if (settings.rae_animations_transparency_enable === 'yes') {
             const viewport = settings.rae_animations_transparency_viewport?.sizes || {};
             
@@ -89,9 +83,7 @@
             };
         }
 
-        /* ------------------------------
-         * Blur
-         * ------------------------------ */
+        /* Blur */
         if (settings.rae_animations_blur_enable === 'yes') {
             const viewport = settings.rae_animations_blur_viewport?.sizes || {};
             
@@ -103,9 +95,7 @@
             };
         }
 
-        /* ------------------------------
-         * Scale
-         * ------------------------------ */
+        /* Scale */
         if (settings.rae_animations_scale_enable === 'yes') {
             const viewport = settings.rae_animations_scale_viewport?.sizes || {};
             
@@ -119,9 +109,7 @@
             };
         }
 
-        /* ------------------------------
-         * Rotate
-         * ------------------------------ */
+        /* Rotate */
         if (settings.rae_animations_rotate_enable === 'yes') {
             const viewport = settings.rae_animations_rotate_viewport?.sizes || {};
             
@@ -136,9 +124,7 @@
         return Object.keys(effects).length ? effects : null;
     }
 
-    /* ---------------------------------------------------------
-     * Core Animation Engine
-     * --------------------------------------------------------- */
+    /* Core Animation */
 
     const RaelAnimations = {
         init() {
@@ -389,7 +375,7 @@
             switch(relativeTo) {
                 case 'page':
                     // FULL PAGE MODE - Animation stretches from TOP to BOTTOM of page
-                                       const viewportTop = this.scrollTop;
+                    const viewportTop = this.scrollTop;
                     const viewportBottom = this.scrollTop + this.windowHeight;
                     
                     // Element starts appearing when its top reaches viewport bottom
@@ -435,21 +421,15 @@
                     
                     // Current scroll position in page coordinates (0 to 1)
                     const currentScrollProgress = this.scrollTop / documentHeight;
-                    
-                    // For FULL PAGE mode:
-                    // - Animation starts when scroll is at 0 (top of page) 
-                    // - Animation ends when scroll is at 1 (bottom of page)
-                    // - But offset by element position so animation is centered on element
+               
                     
                     // Adjust so animation is centered around element position
-                    // If element is at 30% of page, animation will complete when scroll reaches 30%
                     const adjustedProgress = Math.max(0, Math.min(1, 
                         (currentScrollProgress - (elementCenter - 0.5)) / 1
                     ));
                     
                     // Alternative: Even more stretched version
-                    // Animation happens over entire page but starts earlier and ends later
-                    const stretchFactor = 0.8; // How much to stretch (0.8 = 80% of page)
+                    const stretchFactor = 0.8; 
                     const startOffset = elementCenter - (stretchFactor / 2);
                     const endOffset = elementCenter + (stretchFactor / 2);
                     
