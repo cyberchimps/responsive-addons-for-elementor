@@ -57,9 +57,9 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 			add_action( 'elementor/frontend/before_enqueue_scripts', array( $this, 'enqueue_rae_animations_scripts' ), 9 );
 			add_action( 'elementor/editor/after_enqueue_scripts', array( $this, 'enqueue_rae_animations_scripts' ), 9 );
 
-			add_action( 'elementor/element/container/section_effects/after_section_end', array( $this, 'register_animations_controls' ), 10, 2 );
-			add_action( 'elementor/element/section/section_effects/after_section_end', array( $this, 'register_animations_controls' ), 10, 2 );
-			add_action( 'elementor/element/column/section_effects/after_section_end', array( $this, 'register_animations_controls' ), 10, 2 );
+			add_action( 'elementor/element/container/section_layout/before_section_start', array( $this, 'register_animations_controls' ), 10, 2 );
+			add_action( 'elementor/element/section/section_layout/before_section_start', array( $this, 'register_animations_controls' ), 10, 2 );
+			add_action( 'elementor/element/column/section_layout/before_section_start', array( $this, 'register_animations_controls' ), 10, 2 );
 
 			add_action( 'elementor/frontend/column/before_render', array( $this, 'render_effects' ), 10, 1 );
 			add_action( 'elementor/frontend/section/before_render', array( $this, 'render_effects' ), 10, 1 );
@@ -690,6 +690,21 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 					],
 				]
 			);
+			$section->add_responsive_control(
+				'rae_animations_apply_effects_on',
+				[
+					'label'       => __( 'Apply Effects On', 'responsive-addons-for-elementor' ),
+					'type'        => Controls_Manager::SELECT2,
+					'multiple'    => true,
+					'options'     => [
+						'desktop' => __( 'Desktop', 'responsive-addons-for-elementor' ),
+						'tablet'  => __( 'Tablet Portrait', 'responsive-addons-for-elementor' ),
+						'mobile'  => __( 'Mobile Portrait', 'responsive-addons-for-elementor' ),
+					],
+					'default'     => [ 'desktop', 'tablet', 'mobile' ],
+					'label_block' => true,
+				]
+			);
 			// Effects Relative To
 			$section->add_control(
 				'rae_animations_effects_relative_to',
@@ -900,6 +915,27 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
     $settings = $element->get_settings_for_display();
     $effects  = $this->get_rael_scroll_effects_data( $settings );
 
+
+	// Device logic (Apply Effects On)
+	 
+	if ( ! empty( $settings['rae_animations_apply_effects_on'] ) && is_array( $settings['rae_animations_apply_effects_on'] ) ) {
+
+		$devices = $settings['rae_animations_apply_effects_on'];
+
+		if ( ! in_array( 'desktop', $devices, true ) ) {
+			$element->add_render_attribute( '_wrapper', 'class', 'rael-hide-animation-desktop' );
+		}
+
+		if ( ! in_array( 'tablet', $devices, true ) ) {
+			$element->add_render_attribute( '_wrapper', 'class', 'rael-hide-animation-tablet' );
+		}
+
+		if ( ! in_array( 'mobile', $devices, true ) ) {
+			$element->add_render_attribute( '_wrapper', 'class', 'rael-hide-animation-mobile' );
+		}
+	}
+
+	// Scroll effects
     if ( ! empty( $effects ) ) {
         $element->add_render_attribute( '_wrapper', [
             'class' => 'rael-scroll-effects',
@@ -966,7 +1002,28 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 				opacity: var(--opacity);
 
 				will-change: transform, filter, opacity;
-			}';
+			}
+			/* Desktop */
+			@media (min-width: 1025px) {
+				.rael-hide-animation-desktop {
+					transform: none !important;
+				}
+			}
+
+			/* Tablet */
+			@media (min-width: 768px) and (max-width: 1024px) {
+				.rael-hide-animation-tablet {
+					transform: none !important;
+				}
+			}
+
+			/* Mobile */
+			@media (max-width: 767px) {
+				.rael-hide-animation-mobile {
+					transform: none !important;
+				}
+			}	
+			';
 
 			wp_add_inline_style('elementor-frontend', $css );
 		}

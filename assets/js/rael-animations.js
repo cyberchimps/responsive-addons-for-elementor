@@ -173,6 +173,18 @@
             return window.pageYOffset || document.documentElement.scrollTop;
         },
 
+        getDocumentHeight() {
+            // Get total document height
+            return Math.max(
+                document.body.scrollHeight,
+                document.documentElement.scrollHeight,
+                document.body.offsetHeight,
+                document.documentElement.offsetHeight,
+                document.body.clientHeight,
+                document.documentElement.clientHeight
+            );
+        },
+
         setupListeners() {
             // Scroll listener
             if (this.isEditor) {
@@ -370,30 +382,89 @@
             const rect = element.getBoundingClientRect();
             const elementTop = rect.top + this.scrollTop;
             const elementHeight = rect.height;
+            const elementBottom = elementTop + elementHeight;
             
-            let startPosition, endPosition;
+            let progress = 0;
             
             switch(relativeTo) {
                 case 'page':
-                    // Entire page height
-                    const pageHeight = Math.max(
-                        document.body.scrollHeight,
-                        document.documentElement.scrollHeight
-                    );
-                    startPosition = 0;
-                    endPosition = pageHeight - this.windowHeight;
-                    break;
+                    // FULL PAGE MODE - Animation stretches from TOP to BOTTOM of page
+                                       const viewportTop = this.scrollTop;
+                    const viewportBottom = this.scrollTop + this.windowHeight;
                     
+                    // Element starts appearing when its top reaches viewport bottom
+                    const viewportElementStart = elementTop - this.windowHeight;
+                    // Element completely disappears when its bottom reaches viewport top
+                    const viewportElementEnd = elementBottom;
+                    
+                    // Total scroll distance where element is visible
+                    const totalVisibleDistance = viewportElementEnd - viewportElementStart;
+                    
+                    if (totalVisibleDistance <= 0) {
+                        progress = 0;
+                        break;
+                    }
+                    
+                    if (this.scrollTop <= viewportElementStart) {
+                        // Element not yet visible
+                        progress = 0;
+                    } else if (this.scrollTop >= viewportElementEnd) {
+                        // Element completely passed
+                        progress = 1;
+                    } else {
+                        // Element is partially visible
+                        progress = (this.scrollTop - viewportElementStart) / totalVisibleDistance;
+                    }
+
+                    break;
+
+                case 'default':
                 case 'viewport':
                 default:
-                    // Relative to viewport
-                    startPosition = elementTop - this.windowHeight;
-                    endPosition = elementTop + elementHeight;
+                    // VIEWPORT MODE - Animation only when element is near viewport
+
+                    const documentHeight = this.getDocumentHeight();
+                    
+                    if (documentHeight <= 0) {
+                        progress = 0;
+                        break;
+                    }
+                    
+                    // Calculate element's vertical center position (0 to 1)
+                    const elementCenter = (elementTop + elementHeight / 2) / documentHeight;
+                    
+                    // Current scroll position in page coordinates (0 to 1)
+                    const currentScrollProgress = this.scrollTop / documentHeight;
+                    
+                    // For FULL PAGE mode:
+                    // - Animation starts when scroll is at 0 (top of page) 
+                    // - Animation ends when scroll is at 1 (bottom of page)
+                    // - But offset by element position so animation is centered on element
+                    
+                    // Adjust so animation is centered around element position
+                    // If element is at 30% of page, animation will complete when scroll reaches 30%
+                    const adjustedProgress = Math.max(0, Math.min(1, 
+                        (currentScrollProgress - (elementCenter - 0.5)) / 1
+                    ));
+                    
+                    // Alternative: Even more stretched version
+                    // Animation happens over entire page but starts earlier and ends later
+                    const stretchFactor = 0.8; // How much to stretch (0.8 = 80% of page)
+                    const startOffset = elementCenter - (stretchFactor / 2);
+                    const endOffset = elementCenter + (stretchFactor / 2);
+                    
+                    if (currentScrollProgress <= startOffset) {
+                        progress = 0;
+                    } else if (currentScrollProgress >= endOffset) {
+                        progress = 1;
+                    } else {
+                        progress = (currentScrollProgress - startOffset) / (endOffset - startOffset);
+                    }
+                    
                     break;
             }
             
-            // Calculate progress (0 to 1)
-            let progress = (this.scrollTop - startPosition) / (endPosition - startPosition);
+            // Ensure progress is between 0 and 1
             progress = Math.min(Math.max(progress, 0), 1);
             
             return progress;
@@ -402,7 +473,7 @@
         applyEffect(element, effectType, effectConfig, progress) {
             if (!effectConfig) return;
             
-            // Map progress to viewport range
+            // Map progress to viewport range (0-100% to 0-1)
             const mappedProgress = this.range(progress, effectConfig.start, effectConfig.end);
             
             switch(effectType) {
@@ -433,6 +504,8 @@
         },
 
         applyTranslateX(element, config, progress) {
+            if (!config || typeof config.speed === 'undefined') return;
+            
             let value = (1 - progress) * config.speed * 20;
             
             // Adjust direction
@@ -446,6 +519,8 @@
         },
 
         applyTranslateY(element, config, progress) {
+            if (!config || typeof config.speed === 'undefined') return;
+            
             let value = (1 - progress) * config.speed * 20;
             
             // Adjust direction
@@ -459,6 +534,8 @@
         },
 
         applyOpacity(element, config, progress) {
+            if (!config) return;
+            
             let opacity = 1;
             const level = config.level || 1;
             
@@ -493,6 +570,8 @@
         },
 
         applyBlur(element, config, progress) {
+            if (!config) return;
+            
             let blur = 0;
             const level = config.level || 1;
             
@@ -526,6 +605,8 @@
         },
 
         applyScale(element, config, progress) {
+            if (!config) return;
+            
             let scale = 1;
             const speed = config.speed || 1;
             
@@ -559,10 +640,14 @@
             element.style.setProperty('--scale', scale);
             
             // Set transform origin
-            element.style.transformOrigin = `${config.origin_x} ${config.origin_y}`;
+            if (config.origin_x && config.origin_y) {
+                element.style.transformOrigin = `${config.origin_x} ${config.origin_y}`;
+            }
         },
 
         applyRotate(element, config, progress) {
+            if (!config) return;
+            
             let rotate = progress * config.speed * 20;
             
             // Adjust direction
