@@ -704,7 +704,7 @@ private function rael_find_element_recursive($elements, $widget_id) {
 			return; 
 		}
 		if (false === get_option( 'responsive_addons_for_elementor_review_notice' ) ) {
-			set_transient( 'responsive_addons_for_elementor_intial_timeout', true, 30 * 24 * 60 * 60 );
+			set_transient( 'responsive_addons_for_elementor_intial_timeout', true, 1.5 * 24 * 60 * 60 );
 			update_option( 'responsive_addons_for_elementor_review_notice', true );
 		}
 		$maybe_later_active = (bool) get_transient( 'responsive_addons_for_elementor_timeout' );
@@ -718,9 +718,9 @@ private function rael_find_element_recursive($elements, $widget_id) {
 		// Check if any template was imported.
 		$any_template_imported = (bool) get_transient( 'rael_template_imported_any' );
     	
-		$thirty_day_delay_passed = get_option( 'responsive_addons_for_elementor_initial_timeout' ) ? true : false;
+		$one_point_five_day_delay_passed = 	false === get_transient( 'responsive_addons_for_elementor_intial_timeout' );
 
-		if ( $thirty_day_delay_passed || $count >= 5 || $any_template_imported ) 
+		if ( $one_point_five_day_delay_passed || $count >= 4 || $any_template_imported ) 
 		{
 
 			$image_path = RAEL_URL . 'admin/images/rae-icon.svg';
