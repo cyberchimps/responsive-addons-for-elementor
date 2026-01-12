@@ -1114,7 +1114,7 @@ private function rael_find_element_recursive($elements, $widget_id) {
 				'rael-particles',
 				'rael_particles',
 				array(
-					'particles_lib' => RAEL_ASSETS_URL . '/lib/particles/particles.min.js',
+					'particles_lib' => RAEL_ASSETS_URL . '/lib/particles/rael-particles.min.js',
 					'snowflakes_image' => RAEL_ASSETS_URL . '/images/snowflake.svg',
 					'gift' => RAEL_ASSETS_URL . '/images/gift.png',
 					'tree' => RAEL_ASSETS_URL . '/images/tree.png',
@@ -1350,11 +1350,11 @@ private function rael_find_element_recursive($elements, $widget_id) {
 		wp_enqueue_style( 'rael-animate-style' );
 		if (Helper::is_extension_active('particle-backgrounds')) {
 
-		wp_enqueue_script( 'rael-particles', RAEL_ASSETS_URL . 'lib/particles/particles.js', array(), RAEL_VER, true );
+		wp_enqueue_script( 'rael-particles', RAEL_ASSETS_URL . 'lib/particles/rael-particles.js', array(), RAEL_VER, true );
 
-		wp_register_style( 'rael-particles-style', RAEL_ASSETS_URL . 'lib/particles/particles.min.css', null, RAEL_VER );
+		wp_register_style( 'rael-particles-style', RAEL_ASSETS_URL . 'lib/particles/rael-particles.min.css', null, RAEL_VER );
 
-			wp_register_style('rael-particles-style-rtl', RAEL_ASSETS_URL . 'lib/particles/particles-rtl.min.css', null, RAEL_VER);
+			wp_register_style('rael-particles-style-rtl', RAEL_ASSETS_URL . 'lib/particles/rael-particles-rtl.min.css', null, RAEL_VER);
 			wp_enqueue_style('rael-particles-style');
 			wp_enqueue_style('rael-particles-style-rtl');
 		}
@@ -1720,92 +1720,92 @@ private function rael_find_element_recursive($elements, $widget_id) {
 			if ( $rael_widget['status'] ) {
 				switch ( $rael_widget['title'] ) {
 					case 'audio':
-						array_push( $css_files, $css_files_path . 'audio/audio' . $css_min_ext );
+						array_push( $css_files, $css_files_path . 'audio/rael-audio' . $css_min_ext );
 						break;
 					case 'back-to-top':
-						array_push( $js_files, $js_files_path . 'back-to-top/back-to-top' . $ext );
-						array_push( $css_files, $css_files_path . 'back-to-top/back-to-top' . $css_min_ext );
+						array_push( $js_files, $js_files_path . 'back-to-top/rael-back-to-top' . $ext );
+						array_push( $css_files, $css_files_path . 'back-to-top/rael-back-to-top' . $css_min_ext );
 						break;
 					case 'banner':
-						array_push( $js_files, $js_files_path . 'banner/banner' . $ext );
-						array_push( $css_files, $css_files_path . 'banner/banner' . $css_min_ext );
+						array_push( $js_files, $js_files_path . 'banner/rael-banner' . $ext );
+						array_push( $css_files, $css_files_path . 'banner/rael-banner' . $css_min_ext );
 						break;
 					case 'business-hour':
-						array_push( $css_files, $css_files_path . 'business-hour/business-hour' . $css_min_ext );
+						array_push( $css_files, $css_files_path . 'business-hour/rael-business-hour' . $css_min_ext );
 						break;
 					case 'button':
-						array_push( $css_files, $css_files_path . 'button/button' . $css_min_ext );
+						array_push( $css_files, $css_files_path . 'button/rael-button' . $css_min_ext );
 						break;
 					case 'call-to-action':
-						array_push( $css_files, $css_files_path . 'call-to-action/cta-frontend' . $css_min_ext );
+						array_push( $css_files, $css_files_path . 'call-to-action/rael-cta-frontend' . $css_min_ext );
 						break;
 					case 'content-switcher':
-						array_push( $js_files, $js_files_path . 'content-switcher/content-switcher' . $ext );
-						array_push( $css_files, $css_files_path . 'content-switcher/content-switcher' . $css_min_ext );
+						array_push( $js_files, $js_files_path . 'content-switcher/rael-content-switcher' . $ext );
+						array_push( $css_files, $css_files_path . 'content-switcher/rael-content-switcher' . $css_min_ext );
 						break;
 					case 'countdown':
-						array_push( $js_files, $js_files_path . 'countdown/countdown' . $ext );
-						array_push( $css_files, $css_files_path . 'countdown/countdown-frontend' . $css_min_ext );
+						array_push( $js_files, $js_files_path . 'countdown/rael-countdown' . $ext );
+						array_push( $css_files, $css_files_path . 'countdown/rael-countdown-frontend' . $css_min_ext );
 						break;
 					case 'divider':
-						array_push( $css_files, $css_files_path . 'divider/divider' . $css_min_ext );
+						array_push( $css_files, $css_files_path . 'divider/rael-divider' . $css_min_ext );
 						break;
 					case 'dual-color-header':
-						array_push( $css_files, $css_files_path . 'dual-color-header/dual-color-header' . $css_min_ext );
+						array_push( $css_files, $css_files_path . 'dual-color-header/rael-dual-color-header' . $css_min_ext );
 						break;
 					case 'fancy-text':
-						array_push( $js_files, $js_files_path . 'fancy-text/fancy-text' . $ext );
-						array_push( $css_files, $css_files_path . 'fancy-text/fancy-text' . $css_min_ext );
+						array_push( $js_files, $js_files_path . 'fancy-text/rael-fancy-text' . $ext );
+						array_push( $css_files, $css_files_path . 'fancy-text/rael-fancy-text' . $css_min_ext );
 						break;
 					case 'faq':
-						array_push( $js_files, $js_files_path . 'faq/faq' . $ext );
-						array_push( $css_files, $css_files_path . 'faq/faq' . $css_min_ext );
+						array_push( $js_files, $js_files_path . 'faq/rael-faq' . $ext );
+						array_push( $css_files, $css_files_path . 'faq/rael-faq' . $css_min_ext );
 						break;
 					case 'feature-list':
-						array_push( $css_files, $css_files_path . 'feature-list/feature-list' . $css_min_ext );
+						array_push( $css_files, $css_files_path . 'feature-list/rael-feature-list' . $css_min_ext );
 						break;
 					case 'flip-box':
 						array_push( $css_files, $css_files_path . 'flipbox/rael-flipbox' . $css_min_ext );
 						break;
 					case 'icon-box':
-						array_push( $css_files, $css_files_path . 'infobox/infobox' . $css_min_ext );
+						array_push( $css_files, $css_files_path . 'infobox/rael-infobox' . $css_min_ext );
 						break;
 					case 'image-gallery':
-						array_push( $js_files, $js_files_path . 'image-gallery/image-gallery' . $ext );
-						array_push( $css_files, $css_files_path . 'image-gallery/image-gallery' . $css_min_ext );
+						array_push( $js_files, $js_files_path . 'image-gallery/rael-image-gallery' . $ext );
+						array_push( $css_files, $css_files_path . 'image-gallery/rael-image-gallery' . $css_min_ext );
 						break;
 					case 'image-hotspot':
-						array_push( $css_files, $css_files_path . 'image-hotspot/image-hotspot' . $css_min_ext );
+						array_push( $css_files, $css_files_path . 'image-hotspot/rael-image-hotspot' . $css_min_ext );
 						break;
 					case 'mc-styler':
-						array_push( $js_files, $js_files_path . 'mailchimp/mailchimp' . $ext );
-						array_push( $css_files, $css_files_path . 'mcstyler/mcstyler' . $css_min_ext );
+						array_push( $js_files, $js_files_path . 'mailchimp/rael-mailchimp' . $ext );
+						array_push( $css_files, $css_files_path . 'mcstyler/rael-mcstyler' . $css_min_ext );
 						break;
 					case 'multi-button':
-						array_push( $css_files, $css_files_path . 'multi-button/multi-button' . $css_min_ext );
+						array_push( $css_files, $css_files_path . 'multi-button/rael-multi-button' . $css_min_ext );
 						break;
 					case 'progress-bar':
-						array_push( $js_files, $js_files_path . 'progress-bar/progress-bar' . $ext );
-						array_push( $css_files, $css_files_path . 'progress-bar/progress-bar' . $css_min_ext );
+						array_push( $js_files, $js_files_path . 'progress-bar/rael-progress-bar' . $ext );
+						array_push( $css_files, $css_files_path . 'progress-bar/rael-progress-bar' . $css_min_ext );
 						break;
 					case 'reviews':
-						if ( ! in_array( $js_files_path . 'testimonial/testimonial' . $ext, $js_files, true ) ) {
-							array_push( $included_js, $js_files_path . 'testimonial/testimonial' . $ext );
-							array_push( $js_files, $js_files_path . 'testimonial/testimonial' . $ext );
+						if ( ! in_array( $js_files_path . 'testimonial/rael-testimonial' . $ext, $js_files, true ) ) {
+							array_push( $included_js, $js_files_path . 'testimonial/rael-testimonial' . $ext );
+							array_push( $js_files, $js_files_path . 'testimonial/rael-testimonial' . $ext );
 						}
-						array_push( $css_files, $css_files_path . 'reviews/reviews' . $css_min_ext );
+						array_push( $css_files, $css_files_path . 'reviews/rael-reviews' . $css_min_ext );
 						break;
 					case 'search-form':
-						array_push( $js_files, $js_files_path . 'search-form/search-form' . $ext );
-						array_push( $css_files, $css_files_path . 'search-form/search-form' . $css_min_ext );
+						array_push( $js_files, $js_files_path . 'search-form/rael-search-form' . $ext );
+						array_push( $css_files, $css_files_path . 'search-form/rael-search-form' . $css_min_ext );
 						break;
 					case 'slider':
 						array_push( $js_files, $js_files_path . 'rael-slider/rael-slider' . $ext );
 						array_push( $css_files, $css_files_path . 'slider/rael-frontend' . $css_min_ext );
 						break;
 					case 'timeline':
-						array_push( $js_files, $js_files_path . 'timeline/timeline' . $ext );
-						array_push( $css_files, $css_files_path . 'timeline/timeline' . $css_min_ext );
+						array_push( $js_files, $js_files_path . 'timeline/rael-timeline' . $ext );
+						array_push( $css_files, $css_files_path . 'timeline/rael-timeline' . $css_min_ext );
 						break;
 					case 'wpf-styler':
 						array_push( $css_files, $css_files_path . 'wpfstyler/wpfstyler' . $css_min_ext );
@@ -1860,8 +1860,8 @@ private function rael_find_element_recursive($elements, $widget_id) {
 						array_push( $css_files, $css_files_path . 'cf7/cf7styler' . $css_min_ext );
 						break;
 					case 'advanced-tabs':
-						array_push( $js_files, $js_files_path . 'advanced-tabs/advanced-tabs' . $ext );
-						array_push( $css_files, $css_files_path . 'advanced-tabs/advanced-tabs' . $css_min_ext );
+						array_push( $js_files, $js_files_path . 'advanced-tabs/rael-advanced-tabs' . $ext );
+						array_push( $css_files, $css_files_path . 'advanced-tabs/rael-advanced-tabs' . $css_min_ext );
 						break;
 					case 'pricing-table':
 						array_push( $css_files, $css_files_path . 'pricing-table/pricing-table-frontend' . $css_min_ext );
@@ -1954,8 +1954,8 @@ private function rael_find_element_recursive($elements, $widget_id) {
 						array_push( $css_files, $css_files_path . 'facebook-feed/facebook-feed' . $css_min_ext );
 						break;
 					case 'before-after-slider':
-						array_push( $js_files, $js_files_path . 'before-after-slider/before-after-slider' . $ext );
-						array_push( $css_files, $css_files_path . 'before-after-slider/before-after-slider' . $css_min_ext );
+						array_push( $js_files, $js_files_path . 'before-after-slider/rael-before-after-slider' . $ext );
+						array_push( $css_files, $css_files_path . 'before-after-slider/rael-before-after-slider' . $css_min_ext );
 						break;
 					case 'stacking-cards':
 						array_push( $css_files, $css_files_path . 'stacking-cards/stacking-cards' . $css_min_ext );
