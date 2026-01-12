@@ -1283,8 +1283,33 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 				'default'    => '#FFFFFF', 
 				'selectors' => array(
 					'{{WRAPPER}} .rael-card-graphic svg path' => 'fill: {{VALUE}} !important;',
+					'{{WRAPPER}} .rael-card-graphic-text' => 'color: {{VALUE}} !important;',
 				),
 				'render_type' => 'template', 
+			)
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name' => 'graphic_element_text_typography',
+				'label'    => __( 'Graphic Element Typography', 'responsive-addons-for-elementor' ),
+				'selector' => '{{WRAPPER}} .rael-card-graphic-text',
+				'fields_options' => array(
+					'typography' => array(
+						'default' => 'Roboto',
+					),
+					'font_size' => array(
+						'default' => array(
+							'unit' => 'px',
+							'size' => 22,
+						),
+					),
+					'font_weight' => array(
+						'default' => 400,
+					),
+				),
+				'render_type' => 'ui',
+				'condition' => array('show_graphic_element' => 'text'),
 			)
 		);
 		$this->add_responsive_control(
