@@ -21,14 +21,15 @@
     width: 100%;
 }
 .rael-card-content {
-    flex: 1;
     order: 1;
-    display: grid;
+    display: flex;
     justify-content: space-between;
+    flex-direction: column;
+    flex-shrink: 0;
 }
 .rael-card-media {
-    flex: 0 0 280px;
-    max-width: 40%;
+    flex: 0 0 100%;
+    max-width: 100%;
     order: 2;
 }
 .rael-card-media img {
