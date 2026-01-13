@@ -1,6 +1,6 @@
 {
 	"version": 3,
-	"file": "add-to-cart-frontend.css",
+	"file": "rael-add-to-cart-frontend.css",
 	"sources": [
 		"../../../dev/scss/frontend/add-to-cart/add-to-cart-frontend.scss"
 	],
