@@ -333,15 +333,6 @@ body.elementor-editor-active .elementor-posts--show-thumbnail .responsive-post__
   right: 0;
   bottom: 0; }
 
-.responsive-posts-container.elementor-has-item-ratio .elementor-post__thumbnail img {
-  height: auto;
-  position: absolute;
-  top: calc( 50% + 1px);
-  left: calc( 50% + 1px);
-  -webkit-transform: scale(1.01) translate(-50%, -50%);
-  -ms-transform: scale(1.01) translate(-50%, -50%);
-  transform: scale(1.01) translate(-50%, -50%); }
-
 .responsive-posts-container.elementor-has-item-ratio .elementor-post__thumbnail.elementor-fit-height img {
   height: 100%;
   width: auto; }
