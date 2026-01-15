@@ -435,4 +435,39 @@ body.elementor-editor-active .elementor-posts--show-thumbnail .responsive-post__
 .elementor-posts-masonry .elementor-post {
   transition: margin-top 0.2s ease;
 }
+/* Masonry Container - CRITICAL */
+.responsive-posts-container {
+    position: relative !important;
+    min-height: 100px;
+    width: 100% !important;
+}
+
+/* Masonry Items - CRITICAL */
+.elementor-post {
+    box-sizing: border-box !important;
+    transition: all 0.3s ease;
+}
+
+/* Editor-specific fixes */
+.elementor-widget-rael-posts {
+    min-width: 1px;
+}
+
+.responsive-posts-container.elementor-posts-masonry {
+    min-height: 200px;
+}
+/* Force width in editor */
+.elementor-editor-active .elementor-widget-rael-posts {
+    min-width: 300px !important;
+}
+
+.elementor-editor-active .responsive-posts-container {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Prevent Elementor editor from hiding items */
+.elementor-editor-active .elementor-post {
+    display: block !important;
+}
 /*# sourceMappingURL=posts.css.map */

@@ -581,53 +581,6 @@ function callAjax(term, postPerPage, paged, pid, $scope, skin) {
     });
 }
 
-// Add required CSS
-var masonryCSS = `
-    /* Masonry Container - CRITICAL */
-    .responsive-posts-container {
-        position: relative !important;
-        min-height: 100px;
-        width: 100% !important;
-    }
-    
-    /* Masonry Items - CRITICAL */
-    .elementor-post {
-        box-sizing: border-box !important;
-        transition: all 0.3s ease;
-    }
-    
-    /* Editor-specific fixes */
-    .elementor-widget-rael-posts {
-        min-width: 1px;
-    }
-    
-    .responsive-posts-container.elementor-posts-masonry {
-        min-height: 200px;
-    }
-        /* Force width in editor */
-.elementor-editor-active .elementor-widget-rael-posts {
-    min-width: 300px !important;
-}
-
-.elementor-editor-active .responsive-posts-container {
-    width: 100% !important;
-    max-width: 100% !important;
-}
-
-/* Prevent Elementor editor from hiding items */
-.elementor-editor-active .elementor-post {
-    display: block !important;
-}
-`;
-
-// Inject CSS
-if (typeof document !== 'undefined') {
-    var style = document.createElement('style');
-    style.type = 'text/css';
-    style.appendChild(document.createTextNode(masonryCSS));
-    document.head.appendChild(style);
-}
-
 // Run masonry on window load
 window.addEventListener('load', function() {
     setTimeout(function() {
