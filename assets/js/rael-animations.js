@@ -244,25 +244,28 @@
         processElement($scope) {
             const $target = getRealContainer($scope);
             const settings = getElementSettings($scope);
+
+            // ALWAYS setup entrance animation
+            this.setupEntranceAnimation($target, settings);
+
             const effects = buildEffectsFromSettings(settings);
 
-            if (effects) {
-                $target.addClass('rael-scroll-effects');
-                
-                // Store effects in data attribute
-                $target.attr('data-rael-scroll-effects', JSON.stringify({
-                    effects: effects,
-                    relativeTo: settings.rae_animations_effects_relative_to || 'viewport'
-                }));
-                
-                // Add to elements array
-                if (!this.elements.includes($target[0])) {
-                    this.elements.push($target[0]);
-                }
+            if (!effects) {
+                $target.removeClass('rael-scroll-effects');
+                $target.removeAttr('data-rael-scroll-effects');
+                return;
             }
 
-            // Handle entrance animation
-            this.setupEntranceAnimation($target, settings);
+            $target
+                .addClass('rael-scroll-effects')
+                .attr('data-rael-scroll-effects', JSON.stringify({
+                    effects,
+                    relativeTo: settings.rae_animations_effects_relative_to || 'viewport'
+                }));
+
+            if (!this.elements.includes($target[0])) {
+                this.elements.push($target[0]);
+            }
         },
 
         setupEntranceAnimation($element, settings) {
@@ -305,14 +308,12 @@
         },
 
         update() {
-            if (!this.elements.length) return;
-
-            // Process each element
-            this.elements.forEach(element => {
-                this.applyEffects(element);
-            });
-
-            // Handle entrance animations
+            if (this.elements.length) {
+                this.elements.forEach(element => {
+                    this.applyEffects(element);
+                });
+            }
+            // Entrance animations MUST ALWAYS RUN
             this.handleEntranceAnimations();
         },
 
@@ -328,7 +329,13 @@
                 
                 if (!effects) {
                     $scope.removeClass('rael-scroll-effects');
-                    return;
+                    element.style.removeProperty('--translateX');
+                    element.style.removeProperty('--translateY');
+                    element.style.removeProperty('--opacity');
+                    element.style.removeProperty('--blur');
+                    element.style.removeProperty('--scale');
+                    element.style.removeProperty('--rotateZ');
+                   // return;
                 }
                 
                 effectsData = {
@@ -362,6 +369,14 @@
             this.applyEffect(element, 'blur', effects.blur, progress);
             this.applyEffect(element, 'scale', effects.scale, progress);
             this.applyEffect(element, 'rotate', effects.rotate, progress);
+
+            // Cleanup disabled effects
+            if (!effects.translateX) element.style.removeProperty('--translateX');
+            if (!effects.translateY) element.style.removeProperty('--translateY');
+            if (!effects.opacity) element.style.removeProperty('--opacity');
+            if (!effects.blur) element.style.removeProperty('--blur');
+            if (!effects.scale) element.style.removeProperty('--scale');
+            if (!effects.rotate) element.style.removeProperty('--rotateZ');
         },
 
         calculateProgress(element, relativeTo) {
