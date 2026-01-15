@@ -156,28 +156,71 @@ class RaelPostsHandler extends elementorModules.frontend.handlers.Base {
         var items = container.querySelectorAll('.elementor-post');
         if (items.length === 0) return;
         
+        // Check if we're in Elementor editor
+        var isEditor = window.elementor && elementor.isEditMode();
+        
+        // In editor, we need to force a layout recalculation
+        if (isEditor) {
+            // Force a reflow to ensure proper measurements
+            container.style.display = 'none';
+            container.offsetHeight; // Trigger reflow
+            container.style.display = '';
+        }
+        
+        // Give it a moment for layout to settle (especially important in editor)
+        var self = this;
+        setTimeout(function() {
+            self._actuallyApplyMasonry(container, items, colsCount, gap, isEditor);
+        }, isEditor ? 100 : 0);
+    }
+
+    _actuallyApplyMasonry(container, items, colsCount, gap, isEditor) {
         var containerWidth = container.offsetWidth;
         if (containerWidth === 0) {
+            // If width is still 0, try again after a delay (common in editor)
+            if (isEditor) {
+                var self = this;
+                setTimeout(function() {
+                    self.applySimpleMasonry(container, colsCount, gap);
+                }, 300);
+            }
             return;
         }
         
         // Calculate column width
         var colWidth = (containerWidth - (gap * (colsCount - 1))) / colsCount;
-    
         
         // Reset container
         container.style.position = 'relative';
         container.style.height = 'auto';
         
+        // In editor, first set items to relative to get their natural heights
+        if (isEditor) {
+            items.forEach(function(item) {
+                item.style.position = 'relative';
+                item.style.width = colWidth + 'px';
+                item.style.float = 'left';
+                item.style.marginRight = gap + 'px';
+                item.style.marginBottom = gap + 'px';
+                item.style.boxSizing = 'border-box';
+            });
+            
+            // Force reflow
+            container.offsetHeight;
+        }
+        
         var colHeights = new Array(colsCount).fill(0);
         
         // Position each item
         items.forEach(function(item) {
-            // Reset item styles
+            // Set to absolute positioning
             item.style.position = 'absolute';
             item.style.width = colWidth + 'px';
             item.style.boxSizing = 'border-box';
             item.style.transition = 'transform 0.3s ease';
+            item.style.float = '';
+            item.style.marginRight = '';
+            item.style.marginBottom = '';
             
             // Find shortest column
             var shortestCol = 0;
@@ -202,8 +245,14 @@ class RaelPostsHandler extends elementorModules.frontend.handlers.Base {
         var maxHeight = Math.max(...colHeights);
         container.style.height = maxHeight + 'px';
         
+        // In editor, run once more after a delay to ensure everything settled
+        if (isEditor) {
+            var self = this;
+            setTimeout(function() {
+                self._actuallyApplyMasonry(container, items, colsCount, gap, isEditor);
+            }, 200);
+        }
     }
-
     run() {
         this.fitImages();
         
@@ -340,8 +389,52 @@ jQuery(window).on("elementor/frontend/init", function() {
     };
     
     elementorFrontend.hooks.addAction("frontend/element_ready/rael-posts.rael_classic", addHandler);
-    elementorFrontend.hooks.addAction("frontend/element_ready/rael-posts.rael_cards", addHandler);
 });
+
+// Editor-specific initialization
+if (window.elementor && elementor.isEditMode()) {
+    // Run masonry when editor loads
+    setTimeout(function() {
+        $('.elementor-widget-rael-posts').each(function() {
+            var $widget = $(this);
+            setTimeout(function() {
+                refreshRaelMasonry($widget);
+                // Run again after a delay for editor
+                setTimeout(function() {
+                    refreshRaelMasonry($widget);
+                }, 1000);
+            }, 800);
+        });
+    }, 1500);
+    
+    // Listen for editor panel changes
+    if (window.elementor && elementor.channels && elementor.channels.editor) {
+        elementor.channels.editor.on('change', function(settings) {
+            if (settings && settings.changed) {
+                // Check if masonry-related settings changed
+                var masonrySettings = ['rael_classic_masonry', 'rael_classic_columns', 
+                                      'rael_classic_row_gap', 'rael_classic_item_gap'];
+                
+                var shouldRefresh = Object.keys(settings.changed).some(function(key) {
+                    return masonrySettings.some(function(masonryKey) {
+                        return key.indexOf(masonryKey) !== -1;
+                    });
+                });
+                
+                if (shouldRefresh) {
+                    setTimeout(function() {
+                        $('.elementor-widget-rael-posts').each(function() {
+                            var $widget = $(this);
+                            setTimeout(function() {
+                                refreshRaelMasonry($widget);
+                            }, 300);
+                        });
+                    }, 100);
+                }
+            }
+        });
+    }
+}
 
 // AJAX AND FILTERING FUNCTIONALITY (UNCHANGED)
 var paged_no = 1;
