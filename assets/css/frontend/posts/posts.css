@@ -432,4 +432,7 @@ body.elementor-editor-active .elementor-posts--show-thumbnail .responsive-post__
   100% {
     transform: scale(1); } }
 
+.elementor-posts-masonry .elementor-post {
+  transition: margin-top 0.2s ease;
+}
 /*# sourceMappingURL=posts.css.map */

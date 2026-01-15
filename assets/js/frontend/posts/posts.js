@@ -109,27 +109,35 @@ class RaelPostsHandler extends elementorModules.frontend.handlers.Base {
             imagesLoaded(this.elements.$posts, function() {
                 self.runMasonry();
             });
-        } else {
-            // Fallback: run after delay
-            setTimeout(function() {
-                self.runMasonry();
-            }, 300);
-        }
+        } 
     }
 
     runMasonry() {
-        console.log('in runMasonry');
     var elements = this.elements;
-    var $items = elements.$posts.filter(':visible');
+
+    if (!elements.$postsContainer.length) {
+        return;
+    }
 
     this.setColsCountSettings();
 
     var colsCount = parseInt(this.getSettings('colsCount'), 10);
+    var masonryEnabled = this.isMasonryEnabled();
 
-    if (!this.isMasonryEnabled() || !colsCount || colsCount < 2) {
-        elements.$postsContainer.height('');
-        $items.css('margin-top', '');
-        elements.$postsContainer.removeClass('elementor-posts-masonry');
+    // destroy first on editor toggle
+    this.destroyMasonry();
+
+    if (!masonryEnabled || !colsCount || colsCount < 2) {
+        return;
+    }
+
+    // EDITOR width safety
+    var container = elements.$postsContainer[0];
+    if (container.offsetWidth === 0) {
+        var self = this;
+        setTimeout(function () {
+            self.runMasonry();
+        }, 200);
         return;
     }
 
@@ -142,62 +150,19 @@ class RaelPostsHandler extends elementorModules.frontend.handlers.Base {
         10
     );
 
-    /* Reset */
-    $items.css('margin-top', 0);
-
-    var containerTop = elements.$postsContainer.offset().top;
-    var colHeights = [];
-    var colLefts = [];
-    console.log('containerTop='+containerTop);
-
-    /* Build column map from first row */
-    $items.slice(0, colsCount).each(function (i) {
-        colHeights[i] = jQuery(this).outerHeight(true);
-        colLefts[i] = jQuery(this).offset().left;
-    });
-
-    /* Position remaining items */
-    $items.slice(colsCount).each(function () {
-        var $item = jQuery(this);
-        var itemTop = $item.offset().top;
-        console.log('itemTop='+itemTop);
-        var itemLeft = $item.offset().left;
-
-        var colIndex = 0;
-        var minDiff = Infinity;
-
-        for (var i = 0; i < colLefts.length; i++) {
-            var diff = Math.abs(itemLeft - colLefts[i]);
-            if (diff < minDiff) {
-                minDiff = diff;
-                colIndex = i;
-            }
-        }
-
-        var pullUp = itemTop - (containerTop + colHeights[colIndex]);
-
-        if (pullUp > 0) {
-            $item.css('margin-top', -(pullUp - gap));
-        }
-
-        colHeights[colIndex] += $item.outerHeight(true) + gap;
-    });
-
-    elements.$postsContainer.height(Math.max.apply(Math, colHeights));
+    this.applySimpleMasonry(container, colsCount, gap);
 }
 
-    // THIS IS THE WORKING SIMPLE MASONRY FUNCTION - FIXED FOR EDITOR
     applySimpleMasonry(container, colsCount, gap) {
-        console.log('in applySimpleMasonry');
         if (!container) return;
         
         var items = container.querySelectorAll('.elementor-post');
         if (items.length === 0) return;
         
-        // Get container width - use a simpler approach
+        // Get container width
         var containerWidth = container.offsetWidth;
         
-        // If width is 0, wait and try again (common in editor)
+        // If width is 0, wait and try again in editor
         if (containerWidth === 0) {
             var self = this;
             setTimeout(function() {
@@ -213,7 +178,7 @@ class RaelPostsHandler extends elementorModules.frontend.handlers.Base {
         container.style.position = 'relative';
         container.style.height = 'auto';
         
-        // First: Temporarily position items inline to measure heights
+        //  Temporarily position items inline to measure heights
         items.forEach(function(item) {
             item.style.position = 'relative';
             item.style.width = colWidth + 'px';
@@ -228,7 +193,7 @@ class RaelPostsHandler extends elementorModules.frontend.handlers.Base {
         
         var colHeights = new Array(colsCount).fill(0);
         
-        // Second: Now apply absolute positioning
+        // apply absolute positioning
         items.forEach(function(item) {
             // Reset to absolute
             item.style.position = 'absolute';
@@ -248,8 +213,6 @@ class RaelPostsHandler extends elementorModules.frontend.handlers.Base {
             // Set position
             var left = shortestCol * (colWidth + gap);
             var top = colHeights[shortestCol];
-            console.log('top='+top);
-            console.log('top+gap==>'+top + gap + 'px');
             
             item.style.left = left + 'px';
             item.style.top = top + gap + 'px';
@@ -262,7 +225,6 @@ class RaelPostsHandler extends elementorModules.frontend.handlers.Base {
         var maxHeight = Math.max(...colHeights);
         container.style.height = maxHeight + 'px';
         
-        // Run once more after everything settles (helps in editor)
         var self = this;
         setTimeout(function() {
             var newContainerWidth = container.offsetWidth;
@@ -275,22 +237,18 @@ class RaelPostsHandler extends elementorModules.frontend.handlers.Base {
     run() {
         this.fitImages();
         
-        // Run masonry after a short delay - works for both frontend and editor
         var self = this;
         setTimeout(function() {
             self.initMasonry();
-        }, 500); // Increased delay to ensure DOM is ready
+        }, 500);
     }
 
     onInit(...args) {
         elementorModules.frontend.handlers.Base.prototype.onInit.apply(this, arguments);
         this.bindEvents();
-        
-        var self = this;
-        // Always use a consistent delay
-        setTimeout(function() {
-            self.run();
-        }, 800);
+
+        this.fitImages();
+        this.initMasonry();
     }
 
     onWindowResize() {
@@ -302,13 +260,44 @@ class RaelPostsHandler extends elementorModules.frontend.handlers.Base {
         }, 250);
     }
 
-    onElementChange() {
-        var self = this;
-        setTimeout(function() {
-            self.fitImages();
-            self.runMasonry();
-        }, 300);
+    onElementChange(propertyName) {
+        if (!propertyName) {
+            return;
+        }
+        if (
+            propertyName.includes('masonry') ||
+            propertyName.includes('columns') ||
+            propertyName.includes('row_gap') ||
+            propertyName.includes('item_gap')
+        ) {
+            const self = this;
+
+            requestAnimationFrame(() => {
+                self.fitImages();
+                self.runMasonry();
+            });
+        }
     }
+    destroyMasonry() {
+        var container = this.elements.$postsContainer[0];
+        if (!container) return;
+
+        var items = container.querySelectorAll('.elementor-post');
+
+        container.style.height = '';
+        container.classList.remove('elementor-posts-masonry');
+
+        items.forEach(function(item) {
+            item.style.position = '';
+            item.style.top = '';
+            item.style.left = '';
+            item.style.width = '';
+            item.style.marginTop = '';
+            item.style.float = '';
+            item.style.transition = '';
+        });
+    }
+
 }
 
 // Global function to refresh masonry after AJAX
@@ -329,7 +318,7 @@ function refreshRaelMasonry($widget) {
     }
 }
 
-// GLOBAL SIMPLE MASONRY FUNCTION (as backup)
+// GLOBAL SIMPLE MASONRY FUNCTION
 function simpleMasonryGlobal(containerSelector) {
     var container = document.querySelector(containerSelector);
     if (!container) {
@@ -343,7 +332,6 @@ function simpleMasonryGlobal(containerSelector) {
     
     // Default settings
     var cols = 3;
-    //var gap = 20;
       var gap = parseInt(
         this.getElementSettings(this.getSkinPrefix() + 'row_gap.size') ||
         this.getElementSettings(this.getSkinPrefix() + 'item_gap.size') ||
@@ -381,7 +369,6 @@ function simpleMasonryGlobal(containerSelector) {
         // Set position
         var left = shortestCol * (colWidth + gap);
         var top = colHeights[shortestCol];
-        console.log('top222='+top);
         
         item.style.left = left + 'px';
         item.style.top = top + 'px';
@@ -406,26 +393,8 @@ jQuery(window).on("elementor/frontend/init", function() {
     elementorFrontend.hooks.addAction("frontend/element_ready/rael-posts.rael_classic", addHandler);
 });
 
-// AJAX AND FILTERING FUNCTIONALITY (UNCHANGED)
 var paged_no = 1;
 var $ = jQuery.noConflict();
-
-// Initialize on document ready
-$(document).ready(function() {
-    // Run masonry after longer delay for editor
-    setTimeout(function() {
-        $('.elementor-widget-rael-posts').each(function() {
-            var $widget = $(this);
-            setTimeout(function() {
-                refreshRaelMasonry($widget);
-                // Run again after delay for editor
-                setTimeout(function() {
-                    refreshRaelMasonry($widget);
-                }, 1200);
-            }, 800);
-        });
-    }, 1500);
-});
 
 $('.rael_post_filterable_tabs li').click(function(e) {
     e.preventDefault();
@@ -659,7 +628,7 @@ if (typeof document !== 'undefined') {
     document.head.appendChild(style);
 }
 
-// Run masonry on window load (backup)
+// Run masonry on window load
 window.addEventListener('load', function() {
     setTimeout(function() {
         $('.elementor-widget-rael-posts').each(function() {
