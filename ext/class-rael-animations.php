@@ -80,7 +80,7 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 			}
 			wp_enqueue_script(
 				'rael-animations-frontend',
-				RAEL_ASSETS_URL . 'js/rael-animations.min.js',
+				RAEL_ASSETS_URL . 'js/rael-animations.js',
 				array( 'jquery', 'elementor-frontend' ),
 				RAEL_VER,
 				true
@@ -985,12 +985,23 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 
 			$css = '
 			.rael-scroll-effects {
-					transform: translateX(var(--translateX, 0px))
-						translateY(var(--translateY, 0px))
-						rotateZ(var(--rotateZ, 0deg))
-						scale(var(--scale, 1));
-					filter: blur(var(--blur, 0px));
-					opacity: var(--opacity, 1);
+
+			--translateX: 0px;
+				--translateY: 0px;
+				--rotateZ: 0deg;
+				--scale: 1;
+				--blur: 0px;
+				--opacity: 1;
+
+				transform:
+					translateX(var(--translateX))
+					translateY(var(--translateY))
+					rotateZ(var(--rotateZ))
+					scale(var(--scale));
+
+				filter: blur(var(--blur));
+				opacity: var(--opacity);
+					
 					will-change: transform, filter, opacity;
 			}
 			/* Desktop */
