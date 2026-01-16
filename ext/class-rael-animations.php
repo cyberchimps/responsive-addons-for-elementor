@@ -690,7 +690,7 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 					],
 				]
 			);
-			$section->add_responsive_control(
+			$section->add_control(
 				'rae_animations_apply_effects_on',
 				[
 					'label'       => __( 'Apply Effects On', 'responsive-addons-for-elementor' ),
@@ -726,7 +726,7 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 				]
 			);
 			// Entrance Animation
-			$section->add_responsive_control(
+			$section->add_control(
 				'rae_animations_entrance',
 				[
 					'label' => __( 'Entrance Animation', 'responsive-addons-for-elementor' ),
