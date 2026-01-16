@@ -193,25 +193,6 @@
                 });
             }
 
-            // Elementor specific events
-            // $(window).on('elementor/frontend/init', () => {
-            //     // Listen for new elements
-            //     elementorFrontend.hooks.addAction('frontend/element_ready/global', ($scope) => {
-            //         this.processElement($scope);
-            //     });
-                
-            //     // Listen for settings changes in editor
-            //     if (this.isEditor) {
-            //         elementor.channels.editor.on('change', (model) => {
-            //             setTimeout(() => {
-            //                 this.scanElements();
-            //                 this.update();
-            //                 this.updateEntranceAnimations();
-            //             }, 50);
-            //         });
-            //     }
-            // });
-
             // Use requestAnimationFrame for smooth updates
             this.rafUpdate = () => {
                 this.update();

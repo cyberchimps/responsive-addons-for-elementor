@@ -212,8 +212,8 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 					'type'    => Controls_Manager::SELECT,
 					'default' => 'to_left',
 					'options' => array(
-						'up'   => __( 'To Left', 'responsive-addons-for-elementor' ),
-						'down' => __( 'To right', 'responsive-addons-for-elementor' ),
+						'to_left'   => __( 'To Left', 'responsive-addons-for-elementor' ),
+						'to_right' => __( 'To right', 'responsive-addons-for-elementor' ),
 					),
 					'condition' => array(
 						'rae_animations_scroll_effects_type' => 'horizontal_scroll',
@@ -985,23 +985,13 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 
 			$css = '
 			.rael-scroll-effects {
-				--translateX: 0px;
-				--translateY: 0px;
-				--rotateZ: 0deg;
-				--scale: 1;
-				--blur: 0px;
-				--opacity: 1;
-
-				transform:
-					translateX(var(--translateX))
-					translateY(var(--translateY))
-					rotateZ(var(--rotateZ))
-					scale(var(--scale));
-
-				filter: blur(var(--blur));
-				opacity: var(--opacity);
-
-				will-change: transform, filter, opacity;
+					transform: translateX(var(--translateX, 0px))
+						translateY(var(--translateY, 0px))
+						rotateZ(var(--rotateZ, 0deg))
+						scale(var(--scale, 1));
+					filter: blur(var(--blur, 0px));
+					opacity: var(--opacity, 1);
+					will-change: transform, filter, opacity;
 			}
 			/* Desktop */
 			@media (min-width: 1025px) {
