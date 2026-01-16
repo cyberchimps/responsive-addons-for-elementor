@@ -194,23 +194,23 @@
             }
 
             // Elementor specific events
-            $(window).on('elementor/frontend/init', () => {
-                // Listen for new elements
-                elementorFrontend.hooks.addAction('frontend/element_ready/global', ($scope) => {
-                    this.processElement($scope);
-                });
+            // $(window).on('elementor/frontend/init', () => {
+            //     // Listen for new elements
+            //     elementorFrontend.hooks.addAction('frontend/element_ready/global', ($scope) => {
+            //         this.processElement($scope);
+            //     });
                 
-                // Listen for settings changes in editor
-                if (this.isEditor) {
-                    elementor.channels.editor.on('change', (model) => {
-                        setTimeout(() => {
-                            this.scanElements();
-                            this.update();
-                            this.updateEntranceAnimations();
-                        }, 50);
-                    });
-                }
-            });
+            //     // Listen for settings changes in editor
+            //     if (this.isEditor) {
+            //         elementor.channels.editor.on('change', (model) => {
+            //             setTimeout(() => {
+            //                 this.scanElements();
+            //                 this.update();
+            //                 this.updateEntranceAnimations();
+            //             }, 50);
+            //         });
+            //     }
+            // });
 
             // Use requestAnimationFrame for smooth updates
             this.rafUpdate = () => {
@@ -243,25 +243,47 @@
 
         processElement($scope) {
             const $target = getRealContainer($scope);
-            const settings = getElementSettings($scope);
 
-            // ALWAYS setup entrance animation
-            this.setupEntranceAnimation($target, settings);
+            let effectsData = null;
+            let settings = {};
 
-            const effects = buildEffectsFromSettings(settings);
+            /* -----------------------------
+            * EDITOR MODE → use live settings
+            * ----------------------------- */
+            if (this.isEditor) {
+                settings = getElementSettings($scope);
 
-            if (!effects) {
-                $target.removeClass('rael-scroll-effects');
-                $target.removeAttr('data-rael-scroll-effects');
-                return;
-            }
+                // Entrance animation still comes from settings
+                this.setupEntranceAnimation($target, settings);
 
-            $target
-                .addClass('rael-scroll-effects')
-                .attr('data-rael-scroll-effects', JSON.stringify({
+                const effects = buildEffectsFromSettings(settings);
+                if (!effects) {
+                    $target.removeClass('rael-scroll-effects');
+                    $target.removeAttr('data-rael-scroll-effects');
+                    return;
+                }
+
+                effectsData = {
                     effects,
                     relativeTo: settings.rae_animations_effects_relative_to || 'viewport'
-                }));
+                };
+
+                $target
+                    .addClass('rael-scroll-effects')
+                    .attr('data-rael-scroll-effects', JSON.stringify(effectsData));
+            }
+            else {
+                const raw = $target.attr('data-rael-scroll-effects');
+                if (!raw) return;
+
+                try {
+                    effectsData = JSON.parse(raw);
+                } catch (e) {
+                    return;
+                }
+            }
+
+            if (!effectsData || !effectsData.effects) return;
 
             if (!this.elements.includes($target[0])) {
                 this.elements.push($target[0]);
@@ -501,13 +523,16 @@
         applyTranslateX(element, config, progress) {
             if (!config || typeof config.speed === 'undefined') return;
             
-            let value = (1 - progress) * config.speed * 20;
+            // Base distance (how far it starts from center)
+            const distance = config.speed * 20;
+
+            let value = (1 - progress) * distance;
             
             // Adjust direction
             if (config.direction === 'to_left') {
-                value = -Math.abs(value);
-            } else if (config.direction === 'to_right') {
                 value = Math.abs(value);
+            } else if (config.direction === 'to_right') {
+                value = -Math.abs(value);
             }
             
             element.style.setProperty('--translateX', `${value}px`);
@@ -674,13 +699,13 @@
                 
                 // Check if element is in viewport
                 const rect = element.getBoundingClientRect();
+                const viewportHeight = this.windowHeight;
+
                 const isInViewport = (
-                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-                    rect.bottom >= 0 &&
-                    rect.left <= (window.innerWidth || document.documentElement.clientWidth) &&
-                    rect.right >= 0
+                    rect.top <= viewportHeight &&
+                    rect.bottom >= 0
                 );
-                
+                                
                 if (isInViewport && !element.__raeEntranceDone) {
                     this.triggerEntranceAnimation(element);
                 }
@@ -743,37 +768,43 @@
      * --------------------------------------------------------- */
 
     $(window).on('elementor/frontend/init', function() {
-        // Initialize animations
         RaelAnimations.init();
-        
-        // Process existing elements
-        elementorFrontend.hooks.addAction('frontend/element_ready/global', function($scope) {
-            RaelAnimations.processElement($scope);
-            RaelAnimations.scanElements();
-        });
-        
-        // Handle sections and containers specifically
-        elementorFrontend.hooks.addAction('frontend/element_ready/section', function($scope) {
-            RaelAnimations.processElement($scope);
-            RaelAnimations.scanElements();
-        });
-        
-        elementorFrontend.hooks.addAction('frontend/element_ready/container', function($scope) {
-            RaelAnimations.processElement($scope);
-            RaelAnimations.scanElements();
-        });
-        
-        elementorFrontend.hooks.addAction('frontend/element_ready/column', function($scope) {
-            RaelAnimations.processElement($scope);
-            RaelAnimations.scanElements();
-        });
+
+        elementorFrontend.hooks.addAction(
+            'frontend/element_ready/global',
+            function ($scope) {
+                RaelAnimations.processElement($scope);
+                RaelAnimations.scanElements();
+            }
+        );
+
+        elementorFrontend.hooks.addAction(
+            'frontend/element_ready/section',
+            function ($scope) {
+                RaelAnimations.processElement($scope);
+            }
+        );
+
+        elementorFrontend.hooks.addAction(
+            'frontend/element_ready/container',
+            function ($scope) {
+                RaelAnimations.processElement($scope);
+            }
+        );
+
+        elementorFrontend.hooks.addAction(
+            'frontend/element_ready/column',
+            function ($scope) {
+                RaelAnimations.processElement($scope);
+            }
+        );
     });
 
     // Initialize on DOM ready if Elementor is already loaded
-    $(document).ready(function() {
-        if (typeof elementorFrontend !== 'undefined') {
-            $(window).trigger('elementor/frontend/init');
-        }
-    });
+    // $(document).ready(function() {
+    //     if (typeof elementorFrontend !== 'undefined') {
+    //         $(window).trigger('elementor/frontend/init');
+    //     }
+    // });
 
 })(jQuery);
