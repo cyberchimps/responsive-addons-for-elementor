@@ -7,10 +7,23 @@
 
     function getRealContainer($scope) {
         if ($scope.hasClass('e-con')) return $scope;
-        if ($scope.is('section.elementor-section')) return $scope;
+       
+        // Legacy Section
+        if ($scope.hasClass('elementor-section')) {
+            return $scope;
+        }
 
+        // Legacy Inner Section
+        const $innerSection = $scope.closest('.elementor-inner-section');
+        if ($innerSection.length) {
+            return $innerSection;
+        }
+
+        // Legacy Column
         const $column = $scope.closest('.elementor-column');
-        if ($column.length) return $column;
+        if ($column.length) {
+            return $column;
+        }
 
         return $scope;
     }
@@ -472,7 +485,7 @@
             if (!effectConfig) return;
             
             // Map progress to viewport range (0-100% to 0-1)
-            const mappedProgress = this.range(progress, effectConfig.start, effectConfig.end);
+            const mappedProgress = this.stabilizeProgress(this.range(progress, effectConfig.start, effectConfig.end));
             
             switch(effectType) {
                 case 'translateX':
@@ -500,22 +513,30 @@
                     break;
             }
         },
+        stabilizeProgress(progress) {
+            // Clamp
+            progress = Math.max(0, Math.min(1, progress));
+
+            // Snap very small values to avoid oscillation
+            if (progress < 0.001) return 0;
+            if (progress > 0.999) return 1;
+
+            return progress;
+        },
 
         applyTranslateX(element, config, progress) {
             if (!config || typeof config.speed === 'undefined') return;
-            
-            // Base distance (how far it starts from center)
+
             const distance = config.speed * 20;
 
-            let value = (1 - progress) * distance;
-            
-            // Adjust direction
-            if (config.direction === 'to_left') {
-                value = Math.abs(value);
-            } else if (config.direction === 'to_right') {
-                value = -Math.abs(value);
-            }
-            
+            // progress: 0 → -1, 0.5 → 0, 1 → +1
+            const centered = (progress - 0.5) * 2;
+
+            // Direction sign
+            const dir = config.direction === 'to_left' ? -1 : 1;
+
+            const value = centered * distance * dir;
+
             element.style.setProperty('--translateX', `${value}px`);
         },
 
