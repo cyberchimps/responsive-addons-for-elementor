@@ -1,10 +1,5 @@
 (function($) {
     'use strict';
-
-    /* ---------------------------------------------------------
-     * Utilities
-     * --------------------------------------------------------- */
-
     function getRealContainer($scope) {
         if ($scope.hasClass('e-con')) return $scope;
        
@@ -241,9 +236,7 @@
             let effectsData = null;
             let settings = {};
 
-            /* -----------------------------
-            * EDITOR MODE → use live settings
-            * ----------------------------- */
+            /* EDITOR MODE */
             if (this.isEditor) {
                 settings = getElementSettings($scope);
 
@@ -527,7 +520,7 @@
         applyTranslateX(element, config, progress) {
             if (!config || typeof config.speed === 'undefined') return;
 
-            const distance = config.speed * 20;
+            const distance = config.speed * 60;
 
             // progress: 0 → -1, 0.5 → 0, 1 → +1
             const centered = (progress - 0.5) * 2;
