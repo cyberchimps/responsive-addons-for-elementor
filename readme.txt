@@ -4,10 +4,10 @@ Donate Link: https://cyberchimps.com
 Tags: elementor, elementor addons, widgets for elementor, header footer builder, elementor templates
 Requires at least: 5.0
 Tested up to: 6.9
-Elementor tested up to: 3.33
-Elementor Pro tested up to: 3.33
+Elementor tested up to: 3.34
+Elementor Pro tested up to: 3.34
 Requires PHP: 5.6
-Stable tag: 2.0.9
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -282,6 +282,12 @@ If you like Responsive Addons for Elementor, consider checking out our other Wor
 The Development Version of the Responsive Addons for Elementor plugin is located at [https://github.com/cyberchimps/responsive-addons-for-elementor](https://github.com/cyberchimps/responsive-addons-for-elementor)
 
 == Changelog ==
+
+= 2.1.0 – 20th January 2026 =
+- New: RAE Extension – Scroll Animations: Introduced a scroll animations extension to enhance motion effects across supported elements.
+- Improvement: RAE Flipbox – Added image and icon options for the back side section, enabling richer and more flexible Flipbox designs.
+- Improvement: Core Framework – Enhanced internal code structure and asset management for improved stability and performance.
+- Fix: RAE Media Carousel – Resolved an issue where video links assigned to individual slides were not clickable, ensuring videos open and play correctly on user interaction.
 
 = 2.0.9 – 24th December 2025 =
 - Improvement: RAE Testimonial Slider
