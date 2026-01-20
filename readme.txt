@@ -1,13 +1,13 @@
 === Responsive Addons for Elementor – Free Elementor Addons Plugin and Elementor Templates ===
 Contributors: cyberchimps
 Donate Link: https://cyberchimps.com
-Tags: elementor, elementor addons, elementor widget, woocommerce elementor, page builder plugin
+Tags: elementor, elementor addons, widgets for elementor, header footer builder, elementor templates
 Requires at least: 5.0
 Tested up to: 6.8
 Elementor tested up to: 3.32
 Elementor Pro tested up to: 3.32
 Requires PHP: 5.6
-Stable tag: 2.0.6
+Stable tag: 2.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -292,6 +292,9 @@ The Development Version of the Responsive Addons for Elementor plugin is located
 
 == Changelog ==
 
+= 2.0.7 - 26th November 2025 = 
+- Fix: Implemented various bugfixes in the Testimonial Slider, Media carousel, Login signup form, Team Member, FAQ, Posts, Stacking Cards, Reviews widgets for improved stability.
+- Fix: Resolved issue where in RAE Sticky section the z-index and max-width options were not functioning correctly.
 
 = 2.0.6 - 29th October 2025 =
 - Improvement: Enhanced Google Fonts loading logic to ensure more reliable fetching and rendering of fonts within Elementor typography controls.
