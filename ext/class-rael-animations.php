@@ -193,8 +193,8 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 						'unit'  => '%',
 					],
 					'labels' => [
-						__( 'Bottom', 'responsive-addons-for-elementor' ),
-						__( 'Top', 'responsive-addons-for-elementor' ),
+						__( 'Start', 'responsive-addons-for-elementor' ),
+						__( 'End', 'responsive-addons-for-elementor' ),
 					],
 					'scales' => 1,
 					'handles' => 'range',
@@ -212,8 +212,8 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 					'type'    => Controls_Manager::SELECT,
 					'default' => 'to_left',
 					'options' => array(
-						'up'   => __( 'To Left', 'responsive-addons-for-elementor' ),
-						'down' => __( 'To right', 'responsive-addons-for-elementor' ),
+						'to_left'   => __( 'To Left', 'responsive-addons-for-elementor' ),
+						'to_right' => __( 'To right', 'responsive-addons-for-elementor' ),
 					),
 					'condition' => array(
 						'rae_animations_scroll_effects_type' => 'horizontal_scroll',
@@ -263,8 +263,8 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 						'unit'  => '%',
 					],
 					'labels' => [
-						__( 'Bottom', 'responsive-addons-for-elementor' ),
-						__( 'Top', 'responsive-addons-for-elementor' ),
+						__( 'Start', 'responsive-addons-for-elementor' ),
+						__( 'End', 'responsive-addons-for-elementor' ),
 					],
 					'scales' => 1,
 					'handles' => 'range',
@@ -352,8 +352,8 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 						'unit'  => '%',
 					],
 					'labels' => [
-						__( 'Bottom', 'responsive-addons-for-elementor' ),
-						__( 'Top', 'responsive-addons-for-elementor' ),
+						__( 'Start', 'responsive-addons-for-elementor' ),
+						__( 'End', 'responsive-addons-for-elementor' ),
 					],
 					'scales' => 1,
 					'handles' => 'range',
@@ -441,8 +441,8 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 						'unit'  => '%',
 					],
 					'labels' => [
-						__( 'Bottom', 'responsive-addons-for-elementor' ),
-						__( 'Top', 'responsive-addons-for-elementor' ),
+						__( 'Start', 'responsive-addons-for-elementor' ),
+						__( 'End', 'responsive-addons-for-elementor' ),
 					],
 					'scales' => 1,
 					'handles' => 'range',
@@ -529,8 +529,8 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 						'unit'  => '%',
 					],
 					'labels' => [
-						__( 'Bottom', 'responsive-addons-for-elementor' ),
-						__( 'Top', 'responsive-addons-for-elementor' ),
+						__( 'Start', 'responsive-addons-for-elementor' ),
+						__( 'End', 'responsive-addons-for-elementor' ),
 					],
 					'scales' => 1,
 					'handles' => 'range',
@@ -540,10 +540,6 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 					],
 				]
 			);
-			// 	$transform_origin_conditions = [
-			// 	'relation' => 'or',
-			// 	'terms' => array_merge( $transform_origin_conditions, $transform_origin_conditions_hover ),
-			// ];
 
 			// Will override motion effect transform-origin.
 			$section->add_responsive_control(
@@ -569,9 +565,6 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 							'rae_animations_scrolling_enable' => 'yes',
 							'rae_animations_scale_enable' => 'yes',
 						],
-					// 'selectors' => [
-					// 	'{{WRAPPER}}' => '--e-' . $transform_css_modifier . 'transform-origin-x: {{VALUE}}',
-					// ],
 				]
 			);
 
@@ -599,9 +592,7 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 							'rae_animations_scrolling_enable' => 'yes',
 							'rae_animations_scale_enable' => 'yes',
 						],
-					// 'selectors' => [
-					// 	'{{WRAPPER}}' => '--e-' . $transform_css_modifier . 'transform-origin-y: {{VALUE}}',
-					// ],
+				
 				]
 			);
 			// Rotate
@@ -679,8 +670,8 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 						'unit'  => '%',
 					],
 					'labels' => [
-						__( 'Bottom', 'responsive-addons-for-elementor' ),
-						__( 'Top', 'responsive-addons-for-elementor' ),
+						__( 'Start', 'responsive-addons-for-elementor' ),
+						__( 'End', 'responsive-addons-for-elementor' ),
 					],
 					'scales' => 1,
 					'handles' => 'range',
@@ -690,7 +681,7 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 					],
 				]
 			);
-			$section->add_responsive_control(
+			$section->add_control(
 				'rae_animations_apply_effects_on',
 				[
 					'label'       => __( 'Apply Effects On', 'responsive-addons-for-elementor' ),
@@ -726,7 +717,7 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 				]
 			);
 			// Entrance Animation
-			$section->add_responsive_control(
+			$section->add_control(
 				'rae_animations_entrance',
 				[
 					'label' => __( 'Entrance Animation', 'responsive-addons-for-elementor' ),
@@ -985,7 +976,8 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 
 			$css = '
 			.rael-scroll-effects {
-				--translateX: 0px;
+
+			--translateX: 0px;
 				--translateY: 0px;
 				--rotateZ: 0deg;
 				--scale: 1;
@@ -1000,8 +992,8 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 
 				filter: blur(var(--blur));
 				opacity: var(--opacity);
-
-				will-change: transform, filter, opacity;
+					
+					will-change: transform, filter, opacity;
 			}
 			/* Desktop */
 			@media (min-width: 1025px) {

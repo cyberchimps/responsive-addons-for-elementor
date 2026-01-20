@@ -872,6 +872,32 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 
 		$this->end_controls_tab();
 
+		$this->start_controls_tab(
+			'front_image_style_tab',
+			array(
+				'label'     => __( 'Image', 'responsive-addons-for-elementor' ),
+				'condition' => array( 'graphic_element' => 'image' ),
+			)
+		);
+
+		$this->add_control(
+			'image_spacing',
+			array(
+				'label'     => __( 'Spacing', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'selectors' => array( '{{WRAPPER}} .rael-flip-box-image' => 'margin-bottom: {{SIZE}}{{UNIT}};' ),
+				'condition' => array( 'graphic_element' => 'image' ),
+			)
+		);
+
+		$this->end_controls_tab();
+
 		$this->end_controls_tabs();
 
 		$this->add_group_control(
@@ -1205,7 +1231,30 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 		);
 
 		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'back_image_style_tab',
+			array(
+				'label'     => __( 'Image', 'responsive-addons-for-elementor' ),
+				'condition' => array( 'back_graphic_element' => 'image' ),
+			)
+		);
 
+		$this->add_control(
+			'back_image_spacing',
+			array(
+				'label'     => __( 'Spacing', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'selectors' => array( '{{WRAPPER}} .rael-flip-box-back .rael-flip-box-image' => 'margin-bottom: {{SIZE}}{{UNIT}};' ),
+				'condition' => array( 'back_graphic_element' => 'image' ),
+			)
+		);
+		$this->end_controls_tab();
 		$this->end_controls_tabs();
 
 		$this->add_group_control(
@@ -1621,10 +1670,9 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 				class="rael-flip-box-layer-overlay">
 
 				<div class="rael-flip-box-layer-inner">
-
 					<?php if ( 'image' === $settings['back_graphic_element'] && ! empty( $settings['back_image']['url'] ) ) : ?>
 						<div class="rael-flip-box-image">
-							<?php echo Group_Control_Image_Size::get_attachment_image_html( $settings, 'image' ); ?>
+							<?php echo Group_Control_Image_Size::get_attachment_image_html( $settings, 'back_image' ); ?>
 						</div>
 
 					<?php elseif ( 'icon' === $settings['back_graphic_element'] && $back_has_icon ) : ?>
