@@ -31,6 +31,17 @@ class Elementor_Related_Query extends Elementor_Post_Query {
 	 * @return \WP_Query
 	 */
 	public function get_query() {
+		
+		$paged = max(
+			1,
+			get_query_var( 'paged' ),
+			get_query_var( 'page' )
+		);
+
+		if ( empty( $this->query_args['paged'] ) ) {
+			$this->query_args['paged'] = $paged;
+		}
+
 		$query = parent::get_query();
 
 		if ( ! $query->post_count && $this->is_valid_fallback() ) {
@@ -42,8 +53,25 @@ class Elementor_Related_Query extends Elementor_Post_Query {
 
 	protected function get_fallback_query( $original_query ) {
 		$this->set_fallback_query_args();
-		$this->set_fallback_arg_by_settings( 'posts_per_page', $original_query->query_vars['posts_per_page'] );
-		$this->fallback_args = apply_filters( 'elementor/query/fallback_query_args', $this->fallback_args, $this->widget );
+
+		$paged = max(
+			1,
+			get_query_var( 'paged' ),
+			get_query_var( 'page' )
+		);
+
+		$this->fallback_args['paged'] = $paged;
+
+		$this->set_fallback_arg_by_settings(
+			'posts_per_page',
+			$original_query->query_vars['posts_per_page']
+		);
+
+		$this->fallback_args = apply_filters(
+			'elementor/query/fallback_query_args',
+			$this->fallback_args,
+			$this->widget
+		);
 
 		return new \WP_Query( $this->fallback_args );
 	}

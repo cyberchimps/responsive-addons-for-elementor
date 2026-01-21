@@ -127,7 +127,7 @@ class Build_Post_Query {
 			$control_id = $control_id . '_';
 		}
 
-		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_products' ) ) {
+		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_posts_nonce' ) ) {
 			return;
 		}
 
@@ -225,8 +225,9 @@ class Build_Post_Query {
 	public static function get_paged() {
 
 		global $wp_the_query, $paged;
+		error_log('pagednonce=='.$_POST['nonce']);
 
-		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_products' ) ) {
+		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_posts_nonce' ) ) {
 			return;
 		}
 

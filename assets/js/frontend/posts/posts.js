@@ -391,6 +391,7 @@ jQuery(window).on("elementor/frontend/init", function() {
     };
     
     elementorFrontend.hooks.addAction("frontend/element_ready/rael-posts.rael_classic", addHandler);
+    elementorFrontend.hooks.addAction("frontend/element_ready/rael-posts.rael_cards", addHandler);
 });
 
 var paged_no = 1;
@@ -505,80 +506,58 @@ $('body').on('click', '.rael-post-pagination .rael_pagination_load_more', functi
     $scope.find('.responsive-posts-container').data('paged', paged);
     let widget_id = $scope.data('id');
 
-    $.ajax({
-        type: 'POST',
-        url: localize.ajaxurl,
-        data: {
-            action: 'rael_get_posts_by_terms',
-            data: {
-                term: term,
-                postPerPage: postPerPage,
-                paged: paged,
-                pid: pid,
-                widget_id: widget_id,
-                skin: skin
+    $.ajax(
+        {
+            type: 'POST',
+            url: localize.ajaxurl,
+            data:
+            {
+                action: 'rael_get_posts_by_terms',
+                data:
+                {
+                    term,postPerPage,paged,pid,widget_id,skin
+                }
             },
-            nonce: localize.nonce
-        },
-        success: function success(data) {
-            var sel = $scope.find('.responsive-posts-container');
-            if (sel.data('pagination') === 'infinite') {
-                $scope.find('.responsive-post-load-more-loader').remove();
-                sel.append(data.html);
-                sel.next('.rael-post-pagination').first().remove();
-                $(data.pagination).insertAfter(sel);
-                
-                // Refresh masonry after load more
-                setTimeout(function() {
-                    refreshRaelMasonry($scope);
-                }, 500);
+            success: function success( data )
+            {
+                var sel = $scope.find( '.responsive-posts-container' );
+                if ( sel.data('pagination') === 'infinite' ) {
+                    $scope.find( '.responsive-post-load-more-loader' ).remove()
+                    sel.append(data.html)
+                    sel.next('.rael-post-pagination').first().remove();
+                    $(data.pagination).insertAfter(sel);
+                }
             }
         }
-    });
+    );
 });
 
-function callAjax(term, postPerPage, paged, pid, $scope, skin) {
-    let widget_id = $scope.data('id');
-    $.ajax({
-        type: 'POST',
-        url: localize.ajaxurl,
-        data: {
-            action: 'rael_get_posts_by_terms',
-            data: {
-                term: term,
-                postPerPage: postPerPage,
-                paged: paged,
-                pid: pid,
-                widget_id: widget_id,
-                skin: skin
+function callAjax(term,postPerPage,paged,pid,$scope,skin) {
+    let widget_id = $scope.data( 'id' );
+    $.ajax(
+        {
+            type: 'POST',
+            url: raelpostsvar.ajaxurl,
+            data:
+            {
+                action: 'rael_get_posts_by_terms',
+                nonce: raelpostsvar.nonce,
+                data:
+                {
+                    term,postPerPage,paged,pid,widget_id,skin
+                }
+            },
+            success: function success( data )
+            {
+                var sel = $scope.find( '.responsive-posts-container' );
+                sel.empty();
+                sel.append(data.html)
+                sel.next('.rael-post-pagination').first().remove();
+                $(data.pagination).insertAfter(sel);
+                $('div.responsive-post-loader').remove();
             }
-        },
-        success: function success(response) {
-            if (!response || response.success !== true) {
-                console.error('RAEL AJAX failed', response);
-                $('.responsive-post-loader').remove();
-                return;
-            }
-
-            var sel = $scope.find('.responsive-posts-container');
-            sel.html(response.data.html);
-
-            sel.next('.rael-post-pagination').remove();
-            $(response.data.pagination).insertAfter(sel);
-            
-            // Remove loader
-            $('.responsive-post-loader').remove();
-            
-            // Refresh masonry after AJAX
-            setTimeout(function() {
-                refreshRaelMasonry($scope);
-            }, 500);
-        },
-        error: function(xhr, status, error) {
-            console.error('RAEL AJAX error:', error);
-            $('.responsive-post-loader').remove();
-        }
-    });
+        } 
+    );
 }
 
 // Run masonry on window load

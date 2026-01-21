@@ -803,11 +803,12 @@ abstract class Skin_Style {
 
 		ob_start();
 
-		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_products' ) ) {
+		 if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_posts_nonce' ) ) {
 			return;
 		}
 
-		$term = ( isset( $_POST['data']['term'] ) ) ? sanitize_text_field( wp_unslash( $_POST['data']['term'] ) ) : '';
+        $term = ( isset( $_POST['data']['term'] ) ) ? sanitize_text_field( wp_unslash( $_POST['data']['term'] ) ) : '';
+
 
 		self::$settings = $widget->get_settings_for_display();
 		require_once RAEL_DIR . 'includes/widgets-manager/widgets/skins/template-blocks/class-build-post-query.php';
@@ -851,7 +852,7 @@ abstract class Skin_Style {
 
 		ob_start();
 
-		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_products' ) ) {
+		if ( ( ! isset( $_POST['nonce'] ) ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'rael_posts_nonce' ) ) {
 			return;
 		}
 
