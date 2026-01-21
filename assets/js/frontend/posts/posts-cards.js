@@ -299,23 +299,35 @@ class RaelCardsHandler extends elementorModules.frontend.handlers.Base {
     }
 
 }
+function forceRaelMasonryReflow($scope) {
+    if (!window.elementorFrontend) return;
 
-// Global function to refresh masonry after AJAX
-function refreshRaelMasonry($widget) {
-    var widgetId = $widget.data('id');
-    var handlers = elementorFrontend.elementsHandler.handlers;
-        
-    for (var key in handlers) {
-        if (handlers[key] && handlers[key].$element && 
-            handlers[key].$element[0] === $widget[0]) {
-            if (handlers[key].runMasonry) {
-                setTimeout(function() {
-                    handlers[key].runMasonry();
-                }, 800);
-            }
+    const handlers = elementorFrontend.elementsHandler.handlers;
+
+    for (let key in handlers) {
+        const handler = handlers[key];
+        if (
+            handler &&
+            handler.$element &&
+            handler.$element[0] === $scope[0] &&
+            typeof handler.onWindowResize === 'function'
+        ) {
+            handler.onWindowResize(); 
             break;
         }
     }
+}
+
+
+// Global function to refresh masonry after AJAX
+function refreshRaelMasonry($widget) {
+    if (!window.elementorFrontend) return;
+
+    // Let DOM settle
+    setTimeout(function () {
+        // Re-run Elementor handler lifecycle for this widget
+        elementorFrontend.elementsHandler.runReadyTrigger($scope);
+    }, 50);
 }
 
 // GLOBAL SIMPLE MASONRY FUNCTION
@@ -554,11 +566,21 @@ function callAjax(term,postPerPage,paged,pid,$scope,skin) {
                 sel.next('.rael-post-pagination').first().remove();
                 $(data.pagination).insertAfter(sel);
                 $('div.responsive-post-loader').remove();
+
+                  if (typeof imagesLoaded !== 'undefined') {
+                        imagesLoaded(sel[0], function () {
+                            setTimeout(forceWindowResize, 50);
+                        });
+                    } else {
+                        setTimeout(forceWindowResize, 150);
+                    }
             }
         } 
     );
 }
-
+function forceWindowResize() {
+    window.dispatchEvent(new Event('resize'));
+}
 // Run masonry on window load
 window.addEventListener('load', function() {
     setTimeout(function() {
