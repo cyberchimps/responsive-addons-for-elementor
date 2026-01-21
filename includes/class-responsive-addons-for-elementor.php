@@ -149,8 +149,51 @@ class Responsive_Addons_For_Elementor {
 		add_action( 'wp_ajax_rael_save_duplicator_settings', array( $this, 'rael_save_duplicator_settings' ) );
 		add_action( 'wp_ajax_nopriv_rael_save_duplicator_settings', array( $this, 'rael_save_duplicator_settings' ) );
 
+		// RST icon in editor
+		//add_action( 'elementor/editor/after_enqueue_styles', array( $this, 'rael_editor_promo_styles' ) );
+		add_action( 'elementor/editor/after_enqueue_styles', function () {
+			wp_enqueue_style(
+				'rael-inter-font',
+				'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap',
+				[],
+				null
+			);
+		}
 
+	);
 
+		add_action( 'elementor/editor/after_enqueue_scripts', function () {
+			wp_enqueue_script(
+				'rael-editor-add-rst-promo-block',
+				RAEL_URL . 'assets/js/editor/rael-editor-add-rst-promo-block.js',
+				array( 'jquery', 'elementor-editor' ),
+				RAEL_VER,
+				true
+			);
+			
+			wp_localize_script(
+				'rael-editor-add-rst-promo-block',
+				'raelEditorAddRstPromoBlock',
+				array(
+					'rstPromoIconUrl' => RAEL_URL . 'admin/images/rae-rst-icon.png',
+					'nonce'           => wp_create_nonce( 'rael_rst_nonce' ),
+        			'ajaxUrl'         => admin_url( 'admin-ajax.php' ),
+				)
+			);
+
+		});
+
+		// add_action( 'elementor/editor/after_enqueue_scripts', function () {
+		// 	wp_enqueue_script( 'updates' );
+		// 	wp_enqueue_script( 'plugin-install' );
+		// 	wp_enqueue_script( 'wp-util' );
+		// });
+
+		add_action( 'elementor/editor/footer', array( $this, 'rae_print_rst_template_views' ) );
+
+		add_action( 'wp_ajax_rae_install_rplus_plugin',array( $this, 'rae_install_rplus_plugin' ));
+
+		
 
 		global $blog_id;
 		if ( is_multisite() ) {
@@ -1505,23 +1548,23 @@ private function rael_find_element_recursive($elements, $widget_id) {
 			)
 		);
 
-		wp_enqueue_script( 'rael-rst-admin', RAEL_URL . '/admin/js/rael-rst-plugin-install.js', array( 'jquery' ), true, RAEL_VER );
-		wp_enqueue_script( 'updates' );
-		wp_localize_script(
-			'rael-rst-admin',
-			'rstPluginInstall',
-			array(
-				'installing'            => esc_html__( 'Installing ', 'responsive-addons-for-elementor' ),
-				'activating'            => esc_html__( 'Activating ', 'responsive-addons-for-elementor' ),
-				'verify_network'        => esc_html__( 'Not connect. Verify Network.', 'responsive-addons-for-elementor' ),
-				'page_not_found'        => esc_html__( 'Requested page not found. [404]', 'responsive-addons-for-elementor' ),
-				'internal_server_error' => esc_html__( 'Internal Server Error [500]', 'responsive-addons-for-elementor' ),
-				'json_parse_failed'     => esc_html__( 'Requested JSON parse failed', 'responsive-addons-for-elementor' ),
-				'timeout_error'         => esc_html__( 'Time out error', 'responsive-addons-for-elementor' ),
-				'ajax_req_aborted'      => esc_html__( 'Ajax request aborted', 'responsive-addons-for-elementor' ),
-				'uncaught_error'        => esc_html__( 'Uncaught Error', 'responsive-addons-for-elementor' ),
-			)
-		);
+		//wp_enqueue_script( 'rael-rst-admin', RAEL_URL . '/admin/js/rael-rst-plugin-install.js', array( 'jquery' ), true, RAEL_VER );
+		//wp_enqueue_script( 'updates' );
+		// wp_localize_script(
+		// 	'rael-rst-admin',
+		// 	'rstPluginInstall',
+		// 	array(
+		// 		'installing'            => esc_html__( 'Installing ', 'responsive-addons-for-elementor' ),
+		// 		'activating'            => esc_html__( 'Activating ', 'responsive-addons-for-elementor' ),
+		// 		'verify_network'        => esc_html__( 'Not connect. Verify Network.', 'responsive-addons-for-elementor' ),
+		// 		'page_not_found'        => esc_html__( 'Requested page not found. [404]', 'responsive-addons-for-elementor' ),
+		// 		'internal_server_error' => esc_html__( 'Internal Server Error [500]', 'responsive-addons-for-elementor' ),
+		// 		'json_parse_failed'     => esc_html__( 'Requested JSON parse failed', 'responsive-addons-for-elementor' ),
+		// 		'timeout_error'         => esc_html__( 'Time out error', 'responsive-addons-for-elementor' ),
+		// 		'ajax_req_aborted'      => esc_html__( 'Ajax request aborted', 'responsive-addons-for-elementor' ),
+		// 		'uncaught_error'        => esc_html__( 'Uncaught Error', 'responsive-addons-for-elementor' ),
+		// 	)
+		// );
 
 		remove_filter( 'update_footer', 'core_update_footer' );
 	}
@@ -2682,4 +2725,113 @@ private function rael_find_element_recursive($elements, $widget_id) {
 			);
 		}
 	}
+
+	public function rae_print_rst_template_views() {
+		// Plugin slug for Responsive Plus
+		$plugin_slug = 'responsive-add-ons/responsive-add-ons.php';
+
+		// Button text depends on whether plugin is installed
+		$button_text = ( ! $this->is_plugin_installed( $plugin_slug ) ) ? 'Install RST Plugin ' : 'Activate RST Plugin';
+		?>
+		<div id="rael-promo-temp-wrap" class="rael-promo-temp-wrap" style="display: none">
+			<div class="rael-promo-temp-wrapper">
+				<div class="rael-promo-temp">
+					<a href="#" class="rael-promo-temp__close">
+						<i class="eicon-close" aria-hidden="true" title="Close"></i>
+					</a>
+
+					<div class="rael-promo-temp--left">
+						<div class="rael-promo-temp__logo">
+							<img src="<?php echo esc_url( RAEL_URL . 'admin/images/rst_logo.svg' ); ?>" alt="RST Logo">
+						</div>
+						<div class="rael-promo-subheading">
+							<span class="subhead-text"><?php esc_html_e('150+ ','responsive-addons-for-elementor'); ?></span>
+							<span style="display:block;"><?php esc_html_e('Elementor Templates', 'responsive-addons-for-elementor'); ?></span>
+						</div>
+						<ul class="rael-promo-temp__feature__list">
+							<li><?php esc_html_e('500+ Elementor sections', 'responsive-addons-for-elementor'); ?></li>
+							<li><?php esc_html_e('Supports Elementor & Gutenberg', 'responsive-addons-for-elementor'); ?></li>
+							<li><?php esc_html_e('Powering 20,000+ Websites', 'responsive-addons-for-elementor'); ?></li>
+							<li><?php esc_html_e('Access to 250+ Full Site Templates', 'responsive-addons-for-elementor'); ?></li>
+						</ul>
+
+						<?php if ( ! $this->is_plugin_installed( $plugin_slug ) ) { ?>
+							<button class="rael-rst-plugin-installer" data-action="install" data-slug="<?php echo esc_html_e( 'responsive-add-ons','responsive-addons-for-elementor' ); ?>">
+								<?php esc_html_e( 'Install RST Plugin', 'responsive-addons-for-elementor' ); ?>
+							</button>
+						<?php } else { ?>
+							<?php if ( is_plugin_active( $plugin_slug ) ) { ?>
+								<button class="rael-rst-plugin-installer"><?php esc_html_e( 'Activated RST Plugin', 'responsive-addons-for-elementor'); ?></button>
+							<?php } else { ?>
+								<button class="rael-rst-plugin-installer" data-action="activate" data-basename="<?php echo esc_attr( $plugin_slug ); ?>">
+									<?php esc_html_e( 'Activate RST Plugin', 'responsive-addons-for-elementor'); ?></button>
+							<?php } ?>
+						<?php } ?>
+
+						<button class="rael-promo-status-submit" style="display: none"><?php esc_html_e('Submit','responsive-addons-for-elementor'); ?></button>
+					</div>
+
+					<div class="rael-promo-temp--right">
+						<img src="<?php echo esc_url( RAEL_URL . 'admin/images/rae-rst-promo-image.png' ); ?>" alt="RAEL Promo">
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Helper to check if a plugin is installed
+	 */
+	private function is_plugin_installed( $plugin_slug ) {
+		include_once ABSPATH . 'wp-admin/includes/plugin.php';
+		return file_exists( WP_PLUGIN_DIR . '/' . $plugin_slug );
+	}
+
+	public function rae_install_rplus_plugin () {
+
+		check_ajax_referer( 'rael_rst_nonce', 'nonce' );
+
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			wp_send_json_error( 'Permission denied' );
+		}
+
+		$plugin_slug = 'responsive-add-ons';
+		$plugin_file = 'responsive-add-ons/responsive-add-ons.php';
+
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+		require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+
+		// Install if missing
+		if ( ! file_exists( WP_PLUGIN_DIR . '/' . $plugin_file ) ) {
+
+			$api = plugins_api( 'plugin_information', [
+				'slug'   => $plugin_slug,
+				'fields' => [ 'sections' => false ],
+			] );
+
+			if ( is_wp_error( $api ) ) {
+				wp_send_json_error( $api->get_error_message() );
+			}
+
+			$upgrader = new Plugin_Upgrader( new Automatic_Upgrader_Skin() );
+			$result   = $upgrader->install( $api->download_link );
+
+			if ( is_wp_error( $result ) ) {
+				wp_send_json_error( $result->get_error_message() );
+			}
+		}
+
+		// Activate plugin
+		if ( ! is_plugin_active( $plugin_file ) ) {
+			activate_plugin( $plugin_file );
+		}
+
+		wp_send_json_success([
+			'message' => __( 'RST Plugin Activated', 'responsive-addons-for-elementor' ),
+		]);
+	}
+
+
 }
