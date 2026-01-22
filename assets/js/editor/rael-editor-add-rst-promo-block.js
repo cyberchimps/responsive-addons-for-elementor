@@ -1,6 +1,9 @@
 (function ($) {
     'use strict';
-    
+    if (raelEditorAddRstPromoBlock?.isRstActive) {
+    console.log('RST plugin active → RAEL promo button disabled');
+    return;
+}
     /**
      * Inject CSS for RAEL button dynamically
      */
@@ -15,98 +18,130 @@
                 background-image: url('${rstPromoIconUrl}') !important;
                 background-repeat: no-repeat !important;
                 background-position: center center !important;
-                background-size: cover !important;
+                background-size: contain !important;
                 background-color: #a392ad !important;
                 border-radius: 50%;
                 cursor: pointer;
             }
-                .rael-promo-temp-wrap {
-    position: fixed;
-    inset: 0;
-    z-index: 999999;
-    background: rgba(0,0,0,0.6);
-}
 
-.rael-promo-temp-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
+            .rael-promo-temp-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+            }
 
-.rael-promo-temp {
-    background: #fff;
-    width: 1175px;
-    max-width: 95%;
-    border-radius: 8px;
-    display: flex;
-    overflow: hidden;
-}
-.rael-promo-subheading{
-      font-family: 'Inter', sans-serif;
-font-weight: 700;
-font-style: normal;
-font-size: 30px;
-}
+            .rael-promo-temp {
+                background: #fff;
+                width: 1175px;
+                display: flex;
+                overflow: hidden;
+            }
+            .rael-promo-subheading{
+                font-family: 'Inter', sans-serif;
+                font-weight: 700;
+                font-style: normal;
+                font-size: 30px;
+                color: #111827;
+                margin-top: 20px;
+            }
 
-.rael-promo-temp--left {
-     -webkit-box-flex: 0;
-    -ms-flex: 0 0 calc(100% - 755px);
-    flex: 0 0 calc(100% - 755px);
-    padding: 45px 30px 30px;
-    width: 310px;
-    text-align: left;
-    font-family: 'Inter', sans-serif;
-font-weight: 500;
-font-style: normal;
-font-size: 18px;
+            .rael-promo-temp--left {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 calc(100% - 754px);
+                flex: 0 0 calc(100% - 754px);
+                padding: 45px 45px 51px 45px;
+                text-align: left;
+                font-family: 'Inter', sans-serif;
+                font-weight: 500;
+                font-style: normal;
+                font-size: 18px;
 
-}
-.rael-promo-temp__feature__list{
-    text-align:left;
-    padding-left: 20px;
-}
-.rael-promo-temp__feature__list li{
-list-style: circle;
-}
+            }
+            .rael-promo-temp__feature__list{
+                text-align:left;
+                padding-left: 20px;
+                margin-top: 20px;
+                line-height: 33px;
+            }
+            .rael-promo-temp__feature__list li{
+            list-style: circle;
+            }
 
-.rael-promo-temp--right img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.rael-promo-temp--right{
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 755px;
-    flex: 0 0 755px;
-    }
+            .rael-promo-temp--right img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .rael-promo-temp--right{
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 755px;
+                flex: 0 0 755px;
+                }
 
-.rael-promo-temp__close {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    cursor: pointer;
-}
-    .rael-rst-plugin-installer{
-        background: linear-gradient(89.14deg, #2563EB 0%, #00C3FF 102.04%);
-        color: #ffffff;
-    }
-    .subhead-text{
-        font-size: 40px;
-    }
+            .rael-promo-temp__close {
+                position: absolute;
+                top: 12px;
+                right: 12px;
+                cursor: pointer;
+            }
+            .rael-rst-plugin-installer{
+                background: linear-gradient(89.14deg, #2563EB 0%, #00C3FF 102.04%);
+                color: #ffffff;
+                padding: 12px;
+                font-size: 16px;
+                font-weight: 600;
+                width: 90%;
+                border: none;
+                border-radius: 10px;
+                font-family: 'Inter';
+                margin: 30px 0 0 10px;
+            }
+            .subhead-text{
+                font-size: 48px;
+            }
+            #rael-rst-promo-popup .dialog-widget-content{
+                border-radius: 16px;
+            }
+            #rael-rst-promo-popup .dialog-widget-content.dialog-lightbox-widget-content{
+                top: 150px !important;
+                left: 370px !important;
+            }
+            .rael-promo-temp .eicon-close{
+                color: black;
+                background-color: white;
+                padding: 9px;
+                border: 1px solid black;
+                border-radius: 5px;
+                font-weight: 900;
+                font-size: 20px;
+            }
+            .rael-rst-plugin-installer i{
+                margin-left: 5px;
+            }
         `;
 
-        // Check if editor iframe exists
-        if (elementor && elementor.$previewContents && elementor.$previewContents[0]) {
-            const head = elementor.$previewContents[0].head || elementor.$previewContents[0].querySelector('head');
-            if (head && !head.querySelector('#rael-editor-ral-button-css')) {
+
+        // Inject into iframe (for button)
+        if (elementor?.$previewContents?.[0]) {
+            const iframeHead = elementor.$previewContents[0].head;
+            if (iframeHead && !iframeHead.querySelector('#rael-editor-css')) {
                 const style = document.createElement('style');
-                style.id = 'rael-editor-ral-button-css';
+                style.id = 'rael-editor-css';
                 style.innerHTML = css;
-                head.appendChild(style);
-                console.log('RAEL button CSS injected into editor iframe head');
+                iframeHead.appendChild(style);
             }
         }
+
+        // Inject into parent window (for dialog)
+        const parentHead = window.top.document.head;
+        if (parentHead && !parentHead.querySelector('#rael-editor-css-parent')) {
+            const style = document.createElement('style');
+            style.id = 'rael-editor-css-parent';
+            style.innerHTML = css;
+            parentHead.appendChild(style);
+        }
+
     }
 
     /**
@@ -147,112 +182,164 @@ list-style: circle;
 
         console.log('RAEL button click event bound');
     }
-    function openRstPromoPopup() {
-        if (!elementor || !elementor.$previewContents) return;
+ 
+    function openRstPromoPopupViaDialog() {
 
-        const iframeBody = elementor.$previewContents[0].body;
-        let $popup = $(iframeBody).find('#rael-promo-temp-wrap');
-
-        // If popup HTML exists in parent but not iframe → move it
-        if (!$popup.length && $('#rael-promo-temp-wrap').length) {
-            $popup = $('#rael-promo-temp-wrap').appendTo(iframeBody);
+        if (window.raelPromoDialog) {
+            return;
         }
 
-        if ($popup.length) {
-            $popup.fadeIn(200);
-        }
-    }
+        window.raelPromoDialog = elementorCommon.dialogsManager.createWidget(
+            'lightbox',
+            {
+                id: 'rael-rst-promo-popup',
+                headerMessage: false,
+                message: '',
+                hide: {
+                    auto: false,
+                    onBackgroundClick: true
+                },
+                position: {
+                    my: 'center',
+                    at: 'center'
+                },
+                onShow: function () {
+                    
+                    const $source = $('#rael-promo-temp-wrap');
 
-    function bindPopupCloseEvents() {
-        if (!elementor || !elementor.$previewContents) return;
+                    if (!$source.length) {
+                        console.warn('RAEL promo markup not found');
+                        return;
+                    }
 
-        const iframeBody = elementor.$previewContents[0].body;
+                    // CLONE ONLY INNER CONTENT
+                    const $content = $source
+                        .find('.rael-promo-temp')
+                        .clone(true, true)
+                        .css('display', 'flex');
 
-        $(iframeBody)
-            .on('click', '.rael-promo-temp__close', function (e) {
-                e.preventDefault();
-                $('#rael-promo-temp-wrap', iframeBody).fadeOut(200);
-            })
-            .on('click', '#rael-promo-temp-wrap', function (e) {
-                if (e.target === this) {
-                    $(this).fadeOut(200);
+                    $('#rael-rst-promo-popup .dialog-message').html($content);
+                },
+                onHide: function () {
+                    window.raelPromoDialog.destroy();
+                    window.raelPromoDialog = null;
                 }
-            });
+            }
+        );
+
+        window.raelPromoDialog.getElements('header').remove();
+        window.raelPromoDialog.show();
+
+    
     }
 
     function bindRaelButtonClick() {
         if (!elementor || !elementor.$previewContents) return;
 
         $(elementor.$previewContents[0].body)
-            .off('click', '.elementor-add-rael-rst-button')
-            .on('click', '.elementor-add-rael-rst-button', function (e) {
+            .off('click.raelPromo')
+            .on('click.raelPromo', '.elementor-add-rael-rst-button', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
-                openRstPromoPopup();
+
+                console.log('RAEL promo button clicked');
+
+                openRstPromoPopupViaDialog();
             });
 
         console.log('RAEL button click event bound');
     }
+
     function bindRstPluginInstaller() {
-    if (!elementor || !elementor.$previewContents) return;
+        if (!elementor || !elementor.$previewContents) return;
 
-    const iframeBody = elementor.$previewContents[0].body;
+        $(document)
+            .off('click', '.rael-rst-plugin-installer')
+            .on('click', '.rael-rst-plugin-installer', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
 
-    $(iframeBody)
-        .off('click', '.rael-rst-plugin-installer')
-        .on('click', '.rael-rst-plugin-installer', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
+                console.log('RAEL RST installer clicked');
 
-            console.log('RAEL RST installer clicked');
+                const $btn = $(this);
+                if ($btn.hasClass('is-processing')) return;
 
-            const $btn = $(this);
-            if ($btn.hasClass('is-processing')) return;
+                $btn
+                    .addClass('is-processing')
+                    .text('Installing...')
+                    .prop('disabled', true);
 
-            $btn
-                .addClass('is-processing')
-                .text('Processing...')
-                .prop('disabled', true);
+                $.ajax({
+                    url: raelEditorAddRstPromoBlock.ajaxUrl,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        action: 'rae_install_rplus_plugin',
+                        nonce: raelEditorAddRstPromoBlock.nonce
+                    },
+                    success(res) {
+                        if (res.success) {
+                            //$btn.text(res.data.message);
+                            $btn.text(res.data.message || 'Installed');
 
-            $.ajax({
-                url: raelEditorAddRstPromoBlock.ajaxUrl,
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    action: 'rae_install_rplus_plugin',
-                    nonce: raelEditorAddRstPromoBlock.nonce
-                },
-                success(res) {
-                    if (res.success) {
-                        $btn.text(res.data.message);
-                        // Small delay so WP finishes activation
-                        setTimeout(function () {
-                            if (window.elementor && elementor.reloadPreview) {
-                                elementor.reloadPreview();
+                            // Close the promo popup
+                            if (window.raelPromoDialog) {
+                                setTimeout(function () {
+                                    window.raelPromoDialog.hide(); // triggers onHide → destroy
+                                }, 600);
                             }
-                        }, 1200);
-                    } else {
-                        $btn.text('Failed');
-                        console.error(res.data);
+                            // Small delay so WP finishes activation
+                            setTimeout(function () {
+                                if (window.elementor && elementor.reloadPreview) {
+                                    elementor.reloadPreview();
+                                }
+                            }, 1200);
+                        } else {
+                            $btn.text('Failed');
+                            console.error(res.data);
+                        }
+                    },
+                    error(err) {
+                        $btn.text('Error');
+                        console.error(err);
                     }
-                },
-                error(err) {
-                    $btn.text('Error');
-                    console.error(err);
-                }
+                });
             });
-        });
 
-    console.log('RAEL RST installer click bound');
-}
+        console.log('RAEL RST installer click bound');
+    }
+
+    function hideRaelButtonIfInstalled() {
+        if (!raelEditorAddRstPromoBlock?.isRstActive) return;
+
+        // iframe
+        if (elementor?.$previewContents?.[0]) {
+            $(elementor.$previewContents[0].body)
+                .find('.elementor-add-rael-rst-button')
+                .remove();
+        }
+
+        // template
+        $('#tmpl-elementor-add-section').data('rael-injected', true);
+    }
+
     // Wait for Elementor preview to load
     elementor.on('preview:loaded', function () {
+        hideRaelButtonIfInstalled();
         injectRaelButtonCSS(); // inject CSS first
         injectRaelButton();
         bindRaelButtonClick();
-        bindPopupCloseEvents();
         bindRstPluginInstaller(); 
     });
+
+    $(document).on('click', '.rael-promo-temp__close', function (e) {
+        e.preventDefault();
+
+        if (window.raelPromoDialog) {
+            window.raelPromoDialog.hide();
+        }
+    });
+
 
 })(jQuery);
 
