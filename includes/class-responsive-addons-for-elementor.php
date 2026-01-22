@@ -723,7 +723,7 @@ private function rael_find_element_recursive($elements, $widget_id) {
 		if ( $thirty_day_delay_passed || $count >= 5 || $any_template_imported ) 
 		{
 
-			$image_path = RAEL_URL . 'admin/images/rae-icon.svg';
+			$image_path = RAEL_URL . 'admin/images/rae-logo-mini.png';
 			printf(
 				'<div class="notice notice-warning rael-ask-for-review-notice">
 					<div class="rael-ask-for-review-notice-container">
