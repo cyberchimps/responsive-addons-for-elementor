@@ -1,9 +1,8 @@
 (function ($) {
     'use strict';
-    if (raelEditorAddRstPromoBlock?.isRstActive) {
-    console.log('RST plugin active → RAEL promo button disabled');
-    return;
-}
+    if (raelEditorAddRstPromoBlock?.isRstActive == 1) {
+        return;
+    }
     /**
      * Inject CSS for RAEL button dynamically
      */
@@ -163,7 +162,6 @@
         );
         addSectionTemplate.text(templateHtml);
 
-        console.log('RAEL button injected into template');
     }
 
     /**
@@ -179,8 +177,6 @@
                 e.stopPropagation();
                 alert('RAEL clicked');
             });
-
-        console.log('RAEL button click event bound');
     }
  
     function openRstPromoPopupViaDialog() {
@@ -241,14 +237,25 @@
             .on('click.raelPromo', '.elementor-add-rael-rst-button', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
-
-                console.log('RAEL promo button clicked');
-
                 openRstPromoPopupViaDialog();
             });
 
-        console.log('RAEL button click event bound');
     }
+    function removeRaelRstButton() {
+
+        // iframe
+        if (elementor?.$previewContents?.[0]) {
+            $(elementor.$previewContents[0].body)
+                .find('.elementor-add-rael-rst-button')
+                .remove();
+        }
+
+        // prevent future injections
+        $('#tmpl-elementor-add-section')
+            .data('rael-injected', true);
+
+    }
+
 
     function bindRstPluginInstaller() {
         if (!elementor || !elementor.$previewContents) return;
@@ -258,8 +265,6 @@
             .on('click', '.rael-rst-plugin-installer', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
-
-                console.log('RAEL RST installer clicked');
 
                 const $btn = $(this);
                 if ($btn.hasClass('is-processing')) return;
@@ -282,6 +287,9 @@
                             //$btn.text(res.data.message);
                             $btn.text(res.data.message || 'Installed');
 
+                            raelEditorAddRstPromoBlock.isRstActive = 1;
+                            removeRaelRstButton();
+
                             // Close the promo popup
                             if (window.raelPromoDialog) {
                                 setTimeout(function () {
@@ -289,11 +297,12 @@
                                 }, 600);
                             }
                             // Small delay so WP finishes activation
+                         
+
                             setTimeout(function () {
-                                if (window.elementor && elementor.reloadPreview) {
-                                    elementor.reloadPreview();
-                                }
-                            }, 1200);
+                               window.location.reload();
+                            }, 500);
+                                
                         } else {
                             $btn.text('Failed');
                             console.error(res.data);
@@ -306,27 +315,11 @@
                 });
             });
 
-        console.log('RAEL RST installer click bound');
-    }
-
-    function hideRaelButtonIfInstalled() {
-        if (!raelEditorAddRstPromoBlock?.isRstActive) return;
-
-        // iframe
-        if (elementor?.$previewContents?.[0]) {
-            $(elementor.$previewContents[0].body)
-                .find('.elementor-add-rael-rst-button')
-                .remove();
-        }
-
-        // template
-        $('#tmpl-elementor-add-section').data('rael-injected', true);
     }
 
     // Wait for Elementor preview to load
     elementor.on('preview:loaded', function () {
-        hideRaelButtonIfInstalled();
-        injectRaelButtonCSS(); // inject CSS first
+        injectRaelButtonCSS(); 
         injectRaelButton();
         bindRaelButtonClick();
         bindRstPluginInstaller(); 

@@ -58,7 +58,6 @@ class Responsive_Addons_For_Elementor {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$is_rst_active = is_plugin_active( 'responsive-add-ons/responsive-add-ons.php' );
 
 		add_action( 'init', array( $this, 'responsive_addons_for_elementor_widgets_display' ) );
 		add_action( 'plugins_loaded', array( $this, 'init' ) );
@@ -163,7 +162,10 @@ class Responsive_Addons_For_Elementor {
 
 	);
 
-		add_action( 'elementor/editor/after_enqueue_scripts', function () {
+		$is_rst_active = is_plugin_active( 'responsive-add-ons/responsive-add-ons.php' );
+
+
+		add_action( 'elementor/editor/after_enqueue_scripts', function () use ( $is_rst_active ) {
 			wp_enqueue_script(
 				'rael-editor-add-rst-promo-block',
 				RAEL_URL . 'assets/js/editor/rael-editor-add-rst-promo-block.js',
@@ -171,7 +173,6 @@ class Responsive_Addons_For_Elementor {
 				RAEL_VER,
 				true
 			);
-			error_log("is_rst_active-".$is_rst_active);
 			wp_localize_script(
 				'rael-editor-add-rst-promo-block',
 				'raelEditorAddRstPromoBlock',
@@ -179,7 +180,7 @@ class Responsive_Addons_For_Elementor {
 					'rstPromoIconUrl' => RAEL_URL . 'admin/images/rst-editor-icon.svg',
 					'nonce'           => wp_create_nonce( 'rael_rst_nonce' ),
         			'ajaxUrl'         => admin_url( 'admin-ajax.php' ),
-					'isRstActive'	  => $is_rst_active,
+					'isRstActive'	  => $is_rst_active ? $is_rst_active : 0,
 				)
 			);
 
