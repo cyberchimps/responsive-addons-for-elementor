@@ -95,6 +95,7 @@
                 border-radius: 10px;
                 font-family: 'Inter';
                 margin: 30px 0 0 10px;
+                cursor: pointer;
             }
             .subhead-text{
                 font-size: 48px;
