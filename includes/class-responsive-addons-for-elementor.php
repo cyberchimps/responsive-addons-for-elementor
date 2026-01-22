@@ -1391,6 +1391,24 @@ private function rael_find_element_recursive($elements, $widget_id) {
 		);
 
 		wp_enqueue_style( 'rael-style' );
+		
+		wp_add_inline_style(
+			'rael-style',
+			'#elementor-panel__editor__help__link[href^="https://cyberchimps.com/docs/"]::before{
+				content:"";
+				display:inline-block;
+				width:23px;
+				height:23px;
+				margin-right:6px;
+				margin-bottom:3px;
+				background-image:url(' . esc_url( RAEL_URL . 'admin/images/rae-logo-mini.png' ) . ');
+				background-size:contain;
+				background-repeat:no-repeat;
+				background-position:center;
+				vertical-align:middle;
+				border-radius: 5px;
+			}'
+		);
 
 		wp_register_style(
 			'rael-icons',
