@@ -11,7 +11,7 @@ Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Build Elementor sites with 80+ widgets, 5+ extensions & full builder. 250+ templates & 500+ sections—no upgrade needed.
+Free Elementor addons plugin with 80+ widgets, 5+ extensions, Theme builder, 250+ Elementor templates, 500+ sections — build modern UI Elementor websites.
 
 == Description ==
 
