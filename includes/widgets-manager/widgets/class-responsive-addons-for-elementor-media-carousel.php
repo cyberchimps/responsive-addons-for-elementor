@@ -17,6 +17,7 @@ use Elementor\Group_Control_Text_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Embed;
+use Elementor\Icons_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -1193,7 +1194,6 @@ class Responsive_Addons_For_Elementor_Media_Carousel extends Widget_Base {
 		 * @param string $element_key The key for identifying the slide element.
 		 */
 	protected function print_slide( array $slide, array $settings, $element_key ) {
-
 		if ( ! empty( $settings['rael_thumbs_slider'] ) ) {
 			$settings['rael_video_play_icon'] = false;
 
@@ -1225,7 +1225,7 @@ class Responsive_Addons_For_Elementor_Media_Carousel extends Widget_Base {
 				++$this->lightbox_slide_index;
 			}
 			//For fixing xss issue
-			$rael_video_link = $this->sanitize_embed_url( $slide['rael_video']['url'] ?? '' );
+			$rael_video_link =  $this->sanitize_embed_url( $slide['rael_video']['url'] ?? '' );
 
 			if ( 'video' === $slide['rael_type'] && ! empty( $rael_video_link) ) {
 				$embed_url_params = array(
@@ -1280,24 +1280,35 @@ class Responsive_Addons_For_Elementor_Media_Carousel extends Widget_Base {
 	 * @return string The URL of the link destination for the slide image.
 	 */
 	protected function get_image_link_to( $slide ) {
-    // If there is a video URL, return the image URL (sanitized)
-    if ( ! empty( $slide['rael_video']['url'] ) ) {
-        return $this->sanitize_embed_url( $slide['rael_image']['url'] );
-    }
+		// If there is a video URL, return the image URL (sanitized as general URL)
+		if ( ! empty( $slide['rael_video']['url'] ) ) {
+			return $this->sanitize_general_url( $slide['rael_image']['url'] );
+		}
 
-    // If no link type, return empty string
-    if ( ! $slide['rael_image_link_to_type'] ) {
-        return '';
-    }
+		// If no link type, return empty string
+		if ( ! $slide['rael_image_link_to_type'] ) {
+			return '';
+		}
 
-    // If link type is custom, return custom URL (sanitized)
-    if ( 'custom' === $slide['rael_image_link_to_type'] && ! empty( $slide['rael_image_link_to']['url'] ) ) {
-        return $this->sanitize_embed_url( $slide['rael_image_link_to']['url'] );
-    }
+		// If link type is custom, return custom URL
+		if ( 'custom' === $slide['rael_image_link_to_type'] && ! empty( $slide['rael_image_link_to']['url'] ) ) {
+			// Determine if this is an embed URL or regular URL
+			$url = $slide['rael_image_link_to']['url'];
+			$host = strtolower( wp_parse_url( $url, PHP_URL_HOST ) );
+			
+			// Check if it's a video/embed URL
+			$embed_hosts = array('youtube.com', 'www.youtube.com', 'youtu.be', 'vimeo.com', 'player.vimeo.com', 'dailymotion.com', 'www.dailymotion.com','wistia.com', 'fast.wistia.com','facebook.com', 'www.facebook.com','twitch.tv', 'www.twitch.tv','tiktok.com', 'www.tiktok.com','instagram.com', 'www.instagram.com','twitter.com', 'www.twitter.com', 'x.com', 'www.x.com','soundcloud.com', 'www.soundcloud.com','spotify.com', 'open.spotify.com','mixcloud.com', 'www.mixcloud.com'); // Your embed hosts list
+			
+			if ( in_array( $host, $embed_hosts, true ) ) {
+				return $this->sanitize_embed_url( $url );
+			} else {
+				return $this->sanitize_general_url( $url );
+			}
+		}
 
-    // Default: return image URL (sanitized)
-    return $this->sanitize_embed_url( $slide['rael_image']['url'] );
-}
+		// Default: return image URL (sanitized as general URL)
+		return $this->sanitize_general_url( $slide['rael_image']['url'] );
+	}
 
 	/**
 	 * Print the HTML markup for an individual slide image.
@@ -1315,7 +1326,17 @@ class Responsive_Addons_For_Elementor_Media_Carousel extends Widget_Base {
 		<div <?php echo wp_kses_post( $this->get_render_attribute_string( $element_key . '-image' ) ); ?>>
 			<?php if ( 'video' === $slide['rael_type'] && $settings['rael_video_play_icon'] ) : ?>
 				<div class="elementor-custom-embed-play">
-					<i class="eicon-play" aria-hidden="true"></i>
+					<?php
+					Icons_Manager::render_icon(
+						[
+							'value'   => 'eicon-play',
+							'library' => 'eicons',
+						],
+						[
+							'aria-hidden' => 'true',
+						]
+					);
+					?>
 					<span class="elementor-screen-only"><?php esc_html_e( 'Play', 'responsive-addons-for-elementor' ); ?></span>
 				</div>
 			<?php endif; ?>
@@ -1376,47 +1397,67 @@ class Responsive_Addons_For_Elementor_Media_Carousel extends Widget_Base {
  * @param string $url User input URL
  * @return string Safe URL or empty string
  */
-	private function sanitize_embed_url( $url ) {
-		if ( empty( $url ) ) {
-			return '';
-		}
+private function sanitize_embed_url( $url ) {
+    if ( empty( $url ) ) {
+        return '';
+    }
 
-		// Remove leading/trailing spaces
-		$url = trim( $url );
+    // Remove leading/trailing spaces
+    $url = trim( $url );
 
-		// Decode URL to avoid encoded javascript: tricks
-		$url = rawurldecode( $url );
+    // Decode URL to avoid encoded javascript: tricks
+    $url = rawurldecode( $url );
 
-		// Only allow http or https
-		if ( ! preg_match( '#^https?://#i', $url ) ) {
-			return '';
-		}
+    // Only allow http or https
+    if ( ! preg_match( '#^https?://#i', $url ) ) {
+        return '';
+    }
 
-		// Parse host
-		$host = strtolower( wp_parse_url( $url, PHP_URL_HOST ) );
+    // Parse host
+    $host = strtolower( wp_parse_url( $url, PHP_URL_HOST ) );
 
-		// Popular allowed embed hosts
-		$allowed_hosts = array(
-			'youtube.com', 'www.youtube.com', 'youtu.be',
-			'vimeo.com', 'player.vimeo.com',
-			'dailymotion.com', 'www.dailymotion.com',
-			'wistia.com', 'fast.wistia.com',
-			'facebook.com', 'www.facebook.com',
-			'twitch.tv', 'www.twitch.tv',
-			'tiktok.com', 'www.tiktok.com',
-			'instagram.com', 'www.instagram.com',
-			'twitter.com', 'www.twitter.com', 'x.com', 'www.x.com',
-			'soundcloud.com', 'www.soundcloud.com',
-			'spotify.com', 'open.spotify.com',
-			'mixcloud.com', 'www.mixcloud.com',
-		);
+    // Popular allowed embed hosts
+    $allowed_hosts = array(
+        'youtube.com', 'www.youtube.com', 'youtu.be',
+        'vimeo.com', 'player.vimeo.com',
+        'dailymotion.com', 'www.dailymotion.com',
+        'wistia.com', 'fast.wistia.com',
+        'facebook.com', 'www.facebook.com',
+        'twitch.tv', 'www.twitch.tv',
+        'tiktok.com', 'www.tiktok.com',
+        'instagram.com', 'www.instagram.com',
+        'twitter.com', 'www.twitter.com', 'x.com', 'www.x.com',
+        'soundcloud.com', 'www.soundcloud.com',
+        'spotify.com', 'open.spotify.com',
+        'mixcloud.com', 'www.mixcloud.com',
+    );
 
-		if ( ! in_array( $host, $allowed_hosts, true ) ) {
-			return '';
-		}
+    if ( ! in_array( $host, $allowed_hosts, true ) ) {
+        return '';
+    }
 
-		// Final escape
-		return esc_url( $url );
-	}
+    // Final escape
+    return esc_url( $url );
+}
+
+private function sanitize_general_url( $url ) {
+    if ( empty( $url ) ) {
+        return '';
+    }
+
+    // Remove leading/trailing spaces
+    $url = trim( $url );
+
+    // Decode URL to avoid encoded javascript: tricks
+    $url = rawurldecode( $url );
+
+    // Only allow http or https
+    if ( ! preg_match( '#^https?://#i', $url ) ) {
+        return '';
+    }
+
+    // Final escape
+    return esc_url( $url );
+}
 
 }
