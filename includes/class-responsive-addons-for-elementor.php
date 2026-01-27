@@ -2763,6 +2763,7 @@ private function rael_find_element_recursive($elements, $widget_id) {
 						<?php } else { ?>
 							<?php if ( is_plugin_active( $plugin_slug ) ) { ?>
 								<button class="rael-rst-plugin-installer"><?php esc_html_e( 'Activated RST Plugin', 'responsive-addons-for-elementor'); ?><i class="eicon-arrow-right"></i></button>
+
 							<?php } else { ?>
 								<button class="rael-rst-plugin-installer" data-action="activate" data-basename="<?php echo esc_attr( $plugin_slug ); ?>">
 									<?php esc_html_e( 'Activate RST Plugin', 'responsive-addons-for-elementor'); ?><i class="eicon-arrow-right"></i></button>
@@ -2770,6 +2771,8 @@ private function rael_find_element_recursive($elements, $widget_id) {
 						<?php } ?>
 
 						<button class="rael-promo-status-submit" style="display: none"><?php esc_html_e('Submit','responsive-addons-for-elementor'); ?></button>
+						<span class="promo-success-msg" style="display:none"></span>
+
 					</div>
 
 					<div class="rael-promo-temp--right">

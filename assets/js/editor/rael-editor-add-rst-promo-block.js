@@ -119,6 +119,16 @@
             .rael-rst-plugin-installer i{
                 margin-left: 5px;
             }
+            .promo-success-msg{
+                font-size: 14px;
+                font-family: 'Inter';
+                margin-top: 11px;
+                display: inline-block;
+                background-color: #fff3cd;
+                border: 1px solid #FFDB58;
+                border-radius: 5px;
+                padding: 9px;
+            }
         `;
 
 
@@ -226,7 +236,6 @@
 
         window.raelPromoDialog.getElements('header').remove();
         window.raelPromoDialog.show();
-
     
     }
 
@@ -254,7 +263,6 @@
         // prevent future injections
         $('#tmpl-elementor-add-section')
             .data('rael-injected', true);
-
     }
 
 
@@ -285,25 +293,16 @@
                     },
                     success(res) {
                         if (res.success) {
-                            //$btn.text(res.data.message);
                             $btn.text(res.data.message || 'Installed');
 
                             raelEditorAddRstPromoBlock.isRstActive = 1;
                             removeRaelRstButton();
 
-                            // Close the promo popup
-                            if (window.raelPromoDialog) {
-                                setTimeout(function () {
-                                    window.raelPromoDialog.hide(); // triggers onHide → destroy
-                                }, 600);
-                            }
-                            // Small delay so WP finishes activation
-                         
-
-                            setTimeout(function () {
-                               window.location.reload();
-                            }, 500);
-                                
+                            $('#rael-rst-promo-popup .dialog-message')
+                                .find('.promo-success-msg')
+                                .text(
+                                    'Almost there! Save your changes and reload the editor to see ready-made sections.'
+                                ).fadeIn();
                         } else {
                             $btn.text('Failed');
                             console.error(res.data);
