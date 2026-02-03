@@ -1343,6 +1343,16 @@ private function rael_find_element_recursive($elements, $widget_id) {
 							'nonce' => wp_create_nonce('rael_facebook_feed_nonce')
 						));
 						break;
+					case 'posts':
+						wp_enqueue_script( 'rael-posts', RAEL_ASSETS_URL . 'js/frontend/posts/posts.min.js', array( 'jquery' ), RAEL_VER, true );
+						wp_enqueue_script( 'rael-posts-cards', RAEL_ASSETS_URL . 'js/frontend/posts/posts-cards.min.js', array( 'jquery' ), RAEL_VER, true );
+
+						wp_localize_script('rael-posts', 'raelpostsvar', array(
+							'ajaxurl' => admin_url('admin-ajax.php'),
+							'nonce' => wp_create_nonce('rael_posts_nonce')
+						));
+						break;
+
 				}
 			}
 		}
@@ -1870,9 +1880,7 @@ private function rael_find_element_recursive($elements, $widget_id) {
 						array_push( $css_files, $css_files_path . 'price-list/price-list-frontend' . $css_min_ext );
 						break;
 					case 'posts':
-						array_push( $js_files, $js_files_path . 'posts/posts' . $ext );
-						array_push( $js_files, $js_files_path . 'posts/posts-cards' . $ext );
-						array_push( $css_files, $css_files_path . 'posts/posts' . $css_min_ext );
+						array_push( $css_files, $css_files_path . 'posts/posts'. $css_min_ext );
 						break;
 					case 'price-box':
 						array_push( $js_files, $js_files_path . 'price-box/price-box' . $ext );
