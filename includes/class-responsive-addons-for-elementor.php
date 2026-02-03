@@ -81,7 +81,7 @@ class Responsive_Addons_For_Elementor {
 		// Remove all admin notices from specific pages.
 		add_action( 'admin_init', array( $this, 'responsive_addons_for_elementor_admin_init' ) );
 
-		add_action( 'wp_enqueue_scripts', array( $this, 'load_assets' ), 15 );
+		add_action( 'elementor/frontend/after_register_scripts', array( $this, 'load_assets' ), 15 );
 
 		// Enqueues the necessary scripts and styles for the plugin's admin interface
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -1184,9 +1184,9 @@ private function rael_find_element_recursive($elements, $widget_id) {
 					case 'woo-products':
 						if ( ! isset( $included_libs['rael-photoswipe'] ) ) {
 							$included_libs['rael-photoswipe'] = true;
-							wp_enqueue_script( 'rael-photoswipe', RAEL_ASSETS_URL . 'lib/photoswipe/photoswipe.min.js', array( 'jquery', 'masonry', 'imagesloaded' ), RAEL_VER, true );
-							wp_enqueue_script( 'rael-photoswipe-ui', RAEL_ASSETS_URL . 'lib/photoswipe/photoswipe-ui-default.min.js', array(), RAEL_VER, true );
-							wp_enqueue_script( 'rael-scripts', RAEL_ASSETS_URL . 'js/rael-photoswipe.min.js', array( 'rael-photoswipe', 'rael-photoswipe-ui' ), RAEL_VER, true );
+							wp_register_script( 'rael-photoswipe', RAEL_ASSETS_URL . 'lib/photoswipe/photoswipe.min.js', array( 'jquery', 'masonry', 'imagesloaded' ), RAEL_VER, true );
+							wp_register_script( 'rael-photoswipe-ui', RAEL_ASSETS_URL . 'lib/photoswipe/photoswipe-ui-default.min.js', array(), RAEL_VER, true );
+							wp_register_script( 'rael-scripts', RAEL_ASSETS_URL . 'js/rael-photoswipe.min.js', array( 'rael-photoswipe', 'rael-photoswipe-ui' ), RAEL_VER, true );
 							wp_register_style( 'rael-photoswipe-style', RAEL_ASSETS_URL . 'lib/photoswipe/photoswipe.min.css', null, RAEL_VER );
 							wp_enqueue_style( 'rael-photoswipe-style' );
 							wp_register_style( 'rael-photoswipe-default-skin', RAEL_ASSETS_URL . 'lib/photoswipe/default-skin.min.css', null, RAEL_VER );
@@ -1194,36 +1194,36 @@ private function rael_find_element_recursive($elements, $widget_id) {
 						}
 						if ( ! isset( $included_libs['rael-swiper'] ) ) {
 							$included_libs['rael-swiper'] = true;
-							wp_enqueue_script( 'rael-swiper', RAEL_ASSETS_URL . 'lib/swiper/swiper.min.js', array(), RAEL_VER, true );
+							wp_register_script( 'rael-swiper', RAEL_ASSETS_URL . 'lib/swiper/swiper.min.js', array(), RAEL_VER, true );
 							wp_localize_script( 'rael-swiper', 'rael_elementor_swiper', $swiper_class );
 						}
 						break;
 					case 'image-gallery':
 						if ( ! isset( $included_libs['rael-fancybox'] ) ) {
 							$included_libs['rael-fancybox'] = true;
-							wp_enqueue_script( 'rael-fancybox', RAEL_ASSETS_URL . 'lib/fancybox/jquery_fancybox.min.js', array( 'jquery' ), RAEL_VER, true );
+							wp_register_script( 'rael-fancybox', RAEL_ASSETS_URL . 'lib/fancybox/jquery_fancybox.min.js', array( 'jquery' ), RAEL_VER, true );
 							wp_register_style( 'rael-fancybox-style', RAEL_ASSETS_URL . 'lib/fancybox/jquery-fancybox.min.css', null, RAEL_VER );
 							wp_enqueue_style( 'rael-fancybox-style' );
 						}
-						wp_enqueue_script( 'rael-justified', RAEL_ASSETS_URL . 'lib/justifiedgallery/justifiedgallery.min.js', array( 'jquery' ), RAEL_VER, true );
-						wp_enqueue_script( 'rael-element-resize', RAEL_ASSETS_URL . 'lib/jquery-element-resize/jquery_resize.min.js', array( 'jquery' ), RAEL_VER, true );
+						wp_register_script( 'rael-justified', RAEL_ASSETS_URL . 'lib/justifiedgallery/justifiedgallery.min.js', array( 'jquery' ), RAEL_VER, true );
+						wp_register_script( 'rael-element-resize', RAEL_ASSETS_URL . 'lib/jquery-element-resize/jquery_resize.min.js', array( 'jquery' ), RAEL_VER, true );
 						if ( ! isset( $included_libs['rael-isotope'] ) ) {
 							$included_libs['rael-isotope'] = true;
-							wp_enqueue_script( 'rael-isotope', RAEL_ASSETS_URL . 'lib/isotope/isotope.min.js', array( 'jquery' ), RAEL_VER, true );
+							wp_register_script( 'rael-isotope', RAEL_ASSETS_URL . 'lib/isotope/isotope.min.js', array( 'jquery' ), RAEL_VER, true );
 						}
 						if ( ! isset( $included_libs['rael-swiper'] ) ) {
 							$included_libs['rael-swiper'] = true;
-							wp_enqueue_script( 'rael-swiper', RAEL_ASSETS_URL . 'lib/swiper/swiper.min.js', array(), RAEL_VER, true );
+							wp_register_script( 'rael-swiper', RAEL_ASSETS_URL . 'lib/swiper/swiper.min.js', array(), RAEL_VER, true );
 							wp_localize_script( 'rael-swiper', 'rael_elementor_swiper', $swiper_class );
 						}
 						break;
 					case 'twitter-feed':
 						if ( ! isset( $included_libs['rael-isotope'] ) ) {
 							$included_libs['rael-isotope'] = true;
-							wp_enqueue_script( 'rael-isotope', RAEL_ASSETS_URL . 'lib/isotope/isotope.min.js', array( 'jquery' ), RAEL_VER, true );
+							wp_register_script( 'rael-isotope', RAEL_ASSETS_URL . 'lib/isotope/isotope.min.js', array( 'jquery' ), RAEL_VER, true );
 						}
 						
-						wp_enqueue_script(
+						wp_register_script(
 							'rael-twitter-feed', 
 							RAEL_ASSETS_URL . 'js/frontend/twitter-feed/rael-twitter-feed.js', 
 							array('jquery', 'rael-isotope', 'imagesloaded'), 
@@ -1232,18 +1232,18 @@ private function rael_find_element_recursive($elements, $widget_id) {
 						);
 						break;
 					case 'nav-menu':
-						wp_enqueue_script( 'rael-smartmenus', RAEL_ASSETS_URL . 'lib/smartmenus/jquery.smartmenus.min.js', array(), RAEL_VER, true );
+						wp_register_script( 'rael-smartmenus', RAEL_ASSETS_URL . 'lib/smartmenus/jquery.smartmenus.min.js', array(), RAEL_VER, true );
 						break;
 					case 'video':
-						wp_enqueue_script( 'rael-magnific-popup', RAEL_ASSETS_URL . 'lib/magnific-popup/jquery.magnific-popup.min.js', array(), RAEL_VER, true );
+						wp_register_script( 'rael-magnific-popup', RAEL_ASSETS_URL . 'lib/magnific-popup/jquery.magnific-popup.min.js', array(), RAEL_VER, true );
 						wp_register_style( 'rael-magnific-popup-style', RAEL_ASSETS_URL . 'lib/magnific-popup/magnific-popup.min.css', null, RAEL_VER );
 						wp_enqueue_style( 'rael-magnific-popup-style' );
 						break;
 					case 'lottie':
-						wp_enqueue_script( 'rael-lottie-lib', RAEL_ASSETS_URL . 'lib/lottie/lottie.min.js', array(), RAEL_VER, true );
+						wp_register_script( 'rael-lottie-lib', RAEL_ASSETS_URL . 'lib/lottie/lottie.min.js', array(), RAEL_VER, true );
 						break;
 					case 'sticky-video':
-						wp_enqueue_script( 'rael-plyr', RAEL_ASSETS_URL . 'lib/plyr/plyr.min.js', array(), RAEL_VER, true );
+						wp_register_script( 'rael-plyr', RAEL_ASSETS_URL . 'lib/plyr/plyr.min.js', array(), RAEL_VER, true );
 						wp_register_style( 'rael-plyr-style', RAEL_ASSETS_URL . 'lib/plyr/plyr.min.css', null, RAEL_VER );
 						wp_enqueue_style( 'rael-plyr-style' );
 						break;
@@ -1254,38 +1254,38 @@ private function rael_find_element_recursive($elements, $widget_id) {
 					case 'reviews':
 						if ( ! isset( $included_libs['rael-swiper'] ) ) {
 							$included_libs['rael-swiper'] = true;
-							wp_enqueue_script( 'rael-swiper', RAEL_ASSETS_URL . 'lib/swiper/swiper.js', array(), RAEL_VER, true );
+							wp_register_script( 'rael-swiper', RAEL_ASSETS_URL . 'lib/swiper/swiper.js', array(), RAEL_VER, true );
 							wp_localize_script( 'rael-swiper', 'rael_elementor_swiper', $swiper_class );
 							
 						}
-						wp_enqueue_script( 'rael-media-carousel', RAEL_ASSETS_URL . 'js/frontend/media-carousel/media-carousel.js', array('jquery', 'elementor-frontend'), RAEL_VER, true);// . $ext );
+						wp_register_script( 'rael-media-carousel', RAEL_ASSETS_URL . 'js/frontend/media-carousel/media-carousel.js', array('jquery', 'elementor-frontend'), RAEL_VER, true);// . $ext );
 
 						break;
 					case 'slider':
 					case 'testimonial-slider':
 						if ( ! isset( $included_libs['rael-swiper'] ) ) {
 							$included_libs['rael-swiper'] = true;
-							wp_enqueue_script( 'rael-swiper', RAEL_ASSETS_URL . 'lib/swiper/swiper.js', array(), RAEL_VER, true );
+							wp_register_script( 'rael-swiper', RAEL_ASSETS_URL . 'lib/swiper/swiper.js', array(), RAEL_VER, true );
 							wp_localize_script( 'rael-swiper', 'rael_elementor_swiper', $swiper_class );
 						}
 						break;
 					case 'banner':
-						wp_enqueue_script( 'rael-tilt', RAEL_ASSETS_URL . 'lib/universal-tilt/universal-tilt.min.js', array(), RAEL_VER, true );
+						wp_register_script( 'rael-tilt', RAEL_ASSETS_URL . 'lib/universal-tilt/universal-tilt.min.js', array(), RAEL_VER, true );
 						break;
 					case 'fancy-text':
-						wp_enqueue_script( 'rael-morphext', RAEL_ASSETS_URL . 'lib/morphext/morphext.min.js', array(), RAEL_VER, true );
-						wp_enqueue_script( 'rael-typed', RAEL_ASSETS_URL . 'lib/typed/typed.min.js', array(), RAEL_VER, true );
+						wp_register_script( 'rael-morphext', RAEL_ASSETS_URL . 'lib/morphext/morphext.min.js', array(), RAEL_VER, true );
+						wp_register_script( 'rael-typed', RAEL_ASSETS_URL . 'lib/typed/typed.min.js', array(), RAEL_VER, true );
 						break;
 					case 'data-table':
-						wp_enqueue_script( 'rael-table-sorter', RAEL_ASSETS_URL . 'lib/table-sorter/jquery.tablesorter.min.js', array(), RAEL_VER, true );
+						wp_register_script( 'rael-table-sorter', RAEL_ASSETS_URL . 'lib/table-sorter/jquery.tablesorter.min.js', array(), RAEL_VER, true );
 						break;
 					case 'progress-bar':
-						wp_enqueue_script( 'rael-inview', RAEL_ASSETS_URL . 'lib/inview/inview.min.js', array(), RAEL_VER, true );
+						wp_register_script( 'rael-inview', RAEL_ASSETS_URL . 'lib/inview/inview.min.js', array(), RAEL_VER, true );
 						break;
 					case 'team-member':
 						if ( ! isset( $included_libs['rael-magnific-popup'] ) ) {
 							$included_libs['rael-magnific-popup'] = true;
-							wp_enqueue_script( 'rael-magnific-popup', RAEL_ASSETS_URL . 'lib/magnific-popup/jquery.magnific-popup.min.js', array(), RAEL_VER, true );
+							wp_register_script( 'rael-magnific-popup', RAEL_ASSETS_URL . 'lib/magnific-popup/jquery.magnific-popup.min.js', array(), RAEL_VER, true );
 							wp_register_style( 'rael-magnific-popup-style', RAEL_ASSETS_URL . 'lib/magnific-popup/magnific-popup.min.css', null, RAEL_VER );
 							wp_enqueue_style( 'rael-magnific-popup-style' );
 						}
@@ -1293,18 +1293,18 @@ private function rael_find_element_recursive($elements, $widget_id) {
 					case 'before-after-slider':
 						if ( ! isset( $included_libs['rael-twentytwenty'] ) ) {
 							$included_libs['rael-twentytwenty'] = true;
-							wp_enqueue_script( 'rael-twentytwenty', RAEL_ASSETS_URL . 'lib/jquery-twentytwenty/jquery-twentytwenty.min.js', array( 'jquery' ), RAEL_VER, true );
+							wp_register_script( 'rael-twentytwenty', RAEL_ASSETS_URL . 'lib/jquery-twentytwenty/jquery-twentytwenty.min.js', array( 'jquery' ), RAEL_VER, true );
 						}
 						if( ! isset( $included_libs['rael-event-move'] ) ) {
 							$included_libs['rael-event-move'] = true;
-							wp_enqueue_script( 'rael-event-move', RAEL_ASSETS_URL . 'lib/jquery-event-move/jquery-event-move.min.js', array( 'jquery' ), RAEL_VER, true );
+							wp_register_script( 'rael-event-move', RAEL_ASSETS_URL . 'lib/jquery-event-move/jquery-event-move.min.js', array( 'jquery' ), RAEL_VER, true );
 						}
             			break;
 					case 'stacking-cards':
 						// Load GSAP once
 						if ( ! isset( $included_libs['gsap'] ) ) {
 							$included_libs['gsap'] = true;
-							wp_enqueue_script(
+							wp_register_script(
 								'gsap',
 								RAEL_ASSETS_URL . 'lib/gsap/gsap.min.js',
 								array(),
@@ -1316,7 +1316,7 @@ private function rael_find_element_recursive($elements, $widget_id) {
 						// Load GSAP ScrollTrigger once
 						if ( ! isset( $included_libs['gsap-scrolltrigger'] ) ) {
 							$included_libs['gsap-scrolltrigger'] = true;
-							wp_enqueue_script(
+							wp_register_script(
 								'gsap-scrolltrigger',
 								RAEL_ASSETS_URL . 'lib/gsap/ScrollTrigger.min.js',
 								array( 'gsap' ),
@@ -1327,7 +1327,7 @@ private function rael_find_element_recursive($elements, $widget_id) {
 						 // Load Stacking Cards script
 						if ( ! isset( $included_libs['rael-stacking-cards'] ) ) {
 							$included_libs['rael-stacking-cards'] = true;
-							wp_enqueue_script(
+							wp_register_script(
 								'rael-stacking-cards',
 								RAEL_ASSETS_URL . 'js/frontend/stacking-cards/rael-stacking-cards.min.js',
 								array( 'elementor-frontend', 'jquery', 'gsap', 'gsap-scrolltrigger' ),
@@ -1337,7 +1337,7 @@ private function rael_find_element_recursive($elements, $widget_id) {
 						}
 						break;
 					case 'facebook-feed':
-						wp_enqueue_script( 'rael-facebook-feed', RAEL_ASSETS_URL . 'js/frontend/facebook-feed/rael-facebook-feed.min.js', array( 'jquery' ), RAEL_VER, true );
+						wp_register_script( 'rael-facebook-feed', RAEL_ASSETS_URL . 'js/frontend/facebook-feed/rael-facebook-feed.min.js', array( 'jquery' ), RAEL_VER, true );
 						wp_localize_script('rael-facebook-feed', 'rael_facebook_feed_vars', array(
 							'ajaxurl' => admin_url('admin-ajax.php'),
 							'nonce' => wp_create_nonce('rael_facebook_feed_nonce')

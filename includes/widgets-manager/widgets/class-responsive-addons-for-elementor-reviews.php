@@ -81,6 +81,12 @@ class Responsive_Addons_For_Elementor_Reviews extends Widget_Base {
 			'e-swiper',	
 		);
 	}
+	/**
+	 * This function helps in getting the scripts.
+	 */
+	public function get_script_depends() {
+		return array( 'rael-swiper','rael-media-carousel' );
+	}
 
 	/**
 	 * Add repeater controls

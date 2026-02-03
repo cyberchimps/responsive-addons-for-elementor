@@ -182,7 +182,7 @@ class Responsive_Addons_For_Elementor_Woo_Products extends Widget_Base {
 	 */
 	public function get_script_depends() {
 		return array(
-			'font-awesome-4-shim',
+			'font-awesome-4-shim','rael-photoswipe','rael-photoswipe-ui','rael-scripts','rael-swiper'
 		);
 	}
 
