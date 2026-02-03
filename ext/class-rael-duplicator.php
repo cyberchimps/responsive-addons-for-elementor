@@ -328,21 +328,12 @@ private function rae_duplicate( $post_id ) {
 		if ( empty( $screen->id ) ) {
 			return $hidden;
 		}
+		
+		$column = 'rae_duplicator';
 
-		// Allowed list table screen IDs
-		$screens = array(
-			'edit-post',     // Posts
-			'edit-page',     // Pages
-			'edit-product',  // WooCommerce Products
-		);
-
-		// Apply only to above screens
-		if ( in_array( $screen->id, $screens, true ) ) {
-			$column = 'rae_duplicator';
-
-			if ( ! in_array( $column, $hidden, true ) ) {
-				$hidden[] = $column;
-			}
+		/*  Core post types, Elementor post types, All custom post types */
+		if ( $screen->base === 'edit' && ! in_array( $column, $hidden, true )) {
+			$hidden[] = $column;
 		}
 
 		return $hidden;
@@ -350,7 +341,13 @@ private function rae_duplicate( $post_id ) {
 
 	public function rae_duplicator_admin_styles($hook) {
 		$screen = get_current_screen();
-		if ( ! $screen || ! in_array( $screen->id, [ 'edit-post', 'edit-page', 'edit-product' ], true ) ) {
+
+		if ( ! $screen ) {
+			return;
+		}
+
+		/* Apply only to list table screens: Core post types, Elementor post types, All CPTs */
+		if ( 'edit' !== $screen->base ) {
 			return;
 		}
 
