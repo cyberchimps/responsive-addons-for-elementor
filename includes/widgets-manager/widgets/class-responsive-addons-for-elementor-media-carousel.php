@@ -109,6 +109,8 @@ class Responsive_Addons_For_Elementor_Media_Carousel extends Widget_Base {
 			'swiper',
 			'e-swiper',
 			'font-awesome-4-shim',
+			'rael-swiper',
+			'rael-media-carousel',
 		);
 	}
 	/**

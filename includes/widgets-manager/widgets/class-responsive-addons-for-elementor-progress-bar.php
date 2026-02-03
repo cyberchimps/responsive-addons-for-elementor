@@ -87,7 +87,16 @@ class Responsive_Addons_For_Elementor_Progress_Bar extends Widget_Base {
 	public function get_custom_help_url() {
 		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/progress-bar-2/';
 	}
-
+	/**
+	 * Get the scripts required for the widget.
+	 *
+	 * @return array
+	 */
+	public function get_script_depends() {
+		return array(
+			'rael-inview'
+		);
+	}
 	/**
 	 * Register controls function
 	 *

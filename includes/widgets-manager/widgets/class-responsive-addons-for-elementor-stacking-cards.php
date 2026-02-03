@@ -56,7 +56,7 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 	}
 
 	public function get_script_depends() {
-		return array( 'rael-stacking-card' );
+		return array( 'gsap','gsap-scrolltrigger','rael-stacking-cards' );
 	}
 
 	protected function register_controls() {
