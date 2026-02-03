@@ -114,6 +114,12 @@ class Responsive_Addons_For_Elementor_Content_Ticker extends Widget_Base {
 			'responsive elementor addons',
 		);
 	}
+	/**
+	 * This function helps in getting the scripts.
+	 */
+	public function get_script_depends() {
+		return array( 'rael-swiper','rael-media-carousel' );
+	}
 
 	/**
 	 * Register all the control settings for the RAEL Content Ticker widget.

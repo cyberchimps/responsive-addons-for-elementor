@@ -86,6 +86,9 @@ class Responsive_Addons_For_Elementor_Product_Carousel extends Widget_Base {
 	public function get_categories() {
 		return array( 'responsive-addons-for-elementor' );
 	}
+	public function get_script_depends() {
+		return array( 'rael-photoswipe','rael-photoswipe-ui','rael-scripts','rael-swiper' );
+	}
 	/**
 	 * Get the stylesheets required for the widget.
 	 *

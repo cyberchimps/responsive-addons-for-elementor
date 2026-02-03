@@ -106,6 +106,12 @@ class Responsive_Addons_For_Elementor_Sticky_Video extends Widget_Base {
 		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/sticky-video/';
 	}
 	/**
+	 * This function helps in getting the scripts.
+	 */
+	public function get_script_depends() {
+		return array( 'rael-plyr' );
+	}
+	/**
 	 * Register controls for the Table of Contents widget.
 	 */
 	protected function register_controls() {

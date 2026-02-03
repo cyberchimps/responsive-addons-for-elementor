@@ -69,6 +69,21 @@ class Responsive_Addons_For_Elementor_Facebook_Feed extends Widget_Base {
 	public function get_categories() {
 		return array( 'responsive-addons-for-elementor' );
 	}
+	   /**
+	 * Retrieve the list of scripts the image carousel widget depended on.
+	 *
+	 * Used to set scripts dependencies required to run the widget.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @return array Widget scripts dependencies.
+	 */
+	public function get_script_depends() {
+		return array(
+			'rael-facebook-feed',
+		);
+	}
 
 	/**
 	 * Register 'Facebook Feed' widget controls.
