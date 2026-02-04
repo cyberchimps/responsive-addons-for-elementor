@@ -1387,8 +1387,8 @@ private function rael_find_element_recursive($elements, $widget_id) {
 						));
 						break;
 					case 'posts':
-						wp_enqueue_script( 'rael-posts', RAEL_ASSETS_URL . 'js/frontend/posts/posts.min.js', array( 'jquery' ), RAEL_VER, true );
-						wp_enqueue_script( 'rael-posts-cards', RAEL_ASSETS_URL . 'js/frontend/posts/posts-cards.min.js', array( 'jquery' ), RAEL_VER, true );
+						wp_enqueue_script( 'rael-posts', RAEL_ASSETS_URL . 'js/frontend/posts/rael-posts.min.js', array( 'jquery' ), RAEL_VER, true );
+						wp_enqueue_script( 'rael-posts-cards', RAEL_ASSETS_URL . 'js/frontend/posts/rael-posts-cards.min.js', array( 'jquery' ), RAEL_VER, true );
 
 						wp_localize_script('rael-posts', 'raelpostsvar', array(
 							'ajaxurl' => admin_url('admin-ajax.php'),
