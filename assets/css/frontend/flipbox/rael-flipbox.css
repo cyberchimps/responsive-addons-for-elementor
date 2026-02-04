@@ -26,9 +26,6 @@
     background-color: rgba(0, 0, 0, 0.5); 
   }
 
-  .rael-flip-box:hover .elementor-icon i::before {
-    content: ''; }
-
 .rael-flip-box .elementor-icon-wrapper {
   margin-bottom: 20px; }
 
@@ -227,5 +224,13 @@
 @media (max-device-width: 1024px) {
   .rael-flip-box {
     cursor: pointer; } }
+
+.elementor-editor-active .rael-flip-box:hover .elementor-icon i::before {
+    content: inherit !important
+}
+.rael-flip-box-image img{
+  width: 50%;
+  height: 150px;
+}
 
 /*# sourceMappingURL=rael-flipbox.css.map */

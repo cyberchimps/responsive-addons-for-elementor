@@ -65,6 +65,7 @@ class RaelCardsHandler extends elementorModules.frontend.handlers.Base {
             return;
         }
 
+
         this.elements.$posts.each(function() {
             var $post = $(this),
                 $image = $post.find(settings.selectors.postThumbnailImage);
@@ -232,6 +233,50 @@ class RaelCardsHandler extends elementorModules.frontend.handlers.Base {
                 self.applySimpleMasonry(container, colsCount, gap);
             }
         }, 300);
+    }
+
+    run() {
+        this.fitImages();
+        
+        var self = this;
+        setTimeout(function() {
+            self.initMasonry();
+        }, 500);
+        
+    }
+
+    runMasonry($scope) {
+
+        var elements = this.elements;
+        elements.$posts.css({
+            marginTop: '',
+            transitionDuration: ''
+        });
+        this.setColsCountSettings();
+        var colsCount = this.getSettings('colsCount'),
+            hasMasonry = this.isMasonryEnabled() && colsCount >= 2;
+        elements.$postsContainer.toggleClass('elementor-posts-masonry', hasMasonry);
+
+        if (!hasMasonry) {
+            elements.$postsContainer.height('');
+            return;
+        }
+        /* The `verticalSpaceBetween` variable is setup in a way that supports older versions of the portfolio widget */
+
+
+        var verticalSpaceBetween = this.getElementSettings(this.getSkinPrefix() + 'row_gap.size');
+
+        if ('' === this.getSkinPrefix() && '' === verticalSpaceBetween) {
+            verticalSpaceBetween = this.getElementSettings(this.getSkinPrefix() + 'item_gap.size');
+        }
+
+        var masonry = new elementorModules.utils.Masonry({
+            container: elements.$postsContainer,
+            items: elements.$posts.filter(':visible'),
+            columnsCount: this.getSettings('colsCount'),
+            verticalSpaceBetween: verticalSpaceBetween
+        });
+        masonry.run();
     }
 
     run() {
@@ -603,4 +648,28 @@ window.addEventListener('resize', function() {
             }, 200);
         });
     }, 200);
+});
+        this.run();
+    }
+
+    onWindowResize() {
+        this.fitImages();
+        this.runMasonry();
+    }
+
+    onElementChange() {
+        this.fitImages();
+        this.runMasonry();
+    }
+}
+
+jQuery(window).on("elementor/frontend/init", () => {
+
+    const addCardHandler = ($element) => {
+        elementorFrontend.elementsHandler.addHandler(RaelCardsHandler, {
+            $element,
+        });
+    };
+    elementorFrontend.hooks.addAction("frontend/element_ready/rael-posts.rael_cards", addCardHandler);
+
 });

@@ -266,6 +266,96 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 
 		$this->start_controls_tab( 'back_content_tab', array( 'label' => __( 'Content', 'responsive-addons-for-elementor' ) ) );
 
+			$this->add_control(
+			'back_graphic_element',
+			array(
+				'label'   => __( 'Graphic Element', 'responsive-addons-for-elementor' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => array(
+					'none'  => array(
+						'title' => __( 'None', 'responsive-addons-for-elementor' ),
+						'icon'  => 'fas fa-ban',
+					),
+					'image' => array(
+						'title' => __( 'Image', 'responsive-addons-for-elementor' ),
+						'icon'  => 'far fa-image',
+					),
+					'icon'  => array(
+						'title' => __( 'Icon', 'responsive-addons-for-elementor' ),
+						'icon'  => 'fas fa-star',
+					),
+				),
+				'default' => 'icon',
+			)
+		);
+
+		$this->add_control(
+			'back_image',
+			array(
+				'label'     => __( 'Choose Image', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::MEDIA,
+				'default'   => array( 'url' => Utils::get_placeholder_image_src() ),
+				'condition' => array( 'back_graphic_element' => 'image' ),
+				'dynamic'   => array( 'active' => true ),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Image_Size::get_type(),
+			array(
+				'name'      => 'back_image',
+				'label'     => __( 'Image Size', 'responsive-addons-for-elementor' ),
+				'default'   => 'thumbnail',
+				'condition' => array( 'back_graphic_element' => 'image' ),
+			)
+		);
+
+		$this->add_control(
+			'back_flip_box_icon',
+			array(
+				'label'            => __( 'Icon', 'responsive-addons-for-elementor' ),
+				'type'             => Controls_Manager::ICONS,
+				'fa4compatibility' => 'icon',
+				'default'          => array(
+					'value'   => 'fas fa-star-of-life',
+					'library' => 'fa-solid',
+				),
+				'condition'        => array( 'back_graphic_element' => 'icon' ),
+			)
+		);
+
+		$this->add_control(
+			'back_icon_view',
+			array(
+				'label'     => __( 'View', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'default',
+				'options'   => array(
+					'default' => __( 'Default', 'responsive-addons-for-elementor' ),
+					'stacked' => __( 'Stacked', 'responsive-addons-for-elementor' ),
+					'framed'  => __( 'Framed', 'responsive-addons-for-elementor' ),
+				),
+				'condition' => array( 'back_graphic_element' => 'icon' ),
+			)
+		);
+
+		$this->add_control(
+			'back_icon_shape',
+			array(
+				'label'     => __( 'Shape', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'circle',
+				'options'   => array(
+					'circle' => __( 'Circle', 'responsive-addons-for-elementor' ),
+					'square' => __( 'Square', 'responsive-addons-for-elementor' ),
+				),
+				'condition' => array(
+					'back_icon_view!'      => 'default',
+					'back_graphic_element' => 'icon',
+				),
+			)
+		);
+
 		$this->add_control(
 			'back_title_text',
 			array(
@@ -558,6 +648,91 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 		$this->start_controls_tabs( 'front_style_tabs' );
 
 		$this->start_controls_tab(
+			'front_title_style_tab',
+			array(
+				'label'     => __( 'Title', 'responsive-addons-for-elementor' ),
+				'condition' => array( 'front_title_text!' => '' ),
+			)
+		);
+
+		$this->add_control(
+			'front_title_spacing',
+			array(
+				'label'     => __( 'Spacing', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'selectors' => array( '{{WRAPPER}} .rael-flip-box-front .rael-flip-box-layer-title' => 'margin-bottom: {{SIZE}}{{UNIT}};' ),
+				'condition' => array( 'front_description_text!' => '' ),
+			)
+		);
+
+		$this->add_control(
+			'front_title_color',
+			array(
+				'label'     => __( 'Text Color', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .rael-flip-box-front .rael-flip-box-layer-title' => 'color: {{VALUE}}',
+
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'front_title_typography',
+				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
+				'global'   => array(
+					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+				),
+				'selector' => '{{WRAPPER}} .rael-flip-box-front .rael-flip-box-layer-title',
+			)
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'front_description_style_tab',
+			array(
+				'label'     => __( 'Description', 'responsive-addons-for-elementor' ),
+				'condition' => array( 'front_description_text!' => '' ),
+			)
+		);
+
+		$this->add_control(
+			'front_description_color',
+			array(
+				'label'     => __( 'Text Color', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#f5f5f5',
+				'selectors' => array(
+					'{{WRAPPER}} .rael-flip-box-front .rael-flip-box-layer-desc' => 'color: {{VALUE}}',
+
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'front_description_typography',
+				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
+				'global'   => array(
+					'default' => Global_Typography::TYPOGRAPHY_TEXT,
+				),
+				'selector' => '{{WRAPPER}} .rael-flip-box-front .rael-flip-box-layer-desc',
+			)
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
 			'front_icon_style_tab',
 			array(
 				'label'     => __( 'Icon', 'responsive-addons-for-elementor' ),
@@ -698,15 +873,15 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 		$this->end_controls_tab();
 
 		$this->start_controls_tab(
-			'front_title_style_tab',
+			'front_image_style_tab',
 			array(
-				'label'     => __( 'Title', 'responsive-addons-for-elementor' ),
-				'condition' => array( 'front_title_text!' => '' ),
+				'label'     => __( 'Image', 'responsive-addons-for-elementor' ),
+				'condition' => array( 'graphic_element' => 'image' ),
 			)
 		);
 
 		$this->add_control(
-			'front_title_spacing',
+			'image_spacing',
 			array(
 				'label'     => __( 'Spacing', 'responsive-addons-for-elementor' ),
 				'type'      => Controls_Manager::SLIDER,
@@ -716,67 +891,8 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 						'max' => 100,
 					),
 				),
-				'selectors' => array( '{{WRAPPER}} .rael-flip-box-front .rael-flip-box-layer-title' => 'margin-bottom: {{SIZE}}{{UNIT}};' ),
-				'condition' => array( 'front_description_text!' => '' ),
-			)
-		);
-
-		$this->add_control(
-			'front_title_color',
-			array(
-				'label'     => __( 'Text Color', 'responsive-addons-for-elementor' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => array(
-					'{{WRAPPER}} .rael-flip-box-front .rael-flip-box-layer-title' => 'color: {{VALUE}}',
-
-				),
-			)
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'     => 'front_title_typography',
-				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'global'   => array(
-					'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
-				),
-				'selector' => '{{WRAPPER}} .rael-flip-box-front .rael-flip-box-layer-title',
-			)
-		);
-
-		$this->end_controls_tab();
-
-		$this->start_controls_tab(
-			'front_description_style_tab',
-			array(
-				'label'     => __( 'Description', 'responsive-addons-for-elementor' ),
-				'condition' => array( 'front_description_text!' => '' ),
-			)
-		);
-
-		$this->add_control(
-			'front_description_color',
-			array(
-				'label'     => __( 'Text Color', 'responsive-addons-for-elementor' ),
-				'type'      => Controls_Manager::COLOR,
-				'default'   => '#f5f5f5',
-				'selectors' => array(
-					'{{WRAPPER}} .rael-flip-box-front .rael-flip-box-layer-desc' => 'color: {{VALUE}}',
-
-				),
-			)
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			array(
-				'name'     => 'front_description_typography',
-				'label'    => __( 'Typography', 'responsive-addons-for-elementor' ),
-				'global'   => array(
-					'default' => Global_Typography::TYPOGRAPHY_TEXT,
-				),
-				'selector' => '{{WRAPPER}} .rael-flip-box-front .rael-flip-box-layer-desc',
+				'selectors' => array( '{{WRAPPER}} .rael-flip-box-image' => 'margin-bottom: {{SIZE}}{{UNIT}};' ),
+				'condition' => array( 'graphic_element' => 'image' ),
 			)
 		);
 
@@ -872,6 +988,8 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 		);
 
 		$this->start_controls_tabs( 'back_style_tabs' );
+
+		
 
 		$this->start_controls_tab(
 			'back_title_style_tab',
@@ -974,7 +1092,169 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 		);
 
 		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'back_icon_style_tab',
+			array(
+				'label'     => __( 'Icon', 'responsive-addons-for-elementor' ),
+				'condition' => array( 'back_graphic_element' => 'icon' ),
+			)
+		);
 
+		$this->add_control(
+			'back_icon_spacing',
+			array(
+				'label'     => __( 'Spacing', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'selectors' => array( '{{WRAPPER}} .rael-flip-box-back .elementor-icon-wrapper' => 'margin-bottom: {{SIZE}}{{UNIT}};' ),
+				'condition' => array( 'back_graphic_element' => 'icon' ),
+			)
+		);
+
+		$this->add_control(
+			'back_icon_primary_color',
+			array(
+				'label'     => __( 'Icon Color', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'selectors' => array(
+					'{{WRAPPER}} .rael-flip-box-back .elementor-view-stacked .elementor-icon' => 'background-color: {{VALUE}}',
+					'{{WRAPPER}} .rael-flip-box-back .elementor-view-stacked .elementor-icon svg' => 'stroke: {{VALUE}}',
+					'{{WRAPPER}} .rael-flip-box-back .elementor-view-framed .elementor-icon, {{WRAPPER}} .rael-flip-box-back .elementor-view-default .elementor-icon' => 'color: {{VALUE}}; border-color: {{VALUE}}',
+					'{{WRAPPER}} .rael-flip-box-back .elementor-view-framed .elementor-icon svg, {{WRAPPER}} .rael-flip-box-back .elementor-view-default .elementor-icon svg' => 'fill: {{VALUE}};',
+				),
+				'condition' => array( 'back_graphic_element' => 'icon' ),
+			)
+		);
+
+		$this->add_control(
+			'back_icon_secondary_color',
+			array(
+				'label'     => __( 'Secondary Color', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '',
+				'condition' => array(
+					'back_graphic_element' => 'icon',
+					'back_icon_view!'      => 'default',
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .rael-flip-box-back .elementor-view-framed .elementor-icon' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .rael-flip-box-back .elementor-view-framed .elementor-icon svg' => 'stroke: {{VALUE}};',
+					'{{WRAPPER}} .rael-flip-box-back .elementor-view-stacked .elementor-icon' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .rael-flip-box-back .elementor-view-stacked .elementor-icon svg' => 'fill: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'back_icon_size',
+			array(
+				'label'     => __( 'Icon Size', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => array(
+					'px' => array(
+						'min' => 6,
+						'max' => 300,
+					),
+				),
+				'selectors' => array( '{{WRAPPER}} .rael-flip-box-back .elementor-icon' => 'font-size: {{SIZE}}{{UNIT}};' ),
+				'condition' => array( 'back_graphic_element' => 'icon' ),
+			)
+		);
+
+		$this->add_control(
+			'back_icon_padding',
+			array(
+				'label'     => __( 'Icon Padding', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'selectors' => array( '{{WRAPPER}} .rael-flip-box-back .elementor-icon' => 'padding: {{SIZE}}{{UNIT}};' ),
+				'range'     => array(
+					'em' => array(
+						'min' => 0,
+						'max' => 5,
+					),
+				),
+				'condition' => array(
+					'back_graphic_element' => 'icon',
+					'back_icon_view!'      => 'default',
+				),
+			)
+		);
+
+		$this->add_control(
+			'back_icon_rotate',
+			array(
+				'label'     => __( 'Icon Rotate', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'default'   => array(
+					'size' => 0,
+					'unit' => 'deg',
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .rael-flip-box-back .elementor-icon i'   => 'transform: rotate({{SIZE}}{{UNIT}});',
+					'{{WRAPPER}} .rael-flip-box-back .elementor-icon svg' => 'transform: rotate({{SIZE}}{{UNIT}});',
+				),
+				'condition' => array( 'back_graphic_element' => 'icon' ),
+			)
+		);
+
+		$this->add_control(
+			'back_icon_border_width',
+			array(
+				'label'     => __( 'Border Width', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'selectors' => array( '{{WRAPPER}} .rael-flip-box-back .elementor-icon' => 'border-width: {{SIZE}}{{UNIT}}' ),
+				'condition' => array(
+					'back_graphic_element' => 'icon',
+					'back_icon_view'       => 'framed',
+				),
+			)
+		);
+
+		$this->add_control(
+			'back_icon_border_radius',
+			array(
+				'label'      => __( 'Border Radius', 'responsive-addons-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => array( 'px', '%' ),
+				'selectors'  => array( '{{WRAPPER}} .rael-flip-box-back .elementor-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};' ),
+				'condition'  => array(
+					'back_graphic_element' => 'icon',
+					'back_icon_view!'      => 'default',
+				),
+			)
+		);
+
+		$this->end_controls_tab();
+		$this->start_controls_tab(
+			'back_image_style_tab',
+			array(
+				'label'     => __( 'Image', 'responsive-addons-for-elementor' ),
+				'condition' => array( 'back_graphic_element' => 'image' ),
+			)
+		);
+
+		$this->add_control(
+			'back_image_spacing',
+			array(
+				'label'     => __( 'Spacing', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::SLIDER,
+				'range'     => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 100,
+					),
+				),
+				'selectors' => array( '{{WRAPPER}} .rael-flip-box-back .rael-flip-box-image' => 'margin-bottom: {{SIZE}}{{UNIT}};' ),
+				'condition' => array( 'back_graphic_element' => 'image' ),
+			)
+		);
+		$this->end_controls_tab();
 		$this->end_controls_tabs();
 
 		$this->add_group_control(
@@ -1251,140 +1531,190 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 	 * @since  1.0.0
 	 * @access protected
 	 */
-	protected function render() {
-		$settings    = $this->get_settings_for_display();
-		$animation   = ( $settings['button_hover_animation'] ) ? ' elementor-animation-' . $settings['button_hover_animation'] : '';
-		$wrapper_tag = 'div';
-		$button_tag  = 'a';
-		$link_url = empty( $settings['link']['url'] ) ? '#' : esc_url_raw( $settings['link']['url'] );
+		protected function render() {
+	$settings  = $this->get_settings_for_display();
+	$link      = $settings['link'] ?? [];
+	$link_url = ! empty( $link['url'] ) ? esc_url( $link['url'] ) : '';
 
-		$this->add_render_attribute( 'button', 'class', array( 'rael-flip-box-button', 'elementor-button', 'elementor-size-' . $settings['button_size'], $animation ) );
+	$animation = ! empty( $settings['button_hover_animation'] )
+		? ' elementor-animation-' . esc_attr( $settings['button_hover_animation'] )
+		: '';
 
-		$this->add_render_attribute( 'wrapper', 'class', 'rael-flip-box-layer rael-flip-box-back' );
+	$wrapper_tag = 'div';
+	$button_tag  = 'a';
 
-		if ( 'box' === $settings['link_click'] ) {
-			$wrapper_tag = 'a';
-			$button_tag  = 'button';
-			$this->add_render_attribute( 'wrapper', 'href', $link_url );
-			if ( $settings['link']['is_external'] ) {
-				$this->add_render_attribute( 'wrapper', 'target', '_blank' );
-			}
-		} else {
-			$this->add_render_attribute( 'button', 'href', $link_url );
-			if ( $settings['link']['is_external'] ) {
-				$this->add_render_attribute( 'button', 'target', '_blank' );
-			}
+	/* Button attributes */
+	$this->add_render_attribute(
+		'button',
+		'class',
+		[
+			'rael-flip-box-button',
+			'elementor-button',
+			'elementor-size-' . esc_attr( $settings['button_size'] ),
+			$animation,
+		]
+	);
+
+	/* Link handling */
+	if ( 'box' === $settings['link_click'] && $link_url ) {
+		$wrapper_tag = 'a';
+		$button_tag  = 'button';
+
+		$this->add_render_attribute( 'wrapper', 'href', $link_url );
+
+		if ( ! empty( $link['is_external'] ) ) {
+			$this->add_render_attribute( 'wrapper', 'target', '_blank' );
 		}
-
-		if ( 'icon' === $settings['graphic_element'] ) {
-			$this->add_render_attribute( 'icon-wrapper', 'class', 'elementor-icon-wrapper' );
-			$this->add_render_attribute( 'icon-wrapper', 'class', 'elementor-view-' . $settings['icon_view'] );
-			if ( 'default' !== $settings['icon_view'] ) {
-				$this->add_render_attribute( 'icon-wrapper', 'class', 'elementor-shape-' . $settings['icon_shape'] );
-			}
-			if ( ! empty( $settings['icon'] ) ) {
-				$this->add_render_attribute( 'icon', 'class', $settings['icon'] );
-			}
+		if ( ! empty( $link['nofollow'] ) ) {
+			$this->add_render_attribute( 'wrapper', 'rel', 'nofollow' );
 		}
+	} elseif ( $link_url ) {
+		$this->add_render_attribute( 'button', 'href', $link_url );
 
-		$this->add_render_attribute( 'box_front_title_tags', 'class', 'rael-flip-box-layer-title' );
-
-		if ( ! isset( $settings['icon'] ) && ! Icons_Manager::is_migration_allowed() ) {
-			// add old default.
-			$settings['icon'] = 'fas fa-star-of-life';
+		if ( ! empty( $link['is_external'] ) ) {
+			$this->add_render_attribute( 'button', 'target', '_blank' );
 		}
+		if ( ! empty( $link['nofollow'] ) ) {
+			$this->add_render_attribute( 'button', 'rel', 'nofollow' );
+		}
+	}
 
-		$has_icon = ! empty( $settings['icon'] ) || ! empty( $settings['flip_box_icon'] );
-		$migrated = isset( $settings['__fa4_migrated']['flip_box_icon'] );
-		$is_new   = empty( $settings['icon'] ) && Icons_Manager::is_migration_allowed();
+	/*  Front icon attributes */
+	if ( 'icon' === $settings['graphic_element'] ) {
+		$this->add_render_attribute( 'front_icon_wrapper', 'class', [
+			'elementor-icon-wrapper',
+			'elementor-view-' . esc_attr( $settings['icon_view'] ),
+		] );
 
-		?>
-		<div class="rael-flip-box">
-			<div class="rael-flip-box-layer rael-flip-box-front">
-				<div class="rael-flip-box-layer-overlay">
-					<div class="rael-flip-box-layer-inner">
-		<?php if ( 'image' === $settings['graphic_element'] && ! empty( $settings['image']['url'] ) ) : ?>
-							<div class="rael-flip-box-image">
-				<?php echo wp_kses_post( Group_Control_Image_Size::get_attachment_image_html( $settings, 'image' ) ); ?>
-							</div>
-				<?php
-		elseif ( 'icon' === $settings['graphic_element'] && $has_icon ) :
-			?>
-							<div <?php echo wp_kses_post( $this->get_render_attribute_string( 'icon-wrapper' ) ); ?>>
-								<div class="elementor-icon">
+		if ( 'default' !== $settings['icon_view'] ) {
+			$this->add_render_attribute(
+				'front_icon_wrapper',
+				'class',
+				'elementor-shape-' . esc_attr( $settings['icon_shape'] )
+			);
+		}
+	}
 
-			<?php
-			if ( $is_new || $migrated ) :
-				Icons_Manager::render_icon(
-					$settings['flip_box_icon'],
-					array(
-						'aria-hidden' => 'true',
-						'class'       => 'fa-fw',
-					)
-				);
-			else :
-				?>
-										<i class="<?php echo esc_attr( $settings['icon'] ); ?>" aria-hidden="true"></i>
-				<?php
-			endif;
-			?>
+	/* Back icon attributes */
+	if ( 'icon' === $settings['back_graphic_element'] ) {
+		$this->add_render_attribute( 'back_icon_wrapper', 'class', [
+			'elementor-icon-wrapper',
+			'elementor-view-' . esc_attr( $settings['back_icon_view'] ),
+		] );
 
-								</div>
-							</div>
-			<?php
-		endif;
-		?>
+		if ( 'default' !== $settings['back_icon_view'] ) {
+			$this->add_render_attribute(
+				'back_icon_wrapper',
+				'class',
+				'elementor-shape-' . esc_attr( $settings['back_icon_shape'] )
+			);
+		}
+	}
 
-		<?php if ( ! empty( $settings['front_title_text'] ) ) : ?>
-						<<?php echo esc_html( Helper::validate_html_tags( $settings['front_title_tags'] ) ); ?> <?php echo wp_kses_post( $this->get_render_attribute_string( 'box_front_title_tags' ) ); ?>>
-				<?php echo wp_kses( $settings['front_title_text'], $this->element_pack_allow_tags( 'title' ) ); ?>
-					</<?php echo esc_html( Helper::validate_html_tags( $settings['front_title_tags'] ) ); ?>>
-				<?php
-		endif;
-		?>
+	/* Icon migration changes */
+	$front_has_icon = ! empty( $settings['flip_box_icon'] );
+	$front_migrated = isset( $settings['__fa4_migrated']['flip_box_icon'] );
+	$front_is_new   = Icons_Manager::is_migration_allowed();
 
-		<?php if ( ! empty( $settings['front_description_text'] ) ) : ?>
-						<div class="rael-flip-box-layer-desc">
-			<?php echo wp_kses( $settings['front_description_text'], $this->element_pack_allow_tags( 'text' ) ); ?>
+	$back_has_icon = ! empty( $settings['back_flip_box_icon'] );
+	$back_migrated = isset( $settings['__fa4_migrated']['back_flip_box_icon'] );
+	$back_is_new   = Icons_Manager::is_migration_allowed();
+	?>
+
+	<div class="rael-flip-box">
+		<!-- FRONT -->
+		<div class="rael-flip-box-layer rael-flip-box-front">
+			<div class="rael-flip-box-layer-overlay">
+				<div class="rael-flip-box-layer-inner">
+
+					<?php if ( 'image' === $settings['graphic_element'] && ! empty( $settings['image']['url'] ) ) : ?>
+						<div class="rael-flip-box-image">
+							<?php echo Group_Control_Image_Size::get_attachment_image_html( $settings, 'image' ); ?>
 						</div>
-			<?php
-		endif;
-		?>
+
+					<?php elseif ( 'icon' === $settings['graphic_element'] && $front_has_icon ) : ?>
+						<div <?php echo $this->get_render_attribute_string( 'front_icon_wrapper' ); ?>>
+							<div class="elementor-icon">
+								<?php
+								if ( $front_is_new || $front_migrated ) {
+									Icons_Manager::render_icon(
+										$settings['flip_box_icon'],
+										[ 'aria-hidden' => 'true' ]
+									);
+								}
+								?>
+							</div>
+						</div>
+					<?php endif; ?>
+
+					<?php if ( ! empty( $settings['front_title_text'] ) ) : ?>
+						<<?php echo tag_escape( $settings['front_title_tags'] ); ?> class="rael-flip-box-layer-title">
+							<?php echo wp_kses_post( $settings['front_title_text'] ); ?>
+						</<?php echo tag_escape( $settings['front_title_tags'] ); ?>>
+					<?php endif; ?>
+
+					<?php if ( ! empty( $settings['front_description_text'] ) ) : ?>
+						<div class="rael-flip-box-layer-desc">
+							<?php echo wp_kses_post( $settings['front_description_text'] ); ?>
+						</div>
+					<?php endif; ?>
+
 				</div>
 			</div>
 		</div>
-		<<?php echo esc_attr( $wrapper_tag ); ?> <?php echo wp_kses_post( $this->get_render_attribute_string( 'wrapper' ) ); ?>>
-		<div class="rael-flip-box-layer-overlay">
-		<div class="rael-flip-box-layer-inner">
-		<?php if ( ! empty( $settings['back_title_text'] ) ) : ?>
-		<<?php echo esc_html( Helper::validate_html_tags( $settings['back_title_tags'] ) ); ?> <?php echo wp_kses_post( $this->get_render_attribute_string( 'box_front_title_tags' ) ); ?>>
-			<?php echo wp_kses( $settings['back_title_text'], $this->element_pack_allow_tags( 'title' ) ); ?>
-		</<?php echo esc_html( Helper::validate_html_tags( $settings['back_title_tags'] ) ); ?>>
-			<?php
-		endif;
-		?>
 
-		<?php if ( ! empty( $settings['back_description_text'] ) ) : ?>
-		<div class="rael-flip-box-layer-desc">
-			<?php echo wp_kses( $settings['back_description_text'], $this->element_pack_allow_tags( 'text' ) ); ?>
-		</div>
-			<?php
-		endif;
-		?>
+		<!-- BACK -->
+		<div class="rael-flip-box-layer rael-flip-box-back">
+			<<?php echo tag_escape( $wrapper_tag ); ?>
+				<?php echo $this->get_render_attribute_string( 'wrapper' ); ?>
+				class="rael-flip-box-layer-overlay">
 
-		<?php if ( ! empty( $settings['button_text'] ) ) : ?>
-		<<?php echo esc_attr( $button_tag ); ?> <?php echo wp_kses_post( $this->get_render_attribute_string( 'button' ) ); ?>>
-			<?php echo wp_kses( $settings['button_text'], $this->element_pack_allow_tags( 'title' ) ); ?>
-		</<?php echo esc_attr( $button_tag ); ?>>
-			<?php
-		endif;
-		?>
+				<div class="rael-flip-box-layer-inner">
+					<?php if ( 'image' === $settings['back_graphic_element'] && ! empty( $settings['back_image']['url'] ) ) : ?>
+						<div class="rael-flip-box-image">
+							<?php echo Group_Control_Image_Size::get_attachment_image_html( $settings, 'back_image' ); ?>
+						</div>
+
+					<?php elseif ( 'icon' === $settings['back_graphic_element'] && $back_has_icon ) : ?>
+						<div <?php echo $this->get_render_attribute_string( 'back_icon_wrapper' ); ?>>
+							<div class="elementor-icon">
+								<?php
+								if ( $back_is_new || $back_migrated ) {
+									Icons_Manager::render_icon(
+										$settings['back_flip_box_icon'],
+										[ 'aria-hidden' => 'true' ]
+									);
+								}
+								?>
+							</div>
+						</div>
+					<?php endif; ?>
+
+					<?php if ( ! empty( $settings['back_title_text'] ) ) : ?>
+						<<?php echo tag_escape( $settings['back_title_tags'] ); ?> class="rael-flip-box-layer-title">
+							<?php echo wp_kses_post( $settings['back_title_text'] ); ?>
+						</<?php echo tag_escape( $settings['back_title_tags'] ); ?>>
+					<?php endif; ?>
+
+					<?php if ( ! empty( $settings['back_description_text'] ) ) : ?>
+						<div class="rael-flip-box-layer-desc">
+							<?php echo wp_kses_post( $settings['back_description_text'] ); ?>
+						</div>
+					<?php endif; ?>
+
+					<?php if ( 'button' === $settings['link_click'] && ! empty( $settings['button_text'] ) ) : ?>
+						<<?php echo esc_attr( $button_tag ); ?>
+							<?php echo $this->get_render_attribute_string( 'button' ); ?>>
+							<?php echo esc_html( $settings['button_text'] ); ?>
+						</<?php echo esc_attr( $button_tag ); ?>>
+					<?php endif; ?>
+
+				</div>
+			</<?php echo tag_escape( $wrapper_tag ); ?>>
 		</div>
-		</div>
-		</<?php echo esc_attr( $wrapper_tag ); ?>>
-		</div>
-		<?php
-	}
+	</div>
+	<?php
+}
 
 	/**
 	 * Render Flip Box widget output in the editor.
@@ -1395,99 +1725,137 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 	 * @access protected
 	 */
 	protected function content_template() {
-		?>
-		<#
-		var buttonClass = 'rael-flip-box-button elementor-button elementor-size-' + settings.button_size + ' elementor-animation-' + settings.button_hover_animation;
+    ?>
+    <#
+    var buttonClass = 'rael-flip-box-button elementor-button elementor-size-' + settings.button_size + ' elementor-animation-' + settings.button_hover_animation;
 
-		if ( 'image' == settings.graphic_element && '' != settings.image.url ) {
-		var image = {
-		id: settings.image.id,
-		url: settings.image.url,
-		size: settings.image_size,
-		dimension: settings.image_custom_dimension,
-		model: view.getEditModel()
-		};
+    // Front image
+    if ( 'image' == settings.graphic_element && '' != settings.image.url ) {
+        var frontImage = {
+            id: settings.image.id,
+            url: settings.image.url,
+            size: settings.image_size,
+            dimension: settings.image_custom_dimension,
+            model: view.getEditModel()
+        };
+        var frontImageUrl = elementor.imagesManager.getImageUrl( frontImage );
+    }
 
-		var imageUrl = elementor.imagesManager.getImageUrl( image );
-		}
+    // Back image
+    if ( 'image' == settings.back_graphic_element && '' != settings.back_image.url ) {
+        var backImage = {
+            id: settings.back_image.id,
+            url: settings.back_image.url,
+            size: settings.image_size, // Note: using same image size control
+            dimension: settings.image_custom_dimension,
+            model: view.getEditModel()
+        };
+        var backImageUrl = elementor.imagesManager.getImageUrl( backImage );
+    }
 
-		var wrapperTag = 'div',
-		buttonTag = 'a';
+    var wrapperTag = 'div',
+        buttonTag = 'a';
 
-		if ( 'box' == settings.link_click ) {
-		wrapperTag = 'a';
-		buttonTag = 'button';
-		}
+    if ( 'box' == settings.link_click ) {
+        wrapperTag = 'a';
+        buttonTag = 'button';
+    }
 
-		if ( 'icon' == settings.graphic_element ) {
-		var iconWrapperClasses = 'elementor-icon-wrapper';
-		iconWrapperClasses += ' elementor-view-' + settings.icon_view;
-		if ( 'default' != settings.icon_view ) {
-		iconWrapperClasses += ' elementor-shape-' + settings.icon_shape;
-		}
-		}
+    // Front icon wrapper classes
+    var frontIconWrapperClasses = '';
+    if ( 'icon' == settings.graphic_element ) {
+        frontIconWrapperClasses = 'elementor-icon-wrapper';
+        frontIconWrapperClasses += ' elementor-view-' + settings.icon_view;
+        if ( 'default' != settings.icon_view ) {
+            frontIconWrapperClasses += ' elementor-shape-' + settings.icon_shape;
+        }
+    }
 
-		view.addRenderAttribute( 'box_front_title_tags', 'class', 'rael-flip-box-layer-title' );
+    // Back icon wrapper classes
+    var backIconWrapperClasses = '';
+    if ( 'icon' == settings.back_graphic_element ) {
+        backIconWrapperClasses = 'elementor-icon-wrapper';
+        backIconWrapperClasses += ' elementor-view-' + settings.back_icon_view;
+        if ( 'default' != settings.back_icon_view ) {
+            backIconWrapperClasses += ' elementor-shape-' + settings.back_icon_shape;
+        }
+    }
 
-		let hasIcon = settings.icon || settings.flip_box_icon;
-		iconHTML = elementor.helpers.renderIcon( view, settings.flip_box_icon, { 'aria-hidden': true }, 'i' , 'object' );
+    // Front icon
+    let hasFrontIcon = settings.icon || settings.flip_box_icon;
+    let frontIconHTML = elementor.helpers.renderIcon( view, settings.flip_box_icon, { 'aria-hidden': true }, 'i' , 'object' );
+    let frontMigrated = elementor.helpers.isIconMigrated( settings, 'flip_box_icon' );
 
-		migrated = elementor.helpers.isIconMigrated( settings, 'flip_box_icon' );
-		#>
+    // Back icon
+    let hasBackIcon = settings.back_flip_box_icon;
+    let backIconHTML = elementor.helpers.renderIcon( view, settings.back_flip_box_icon, { 'aria-hidden': true }, 'i' , 'object' );
+    #>
 
-		<div class="rael-flip-box">
-			<div class="rael-flip-box-layer rael-flip-box-front">
-				<div class="rael-flip-box-layer-overlay">
-					<div class="rael-flip-box-layer-inner">
-						<# if ( 'image' == settings.graphic_element && '' != settings.image.url ) { #>
-						<div class="rael-flip-box-image">
-							<img src="{{ imageUrl }}">
-						</div>
-						<#  } else if ( 'icon' === settings.graphic_element && hasIcon ) { #>
-						<div class="{{ iconWrapperClasses }}" >
-							<div class="elementor-icon">
+    <div class="rael-flip-box">
+        <div class="rael-flip-box-layer rael-flip-box-front">
+            <div class="rael-flip-box-layer-overlay">
+                <div class="rael-flip-box-layer-inner">
+                    <# if ( 'image' == settings.graphic_element && '' != settings.image.url ) { #>
+                        <div class="rael-flip-box-image">
+                            <img src="{{ frontImageUrl }}">
+                        </div>
+                    <# } else if ( 'icon' === settings.graphic_element && hasFrontIcon ) { #>
+                        <div class="{{ frontIconWrapperClasses }}" >
+                            <div class="elementor-icon">
+                                <# if ( frontIconHTML && frontIconHTML.rendered && ( ! settings.icon || frontMigrated ) ) { #>
+                                    {{{ frontIconHTML.value }}}
+                                <# } else { #>
+                                    <i class="{{ settings.icon }}" aria-hidden="true"></i>
+                                <# } #>
+                            </div>
+                        </div>
+                    <# } #>
 
-								<# if ( iconHTML && iconHTML.rendered && ( ! settings.icon || migrated ) ) { #>
-								{{{ iconHTML.value }}}
-								<# } else { #>
-								<i class="{{ settings.icon }}" aria-hidden="true"></i>
-								<# } #>
+                    <# if ( settings.front_title_text ) { #>
+                        <{{{ elementor.helpers.validateHTMLTag(settings.front_title_tags) }}} class="rael-flip-box-layer-title">{{ settings.front_title_text }}</{{{ elementor.helpers.validateHTMLTag(settings.front_title_tags) }}}>
+                    <# } #>
 
-							</div>
-						</div>
-						<# } #>
+                    <# if ( settings.front_description_text ) { #>
+                        <div class="rael-flip-box-layer-desc">{{ settings.front_description_text }}</div>
+                    <# } #>
+                </div>
+            </div>
+        </div>
+        
+        <{{ wrapperTag }} class="rael-flip-box-layer rael-flip-box-back">
+            <div class="rael-flip-box-layer-overlay">
+                <div class="rael-flip-box-layer-inner">
+                    <# if ( 'image' == settings.back_graphic_element && '' != settings.back_image.url ) { #>
+                        <div class="rael-flip-box-image">
+                            <img src="{{ backImageUrl }}">
+                        </div>
+                    <# } else if ( 'icon' === settings.back_graphic_element && hasBackIcon ) { #>
+                        <div class="{{ backIconWrapperClasses }}" >
+                            <div class="elementor-icon">
+                                <# if ( backIconHTML && backIconHTML.rendered ) { #>
+                                    {{{ backIconHTML.value }}}
+                                <# } #>
+                            </div>
+                        </div>
+                    <# } #>
+                    
+                    <# if ( settings.back_title_text ) { #>
+                        <{{{ elementor.helpers.validateHTMLTag(settings.back_title_tags) }}} class="rael-flip-box-layer-title">{{ settings.back_title_text }}</{{{ elementor.helpers.validateHTMLTag(settings.back_title_tags) }}}>
+                    <# } #>
 
-						<# if ( settings.front_title_text ) { #>
-						<{{{ elementor.helpers.validateHTMLTag(settings.front_title_tags) }}} {{{ view.getRenderAttributeString( 'box_front_title_tags' ) }}}>{{ settings.front_title_text }}</{{{ elementor.helpers.validateHTMLTag(settings.front_title_tags) }}}>
-					<# } #>
+                    <# if ( settings.back_description_text ) { #>
+                        <div class="rael-flip-box-layer-desc">{{ settings.back_description_text }}</div>
+                    <# } #>
 
-					<# if ( settings.front_description_text ) { #>
-					<div class="rael-flip-box-layer-desc">{{ settings.front_description_text }}</div>
-					<# } #>
-				</div>
-			</div>
-		</div>
-		<{{ wrapperTag }} class="rael-flip-box-layer rael-flip-box-back">
-		<div class="rael-flip-box-layer-overlay">
-			<div class="rael-flip-box-layer-inner">
-				<# if ( settings.back_title_text ) { #>
-				<{{{ elementor.helpers.validateHTMLTag(settings.back_title_tags) }}} {{{ view.getRenderAttributeString( 'box_front_title_tags' ) }}}>{{ settings.back_title_text }}</{{{ elementor.helpers.validateHTMLTag(settings.back_title_tags) }}}>
-			<# } #>
-
-			<# if ( settings.back_description_text ) { #>
-			<div class="rael-flip-box-layer-desc">{{ settings.back_description_text }}</div>
-			<# } #>
-
-			<# if ( settings.button_text ) { #>
-			<{{ buttonTag }} href="#" class="{{ buttonClass }}">{{ settings.button_text }}</{{ buttonTag }}>
-		<# } #>
-		</div>
-		</div>
-		</{{ wrapperTag }}>
-		</div>
-		<?php
-	}
-
+                    <# if ( settings.button_text ) { #>
+                        <{{ buttonTag }} href="#" class="{{ buttonClass }}">{{ settings.button_text }}</{{ buttonTag }}>
+                    <# } #>
+                </div>
+            </div>
+        </{{ wrapperTag }}>
+    </div>
+    <?php
+}
 	/**
 	 * Get Custom help URL
 	 *

@@ -87,6 +87,16 @@ class Responsive_Addons_For_Elementor_Team_Member extends Widget_Base {
 		return array( 'responsive-addons-for-elementor' );
 	}
 	/**
+	 * Get the scripts required for the widget.
+	 *
+	 * @return array
+	 */
+	public function get_script_depends() {
+		return array(
+			'rael-magnific-popup'
+		);
+	}
+	/**
 	 * Register controls for the widget.
 	 *
 	 * @return void

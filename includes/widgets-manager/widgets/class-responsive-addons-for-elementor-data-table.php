@@ -75,6 +75,16 @@ class Responsive_Addons_For_Elementor_Data_Table extends Widget_Base {
 		return array( 'table', 'content table', 'data', 'comparison table', 'grid', 'details' );
 	}
 	/**
+	 * Get the scripts required for the widget.
+	 *
+	 * @return array
+	 */
+	public function get_script_depends() {
+		return array(
+			'rael-table-sorter'
+		);
+	}
+	/**
 	 * Get custom help url function
 	 */
 	public function get_custom_help_url() {
