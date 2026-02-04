@@ -441,7 +441,6 @@ body.elementor-editor-active .elementor-posts--show-thumbnail .responsive-post__
     min-height: 100px;
     width: 100% !important;
 }
-
 /* Masonry Items - CRITICAL */
 .elementor-post {
     box-sizing: border-box !important;
@@ -465,7 +464,6 @@ body.elementor-editor-active .elementor-posts--show-thumbnail .responsive-post__
     width: 100% !important;
     max-width: 100% !important;
 }
-
 /* Prevent Elementor editor from hiding items */
 .elementor-editor-active .elementor-post {
     display: block !important;
