@@ -843,7 +843,7 @@ class Responsive_Addons_For_Elementor_Search_Form extends Widget_Base {
 					$btnclass = 'both_cls';
 				}
 					?>
-					<button class="rael-elementor-search-form__submit <?php echo $btnclass; ?>" type="submit" title="<?php esc_attr_e( 'Search', 'responsive-addons-for-elementor' ); ?>" aria-label="<?php esc_attr_e( 'Search', 'responsive-addons-for-elementor' ); ?>">
+					<button class="rael-elementor-search-form__submit <?php echo esc_attr( $btnclass ); ?>" type="submit" title="<?php esc_attr_e( 'Search', 'responsive-addons-for-elementor' ); ?>" aria-label="<?php esc_attr_e( 'Search', 'responsive-addons-for-elementor' ); ?>">
 						<?php
 					// TEXT should show if button_type is "text" OR "both"
 					if ( in_array( $settings['rael_button_type'], [ 'text', 'both' ], true ) && ! empty( $settings['rael_button_text'] ) ) : ?>

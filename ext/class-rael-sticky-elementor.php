@@ -397,13 +397,6 @@ if ( ! class_exists( 'Rael_Sticky_Elementor' ) ) {
 			if ( ! Helper::is_extension_active('sticky-section') ) {
 				return;
 			}
-			wp_enqueue_script(
-				'jsticky',
-				RAEL_URL . 'assets/lib/jsticky/jquery.jsticky.min.js',
-				array( 'jquery' ),
-				RAEL_VER,
-				true
-			);
 
 			wp_enqueue_script(
 				'rael-sticky-frontend',

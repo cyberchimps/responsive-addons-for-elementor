@@ -9,6 +9,10 @@ namespace Responsive_Addons_For_Elementor\Themes;
 
 use Responsive_Addons_For_Elementor\ModulesManager\Theme_Builder\Theme_Builder;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Astra theme compatibility.
  */

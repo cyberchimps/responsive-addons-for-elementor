@@ -295,21 +295,11 @@ private function rae_duplicate( $post_id ) {
 			if ( in_array( $key, $exclude ) ) {
 				continue;
 			}
-			$placeholders[] = "(%d, %s, %s)";
-			$values[] = $new_post_id;
-			$values[] = $key;
-			$values[] = $value;
+
+			add_post_meta( $new_post_id, $key, $value );
 			
 		}
 
-		if ( ! empty( $placeholders ) ) {
-			
-
-			$sql = "INSERT INTO {$wpdb->postmeta} ( post_id, meta_key, meta_value ) VALUES " . implode(', ', $placeholders);
-			    
-			$wpdb->query( $wpdb->prepare( $sql, $values ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-
-		}
 	}
 
     return $new_post_id;

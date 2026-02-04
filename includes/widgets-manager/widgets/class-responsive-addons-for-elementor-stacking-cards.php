@@ -2095,7 +2095,7 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 				->get_builder_content_for_display( $item['item_template'] );
 
 			echo '<div class="rael-card-template">';
-			echo $template_html; // SAFE, rendered by Elementor
+			echo wp_kses_post( $template_html ); // SAFE, rendered by Elementor
 			echo '</div>';
 		}
 		else{
@@ -2106,43 +2106,42 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 			echo '<div class="rael-card-content">';
 
 			// Graphic
+
 			$graphic_output = '';
 
 			if ( ! empty( $item['show_graphic_element'] ) ) {
+				echo '<div class="rael-card-graphic">';
+
 				switch ( $item['show_graphic_element'] ) {
+
 					case 'icon':
 						if ( ! empty( $item['graphic_icon'] ) ) {
-							ob_start();
 							\Elementor\Icons_Manager::render_icon(
 								$item['graphic_icon'],
-								[ 'aria-hidden' => 'true' ]
+								array( 'aria-hidden' => 'true' )
 							);
-							$graphic_output = ob_get_clean();
 						}
 						break;
 
 					case 'image':
 						if ( ! empty( $item['graphic_html'] ) ) {
-							$graphic_output = $item['graphic_html'];
+							// Elementor image HTML is printed directly
+							echo wp_kses_post( $item['graphic_html'] );
 						}
 						break;
 
 					case 'text':
 						if ( ! empty( $item['graphic_text'] ) ) {
-							$graphic_output = '<div class="rael-card-graphic-text">' . esc_html( $item['graphic_text'] ) . '</div>';
+							echo '<div class="rael-card-graphic-text">';
+							echo esc_html( $item['graphic_text'] );
+							echo '</div>';
 						}
 						break;
-
-					case 'none':
-					default:
-						$graphic_output = '';
-						break;
 				}
+
+				echo '</div>';
 			}
 
-			if ( ! empty( $graphic_output ) ) {
-				echo '<div class="rael-card-graphic">' . $graphic_output . '</div>';
-			}
 
 			// For Post Titles
 			$final_title_parts = [];
