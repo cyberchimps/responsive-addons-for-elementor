@@ -326,7 +326,7 @@ function refreshRaelMasonry($widget) {
     // Let DOM settle
     setTimeout(function () {
         // Re-run Elementor handler lifecycle for this widget
-        elementorFrontend.elementsHandler.runReadyTrigger($scope);
+        elementorFrontend.elementsHandler.runReadyTrigger($widget);
     }, 50);
 }
 
@@ -453,14 +453,14 @@ $('body').on('change', '.rael_post_filterable_tabs_wrapper_dropdown .rael_post_f
     callAjax(term, postPerPage, paged, pid, $scope, skin);
 });
 
-$('body').on('click', '.rael-post-pagination .page-numbers', function(e) {
+$('body').on('click', '.rael-post-pagination a.page-numbers', function(e) {
     let $scope = $(this).closest('.elementor-widget-rael-posts');
     if ($scope.length > 0) {
         e.preventDefault();
     }
     $('.rael-post-pagination span.elementor-screen-only').remove();
     var page_number = 1;
-    var curr = parseInt($scope.find('.rael-post-pagination .page-numbers.current').html());
+    var curr = parseInt($scope.find('.rael-post-pagination a.page-numbers.current').html());
     var $this = $(this);
 
     if ($this.hasClass('next')) {
@@ -472,14 +472,21 @@ $('body').on('click', '.rael-post-pagination .page-numbers', function(e) {
     }
 
     if ($scope.find('.responsive-posts-container').data('pagination') === 'prev_next') {
-        page_number = $scope.find('.responsive-posts-container').data('paged');
+
+        const $container  = $scope.find('.responsive-posts-container');
+        let paged         = parseInt($container.data('paged'), 10);
+
+
         if ($this.hasClass('next')) {
-            page_number += 1;
+            paged++;
         } else {
-            page_number -= 1;
+            paged--;
         }
-        $scope.find('.responsive-posts-container').data('paged', page_number);
+
+        $container.data('paged', paged);
+        page_number = paged;
     }
+
 
     var pid = $scope.find('.responsive-posts-container').data('pid');
     if (window.innerWidth <= 767) {
@@ -521,14 +528,15 @@ $('body').on('click', '.rael-post-pagination .rael_pagination_load_more', functi
     $.ajax(
         {
             type: 'POST',
-            url: localize.ajaxurl,
+            url: raelpostsvar.ajaxurl,
             data:
             {
                 action: 'rael_get_posts_by_terms',
                 data:
                 {
                     term,postPerPage,paged,pid,widget_id,skin
-                }
+                },
+                nonce: raelpostsvar.nonce
             },
             success: function success( data )
             {
@@ -585,8 +593,8 @@ function forceWindowResize() {
 // Run masonry on window load
 window.addEventListener('load', function() {
     setTimeout(function() {
-        $('.elementor-widget-rael-posts').each(function() {
-            var $widget = $(this);
+        jQuery('.elementor-widget-rael-posts').each(function() {
+            var $widget = jQuery(this);
             setTimeout(function() {
                 refreshRaelMasonry($widget);
             }, 800);
@@ -597,8 +605,8 @@ window.addEventListener('load', function() {
 // Run on resize
 window.addEventListener('resize', function() {
     setTimeout(function() {
-        $('.elementor-widget-rael-posts').each(function() {
-            var $widget = $(this);
+        jQuery('.elementor-widget-rael-posts').each(function() {
+            var $widget = jQuery(this);
             setTimeout(function() {
                 refreshRaelMasonry($widget);
             }, 200);

@@ -65,7 +65,6 @@ class RaelCardsHandler extends elementorModules.frontend.handlers.Base {
             return;
         }
 
-
         this.elements.$posts.each(function() {
             var $post = $(this),
                 $image = $post.find(settings.selectors.postThumbnailImage);
@@ -242,50 +241,6 @@ class RaelCardsHandler extends elementorModules.frontend.handlers.Base {
         setTimeout(function() {
             self.initMasonry();
         }, 500);
-        
-    }
-
-    runMasonry($scope) {
-
-        var elements = this.elements;
-        elements.$posts.css({
-            marginTop: '',
-            transitionDuration: ''
-        });
-        this.setColsCountSettings();
-        var colsCount = this.getSettings('colsCount'),
-            hasMasonry = this.isMasonryEnabled() && colsCount >= 2;
-        elements.$postsContainer.toggleClass('elementor-posts-masonry', hasMasonry);
-
-        if (!hasMasonry) {
-            elements.$postsContainer.height('');
-            return;
-        }
-        /* The `verticalSpaceBetween` variable is setup in a way that supports older versions of the portfolio widget */
-
-
-        var verticalSpaceBetween = this.getElementSettings(this.getSkinPrefix() + 'row_gap.size');
-
-        if ('' === this.getSkinPrefix() && '' === verticalSpaceBetween) {
-            verticalSpaceBetween = this.getElementSettings(this.getSkinPrefix() + 'item_gap.size');
-        }
-
-        var masonry = new elementorModules.utils.Masonry({
-            container: elements.$postsContainer,
-            items: elements.$posts.filter(':visible'),
-            columnsCount: this.getSettings('colsCount'),
-            verticalSpaceBetween: verticalSpaceBetween
-        });
-        masonry.run();
-    }
-
-    run() {
-        this.fitImages();
-        
-        var self = this;
-        setTimeout(function() {
-            self.initMasonry();
-        }, 500);
     }
 
     onInit(...args) {
@@ -371,7 +326,7 @@ function refreshRaelMasonry($widget) {
     // Let DOM settle
     setTimeout(function () {
         // Re-run Elementor handler lifecycle for this widget
-        elementorFrontend.elementsHandler.runReadyTrigger($scope);
+        elementorFrontend.elementsHandler.runReadyTrigger($widget);
     }, 50);
 }
 
@@ -565,14 +520,15 @@ $('body').on('click', '.rael-post-pagination .rael_pagination_load_more', functi
     $.ajax(
         {
             type: 'POST',
-            url: localize.ajaxurl,
+            url: raelpostsvar.ajaxurl,
             data:
             {
                 action: 'rael_get_posts_by_terms',
                 data:
                 {
                     term,postPerPage,paged,pid,widget_id,skin
-                }
+                },
+                nonce: raelpostsvar.nonce
             },
             success: function success( data )
             {
@@ -629,8 +585,8 @@ function forceWindowResize() {
 // Run masonry on window load
 window.addEventListener('load', function() {
     setTimeout(function() {
-        $('.elementor-widget-rael-posts').each(function() {
-            var $widget = $(this);
+        jQuery('.elementor-widget-rael-posts').each(function() {
+            var $widget = jQuery(this);
             setTimeout(function() {
                 refreshRaelMasonry($widget);
             }, 800);
@@ -641,35 +597,11 @@ window.addEventListener('load', function() {
 // Run on resize
 window.addEventListener('resize', function() {
     setTimeout(function() {
-        $('.elementor-widget-rael-posts').each(function() {
-            var $widget = $(this);
+        jQuery('.elementor-widget-rael-posts').each(function() {
+            var $widget = jQuery(this);
             setTimeout(function() {
                 refreshRaelMasonry($widget);
             }, 200);
         });
     }, 200);
-});
-        this.run();
-    }
-
-    onWindowResize() {
-        this.fitImages();
-        this.runMasonry();
-    }
-
-    onElementChange() {
-        this.fitImages();
-        this.runMasonry();
-    }
-}
-
-jQuery(window).on("elementor/frontend/init", () => {
-
-    const addCardHandler = ($element) => {
-        elementorFrontend.elementsHandler.addHandler(RaelCardsHandler, {
-            $element,
-        });
-    };
-    elementorFrontend.hooks.addAction("frontend/element_ready/rael-posts.rael_cards", addCardHandler);
-
 });

@@ -64,7 +64,8 @@
                 line-height: 33px;
             }
             .rael-promo-temp__feature__list li{
-            list-style: circle;
+                list-style: circle;
+                color: #475569;
             }
 
             .rael-promo-temp--right img {
