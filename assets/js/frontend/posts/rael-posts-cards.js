@@ -153,85 +153,59 @@ class RaelCardsHandler extends elementorModules.frontend.handlers.Base {
     this.applySimpleMasonry(container, colsCount, gap);
 }
 
-    applySimpleMasonry(container, colsCount, gap) {
+     applySimpleMasonry(container, colsCount, gap) {
         if (!container) return;
-        
+
         var items = container.querySelectorAll('.elementor-post');
-        if (items.length === 0) return;
-        
-        // Get container width
-        var containerWidth = container.offsetWidth;
-        
-        // If width is 0, wait and try again in editor
-        if (containerWidth === 0) {
+        if (!items.length) return;
+
+        var widgetContainer = this.$element.find('.elementor-widget-container')[0];
+        if (!widgetContainer) return;
+
+        var containerWidth = widgetContainer.getBoundingClientRect().width;
+
+        if (
+            window.elementorFrontend &&
+            elementorFrontend.isEditMode() &&
+            containerWidth < 300
+        ) {
             var self = this;
-            setTimeout(function() {
+            setTimeout(function () {
                 self.applySimpleMasonry(container, colsCount, gap);
             }, 200);
             return;
         }
-        
-        // Calculate column width
+
         var colWidth = (containerWidth - (gap * (colsCount - 1))) / colsCount;
-        
-        // Reset container
+
         container.style.position = 'relative';
         container.style.height = 'auto';
-        
-        //  Temporarily position items inline to measure heights
-        items.forEach(function(item) {
-            item.style.position = 'relative';
-            item.style.width = colWidth + 'px';
-            item.style.float = 'left';
-            item.style.marginRight = gap + 'px';
-            item.style.marginBottom = gap + 'px';
-            item.style.boxSizing = 'border-box';
-        });
-        
-        // Force browser to calculate layout
-        container.offsetHeight;
-        
+
         var colHeights = new Array(colsCount).fill(0);
-        
-        // apply absolute positioning
+
         items.forEach(function(item) {
-            // Reset to absolute
             item.style.position = 'absolute';
-            item.style.float = '';
-            item.style.marginRight = '';
-            item.style.marginBottom = '';
-            item.style.transition = 'transform 0.3s ease';
-            
-            // Find shortest column
+            item.style.width = colWidth + 'px';
+            item.style.boxSizing = 'border-box';
+
             var shortestCol = 0;
             for (var i = 1; i < colsCount; i++) {
                 if (colHeights[i] < colHeights[shortestCol]) {
                     shortestCol = i;
                 }
             }
-            
-            // Set position
+
             var left = shortestCol * (colWidth + gap);
-            var top = colHeights[shortestCol];
-            
+            var top  = colHeights[shortestCol];
+
             item.style.left = left + 'px';
-            item.style.top = top + gap + 'px';
-            
-            // Update column height
+            item.style.top  = top + 'px';
+
             colHeights[shortestCol] += item.offsetHeight + gap;
         });
-        
-        // Set container height
-        var maxHeight = Math.max(...colHeights);
-        container.style.height = maxHeight + 'px';
-        
-        var self = this;
-        setTimeout(function() {
-            var newContainerWidth = container.offsetWidth;
-            if (newContainerWidth > 0 && newContainerWidth !== containerWidth) {
-                self.applySimpleMasonry(container, colsCount, gap);
-            }
-        }, 300);
+
+        container.style.height = Math.max(...colHeights) + 'px';
+
     }
 
     run() {
