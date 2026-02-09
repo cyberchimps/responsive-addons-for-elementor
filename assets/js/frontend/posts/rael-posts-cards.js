@@ -65,7 +65,6 @@ class RaelCardsHandler extends elementorModules.frontend.handlers.Base {
             return;
         }
 
-
         this.elements.$posts.each(function() {
             var $post = $(this),
                 $image = $post.find(settings.selectors.postThumbnailImage);
@@ -154,129 +153,59 @@ class RaelCardsHandler extends elementorModules.frontend.handlers.Base {
     this.applySimpleMasonry(container, colsCount, gap);
 }
 
-    applySimpleMasonry(container, colsCount, gap) {
+     applySimpleMasonry(container, colsCount, gap) {
         if (!container) return;
-        
+
         var items = container.querySelectorAll('.elementor-post');
-        if (items.length === 0) return;
-        
-        // Get container width
-        var containerWidth = container.offsetWidth;
-        
-        // If width is 0, wait and try again in editor
-        if (containerWidth === 0) {
+        if (!items.length) return;
+
+        var widgetContainer = this.$element.find('.elementor-widget-container')[0];
+        if (!widgetContainer) return;
+
+        var containerWidth = widgetContainer.getBoundingClientRect().width;
+
+        if (
+            window.elementorFrontend &&
+            elementorFrontend.isEditMode() &&
+            containerWidth < 300
+        ) {
             var self = this;
-            setTimeout(function() {
+            setTimeout(function () {
                 self.applySimpleMasonry(container, colsCount, gap);
             }, 200);
             return;
         }
-        
-        // Calculate column width
+
         var colWidth = (containerWidth - (gap * (colsCount - 1))) / colsCount;
-        
-        // Reset container
+
         container.style.position = 'relative';
         container.style.height = 'auto';
-        
-        //  Temporarily position items inline to measure heights
-        items.forEach(function(item) {
-            item.style.position = 'relative';
-            item.style.width = colWidth + 'px';
-            item.style.float = 'left';
-            item.style.marginRight = gap + 'px';
-            item.style.marginBottom = gap + 'px';
-            item.style.boxSizing = 'border-box';
-        });
-        
-        // Force browser to calculate layout
-        container.offsetHeight;
-        
+
         var colHeights = new Array(colsCount).fill(0);
-        
-        // apply absolute positioning
+
         items.forEach(function(item) {
-            // Reset to absolute
             item.style.position = 'absolute';
-            item.style.float = '';
-            item.style.marginRight = '';
-            item.style.marginBottom = '';
-            item.style.transition = 'transform 0.3s ease';
-            
-            // Find shortest column
+            item.style.width = colWidth + 'px';
+            item.style.boxSizing = 'border-box';
+
             var shortestCol = 0;
             for (var i = 1; i < colsCount; i++) {
                 if (colHeights[i] < colHeights[shortestCol]) {
                     shortestCol = i;
                 }
             }
-            
-            // Set position
+
             var left = shortestCol * (colWidth + gap);
-            var top = colHeights[shortestCol];
-            
+            var top  = colHeights[shortestCol];
+
             item.style.left = left + 'px';
-            item.style.top = top + gap + 'px';
-            
-            // Update column height
+            item.style.top  = top + 'px';
+
             colHeights[shortestCol] += item.offsetHeight + gap;
         });
-        
-        // Set container height
-        var maxHeight = Math.max(...colHeights);
-        container.style.height = maxHeight + 'px';
-        
-        var self = this;
-        setTimeout(function() {
-            var newContainerWidth = container.offsetWidth;
-            if (newContainerWidth > 0 && newContainerWidth !== containerWidth) {
-                self.applySimpleMasonry(container, colsCount, gap);
-            }
-        }, 300);
-    }
 
-    run() {
-        this.fitImages();
-        
-        var self = this;
-        setTimeout(function() {
-            self.initMasonry();
-        }, 500);
-        
-    }
+        container.style.height = Math.max(...colHeights) + 'px';
 
-    runMasonry($scope) {
-
-        var elements = this.elements;
-        elements.$posts.css({
-            marginTop: '',
-            transitionDuration: ''
-        });
-        this.setColsCountSettings();
-        var colsCount = this.getSettings('colsCount'),
-            hasMasonry = this.isMasonryEnabled() && colsCount >= 2;
-        elements.$postsContainer.toggleClass('elementor-posts-masonry', hasMasonry);
-
-        if (!hasMasonry) {
-            elements.$postsContainer.height('');
-            return;
-        }
-        /* The `verticalSpaceBetween` variable is setup in a way that supports older versions of the portfolio widget */
-
-
-        var verticalSpaceBetween = this.getElementSettings(this.getSkinPrefix() + 'row_gap.size');
-
-        if ('' === this.getSkinPrefix() && '' === verticalSpaceBetween) {
-            verticalSpaceBetween = this.getElementSettings(this.getSkinPrefix() + 'item_gap.size');
-        }
-
-        var masonry = new elementorModules.utils.Masonry({
-            container: elements.$postsContainer,
-            items: elements.$posts.filter(':visible'),
-            columnsCount: this.getSettings('colsCount'),
-            verticalSpaceBetween: verticalSpaceBetween
-        });
-        masonry.run();
     }
 
     run() {
@@ -371,7 +300,7 @@ function refreshRaelMasonry($widget) {
     // Let DOM settle
     setTimeout(function () {
         // Re-run Elementor handler lifecycle for this widget
-        elementorFrontend.elementsHandler.runReadyTrigger($scope);
+        elementorFrontend.elementsHandler.runReadyTrigger($widget);
     }, 50);
 }
 
@@ -565,14 +494,15 @@ $('body').on('click', '.rael-post-pagination .rael_pagination_load_more', functi
     $.ajax(
         {
             type: 'POST',
-            url: localize.ajaxurl,
+            url: raelpostsvar.ajaxurl,
             data:
             {
                 action: 'rael_get_posts_by_terms',
                 data:
                 {
                     term,postPerPage,paged,pid,widget_id,skin
-                }
+                },
+                nonce: raelpostsvar.nonce
             },
             success: function success( data )
             {
@@ -629,8 +559,8 @@ function forceWindowResize() {
 // Run masonry on window load
 window.addEventListener('load', function() {
     setTimeout(function() {
-        $('.elementor-widget-rael-posts').each(function() {
-            var $widget = $(this);
+        jQuery('.elementor-widget-rael-posts').each(function() {
+            var $widget = jQuery(this);
             setTimeout(function() {
                 refreshRaelMasonry($widget);
             }, 800);
@@ -641,35 +571,11 @@ window.addEventListener('load', function() {
 // Run on resize
 window.addEventListener('resize', function() {
     setTimeout(function() {
-        $('.elementor-widget-rael-posts').each(function() {
-            var $widget = $(this);
+        jQuery('.elementor-widget-rael-posts').each(function() {
+            var $widget = jQuery(this);
             setTimeout(function() {
                 refreshRaelMasonry($widget);
             }, 200);
         });
     }, 200);
-});
-        this.run();
-    }
-
-    onWindowResize() {
-        this.fitImages();
-        this.runMasonry();
-    }
-
-    onElementChange() {
-        this.fitImages();
-        this.runMasonry();
-    }
-}
-
-jQuery(window).on("elementor/frontend/init", () => {
-
-    const addCardHandler = ($element) => {
-        elementorFrontend.elementsHandler.addHandler(RaelCardsHandler, {
-            $element,
-        });
-    };
-    elementorFrontend.hooks.addAction("frontend/element_ready/rael-posts.rael_cards", addCardHandler);
-
 });
