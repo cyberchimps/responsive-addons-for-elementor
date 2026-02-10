@@ -1356,7 +1356,7 @@ class Responsive_Addons_For_Elementor_Data_Table extends Widget_Base {
 									)
 								);
 								?>
-								<img <?php echo wp_kses_post( $this->get_render_attribute_string( 'data_table_th_img' . $i ) ); ?>><?php endif; ?><span class="data-table-header-text"><?php echo esc_html__( wp_kses_post( $header_title['rael_data_table_header_col'] ), 'responsive-addons-for-elementor' ); //phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText ?></span></th>
+								<img <?php echo wp_kses_post( $this->get_render_attribute_string( 'data_table_th_img' . $i ) ); ?>><?php endif; ?><span class="data-table-header-text"><?php echo wp_kses_post( $header_title['rael_data_table_header_col'] ); ?></span></th>
 						<?php
 						++$i;
 endforeach;
