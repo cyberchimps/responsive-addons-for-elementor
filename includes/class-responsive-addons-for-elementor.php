@@ -1940,8 +1940,6 @@ private function rael_find_element_recursive($elements, $widget_id) {
 						array_push( $css_files, $css_files_path . 'price-list/rael-price-list-frontend' . $css_min_ext );
 						break;
 					case 'posts':
-						array_push( $js_files, $js_files_path . 'posts/rael-posts' . $ext );
-						array_push( $js_files, $js_files_path . 'posts/rael-posts-cards' . $ext );
 						array_push( $css_files, $css_files_path . 'posts/rael-posts' . $css_min_ext );
 						break;
 					case 'price-box':

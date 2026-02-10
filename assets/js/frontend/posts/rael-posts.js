@@ -376,8 +376,24 @@ jQuery(window).on("elementor/frontend/init", function() {
         });
     };
     
-    elementorFrontend.hooks.addAction("frontend/element_ready/rael-posts.rael_classic", addHandler);
-    elementorFrontend.hooks.addAction("frontend/element_ready/rael-posts.rael_cards", addHandler);
+
+     elementorFrontend.hooks.addAction(
+    "frontend/element_ready/rael-posts.rael_classic",
+    function ($element) {
+
+      // prevent double handler
+      if ($element.data("raelPostsHandlerInit")) {
+        return;
+      }
+
+      $element.data("raelPostsHandlerInit", true);
+
+      elementorFrontend.elementsHandler.addHandler(
+        RaelPostsHandler,
+        { $element: $element }
+      );
+    }
+  );
 });
 
 var paged_no = 1;
