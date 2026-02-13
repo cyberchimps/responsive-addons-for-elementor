@@ -1409,6 +1409,28 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 				'render_type' => 'template', 
 			)
 		);
+		$this->add_responsive_control(
+			'title_padding',
+			array(
+				'label' => __( 'Padding', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .rael-card-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'render_type' => 'template', 
+			)
+		);
+		$this->add_responsive_control(
+			'title_margin',
+			array(
+				'label' => __( 'Margin', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .rael-card-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'render_type' => 'template', 
+			)
+		);
 
 		$this->end_controls_section();
 
@@ -1483,6 +1505,28 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 				),
 				'selectors' => array(
 					'{{WRAPPER}} .rael-card-desc' => 'margin-top: {{SIZE}}{{UNIT}};',
+				),
+				'render_type' => 'template', 
+			)
+		);
+		$this->add_responsive_control(
+			'description_padding',
+			array(
+				'label' => __( 'Padding', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .rael-card-desc' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'render_type' => 'template', 
+			)
+		);
+		$this->add_responsive_control(
+			'description_margin',
+			array(
+				'label' => __( 'Margin', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .rael-card-desc' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'render_type' => 'template', 
 			)
