@@ -149,5 +149,7 @@
   font-family: var(--e-global-typography-secondary-font-family), Sans-serif;
   font-weight: var(--e-global-typography-secondary-font-weight);
 }
-
+.rael-faq-container.rael-faq-layout-grid .rael-accordion-content{
+  display: block; 
+}
 /*# sourceMappingURL=faq.css.map */
