@@ -1,5 +1,8 @@
 <?php
 namespace Responsive_Addons_For_Elementor\WidgetsManager\Modules\QueryControl\Classes;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 use Elementor\Widget_Base;
 use Responsive_Addons_For_Elementor\WidgetsManager\Modules\QueryControl\Module;

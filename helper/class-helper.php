@@ -1,7 +1,9 @@
 <?php
 
 namespace Responsive_Addons_For_Elementor\Helper;
-
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 use Elementor\Plugin;
 use Responsive_Addons_For_Elementor\WidgetsManager\Modules\Woocommerce\Classes\Products_Renderer;
 use Responsive_Addons_For_Elementor\WidgetsManager\Modules\Woocommerce\RAEL_Products;

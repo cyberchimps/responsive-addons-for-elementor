@@ -6,6 +6,9 @@
  *
  * @package Responsive_Addons_For_Elementor
  */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 use Elementor\Plugin;
 use Elementor\Controls_Stack;

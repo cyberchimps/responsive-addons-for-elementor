@@ -1629,11 +1629,11 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 
 					<?php if ( 'image' === $settings['graphic_element'] && ! empty( $settings['image']['url'] ) ) : ?>
 						<div class="rael-flip-box-image">
-							<?php echo Group_Control_Image_Size::get_attachment_image_html( $settings, 'image' ); ?>
+							<?php echo wp_kses_post(Group_Control_Image_Size::get_attachment_image_html( $settings, 'image' )); ?>
 						</div>
 
 					<?php elseif ( 'icon' === $settings['graphic_element'] && $front_has_icon ) : ?>
-						<div <?php echo $this->get_render_attribute_string( 'front_icon_wrapper' ); ?>>
+						<div <?php echo wp_kses_post($this->get_render_attribute_string( 'front_icon_wrapper' )); ?>>
 							<div class="elementor-icon">
 								<?php
 								if ( $front_is_new || $front_migrated ) {
@@ -1666,17 +1666,17 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 		<!-- BACK -->
 		<div class="rael-flip-box-layer rael-flip-box-back">
 			<<?php echo tag_escape( $wrapper_tag ); ?>
-				<?php echo $this->get_render_attribute_string( 'wrapper' ); ?>
+				<?php echo wp_kses_post($this->get_render_attribute_string( 'wrapper' )); ?>
 				class="rael-flip-box-layer-overlay">
 
 				<div class="rael-flip-box-layer-inner">
 					<?php if ( 'image' === $settings['back_graphic_element'] && ! empty( $settings['back_image']['url'] ) ) : ?>
 						<div class="rael-flip-box-image">
-							<?php echo Group_Control_Image_Size::get_attachment_image_html( $settings, 'back_image' ); ?>
+							<?php echo wp_kses_post(Group_Control_Image_Size::get_attachment_image_html( $settings, 'back_image' )); ?>
 						</div>
 
 					<?php elseif ( 'icon' === $settings['back_graphic_element'] && $back_has_icon ) : ?>
-						<div <?php echo $this->get_render_attribute_string( 'back_icon_wrapper' ); ?>>
+						<div <?php echo wp_kses_post($this->get_render_attribute_string( 'back_icon_wrapper' )); ?>>
 							<div class="elementor-icon">
 								<?php
 								if ( $back_is_new || $back_migrated ) {
@@ -1704,7 +1704,7 @@ class Responsive_Addons_For_Elementor_Flip_Box extends Widget_Base {
 
 					<?php if ( 'button' === $settings['link_click'] && ! empty( $settings['button_text'] ) ) : ?>
 						<<?php echo esc_attr( $button_tag ); ?>
-							<?php echo $this->get_render_attribute_string( 'button' ); ?>>
+							<?php echo wp_kses_post($this->get_render_attribute_string( 'button' )); ?>>
 							<?php echo esc_html( $settings['button_text'] ); ?>
 						</<?php echo esc_attr( $button_tag ); ?>>
 					<?php endif; ?>
