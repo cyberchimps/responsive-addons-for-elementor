@@ -29,15 +29,6 @@
   right: 0;
   bottom: 0; }
 
-.responsive-posts-container.elementor-has-item-ratio .elementor-post__thumbnail img {
-  height: auto;
-  position: absolute;
-  top: calc( 50% + 1px);
-  left: calc( 50% + 1px);
-  -webkit-transform: scale(1.01) translate(-50%, -50%);
-  -ms-transform: scale(1.01) translate(-50%, -50%);
-  transform: scale(1.01) translate(-50%, -50%); }
-
 .responsive-posts-container.elementor-has-item-ratio .elementor-post__thumbnail.elementor-fit-height img {
   height: 100%;
   width: auto; }
@@ -342,15 +333,6 @@ body.elementor-editor-active .elementor-posts--show-thumbnail .responsive-post__
   right: 0;
   bottom: 0; }
 
-.responsive-posts-container.elementor-has-item-ratio .elementor-post__thumbnail img {
-  height: auto;
-  position: absolute;
-  top: calc( 50% + 1px);
-  left: calc( 50% + 1px);
-  -webkit-transform: scale(1.01) translate(-50%, -50%);
-  -ms-transform: scale(1.01) translate(-50%, -50%);
-  transform: scale(1.01) translate(-50%, -50%); }
-
 .responsive-posts-container.elementor-has-item-ratio .elementor-post__thumbnail.elementor-fit-height img {
   height: 100%;
   width: auto; }
@@ -450,4 +432,46 @@ body.elementor-editor-active .elementor-posts--show-thumbnail .responsive-post__
   100% {
     transform: scale(1); } }
 
+.elementor-posts-masonry .elementor-post {
+  transition: margin-top 0.2s ease;
+}
+/* Masonry Container - CRITICAL */
+.responsive-posts-container {
+    position: relative !important;
+    min-height: 100px;
+    width: 100% !important;
+}
+/* Masonry Items - CRITICAL */
+.elementor-post {
+    box-sizing: border-box !important;
+    transition: all 0.3s ease;
+}
+
+/* Editor-specific fixes */
+.elementor-widget-rael-posts {
+    min-width: 1px;
+}
+
+.responsive-posts-container.elementor-posts-masonry {
+    min-height: 200px;
+}
+/* Force width in editor */
+.elementor-editor-active .elementor-widget-rael-posts {
+    min-width: 300px !important;
+}
+
+.elementor-editor-active .responsive-posts-container {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+/* Prevent Elementor editor from hiding items */
+.elementor-editor-active .elementor-post {
+    display: block !important;
+}
+span.page-numbers.next,
+span.page-numbers.prev {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.5;
+}
 /*# sourceMappingURL=posts.css.map */

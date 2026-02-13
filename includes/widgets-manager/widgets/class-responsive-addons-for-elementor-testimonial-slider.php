@@ -86,6 +86,7 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 	public function get_script_depends() {
 		return array(
 			'font-awesome-4-shim',
+			'rael-swiper',
 		);
 	}
 	/**

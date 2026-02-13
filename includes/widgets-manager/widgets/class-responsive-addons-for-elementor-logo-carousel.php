@@ -112,6 +112,12 @@ class Responsive_Addons_For_Elementor_Logo_Carousel extends Widget_Base {
 	public function get_custom_help_url() {
 		return 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/logo-carousel/';
 	}
+	/**
+	 * This function helps in getting the scripts.
+	 */
+	public function get_script_depends() {
+		return array( 'rael-swiper','rael-media-carousel' );
+	}
 
 	/**
 	 * Register widget controls.

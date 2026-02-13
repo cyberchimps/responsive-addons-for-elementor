@@ -107,7 +107,7 @@ class Responsive_Addons_For_Elementor_Twitter_Feed extends Widget_Base {
 	 * @return array Widget scripts dependencies.
 	 */
 	public function get_script_depends() {
-		return array( 'rael-isotope', 'imagesloaded' );
+		return array( 'rael-isotope', 'imagesloaded','rael-twitter-feed' );
 	}
 
 	/**
