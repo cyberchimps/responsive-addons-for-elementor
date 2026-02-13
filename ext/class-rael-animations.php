@@ -993,7 +993,10 @@ if ( ! class_exists( 'Rael_Animations' ) ) {
 				filter: blur(var(--blur));
 				opacity: var(--opacity);
 					
-					will-change: transform, filter, opacity;
+				will-change: transform, filter, opacity;
+			}
+			html, body {
+				overflow-x: clip;
 			}
 			/* Desktop */
 			@media (min-width: 1025px) {
