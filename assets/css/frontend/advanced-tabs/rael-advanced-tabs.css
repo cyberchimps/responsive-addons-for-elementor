@@ -120,6 +120,23 @@
 .rael-tab-top-icon li a .rael-tab-title {
   margin-top: 10px; }
 
+.rael-tab-inline-icon li h1.rael-tab-title,
+.rael-tab-inline-icon li h2.rael-tab-title,
+.rael-tab-inline-icon li h3.rael-tab-title,
+.rael-tab-inline-icon li h4.rael-tab-title,
+.rael-tab-inline-icon li h5.rael-tab-title,
+.rael-tab-inline-icon li h6.rael-tab-title,
+.rael-tab-inline-icon li p.rael-tab-title,
+.rael-tab-top-icon li h1.rael-tab-title,
+.rael-tab-top-icon li h2.rael-tab-title,
+.rael-tab-top-icon li h3.rael-tab-title,
+.rael-tab-top-icon li h4.rael-tab-title,
+.rael-tab-top-icon li h5.rael-tab-title,
+.rael-tab-top-icon li h6.rael-tab-title,
+.rael-tab-top-icon li p.rael-tab-title {
+  margin-top: unset;
+}
+
 .rael-advanced-tabs.rael-tabs-vertical {
   display: -webkit-box;
   display: -ms-flexbox;
