@@ -100,6 +100,7 @@
 .rael-cf7-input-size-sm .rael-cf7-style .wpcf7 textarea,
 .rael-cf7-input-size-sm .rael-cf7-style input:not([type=submit]),
 .rael-cf7-input-size-sm .rael-cf7-style select {
+  outline: none;
   font-size: 15px;
   padding: 12px 10px; }
 

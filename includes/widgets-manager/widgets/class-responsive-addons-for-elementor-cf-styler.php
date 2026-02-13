@@ -238,7 +238,7 @@ class Responsive_Addons_For_Elementor_Cf_Styler extends Widget_Base {
 				),
 				'default'   => '',
 				'selectors' => array(
-					'{{WRAPPER}} .rael-cf7-style .wpcf7 form.wpcf7-form:not(input)' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .rael-cf7-style .wpcf7 form.wpcf7-form:not(input) label' => 'color: {{VALUE}};',
 				),
 			)
 		);
