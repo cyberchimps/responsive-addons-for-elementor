@@ -11,6 +11,9 @@ use Elementor\Plugin;
 use Responsive_Addons_For_Elementor\WidgetsManager\Modules\QueryControl\Module as QueryControlModule;
 use Elementor\TemplateLibrary\Source_Local;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 /**
  * Class Module
  *
