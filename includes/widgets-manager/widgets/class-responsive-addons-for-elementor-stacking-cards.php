@@ -1758,6 +1758,31 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 			)
 		);
 
+		$this->add_responsive_control(
+		'image_width',
+			array(
+				'label' => __( 'Width', 'responsive-addons-for-elementor' ),
+				'type'  => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%' ),
+				'range' => array(
+					'px' => array(
+						'min' => 50,
+						'max' => 500,
+					),
+					'%' => array(
+						'min' => 50,
+						'max' => 500,
+					),
+				),
+				'default' =>  array(
+					'size' => 280,
+					'unit' => 'px',
+				),
+				'selectors' => array(
+					'{{WRAPPER}}  .rael-card-media' => 'width: {{SIZE}}{{UNIT}}; max-width: {{SIZE}}{{UNIT}}; flex: 0 0 {{SIZE}}{{UNIT}};',
+				),
+			)
+        );
 		
 		$this->add_responsive_control(
 			'image_fit',
