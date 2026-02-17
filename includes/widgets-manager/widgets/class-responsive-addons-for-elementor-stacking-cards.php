@@ -417,7 +417,11 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 		// ------------------ Graphic Tab ------------------
 		$repeater->start_controls_tab(
 			'tab_graphic',
-			array( 'label' => __( 'Graphic', 'responsive-addons-for-elementor' ) )
+			array( 'label' => __( 'Graphic', 'responsive-addons-for-elementor' ) ,
+			'condition' => array(
+				'content_type' => 'editor',
+			)
+			),
 		);
 
 		$repeater->add_control(
@@ -494,20 +498,12 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 			)
 		);
 
-		$repeater->add_control(
-			'background_image',
-			array(
-				'label'     => __( 'Background Image', 'responsive-addons-for-elementor' ),
-				'type'      => Controls_Manager::MEDIA,
-				'condition' => array( 'background_type' => 'image' ),
-				'render_type' => 'template', 
-			)
-		);
-
+	
 		$repeater->end_controls_tab();
 
 		$repeater->end_controls_tabs();
 		// ================== Tabs End ==================
+
 
 		// Add repeater to control
 		$this->add_control(
@@ -581,223 +577,223 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 			)
 		);
 
-    $this->add_responsive_control(
-        'card_gap',
-        array(
-            'label' => __( 'Card Gap', 'responsive-addons-for-elementor' ),
-            'type' => Controls_Manager::SLIDER,
-            'size_units' => array( 'px', 'vh', '%' ),
-            'range' => array(
-                'px' => array(
-                    'min' => 0,
-                    'max' => 200,
+		$this->add_responsive_control(
+			'card_gap',
+			array(
+				'label' => __( 'Card Gap', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', 'vh', '%' ),
+				'range' => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 200,
+					),
+					'vh' => array(
+						'min' => 10,
+						'max' => 100,
+					),
+					'%'  => array(
+						'min' => 0,
+						'max' => 100,
+					),
 				),
-				'vh' => array(
-					'min' => 10,
-					'max' => 100,
+				'default' => array( 'size' => 100, 'unit' => 'px' ),
+				'render_type' => 'template', 
+			)
+		);
+
+		$this->add_responsive_control(
+			'card_top_offset',
+			array(
+				'label' => __( 'Card Top Offset', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => array( 'px' ),
+				'range' => array(
+					'px' => array(
+						'min' => 0,
+						'max' => 200,
+					),
 				),
-				'%'  => array(
-					'min' => 0,
-					'max' => 100,
+				'default' => array( 'size' => 20, 'unit' => 'px' ),
+				'dynamic' => array( 'active' => true ), 
+				'render_type' => 'template', 
+			)
+		);
+
+		$this->add_control(
+			'enable_scroll_motion',
+			array(
+				'label' => __( 'Enable Scroll Motion', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Yes', 'responsive-addons-for-elementor' ),
+				'label_off' => __( 'No', 'responsive-addons-for-elementor' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+				'render_type' => 'template', 
+			)
+		);
+
+		$this->add_control(
+			'hover_transition_duration',
+			array(
+				'label' => __( 'Hover Transition Duration (ms)', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::NUMBER,
+				'min' => 0,
+				'max' => 2000,
+				'default' => 300,
+				'render_type' => 'template', 
+			)
+		);
+
+		$this->add_control(
+			'general_item_image_size',
+			array(
+				'label' => __( 'Item Image Size', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'medium_large',
+				'options' => array(
+					'thumbnail'    => __( 'Thumbnail', 'responsive-addons-for-elementor' ),
+					'medium'       => __( 'Medium', 'responsive-addons-for-elementor' ),
+					'medium_large' => __( 'Medium Large (max width 768)', 'responsive-addons-for-elementor' ),
+					'large'        => __( 'Large', 'responsive-addons-for-elementor' ),
+					'full'         => __( 'Full', 'responsive-addons-for-elementor' ),
 				),
-			),
-            'default' => array( 'size' => 100, 'unit' => 'px' ),
-			'render_type' => 'template', 
-        )
-    );
+				'render_type' => 'template', 
+			)
+		);
 
-    $this->add_responsive_control(
-        'card_top_offset',
-        array(
-            'label' => __( 'Card Top Offset', 'responsive-addons-for-elementor' ),
-            'type' => Controls_Manager::SLIDER,
-            'size_units' => array( 'px' ),
-            'range' => array(
-                'px' => array(
-                    'min' => 0,
-                    'max' => 200,
+		$this->add_control(
+			'rtl_enable',
+			array(
+				'label' => __( 'RTL', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Yes', 'responsive-addons-for-elementor' ),
+				'label_off' => __( 'No', 'responsive-addons-for-elementor' ),
+				'return_value' => 'yes',
+				'default' => 'no',
+				'render_type' => 'template', 
+			)
+		);
+
+		$this->end_controls_section();
+
+		// ================== Layout Section ==================
+		$this->start_controls_section(
+			'layout_section',
+			array(
+				'label' => __( 'Layout', 'responsive-addons-for-elementor' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			)
+		);
+
+		$this->add_control(
+			'show_title',
+			array(
+				'label' => __( 'Show Title', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::SWITCHER,
+				'label_on' => __( 'Yes', 'responsive-addons-for-elementor' ),
+				'label_off' => __( 'No', 'responsive-addons-for-elementor' ),
+				'default' => 'yes',
+				'render_type'  => 'template',
+			)
+		);
+
+		$this->add_control(
+			'title_html_tag',
+			array(
+				'label' => __( 'Title HTML Tag', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'div',
+				'options' => array(
+					'h1' => 'H1',
+					'h2' => 'H2',
+					'h3' => 'H3',
+					'h4' => 'H4',
+					'h5' => 'H5',
+					'h6' => 'H6',
+					'div' => 'div',
+					'span' => 'span',
+					'p' => 'p',
 				),
-			),
-            'default' => array( 'size' => 20, 'unit' => 'px' ),
-			'dynamic' => array( 'active' => true ), 
-			'render_type' => 'template', 
-        )
-    );
+				'render_type' => 'template', 
+			)
+		);
 
-    $this->add_control(
-        'enable_scroll_motion',
-        array(
-            'label' => __( 'Enable Scroll Motion', 'responsive-addons-for-elementor' ),
-            'type' => Controls_Manager::SWITCHER,
-            'label_on' => __( 'Yes', 'responsive-addons-for-elementor' ),
-            'label_off' => __( 'No', 'responsive-addons-for-elementor' ),
-            'return_value' => 'yes',
-            'default' => 'yes',
-			'render_type' => 'template', 
-        )
-    );
+		$this->add_control(
+			'show_description',
+			array(
+				'label' => __( 'Show Description', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::SWITCHER,
+				'default' => 'yes',
+				'render_type' => 'template', 
+			)
+		);
 
-    $this->add_control(
-        'hover_transition_duration',
-        array(
-            'label' => __( 'Hover Transition Duration (ms)', 'responsive-addons-for-elementor' ),
-            'type' => Controls_Manager::NUMBER,
-            'min' => 0,
-            'max' => 2000,
-            'default' => 300,
-			'render_type' => 'template', 
-        )
-    );
+		$this->add_control(
+			'show_button',
+			array(
+				'label' => __( 'Show Button', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::SWITCHER,
+				'default' => 'yes',
+				'render_type' => 'template', 
+			)
+		);
 
-    $this->add_control(
-        'general_item_image_size',
-        array(
-            'label' => __( 'Item Image Size', 'responsive-addons-for-elementor' ),
-            'type' => Controls_Manager::SELECT,
-            'default' => 'medium_large',
-            'options' => array(
-                'thumbnail'    => __( 'Thumbnail', 'responsive-addons-for-elementor' ),
-                'medium'       => __( 'Medium', 'responsive-addons-for-elementor' ),
-                'medium_large' => __( 'Medium Large (max width 768)', 'responsive-addons-for-elementor' ),
-                'large'        => __( 'Large', 'responsive-addons-for-elementor' ),
-                'full'         => __( 'Full', 'responsive-addons-for-elementor' ),
-            ),
-			'render_type' => 'template', 
-        )
-    );
+		$this->add_control(
+			'button_text',
+			array(
+				'label' => __( 'Button Text', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => __( 'Read More', 'responsive-addons-for-elementor' ),
+				'condition' => array( 'show_button' => 'yes' ),
+				'render_type' => 'template', 
+			)
+		);
 
-    $this->add_control(
-        'rtl_enable',
-        array(
-            'label' => __( 'RTL', 'responsive-addons-for-elementor' ),
-            'type' => Controls_Manager::SWITCHER,
-            'label_on' => __( 'Yes', 'responsive-addons-for-elementor' ),
-            'label_off' => __( 'No', 'responsive-addons-for-elementor' ),
-            'return_value' => 'yes',
-            'default' => 'no',
-			'render_type' => 'template', 
-        )
-    );
+		$this->add_control(
+			'show_image',
+			array(
+				'label' => __( 'Show Image', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::SWITCHER,
+				'default' => 'yes',
+				'render_type' => 'template', 
+			)
+		);
 
-    $this->end_controls_section();
+		$this->add_control(
+			'show_graphic_element',
+			array(
+				'label' => __( 'Show Graphic Element', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'icon',
+				'options' => array(
+					'none'  => __( 'None', 'responsive-addons-for-elementor' ),
+					'icon'  => __( 'Icon', 'responsive-addons-for-elementor' ),
+					'image' => __( 'Image', 'responsive-addons-for-elementor' ),
+					'text'  => __( 'Text', 'responsive-addons-for-elementor' ),
+				),
+				'render_type' => 'template', 
+			)
+		);
 
-    // ================== Layout Section ==================
-    $this->start_controls_section(
-        'layout_section',
-        array(
-            'label' => __( 'Layout', 'responsive-addons-for-elementor' ),
-            'tab'   => Controls_Manager::TAB_CONTENT,
-        )
-    );
+		$this->add_control(
+			'graphic_element_image_size',
+			array(
+				'label' => __( 'Graphic Element Image Size', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'medium_large',
+				'options' => array(
+					'thumbnail'    => __( 'Thumbnail', 'responsive-addons-for-elementor' ),
+					'medium'       => __( 'Medium', 'responsive-addons-for-elementor' ),
+					'medium_large' => __( 'Medium Large (max width 768)', 'responsive-addons-for-elementor' ),
+					'large'        => __( 'Large', 'responsive-addons-for-elementor' ),
+					'full'         => __( 'Full', 'responsive-addons-for-elementor' ),
+				),
+				'render_type' => 'template', 
+			)
+		);
 
-    $this->add_control(
-        'show_title',
-        array(
-            'label' => __( 'Show Title', 'responsive-addons-for-elementor' ),
-            'type' => Controls_Manager::SWITCHER,
-            'label_on' => __( 'Yes', 'responsive-addons-for-elementor' ),
-            'label_off' => __( 'No', 'responsive-addons-for-elementor' ),
-            'default' => 'yes',
-			'render_type'  => 'template',
-        )
-    );
-
-    $this->add_control(
-        'title_html_tag',
-        array(
-            'label' => __( 'Title HTML Tag', 'responsive-addons-for-elementor' ),
-            'type' => Controls_Manager::SELECT,
-            'default' => 'div',
-            'options' => array(
-                'h1' => 'H1',
-                'h2' => 'H2',
-                'h3' => 'H3',
-                'h4' => 'H4',
-                'h5' => 'H5',
-                'h6' => 'H6',
-                'div' => 'div',
-                'span' => 'span',
-                'p' => 'p',
-            ),
-			'render_type' => 'template', 
-        )
-    );
-
-    $this->add_control(
-        'show_description',
-        array(
-            'label' => __( 'Show Description', 'responsive-addons-for-elementor' ),
-            'type' => Controls_Manager::SWITCHER,
-            'default' => 'yes',
-			'render_type' => 'template', 
-        )
-    );
-
-    $this->add_control(
-        'show_button',
-        array(
-            'label' => __( 'Show Button', 'responsive-addons-for-elementor' ),
-            'type' => Controls_Manager::SWITCHER,
-            'default' => 'yes',
-			'render_type' => 'template', 
-        )
-    );
-
-    $this->add_control(
-        'button_text',
-        array(
-            'label' => __( 'Button Text', 'responsive-addons-for-elementor' ),
-            'type' => Controls_Manager::TEXT,
-            'default' => __( 'Read More', 'responsive-addons-for-elementor' ),
-            'condition' => array( 'show_button' => 'yes' ),
-			'render_type' => 'template', 
-        )
-    );
-
-    $this->add_control(
-        'show_image',
-        array(
-            'label' => __( 'Show Image', 'responsive-addons-for-elementor' ),
-            'type' => Controls_Manager::SWITCHER,
-            'default' => 'yes',
-			'render_type' => 'template', 
-        )
-    );
-
-    $this->add_control(
-        'show_graphic_element',
-        array(
-            'label' => __( 'Show Graphic Element', 'responsive-addons-for-elementor' ),
-            'type' => Controls_Manager::SELECT,
-            'default' => 'icon',
-            'options' => array(
-                'none'  => __( 'None', 'responsive-addons-for-elementor' ),
-                'icon'  => __( 'Icon', 'responsive-addons-for-elementor' ),
-                'image' => __( 'Image', 'responsive-addons-for-elementor' ),
-                'text'  => __( 'Text', 'responsive-addons-for-elementor' ),
-            ),
-			'render_type' => 'template', 
-        )
-    );
-
-    $this->add_control(
-        'graphic_element_image_size',
-        array(
-            'label' => __( 'Graphic Element Image Size', 'responsive-addons-for-elementor' ),
-            'type' => Controls_Manager::SELECT,
-            'default' => 'medium_large',
-            'options' => array(
-                'thumbnail'    => __( 'Thumbnail', 'responsive-addons-for-elementor' ),
-                'medium'       => __( 'Medium', 'responsive-addons-for-elementor' ),
-                'medium_large' => __( 'Medium Large (max width 768)', 'responsive-addons-for-elementor' ),
-                'large'        => __( 'Large', 'responsive-addons-for-elementor' ),
-                'full'         => __( 'Full', 'responsive-addons-for-elementor' ),
-            ),
-			'render_type' => 'template', 
-        )
-    );
-
-    $this->end_controls_section();
+		$this->end_controls_section();
 
 	
 		// Scroll Motion
@@ -890,7 +886,7 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 
 		$this->end_controls_tab();
 
-// ---------------- Hover tab (Scale, Opacity, Blur, Greyscale, Rotation) ---------------- 
+		// ---------------- Hover tab (Scale, Opacity, Blur, Greyscale, Rotation) ---------------- 
 		$this->start_controls_tab(
 			'scroll_motion_scroll',
 			array( 'label' => __( 'Scroll', 'responsive-addons-for-elementor' ) )
@@ -1017,12 +1013,11 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
-			array(
-				'name' => 'card_background',
-				'label' => __( 'Background', 'responsive-addons-for-elementor' ),
-				'types' => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .rael-stacking-card',
-				'fields_options' => array(
+			[
+				'name'     => 'card_background',
+				'label'    => __( 'Background Image', 'responsive-addons-for-elementor' ),
+				'types'    => array( 'classic', 'gradient' ),
+					'fields_options' => array(
 					'background' => array(
 						'default' => 'classic',
 					),
@@ -1033,9 +1028,31 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 						'default' => '#f0f0f0', 
 					),
 				),
-				'render_type' => 'template', 
-			)
+				'selector' => '{{WRAPPER}} .rael-bg-layer',
+			]
 		);
+		$this->add_control(
+			'overlay_heading',
+			[
+				'type' => Controls_Manager::HEADING,
+				'label' => __( 'Background Image Overlay', 'responsive-addons-for-elementor' ),
+				'separator' => 'before',
+			]
+		);
+		
+		$this->add_control(
+			'overlay_color',
+			[
+				'label' => __( 'Overlay Color', 'responsive-addons-for-elementor' ),
+				'type'  => Controls_Manager::COLOR,
+				'default' => '#FFFFFF05', 
+				'selectors' => [
+					'{{WRAPPER}} .rael-overlay-layer' => 'background-color: {{VALUE}};',
+				],
+				 'separator' => 'after',
+			]
+		);
+		
 		// Box Shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
@@ -1342,6 +1359,7 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 			array(
 				'label' => __( 'Title', 'responsive-addons-for-elementor' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+
 			)
 		);
 
@@ -1405,6 +1423,28 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 				),
 				'selectors' => array(
 					'{{WRAPPER}} .rael-card-title' => 'margin-top: {{SIZE}}{{UNIT}};',
+				),
+				'render_type' => 'template', 
+			)
+		);
+		$this->add_responsive_control(
+			'title_padding',
+			array(
+				'label' => __( 'Padding', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .rael-card-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'render_type' => 'template', 
+			)
+		);
+		$this->add_responsive_control(
+			'title_margin',
+			array(
+				'label' => __( 'Margin', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .rael-card-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'render_type' => 'template', 
 			)
@@ -1483,6 +1523,28 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 				),
 				'selectors' => array(
 					'{{WRAPPER}} .rael-card-desc' => 'margin-top: {{SIZE}}{{UNIT}};',
+				),
+				'render_type' => 'template', 
+			)
+		);
+		$this->add_responsive_control(
+			'description_padding',
+			array(
+				'label' => __( 'Padding', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .rael-card-desc' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				),
+				'render_type' => 'template', 
+			)
+		);
+		$this->add_responsive_control(
+			'description_margin',
+			array(
+				'label' => __( 'Margin', 'responsive-addons-for-elementor' ),
+				'type' => Controls_Manager::DIMENSIONS,
+				'selectors' => array(
+					'{{WRAPPER}} .rael-card-desc' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				),
 				'render_type' => 'template', 
 			)
@@ -1758,6 +1820,31 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 			)
 		);
 
+		$this->add_responsive_control(
+		'image_width',
+			array(
+				'label' => __( 'Width', 'responsive-addons-for-elementor' ),
+				'type'  => Controls_Manager::SLIDER,
+				'size_units' => array( 'px', '%' ),
+				'range' => array(
+					'px' => array(
+						'min' => 50,
+						'max' => 500,
+					),
+					'%' => array(
+						'min' => 50,
+						'max' => 500,
+					),
+				),
+				'default' =>  array(
+					'size' => 280,
+					'unit' => 'px',
+				),
+				'selectors' => array(
+					'{{WRAPPER}}  .rael-card-media' => 'width: {{SIZE}}{{UNIT}}; max-width: {{SIZE}}{{UNIT}}; flex: 0 0 {{SIZE}}{{UNIT}};',
+				),
+			)
+        );
 		
 		$this->add_responsive_control(
 			'image_fit',
@@ -2103,7 +2190,7 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
         	echo '<div class="rael-card-inner">';
 			
 			// Content
-			echo '<div class="rael-card-content">';
+			echo '<div class="rael-card-content"><div class="rael-bg-layer"></div><div class="rael-overlay-layer"></div>';
 
 			// Graphic
 			$graphic_output = '';
