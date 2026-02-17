@@ -498,16 +498,7 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 			)
 		);
 
-		$repeater->add_control(
-			'background_image',
-			array(
-				'label'     => __( 'Background Image', 'responsive-addons-for-elementor' ),
-				'type'      => Controls_Manager::MEDIA,
-				'condition' => array( 'background_type' => 'image' ),
-				'render_type' => 'template', 
-			)
-		);
-
+	
 		$repeater->end_controls_tab();
 
 		$repeater->end_controls_tabs();
@@ -1022,12 +1013,11 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 
 		$this->add_group_control(
 			Group_Control_Background::get_type(),
-			array(
-				'name' => 'card_background',
-				'label' => __( 'Background', 'responsive-addons-for-elementor' ),
-				'types' => array( 'classic', 'gradient' ),
-				'selector' => '{{WRAPPER}} .rael-stacking-card',
-				'fields_options' => array(
+			[
+				'name'     => 'card_background',
+				'label'    => __( 'Background Image', 'responsive-addons-for-elementor' ),
+				'types'    => array( 'classic', 'gradient' ),
+					'fields_options' => array(
 					'background' => array(
 						'default' => 'classic',
 					),
@@ -1038,9 +1028,31 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
 						'default' => '#f0f0f0', 
 					),
 				),
-				'render_type' => 'template', 
-			)
+				'selector' => '{{WRAPPER}} .rael-bg-layer',
+			]
 		);
+		$this->add_control(
+			'overlay_heading',
+			[
+				'type' => Controls_Manager::HEADING,
+				'label' => __( 'Background Image Overlay', 'responsive-addons-for-elementor' ),
+				'separator' => 'before',
+			]
+		);
+		
+		$this->add_control(
+			'overlay_color',
+			[
+				'label' => __( 'Overlay Color', 'responsive-addons-for-elementor' ),
+				'type'  => Controls_Manager::COLOR,
+				'default' => '#FFFFFF05', 
+				'selectors' => [
+					'{{WRAPPER}} .rael-overlay-layer' => 'background-color: {{VALUE}};',
+				],
+				 'separator' => 'after',
+			]
+		);
+		
 		// Box Shadow
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
@@ -2178,7 +2190,7 @@ class Responsive_Addons_For_Elementor_Stacking_Cards extends Widget_Base
         	echo '<div class="rael-card-inner">';
 			
 			// Content
-			echo '<div class="rael-card-content">';
+			echo '<div class="rael-card-content"><div class="rael-bg-layer"></div><div class="rael-overlay-layer"></div>';
 
 			// Graphic
 			$graphic_output = '';
