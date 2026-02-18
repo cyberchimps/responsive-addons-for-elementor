@@ -84,7 +84,8 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 	 * @return array
 	 */
 	public function get_script_depends() {
-		  return [ 'font-awesome-4-shim' ];
+		return [ 'rael-swiper','font-awesome-4-shim', 'rael-testimonial-marquee'];
+  
 	}
 	/**
 	 * Get default values for the repeater control.
@@ -442,22 +443,6 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 			]
 		);
 
-		/* Reverse Direction Toggle */
-		$this->add_control(
-			'marquee_reverse',
-			[
-				'label'        => __( 'Reverse Direction', 'responsive-addons-for-elementor' ),
-				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => __( 'Yes', 'responsive-addons-for-elementor' ),
-				'label_off'    => __( 'No', 'responsive-addons-for-elementor' ),
-				'return_value' => 'yes',
-				'default'      => '',
-				'condition'    => [
-					'enable_marquee' => 'yes',
-				],
-			]
-		);
-
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -468,7 +453,6 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 					'enable_marquee!' => 'yes',
 				],
 			),
-			
 			
 		);
 
@@ -1146,7 +1130,6 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 				'default' => '#ffb400',
 				'selectors' => [
 					'{{WRAPPER}} .rael-rating-stars i' => 'color: {{VALUE}};',
-
 				],
 			]
 		);
@@ -1674,15 +1657,15 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 	 * @return void
 	 */
 	protected function render( array $settings = null ) {
+
 		$settings = $this->get_settings_for_display();
 
-		if ( 'yes' === $settings['enable_marquee'] ) {
+		$is_marquee = ( 'yes' === $settings['enable_marquee'] );
+
+		if ( $is_marquee ) {
 			wp_enqueue_script( 'rael-testimonial-marquee' );
 		} else {
 			wp_enqueue_script( 'rael-swiper' );
-		}
-		if ( null === $settings ) {
-			$settings = $this->get_settings_for_display();
 		}
 
 		if ( empty( $settings['slides'] ) ) {
@@ -1695,50 +1678,114 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 		);
 
 		$settings = array_merge( $default_settings, $settings );
-
 		$slides_count = count( $settings['slides'] );
 
 		?>
-		<div class="responsive-swiper">
-			<div class="<?php echo esc_attr( $settings['container_class'] ); ?> swiper<?php echo esc_attr( RAEL_SWIPER_CONTAINER ); ?>">
-				<div class="swiper-wrapper">
+
+		<?php if ( $is_marquee ) : ?>
+
+			<!-- Marquee mode -->
+
+			<div class="responsive-marquee-wrapper"
+				data-marquee-speed="<?php echo esc_attr( $settings['marquee_speed'] ?? 50 ); ?>"
+				data-marquee-direction="<?php echo esc_attr( $settings['marquee_direction'] ?? 'ltr' ); ?>"
+				data-marquee-gap="<?php echo esc_attr( $settings['marquee_gap'] ?? '2' ); ?>"
+				data-marquee-pause="<?php echo esc_attr( $settings['marquee_pause_hover'] ?? 'ltr' ); ?>">
+
+				<div class="responsive-marquee-track">
+
 					<?php
 					foreach ( $settings['slides'] as $index => $slide ) :
 						++$this->slide_prints_count;
 						?>
-						<div class="swiper-slide">
-							<?php $this->print_single_slide( $slide, $settings, 'slide-' . $index . '-' . $this->slide_prints_count ); ?>
+						<div class="marquee-item">
+							<?php
+							$this->print_single_slide(
+								$slide,
+								$settings,
+								'slide-' . $index . '-' . $this->slide_prints_count
+							);
+							?>
 						</div>
 					<?php endforeach; ?>
-				</div>
-				<?php if ( 1 < $slides_count ) : ?>
-					<?php if ( $settings['pagination'] ) : ?>
-						 
-							<div class="swiper-pagination"></div>
-					<?php endif; ?>
-					<?php if ( $settings['show_arrows'] ) : ?>
-						<?php
-						if ( $settings['arrow_style'] ) {
-							$pa_next_arrow = $settings['arrow_style'];
-							$pa_prev_arrow = str_replace( 'right', 'left', $settings['arrow_style'] );
-						} else {
-							$pa_next_arrow = 'fa fa-angle-right';
-							$pa_prev_arrow = 'fa fa-angle-left';
-						}
+
+					<?php
+					foreach ( $settings['slides'] as $index => $slide ) :
+						++$this->slide_prints_count;
 						?>
-						<!-- Add Arrows -->
-						<div class="responsive-swiper-button-next elementor-swiper-button elementor-swiper-button-next swiper-button-next-<?php echo esc_attr( $this->get_id() ); ?>">
-							<i class="<?php echo esc_attr( $pa_next_arrow ); ?>"></i>
+						<div class="marquee-item">
+							<?php
+							$this->print_single_slide(
+								$slide,
+								$settings,
+								'slide-dup-' . $index . '-' . $this->slide_prints_count
+							);
+							?>
 						</div>
-						<div class="responsive-swiper-button-prev elementor-swiper-button elementor-swiper-button-prev swiper-button-prev-<?php echo esc_attr( $this->get_id() ); ?>">
-							<i class="<?php echo esc_attr( $pa_prev_arrow ); ?>"></i>
-						</div>
-					<?php endif; ?>
-				<?php endif; ?>
+					<?php endforeach; ?>
+
+				</div>
 			</div>
-		</div>
+
+    	<?php else : ?>
+
+			<!-- Original Swiper-slider mode -->
+
+			<div class="responsive-swiper">
+				<div class="<?php echo esc_attr( $settings['container_class'] ); ?> swiper<?php echo esc_attr( RAEL_SWIPER_CONTAINER ); ?>">
+					<div class="swiper-wrapper">
+						<?php foreach ( $settings['slides'] as $index => $slide ) : ?>
+							<?php ++$this->slide_prints_count; ?>
+							<div class="swiper-slide">
+								<?php
+								$this->print_single_slide(
+									$slide,
+									$settings,
+									'slide-' . $index . '-' . $this->slide_prints_count
+								);
+								?>
+							</div>
+						<?php endforeach; ?>
+					</div>
+
+					<?php if ( 1 < $slides_count ) : ?>
+
+						<?php if ( $settings['pagination'] ) : ?>
+							<div class="swiper-pagination"></div>
+						<?php endif; ?>
+
+						<?php if ( $settings['show_arrows'] ) : ?>
+
+							<?php
+							if ( $settings['arrow_style'] ) {
+								$pa_next_arrow = $settings['arrow_style'];
+								$pa_prev_arrow = str_replace( 'right', 'left', $settings['arrow_style'] );
+							} else {
+								$pa_next_arrow = 'fa fa-angle-right';
+								$pa_prev_arrow = 'fa fa-angle-left';
+							}
+							?>
+
+							<div class="responsive-swiper-button-next elementor-swiper-button elementor-swiper-button-next swiper-button-next-<?php echo esc_attr( $this->get_id() ); ?>">
+								<i class="<?php echo esc_attr( $pa_next_arrow ); ?>"></i>
+							</div>
+
+							<div class="responsive-swiper-button-prev elementor-swiper-button elementor-swiper-button-prev swiper-button-prev-<?php echo esc_attr( $this->get_id() ); ?>">
+								<i class="<?php echo esc_attr( $pa_prev_arrow ); ?>"></i>
+							</div>
+
+						<?php endif; ?>
+
+                	<?php endif; ?>
+
+            	</div>
+        	</div>
+
+    	<?php endif; ?>
+
 		<?php
 	}
+
 	/**
 	 * Generate HTML for displaying the testimonial title in the specified location.
 	 *

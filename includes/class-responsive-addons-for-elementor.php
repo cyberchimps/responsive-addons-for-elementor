@@ -1311,6 +1311,8 @@ private function rael_find_element_recursive($elements, $widget_id) {
 							wp_register_script( 'rael-swiper', RAEL_ASSETS_URL . 'lib/swiper/swiper.js', array(), RAEL_VER, true );
 							wp_localize_script( 'rael-swiper', 'rael_elementor_swiper', $swiper_class );
 						}
+						wp_register_script( 'rael-testimonial-marquee', RAEL_ASSETS_URL . 'js/frontend/testimonial/rael-testimonial-marquee.js', array(), RAEL_VER,true );
+
 						break;
 					case 'banner':
 						wp_register_script( 'rael-tilt', RAEL_ASSETS_URL . 'lib/universal-tilt/universal-tilt.min.js', array(), RAEL_VER, true );

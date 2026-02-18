@@ -293,5 +293,36 @@
 
 .elementor-widget-rael-testimonial-slider .responsive-testimonial-swiper .swiper-slide-duplicate-next {
   margin-right: 6px !important; }
+  
+.responsive-marquee-wrapper {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.responsive-marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+}
+
+.marquee-item {
+    flex-shrink: 0;
+}
+
+/* Infinite seamless animation */
+@keyframes rael-marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause on hover (optional but recommended) */
+.responsive-marquee-wrapper:hover .responsive-marquee-track {
+    animation-play-state: paused;
+}
 
 /*# sourceMappingURL=testimonial-slider.css.map */
