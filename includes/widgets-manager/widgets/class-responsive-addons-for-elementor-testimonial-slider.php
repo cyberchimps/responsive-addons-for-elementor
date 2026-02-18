@@ -84,10 +84,7 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 	 * @return array
 	 */
 	public function get_script_depends() {
-		return array(
-			'font-awesome-4-shim',
-			'rael-swiper',
-		);
+		  return [ 'font-awesome-4-shim' ];
 	}
 	/**
 	 * Get default values for the repeater control.
@@ -354,12 +351,125 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 		);
 
 		$this->end_controls_section();
+		
+		// Marquee Section
+		$this->start_controls_section(
+			'section_marquee',
+			[
+				'label' => __( 'Marquee', 'responsive-addons-for-elementor' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+
+		/* Enable Marquee */
+		$this->add_control(
+			'enable_marquee',
+			[
+				'label'        => __( 'Enable Marquee', 'responsive-addons-for-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'ON', 'responsive-addons-for-elementor' ),
+				'label_off'    => __( 'OFF', 'responsive-addons-for-elementor' ),
+				'return_value' => 'yes',
+				'default'      => '',
+			]
+		);
+
+		/* Direction */
+		$this->add_control(
+			'marquee_direction',
+			[
+				'label'     => __( 'Direction', 'responsive-addons-for-elementor' ),
+				'type'      => Controls_Manager::SELECT,
+				'default'   => 'rtl',
+				'options'   => [
+					'ltr' => __( 'Left to Right', 'responsive-addons-for-elementor' ),
+					'rtl' => __( 'Right to Left', 'responsive-addons-for-elementor' ),
+					'ttb' => __( 'Top to Bottom', 'responsive-addons-for-elementor' ),
+					'btt' => __( 'Bottom to Top', 'responsive-addons-for-elementor' ),
+				],
+				'condition' => [
+					'enable_marquee' => 'yes',
+				],
+			]
+		);
+
+		/* Speed (px/sec) */
+		$this->add_control(
+			'marquee_speed',
+			[
+				'label'      => __( 'Speed', 'responsive-addons-for-elementor' ),
+				'type'       => Controls_Manager::NUMBER,
+				'default'    => 60,
+				'min'        => 10,
+				'max'        => 500,
+				'step'       => 10,
+				'condition'  => [
+					'enable_marquee' => 'yes',
+				],
+			]
+		);
+
+		/* Gap Between Items */
+		$this->add_control(
+			'marquee_gap',
+			[
+				'label'      => __( 'Gap Between Items', 'responsive-addons-for-elementor' ),
+				'type'       => Controls_Manager::NUMBER,
+				'default'    => 30,
+				'min'        => 0,
+				'max'        => 200,
+				'step'       => 5,
+				'condition'  => [
+					'enable_marquee' => 'yes',
+				],
+			]
+		);
+
+		/* Pause on Hover */
+		$this->add_control(
+			'marquee_pause_hover',
+			[
+				'label'        => __( 'Pause on Hover', 'responsive-addons-for-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'responsive-addons-for-elementor' ),
+				'label_off'    => __( 'No', 'responsive-addons-for-elementor' ),
+				'return_value' => 'yes',
+				'default'      => 'yes',
+				'condition'    => [
+					'enable_marquee' => 'yes',
+				],
+			]
+		);
+
+		/* Reverse Direction Toggle */
+		$this->add_control(
+			'marquee_reverse',
+			[
+				'label'        => __( 'Reverse Direction', 'responsive-addons-for-elementor' ),
+				'type'         => Controls_Manager::SWITCHER,
+				'label_on'     => __( 'Yes', 'responsive-addons-for-elementor' ),
+				'label_off'    => __( 'No', 'responsive-addons-for-elementor' ),
+				'return_value' => 'yes',
+				'default'      => '',
+				'condition'    => [
+					'enable_marquee' => 'yes',
+				],
+			]
+		);
+
+		$this->end_controls_section();
 
 		$this->start_controls_section(
 			'section_additional_options',
 			array(
-				'label' => __( 'Additional Options', 'responsive-addons-for-elementor' ),
-			)
+				'label' => __( 'Additional Options', 'responsive-addons-for-elementor' ),	
+				'condition' => [
+					'enable_marquee!' => 'yes',
+				],
+			),
+			
+			
 		);
 
 		$this->add_control(
@@ -373,6 +483,7 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 				'prefix_class'       => 'elementor-arrows-',
 				'render_type'        => 'template',
 				'frontend_available' => true,
+				
 			)
 		);	
 
@@ -1563,6 +1674,13 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 	 * @return void
 	 */
 	protected function render( array $settings = null ) {
+		$settings = $this->get_settings_for_display();
+
+		if ( 'yes' === $settings['enable_marquee'] ) {
+			wp_enqueue_script( 'rael-testimonial-marquee' );
+		} else {
+			wp_enqueue_script( 'rael-swiper' );
+		}
 		if ( null === $settings ) {
 			$settings = $this->get_settings_for_display();
 		}
@@ -1670,12 +1788,20 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 	 */
 	protected function print_single_slide( array $slide, array $settings, $element_key ) {
 		$settings         = $this->get_settings_for_display();
+		$is_marquee = ( 'yes' === $settings['enable_marquee'] );
+
+		$slide_classes = [ 'responsive-testimonial' ];
+
+		if ( $is_marquee ) {
+			$slide_classes[] = 'rael-marquee-item';
+		}
+
 		$tm_icon_migrated = isset( $settings['__fa4_migrated']['rael_testimonial_slider_icon_new'] );
 		$tm_icon_is_new   = empty( $settings['rael_testimonial_slider_before_content_icon'] );
 		$this->add_render_attribute(
 			$element_key . '-testimonial',
 			array(
-				'class' => 'responsive-testimonial',
+				'class' => $slide_classes,
 			)
 		);
 
