@@ -161,7 +161,7 @@
   object-fit: cover; }
 
 .elementor-widget-rael-testimonial-slider .responsive-testimonial__text {
-  font-size: 1.3em;
+  font-size: inherit;
   font-style: italic;
   line-height: 1.5; }
 
@@ -293,7 +293,7 @@
 
 .elementor-widget-rael-testimonial-slider .responsive-testimonial-swiper .swiper-slide-duplicate-next {
   margin-right: 6px !important; }
-  
+
 .responsive-marquee-wrapper {
     overflow: hidden;
     width: 100%;
@@ -309,19 +309,25 @@
 .marquee-item {
     flex-shrink: 0;
 }
-
+.rael-marquee-item{
+    flex: 0 0 auto;      
+    width: 350px;        
+    max-width: 100%;
+}
 /* Infinite seamless animation */
-@keyframes rael-marquee {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
+@keyframes rael-marquee-x {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
+@keyframes rael-marquee-y {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+}
+
+
 /* Pause on hover (optional but recommended) */
-.responsive-marquee-wrapper:hover .responsive-marquee-track {
+.responsive-marquee-wrapper.rael-pause-enabled:hover .responsive-marquee-track {
     animation-play-state: paused;
 }
 

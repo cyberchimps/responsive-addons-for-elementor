@@ -369,8 +369,8 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 			[
 				'label'        => __( 'Enable Marquee', 'responsive-addons-for-elementor' ),
 				'type'         => Controls_Manager::SWITCHER,
-				'label_on'     => __( 'ON', 'responsive-addons-for-elementor' ),
-				'label_off'    => __( 'OFF', 'responsive-addons-for-elementor' ),
+				'label_on'     => __( 'On', 'responsive-addons-for-elementor' ),
+				'label_off'    => __( 'Off', 'responsive-addons-for-elementor' ),
 				'return_value' => 'yes',
 				'default'      => '',
 			]
@@ -1687,10 +1687,10 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 			<!-- Marquee mode -->
 
 			<div class="responsive-marquee-wrapper"
-				data-marquee-speed="<?php echo esc_attr( $settings['marquee_speed'] ?? 50 ); ?>"
+				data-marquee-speed="<?php echo esc_attr( $settings['marquee_speed'] ?? 20 ); ?>"
 				data-marquee-direction="<?php echo esc_attr( $settings['marquee_direction'] ?? 'ltr' ); ?>"
-				data-marquee-gap="<?php echo esc_attr( $settings['marquee_gap'] ?? '2' ); ?>"
-				data-marquee-pause="<?php echo esc_attr( $settings['marquee_pause_hover'] ?? 'ltr' ); ?>">
+				data-marquee-gap="<?php echo esc_attr( $settings['marquee_gap'] ?? '20' ); ?>"
+				data-marquee-pause="<?php echo esc_attr( $settings['marquee_pause_hover'] ?? '' ); ?>">
 
 				<div class="responsive-marquee-track">
 
