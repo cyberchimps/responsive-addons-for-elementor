@@ -395,13 +395,43 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'marquee_alignment',
+			array(
+				'label'   => __( 'Alignment', 'responsive-addons-for-elementor' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'default' => 'center',
+				'options' => array(
+					'flex-start' => array(
+						'title' => __( 'Left', 'responsive-addons-for-elementor' ),
+						'icon'  => 'eicon-text-align-left',
+					),
+					'center' => array(
+						'title' => __( 'Center', 'responsive-addons-for-elementor' ),
+						'icon'  => 'eicon-text-align-center',
+					),
+					'flex-end' => array(
+						'title' => __( 'Right', 'responsive-addons-for-elementor' ),
+						'icon'  => 'eicon-text-align-right',
+					),
+				),
+				'selectors' => array(
+					'{{WRAPPER}} .responsive-marquee-track' => 'align-items: {{VALUE}};',
+				),
+				'condition' => array(
+					'enable_marquee'     => 'yes',
+					'marquee_direction'  => array( 'ttb', 'btt' ),
+				),
+			)
+		);
+
 		/* Speed (px/sec) */
 		$this->add_control(
 			'marquee_speed',
 			[
 				'label'      => __( 'Speed', 'responsive-addons-for-elementor' ),
 				'type'       => Controls_Manager::NUMBER,
-				'default'    => 60,
+				'default'    => 100,
 				'min'        => 10,
 				'max'        => 500,
 				'step'       => 10,
@@ -448,7 +478,7 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 		$this->start_controls_section(
 			'section_additional_options',
 			array(
-				'label' => __( 'Additional Options', 'responsive-addons-for-elementor' ),	
+				'label' => __( 'Slider Options', 'responsive-addons-for-elementor' ),	
 				'condition' => [
 					'enable_marquee!' => 'yes',
 				],
@@ -466,8 +496,7 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 				'label_on'           => __( 'Show', 'responsive-addons-for-elementor' ),
 				'prefix_class'       => 'elementor-arrows-',
 				'render_type'        => 'template',
-				'frontend_available' => true,
-				
+				'frontend_available' => true,			
 			)
 		);	
 
@@ -1203,6 +1232,9 @@ class Responsive_Addons_For_Elementor_Testimonial_Slider extends Widget_Base {
 			array(
 				'label' => __( 'Navigation', 'responsive-addons-for-elementor' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'enable_marquee!' => 'yes',
+				],
 			)
 		);
 
