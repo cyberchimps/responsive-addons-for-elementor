@@ -1,6 +1,6 @@
 {
   "name": "responsive-addons-for-elementor",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Responsive Addons for Elementor plugin adds Elementor widgets and seamlessly integrates with any Elementor Package (Free, Pro). It is compatible with all popular WordPress themes.",
   "main": "index.js",
   "scripts": {
