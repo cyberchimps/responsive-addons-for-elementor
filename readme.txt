@@ -1,4 +1,4 @@
-=== Responsive Addons for Elementor – Free Elementor Addons Plugin and Elementor Templates ===
+=== Responsive Addons for Elementor – Free Elementor Addons, Kits and Elementor Templates ===
 Contributors: cyberchimps
 Donate Link: https://cyberchimps.com
 Tags: elementor, elementor addons, widgets for elementor, header footer builder, elementor templates
@@ -7,11 +7,11 @@ Tested up to: 6.9
 Elementor tested up to: 3.35
 Elementor Pro tested up to: 3.35
 Requires PHP: 5.6
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Free Elementor addons plugin with 80+ widgets, 5+ extensions, Theme builder, 250+ Elementor templates, 500+ sections — build modern UI Elementor websites.
+Free Elementor addons plugin with 80+ widgets, 5+ extensions, Theme builder, 250+ Elementor templates, 500+ modern UI sections for Elementor websites.
 
 == Description ==
 
@@ -55,9 +55,6 @@ Unlock a growing library of pre-made templates and sections with Responsive Addo
 
 ###🌟 Expert Support:###
 Join our community and get exceptional support through our forum or contact form whenever you need it.
-
-###⚙️ Plugin Requirements:###
-Responsive Addons for Elementor require the Elementor plugin for its functionality.
 
 ###🚀 Continuous Updates:###
 Stay ahead with regular updates and new additions to our collection of Elementor widgets, giving you fresh tools to enhance your website.
@@ -253,7 +250,7 @@ Let’s get started with the widget list.
 
 ###Theme Builder for Elementor###
 
-<a href = "https://cyberchimps.com/responsive-addons-for-elementor/theme-builder/" >Theme Builder</a> — Responsive Addons for Elementor’s Theme Builder is a user-friendly tool that empowers you to create and design templates for different sections of your website. Its drag-and-drop interface makes website customization a breeze. The tool also offers a feature that allows you to design and customize various sections of your website as templates, such as the header, footer, WooCommerce products, and more.
+<a href = "https://cyberchimps.com/responsive-addons-for-elementor/theme-builder/" >Theme Builder</a> — Responsive Addons for Elementor’s Theme Builder offers a drag-and-drop interface that allows you to design and customize various sections of your website as templates, such as the header, footer, WooCommerce products, and more.
 
 
 ##Support & Documentation##
@@ -282,6 +279,12 @@ If you like Responsive Addons for Elementor, consider checking out our other Wor
 The Development Version of the Responsive Addons for Elementor plugin is located at [https://github.com/cyberchimps/responsive-addons-for-elementor](https://github.com/cyberchimps/responsive-addons-for-elementor)
 
 == Changelog ==
+
+= 2.1.2 – 23rd February 2026 =
+- Fix: RAE - Starter Templates activation issue.
+- Fix: RAE Advanced Tabs - Extra margin when heading (H1–H6) or paragraph tags are used in tab titles.
+- Fix: RAE Contact Form 7 Styler - Issue where label color and active input border color were not applied.
+- Fix: RAE FAQ - Issue causing content to disappear when Grid layout is selected.
 
 = 2.1.1 – 10th February 2026 =
 - Improvement: Enhanced core asset loading logic for better performance and efficiency.
