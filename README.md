@@ -1,7 +1,7 @@
 # Responsive Addons for Elementor
 
 [![License: GPL v2](https://img.shields.io/badge/License-GPLv2-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![WordPress Plugin](https://img.shields.io/badge/WordPress%20Plugin-2.2.1-blue.svg)](https://wordpress.org/plugins/responsive-addons-for-elementor/)
+[![WordPress Plugin](https://img.shields.io/badge/WordPress%20Plugin-2.2.2-blue.svg)](https://wordpress.org/plugins/responsive-addons-for-elementor/)
 [![Elementor Compatible](https://img.shields.io/badge/Elementor-4.0+-green.svg)](https://elementor.com)
 
 A free, powerful WordPress plugin that extends [Elementor](https://elementor.com) with 80+ widgets, 5+ extensions, a theme builder, and 250+ pre-designed sections to help you build modern, responsive websites with ease.
