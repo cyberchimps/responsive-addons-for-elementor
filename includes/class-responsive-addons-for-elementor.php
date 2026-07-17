@@ -1629,6 +1629,41 @@ private function rael_find_element_recursive($elements, $widget_id) {
 		wp_enqueue_style( 'wp-components' );
 
 		wp_enqueue_script( 'updates' );
+		// Fetch the current user plan
+		$is_responsivepro_active = is_plugin_active( 'responsivepro/responsivepro.php' );
+		$plan_details = '';
+		$is_connected = false;
+		$email        = '';
+		$plan         = '';
+
+		if ( $is_responsivepro_active && class_exists( 'ResponsivePRO' ) ) {
+			$responsivepro_settings = new ResponsivePRO();
+			$plan_details = $responsivepro_settings->get_responsivepro_plan();
+			if ( class_exists( 'ResponsivePRO_App_Auth' ) ) {
+				$cc_app_auth = new ResponsivePRO_App_Auth();
+				$is_connected = $cc_app_auth->has_auth();
+				if ( $is_connected && class_exists( 'ResponsivePRO_Settings' ) ) {
+					$user  = ResponsivePRO_Settings::get_instance();
+					$email = esc_html( $user->get_email() );
+					$plan  = esc_html( ucwords( $user->get_plan() ) );
+				}
+			}
+		}
+
+		if ( ! $is_connected && is_plugin_active( 'responsive-add-ons/responsive-add-ons.php' ) && class_exists( 'Responsive_Add_Ons_App_Auth' ) ) {
+			require_once RESPONSIVE_ADDONS_DIR . 'includes/class-responsive-add-ons-app-auth.php';
+			$cc_app_auth = new Responsive_Add_Ons_App_Auth();
+			$is_connected = $cc_app_auth->has_auth();
+			if ( $is_connected && class_exists( 'Responsive_Add_Ons_Settings' ) ) {
+				$user  = Responsive_Add_Ons_Settings::get_instance();
+				$email = esc_html( $user->get_email() );
+				$plan  = esc_html( ucwords( $user->get_plan() ) );
+			}
+		}
+		$responsivepro_path = 'responsivepro/responsivepro.php';
+
+		$is_responsivepro_active = is_plugin_active( $responsivepro_path );
+
 
 		$rst_path = 'responsive-add-ons/responsive-add-ons.php';
 
@@ -1698,6 +1733,9 @@ private function rael_find_element_recursive($elements, $widget_id) {
 				'google_map_local_lang' => $this->rael_google_map_local_lang(),
 				'recaptcha_site_key'    => get_option( 'rael_login_reg_setting_site_key', '' ),
 				'recaptcha_secret_key'  => get_option( 'rael_login_reg_setting_secret_key', '' ),
+				'plan_details'			=> $plan_details,
+				'userEmail'				=> $email,
+				'isResponsiveXActivated'=> $is_responsivepro_active,
 			)
 		);
 
@@ -2906,7 +2944,7 @@ private function rael_find_element_recursive($elements, $widget_id) {
 	}
 
 	public function rae_print_rst_template_views() {
-		// Plugin slug for Responsive Plus
+		// Plugin slug for Responsive Starter Templates
 		$plugin_slug = 'responsive-add-ons/responsive-add-ons.php';
 
 		// Button text depends on whether plugin is installed
@@ -2921,7 +2959,7 @@ private function rael_find_element_recursive($elements, $widget_id) {
 
 					<div class="rael-promo-temp--left">
 						<div class="rael-promo-temp__logo">
-							<img src="<?php echo esc_url( RAEL_URL . 'admin/images/rst_logo.svg' ); ?>" alt="RST Logo">
+							<img src="<?php echo esc_url( RAEL_URL . 'admin/images/rst_logo.svg' ); ?>" alt="RST Logo" style="width: 151px; height: 45px;">
 						</div>
 						<div class="rael-promo-subheading">
 							<span class="subhead-text"><?php esc_html_e('150+ ','responsive-addons-for-elementor'); ?></span>

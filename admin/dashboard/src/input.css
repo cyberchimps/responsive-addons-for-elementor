@@ -55,3 +55,67 @@
 .rael-widget-toggle .components-h-stack {
     @apply gap-0;
 }
+.rael-info-tooltip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.rael-tooltip-content {
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 8px);
+    transform: translateY(-50%);
+    background-color: #1F2937;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Arrow, now pointing left toward the icon */
+.rael-tooltip-content::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #1F2937 transparent transparent;
+}
+
+.rael-info-tooltip:hover .rael-tooltip-content {
+    opacity: 1;
+    visibility: visible;
+}
+.upgrade-button-bg{
+    background-color: #1D4ED8;
+}
+.connect-button {
+  background-color: #1D4ED8;
+  width: 50%;
+}
+.text-\[\#1D4ED8\] {
+  --tw-text-opacity: 1;
+  color: rgb(29 78 216 / var(--tw-text-opacity, 1));
+}
+.connect-exist{
+    width: 70%;
+}
+
+.connected-span{
+    width: 30%;
+}
+.align-baseline{
+    align-items: baseline;
+}

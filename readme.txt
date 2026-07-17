@@ -7,7 +7,7 @@ Tested up to: 7.0
 Elementor tested up to: 4.0
 Elementor Pro tested up to: 4.0
 Requires PHP: 5.6
-Stable tag: 2.2.1
+Stable tag: 2.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,7 +65,7 @@ Stay ahead with regular updates and new additions to our collection of Elementor
 
 Import professionally designed websites with Responsive Addons for Elementor plugin in minutes. This helps you cut down your website design time by 90% without compromising on performance.
 
-Responsive Addons for Elementor plugin integrates seamlessly with the [Responsive Plus - Starter templates](https://wordpress.org/plugins/responsive-add-ons/) plugin to offer you a library of fully functional, professionally built websites that you can import and launch your website with just a few clicks!
+Responsive Addons for Elementor plugin integrates seamlessly with the [Responsive Starter Templates](https://wordpress.org/plugins/responsive-add-ons/) plugin to offer you a library of fully functional, professionally built websites that you can import and launch your website with just a few clicks!
 
 [Check Ready Websites and Starter Templates](https://cyberchimps.com/wordpress-themes/?page-builder=elementor)
 
@@ -271,7 +271,7 @@ If you like Responsive Addons for Elementor, consider checking out our other Wor
 
 1. **[Responsive Theme](https://wordpress.org/themes/responsive/)**: Responsive Theme is a free WordPress theme built by Cyberchimps that is fast, lightweight, and fully customizable. It loads completely under 100 KB. With a blazing GTMetrix performance score of 100%, it helps your website load super fast, ensuring customers get a better user experience. The theme powers more than 30,000 websites and more than 500 5-star ratings on WordPress.
 
-1. **[Responsive Plus - Starter Templates](https://wordpress.org/plugins/responsive-add-ons/)**: This library of 250+ freemium starter templates for Elementor and block editor allows you to launch your website quickly. Select your favorite website template, click import, and launch your website.
+1. **[Responsive Starter Templates](https://wordpress.org/plugins/responsive-add-ons/)**: This library of 250+ freemium starter templates for Elementor and block editor allows you to launch your website quickly. Select your favorite website template, click import, and launch your website.
 
 1. **[Responsive Blocks](https://wordpress.org/plugins/responsive-block-editor-addons/)**: A library of 50+ creative blocks, you can design beautiful pages without writing a single line of code, and the settings are easy to customize to create your unique look.
 
@@ -279,6 +279,9 @@ If you like Responsive Addons for Elementor, consider checking out our other Wor
 The Development Version of the Responsive Addons for Elementor plugin is located at [https://github.com/cyberchimps/responsive-addons-for-elementor](https://github.com/cyberchimps/responsive-addons-for-elementor)
 
 == Changelog ==
+
+= 2.2.2 - 17th July 2026 = 
+- Improvement: Updated dashboard connection and added the "Upgrade to Pro" section for Responsive Pro compatibility.
 
 = 2.2.1 - 1st July 2026 = 
 - Fix: Enhanced Security: Strengthened the codebase.
@@ -383,7 +386,7 @@ The Development Version of the Responsive Addons for Elementor plugin is located
 
 = 2.1.1 – 10th February 2026 =
 - Improvement: Enhanced core asset loading logic for better performance and efficiency.
-- New: RAE Elementor Editor Integration – Added a Responsive Starter Templates install option in the Elementor editor when only RAE is installed, making it easier to discover and install the Responsive Plus plugin.
+- New: RAE Elementor Editor Integration – Added a Responsive Starter Templates install option in the Elementor editor when only RAE is installed, making it easier to discover and install the Responsive Starter Templates plugin.
 - Improvement: UI Enhancements – Updated the RAE badge color in the Elementor widget panel to match the RAE logo color and added the RAE logo before the "Need Help" link across all widgets for better visual consistency.
 - Fix: RAE Posts widget– Resolved issues including inaccurate live preview updates in the editor, featured images not displaying unless the masonry option was enabled and pagination not working correctly across post listings.
 - Fix: Minor bug fixes.
