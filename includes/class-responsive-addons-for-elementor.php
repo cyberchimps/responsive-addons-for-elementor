@@ -2959,7 +2959,7 @@ private function rael_find_element_recursive($elements, $widget_id) {
 
 					<div class="rael-promo-temp--left">
 						<div class="rael-promo-temp__logo">
-							<img src="<?php echo esc_url( RAEL_URL . 'admin/images/rst_logo.svg' ); ?>" alt="RST Logo">
+							<img src="<?php echo esc_url( RAEL_URL . 'admin/images/rst_logo.svg' ); ?>" alt="RST Logo" style="width: 151px; height: 45px;">
 						</div>
 						<div class="rael-promo-subheading">
 							<span class="subhead-text"><?php esc_html_e('150+ ','responsive-addons-for-elementor'); ?></span>
