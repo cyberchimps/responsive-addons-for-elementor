@@ -281,7 +281,7 @@ The Development Version of the Responsive Addons for Elementor plugin is located
 == Changelog ==
 
 = 2.2.2 - 17th July 2026 = 
-- Improvement: Added Support for Responsive Pro.
+- Improvement: Updated dashboard connection and added the "Upgrade to Pro" section for Responsive Pro compatibility.
 
 = 2.2.1 - 1st July 2026 = 
 - Fix: Enhanced Security: Strengthened the codebase.
