@@ -142,7 +142,13 @@ class Login_Register {
 		do_action( 'rael/login-register/before-login' );
 
 		$widget_id = ! empty( $_POST['widget_id'] ) ? sanitize_text_field( wp_unslash( $_POST['widget_id'] ) ) : '';
-		if ( isset( $_POST['g_recaptcha_enabled'] ) && ! $this->rael_lr_validate_recaptcha() ) {
+		// Security fix: use server-side widget settings as the source of truth for reCAPTCHA,
+		// not the client-controlled g_recaptcha_enabled POST field (bypass vulnerability).
+		$login_recaptcha_enabled = (
+			isset( $settings['rael_enable_login_recaptcha'] ) &&
+			'yes' === $settings['rael_enable_login_recaptcha']
+		);
+		if ( $login_recaptcha_enabled && ! $this->rael_lr_validate_recaptcha() ) {
 			$err_msg = isset( $settings['rael_error_recaptcha'] ) ? $settings['rael_error_recaptcha'] : __( 'You did not pass the reCAPTCHA validation.', 'responsive-addons-for-elementor' );
 			if ( $ajax ) {
 				wp_send_json_error( $err_msg );
@@ -298,7 +304,13 @@ class Login_Register {
 			$errors['terms_conditions'] = isset( $settings['rael_error_tc'] ) ? $settings['rael_error_tc'] : __( 'Please accept the Terms & Conditions and try again.', 'responsive-addons-for-elementor' );
 		}
 
-		if ( isset( $_POST['g_recaptcha_enabled'] ) && ! $this->rael_lr_validate_recaptcha() ) {
+		// Security fix: use server-side widget settings as the source of truth for reCAPTCHA,
+		// not the client-controlled g_recaptcha_enabled POST field (bypass vulnerability).
+		$register_recaptcha_enabled = (
+			isset( $settings['rael_enable_register_recaptcha'] ) &&
+			'yes' === $settings['rael_enable_register_recaptcha']
+		);
+		if ( $register_recaptcha_enabled && ! $this->rael_lr_validate_recaptcha() ) {
 			$errors['recaptcha'] = isset( $settings['rael_error_recaptcha'] ) ? $settings['rael_error_recaptcha'] : __( 'You did not pass the reCAPTCHA validation.', 'responsive-addons-for-elementor' );
 		}
 
@@ -514,7 +526,7 @@ class Login_Register {
 	}
 
 	public function rael_lr_validate_recaptcha() {
-		if ( isset( $_REQUEST['g-recaptcha-response'] ) && strlen( sanitize_text_field( wp_unslash( $_REQUEST['g-recaptcha-response'] ) ) ) == 0 ) {
+		if ( empty( $_REQUEST['g-recaptcha-response'] ) ) {
 			return false;
 		}
 		$endpoint = 'https://www.google.com/recaptcha/api/siteverify';
