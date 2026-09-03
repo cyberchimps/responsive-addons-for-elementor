@@ -883,11 +883,20 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 				'mainEntity' => $faqs_data,
 			);
 
-			$encoded_data = wp_json_encode( $schema_data );
+			/*
+			 * Output as JSON-LD inside <script type="application/ld+json">.
+			 * JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT force <, >, &, ', "
+			 * to be emitted as \uXXXX escape sequences, so the payload cannot break out
+			 * of the <script> element and remains valid JSON. The value must NOT be run
+			 * through wp_kses_*() or esc_html() as that corrupts the JSON string data.
+			 */
+			$json_flags = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT;
+
+			$encoded_data = wp_json_encode( $schema_data, $json_flags );
 			if ( $encoded_data ) {
 				?>
 				<script type="application/ld+json">
-					<?php echo wp_kses_data( $encoded_data ); ?>
+					<?php echo $encoded_data; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON-LD from wp_json_encode() with JSON_HEX_* flags; already context-safe, must not be HTML-escaped. ?>
 				</script>
 				<?php
 			}
