@@ -7,7 +7,7 @@ Tested up to: 7.0
 Elementor tested up to: 4.0
 Elementor Pro tested up to: 4.0
 Requires PHP: 5.6
-Stable tag: 2.2.2
+Stable tag: 2.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -279,6 +279,9 @@ If you like Responsive Addons for Elementor, consider checking out our other Wor
 The Development Version of the Responsive Addons for Elementor plugin is located at [https://github.com/cyberchimps/responsive-addons-for-elementor](https://github.com/cyberchimps/responsive-addons-for-elementor)
 
 == Changelog ==
+
+= 2.2.3 - 28th October 2026 =
+- Fix: Theme Builder : Fixed the custom header width issue to ensure a proper full-width layout in the Theme Builder.
 
 = 2.2.2 - 17th July 2026 = 
 - Improvement: Updated dashboard connection and added the "Upgrade to Pro" section for Responsive Pro compatibility.
