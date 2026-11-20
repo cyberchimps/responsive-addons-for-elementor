@@ -214,6 +214,8 @@ class Responsive_Addons_For_Elementor {
 
 		add_action( 'admin_notices', array( $this, 'rael_ask_for_review_notice' ) );
 		add_action( 'admin_init', array( $this, 'rael_notice_dismissed' ) );
+		add_action( 'admin_notices', array( $this, 'rael_deprecation_notice' ) );
+		add_action( 'admin_init', array( $this, 'rael_deprecation_notice_dismissed' ) );
 		add_action( 'admin_init', array( $this, 'rael_notice_change_timeout' ) );
 
 		add_action( 'upgrader_process_complete', array( $this, 'rael_wp_upe_upgrade_completed' ), 10, 2 );
@@ -289,7 +291,7 @@ class Responsive_Addons_For_Elementor {
 					<div class="notice notice-success rael-migration-notice rael-activated <?php echo esc_attr( $display_class ); ?>">
 						<div class="rael-rael-activated-container">
 							<div class="rael-rael-activated-notice-logo-container">
-								<img class="rael-rael-activated-notice-logo" src="<?php echo esc_url( RAEL_URL ) . 'admin/images/rae-icon.svg'; ?>" alt="rae-logo">
+								<img class="rael-rael-activated-notice-logo" src="<?php echo esc_url( RAEL_URL ) . 'admin/images/rae-logo-mini.png'; ?>" alt="rae-logo">
 							</div>
 							<div class="rael-rael-activated-notice-content">
 								<p class="rael-rael-activated-notice-title"><?php esc_html_e( 'The latest version for Responsive Addons for Elementor(new) plugin is installed successfully!', 'responsive-addons-for-elementor' ); ?></p>
@@ -810,6 +812,55 @@ private function rael_find_element_recursive($elements, $widget_id) {
 			do_action( 'tag_review' );
 		}
 		
+	}
+
+	/**
+	 * Plugin deprecation admin notice.
+	 * Shown to admins on all wp-admin screens; dismissible per user for 30 days.
+	 *
+	 * @since 2.2.4
+	 */
+	public function rael_deprecation_notice() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$dismissed_until = (int) get_user_meta( get_current_user_id(), 'rael_deprecation_notice_dismissed_until', true );
+		if ( $dismissed_until > time() ) {
+			return;
+		}
+
+		$dismiss_url = wp_nonce_url(
+			add_query_arg( 'rael-deprecation-notice-dismissed', '1' ),
+			'rael_dismiss_deprecation_notice'
+		);
+		?>
+		<div class="notice notice-warning rael-deprecation-notice" style="display:flex;align-items:center;gap:14px;padding:12px;">
+			<img src="<?php echo esc_url( RAEL_URL . 'admin/images/rae-logo-mini.png' ); ?>" alt="<?php esc_attr_e( 'Responsive Addons for Elementor logo', 'responsive-addons-for-elementor' ); ?>" width="48" height="48" style="flex:0 0 auto;">
+			<div>
+				<p style="margin:0 0 6px;"><strong><?php esc_html_e( 'Responsive Addons For Elementor is being deprecated.', 'responsive-addons-for-elementor' ); ?></strong></p>
+				<p style="margin:0 0 6px;"><?php esc_html_e( 'Many of the widgets and features from this plugin are now available in Elementor. We\'re therefore retiring Responsive Addons For Elementor.', 'responsive-addons-for-elementor' ); ?><br><?php esc_html_e( 'We recommend switching to Elementor for future use.', 'responsive-addons-for-elementor' ); ?></p>
+				<p style="margin:0;"><a href="<?php echo esc_url( $dismiss_url ); ?>"><?php esc_html_e( 'Dismiss', 'responsive-addons-for-elementor' ); ?></a></p>
+			</div>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Handle dismissal of the deprecation notice (hidden for 30 days).
+	 *
+	 * @since 2.2.4
+	 */
+	public function rael_deprecation_notice_dismissed() {
+		if ( ! isset( $_GET['rael-deprecation-notice-dismissed'] ) ) {
+			return;
+		}
+		if ( ! current_user_can( 'manage_options' ) || ! check_admin_referer( 'rael_dismiss_deprecation_notice' ) ) {
+			return;
+		}
+		update_user_meta( get_current_user_id(), 'rael_deprecation_notice_dismissed_until', time() + 30 * DAY_IN_SECONDS );
+		wp_safe_redirect( remove_query_arg( array( 'rael-deprecation-notice-dismissed', '_wpnonce' ) ) );
+		exit;
 	}
 
 	/**
