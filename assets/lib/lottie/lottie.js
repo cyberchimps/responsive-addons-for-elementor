@@ -14555,7 +14555,7 @@ This method searches for multiple shapes that affect a single element and one of
 		var queryString = myScript.src.replace(/^[^\?]+\??/, '');
 		renderer = getQueryVariable('renderer');
 	}
-	var readyStateCheckInterval = setInterval(checkReady, 100);
+	var readyStateCheckInterval = 0;
 
 	return lottie;
 }));
