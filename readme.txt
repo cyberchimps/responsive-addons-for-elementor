@@ -136,8 +136,6 @@ Let’s get started with the widget list.
 
 1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/login-registration-form/" >Login / Register form</a> – The login / Register widget allows you to create a simple login/registration form for your website.
 
-1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/lottie/" >Lottie</a> – Lottie is a widget that allows you to add Lottie animations.
-
 1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/mailchimp-styler/" >MailChimp Styler</a> – Mailchimp Styler allows you to style your Mailchimp form with different customization options.
 
 1. <a href = "https://cyberchimps.com/responsive-addons-for-elementor/menu-cart/" >Menu Cart</a> – The Menu Cart widget allows you to display the cart icon on the website.

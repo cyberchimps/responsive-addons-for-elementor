@@ -914,6 +914,24 @@ private function rael_find_element_recursive($elements, $widget_id) {
 			// Update stored version
 			update_option( 'rael_last_version', RAEL_VER );
 		}
+
+		// Remove widgets that no longer exist (e.g. the removed Lottie widget) from the
+		// stored list, preserving users' enable/disable choices for the rest.
+		$stored_widgets = get_option( 'rael_widgets' );
+		if ( is_array( $stored_widgets ) ) {
+			$valid_titles   = wp_list_pluck( $rael_widgets_data->get_rael_widgets_data(), 'title' );
+			$pruned_widgets = array_values(
+				array_filter(
+					$stored_widgets,
+					function ( $widget ) use ( $valid_titles ) {
+						return isset( $widget['title'] ) && in_array( $widget['title'], $valid_titles, true );
+					}
+				)
+			);
+			if ( count( $pruned_widgets ) !== count( $stored_widgets ) ) {
+				update_option( 'rael_widgets', $pruned_widgets );
+			}
+		}
 	
 
 		if ( ! function_exists( 'get_plugins' ) ) {
@@ -1296,9 +1314,6 @@ private function rael_find_element_recursive($elements, $widget_id) {
 						wp_register_script( 'rael-magnific-popup', RAEL_ASSETS_URL . 'lib/magnific-popup/jquery.magnific-popup.min.js', array(), RAEL_VER, true );
 						wp_register_style( 'rael-magnific-popup-style', RAEL_ASSETS_URL . 'lib/magnific-popup/magnific-popup.min.css', null, RAEL_VER );
 						wp_enqueue_style( 'rael-magnific-popup-style' );
-						break;
-					case 'lottie':
-						wp_register_script( 'rael-lottie-lib', RAEL_ASSETS_URL . 'lib/lottie/lottie.min.js', array(), RAEL_VER, true );
 						break;
 					case 'sticky-video':						
 						if ( ! isset( $included_libs['plyr'] ) ) {
@@ -2141,10 +2156,6 @@ private function rael_find_element_recursive($elements, $widget_id) {
 					case 'google-map':
 						array_push( $js_files, $js_files_path . 'google-map/rael-google-map' . $ext );
 						array_push( $css_files, $css_files_path . 'google-map/rael-google-map' . $css_min_ext );
-						break;
-					case 'lottie':
-						array_push( $js_files, $js_files_path . 'lottie/rael-lottie' . $ext );
-						array_push( $css_files, $css_files_path . 'lottie/rael-lottie' . $css_min_ext );
 						break;
 					case 'woo-products':
 						if ( ! in_array( $js_files_path . 'product-carousel/rael-quick-view' . $ext, $js_files, true ) ) {

@@ -171,7 +171,6 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 			'login-register',
 			'media-carousel',
 			'google-map',
-			'lottie',
 			'portfolio',
 			'modal-popup',
 			'gf-styler',
@@ -614,9 +613,6 @@ class Responsive_Addons_For_Elementor_Widgets_Manager {
 							break;
 						case 'google-map':
 							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Google_Map() );
-							break;
-						case 'lottie':
-							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Lottie() );
 							break;
 						case 'multi-button':
 							Plugin::instance()->widgets_manager->register( new Widgets\Responsive_Addons_For_Elementor_Multi_Button() );
