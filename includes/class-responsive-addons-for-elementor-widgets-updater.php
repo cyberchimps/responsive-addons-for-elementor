@@ -273,13 +273,6 @@ class Responsive_Addons_For_Elementor_Widgets_Updater {
 				'category' => 'creativity',
 			),
 			array(
-				'title'    => 'lottie',
-				'name'     => 'Lottie',
-				'docs'     => 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/lottie/',
-				'demo'     => 'https://cyberchimps.com/responsive-addons-for-elementor/lottie-widget/',
-				'category' => 'creativity',
-			),
-			array(
 				'title'    => 'login-register',
 				'name'     => 'Login Register',
 				'docs'     => 'https://cyberchimps.com/docs/responsive-addons-for-elementor/widgets/login-register',

@@ -1032,7 +1032,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:2237
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:2411
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:2532
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:222
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-posts.php:921
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-price-box.php:318
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-pricing-table.php:168
@@ -1097,7 +1096,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-image-gallery.php:1246
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:643
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:723
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:359
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-one-page-navigation.php:291
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-post-carousel.php:292
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-price-box.php:599
@@ -1128,7 +1126,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-image-gallery.php:878
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-image-gallery.php:1254
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:647
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:358
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-one-page-navigation.php:295
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-post-carousel.php:296
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-price-box.php:600
@@ -1194,8 +1191,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:719
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:2943
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:472
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:200
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:850
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-mc-styler.php:812
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-modal-popup.php:1217
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-modal-popup.php:1370
@@ -1327,8 +1322,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:695
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:2951
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:473
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:208
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:858
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-mc-styler.php:820
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-modal-popup.php:1225
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-modal-popup.php:1378
@@ -1701,7 +1694,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:533
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:949
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:1114
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:800
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-mc-styler.php:338
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-mc-styler.php:832
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:738
@@ -2029,7 +2021,6 @@ msgstr ""
 #: includes/settings/class-raelcrosssitecopypastecontrols.php:70
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-business-hour.php:267
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-flip-box.php:395
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:308
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-offcanvas.php:499
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-one-page-navigation.php:167
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-timeline.php:502
@@ -2595,7 +2586,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:2408
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:175
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:665
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:225
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:563
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-modal-popup.php:229
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-modal-popup.php:1402
@@ -2769,7 +2759,6 @@ msgstr ""
 #: includes/widgets-manager/modules/query-control/controls/class-group-control-posts.php:74
 #: includes/widgets-manager/modules/query-control/controls/class-group-control-query.php:77
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-content-ticker.php:217
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:153
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-post-carousel.php:407
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-stacking-cards.php:67
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-sticky-video.php:188
@@ -3014,9 +3003,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-image-gallery.php:538
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-image-gallery.php:575
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-image-gallery.php:1439
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:219
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:264
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:324
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:188
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:449
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:541
@@ -3359,9 +3345,6 @@ msgstr ""
 
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-advanced-tabs.php:411
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-image-gallery.php:1335
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:215
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:221
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:818
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:555
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:560
 msgid "Caption"
@@ -3373,7 +3356,6 @@ msgstr ""
 
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-advanced-tabs.php:416
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-advanced-tabs.php:429
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:235
 msgid "Custom Caption"
 msgstr ""
 
@@ -3392,8 +3374,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-flip-box.php:396
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-icon-box.php:444
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:194
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:266
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:281
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:189
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-multi-button.php:320
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-price-box.php:897
@@ -3415,7 +3395,6 @@ msgstr ""
 
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-advanced-tabs.php:451
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-image-gallery.php:572
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:152
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:189
 msgid "Media File"
 msgstr ""
@@ -3424,7 +3403,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:330
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:417
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:530
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:270
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:194
 #: includes/widgets-manager/widgets/theme-builder/class-responsive-addons-for-elementor-theme-post-info.php:361
 msgid "Custom URL"
@@ -3462,7 +3440,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:2236
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:2410
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:2531
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:470
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-mc-styler.php:808
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:295
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:311
@@ -3524,8 +3501,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-feature-list.php:984
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-flip-box.php:597
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-flip-box.php:935
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:196
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:846
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-modal-popup.php:1213
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-modal-popup.php:1366
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-modal-popup.php:1413
@@ -3618,8 +3593,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-image-gallery.php:1734
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:645
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:2947
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:199
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:849
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-mc-styler.php:816
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-modal-popup.php:1221
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-modal-popup.php:1374
@@ -3702,7 +3675,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-image-hotspot.php:737
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:1819
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:1944
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:638
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:399
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-offcanvas.php:591
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-offcanvas.php:996
@@ -3799,7 +3771,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:521
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:888
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:1099
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:788
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-mc-styler.php:370
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-mc-styler.php:466
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-mc-styler.php:688
@@ -4292,7 +4263,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:541
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:840
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:1039
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:667
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-mc-styler.php:648
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:767
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-modal-popup.php:1956
@@ -4441,7 +4411,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:3615
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:853
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:909
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:679
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-mc-styler.php:667
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-mc-styler.php:734
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:688
@@ -4644,7 +4613,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:3286
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:3569
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-login-register.php:3603
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:872
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-mc-styler.php:655
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-mc-styler.php:722
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:995
@@ -4804,7 +4772,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:595
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:902
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:1138
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:725
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-mc-styler.php:715
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:810
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-modal-popup.php:2004
@@ -5716,8 +5683,6 @@ msgid "Enable Mouse Tilt"
 msgstr ""
 
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-banner.php:384
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:476
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:566
 msgid "Reverse"
 msgstr ""
 
@@ -6783,7 +6748,6 @@ msgstr ""
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-flip-box.php:1245
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-gf-styler.php:1329
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-logo-carousel.php:1021
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:898
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-one-page-navigation.php:417
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-portfolio.php:488
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-post-carousel.php:2412
@@ -7158,8 +7122,6 @@ msgstr ""
 
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-call-to-action.php:1382
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-flip-box.php:1395
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:494
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:630
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-media-carousel.php:604
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-nav-menu.php:233
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-nav-menu.php:254
@@ -7654,7 +7616,6 @@ msgstr ""
 
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-content-switcher.php:289
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-content-switcher.php:371
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:496
 #: includes/widgets-manager/widgets/woocommerce/class-responsive-addons-for-elementor-woo-checkout.php:1040
 msgid "Section"
 msgstr ""
@@ -8423,7 +8384,6 @@ msgid "Row"
 msgstr ""
 
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-data-table.php:326
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:495
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-team-member.php:1551
 msgid "Column"
 msgstr ""
@@ -9961,7 +9921,6 @@ msgstr ""
 
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-icon-box.php:746
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-icon-box.php:1348
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:727
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-posts.php:478
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-posts.php:681
 #: includes/widgets-manager/widgets/theme-builder/class-responsive-addons-for-elementor-theme-archive-posts.php:397
@@ -10332,7 +10291,6 @@ msgid "On Image"
 msgstr ""
 
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-image-gallery.php:629
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:322
 msgid "On Hover"
 msgstr ""
 
@@ -11794,95 +11752,14 @@ msgstr ""
 msgid "Active Color"
 msgstr ""
 
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:53
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:145
-msgid "Lottie"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:158
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:167
-msgid "External URL"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:169
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:284
-msgid "Enter your URL"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:183
-msgid "Upload JSON File"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:321
-msgid "Trigger"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:326
-msgid "On Click"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:323
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-stacking-cards.php:895
 msgid "Scroll"
 msgstr ""
 
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:394
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-modal-popup.php:587
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-sticky-video.php:315
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-video.php:217
 msgid "Loop"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:409
-msgid "Times"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:436
-msgid "Link Timeout"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:438
-msgid "Redirect to link after selected timeout"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:470
-msgid "On Hover Out"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:477
-msgid "Pause"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:489
-msgid "Hover Area"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:508
-msgid "Play Speed"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:536
-msgid "Start Point"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:551
-msgid "End Point"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:593
-msgid "Renderer"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:597
-msgid "SVG"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:598
-msgid "Canvas"
-msgstr ""
-
-#: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-lottie.php:608
-msgid "Lazy Load"
 msgstr ""
 
 #: includes/widgets-manager/widgets/class-responsive-addons-for-elementor-mc-styler.php:55
