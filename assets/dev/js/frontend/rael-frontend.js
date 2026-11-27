@@ -30,7 +30,6 @@ import "./fancy-text/rael-fancy-text";
 import "./banner/rael-banner";
 import "./facebook-feed/rael-facebook-feed";
 import "./logo-carousel/rael-logo-carousel";
-import "./lottie/rael-lottie";
 import "./advanced-tabs/rael-advanced-tabs";
 import "./sticky-video/rael-sticky-video";
 import "./product-carousel/rael-product-carousel";
